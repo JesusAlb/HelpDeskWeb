@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D757B232-7B56-47EA-A511-4922E990AEC2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HelpDeskWeb</RootNamespace>
+    <AssemblyName>HelpDeskWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Catalogos\catEquipos.aspx" />
+    <Content Include="Catalogos\catSolicitudes.aspx" />
+    <Content Include="Catalogos\catUsuarios.aspx" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\docs.css" />
+    <Content Include="css\printstyles.css" />
+    <Content Include="css\signin.css" />
+    <Content Include="css\helpdesk-template.css" />
+    <Content Include="css\styles.css" />
+    <Content Include="css\styles2.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Imagenes\helpDesk.png" />
+    <Content Include="index.aspx" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="packages.config" />
+    <EntityDeploy Include="Modelo\ModeloHD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloHD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Modelo\ModeloHD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloHD.edmx</DependentUpon>
+      <LastGenOutput>ModeloHD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\ModeloHD.edmx.diagram">
+      <DependentUpon>ModeloHD.edmx</DependentUpon>
+    </Content>
+    <Content Include="Modelo\ModeloHD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloHD.edmx</DependentUpon>
+      <LastGenOutput>ModeloHD.cs</LastGenOutput>
+    </Content>
+    <Content Include="css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagenes\Add.png" />
+    <Content Include="Imagenes\Add2.png" />
+    <Content Include="Imagenes\Asignar.png" />
+    <Content Include="Imagenes\AsignarR.png" />
+    <Content Include="Imagenes\CIE.png" />
+    <Content Include="Imagenes\cie0.jpg" />
+    <Content Include="Imagenes\CIEgrande.jpg" />
+    <Content Include="Imagenes\Delete.png" />
+    <Content Include="Imagenes\diseno_icono.png" />
+    <Content Include="Imagenes\Edit.png" />
+    <Content Include="Imagenes\encuesta.png" />
+    <Content Include="Imagenes\evento.png" />
+    <Content Include="Imagenes\flechaDerecha.png" />
+    <Content Include="Imagenes\flechaIzquierda.png" />
+    <Content Include="Imagenes\iconoFechaD.png" />
+    <Content Include="Imagenes\iconoFlechaI.png" />
+    <Content Include="Imagenes\iconos\nivel0.png" />
+    <Content Include="Imagenes\iconos\nivel1.png" />
+    <Content Include="Imagenes\iconos\nivel2.png" />
+    <Content Include="Imagenes\iconos\nivel3.png" />
+    <Content Include="Imagenes\iconos\nivel4.png" />
+    <Content Include="Imagenes\iconos\nivel5.png" />
+    <Content Include="Imagenes\IMCA IAP.png" />
+    <Content Include="Imagenes\imca.ico" />
+    <Content Include="Imagenes\incidente.png" />
+    <Content Include="Imagenes\Info.png" />
+    <Content Include="Imagenes\info3.png" />
+    <Content Include="Imagenes\Institucionalidad y Trasparencia.png" />
+    <Content Include="Imagenes\JAP.png" />
+    <Content Include="Imagenes\Print.png" />
+    <Content Include="Imagenes\reAbrir.png" />
+    <Content Include="Imagenes\rem.png" />
+    <Content Include="Imagenes\rEncuesta.png" />
+    <Content Include="Imagenes\soporte.jpg" />
+    <Content Include="Imagenes\Terminar2.png" />
+    <Content Include="Imagenes\usuario.jpg" />
+    <Content Include="Web.config" />
+    <Content Include="principal.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Catalogos\catEquipos.aspx.cs">
+      <DependentUpon>catEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogos\catEquipos.aspx.designer.cs">
+      <DependentUpon>catEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\catSolicitudes.aspx.cs">
+      <DependentUpon>catSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogos\catSolicitudes.aspx.designer.cs">
+      <DependentUpon>catSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\catUsuarios.aspx.cs">
+      <DependentUpon>catUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogos\catUsuarios.aspx.designer.cs">
+      <DependentUpon>catUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Acceso\hdk_ControlAcceso.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Catalogo\hdk_ControlArea.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlCoordinacion.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlDepartamento.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlEquipos.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Catalogo\hdk_ControlLugar.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlMarca.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlPuesto.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlRequerimientos.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlTipoEquipo.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlTipoIncidencia.cs" />
+    <Compile Include="Control\Catalogo\hdk_ControlUsuario.cs" />
+    <Compile Include="Control\Solicitudes\Eventos\hdk_ControlAsigReq.cs" />
+    <Compile Include="Control\Solicitudes\Eventos\hdk_ControlEventos.cs" />
+    <Compile Include="Control\Solicitudes\hdk_ControlEncuestas.cs" />
+    <Compile Include="Control\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\cantidadincidentespordepto.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\EventosXStatus_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\IncidentesXStatus_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ModeloHD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloHD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ModeloHD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ModeloHD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloHD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numEventosPorMes_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numEventosPorUsuario_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numIncidentesPorDepto_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numIncidentesPorMes_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numIncidentesPorTipo_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\numIncidentesPorUsuario_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorDepto_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorMesEv_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorMesIn_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorTipoIn_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorUsuarioEv_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\promedioCalidadPorUsuarioIn_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ReqAsignados_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\requerimientosSinAsignar_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblarea.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblcalidadservicio.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblcoordinacion.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tbldepartamento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblevento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblincidente.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblinstitucion.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tbllugar.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblmarca.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblpregunta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblpuesto.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblrequerimiento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblrequerimientoaevento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblresponsablequipo.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblrespuesta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tbltipoequipo.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tbltipoincidencia.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\tblusuario.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\topCincoRecursosMasUsados_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\topCincoRecursosMenosUsados_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewCoordinacion.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewDepartamento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewEventoConRequerimiento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewMarca.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewRequerimiento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewTipoIncidencia.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ViewUsuario.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaEncuesta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaEquipoReporte.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaEquipos.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaEvento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaIncidente.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\VistaPregunta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="principal.aspx.cs">
+      <DependentUpon>principal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="principal.aspx.designer.cs">
+      <DependentUpon>principal.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1698</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1698/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

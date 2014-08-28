@@ -1,0 +1,39 @@
+body {
+  padding-top: 50px;
+  background:#eee;
+}
+
+.helpdesk-template {
+  margin-left:15px;
+  text-align: center;
+}
+
+.container-panel{
+    position:relative;
+    margin: 5% 5% 20% 60px;
+    text-align:center;
+    height:auto;
+}
+
+.panelCategoria {
+    border:3px solid;
+    border-radius:15px;
+    margin: 2% 20% 20% 20%;
+    height:500px;
+    top: 16px;
+    left: 2px;
+}
+
+.contenido{
+    top:-11px;
+    position:relative;
+    background:white;
+    height:400px;
+    left: -16px;
+}
+
+.box {
+    margin: 1% 0% 5% 7%;
+}
+
+
