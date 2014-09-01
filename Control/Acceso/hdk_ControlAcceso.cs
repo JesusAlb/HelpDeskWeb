@@ -57,6 +57,7 @@ namespace HelpDeskWeb.Control.Acceso
                 {
                     Session["DatosUsuario"] = UsuarioItem;
                     Session["Conexion"] = this;
+                    Session["tabItemIndex"] = 0;
                 }
                 else
                 {               

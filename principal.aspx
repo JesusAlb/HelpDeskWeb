@@ -26,7 +26,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catUsuarios.aspx" >Para usuarios</asp:HyperLink></li>
                 <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catSolicitudes.aspx">Para solicitudes</asp:HyperLink></li>
-                <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catEquipos.aspx">Para equipos</asp:HyperLink></li>          
+                <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catTipoEquipos.aspx">Para equipos</asp:HyperLink></li>          
              </ul>
           </li>
           <li class="dropdown">

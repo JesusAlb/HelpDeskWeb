@@ -76,6 +76,24 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.UpdatePanel update;
         
         /// <summary>
+        /// Control btnTipoEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnTipoEquipos;
+        
+        /// <summary>
+        /// Control btnMarcas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnMarcas;
+        
+        /// <summary>
         /// Control txtFiltro.
         /// </summary>
         /// <remarks>
@@ -103,6 +121,15 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.GridView gvTipoEquipos;
         
         /// <summary>
+        /// Control renglon.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel renglon;
+        
+        /// <summary>
         /// Control lbelAccion.
         /// </summary>
         /// <remarks>
@@ -119,6 +146,15 @@ namespace HelpDeskWeb.Catalogos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        
+        /// <summary>
+        /// Control panelCarTipoEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelCarTipoEquipo;
         
         /// <summary>
         /// Control chEquipo.

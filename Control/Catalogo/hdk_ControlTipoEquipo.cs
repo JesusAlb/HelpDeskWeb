@@ -90,5 +90,17 @@ namespace HelpDeskWeb.Control.Catalogo
                 return null;
             }
         }
+
+        public tbltipoequipo obtenerEquipo(int index)
+        {
+            try
+            {
+               return dbHelp.DB.tbltipoequipoes.SingleOrDefault(a => a.idTipoEquipo == index);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
