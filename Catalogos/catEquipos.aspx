@@ -27,7 +27,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catUsuarios.aspx" >Para usuarios</asp:HyperLink></li>
                 <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catSolicitudes.aspx">Para solicitudes</asp:HyperLink></li>
-                <li><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catEquipos.aspx">Para equipos</asp:HyperLink></li>          
+                <li class="active"><asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catEquipos.aspx">Para equipos</asp:HyperLink></li>          
              </ul>
           </li>
           <li class="dropdown">
@@ -64,7 +64,8 @@
                                 Catálogos para Equipos </asp:Panel>
                                 <asp:Panel runat="server" CssClass="panel-body"> 
                                    <form runat="server" role="form" >    
-                                    <asp:ScriptManager runat="server" ID="ScriptManager"  EnablePartialRendering="true"></asp:ScriptManager>
+                                    <asp:ScriptManager runat="server" ID="ScriptManager"  EnablePartialRendering="true">
+                                    </asp:ScriptManager>
                                         <asp:UpdatePanel runat="server" ID="update" UpdateMode="Always" >
                                         <Triggers>
                                             <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
@@ -73,7 +74,7 @@
                                         <ContentTemplate> 
                                    <asp:Panel runat="server" style="border-bottom:1px solid; border-color:lightgray;">
                                    <asp:Panel runat="server" CssClass="btn-group">
-                                      <asp:LinkButton runat="server" CssClass="btn btn-primary active" href="catEquipos.aspx" style="border-bottom:none" ID="btnTipoEquipos" Text="Tipos de equipos" />
+                                      <asp:LinkButton runat="server" CssClass="btn btn-primary active" OnClick="btnTipoEquipos_Click" style="border-bottom:none" ID="btnTipoEquipos" Text="Tipos de equipos" />
                                       <asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnMarcas" Text="Marcas" style="border-bottom:none" OnClick="btnMarcas_Click" ></asp:LinkButton>
                                     </asp:Panel>
                                     </asp:Panel>
@@ -86,9 +87,9 @@
                                                         <asp:Panel runat="server" CssClass="input-group" HorizontalAlign="Center">
                                                                 <asp:TextBox runat="server"  ID="txtFiltro"  CssClass="form-control"  OnTextChanged="txtFiltro_TextChanged" placeholder="Buscar" /> 
                                                                 <span class="input-group-btn">
-                                                                    <asp:Button runat="server" Text="Filtrar" class="btn btn-default" />
+                                                                    <asp:Button runat="server" Text="Filtrar" ID="btnFiltrar" class="btn btn-default" />
                                                                 </span>                                                       
-                                                         </asp:Panel>                                        
+                                                         </asp:Panel>                                      
                                                     </asp:Panel>
                                                     </asp:Panel>
                                                     <asp:Panel runat="server" CssClass="col-lg-2">
@@ -98,10 +99,10 @@
                                                 </asp:Panel>
                                                 <asp:Panel runat="server" CssClass="col-lg-2>"></asp:Panel>
                                                 <asp:Panel runat="server" CssClass="row">                            
-                                                     <asp:Panel runat="server"  Height="300px" style="border-radius:10px" BorderWidth="1px" ScrollBars="Vertical" CssClass="embed-responsive" BorderColor="#428bca" >
-                                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvTipoEquipos_RowCreated" runat="server" id="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="White" SelectedRowStyle-BackColor="#428bca"
+                                                     <asp:Panel runat="server"  Height="300px" style="border-radius:10px" BorderWidth="1px" ScrollBars="Vertical" CssClass="embed-responsive" BorderColor="black" >
+                                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvTipoEquipos_RowCreated" runat="server" id="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="White" SelectedRowStyle-BackColor="#0B2161"
                                                              DataKeyNames="idTipoEquipo" CellPadding="4" GridLines="None" OnSelectedIndexChanged="gvTipoEquipos_SelectedIndexChanged" >
-                                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#428bca" HorizontalAlign="Center" Font-Size="13" /><Columns>                                                          
+                                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#0B2161" HorizontalAlign="Center" Font-Size="13" /><Columns>                                                          
                                                                     <asp:BoundField  HeaderText="Tipo de equipo" DataField="nomTipoEquipo"/>
                                                                     </Columns>                  
                                                                 </asp:GridView>                                              
@@ -110,8 +111,9 @@
                                             </asp:Panel>
                                             <asp:Panel runat="server" CssClass="col-lg-6">
                                                 <asp:Panel runat="server" ID="renglon" CssClass="row"></asp:Panel>
-                                                <h4 class="text-center"><asp:Label runat="server" Text="Alta de tipos de equipos" ID="lbelAccion"></asp:Label></h4><asp:Panel runat="server" CssClass="form-group" HorizontalAlign="Center">
-                                                  <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre"/>
+                                                <h4 class="text-center"><asp:Label runat="server" Text="Alta de tipos de equipos" ID="lbelAccion"></asp:Label></h4>
+                                                <asp:Panel runat="server" ID="panelNombre" CssClass="form-group" HorizontalAlign="Center">
+                                                  <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
                                                 </asp:Panel>                   
                                                   <asp:Panel runat="server" CssClass="panel panel-primary" ID="panelCarTipoEquipo">
                                                     <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel><asp:Panel runat="server" CssClass="panel-body">
@@ -154,6 +156,7 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </form>
+                                    <asp:Panel runat="server" CssClass="row" ID="PanelInferior" ></asp:Panel>
                                 </asp:Panel>
                         </asp:Panel>             
                     </asp:Panel>

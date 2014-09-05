@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HelpDeskWeb.Modelo;
-using HelpDeskWeb.Control.Catalogo;
-using HelpDeskWeb.Control.Acceso;
+using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.ControlBD.Acceso;
 using System.Drawing;
 using System.Collections;
 
@@ -14,11 +14,10 @@ namespace HelpDeskWeb.Catalogos
 {
     public partial class catEquipos : System.Web.UI.Page
     {
-        hdk_ControlTipoEquipo controlTipoEquipo;
-        hdk_ControlAcceso Control;
-        hdk_ControlMarca controlMarcas;
+        private hdk_ControlTipoEquipo controlTipoEquipo;
+        private hdk_ControlAcceso Control;
+        private hdk_ControlMarca controlMarcas;
         private int tabItemIndex;
-
          
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +30,7 @@ namespace HelpDeskWeb.Catalogos
                 if (panelCarTipoEquipo.Visible)
                 {
                     tabItemIndex = 0;
+
                 }
                 else
                 {
@@ -44,7 +44,14 @@ namespace HelpDeskWeb.Catalogos
         {
             if (tabItemIndex == 0)
             {
-                gvTipoEquipos.DataSource = Control.DB.tbltipoequipoes.Where(a => a.nomTipoEquipo.Contains(txtFiltro.Text)).ToList();
+                BoundField bf = new BoundField();
+                bf.HeaderText = "Tipo de equipo";
+                bf.DataField = "nomTipoEquipo";
+                gvTipoEquipos.Columns.Add(bf);
+                gvTipoEquipos.Columns.RemoveAt(0);
+                string[] keys = { "idTipoEquipo" };
+                gvTipoEquipos.DataKeyNames = keys;
+                gvTipoEquipos.DataSource = controlTipoEquipo.cargarTabla(txtFiltro.Text);
                 gvTipoEquipos.DataBind();
             }
             else
@@ -57,9 +64,10 @@ namespace HelpDeskWeb.Catalogos
                 string[] keys = { "idMarca" };
                 gvTipoEquipos.DataKeyNames = keys;
                 gvTipoEquipos.DataSource = controlMarcas.cargarTabla(txtFiltro.Text);
-                gvTipoEquipos.DataBind();
-                
+                gvTipoEquipos.DataBind();              
             }
+
+
         }
 
 
@@ -78,6 +86,7 @@ namespace HelpDeskWeb.Catalogos
         protected void btnGrabarTipo_Click(object sender, EventArgs e)
         {
             bool insert = false;
+            int elementoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
 
             if (tabItemIndex == 0)
             {
@@ -90,7 +99,7 @@ namespace HelpDeskWeb.Catalogos
                 }
                 else
                 {
-                    int elementoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
+                    
                     if (controlTipoEquipo.modificar(elementoEquipo,txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
                         insert = true;
@@ -102,7 +111,6 @@ namespace HelpDeskWeb.Catalogos
                     txtNombre.Text = "";
                     chDiscoD.Checked = chTeclado.Checked = chRed.Checked = chMouse.Checked = chMonitor.Checked = chRAM.Checked = chProcesador.Checked = false;
                     cargarTablas();
-                    gvTipoEquipos.SelectedIndex = -1;
                 }
             }
             else
@@ -116,8 +124,7 @@ namespace HelpDeskWeb.Catalogos
                 }
                 else
                 {
-                    int idMarca = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
-                    if (controlMarcas.modificar(idMarca, txtNombre.Text))
+                    if (controlMarcas.modificar(elementoEquipo, txtNombre.Text))
                     {
                         insert = true;
                     }
@@ -161,9 +168,10 @@ namespace HelpDeskWeb.Catalogos
                 else
                 {
                     lbelAccion.Text = "Modificación de marcas";
-                    tblmarca marca = Control.DB.tblmarcas.SingleOrDefault(a => a.idMarca == elementoEquipo);
+                    tblmarca marca = controlMarcas.obtenerMarca(elementoEquipo); 
                     txtNombre.Text = marca.nomMarca;
                 }
+               
             }
             catch
             {
@@ -203,11 +211,27 @@ namespace HelpDeskWeb.Catalogos
         {
             btnTipoEquipos.CssClass = "btn btn-default";           
             btnMarcas.CssClass = "btn btn-primary active";
-            lbelAccion.Text = "Alta de marcas"; 
+            lbelAccion.Text = "Alta de marcas";
             renglon.Height = 100;
             tabItemIndex = 1;
             this.cargarTablas();
             panelCarTipoEquipo.Visible = false;
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            this.cargarTablas();
+        }
+
+        protected void btnTipoEquipos_Click(object sender, EventArgs e)
+        {
+            btnMarcas.CssClass = "btn btn-default";
+            btnTipoEquipos.CssClass = "btn btn-primary active";
+            lbelAccion.Text = "Alta de tipos de equipos";
+            renglon.Height = 0;
+            tabItemIndex = 0;
+            this.cargarTablas();
+            panelCarTipoEquipo.Visible = true;
         }
 
     }

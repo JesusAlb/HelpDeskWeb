@@ -93,6 +93,44 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Control\Equipos.aspx" />
+    <Content Include="Control\Usuarios.aspx" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="css\bootstrap2.min.css" />
+    <Content Include="Scripts\jquery-ui-1.11.1.js" />
+    <Content Include="Scripts\jquery-ui.min-1.11.1.js" />
     <Content Include="Catalogos\catEquipos.aspx" />
     <Content Include="Catalogos\catSolicitudes.aspx" />
     <Content Include="Catalogos\catUsuarios.aspx" />
@@ -107,11 +145,13 @@
     <Content Include="css\styles.css" />
     <Content Include="css\styles2.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Imagenes\Fondo1.jpg" />
     <Content Include="Imagenes\helpDesk.png" />
     <Content Include="index.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="js\LiveValidation.js" />
     <Content Include="packages.config" />
     <EntityDeploy Include="Modelo\ModeloHD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -206,6 +246,20 @@
     <Compile Include="Catalogos\catSolicitudes.aspx.designer.cs">
       <DependentUpon>catSolicitudes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Control\Equipos.aspx.cs">
+      <DependentUpon>Equipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Equipos.aspx.designer.cs">
+      <DependentUpon>Equipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos\catUsuarios.aspx.cs">
       <DependentUpon>catUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -213,26 +267,29 @@
     <Compile Include="Catalogos\catUsuarios.aspx.designer.cs">
       <DependentUpon>catUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Control\Acceso\hdk_ControlAcceso.cs">
+    <Compile Include="ControlBD\Acceso\hdk_ControlAcceso.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Catalogo\hdk_ControlArea.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlCoordinacion.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlDepartamento.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlEquipos.cs">
+    <Compile Include="ControlBD\Catalogo\hdk_ControlArea.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlCoordinacion.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlDepartamento.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlEquipos.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Catalogo\hdk_ControlLugar.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlMarca.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlPuesto.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlRequerimientos.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlTipoEquipo.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlTipoIncidencia.cs" />
-    <Compile Include="Control\Catalogo\hdk_ControlUsuario.cs" />
-    <Compile Include="Control\Solicitudes\Eventos\hdk_ControlAsigReq.cs" />
-    <Compile Include="Control\Solicitudes\Eventos\hdk_ControlEventos.cs" />
-    <Compile Include="Control\Solicitudes\hdk_ControlEncuestas.cs" />
-    <Compile Include="Control\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlLugar.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlMarca.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlPuesto.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlRequerimientos.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlTipoEquipo.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlTipoIncidencia.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlUsuario.cs" />
+    <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlAsigReq.cs" />
+    <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlEventos.cs" />
+    <Compile Include="ControlBD\Solicitudes\hdk_ControlEncuestas.cs" />
+    <Compile Include="ControlBD\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
+    <Compile Include="hdk_utilerias.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

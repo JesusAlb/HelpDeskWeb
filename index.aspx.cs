@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HelpDeskWeb.Control.Acceso;
+using HelpDeskWeb.ControlBD.Acceso;
 
 namespace HelpDeskWeb
 {

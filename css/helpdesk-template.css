@@ -1,6 +1,7 @@
 body {
   padding-top: 50px;
-  background:#eee;
+  margin-bottom:0%;
+  background-color:#eee;
 }
 
 .helpdesk-template {
@@ -10,7 +11,7 @@ body {
 
 .container-panel{
     position:relative;
-    margin: 5% 5% 20% 60px;
+    margin: 2% 2% 2% 2%;
     text-align:center;
     height:auto;
 }
@@ -34,6 +35,22 @@ body {
 
 .box {
     margin: 1% 0% 0% 7%;
+}
+
+.panel-inferior{
+    text-align:center;
+    background-color: #B0C4DE; 
+    border-top:1px solid white;
+}
+
+.panel-titulo{
+    margin:2% 2% 2% 2%; 
+    border-bottom-style:solid; 
+    border-bottom-width:thin; 
+    border-bottom-color:#006699;
+    Font-Size:XX-Large;
+    height:45px;
+    text-align:center;
 }
 
 

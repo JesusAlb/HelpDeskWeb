@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Centro de servicio</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap2.min.css" rel="stylesheet" />
     <link href="css/signin.css" rel="stylesheet" />
 </head>
 <body>

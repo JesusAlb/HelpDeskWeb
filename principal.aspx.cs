@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HelpDeskWeb.Control.Catalogo;
-using HelpDeskWeb.Control.Acceso;
+using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.Modelo;
 
 namespace HelpDeskWeb
