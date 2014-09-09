@@ -34,13 +34,13 @@ body {
 }
 
 .box {
-    margin: 1% 0% 0% 7%;
+    margin: 2% 2% 2% 2%;
 }
 
 .panel-inferior{
     text-align:center;
     background-color: #B0C4DE; 
-    border-top:1px solid white;
+    border-top:1px solid #006699;
 }
 
 .panel-titulo{

@@ -74,3 +74,5 @@ C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\ko\System.Spatial.resour
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\ru\System.Spatial.resources.dll
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\HelpDeskWeb.Properties.Resources.resources
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\HelpDeskWeb.csproj.GenerateResource.Cache

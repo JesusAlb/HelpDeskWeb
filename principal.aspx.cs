@@ -10,7 +10,7 @@ using HelpDeskWeb.Modelo;
 
 namespace HelpDeskWeb
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class principal : System.Web.UI.Page
     {
         ViewUsuario usuarioConectado;
 
@@ -37,7 +37,7 @@ namespace HelpDeskWeb
         protected void identificacion()
         {
             lbelUsuario.Text =" " + usuarioConectado.nomUsuario;
-            lbelNomUsuario.Text = usuarioConectado.nomUsuario;
+            lbelNomUsuario.Text = usuarioConectado.nomCompleto;
             lbelTipoUsuario.Text = usuarioConectado.tipoUsuarioString;
         }
     }

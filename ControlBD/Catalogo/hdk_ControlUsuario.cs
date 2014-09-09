@@ -32,11 +32,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public ViewUsuario obtenerUsuario(int id)
+        public tblusuario obtenerUsuario(int id)
         {
             try
             {
-                return dbHelp.DB.ViewUsuarios.Where(a => a.idUsuario == id).SingleOrDefault();
+                return dbHelp.DB.tblusuarios.Where(a => a.idUsuario == id).SingleOrDefault();
             }
             catch 
             {

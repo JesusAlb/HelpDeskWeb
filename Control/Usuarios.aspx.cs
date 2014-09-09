@@ -21,7 +21,6 @@ namespace HelpDeskWeb.Control
         hdk_ControlArea cArea;
         hdk_ControlPuesto cPuesto;
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
@@ -30,7 +29,6 @@ namespace HelpDeskWeb.Control
             cDepto = new hdk_ControlDepartamento(Control);
             cArea = new hdk_ControlArea(Control);
             cPuesto = new hdk_ControlPuesto(Control);
-
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -44,13 +42,15 @@ namespace HelpDeskWeb.Control
             cbCoordinaciones.DataSource = cDepto.cargarComboCord(false);
             cbArea.DataSource = cArea.cargarCombo();
             cbPuesto.DataSource = cPuesto.cargarCombo();
+            cbInstitucion.DataSource = Control.DB.tblinstitucions.Where(a=> a.status == true).ToList();
+            cbInstitucion.DataBind();
             cbCoordinaciones.DataBind();
             cbArea.DataBind();
             cbPuesto.DataBind();
         }
 
         protected void cargarTabla()
-        {                           
+        {           
             gvUsuarios.DataSource = controlUsuario.cargarTabla(txtFiltro.Text);
             gvUsuarios.DataBind();
         }
@@ -69,52 +69,61 @@ namespace HelpDeskWeb.Control
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            if ((Convert.ToInt32(Session["Accion"])) == 0)
+            {
+                if (controlUsuario.insertar(txtNomUsuario.Text, txtNomCompleto.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)))
+                {
+                    this.cargarTabla();
+                }
+            }
+            else
+            {
+                if (controlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString()), txtNomUsuario.Text, txtNomCompleto.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)))
+                {
+                    this.cargarTabla();
 
+                }
+            }
+        }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            lbelTituloModal.Text = "Alta de usuarios";
+            txtCorreo.Text = txtExtension.Text = txtNomCompleto.Text = txtNomUsuario.Text = "";
+            txtPassword.Attributes.Remove("Value");
+            cbArea.SelectedIndex = cbCoordinaciones.SelectedIndex = cbDepto.SelectedIndex = cbPuesto.SelectedIndex = cbTipoUs.SelectedIndex = -1;
+            Session["Accion"] = 0;
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            btnNuevo.Text = "SI FUNCIONA";
-
-           if (gvUsuarios.SelectedIndex != -1)
-            {
-                int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString());
-                btnModificar.Text = idUsuario.ToString();
-                ViewUsuario usuario =  controlUsuario.obtenerUsuario(idUsuario);
-                txtNomUsuario.Text = usuario.nomUsuario;
-                txtNomCompleto.Text = usuario.nomCompleto;
-                txtCorreo.Text = usuario.correo;
-                txtExtension.Text = usuario.exTel;
-                txtPassword.Text = usuario.password;
-                cbArea.Text = usuario.nomArea;
-                cbCoordinaciones.Text = usuario.nomCoordinacion;
-                cbPuesto.Text = usuario.nomPuesto;
-                cbTipoUs.Text = usuario.tipoUsuarioString;
-                cbDepto.DataSource = cDepto.cargarComboDep(Convert.ToInt32(cbCoordinaciones.SelectedValue));
-                cbDepto.DataBind();
-                cbDepto.SelectedItem.Text = usuario.nomDepto;
-            }
+            lbelTituloModal.Text = "Modificar usuario";
+            int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString());
+            tblusuario usuario = controlUsuario.obtenerUsuario(idUsuario);
+            txtNomUsuario.Text = usuario.nomUsuario;
+            txtNomCompleto.Text = usuario.nomCompleto;
+            txtCorreo.Text = usuario.correo;
+            txtExtension.Text = usuario.exTel;
+            txtPassword.Attributes.Add("Value", usuario.password);
+            cbTipoUs.SelectedValue = usuario.tipoUsuario.ToString();
+            cbInstitucion.SelectedValue = usuario.institucion.ToString();
+            cbArea.SelectedValue = usuario.area.ToString();
+            cbPuesto.SelectedValue = usuario.puesto.ToString();
+            cbCoordinaciones.SelectedValue = ((tbldepartamento)cDepto.obtenerDepto(usuario.depto)).coordinacion.ToString();
+            cbDepto.DataSource = cDepto.cargarComboDep(Convert.ToInt32(cbCoordinaciones.SelectedValue));
+            cbDepto.DataBind();
+            cbDepto.SelectedValue = usuario.depto.ToString();
+            Session["Accion"] = 1;
         }
 
-        protected void gvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
         {
-          /*   
-                int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString());
-                btnModificar.Text = idUsuario.ToString();
-                ViewUsuario usuario =  controlUsuario.obtenerUsuario(idUsuario);
-                txtNomUsuario.Text = usuario.nomUsuario;
-                txtNomCompleto.Text = usuario.nomCompleto;
-                txtCorreo.Text = usuario.correo;
-                txtExtension.Text = usuario.exTel;
-                txtPassword.Text = usuario.password;
-                cbArea.SelectedItem.Text= usuario.nomArea;
-                cbCoordinaciones.SelectedItem.Text = usuario.nomCoordinacion;
-                cbPuesto.SelectedItem.Text = usuario.nomPuesto;
-                cbTipoUs.SelectedItem.Text = usuario.tipoUsuarioString;
-                cbDepto.DataSource = cDepto.cargarComboDep(Convert.ToInt32(cbCoordinaciones.SelectedValue));
-                cbDepto.DataBind();
-                cbDepto.SelectedItem.Text = usuario.nomDepto;*/
+            this.cargarTabla();
         }
 
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            this.cargarTabla();
+        }
     }
 }

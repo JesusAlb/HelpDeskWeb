@@ -58,22 +58,13 @@ namespace HelpDeskWeb.Control {
         protected global::System.Web.UI.WebControls.Label lbelUsuario;
         
         /// <summary>
-        /// Control form1.
+        /// Control ScriptManager.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// Control script.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager script;
+        protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
         /// Control txtFiltro.
@@ -112,6 +103,15 @@ namespace HelpDeskWeb.Control {
         protected global::System.Web.UI.WebControls.Panel myModal;
         
         /// <summary>
+        /// Control updateForm1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateForm1;
+        
+        /// <summary>
         /// Control lbelTituloModal.
         /// </summary>
         /// <remarks>
@@ -119,15 +119,6 @@ namespace HelpDeskWeb.Control {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbelTituloModal;
-        
-        /// <summary>
-        /// Control update1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel update1;
         
         /// <summary>
         /// Control txtNomUsuario.
@@ -182,6 +173,15 @@ namespace HelpDeskWeb.Control {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExtension;
+        
+        /// <summary>
+        /// Control cbInstitucion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbInstitucion;
         
         /// <summary>
         /// Control txtCorreo.
@@ -247,15 +247,6 @@ namespace HelpDeskWeb.Control {
         protected global::System.Web.UI.WebControls.LinkButton btnModificar;
         
         /// <summary>
-        /// Control update2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel update2;
-        
-        /// <summary>
         /// Control ContenedorTabla.
         /// </summary>
         /// <remarks>
@@ -263,6 +254,15 @@ namespace HelpDeskWeb.Control {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ContenedorTabla;
+        
+        /// <summary>
+        /// Control update2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel update2;
         
         /// <summary>
         /// Control gvUsuarios.

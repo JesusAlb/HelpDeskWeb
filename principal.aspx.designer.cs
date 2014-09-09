@@ -10,7 +10,7 @@
 namespace HelpDeskWeb {
     
     
-    public partial class WebForm1 {
+    public partial class principal {
         
         /// <summary>
         /// Control menuCatalogos.

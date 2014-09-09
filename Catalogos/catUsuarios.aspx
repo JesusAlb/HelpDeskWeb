@@ -36,8 +36,12 @@
                     <li class="dropdown">
                         <asp:HyperLink runat="server" ID="menuControl" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Control</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Usuarios</a></li>
-                            <li><a href="#">Equipos</a></li>
+                           <li runat="server">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Control/Usuarios.aspx">Usuarios</asp:HyperLink>
+                           </li>
+                            <li runat="server">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Control/Equipos.aspx">Equipos</asp:HyperLink>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -59,45 +63,27 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
-                            <li class="divider"></li>
+                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
-                                <asp:HyperLink runat="server" href="#">Cerrar sesión</asp:HyperLink></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <asp:Panel runat="server" CssClass="container">
+                                <asp:HyperLink runat="server" href="#">Cerrar sesión</asp:HyperLink></li></ul></li><li class="active">
+                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li></ul></div></div></div><asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">
-            <asp:Panel runat="server" CssClass="row">
+            <asp:Panel runat="server" CssClass="row panel-titulo">
+                <asp:Label runat="server" Text="Catálogos para Usuarios" />
+            </asp:Panel>
+            <asp:Panel runat="server" CssClass="row">         
                 <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                 <asp:Panel runat="server" CssClass="row">
                     <asp:Panel runat="server" CssClass="col-lg-10">
-                        <asp:Panel runat="server" CssClass="panel panel-primary">
-                            <asp:Panel runat="server" CssClass="panel-heading" HorizontalAlign="Center" Font-Bold="true" Font-Size="16">
-                                Catálogos para Usuarios
-                            </asp:Panel>
-                            <asp:Panel runat="server" CssClass="panel-body">
                                 <form runat="server" role="form">
                                     <asp:ScriptManager runat="server" ID="ScriptManager" EnablePartialRendering="true">
                                     </asp:ScriptManager>
                                     <asp:UpdatePanel runat="server" ID="update" UpdateMode="Conditional">
                                         <ContentTemplate>
                                             <asp:Panel runat="server" Style="border-bottom: 1px solid; border-color: lightgray;">
-                                                <asp:Panel runat="server" CssClass="btn-group">
-                                                    <asp:LinkButton runat="server" CssClass="btn btn-primary active" Style="border-bottom: none" OnClick="btnCoordinaciones_Click" ID="btnCoordinaciones" Text="Coordinaciones" />
-                                                    <asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnDepartamentos" Text="Departamentos" Style="border-bottom: none" OnClick="btnDepartamentos_Click"></asp:LinkButton>
-                                                    <asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnArea" Text="Áreas" Style="border-bottom: none" OnClick="btnArea_Click"></asp:LinkButton>
-                                                    <asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnPuestos" Text="Puestos" Style="border-bottom: none" OnClick="btnPuestos_Click"></asp:LinkButton>
-                                                </asp:Panel>
-                                            </asp:Panel>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                    <asp:Panel runat="server" CssClass="col-lg-6">
+                                                <ul class="nav nav-tabs">
+                                                    <li><asp:LinkButton runat="server" CssClass="btn btn-primary active" Style="border-bottom: none" OnClick="btnCoordinaciones_Click" ID="btnCoordinaciones" Text="Coordinaciones" /></li>
+                                                    <li><asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnDepartamentos" Text="Departamentos" Style="border-bottom: none" OnClick="btnDepartamentos_Click"></asp:LinkButton></li><li><asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnArea" Text="Áreas" Style="border-bottom: none" OnClick="btnArea_Click"></asp:LinkButton></li><li><asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnPuestos" Text="Puestos" Style="border-bottom: none" OnClick="btnPuestos_Click"></asp:LinkButton></li></ul></asp:Panel></ContentTemplate></asp:UpdatePanel><asp:Panel runat="server" CssClass="col-lg-6">
                                         <asp:Panel runat="server" CssClass="row" Height="40"></asp:Panel>
                                         <asp:Panel runat="server" CssClass="row">
                                             <asp:Panel runat="server" CssClass="col-lg-2>"></asp:Panel>
@@ -131,14 +117,14 @@
                                             <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="col-lg-2>"></asp:Panel>
-                                        <asp:Panel runat="server" ID="contendorGrid" Height="300px"  BorderWidth="1px" ScrollBars="Vertical" CssClass="embed-responsive" BorderColor="black">
+                                        <asp:Panel runat="server" ID="contendorGrid" Height="300px"  ScrollBars="Vertical" CssClass="embed-responsive" >
                                             <asp:UpdatePanel runat="server" ID="update3" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:Panel runat="server" CssClass="row">
                                                         <asp:Panel runat="server" style="margin-left:4%">
                                                         <asp:GridView ToolTip="Seleccione el registro a modificar" HorizontalAlign="Center" OnRowCreated="gvUsuarios_RowCreated" runat="server" ID="gvUsuarios" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="White" SelectedRowStyle-BackColor="#0B2161"
-                                                            DataKeyNames="idCoordinacion" CellPadding="4" GridLines="None" OnSelectedIndexChanged="gvUsuarios_SelectedIndexChanged">
-                                                            <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#0B2161" HorizontalAlign="Center" Font-Size="13" />
+                                                            DataKeyNames="idCoordinacion" AlternatingRowStyle-BackColor="#e0e0e0" CellPadding="4" GridLines="None" OnSelectedIndexChanged="gvUsuarios_SelectedIndexChanged">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" HorizontalAlign="Center" Font-Size="12" />
                                                             <Columns>
                                                                 <asp:BoundField HeaderText="Coordinación" DataField="nomCoordinacion" />
                                                             </Columns>
@@ -162,8 +148,7 @@
                                             <asp:Panel runat="server" CssClass="col-lg-6">
                                                 <asp:Panel runat="server" ID="renglon" CssClass="row" Height="100"></asp:Panel>
                                                 <h4 class="text-center">
-                                                    <asp:Label runat="server" Text="Alta de coordinaciones" ID="lbelAccion"></asp:Label></h4>
-                                                <asp:Panel runat="server" ID="panelNombre" CssClass="form-group" HorizontalAlign="Center">
+                                                    <asp:Label runat="server" Text="Alta de coordinaciones" ID="lbelAccion"></asp:Label></h4><asp:Panel runat="server" ID="panelNombre" CssClass="form-group" HorizontalAlign="Center">
                                                     <asp:TextBox runat="server" ID="txtNomUs" CssClass="form-control" placeholder="Nombre" />
                                                 </asp:Panel>
                                                 <asp:Panel runat="server" ID="panelExtraDatos" CssClass="form-group">
@@ -186,13 +171,14 @@
                                     </asp:UpdatePanel>
                                 </form>
                             </asp:Panel>
-                        </asp:Panel>
-                    </asp:Panel>
                 </asp:Panel>
             </asp:Panel>
         </asp:Panel>
     </asp:Panel>
-    <script src="../js/jquery.min.js"></script>
+    <asp:Panel runat="server" CssClass=" navbar navbar-fixed-bottom panel-inferior">
+
+    </asp:Panel>
+    <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
