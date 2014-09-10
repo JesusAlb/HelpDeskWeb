@@ -173,7 +173,7 @@
                                             </asp:Panel>
                                             <asp:Panel runat="server" CssClass="modal-footer">
                                                 <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                                <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="btn btn-primary" OnClientClick="mostrarModal(false)" Text="Grabar" />
+                                                <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="btn btn-primary" Text="Grabar" />
                                             </asp:Panel>
                                         </ContentTemplate>
                                         <Triggers>
