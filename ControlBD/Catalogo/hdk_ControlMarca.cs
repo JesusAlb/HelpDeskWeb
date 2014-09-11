@@ -108,6 +108,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try
             {
                 return dbHelp.DB.tblmarcas.SingleOrDefault(a => a.idMarca == id);
+
             }catch
             {
                 return null;

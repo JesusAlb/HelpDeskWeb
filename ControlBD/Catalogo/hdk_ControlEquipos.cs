@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace HelpDeskWeb.ControlBD.Catalogo
 {
-    class hdk_ControlEquipos : System.Web.UI.Page
+    class hdk_ControlEquipos
     {
         hdk_ControlAcceso dbHelp; 
 
@@ -91,6 +91,18 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             catch
             {
                 return false;
+            }
+        }
+
+        public tblresponsablequipo obtenerEquipo(int id)
+        {
+            try
+            {
+                return dbHelp.DB.tblresponsablequipoes.SingleOrDefault(a => a.idResponEq == id);
+            }
+            catch
+            {
+                return null;
             }
         }
     }

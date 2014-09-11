@@ -22,17 +22,18 @@ namespace HelpDeskWeb
 
         public void limpiarControles(object[] ob)
         {        
-            for (int x = 0; x < ob.Length; x++)
+            foreach (object x in ob)
             {
-                if (ob[x] is TextBox)
+                if (x is TextBox)
                 {
-                    (ob[x] as TextBox).Text = "";
+                    (x as TextBox).Text = "";
                 }
-                else if (ob[x] is DropDownList)
+                else if (x is DropDownList)
                 {
-                    (ob[x] as DropDownList).SelectedIndex = -1;
+                    (x as DropDownList).SelectedIndex = -1;
                 }
             }
         }
+            
     }
 }

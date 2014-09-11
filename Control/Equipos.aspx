@@ -122,7 +122,7 @@
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                     <asp:Panel runat="server" CssClass="row">
-                                                                        <asp:Panel runat="server" CssClass="panel panel-default">
+                                                                        <asp:Panel runat="server" CssClass="panel panel-default" ID="panelCapacidad">
                                                                             <asp:Panel runat="server" CssClass="panel-heading text-center">
                                                                                 <asp:Label runat="server" Text="Capacidad" Font-Bold="true"></asp:Label>
                                                                             </asp:Panel>

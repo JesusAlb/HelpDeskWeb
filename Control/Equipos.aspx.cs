@@ -28,7 +28,7 @@ namespace HelpDeskWeb.Control
             controlMarca = new hdk_ControlMarca(Control);
             controlUsuario = new hdk_ControlUsuario(Control);
             utilerias = new hdk_utilerias();
-
+            this.panelesInhabilitados(true);
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -41,11 +41,8 @@ namespace HelpDeskWeb.Control
         {
             cbTipoEquipo.DataSource = controlTEquipos.cargarCombo();
             cbTipoEquipo.DataBind();
-            cbMarcaEquipo.DataSource = controlMarca.cargarCombo(1);
-            cbMarcaEquipo.DataBind();
             cbResponsable.DataSource = controlUsuario.cargarComboUsuarios(2);
             cbResponsable.DataBind();
-
 
         }
 
@@ -53,6 +50,15 @@ namespace HelpDeskWeb.Control
         {
             gvEquipo.DataSource = controlEquipos.cargarTabla(txtFiltro.Text);
             gvEquipo.DataBind();
+        }
+
+        protected void panelesInhabilitados(bool valor)
+        {
+            Panel[] paneles ={panelCapacidad, panelEquipo, panelMonitor, panelMouse, panelRed, panelTeclado};
+            for (int y = 0; y < paneles.Length; y++)
+            {
+                paneles[y].Enabled = valor;
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -69,7 +75,11 @@ namespace HelpDeskWeb.Control
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-
+            lbelTituloModal.Text = "Modificar usuario";
+            tblresponsablequipo equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+            txtSerieEquipo.Text = equipos.serieEquipo;
+         //   cbResponsable.SelectedValue = equipos.idResponEq.ToString();
+            cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();
         }
 
         protected void gvEquipo_RowCreated(object sender, GridViewRowEventArgs e)
@@ -81,6 +91,7 @@ namespace HelpDeskWeb.Control
         protected void cbTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             tbltipoequipo tipoEquipo = controlTEquipos.obtenerEquipo(Convert.ToInt32(cbTipoEquipo.SelectedValue));
+            panelesInhabilitados(false);
             this.cargarCombosMarcas( new DropDownList[]{cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado}, new bool[]{tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado});
             this.cargarTextBox(new TextBox[] {txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado}, new bool[] {tipoEquipo.siDiscoDuro, tipoEquipo.siProcesador, tipoEquipo.siRAM, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
             txtIP1.Enabled = txtIP2.Enabled = txtIP3.Enabled = txtIP4.Enabled = txtMAC1.Enabled = txtMAC2.Enabled = txtMAC3.Enabled = txtMAC4.Enabled = txtMAC5.Enabled = txtMAC6.Enabled = tipoEquipo.siRed;
