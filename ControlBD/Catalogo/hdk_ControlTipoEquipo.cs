@@ -79,7 +79,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarCombo()
+        public IList cargarCombo(int tipo)
         {
             try
             {

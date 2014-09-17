@@ -27,8 +27,6 @@ namespace HelpDeskWeb.Control
             controlTEquipos = new hdk_ControlTipoEquipo(Control);
             controlMarca = new hdk_ControlMarca(Control);
             controlUsuario = new hdk_ControlUsuario(Control);
-            utilerias = new hdk_utilerias();
-            this.panelesInhabilitados(true);
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -39,11 +37,10 @@ namespace HelpDeskWeb.Control
 
         protected void cargarComboEquipos()
         {
-            cbTipoEquipo.DataSource = controlTEquipos.cargarCombo();
+            cbTipoEquipo.DataSource = controlTEquipos.cargarCombo(0);
             cbTipoEquipo.DataBind();
             cbResponsable.DataSource = controlUsuario.cargarComboUsuarios(2);
             cbResponsable.DataBind();
-
         }
 
         protected void cargarTabla()
@@ -52,7 +49,7 @@ namespace HelpDeskWeb.Control
             gvEquipo.DataBind();
         }
 
-        protected void panelesInhabilitados(bool valor)
+        protected void panelesHabilitados(bool valor)
         {
             Panel[] paneles ={panelCapacidad, panelEquipo, panelMonitor, panelMouse, panelRed, panelTeclado};
             for (int y = 0; y < paneles.Length; y++)
@@ -63,43 +60,92 @@ namespace HelpDeskWeb.Control
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            object[] controlesSucios = {txtSerieTeclado, txtSerieMouse, txtSerieMonitor, txtSerieEquipo, txtRAM, txtProcesador, txtMAC6, txtMAC5, txtMAC4, txtMAC3, txtMAC2,
-                                       txtMAC1,txtIP4,txtIP3,txtIP2,txtIP1,txtDD, cbMarcaEquipo,cbMarcaMonitor,cbMarcaMouse,cbMarcaTeclado,cbResponsable,cbTipoEquipo};
-            utilerias.limpiarControles(controlesSucios);
+            this.cargarControles();
+            Session["Accion"] = 0;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-          
+
+            string discoDuro = txtDD.Text + " "+ cbDD.Text;
+            string ram = txtRAM + " GB";
+            string procesador = txtProcesador + " GHZ";
+            string ip = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
+            string mac = txtMAC1.Text + "-" + txtMAC2.Text + "-" + txtMAC3.Text + "-" + txtMAC4.Text + "-" + txtMAC5.Text + "-" + txtMAC6.Text;
+
+            if(Convert.ToInt16(Session["Accion"]) == 0)
+            {
+                controlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                    Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
+            }
+            else
+            {
+                controlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                    Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
+            }
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            this.cargarControles();
             lbelTituloModal.Text = "Modificar usuario";
             tblresponsablequipo equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+            cbResponsable.SelectedValue = equipos.responsable.ToString();
+            cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();           
+            string[]division = equipos.discoDuro.Split(' ');
+            txtDD.Text = division[0];
+            division = equipos.procesador.Split(' ');
+            txtProcesador.Text = division[0];
+            division = equipos.memoriaRam.Split(' ');
+            txtRAM.Text = division[0];
+            cbMarcaEquipo.SelectedValue = equipos.marcaEquipo.ToString();
             txtSerieEquipo.Text = equipos.serieEquipo;
-         //   cbResponsable.SelectedValue = equipos.idResponEq.ToString();
-            cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();
+            cbMarcaMonitor.SelectedValue = equipos.marcaMonitor.ToString();
+            txtSerieMonitor.Text = equipos.serieMonitor;
+            cbMarcaMouse.SelectedValue = equipos.marcaMouse.ToString();
+            txtSerieMouse.Text = equipos.serieMouse;
+            cbMarcaTeclado.SelectedValue = equipos.marcaTeclado.ToString();
+            txtSerieTeclado.Text = equipos.serieTeclado;
+            division = equipos.ip.Split('.');
+            txtIP1.Text = division[0];
+            txtIP2.Text = division[1];
+            txtIP3.Text = division[2];
+            txtIP4.Text = division[3];
+            division = equipos.mac.Split('-');
+            txtMAC1.Text = division[0];
+            txtMAC2.Text = division[1];
+            txtMAC3.Text = division[2];
+            txtMAC4.Text = division[3];
+            txtMAC5.Text = division[4];
+            txtMAC6.Text = division[5];
+            Session["Accion"] = 1;
+
         }
 
         protected void gvEquipo_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias utilerias = new hdk_utilerias();
+            utilerias = new hdk_utilerias();
             utilerias.setRowCreated(sender, e);
         }
 
         protected void cbTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.cargarControles();
+        }
+
+        protected void cargarControles()
+        {
             tbltipoequipo tipoEquipo = controlTEquipos.obtenerEquipo(Convert.ToInt32(cbTipoEquipo.SelectedValue));
-            panelesInhabilitados(false);
-            this.cargarCombosMarcas( new DropDownList[]{cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado}, new bool[]{tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado});
-            this.cargarTextBox(new TextBox[] {txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado}, new bool[] {tipoEquipo.siDiscoDuro, tipoEquipo.siProcesador, tipoEquipo.siRAM, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
+            this.cargarCombosMarcas(new DropDownList[] {cbMarcaEquipo, cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado }, new bool[] {tipoEquipo.siEquipo, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
+            this.cargarTextBox(new TextBox[] { txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado }, new bool[] { tipoEquipo.siDiscoDuro, tipoEquipo.siProcesador, tipoEquipo.siRAM, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
             txtIP1.Enabled = txtIP2.Enabled = txtIP3.Enabled = txtIP4.Enabled = txtMAC1.Enabled = txtMAC2.Enabled = txtMAC3.Enabled = txtMAC4.Enabled = txtMAC5.Enabled = txtMAC6.Enabled = tipoEquipo.siRed;
         }
 
         protected void cargarCombosMarcas(DropDownList []cb, bool []vbol)
         {
-            for (int x = 0; x < cb.Length; x++)
+            for(int x = 0; x < cb.Length; x++)
             {
                 if (vbol[x])
                 {
@@ -132,7 +178,6 @@ namespace HelpDeskWeb.Control
             }
             
         }
-
 
     }
 }

@@ -43,7 +43,7 @@
                         <asp:HyperLink runat="server" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Solicitudes</asp:HyperLink>
                         <ul runat="server" class="dropdown-menu" role="menu">
                             <li runat="server">
-                                <asp:HyperLink runat="server" href="#">Incidentes</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" navigateUrl="~/Solicitudes/Incidentes.aspx">Incidentes</asp:HyperLink></li>
                             <li runat="server">
                                 <asp:HyperLink runat="server" href="#">Eventos</asp:HyperLink></li>
                         </ul>

@@ -88,6 +88,7 @@
                                 </span>
                             </asp:Panel>
                         </asp:Panel>
+                        <asp:Panel runat="server" CssClass="col-lg-4">
                         <asp:LinkButton ID="btnNuevo" OnClientClick="mostrarModal(true)" OnClick="btnNuevo_Click" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
@@ -95,8 +96,6 @@
                            <asp:Panel runat="server" CssClass="modal fade" ID="myModal" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <asp:Panel runat="server" CssClass="modal-dialog modal-lg">
                                 <asp:Panel runat="server" CssClass="modal-content">
-                                    <asp:UpdatePanel runat="server" ID="updateForm1" UpdateMode="Conditional">
-                                        <ContentTemplate>
                                             <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                                                 <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de equipos" />
@@ -108,18 +107,18 @@
                                                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:Panel runat="server" CssClass="form-group">
-                                                                    <asp:Panel runat="server" CssClass="row">
-                                                                        <asp:Panel runat="server" CssClass="col-lg-8">
-                                                                            <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label>
-                                                                            <asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nomCompleto" CssClass="form-control" DataValueField="idUsuario">
-                                                                            </asp:DropDownList>
-                                                                        </asp:Panel>
-                                                                        <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                            <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label>
-                                                                            <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nomTipoEquipo" DataValueField="idTipoEquipo"></asp:DropDownList>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                </asp:Panel>
+                                                                            <asp:Panel runat="server" CssClass="row">
+                                                                                <asp:Panel runat="server" CssClass="col-lg-8">
+                                                                                    <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label>
+                                                                                    <asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nomCompleto" AutoPostBack="true" CssClass="form-control" DataValueField="idUsuario">
+                                                                                    </asp:DropDownList>
+                                                                                </asp:Panel>
+                                                                                <asp:Panel runat="server" CssClass="col-lg-4">
+                                                                                    <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label>
+                                                                                    <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nomTipoEquipo" DataValueField="idTipoEquipo"></asp:DropDownList>
+                                                                                </asp:Panel>
+                                                                            </asp:Panel>
+                                                                            </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                     <asp:Panel runat="server" CssClass="row">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelCapacidad">
@@ -257,7 +256,6 @@
                                                                             </asp:Panel>
                                                                             <asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
-
                                                                                     <asp:Panel runat="server" CssClass="row">
                                                                                         <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                                                                                         <asp:Panel runat="server" CssClass="col-lg-8">
@@ -304,6 +302,8 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="cbTipoEquipo" EventName="SelectedIndexChanged" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
@@ -313,18 +313,13 @@
                                                 <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
                                                 <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="btn btn-primary" Text="Grabar" />
                                             </asp:Panel>
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
-                                            <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
-                                        </Triggers>
-                                    </asp:UpdatePanel>
                                 </asp:Panel>
                             </asp:Panel>
                         </asp:Panel>
                         <asp:LinkButton runat="server" ID="btnModificar" OnClientClick="mostrarModal(true)" OnClick="btnModificar_Click" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-pencil"></span> Editar
                         </asp:LinkButton>
+                            </asp:Panel>
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
                         <asp:Panel runat="server" CssClass="box">

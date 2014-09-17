@@ -224,6 +224,8 @@
     <Content Include="Imagenes\soporte.jpg" />
     <Content Include="Imagenes\Terminar2.png" />
     <Content Include="Imagenes\usuario.jpg" />
+    <Content Include="Solicitudes\Eventos.aspx" />
+    <Content Include="Solicitudes\Incidentes.aspx" />
     <Content Include="Web.config" />
     <Content Include="principal.aspx" />
   </ItemGroup>
@@ -471,6 +473,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Solicitudes\Eventos.aspx.cs">
+      <DependentUpon>Eventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Solicitudes\Eventos.aspx.designer.cs">
+      <DependentUpon>Eventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Solicitudes\Incidentes.aspx.cs">
+      <DependentUpon>Incidentes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Solicitudes\Incidentes.aspx.designer.cs">
+      <DependentUpon>Incidentes.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -481,6 +497,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
