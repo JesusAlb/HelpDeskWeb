@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
 using System.Windows;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using HelpDeskWeb.ControlBD.Acceso;
 
 namespace HelpDeskWeb.Datos

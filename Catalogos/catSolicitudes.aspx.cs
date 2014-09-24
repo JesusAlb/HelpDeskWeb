@@ -2,7 +2,7 @@
 using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlAltas;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;

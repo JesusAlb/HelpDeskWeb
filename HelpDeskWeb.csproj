@@ -68,7 +68,15 @@
     <Reference Include="Microsoft.WindowsAzure.Storage">
       <HintPath>packages\WindowsAzure.Storage.2.1.0.4\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -84,6 +92,14 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -157,19 +173,19 @@
     <Content Include="js\jquery.validate.js" />
     <Content Include="js\jquery.validate.min.js" />
     <Content Include="packages.config" />
-    <EntityDeploy Include="Modelo\ModeloHD.edmx">
+    <EntityDeploy Include="EntityFrameWork\ModeloHD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloHD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Modelo\ModeloHD.Context.tt">
+    <Content Include="EntityFrameWork\ModeloHD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloHD.edmx</DependentUpon>
       <LastGenOutput>ModeloHD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelo\ModeloHD.edmx.diagram">
+    <Content Include="EntityFrameWork\ModeloHD.edmx.diagram">
       <DependentUpon>ModeloHD.edmx</DependentUpon>
     </Content>
-    <Content Include="Modelo\ModeloHD.tt">
+    <Content Include="EntityFrameWork\ModeloHD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloHD.edmx</DependentUpon>
       <LastGenOutput>ModeloHD.cs</LastGenOutput>
@@ -180,6 +196,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="js\jquery-2.1.1.min.map" />
+    <Content Include="paginaMaestra.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,7 +243,9 @@
     <Content Include="Imagenes\usuario.jpg" />
     <Content Include="Solicitudes\Eventos.aspx" />
     <Content Include="Solicitudes\Incidentes.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="principal.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -271,9 +290,7 @@
     <Compile Include="ControlBD\Catalogo\hdk_ControlArea.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlCoordinacion.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlDepartamento.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlEquipos.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="ControlBD\Catalogo\hdk_ControlEquipos.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlLugar.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlMarca.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlPuesto.cs" />
@@ -295,170 +312,178 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\cantidadincidentespordepto.cs">
+    <Compile Include="EntityFrameWork\cantidadincidentespordepto.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\EventosXStatus_Result.cs">
+    <Compile Include="EntityFrameWork\EventosXStatus_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\IncidentesXStatus_Result.cs">
+    <Compile Include="EntityFrameWork\IncidentesXStatus_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ModeloHD.Context.cs">
+    <Compile Include="EntityFrameWork\ModeloHD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloHD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ModeloHD.cs">
+    <Compile Include="EntityFrameWork\ModeloHD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ModeloHD.Designer.cs">
+    <Compile Include="EntityFrameWork\ModeloHD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloHD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numEventosPorMes_Result.cs">
+    <Compile Include="EntityFrameWork\numEventosPorMes_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numEventosPorUsuario_Result.cs">
+    <Compile Include="EntityFrameWork\numEventosPorUsuario_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numIncidentesPorDepto_Result.cs">
+    <Compile Include="EntityFrameWork\numIncidentesPorDepto_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numIncidentesPorMes_Result.cs">
+    <Compile Include="EntityFrameWork\numIncidentesPorMes_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numIncidentesPorTipo_Result.cs">
+    <Compile Include="EntityFrameWork\numIncidentesPorTipo_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\numIncidentesPorUsuario_Result.cs">
+    <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorDepto_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorDepto_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorMesEv_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorMesEv_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorMesIn_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorMesIn_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorTipoIn_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorTipoIn_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorUsuarioEv_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorUsuarioEv_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\promedioCalidadPorUsuarioIn_Result.cs">
+    <Compile Include="EntityFrameWork\promedioCalidadPorUsuarioIn_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ReqAsignados_Result.cs">
+    <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\requerimientosSinAsignar_Result.cs">
+    <Compile Include="EntityFrameWork\requerimientosSinAsignar_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblarea.cs">
+    <Compile Include="EntityFrameWork\tblarea.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblcalidadservicio.cs">
+    <Compile Include="EntityFrameWork\tblcalidadservicio.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblcoordinacion.cs">
+    <Compile Include="EntityFrameWork\tblcoordinacion.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tbldepartamento.cs">
+    <Compile Include="EntityFrameWork\tbldepartamento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblevento.cs">
+    <Compile Include="EntityFrameWork\tblevento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblincidente.cs">
+    <Compile Include="EntityFrameWork\tblincidente.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblinstitucion.cs">
+    <Compile Include="EntityFrameWork\tblinstitucion.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tbllugar.cs">
+    <Compile Include="EntityFrameWork\tbllugar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblmarca.cs">
+    <Compile Include="EntityFrameWork\tblmarca.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblpregunta.cs">
+    <Compile Include="EntityFrameWork\tblpregunta.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblpuesto.cs">
+    <Compile Include="EntityFrameWork\tblpuesto.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblrequerimiento.cs">
+    <Compile Include="EntityFrameWork\tblrequerimiento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblrequerimientoaevento.cs">
+    <Compile Include="EntityFrameWork\tblrequerimientoaevento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblresponsablequipo.cs">
+    <Compile Include="EntityFrameWork\tblresponsablequipo.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblrespuesta.cs">
+    <Compile Include="EntityFrameWork\tblrespuesta.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tbltipoequipo.cs">
+    <Compile Include="EntityFrameWork\tbltipoequipo.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tbltipoincidencia.cs">
+    <Compile Include="EntityFrameWork\tbltipoincidencia.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\tblusuario.cs">
+    <Compile Include="EntityFrameWork\tblusuario.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\topCincoRecursosMasUsados_Result.cs">
+    <Compile Include="EntityFrameWork\topCincoRecursosMasUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\topCincoRecursosMenosUsados_Result.cs">
+    <Compile Include="EntityFrameWork\topCincoRecursosMenosUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewCoordinacion.cs">
+    <Compile Include="EntityFrameWork\ViewCoordinacion.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewDepartamento.cs">
+    <Compile Include="EntityFrameWork\ViewDepartamento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewEventoConRequerimiento.cs">
+    <Compile Include="EntityFrameWork\ViewEventoConRequerimiento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewMarca.cs">
+    <Compile Include="EntityFrameWork\ViewMarca.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewRequerimiento.cs">
+    <Compile Include="EntityFrameWork\ViewRequerimiento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewTipoIncidencia.cs">
+    <Compile Include="EntityFrameWork\ViewTipoIncidencia.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\ViewUsuario.cs">
+    <Compile Include="EntityFrameWork\ViewUsuario.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaEncuesta.cs">
+    <Compile Include="EntityFrameWork\VistaEncuesta.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaEquipoReporte.cs">
+    <Compile Include="EntityFrameWork\VistaEquipoReporte.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaEquipos.cs">
+    <Compile Include="EntityFrameWork\VistaEquipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaEvento.cs">
+    <Compile Include="EntityFrameWork\VistaEvento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaIncidente.cs">
+    <Compile Include="EntityFrameWork\VistaIncidente.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelo\VistaPregunta.cs">
+    <Compile Include="EntityFrameWork\VistaPregunta.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\dbHelpDesk.cs" />
+    <Compile Include="paginaMaestra.Master.cs">
+      <DependentUpon>paginaMaestra.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginaMaestra.Master.designer.cs">
+      <DependentUpon>paginaMaestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="principal.aspx.cs">

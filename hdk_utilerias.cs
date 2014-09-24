@@ -34,6 +34,14 @@ namespace HelpDeskWeb
                 }
             }
         }
+
+        public void desactivarBotones(LinkButton[] linkbutton, bool[] status)
+        {
+            for (int x = 0; x < linkbutton.Length; x++)
+            {
+                linkbutton[x].Enabled = status[x];
+            }
+        }
             
     }
 }

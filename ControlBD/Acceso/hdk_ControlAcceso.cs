@@ -8,7 +8,7 @@ using System.Windows;
 using System.Globalization;
 using System.Threading;
 using System.IO;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 
 namespace HelpDeskWeb.ControlBD.Acceso
 {
@@ -50,10 +50,11 @@ namespace HelpDeskWeb.ControlBD.Acceso
         public bool encontrarUsuario(String nombre, string password){
             bool regreso = true;
             try
-            {                
+            {
                 var UsuarioItem = DB.ViewUsuarios.Where(x => x.nomUsuario == nombre && x.password == password).SingleOrDefault();
                 if (UsuarioItem != null)
                 {
+                    
                     Session["DatosUsuario"] = UsuarioItem;
                     Session["Conexion"] = this;
                 }

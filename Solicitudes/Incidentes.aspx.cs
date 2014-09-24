@@ -1,6 +1,6 @@
 ﻿using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Solicitudes.Incidentes;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,6 @@ namespace HelpDeskWeb.Solicitudes
             {
                 this.cargarTablas();
             }
-
         }
 
         protected void cargarTablas()

@@ -1,6 +1,6 @@
 ﻿
 using HelpDeskWeb.ControlBD.Acceso;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections;
 using System.Collections.Generic;

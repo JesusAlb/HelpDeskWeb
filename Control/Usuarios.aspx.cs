@@ -2,7 +2,7 @@
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlAltas;
 using HelpDeskWeb.Datos;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +20,7 @@ namespace HelpDeskWeb.Control
         hdk_ControlDepartamento cDepto;
         hdk_ControlArea cArea;
         hdk_ControlPuesto cPuesto;
+        hdk_utilerias utilerias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace HelpDeskWeb.Control
             controlUsuario = new hdk_ControlUsuario(Control);
             cDepto = new hdk_ControlDepartamento(Control);
             cArea = new hdk_ControlArea(Control);
+            utilerias = new hdk_utilerias();
             cPuesto = new hdk_ControlPuesto(Control);
             if (!IsPostBack)
             {
@@ -89,9 +91,8 @@ namespace HelpDeskWeb.Control
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             lbelTituloModal.Text = "Alta de usuarios";
-            txtCorreo.Text = txtExtension.Text = txtNomCompleto.Text = txtNomUsuario.Text = "";
+            utilerias.limpiarControles(new object[]{txtCorreo, txtExtension, txtNomCompleto, txtNomUsuario, cbArea, cbCoordinaciones, cbDepto, cbInstitucion, cbPuesto, cbTipoUs});
             txtPassword.Attributes.Remove("Value");
-            cbArea.SelectedIndex = cbCoordinaciones.SelectedIndex = cbDepto.SelectedIndex = cbPuesto.SelectedIndex = cbTipoUs.SelectedIndex = -1;
             Session["Accion"] = 0;
         }
 

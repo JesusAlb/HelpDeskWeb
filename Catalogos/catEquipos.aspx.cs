@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HelpDeskWeb.Modelo;
+using HelpDeskWeb.EntityFrameWork;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlBD.Acceso;
 using System.Drawing;

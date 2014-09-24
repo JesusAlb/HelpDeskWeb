@@ -76,3 +76,11 @@ C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\zh-Hans\System.Spatial.r
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\HelpDeskWeb.Properties.Resources.resources
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\HelpDeskWeb.csproj.GenerateResource.Cache
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\Newtonsoft.Json.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.WebHost.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\Newtonsoft.Json.xml
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Net.Http.Formatting.xml
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.xml
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.WebHost.xml
