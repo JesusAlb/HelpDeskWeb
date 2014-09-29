@@ -21,7 +21,7 @@ namespace HelpDeskWeb
         }
 
         public void limpiarControles(object[] ob)
-        {        
+        {
             foreach (object x in ob)
             {
                 if (x is TextBox)
@@ -35,13 +35,12 @@ namespace HelpDeskWeb
             }
         }
 
-        public void desactivarBotones(LinkButton[] linkbutton, bool[] status)
+        public void modificarOnClientClick(LinkButton[] linkbutton, string[] onclientclick)
         {
             for (int x = 0; x < linkbutton.Length; x++)
             {
-                linkbutton[x].Enabled = status[x];
+                linkbutton[x].OnClientClick = onclientclick[x];
             }
         }
-            
     }
 }

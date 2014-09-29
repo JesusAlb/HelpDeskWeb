@@ -17,19 +17,25 @@ namespace HelpDeskWeb.Solicitudes
         private hdk_ControlAcceso Control;
         private hdk_ControlEventos controlEventos;
         private hdk_ControlRequerimientos controlRequerimientos;
+        private hdk_ControlUsuario controlUsuario;
         private hdk_utilerias utilerias;
         private ViewUsuario usuarioConectado;
         private hdk_ControlLugar controlLugar;
         private hdk_ControlAsigReq controlRecursosAsignados;
-        private int tab;
+        private tblevento registroEvento;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["DatosUsuario"] == null)
+            {
+                Response.Redirect("~/index.aspx");
+            }
             usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlRecursosAsignados = new hdk_ControlAsigReq(Control);
             controlRequerimientos = new hdk_ControlRequerimientos(Control);
             controlEventos = new hdk_ControlEventos(Control);
+            controlUsuario = new hdk_ControlUsuario(Control);
             controlLugar = new hdk_ControlLugar(Control);
             txtFechaInicial.Text = "2013-01-01";
             txtFechaFinal.Text = DateTime.Today.ToString("yyyy-MM-dd");
@@ -44,12 +50,18 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (Request["__EVENTTARGET"] == "tabAbierta")
                 {
-                    tab = Convert.ToInt32(this.Request.Params.Get("__EVENTARGUMENT"));
-                    btnEditar.OnClientClick = null;
-                    btnAsignar.OnClientClick = null;
-                    btnRecursos.OnClientClick = null;
+                    Session["tab"] = Convert.ToInt32(this.Request.Params.Get("__EVENTARGUMENT"));
+                    utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { null, null, null });
                 }
+                this.cargarTablas();
             }
+        }
+
+        protected void cargarCombosSoporte()
+        {
+            cbSeguimiento.DataSource = cbSoporte.DataSource = controlUsuario.cargarComboUsuarios(0);
+            cbSoporte.DataBind();
+            cbSeguimiento.DataBind();
         }
 
         protected void cargarTablas()
@@ -79,44 +91,37 @@ namespace HelpDeskWeb.Solicitudes
             cbLugares.DataBind();
         }
 
-        protected void definirPrivilegios()
+        protected void definirPrivilegios(int tab)
         {
             switch (tab)
             {
                 case 0:
                     {
-                        btnEditar.OnClientClick = "mostrarModal('ModalNuevo')";
-                        btnAsignar.OnClientClick = "mostrarModal('ModalAsignar')";
-                        btnRecursos.OnClientClick = "mostrarModal('ModalRecursos')";
+                        utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { "mostrarModal('ModalNuevo','show')", "mostrarModal('ModalAsignar','show')", "mostrarModal('ModalRecursos','show')" });
                         break;
                     }
                 case 1:
                     {
-                        btnEditar.OnClientClick = "mostrarModal('ModalNuevo')";
-                        btnAsignar.OnClientClick = "mostrarModal('ModalAsignar')";
-                        btnRecursos.OnClientClick = "mostrarModal('ModalRecursos')";
+                        utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { "mostrarModal('ModalNuevo','show')", "mostrarModal('ModalAsignar','show')", "mostrarModal('ModalRecursos','show')" });
                         break;
                     }
                 case 2:
                     {
-                        btnEditar.OnClientClick =null;
-                        btnAsignar.OnClientClick =null;
-                        btnRecursos.OnClientClick = null ;
+                        utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { null, null, null });
                         break;
                     }
                 case 3:
                     {
-                        btnEditar.OnClientClick = null;
-                        btnAsignar.OnClientClick = null;
-                        btnRecursos.OnClientClick = null;
+                        utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { null, null, null });
                         break;
                     }
             }
+            
         }
 
         protected void gvEventos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.definirPrivilegios();
+            this.definirPrivilegios(Convert.ToInt32(Session["tab"])); 
             Session["itemSeleccionado"] = (sender as GridView).SelectedDataKey.Value.ToString();
         }
 
@@ -130,6 +135,8 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Session["itemSeleccionado"] != null)
             {
+                registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                txtTitulo.Text = registroEvento.titulo;
                 gvRecursosNoAsignados.DataSource = controlRequerimientos.cargarTabla("", "", Convert.ToInt32(Session["itemSeleccionado"]));
                 gvRecursosNoAsignados.DataBind();
                 gvRecursosAsignados.DataSource = controlRecursosAsignados.cargarTablaReqAsig(Convert.ToInt32(Session["itemSeleccionado"]));
@@ -142,6 +149,7 @@ namespace HelpDeskWeb.Solicitudes
             this.cargarComboLugares();
             lbelTituloModal.Text = "Alta de eventos";
             utilerias.limpiarControles(new Object[]{txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo});
+            Session["Accion"] = 0;
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -150,20 +158,45 @@ namespace HelpDeskWeb.Solicitudes
             {
                 this.cargarComboLugares();
                 lbelTituloModal.Text = "Modificar eventos";
-                int idEvento = Convert.ToInt32(Session["itemSeleccionado"]);
-                tblevento evento = controlEventos.cargarEvento(idEvento);
-                txtTituloNuevo.Text = evento.titulo;
-                txtAcomodo.Text = evento.acomodo;
-                txtAsistencia.Text = evento.asistencia_aprox.Value.ToString(); ;
-                txtDescripcion.Text = evento.descripcion;
-                cbLugares.SelectedValue = evento.lugar.ToString();
-                txtFecha.Text = evento.FechaInicio.Value.Date.ToString("yyyy-MM-dd");
-                txtHoraFinal.Text = evento.horaFn.Value.TimeOfDay.ToString();
-                txtHoraInicial.Text = evento.horaIn.Value.TimeOfDay.ToString();
+                registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                txtTituloNuevo.Text = registroEvento.titulo;
+                txtAcomodo.Text = registroEvento.acomodo;
+                txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString(); ;
+                txtDescripcion.Text = registroEvento.descripcion;
+                cbLugares.SelectedValue = registroEvento.lugar.ToString();
+                txtFecha.Text = registroEvento.FechaInicio.Value.Date.ToString("yyyy-MM-dd");
+                txtHoraFinal.Text = registroEvento.horaFn.Value.TimeOfDay.ToString();
+                txtHoraInicial.Text = registroEvento.horaIn.Value.TimeOfDay.ToString();
+                Session["Accion"] = 1;
             }
         }
 
-        void Page_Unload(object sender, System.EventArgs e)
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(Session["Accion"]) == 0)
+            {
+
+            }
+            else
+            {
+                if (controlEventos.editarEvento(Convert.ToInt32(Session["itemSeleccionado"]), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                {
+                    this.cargarTablas();
+                    ScriptManager.RegisterStartupScript(this.UpdateScript, this.GetType(), "SalirVentana", "mostrarModal('ModalNuevo','hide');", true);
+                    
+                }
+            }
+        }
+
+        protected void btnAsignar_Click(object sender, EventArgs e)
+        {
+            if (btnAsignar.OnClientClick == "mostrarModal('ModalAsignar','show')")
+            {
+                this.cargarCombosSoporte();
+            }          
+        }
+
+        protected void Page_Unload(object sender, System.EventArgs e)
         {
             if (!IsPostBack)
             {

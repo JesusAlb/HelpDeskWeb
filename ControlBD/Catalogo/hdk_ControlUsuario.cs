@@ -78,7 +78,6 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-
         public IList cargarTabla(string filtro)
         {
             try

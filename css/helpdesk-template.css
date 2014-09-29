@@ -1,7 +1,7 @@
 body {
   padding-top: 50px;
   margin-bottom:0%;
-  background-color:#eee;
+  background-color:#FAFAFA;
 }
 
 .helpdesk-template {
@@ -39,7 +39,7 @@ body {
 
 .panel-inferior{
     text-align:center;
-    background-color: #B0C4DE; 
+    background-color: #E6E6E6; 
     border-top:1px solid #006699;
 }
 
