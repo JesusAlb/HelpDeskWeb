@@ -224,14 +224,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ViewCoordinacions">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.ViewCoordinacion">
-        <MappingFragment StoreEntitySet="ViewCoordinacion">
-          <ScalarProperty Name="idCoordinacion" ColumnName="idCoordinacion" />
-          <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ViewDepartamentos">
       <EntityTypeMapping TypeName="dbhelpdeskModel.ViewDepartamento">
         <MappingFragment StoreEntitySet="ViewDepartamentos">
@@ -259,23 +251,6 @@
           <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
           <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
           <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ViewMarcas">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.ViewMarca">
-        <MappingFragment StoreEntitySet="ViewMarca">
-          <ScalarProperty Name="idMarca" ColumnName="idMarca" />
-          <ScalarProperty Name="nomMarca" ColumnName="nomMarca" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ViewRequerimientos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.ViewRequerimiento">
-        <MappingFragment StoreEntitySet="ViewRequerimientos">
-          <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -371,9 +346,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VistaEventos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaEvento">
-        <MappingFragment StoreEntitySet="VistaEventos">
+    <EntitySetMapping Name="VistaEventosCerrados">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaEventosCerrado">
+        <MappingFragment StoreEntitySet="VistaEventosCerrados">
           <ScalarProperty Name="idEvento" ColumnName="idEvento" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="solicitante" ColumnName="solicitante" />
@@ -401,9 +376,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VistaIncidentes">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaIncidente">
-        <MappingFragment StoreEntitySet="VistaIncidentes">
+    <EntitySetMapping Name="VistaEventosSinCerrars">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaEventosSinCerrar">
+        <MappingFragment StoreEntitySet="VistaEventosSinCerrar">
+          <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+          <ScalarProperty Name="responsable" ColumnName="responsable" />
+          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
+          <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
+          <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
+          <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
+          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
+          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
+          <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+          <ScalarProperty Name="idResponsable" ColumnName="idResponsable" />
+          <ScalarProperty Name="idApoyo" ColumnName="idApoyo" />
+          <ScalarProperty Name="lugar" ColumnName="lugar" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VistaIncidentesCerrados">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaIncidentesCerrado">
+        <MappingFragment StoreEntitySet="VistaIncidentesCerrados">
           <ScalarProperty Name="numIncidente" ColumnName="numIncidente" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="solicitante" ColumnName="solicitante" />
@@ -425,6 +426,29 @@
           <ScalarProperty Name="idCalidad_Servicio" ColumnName="idCalidad_Servicio" />
           <ScalarProperty Name="observacionesServicio" ColumnName="observacionesServicio" />
           <ScalarProperty Name="promedioCalidad" ColumnName="promedioCalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VistaIncidentesSinCerrars">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.VistaIncidentesSinCerrar">
+        <MappingFragment StoreEntitySet="VistaIncidentesSinCerrar">
+          <ScalarProperty Name="numIncidente" ColumnName="numIncidente" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
+          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
+          <ScalarProperty Name="fecha_Cierre" ColumnName="fecha_Cierre" />
+          <ScalarProperty Name="acciones" ColumnName="acciones" />
+          <ScalarProperty Name="solucion" ColumnName="solucion" />
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+          <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+          <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
+          <ScalarProperty Name="soporte" ColumnName="soporte" />
+          <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
+          <ScalarProperty Name="idSeguimiento" ColumnName="idSeguimiento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -491,7 +515,9 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UltimoEvento" FunctionName="dbhelpdeskModel.Store.UltimoEvento" />
+    <FunctionImportMapping FunctionImportName="cerrarEvento" FunctionName="dbhelpdeskModel.Store.cerrarEvento" />
     <FunctionImportMapping FunctionImportName="cerrarIncidente" FunctionName="dbhelpdeskModel.Store.cerrarIncidente" />
+    <FunctionImportMapping FunctionImportName="insertarEvento" FunctionName="dbhelpdeskModel.Store.insertarEvento" />
     <FunctionImportMapping FunctionImportName="insertarIncidente" FunctionName="dbhelpdeskModel.Store.insertarIncidente" />
     <FunctionImportMapping FunctionImportName="numEventosPorMes" FunctionName="dbhelpdeskModel.Store.numEventosPorMes">
       <ResultMapping>
@@ -501,22 +527,8 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="numEventosPorUsuario" FunctionName="dbhelpdeskModel.Store.numEventosPorUsuario">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.numEventosPorUsuario_Result">
-          <ScalarProperty Name="Soporte" ColumnName="Soporte" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="numIncidentesPorDepto" FunctionName="dbhelpdeskModel.Store.numIncidentesPorDepto">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.numIncidentesPorDepto_Result">
-          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="numEventosPorUsuario" FunctionName="dbhelpdeskModel.Store.numEventosPorUsuario" />
+    <FunctionImportMapping FunctionImportName="numIncidentesPorDepto" FunctionName="dbhelpdeskModel.Store.numIncidentesPorDepto" />
     <FunctionImportMapping FunctionImportName="numIncidentesPorMes" FunctionName="dbhelpdeskModel.Store.numIncidentesPorMes">
       <ResultMapping>
         <ComplexTypeMapping TypeName="dbhelpdeskModel.numIncidentesPorMes_Result">
@@ -541,54 +553,12 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorDepto" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorDepto">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorDepto_Result">
-          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorMesEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesEv">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorMesEv_Result">
-          <ScalarProperty Name="Mes" ColumnName="Mes" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorMesIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesIn">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorMesIn_Result">
-          <ScalarProperty Name="Mes" ColumnName="Mes" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorTipoIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorTipoIn">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorTipoIn_Result">
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioEv">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorUsuarioEv_Result">
-          <ScalarProperty Name="responsable" ColumnName="responsable" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioIn">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.promedioCalidadPorUsuarioIn_Result">
-          <ScalarProperty Name="soporte" ColumnName="soporte" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorDepto" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorDepto" />
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorMesEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesEv" />
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorMesIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesIn" />
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorTipoIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorTipoIn" />
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioEv" />
+    <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioIn" />
     <FunctionImportMapping FunctionImportName="requerimientosSinAsignar" FunctionName="dbhelpdeskModel.Store.requerimientosSinAsignar">
       <ResultMapping>
         <ComplexTypeMapping TypeName="dbhelpdeskModel.requerimientosSinAsignar_Result">

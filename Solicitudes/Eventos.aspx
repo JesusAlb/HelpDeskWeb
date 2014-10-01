@@ -13,6 +13,15 @@
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/styles2.css" rel="stylesheet" />
     <link href="../css/printstyles.css" rel="stylesheet" />
+        <!-- include alertify.css -->
+    <link rel="stylesheet" href="../css/alertify.css"/>
+
+    <!-- include boostrap theme  -->
+    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>
+
+    <!-- include alertify script -->
+    <script src="../js/alertify.js"></script>
+
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -87,11 +96,8 @@
                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                             <asp:Panel runat="server" CssClass="col-lg-11">
                                 <asp:Panel runat="server" CssClass="row">
-                                    <asp:Panel runat="server" CssClass="input-group">
+                                    <asp:Panel runat="server" CssClass="form-group">
                                         <asp:TextBox runat="server" ID="txtFiltro"   placeholder="Buscar" CssClass="form-control" />
-                                        <span class="input-group-btn">
-                                            <asp:Button runat="server" ID="btnFiltrar" Text="Fitrar" CssClass="btn btn-default" />
-                                        </span>
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" CssClass="row" Style="margin-top: 2%">
@@ -114,7 +120,7 @@
                                             </asp:LinkButton><asp:LinkButton ID="btnEditar" OnClick="btnEditar_Click" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Editar
-                                            </asp:LinkButton><asp:LinkButton ID="btnCancelar" runat="server" CssClass="btn btn-primary">
+                                            </asp:LinkButton><asp:LinkButton ID="btnCancelar" OnClick="btnCancelar_Click" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-remove"></span>
                              Cancelar
                                             </asp:LinkButton>
@@ -211,8 +217,7 @@
                                             </asp:Panel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
-                                            <asp:UpdatePanel runat="server" ID="UpdateScript"
-                                                UpdateMode="Conditional">
+                                            <asp:UpdatePanel runat="server" ID="UpdateGrabar" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
                                                     <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="btn btn-primary" Text="Grabar" />
@@ -232,7 +237,7 @@
                                             <asp:Panel runat="server" CssClass="row">
                                                 <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                 <asp:Panel runat="server" CssClass="col-lg-10">
-                                                    <asp:UpdatePanel runat="server" ID="updateAsignar">
+                                                    <asp:UpdatePanel runat="server" ID="updateAsignar" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
@@ -250,8 +255,12 @@
                                             </asp:Panel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
-                                            <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                            <asp:Button runat="server" ID="Button1" CssClass="btn btn-primary" Text="Grabar" />
+                                        <asp:UpdatePanel runat="server" ID="UpdateSoporte" UpdateMode="Conditional">
+                                            <ContentTemplate>
+                                                <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
+                                                <asp:LinkButton runat="server" ID="btnGrabarAsignacion" OnClick="btnGrabarAsignacion_Click" CssClass="btn btn-primary" Text="Grabar" />
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>      
                                         </asp:Panel>
                                     </asp:Panel>
                                 </asp:Panel>
@@ -395,7 +404,6 @@
                                 <asp:LinkButton runat="server" ID="tabCancelada" OnClientClick="activaTab('3')" href="#cancelada" role="tab">Cancelada</asp:LinkButton>
                             </li>
                         </ul>
-
                             <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
                                 <asp:Panel runat="server" ID="abierta" CssClass="tab-pane fade in active">
                                     <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
@@ -414,8 +422,13 @@
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />      
-                                                <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />                                        
+                                                <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />  
+                                                <asp:AsyncPostBackTrigger ControlID="btnGrabarAsignacion" EventName="Click" />    
+                                                <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
+                                                <asp:AsyncPostBackTrigger ControlID="tabAbierta" EventName="Click"/> 
+                                                <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click"/> 
+                                                <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click"/>     
+                                                <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click"/>                                            
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </asp:Panel>
@@ -438,7 +451,12 @@
                                             </ContentTemplate>
                                             <Triggers>
                                                 <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
+                                                <asp:AsyncPostBackTrigger ControlID="btnGrabarAsignacion" EventName="Click" /> 
                                                 <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
+                                                <asp:AsyncPostBackTrigger ControlID="tabAbierta" EventName="Click"/> 
+                                                <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click"/>
+                                                <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click"/>     
+                                                <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click"/>   
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </asp:Panel>
@@ -462,6 +480,10 @@
                                             <Triggers>
                                                 <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
+                                                <asp:AsyncPostBackTrigger ControlID="tabAbierta" EventName="Click"/> 
+                                                <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click"/>  
+                                                <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click"/>    
+                                                <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click"/>  
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </asp:Panel>
@@ -485,18 +507,24 @@
                                             <Triggers>
                                                 <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
+                                                <asp:AsyncPostBackTrigger ControlID="tabAbierta" EventName="Click"/> 
+                                                <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click"/>     
+                                                <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click"/>  
+                                                 <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click"/> 
                                             </Triggers>
-                                        </asp:UpdatePanel>
+                                        </asp:UpdatePanel>                                         
                                     </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
                         </asp:Panel>
                     </asp:Panel>
                     </asp:Panel>
+               
             </form>
         </asp:Panel>
     </asp:Panel>
     <asp:Panel CssClass="navbar navbar-fixed-bottom panel-inferior" runat="server">
+       
     </asp:Panel>
     <script type="text/javascript">
         function mostrarModal(a, opcion) {
@@ -508,6 +536,5 @@
             __doPostBack('tabAbierta', index);
         };
     </script>
-
 </body>
 </html>

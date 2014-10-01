@@ -12,7 +12,7 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class VistaEvento
+    public partial class VistaEventosSinCerrar
     {
         public int idEvento { get; set; }
         public string descripcion { get; set; }
@@ -34,9 +34,5 @@ namespace HelpDeskWeb.EntityFrameWork
         public string lugar { get; set; }
         public string observaciones { get; set; }
         public string titulo { get; set; }
-        public bool statusCal_Servicio { get; set; }
-        public int idCalidad_Servicio { get; set; }
-        public string observacionesServicio { get; set; }
-        public Nullable<double> promedioCalidad { get; set; }
     }
 }

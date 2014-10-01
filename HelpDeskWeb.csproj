@@ -146,6 +146,24 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="css\alertify.css" />
+    <Content Include="css\alertify.min.css" />
+    <Content Include="css\alertify.rtl.css" />
+    <Content Include="css\alertify.rtl.min.css" />
+    <Content Include="css\themes\bootstrap.css" />
+    <Content Include="css\themes\bootstrap.min.css" />
+    <Content Include="css\themes\bootstrap.rtl.css" />
+    <Content Include="css\themes\bootstrap.rtl.min.css" />
+    <Content Include="css\themes\default.css" />
+    <Content Include="css\themes\default.min.css" />
+    <Content Include="css\themes\default.rtl.css" />
+    <Content Include="css\themes\default.rtl.min.css" />
+    <Content Include="css\themes\semantic.css" />
+    <Content Include="css\themes\semantic.min.css" />
+    <Content Include="css\themes\semantic.rtl.css" />
+    <Content Include="css\themes\semantic.rtl.min.css" />
+    <Content Include="js\alertify.js" />
+    <Content Include="js\alertify.min.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Catalogos\catEquipos.aspx" />
@@ -165,16 +183,6 @@
     <Content Include="Imagenes\Fondo1.jpg" />
     <Content Include="Imagenes\helpDesk.png" />
     <Content Include="index.aspx" />
-    <None Include="js\jquery-2.1.1-vsdoc.js" />
-    <None Include="js\jquery-2.1.1.intellisense.js" />
-    <Content Include="js\jquery-2.1.1.js" />
-    <Content Include="js\jquery-2.1.1.min.js" />
-    <Content Include="js\jquery-ui-1.11.1.js" />
-    <Content Include="js\jquery-ui.min-1.11.1.js" />
-    <None Include="js\jquery.validate-vsdoc.js" />
-    <Content Include="js\jquery.validate.js" />
-    <Content Include="js\jquery.validate.min.js" />
-    <Content Include="packages.config" />
     <EntityDeploy Include="EntityFrameWork\ModeloHD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloHD.Designer.cs</LastGenOutput>
@@ -192,6 +200,16 @@
       <DependentUpon>ModeloHD.edmx</DependentUpon>
       <LastGenOutput>ModeloHD.cs</LastGenOutput>
     </Content>
+    <None Include="js\jquery-2.1.1-vsdoc.js" />
+    <None Include="js\jquery-2.1.1.intellisense.js" />
+    <Content Include="js\jquery-2.1.1.js" />
+    <Content Include="js\jquery-2.1.1.min.js" />
+    <Content Include="js\jquery-ui-1.11.1.js" />
+    <Content Include="js\jquery-ui.min-1.11.1.js" />
+    <None Include="js\jquery.validate-vsdoc.js" />
+    <Content Include="js\jquery.validate.js" />
+    <Content Include="js\jquery.validate.min.js" />
+    <Content Include="packages.config" />
     <Content Include="css\bootstrap-theme.css.map" />
     <Content Include="css\bootstrap.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -304,16 +322,6 @@
     <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlEventos.cs" />
     <Compile Include="ControlBD\Solicitudes\hdk_ControlEncuestas.cs" />
     <Compile Include="ControlBD\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
-    <Compile Include="hdk_utilerias.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\cantidadincidentespordepto.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -341,12 +349,6 @@
     <Compile Include="EntityFrameWork\numEventosPorMes_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\numEventosPorUsuario_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorDepto_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\numIncidentesPorMes_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -354,24 +356,6 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorDepto_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorMesEv_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorMesIn_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorTipoIn_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorUsuarioEv_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\promedioCalidadPorUsuarioIn_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
@@ -440,19 +424,10 @@
     <Compile Include="EntityFrameWork\topCincoRecursosMenosUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\ViewCoordinacion.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\ViewDepartamento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\ViewEventoConRequerimiento.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\ViewMarca.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\ViewRequerimiento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\ViewTipoIncidencia.cs">
@@ -470,14 +445,30 @@
     <Compile Include="EntityFrameWork\VistaEquipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEvento.cs">
+    <Compile Include="EntityFrameWork\VistaEventosCerrado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaIncidente.cs">
+    <Compile Include="EntityFrameWork\VistaEventosSinCerrar.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\VistaIncidentesCerrado.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\VistaIncidentesSinCerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\VistaPregunta.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hdk_utilerias.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\dbHelpDesk.cs" />
     <Compile Include="paginaMaestra.Master.cs">

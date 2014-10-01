@@ -24,7 +24,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         public int obtenerNumeroEncuestasIn(int us){
             try
             {
-                return dbHelp.DB.VistaIncidentes.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbHelp.DB.VistaIncidentesCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {
@@ -37,7 +37,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbHelp.DB.VistaEventos.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbHelp.DB.VistaEventosCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {

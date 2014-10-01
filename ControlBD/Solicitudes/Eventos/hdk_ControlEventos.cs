@@ -34,27 +34,39 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 
             try
             {
-                if (FechaInicio == null || FechaFinal == null)
+                if (status != 2)
                 {
-                    return dbHelp.DB.VistaEventos.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
-                                                     a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||
-                                                     /*a.horaIn.Value.Hour == numero || a.horaIn.Value.Minute == numero || a.horaFn.Value.Hour == numero || 
-                                                     a.horaFn.Value.Minute == numero || a.fecha_Sol.Value.Day.Equals(numero) || a.fecha_Sol.Value.Month.Equals(numero) || a.fecha_Sol.Value.Year.Equals(numero) ||
-                                                     a.fecha_cierre.Value.Day.Equals(numero) || a.fecha_cierre.Value.Month.Equals(numero) || a.fecha_cierre.Value.Year.Equals(numero) ||
-                                                     a.FechaInicio.Value.Day.Equals(numero) || a.FechaInicio.Value.Month.Equals(numero) || a.FechaInicio.Value.Year.Equals(numero) ||         */                 
-                                                     a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
-                                                     a.tipo_evento.Contains(filtro))).ToList();
+                    if (FechaInicio == null || FechaFinal == null)
+                    {
+                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
+                                                         a.tipo_evento.Contains(filtro))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                           a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||                          
+                                           a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro))).ToList();
+
+                    }
                 }
                 else
                 {
-                    return dbHelp.DB.VistaEventos.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
-                                       a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||a.FechaInicio.Value.Equals(busquedaFecha) ||
-                        /*a.horaIn.Value.Hour == numero || a.horaIn.Value.Minute == numero || a.horaFn.Value.Hour == numero || 
-                        a.horaFn.Value.Minute == numero || a.fecha_Sol.Value.Day.Equals(numero) || a.fecha_Sol.Value.Month.Equals(numero) || a.fecha_Sol.Value.Year.Equals(numero) ||
-                        a.fecha_cierre.Value.Day.Equals(numero) || a.fecha_cierre.Value.Month.Equals(numero) || a.fecha_cierre.Value.Year.Equals(numero) ||
-                        a.FechaInicio.Value.Day.Equals(numero) || a.FechaInicio.Value.Month.Equals(numero) || a.FechaInicio.Value.Year.Equals(numero) ||*/
-                                       a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro)||a.tipo_evento.Contains(filtro))).ToList();
+                    if (FechaInicio == null || FechaFinal == null)
+                    {
+                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
+                                                         a.tipo_evento.Contains(filtro))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                           a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||                         
+                                           a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro))).ToList();
 
+                    }
                 }
             }
             catch
@@ -89,51 +101,61 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 
             try
             {
-                if (FechaInicio == null || FechaFinal == null)
+                if (status != 2)
                 {
-                   // MessageBox.Show("FILTRO: " + filtro + "; NUMERO: " + numero + "; BUSQUEDA FECHA: " + busquedaFecha);
-                    return dbHelp.DB.VistaEventos.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
-                                                     a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || 
-                                                     a.FechaInicio.Value.Equals(busquedaFecha) ||
-                                                     a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                                                     a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
-                                                     a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
-                                                     a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
-                                                     a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro) 
-                                                     ) && a.status == status).ToList();
+                    if (FechaInicio == null || FechaFinal == null)
+                    {
+                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
+                                                         a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                                                         a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
+                                                         a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
+                                                         a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
+                                                         ) && a.status == status).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
+                                                         a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                                                         a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
+                                                         a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
+                                                         a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
+                                                         ) && (a.status == status) && (a.fecha_Sol >= FechaInicio && a.fecha_Sol <= FechaFinal)).ToList();
 
-                 /*   return dbHelp.VistaEventos.Where(a =>(a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) || 
-                                                     a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || 
-                                                     a.FechaInicio.Value.Equals(busquedaFecha) || a.horaIn.Value.Hour == numero || a.horaIn.Value.Minute == numero || a.horaFn.Value.Hour == numero || 
-                                                     a.horaFn.Value.Minute == numero || a.fecha_Sol.Value.Day == numero || a.fecha_Sol.Value.Month == numero || a.fecha_Sol.Value.Year == numero ||
-                                                     a.fecha_cierre.Value.Day == numero || a.fecha_cierre.Value.Month == numero || a.fecha_cierre.Value.Year == numero ||
-                                                     a.FechaInicio.Value.Day == numero || a.FechaInicio.Value.Month == numero || a.FechaInicio.Value.Year == numero ||
-                                                     a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
-                                                     a.tipo_evento.Contains(filtro)) && (a.status == status) ).ToList();
-               
-                  */ }
+                    }
+                }
                 else
                 {
-                    return dbHelp.DB.VistaEventos.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
-                                                     a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
-                                                     a.FechaInicio.Value.Equals(busquedaFecha) ||
-                                                     a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                                                     a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
-                                                     a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
-                                                     a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
-                                                     a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
-                                                     ) && (a.status == status) && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)).ToList();
+                    if (FechaInicio == null || FechaFinal == null)
+                    {
+                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
+                                                         a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                                                         a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
+                                                         a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
+                                                         a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
+                                                         ) && a.status == status).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                                                         a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
+                                                         a.FechaInicio.Value.Equals(busquedaFecha) ||
+                                                         a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                                                         a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                                                         a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
+                                                         a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
+                                                         a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
+                                                         ) && (a.status == status) && (a.fecha_Sol >= FechaInicio && a.fecha_Sol <= FechaFinal)).ToList();
 
- /*                   return dbHelp.VistaEventos.Where(a => (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
-                                 a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
-                                 a.FechaInicio.Value.Equals(busquedaFecha) || a.horaIn.Value.Hour == numero || a.horaIn.Value.Minute == numero || a.horaFn.Value.Hour == numero || 
-                                 a.horaFn.Value.Minute == numero || a.fecha_Sol.Value.Day.Equals(numero) || a.fecha_Sol.Value.Month.Equals(numero) || a.fecha_Sol.Value.Year.Equals(numero) ||
-                                 a.fecha_cierre.Value.Day.Equals(numero) || a.fecha_cierre.Value.Month.Equals(numero) || a.fecha_cierre.Value.Year.Equals(numero) ||
-                                 a.FechaInicio.Value.Day.Equals(numero) || a.FechaInicio.Value.Month.Equals(numero) || a.FechaInicio.Value.Year.Equals(numero) ||                                 
-                                 a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
-                                 (a.FechaInicio >= FechaInicio) || (a.fecha_Sol >= FechaInicio && a.fecha_cierre <= FechaFinal) ||
-                                 a.tipo_evento.Contains(filtro)) && (a.status == status)).ToList();*/
-
+                    }
                 }
             }
             catch
@@ -142,52 +164,19 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool insertarEvento(int id, int res, int apo, string tit, int lug, DateTime feSol, string ac, string tipo, DateTime feIn, int asis, DateTime In, DateTime Fn, string desc)
+        public bool insertarEvento(int? id, string tit, int? lug, string ac, string tipo, DateTime feIn, int? asis, DateTime? In, DateTime? Fn, string desc)
         {       
             try
             {
-                var evento = new tblevento
-                {
-                    titulo = tit,
-                    descripcion = desc,
-                    fecha_Sol = feSol,
-                    solicitante = id,
-                    responsable = res,
-                    apoyo = apo,
-                    lugar = lug,
-                    acomodo = ac,
-                    tipo_evento = tipo,
-                    FechaInicio = feIn,
-                    asistencia_aprox = asis,
-                    horaIn = In,
-                    horaFn = Fn,
-                    status = 0,
-                    observaciones = "Sin observaciones",
-
-                };
-                if (evento != null)
-                {
-                    dbHelp.DB.tbleventoes.Attach(evento);
-                    dbHelp.DB.tbleventoes.Add(evento);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
-                }
-                return true;
+                   var evento = dbHelp.DB.insertarEvento(tit, lug, ac, asis, In, Fn, desc, tipo, id, feIn);
+                   if (evento != 0)
+                   {
+                       dbHelp.actualizarModelo();
+                   }
+                   return true; 
             }
             catch
-            {
-                try
-                {
-                    using (StreamWriter w = File.AppendText("../../altaEventos.txt"))
-                    {
-                        string registro = feSol.Date + "    " + tit + "    " + desc + "    " + id + "    " + lug + "    " + ac + "    " + tipo + "    " + feIn.Date + "    " + In.TimeOfDay + "    " + Fn.TimeOfDay + "    " + asis + "    " + "0";
-                        w.WriteLine(registro);
-                    }
-                }
-                catch
-                {
-
-                }             
+            {    
                 return false;
             }
             
@@ -203,8 +192,13 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     ItemAmodificar.status = status;
                     dbHelp.DB.SaveChanges();
                     dbHelp.actualizarModelo();
+                    return true;
                 }
-                return true;
+                else
+                {
+                    return false;
+                }
+                
             }
             catch
             {
@@ -216,15 +210,16 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbleventoes.SingleOrDefault(x => x.idEvento == id);
-                if (ItemAmodificar != null)
+                var eventoModificado = dbHelp.DB.cerrarEvento(id);
+                if (eventoModificado != 0)
                 {
-                    ItemAmodificar.status = 2;
-                    ItemAmodificar.fecha_cierre = DateTime.Today;
-                    dbHelp.DB.SaveChanges();
                     dbHelp.actualizarModelo();
+                    return true;
                 }
-                return true;
+                else
+                {
+                    return false;    
+                }                     
             }
             catch
             {

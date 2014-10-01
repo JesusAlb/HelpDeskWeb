@@ -255,13 +255,6 @@
     <Property Name="Departamento" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" />
   </EntityType>
-  <EntityType Name="ViewCoordinacion">
-    <Key>
-      <PropertyRef Name="idCoordinacion" />
-    </Key>
-    <Property Name="idCoordinacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="ViewDepartamento">
     <Key>
       <PropertyRef Name="idDepto" />
@@ -295,23 +288,6 @@
     <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="nomRequerimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idRequerimientos" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ViewMarca">
-    <Key>
-      <PropertyRef Name="idMarca" />
-      <PropertyRef Name="nomMarca" />
-    </Key>
-    <Property Name="idMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nomMarca" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ViewRequerimiento">
-    <Key>
-      <PropertyRef Name="idRequerimientos" />
-      <PropertyRef Name="nomRequerimiento" />
-    </Key>
-    <Property Name="idRequerimientos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="nomRequerimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewTipoIncidencia">
     <Key>
@@ -449,7 +425,7 @@
     <Property Name="serieTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityType Name="VistaEvento">
+  <EntityType Name="VistaEventosCerrado">
     <Key>
       <PropertyRef Name="idEvento" />
       <PropertyRef Name="descripcion" />
@@ -491,7 +467,42 @@
     <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="promedioCalidad" Type="Double" />
   </EntityType>
-  <EntityType Name="VistaIncidente">
+  <EntityType Name="VistaEventosSinCerrar">
+    <Key>
+      <PropertyRef Name="idEvento" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="solicitante" />
+      <PropertyRef Name="responsable" />
+      <PropertyRef Name="apoyo" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="idSolicitante" />
+      <PropertyRef Name="idResponsable" />
+      <PropertyRef Name="idApoyo" />
+      <PropertyRef Name="lugar" />
+      <PropertyRef Name="titulo" />
+    </Key>
+    <Property Name="idEvento" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="solicitante" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
+    <Property Name="asistencia_aprox" Type="Int32" />
+    <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="horaIn" Type="DateTime" Precision="3" />
+    <Property Name="horaFn" Type="DateTime" Precision="3" />
+    <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="idSolicitante" Type="Int32" Nullable="false" />
+    <Property Name="idResponsable" Type="Int32" Nullable="false" />
+    <Property Name="idApoyo" Type="Int32" Nullable="false" />
+    <Property Name="lugar" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VistaIncidentesCerrado">
     <Key>
       <PropertyRef Name="numIncidente" />
       <PropertyRef Name="solicitante" />
@@ -514,7 +525,7 @@
     <Property Name="status" Type="Int32" Nullable="false" />
     <Property Name="horaIn" Type="DateTime" Precision="3" />
     <Property Name="horaFn" Type="DateTime" Precision="3" />
-    <Property Name="fecha_Cierre" Type="DateTime" Precision="0" />
+    <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
     <Property Name="soporte" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -527,6 +538,36 @@
     <Property Name="idCalidad_Servicio" Type="Int32" Nullable="false" />
     <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="promedioCalidad" Type="Double" />
+  </EntityType>
+  <EntityType Name="VistaIncidentesSinCerrar">
+    <Key>
+      <PropertyRef Name="numIncidente" />
+      <PropertyRef Name="tipo" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="solicitante" />
+      <PropertyRef Name="idSolicitante" />
+      <PropertyRef Name="idSoporte" />
+      <PropertyRef Name="soporte" />
+      <PropertyRef Name="seguimiento" />
+      <PropertyRef Name="idSeguimiento" />
+    </Key>
+    <Property Name="numIncidente" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="horaIn" Type="DateTime" Precision="3" />
+    <Property Name="horaFn" Type="DateTime" Precision="3" />
+    <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
+    <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="solicitante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idSolicitante" Type="Int32" Nullable="false" />
+    <Property Name="idSoporte" Type="Int32" Nullable="false" />
+    <Property Name="soporte" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="seguimiento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idSeguimiento" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="VistaPregunta">
     <Key>
@@ -887,18 +928,17 @@
     <EntitySet Name="tbltipoincidencias" EntityType="Self.tbltipoincidencia" />
     <EntitySet Name="tblusuarios" EntityType="Self.tblusuario" />
     <EntitySet Name="cantidadincidentespordeptoes" EntityType="Self.cantidadincidentespordepto" />
-    <EntitySet Name="ViewCoordinacions" EntityType="Self.ViewCoordinacion" />
     <EntitySet Name="ViewDepartamentos" EntityType="Self.ViewDepartamento" />
     <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimiento" />
-    <EntitySet Name="ViewMarcas" EntityType="Self.ViewMarca" />
-    <EntitySet Name="ViewRequerimientos" EntityType="Self.ViewRequerimiento" />
     <EntitySet Name="ViewTipoIncidencias" EntityType="Self.ViewTipoIncidencia" />
     <EntitySet Name="ViewUsuarios" EntityType="Self.ViewUsuario" />
     <EntitySet Name="VistaEncuestas" EntityType="Self.VistaEncuesta" />
     <EntitySet Name="VistaEquipoReportes" EntityType="Self.VistaEquipoReporte" />
     <EntitySet Name="VistaEquipos" EntityType="Self.VistaEquipos" />
-    <EntitySet Name="VistaEventos" EntityType="Self.VistaEvento" />
-    <EntitySet Name="VistaIncidentes" EntityType="Self.VistaIncidente" />
+    <EntitySet Name="VistaEventosCerrados" EntityType="Self.VistaEventosCerrado" />
+    <EntitySet Name="VistaEventosSinCerrars" EntityType="Self.VistaEventosSinCerrar" />
+    <EntitySet Name="VistaIncidentesCerrados" EntityType="Self.VistaIncidentesCerrado" />
+    <EntitySet Name="VistaIncidentesSinCerrars" EntityType="Self.VistaIncidentesSinCerrar" />
     <EntitySet Name="VistaPreguntas" EntityType="Self.VistaPregunta" />
     <AssociationSet Name="area" Association="Self.area">
       <End Role="tblarea" EntitySet="tblareas" />
@@ -1010,15 +1050,29 @@
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="UltimoEvento" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="cerrarEvento">
+      <Parameter Name="idEv" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="cerrarIncidente">
       <Parameter Name="idIn" Mode="In" Type="Int32" />
-      <Parameter Name="Tipo" Mode="In" Type="Int32" />
       <Parameter Name="Acci" Mode="In" Type="String" />
       <Parameter Name="Solu" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="insertarEvento">
+      <Parameter Name="titulo" Mode="In" Type="String" />
+      <Parameter Name="lugar" Mode="In" Type="Int32" />
+      <Parameter Name="acomodo" Mode="In" Type="String" />
+      <Parameter Name="asistencia" Mode="In" Type="Int32" />
+      <Parameter Name="horaIn" Mode="In" Type="DateTime" />
+      <Parameter Name="HoraFn" Mode="In" Type="DateTime" />
+      <Parameter Name="descripcion" Mode="In" Type="String" />
+      <Parameter Name="tipoEvento" Mode="In" Type="String" />
+      <Parameter Name="solicitante" Mode="In" Type="Int32" />
+      <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
+    </FunctionImport>
     <FunctionImport Name="insertarIncidente">
       <Parameter Name="Tipo" Mode="In" Type="Int32" />
-      <Parameter Name="Desc" Mode="In" Type="String" />
+      <Parameter Name="Descr" Mode="In" Type="String" />
       <Parameter Name="Soli" Mode="In" Type="Int32" />
       <Parameter Name="Prio" Mode="In" Type="String" />
       <Parameter Name="Stat" Mode="In" Type="Int32" />
@@ -1027,11 +1081,11 @@
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="numEventosPorUsuario" ReturnType="Collection(dbhelpdeskModel.numEventosPorUsuario_Result)">
+    <FunctionImport Name="numEventosPorUsuario">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="numIncidentesPorDepto" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorDepto_Result)">
+    <FunctionImport Name="numIncidentesPorDepto">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
@@ -1047,27 +1101,27 @@
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorDepto" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorDepto_Result)">
+    <FunctionImport Name="promedioCalidadPorDepto">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorMesEv" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorMesEv_Result)">
+    <FunctionImport Name="promedioCalidadPorMesEv">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorMesIn" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorMesIn_Result)">
+    <FunctionImport Name="promedioCalidadPorMesIn">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorTipoIn" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorTipoIn_Result)">
+    <FunctionImport Name="promedioCalidadPorTipoIn">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorUsuarioEv" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorUsuarioEv_Result)">
+    <FunctionImport Name="promedioCalidadPorUsuarioEv">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="promedioCalidadPorUsuarioIn" ReturnType="Collection(dbhelpdeskModel.promedioCalidadPorUsuarioIn_Result)">
+    <FunctionImport Name="promedioCalidadPorUsuarioIn">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
@@ -1126,14 +1180,6 @@
     <Property Type="String" Name="Fecha" Nullable="true" MaxLength="61" />
     <Property Type="Int32" Name="Cantidad" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="numEventosPorUsuario_Result">
-    <Property Type="String" Name="Soporte" Nullable="false" MaxLength="25" />
-    <Property Type="Int32" Name="Cantidad" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="numIncidentesPorDepto_Result">
-    <Property Type="String" Name="Departamento" Nullable="false" MaxLength="40" />
-    <Property Type="Int32" Name="Cantidad" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="numIncidentesPorMes_Result">
     <Property Type="String" Name="Fecha" Nullable="true" MaxLength="61" />
     <Property Type="Int32" Name="Cantidad" Nullable="true" />
@@ -1145,30 +1191,6 @@
   <ComplexType Name="numIncidentesPorUsuario_Result">
     <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" />
     <Property Type="Int32" Name="Número" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorDepto_Result">
-    <Property Type="String" Name="Departamento" Nullable="false" MaxLength="40" />
-    <Property Type="Single" Name="Promedio" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorMesEv_Result">
-    <Property Type="String" Name="Mes" Nullable="true" MaxLength="61" />
-    <Property Type="Double" Name="Promedio" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorMesIn_Result">
-    <Property Type="String" Name="Mes" Nullable="true" MaxLength="61" />
-    <Property Type="Double" Name="Promedio" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorTipoIn_Result">
-    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="25" />
-    <Property Type="Double" Name="Promedio" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorUsuarioEv_Result">
-    <Property Type="String" Name="responsable" Nullable="false" MaxLength="25" />
-    <Property Type="Double" Name="Promedio" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="promedioCalidadPorUsuarioIn_Result">
-    <Property Type="String" Name="soporte" Nullable="false" MaxLength="25" />
-    <Property Type="Double" Name="Promedio" Nullable="true" />
   </ComplexType>
   <ComplexType Name="requerimientosSinAsignar_Result">
     <Property Type="Int32" Name="idRequerimientos" Nullable="false" />

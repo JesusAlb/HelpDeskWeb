@@ -37,8 +37,8 @@ namespace HelpDeskWeb.Solicitudes
             controlEventos = new hdk_ControlEventos(Control);
             controlUsuario = new hdk_ControlUsuario(Control);
             controlLugar = new hdk_ControlLugar(Control);
-            txtFechaInicial.Text = "2013-01-01";
-            txtFechaFinal.Text = DateTime.Today.ToString("yyyy-MM-dd");
+            txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
+            txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
             tabEnProceso.Attributes.Add("onclick", "activaTab('1')");
 
             if (!IsPostBack)
@@ -50,10 +50,10 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (Request["__EVENTTARGET"] == "tabAbierta")
                 {
+                    this.limpiarSeleccion();
                     Session["tab"] = Convert.ToInt32(this.Request.Params.Get("__EVENTARGUMENT"));
                     utilerias.modificarOnClientClick(new LinkButton[] { btnEditar, btnAsignar, btnRecursos }, new string[] { null, null, null });
                 }
-                this.cargarTablas();
             }
         }
 
@@ -64,14 +64,21 @@ namespace HelpDeskWeb.Solicitudes
             cbSeguimiento.DataBind();
         }
 
+        protected void limpiarSeleccion()
+        {
+            Session["itemSeleccionado"] = null;
+            gvEventos_Abiertos.SelectedIndex = gvEventos_Cancelados.SelectedIndex = gvEventos_Cerrados.SelectedIndex = gvEventos_EnProceso.SelectedIndex = -1;
+        }
+
         protected void cargarTablas()
         {
-            this.cargarTablasConjunto(new Object[] {gvEventos_Abiertos, gvEventos_EnProceso, gvEventos_Cerrados, gvEventos_Cancelados});
+            this.cargarTablasConjunto(new Object[] { gvEventos_Abiertos, gvEventos_EnProceso, gvEventos_Cerrados, gvEventos_Cancelados });
         }
 
         protected void cargarTablasConjunto(object[] objeto)
         {
-            for(int x = 0; x < objeto.Length; x++){
+            for (int x = 0; x < objeto.Length; x++)
+            {
                 if (usuarioConectado.tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSoporte(x, txtFiltro.Text, Convert.ToDateTime(txtFechaInicial.Text), Convert.ToDateTime(txtFechaFinal.Text));
@@ -116,13 +123,13 @@ namespace HelpDeskWeb.Solicitudes
                         break;
                     }
             }
-            
+
         }
 
         protected void gvEventos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.definirPrivilegios(Convert.ToInt32(Session["tab"])); 
             Session["itemSeleccionado"] = (sender as GridView).SelectedDataKey.Value.ToString();
+            this.definirPrivilegios(Convert.ToInt32(Session["tab"]));
         }
 
         protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
@@ -148,7 +155,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             this.cargarComboLugares();
             lbelTituloModal.Text = "Alta de eventos";
-            utilerias.limpiarControles(new Object[]{txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo});
+            utilerias.limpiarControles(new Object[] { txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo });
             Session["Accion"] = 0;
         }
 
@@ -161,7 +168,7 @@ namespace HelpDeskWeb.Solicitudes
                 registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
                 txtTituloNuevo.Text = registroEvento.titulo;
                 txtAcomodo.Text = registroEvento.acomodo;
-                txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString(); ;
+                txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString();
                 txtDescripcion.Text = registroEvento.descripcion;
                 cbLugares.SelectedValue = registroEvento.lugar.ToString();
                 txtFecha.Text = registroEvento.FechaInicio.Value.Date.ToString("yyyy-MM-dd");
@@ -175,25 +182,32 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Convert.ToInt32(Session["Accion"]) == 0)
             {
-
+                if (controlEventos.insertarEvento(usuarioConectado.idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                {
+                    this.cargarTablas();
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "mostrarModal('ModalNuevo','hide');", true);
+                }
             }
             else
             {
                 if (controlEventos.editarEvento(Convert.ToInt32(Session["itemSeleccionado"]), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                 {
                     this.cargarTablas();
-                    ScriptManager.RegisterStartupScript(this.UpdateScript, this.GetType(), "SalirVentana", "mostrarModal('ModalNuevo','hide');", true);
-                    
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "mostrarModal('ModalNuevo','hide');", true);
                 }
             }
+
         }
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (btnAsignar.OnClientClick == "mostrarModal('ModalAsignar','show')")
+            if (Session["itemSeleccionado"] != null && Convert.ToInt32(Session["tab"]) < 2)
             {
                 this.cargarCombosSoporte();
-            }          
+                registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                cbSeguimiento.SelectedValue = registroEvento.apoyo.ToString();
+                cbSoporte.SelectedValue = registroEvento.responsable.ToString();
+            }
         }
 
         protected void Page_Unload(object sender, System.EventArgs e)
@@ -204,5 +218,42 @@ namespace HelpDeskWeb.Solicitudes
             }
         }
 
+        protected void btnGrabarAsignacion_Click(object sender, EventArgs e)
+        {
+            if (!cbSoporte.SelectedItem.Text.Equals("S/A"))
+            {
+                if (controlEventos.asignarResponsable(Convert.ToInt32(Session["itemSeleccionado"]), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+                {
+                    this.cargarTablas();
+                    ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "mostrarModal('ModalAsignar','hide');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "AsignacionCorrecta", "alertify.alert('Correcto', 'Soporte asignado correctamente', 'onok');", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "ErrorSoporte", "alertify.alert('Error', 'Seleccione un usuario de soporte', 'onok');", true);
+            }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (Session["itemSeleccionado"] != null && Convert.ToInt32(Session["tab"]) < 2)
+            {
+                if (controlEventos.cambiarStatus(Convert.ToInt32(Session["itemSeleccionado"]), 3))
+                {
+                    this.cargarTablas();
+                    ScriptManager.RegisterStartupScript(this.update1, this.GetType(), "EventoCancelado", "alertify.alert('Correcto', 'Evento cancelado correctamente', 'onok');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.update1, this.GetType(), "ErrorServidor", "alertify.alert('Error', 'Error en el servidor', 'onok');", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.update1, this.GetType(), "ErrorNoId", "alertify.alert('Error', 'Seleccione un evento abierto o en proceso', 'onok');", true);
+            }
+
+        }
     }
 }

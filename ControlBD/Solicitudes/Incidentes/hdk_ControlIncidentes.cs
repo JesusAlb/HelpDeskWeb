@@ -50,29 +50,43 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
 
             try
             {
-                if (limiteIn == null || limiteSp == null)
+                if (status != 2)
                 {
-                    return dbHelp.DB.VistaIncidentes.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                        a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                        a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                        a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                       /* a.fecha_Cierre.Value.Day == numero || a.fecha_Cierre.Value.Month == numero || a.fecha_Cierre.Value.Year == numero ||
-                        a.fecha_Sol.Value.Day == numero || a.fecha_Sol.Value.Month == numero || a.fecha_Sol.Value.Year == numero ||
-                        a.horaIn.Value.Minute == numero || a.horaIn.Value.Hour == numero ||
-                        a.horaFn.Value.Minute == numero || a.horaFn.Value.Hour == numero || */
-                        a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo))).ToList();
+                    if (limiteIn == null || limiteSp == null)
+                    {
+                        return dbHelp.DB.VistaIncidentesSinCerrars.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaIncidentesSinCerrars.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp))).ToList();
+                    }
                 }
                 else
                 {
-                    return dbHelp.DB.VistaIncidentes.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                        a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                        a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                        a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                      /*  a.fecha_Cierre.Value.Day == numero || a.fecha_Cierre.Value.Month == numero || a.fecha_Cierre.Value.Year == numero ||
-                        a.fecha_Sol.Value.Day == numero || a.fecha_Sol.Value.Month == numero || a.fecha_Sol.Value.Year == numero ||
-                        a.horaIn.Value.Minute == numero || a.horaIn.Value.Hour == numero ||
-                        a.horaFn.Value.Minute == numero || a.horaFn.Value.Hour == numero ||*/
-                        a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp))).ToList();
+                    if (limiteIn == null || limiteSp == null)
+                    {
+                        return dbHelp.DB.VistaIncidentesCerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaIncidentesCerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp))).ToList();
+                    }
                 }
             }
             catch 
@@ -93,29 +107,43 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             try
             {
-                if (limiteIn == null || limiteSp == null)
+                if (status != 2)
                 {
-                    return dbHelp.DB.VistaIncidentes.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                        a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                        a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                        a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                        /*a.fecha_Cierre.Value.Day == numero || a.fecha_Cierre.Value.Month == numero || a.fecha_Cierre.Value.Year == numero ||
-                          a.fecha_Sol.Value.Day == numero || a.fecha_Sol.Value.Month == numero || a.fecha_Sol.Value.Year == numero ||
-                          a.horaIn.Value.Minute == numero || a.horaIn.Value.Hour == numero ||
-                          a.horaFn.Value.Minute == numero || a.horaFn.Value.Hour == numero ||*/
-                        a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo))).ToList();
+                    if (limiteIn == null || limiteSp == null)
+                    {
+                        return dbHelp.DB.VistaIncidentesSinCerrars.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaIncidentesSinCerrars.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo)) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp)).ToList();
+                    }
                 }
                 else
                 {
-                    return dbHelp.DB.VistaIncidentes.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                        a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || 
-                        a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                        a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                        /*  a.fecha_Cierre.Value.Day == numero || a.fecha_Cierre.Value.Month == numero || a.fecha_Cierre.Value.Year == numero ||
-                          a.fecha_Sol.Value.Day == numero || a.fecha_Sol.Value.Month == numero || a.fecha_Sol.Value.Year == numero ||
-                          a.horaIn.Value.Minute == numero || a.horaIn.Value.Hour == numero ||
-                          a.horaFn.Value.Minute == numero || a.horaFn.Value.Hour == numero ||*/
-                        a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo)) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp)).ToList();
+                    if (limiteIn == null || limiteSp == null)
+                    {
+                        return dbHelp.DB.VistaIncidentesCerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo))).ToList();
+                    }
+                    else
+                    {
+                        return dbHelp.DB.VistaIncidentesCerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo)) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp)).ToList();
+                    }
                 }
             }
             catch 

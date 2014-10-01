@@ -46,18 +46,17 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tbltipoincidencia> tbltipoincidencias { get; set; }
         public virtual DbSet<tblusuario> tblusuarios { get; set; }
         public virtual DbSet<cantidadincidentespordepto> cantidadincidentespordeptoes { get; set; }
-        public virtual DbSet<ViewCoordinacion> ViewCoordinacions { get; set; }
         public virtual DbSet<ViewDepartamento> ViewDepartamentos { get; set; }
         public virtual DbSet<ViewEventoConRequerimiento> ViewEventoConRequerimientos { get; set; }
-        public virtual DbSet<ViewMarca> ViewMarcas { get; set; }
-        public virtual DbSet<ViewRequerimiento> ViewRequerimientos { get; set; }
         public virtual DbSet<ViewTipoIncidencia> ViewTipoIncidencias { get; set; }
         public virtual DbSet<ViewUsuario> ViewUsuarios { get; set; }
         public virtual DbSet<VistaEncuesta> VistaEncuestas { get; set; }
         public virtual DbSet<VistaEquipoReporte> VistaEquipoReportes { get; set; }
         public virtual DbSet<VistaEquipos> VistaEquipos { get; set; }
-        public virtual DbSet<VistaEvento> VistaEventos { get; set; }
-        public virtual DbSet<VistaIncidente> VistaIncidentes { get; set; }
+        public virtual DbSet<VistaEventosCerrado> VistaEventosCerrados { get; set; }
+        public virtual DbSet<VistaEventosSinCerrar> VistaEventosSinCerrars { get; set; }
+        public virtual DbSet<VistaIncidentesCerrado> VistaIncidentesCerrados { get; set; }
+        public virtual DbSet<VistaIncidentesSinCerrar> VistaIncidentesSinCerrars { get; set; }
         public virtual DbSet<VistaPregunta> VistaPreguntas { get; set; }
     
         public virtual ObjectResult<EventosXStatus_Result> EventosXStatus(Nullable<int> status)
@@ -92,15 +91,20 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UltimoEvento");
         }
     
-        public virtual int cerrarIncidente(Nullable<int> idIn, Nullable<int> tipo, string acci, string solu)
+        public virtual int cerrarEvento(Nullable<int> idEv)
+        {
+            var idEvParameter = idEv.HasValue ?
+                new ObjectParameter("idEv", idEv) :
+                new ObjectParameter("idEv", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cerrarEvento", idEvParameter);
+        }
+    
+        public virtual int cerrarIncidente(Nullable<int> idIn, string acci, string solu)
         {
             var idInParameter = idIn.HasValue ?
                 new ObjectParameter("idIn", idIn) :
                 new ObjectParameter("idIn", typeof(int));
-    
-            var tipoParameter = tipo.HasValue ?
-                new ObjectParameter("Tipo", tipo) :
-                new ObjectParameter("Tipo", typeof(int));
     
             var acciParameter = acci != null ?
                 new ObjectParameter("Acci", acci) :
@@ -110,18 +114,63 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("Solu", solu) :
                 new ObjectParameter("Solu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cerrarIncidente", idInParameter, tipoParameter, acciParameter, soluParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cerrarIncidente", idInParameter, acciParameter, soluParameter);
         }
     
-        public virtual int insertarIncidente(Nullable<int> tipo, string desc, Nullable<int> soli, string prio, Nullable<int> stat)
+        public virtual int insertarEvento(string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, string tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("titulo", titulo) :
+                new ObjectParameter("titulo", typeof(string));
+    
+            var lugarParameter = lugar.HasValue ?
+                new ObjectParameter("lugar", lugar) :
+                new ObjectParameter("lugar", typeof(int));
+    
+            var acomodoParameter = acomodo != null ?
+                new ObjectParameter("acomodo", acomodo) :
+                new ObjectParameter("acomodo", typeof(string));
+    
+            var asistenciaParameter = asistencia.HasValue ?
+                new ObjectParameter("asistencia", asistencia) :
+                new ObjectParameter("asistencia", typeof(int));
+    
+            var horaInParameter = horaIn.HasValue ?
+                new ObjectParameter("horaIn", horaIn) :
+                new ObjectParameter("horaIn", typeof(System.DateTime));
+    
+            var horaFnParameter = horaFn.HasValue ?
+                new ObjectParameter("HoraFn", horaFn) :
+                new ObjectParameter("HoraFn", typeof(System.DateTime));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var tipoEventoParameter = tipoEvento != null ?
+                new ObjectParameter("tipoEvento", tipoEvento) :
+                new ObjectParameter("tipoEvento", typeof(string));
+    
+            var solicitanteParameter = solicitante.HasValue ?
+                new ObjectParameter("solicitante", solicitante) :
+                new ObjectParameter("solicitante", typeof(int));
+    
+            var fechaEventoParameter = fechaEvento.HasValue ?
+                new ObjectParameter("FechaEvento", fechaEvento) :
+                new ObjectParameter("FechaEvento", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarEvento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter);
+        }
+    
+        public virtual int insertarIncidente(Nullable<int> tipo, string descr, Nullable<int> soli, string prio, Nullable<int> stat)
         {
             var tipoParameter = tipo.HasValue ?
                 new ObjectParameter("Tipo", tipo) :
                 new ObjectParameter("Tipo", typeof(int));
     
-            var descParameter = desc != null ?
-                new ObjectParameter("Desc", desc) :
-                new ObjectParameter("Desc", typeof(string));
+            var descrParameter = descr != null ?
+                new ObjectParameter("Descr", descr) :
+                new ObjectParameter("Descr", typeof(string));
     
             var soliParameter = soli.HasValue ?
                 new ObjectParameter("Soli", soli) :
@@ -135,7 +184,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("Stat", stat) :
                 new ObjectParameter("Stat", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarIncidente", tipoParameter, descParameter, soliParameter, prioParameter, statParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarIncidente", tipoParameter, descrParameter, soliParameter, prioParameter, statParameter);
         }
     
         public virtual ObjectResult<numEventosPorMes_Result> numEventosPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
@@ -151,7 +200,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numEventosPorMes_Result>("numEventosPorMes", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<numEventosPorUsuario_Result> numEventosPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int numEventosPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -161,10 +210,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numEventosPorUsuario_Result>("numEventosPorUsuario", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numEventosPorUsuario", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<numIncidentesPorDepto_Result> numIncidentesPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int numIncidentesPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -174,7 +223,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorDepto_Result>("numIncidentesPorDepto", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorDepto", fechaInicioParameter, fechaFinalParameter);
         }
     
         public virtual ObjectResult<numIncidentesPorMes_Result> numIncidentesPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
@@ -216,7 +265,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorUsuario_Result>("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorDepto_Result> promedioCalidadPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -226,10 +275,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorDepto_Result>("promedioCalidadPorDepto", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorDepto", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorMesEv_Result> promedioCalidadPorMesEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorMesEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -239,10 +288,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorMesEv_Result>("promedioCalidadPorMesEv", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorMesEv", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorMesIn_Result> promedioCalidadPorMesIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorMesIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -252,10 +301,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorMesIn_Result>("promedioCalidadPorMesIn", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorMesIn", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorTipoIn_Result> promedioCalidadPorTipoIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorTipoIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -265,10 +314,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorTipoIn_Result>("promedioCalidadPorTipoIn", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorTipoIn", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorUsuarioEv_Result> promedioCalidadPorUsuarioEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorUsuarioEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -278,10 +327,10 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorUsuarioEv_Result>("promedioCalidadPorUsuarioEv", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorUsuarioEv", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<promedioCalidadPorUsuarioIn_Result> promedioCalidadPorUsuarioIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int promedioCalidadPorUsuarioIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -291,7 +340,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<promedioCalidadPorUsuarioIn_Result>("promedioCalidadPorUsuarioIn", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorUsuarioIn", fechaInicioParameter, fechaFinalParameter);
         }
     
         public virtual ObjectResult<requerimientosSinAsignar_Result> requerimientosSinAsignar(Nullable<int> idEvento)

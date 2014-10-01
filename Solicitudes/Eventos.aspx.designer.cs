@@ -76,15 +76,6 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.TextBox txtFiltro;
         
         /// <summary>
-        /// Control btnFiltrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltrar;
-        
-        /// <summary>
         /// Control txtFechaInicial.
         /// </summary>
         /// <remarks>
@@ -274,13 +265,13 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
-        /// Control UpdateScript.
+        /// Control UpdateGrabar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdateScript;
+        protected global::System.Web.UI.UpdatePanel UpdateGrabar;
         
         /// <summary>
         /// Control btnGuardar.
@@ -337,13 +328,22 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.DropDownList cbSeguimiento;
         
         /// <summary>
-        /// Control Button1.
+        /// Control UpdateSoporte.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.UpdatePanel UpdateSoporte;
+        
+        /// <summary>
+        /// Control btnGrabarAsignacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabarAsignacion;
         
         /// <summary>
         /// Control ModalRecursos.
