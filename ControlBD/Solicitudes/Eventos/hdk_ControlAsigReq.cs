@@ -45,13 +45,13 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                }
            }
 
-          public bool insertar(int id, int req, int cantidad)
+          public bool insertar(int id, int req, int? cantidad)
           {
               try
               {
                   var asigReq = new tblrequerimientoaevento { };
                   
-                  if (cantidad == 0)
+                  if (cantidad == null)
                   {
                       asigReq = new tblrequerimientoaevento
                       {
@@ -119,6 +119,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
               }
           }
 
+          public tblrequerimientoaevento obtenerRequerimientoAsignado(int req, int idEv)
+          {
+              try
+              {
+                  return dbHelp.DB.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == idEv && x.requerimiento == req);
+              }
+              catch
+              {
+                  return null;
+              }
+          }
 
     }
 }

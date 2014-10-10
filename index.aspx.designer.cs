@@ -13,6 +13,15 @@ namespace HelpDeskWeb {
     public partial class index {
         
         /// <summary>
+        /// Control scriptM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptM;
+        
+        /// <summary>
         /// Control txtUsuario.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace HelpDeskWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        
+        /// <summary>
+        /// Control Update.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Update;
         
         /// <summary>
         /// Control entrar.

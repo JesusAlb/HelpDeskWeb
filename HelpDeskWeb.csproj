@@ -162,6 +162,10 @@
     <Content Include="css\themes\semantic.min.css" />
     <Content Include="css\themes\semantic.rtl.css" />
     <Content Include="css\themes\semantic.rtl.min.css" />
+    <Content Include="Imagenes\noEncuesta0.png" />
+    <Content Include="Imagenes\noEncuesta1.png" />
+    <Content Include="Imagenes\siEncuesta0.png" />
+    <Content Include="Imagenes\siEncuesta1.png" />
     <Content Include="js\alertify.js" />
     <Content Include="js\alertify.min.js" />
     <Content Include="js\bootstrap.js" />

@@ -87,6 +87,18 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
+        public VistaEventosCerrado cargarEventoCerrado(int evento)
+        {
+            try
+            {
+                return dbHelp.DB.VistaEventosCerrados.SingleOrDefault(a => a.idEvento == evento);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public IList cargarTablasSoporte(int status, string filtro, DateTime? FechaInicio, DateTime? FechaFinal)
         {
 

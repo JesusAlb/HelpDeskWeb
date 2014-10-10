@@ -35,12 +35,29 @@ namespace HelpDeskWeb
             }
         }
 
-        public void modificarOnClientClick(LinkButton[] linkbutton, string[] onclientclick)
+        public bool verificarCamposVacios(TextBox[] controles)
         {
-            for (int x = 0; x < linkbutton.Length; x++)
+            foreach (TextBox control in controles)
             {
-                linkbutton[x].OnClientClick = onclientclick[x];
-            }
+                    if (String.IsNullOrWhiteSpace(control.Text))
+                    {
+                        return false;
+                    }
+                    else if(control.TextMode == TextBoxMode.Date || control.TextMode == TextBoxMode.Time)
+                    {
+                        try
+                        {
+                            Convert.ToDateTime(control.Text); 
+                        }
+                        catch
+                        {
+                            return false;
+                        }
+                    }                
+             }
+
+            return true;
         }
     }
+
 }

@@ -26,7 +26,7 @@ namespace HelpDeskWeb
             }
             else
             {
-                this.Page.Response.Write("<script language='JavaScript'>window.alert('Contraseña incorrecta');</script>");
+                ScriptManager.RegisterStartupScript(this.Update, this.GetType(), "UsuarioIncorrecto", "alertify.alert('Error', 'Usuario o contraseña inválidos', 'onok');", true);
                 txtUsuario.Text = "";
                 txtPassword.Text = "";
             }

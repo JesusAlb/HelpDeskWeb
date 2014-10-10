@@ -94,13 +94,13 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.TextBox txtFechaFinal;
         
         /// <summary>
-        /// Control update1.
+        /// Control UpdateBtns.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel update1;
+        protected global::System.Web.UI.UpdatePanel UpdateBtns;
         
         /// <summary>
         /// Control btnNuevo.
@@ -166,6 +166,15 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.Panel ModalNuevo;
         
         /// <summary>
+        /// Control updateModalNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateModalNuevo;
+        
+        /// <summary>
         /// Control lbelTituloModal.
         /// </summary>
         /// <remarks>
@@ -175,13 +184,13 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.Label lbelTituloModal;
         
         /// <summary>
-        /// Control updateModalNuevo.
+        /// Control panelModalNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateModalNuevo;
+        protected global::System.Web.UI.WebControls.Panel panelModalNuevo;
         
         /// <summary>
         /// Control txtTituloNuevo.
@@ -391,13 +400,49 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.Button btnFiltrarReq;
         
         /// <summary>
-        /// Control panel4.
+        /// Control cbCuantificable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel4;
+        protected global::System.Web.UI.WebControls.DropDownList cbCuantificable;
+        
+        /// <summary>
+        /// Control tabla1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tabla1;
+        
+        /// <summary>
+        /// Control tblReqAsH1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tblReqAsH1;
+        
+        /// <summary>
+        /// Control tblReqAsH2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tblReqAsH2;
+        
+        /// <summary>
+        /// Control panelTablaReqA.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelTablaReqA;
         
         /// <summary>
         /// Control UpdatePanel5.
@@ -418,6 +463,24 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.GridView gvRecursosAsignados;
         
         /// <summary>
+        /// Control UpdateBtnQuitar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateBtnQuitar;
+        
+        /// <summary>
+        /// Control txtCantidadAs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantidadAs;
+        
+        /// <summary>
         /// Control btnQuitar.
         /// </summary>
         /// <remarks>
@@ -425,6 +488,15 @@ namespace HelpDeskWeb.Solicitudes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnQuitar;
+        
+        /// <summary>
+        /// Control Table1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
         
         /// <summary>
         /// Control panelRecursosNoAsignados.
@@ -454,6 +526,24 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.GridView gvRecursosNoAsignados;
         
         /// <summary>
+        /// Control UpdateBtnAñadir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateBtnAñadir;
+        
+        /// <summary>
+        /// Control txtCantidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+        
+        /// <summary>
         /// Control btnAñadir.
         /// </summary>
         /// <remarks>
@@ -472,13 +562,121 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
         
         /// <summary>
-        /// Control Button2.
+        /// Control UpdateGrabarRecursos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.UpdatePanel UpdateGrabarRecursos;
+        
+        /// <summary>
+        /// Control btnGrabarRecursos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabarRecursos;
+        
+        /// <summary>
+        /// Control ModalEncuesta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ModalEncuesta;
+        
+        /// <summary>
+        /// Control Label3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// Control txtSolicitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSolicitante;
+        
+        /// <summary>
+        /// Control updateEncuestas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateEncuestas;
+        
+        /// <summary>
+        /// Control gvEncuestas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEncuestas;
+        
+        /// <summary>
+        /// Control upResultado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upResultado;
+        
+        /// <summary>
+        /// Control imgSatisfaccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSatisfaccion;
+        
+        /// <summary>
+        /// Control txtPromedio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPromedio;
+        
+        /// <summary>
+        /// Control txtObEncuestas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObEncuestas;
+        
+        /// <summary>
+        /// Control upGrabarEncuesta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upGrabarEncuesta;
+        
+        /// <summary>
+        /// Control btnGrabarEncuesta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabarEncuesta;
         
         /// <summary>
         /// Control tabAbierta.
@@ -616,13 +814,13 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
-        /// Control UpdatePanel3.
+        /// Control UpGvEventosCerrados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.UpdatePanel UpGvEventosCerrados;
         
         /// <summary>
         /// Control gvEventos_Cerrados.
