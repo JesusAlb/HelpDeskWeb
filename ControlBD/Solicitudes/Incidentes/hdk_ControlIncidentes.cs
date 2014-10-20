@@ -152,7 +152,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public bool insertarIncidente(int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
+        public bool insertarIncidenteCompleto(int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
         {
 
             try
@@ -209,6 +209,28 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 
         }
 
+        public bool insertarIncidente(int sol, string descripcion)
+        {
+            try
+            {
+               int resultado = dbHelp.DB.insertarIncidente(descripcion, sol);
+               if (resultado != 0)
+               {
+                   dbHelp.DB.SaveChanges();
+                   dbHelp.actualizarModelo();
+                   return true;
+               }
+               else
+               {
+                   return false;
+               }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool cambiarStatus(int id, int status)
         {
             try
@@ -228,23 +250,22 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public bool cerrarIncidente(int id, string sol, string ac, int tipo)
+        public bool cerrarIncidente(int id, string acciones, string solucion)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tblincidentes.SingleOrDefault(x => x.numIncidente == id);
-                if (ItemAmodificar != null)
+                var ItemAmodificar = dbHelp.DB.cerrarIncidente(id, acciones, solucion);
+                if (ItemAmodificar != 0)
                 {
-                    ItemAmodificar.status = 2;
-                    ItemAmodificar.solucion = sol;
-                    ItemAmodificar.acciones = ac;
-                    ItemAmodificar.tipo = tipo;
-                    ItemAmodificar.fecha_Cierre = DateTime.Today;
-                    ItemAmodificar.horaFn = DateTime.Now;
                     dbHelp.DB.SaveChanges();
                     dbHelp.actualizarModelo();
+                    return true;
                 }
-                return true;
+                else
+                {
+                    return false;
+                }
+               
             }
             catch
             {
@@ -252,7 +273,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public bool asignarSoporte(int id, int sop, int seg)
+        public bool asignarSoporte(int id, int sop, int seg, string prioridad, int tipo)
         {
             try
             {
@@ -262,6 +283,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                     ItemAmodificar.status = 1;
                     ItemAmodificar.soporte = sop;
                     ItemAmodificar.seguimiento = seg;
+                    ItemAmodificar.tipo = tipo;
+                    ItemAmodificar.prioridad = prioridad;
                     dbHelp.DB.SaveChanges();
                     dbHelp.actualizarModelo();
                 }
@@ -281,7 +304,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
-                return -1;
+                return 0;
             }
         }
         
@@ -296,5 +319,30 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 return 1;
             }
         }
+
+        public tblincidente obtenerIncidente(int idIncidente)
+        {
+            try
+            {
+                return dbHelp.DB.tblincidentes.SingleOrDefault(a => a.numIncidente == idIncidente);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public VistaIncidentesCerrado obtenerIncidenteCerrado(int idIncidente)
+        {
+            try
+            {
+                return dbHelp.DB.VistaIncidentesCerrados.SingleOrDefault(a => a.numIncidente == idIncidente);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

@@ -162,12 +162,8 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarEvento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter);
         }
     
-        public virtual int insertarIncidente(Nullable<int> tipo, string descr, Nullable<int> soli, string prio, Nullable<int> stat)
+        public virtual int insertarIncidente(string descr, Nullable<int> soli)
         {
-            var tipoParameter = tipo.HasValue ?
-                new ObjectParameter("Tipo", tipo) :
-                new ObjectParameter("Tipo", typeof(int));
-    
             var descrParameter = descr != null ?
                 new ObjectParameter("Descr", descr) :
                 new ObjectParameter("Descr", typeof(string));
@@ -176,15 +172,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("Soli", soli) :
                 new ObjectParameter("Soli", typeof(int));
     
-            var prioParameter = prio != null ?
-                new ObjectParameter("Prio", prio) :
-                new ObjectParameter("Prio", typeof(string));
-    
-            var statParameter = stat.HasValue ?
-                new ObjectParameter("Stat", stat) :
-                new ObjectParameter("Stat", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarIncidente", tipoParameter, descrParameter, soliParameter, prioParameter, statParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarIncidente", descrParameter, soliParameter);
         }
     
         public virtual ObjectResult<numEventosPorMes_Result> numEventosPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)

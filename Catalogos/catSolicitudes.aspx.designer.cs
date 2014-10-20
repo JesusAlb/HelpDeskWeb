@@ -67,148 +67,139 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
-        /// Control update.
+        /// Control tabTipoIncidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel update;
+        protected global::System.Web.UI.WebControls.LinkButton tabTipoIncidentes;
         
         /// <summary>
-        /// Control btnTipoIncidentes.
+        /// Control tabLugares.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnTipoIncidentes;
+        protected global::System.Web.UI.WebControls.LinkButton tabLugares;
         
         /// <summary>
-        /// Control btnLugares.
+        /// Control tabRequerimientos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLugares;
+        protected global::System.Web.UI.WebControls.LinkButton tabRequerimientos;
         
         /// <summary>
-        /// Control btnRequerimientos.
+        /// Control myTabContent.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRequerimientos;
+        protected global::System.Web.UI.WebControls.Panel myTabContent;
         
         /// <summary>
-        /// Control txtFiltroSol.
+        /// Control tipoincidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroSol;
+        protected global::System.Web.UI.WebControls.Panel tipoincidentes;
         
         /// <summary>
-        /// Control btnFiltroSol.
+        /// Control txtFiltroTipoIncidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltroSol;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroTipoIncidentes;
         
         /// <summary>
-        /// Control filtroExtra.
+        /// Control updateAccionesTipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel filtroExtra;
+        protected global::System.Web.UI.UpdatePanel updateAccionesTipos;
         
         /// <summary>
-        /// Control listTipo.
+        /// Control btnNuevoTipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList listTipo;
+        protected global::System.Web.UI.WebControls.LinkButton btnNuevoTipo;
         
         /// <summary>
-        /// Control btnNuevo.
+        /// Control btnEditarTipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuevo;
+        protected global::System.Web.UI.WebControls.LinkButton btnEditarTipo;
         
         /// <summary>
-        /// Control gvSolicitudes.
+        /// Control accionesEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvSolicitudes;
+        protected global::System.Web.UI.WebControls.HiddenField accionesEquipos;
         
         /// <summary>
-        /// Control renglon.
+        /// Control ModalNuevoTipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel renglon;
+        protected global::System.Web.UI.WebControls.Panel ModalNuevoTipo;
         
         /// <summary>
-        /// Control lbelAccion.
+        /// Control updateNuevaMarca.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbelAccion;
+        protected global::System.Web.UI.UpdatePanel updateNuevaMarca;
         
         /// <summary>
-        /// Control panelNombre.
+        /// Control lbelModalMarca.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNombre;
+        protected global::System.Web.UI.WebControls.Label lbelModalMarca;
         
         /// <summary>
-        /// Control txtNomSol.
+        /// Control panel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNomSol;
+        protected global::System.Web.UI.WebControls.Panel panel2;
         
         /// <summary>
-        /// Control panelExtraDatos.
+        /// Control txtTipoIncidente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelExtraDatos;
-        
-        /// <summary>
-        /// Control rbTipoRequerimientos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbTipoRequerimientos;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoIncidente;
         
         /// <summary>
         /// Control btnGrabarTipo.
@@ -217,6 +208,33 @@ namespace HelpDeskWeb.Catalogos {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGrabarTipo;
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabarTipo;
+        
+        /// <summary>
+        /// Control TablaTipoIncidentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TablaTipoIncidentes;
+        
+        /// <summary>
+        /// Control updateGvTipoIncidentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateGvTipoIncidentes;
+        
+        /// <summary>
+        /// Control gvTipoIncidentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTipoIncidentes;
     }
 }

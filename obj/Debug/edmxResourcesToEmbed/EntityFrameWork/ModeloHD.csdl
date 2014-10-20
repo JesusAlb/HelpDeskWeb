@@ -1071,11 +1071,8 @@
       <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
     </FunctionImport>
     <FunctionImport Name="insertarIncidente">
-      <Parameter Name="Tipo" Mode="In" Type="Int32" />
       <Parameter Name="Descr" Mode="In" Type="String" />
       <Parameter Name="Soli" Mode="In" Type="Int32" />
-      <Parameter Name="Prio" Mode="In" Type="String" />
-      <Parameter Name="Stat" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="numEventosPorMes" ReturnType="Collection(dbhelpdeskModel.numEventosPorMes_Result)">
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />

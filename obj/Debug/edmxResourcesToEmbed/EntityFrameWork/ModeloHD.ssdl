@@ -915,11 +915,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
     <Parameter Name="FechaEvento" Type="datetime" Mode="In" />
   </Function>
   <Function Name="insertarIncidente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Tipo" Type="int" Mode="In" />
     <Parameter Name="Descr" Type="varchar" Mode="In" />
     <Parameter Name="Soli" Type="int" Mode="In" />
-    <Parameter Name="Prio" Type="varchar" Mode="In" />
-    <Parameter Name="Stat" Type="int" Mode="In" />
   </Function>
   <Function Name="numEventosPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fechaInicio" Type="datetime" Mode="In" />

@@ -68,8 +68,6 @@
         </div>
     </asp:Panel>
     <asp:ContentPlaceHolder ID="Main" runat="server" />
-    <asp:Panel CssClass="navbar navbar-fixed-bottom panel-inferior" runat="server">
-    </asp:Panel>
 
 </body>
 

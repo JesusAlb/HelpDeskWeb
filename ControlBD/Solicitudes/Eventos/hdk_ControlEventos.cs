@@ -137,8 +137,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                          a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
                                                          a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
                                                          a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
-                                                         ) && (a.status == status) && (a.fecha_Sol >= FechaInicio && a.fecha_Sol <= FechaFinal)).ToList();
-
+                                                         ) && (a.status == status) && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)).ToList();
+                        
                     }
                 }
                 else
@@ -165,7 +165,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                          a.asistencia_aprox == numero || a.descripcion.Contains(filtro) ||
                                                          a.lugar.Contains(filtro) || a.observaciones.Contains(filtro) ||
                                                          a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro)
-                                                         ) && (a.status == status) && (a.fecha_Sol >= FechaInicio && a.fecha_Sol <= FechaFinal)).ToList();
+                                                         ) && (a.status == status) && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)).ToList();
 
                     }
                 }
@@ -223,8 +223,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             try
             {
                 var eventoModificado = dbHelp.DB.cerrarEvento(id);
-                if (eventoModificado != 0)
+                if (eventoModificado !=0 )
                 {
+                    dbHelp.DB.SaveChanges();
                     dbHelp.actualizarModelo();
                     return true;
                 }
@@ -317,5 +318,18 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 return 1;
             }
         }
+
+        public int obtenerNumeroEventos()
+        {
+            try
+            {
+                return dbHelp.DB.tbleventoes.Where(a => a.status == 0).Count();
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
     }
 }

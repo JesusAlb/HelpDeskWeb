@@ -15,7 +15,6 @@ namespace HelpDeskWeb
             {
                 e.Row.Attributes["onmouseover"] = "this.style.cursor='pointer';this.style.textDecoration='none';";
                 e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
-                e.Row.ToolTip = "Click para seleccionar el renglon";
                 e.Row.Attributes["onclick"] = this.Page.ClientScript.GetPostBackClientHyperlink((sender as GridView), "Select$" + e.Row.RowIndex);
             }
         }

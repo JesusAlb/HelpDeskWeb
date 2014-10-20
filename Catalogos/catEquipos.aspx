@@ -8,11 +8,22 @@
     <title>Centro de servicio</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/helpdesk-template.css" rel="stylesheet"/>
-    <link href="../css/styles.css" rel="stylesheet"/>
-    <link href="../css/styles2.css" rel="stylesheet"/>
-    <link href="../css/printstyles.css" rel="stylesheet"/>
-    <script src="../js/ie-emulation-modes-warning.js"></script>
-    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+            <!-- include alertify.css -->
+    <link rel="stylesheet" href="../css/alertify.css"/>
+    <link rel="stylesheet" href="../css/themes/default.css" />
+    <link rel="stylesheet" href="../css/alertify.min.css" />
+    <style type="text/css">
+
+    </style>
+
+    <!-- include boostrap theme  -->
+    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
+    <!-- include alertify script -->
+    <script src="../js/alertify.js"></script>
+    <script src="../js/alertify.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/jquery-2.1.1.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -55,117 +66,268 @@
                     <li><asp:HyperLink runat="server" href="#">Cerrar sesión</asp:HyperLink></li></ul></li><li class="active"><asp:HyperLink runat="server" NavigateUrl="~/principal.aspx" >Inicio</asp:HyperLink></li></ul></div></div></div>
     <asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">
-            <asp:Panel runat="server" CssClass="row">
-                <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>           
-                <asp:Panel runat="server" CssClass="row">             
+            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+            <asp:Panel runat="server" CssClass="col-lg-10">
+                <form runat="server" role="form">
+                    <asp:ScriptManager runat="server" ID="ScriptManager" EnablePartialRendering="true">
+                    </asp:ScriptManager>
+                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                     <asp:Panel runat="server" CssClass="col-lg-10">
-                        <asp:Panel runat="server" CssClass="panel panel-primary" >
-                            <asp:Panel runat="server" CssClass="panel-heading" HorizontalAlign="Center" Font-Bold="true" Font-Size="16">
-                                Catálogos para Equipos </asp:Panel>
-                                <asp:Panel runat="server" CssClass="panel-body"> 
-                                   <form runat="server" role="form" >    
-                                    <asp:ScriptManager runat="server" ID="ScriptManager"  EnablePartialRendering="true">
-                                    </asp:ScriptManager>
-                                        <asp:UpdatePanel runat="server" ID="update" UpdateMode="Always" >
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
-                                            <asp:AsyncPostBackTrigger ControlID="btnMarcas" EventName="Click" />
-                                        </Triggers>
-                                        <ContentTemplate> 
-                                   <asp:Panel runat="server" style="border-bottom:1px solid; border-color:lightgray;">
-                                   <asp:Panel runat="server" CssClass="btn-group">
-                                      <asp:LinkButton runat="server" CssClass="btn btn-primary active" OnClick="btnTipoEquipos_Click" style="border-bottom:none" ID="btnTipoEquipos" Text="Tipos de equipos" />
-                                      <asp:LinkButton runat="server" CssClass="btn btn-default" ID="btnMarcas" Text="Marcas" style="border-bottom:none" OnClick="btnMarcas_Click" ></asp:LinkButton>
-                                    </asp:Panel>
-                                    </asp:Panel>
-                                            <asp:Panel runat="server" CssClass="col-lg-6">
-                                                <asp:Panel runat="server" CssClass="row" Height="40"></asp:Panel>
-                                                <asp:Panel runat="server" CssClass="row">
-                                                    <asp:Panel runat="server" CssClass="col-lg-2>"></asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="col-lg-8" HorizontalAlign="Center" >
-                                                    <asp:Panel runat="server" CssClass="form-group">
-                                                        <asp:Panel runat="server" CssClass="input-group" HorizontalAlign="Center">
-                                                                <asp:TextBox runat="server"  ID="txtFiltro"  CssClass="form-control"  OnTextChanged="txtFiltro_TextChanged" placeholder="Buscar" /> 
-                                                                <span class="input-group-btn">
-                                                                    <asp:Button runat="server" Text="Filtrar" ID="btnFiltrar" class="btn btn-default" />
-                                                                </span>                                                       
-                                                         </asp:Panel>                                      
-                                                    </asp:Panel>
-                                                    </asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="col-lg-2">
-                                                        <asp:Button runat="server" Text="Nuevo" ID="btnNuevo"  OnClick="btnNuevo_Click" CssClass="btn btn-primary" />    
-                                                    </asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
-                                                </asp:Panel>
-                                                <asp:Panel runat="server" CssClass="col-lg-2>"></asp:Panel>
-                                                <asp:Panel runat="server" CssClass="row">                            
-                                                     <asp:Panel runat="server"  Height="300px" style="border-radius:10px" BorderWidth="1px" ScrollBars="Vertical" CssClass="embed-responsive" BorderColor="black" >
-                                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvTipoEquipos_RowCreated" runat="server" id="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="White" SelectedRowStyle-BackColor="#0B2161"
-                                                             DataKeyNames="idTipoEquipo" CellPadding="4" GridLines="None" OnSelectedIndexChanged="gvTipoEquipos_SelectedIndexChanged" >
-                                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#0B2161" HorizontalAlign="Center" Font-Size="13" /><Columns>                                                          
-                                                                    <asp:BoundField  HeaderText="Tipo de equipo" DataField="nomTipoEquipo"/>
-                                                                    </Columns>                  
-                                                                </asp:GridView>                                              
-                                                    </asp:Panel> 
-                                                </asp:Panel> 
+                    <asp:Panel runat="server" CssClass="panel panel-default" BorderColor="Gray" >
+                        <asp:Panel runat="server" CssClass="panel-heading" Font-Size="Large" HorizontalAlign="Center" BackColor="#E6E6E6">
+                            Catálogos de equipos
+                        </asp:Panel>
+                        <asp:Panel runat="server" CssClass="panel-body">
+                          <asp:Panel runat="server" CssClass="form-group">
+                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                <li class="active">
+                                    <asp:LinkButton runat="server" ID="tabEquipos" OnClientClick="activaTab('0')" href="#equipos" role="tab">Tipos de equipos</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="tabMarcas" OnClientClick="activaTab('1')" href="#marcas" role="tab">Marcas</asp:LinkButton></li>
+                            </ul>
+                        </asp:Panel>
+                        <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
+                               <asp:Panel runat="server" ID="equipos" CssClass="tab-pane fade in active">
+                                <asp:Panel runat="server" CssClass="form-group">
+                                    <asp:Panel runat="server" CssClass="row">
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-6">
+                                            <asp:Panel runat="server" CssClass="form-group">
+                                                <asp:TextBox runat="server" ID="txtFiltroTipo" CssClass="form-control" placeholder="Buscar" />
                                             </asp:Panel>
-                                            <asp:Panel runat="server" CssClass="col-lg-6">
-                                                <asp:Panel runat="server" ID="renglon" CssClass="row"></asp:Panel>
-                                                <h4 class="text-center"><asp:Label runat="server" Text="Alta de tipos de equipos" ID="lbelAccion"></asp:Label></h4>
-                                                <asp:Panel runat="server" ID="panelNombre" CssClass="form-group" HorizontalAlign="Center">
-                                                  <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
-                                                </asp:Panel>                   
-                                                  <asp:Panel runat="server" CssClass="panel panel-primary" ID="panelCarTipoEquipo">
-                                                    <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel><asp:Panel runat="server" CssClass="panel-body">
-                                                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="col-lg-9">
-                                                    <div  class="row">                      
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chEquipo" Checked="true"  Enabled="false" Text="Marca del equipo" />
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chDiscoD" Text="Capacidad de almacenamiento"/>
-                                                     </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chProcesador" Text="Velocidad del reloj del procesador"/>
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chRAM" Text="Capacidad de RAM"/>
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chRed" Text="Direcciones de red"/>
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chMonitor" Text="Marca del monitor"/>
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chTeclado" Text="Marca del teclado"/>
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chMouse" Text="Marca del mouse" />
-                                                    </div>
-                                                    <div class="row">
-                                                    <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chTodos"  OnCheckedChanged="chTodos_CheckedChanged" AutoPostBack="true" Text="Seleccionar todas" Value="todos"/>
-                                                    </div>                        
+
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-4">
+                                            <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
+                                                        <asp:LinkButton ID="btnNuevoTipo" runat="server" CssClass="btn btn-primary" OnClick="btnNuevoTipo_Click">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                             Nuevo
+                                                        </asp:LinkButton>
+                                                        <asp:LinkButton ID="btnEditarTipo" runat="server" CssClass="btn btn-primary" OnClick="btnEditarTipo_Click">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Editar
+                                                        </asp:LinkButton>
+
                                                     </asp:Panel>
-                                                   </asp:Panel>                                                    
-                                                   </asp:Panel>
-                                                   <asp:Panel runat="server" CssClass="form-group" HorizontalAlign="Center">
-                                                  <asp:Button runat="server" ID="btnGrabarTipo" OnClick="btnGrabarTipo_Click" Text="Grabar"  CssClass="btn btn-primary btn-group-sm text-center"/>
-                                                 </asp:Panel>
-                                                </asp:Panel>
+                                                    <asp:HiddenField runat="server" ID="accionesEquipos" Value="0" />
                                                 </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
+                                                </Triggers>
                                             </asp:UpdatePanel>
-                                        </form>
-                                    <asp:Panel runat="server" CssClass="row" ID="PanelInferior" ></asp:Panel>
+                                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevoTipoEquipos" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <asp:Panel runat="server" CssClass="modal-dialog modal-md">
+                                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarTipo">
+                                                        <asp:UpdatePanel ID="updateNuevoTipo" runat="server" UpdateMode="Conditional">
+                                                            <ContentTemplate>
+                                                                <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
+                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                                                                    <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelModal" Text="Alta de tipo de equipos" />
+                                                                </asp:Panel>
+                                                                <asp:Panel runat="server" CssClass="modal-body">
+                                                                    <asp:Panel runat="server" CssClass="row">
+                                                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                                                        <asp:Panel runat="server" CssClass="col-lg-10">
+                                                                            <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
+                                                                                <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
+                                                                                <asp:TextBox runat="server" ID="txtTipoEquipo" CssClass="form-control" placeholder="Nombre" />
+                                                                            </asp:Panel>
+                                                                            <asp:Panel runat="server" CssClass="panel panel-primary" ID="panelCarTipoEquipo">
+                                                                                <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel>
+                                                                                <asp:Panel runat="server" CssClass="panel-body">
+                                                                                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                                                                    <asp:Panel runat="server" CssClass="col-lg-9">
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chEquipo" Checked="true" Enabled="false" Text="Marca del equipo" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chDiscoD" Text="Capacidad de almacenamiento" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chProcesador" Text="Velocidad del reloj del procesador" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chRAM" Text="Capacidad de RAM" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chRed" Text="Direcciones de red" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chMonitor" Text="Marca del monitor" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chTeclado" Text="Marca del teclado" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chMouse" Text="Marca del mouse" />
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chTodos" OnCheckedChanged="chTodos_CheckedChanged" AutoPostBack="true" Text="Seleccionar todas" Value="todos" />
+                                                                                        </div>
+                                                                                    </asp:Panel>
+                                                                                </asp:Panel>
+                                                                            </asp:Panel>
+
+                                                                        </asp:Panel>
+                                                                    </asp:Panel>
+                                                                </asp:Panel>
+                                                                <asp:Panel runat="server" CssClass="modal-footer">
+                                                                            <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
+                                                                            <asp:LinkButton runat="server" ID="btnGrabarTipo" CssClass="btn btn-primary" OnClick="btnGrabarTipo_Click" Text="Grabar" />
+                                                                </asp:Panel>
+                                                            </ContentTemplate>
+                                                            <Triggers>
+                                                                <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
+                                                            </Triggers>
+                                                        </asp:UpdatePanel>
+                                                    </asp:Panel>
+                                                </asp:Panel>
+                                            </asp:Panel>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                    </asp:Panel>
                                 </asp:Panel>
-                        </asp:Panel>             
+                                <asp:Panel runat="server" CssClass="form-group">
+                                    <asp:Panel runat="server" CssClass="row">
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-10">
+                                            <asp:Table runat="server" ID="Table1" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
+                                                <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
+                                                    <asp:TableCell>Tipos de equipos</asp:TableCell>
+                                                </asp:TableRow>
+                                            </asp:Table>
+                                            <asp:Panel runat="server" Height="300px" ScrollBars="Auto">
+                                                <asp:UpdatePanel runat="server" ID="UpdatePanel5" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:GridView OnRowCreated="gv_RowCreated"  runat="server" ID="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idTipoEquipo" CellPadding="4" GridLines="Horizontal">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="Tipo de equipo" DataField="nomTipoEquipo" />
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabarTipo" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </asp:Panel>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                    </asp:Panel>
+                                </asp:Panel>
+                                </asp:Panel>
+                               <asp:Panel runat="server" ID="marcas" CssClass="tab-pane fade">
+                                   <asp:Panel runat="server" CssClass="form-group">
+                                       <asp:Panel runat="server" CssClass="row">
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-6">
+                                            <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" placeholder="Buscar" />
+                                        </asp:Panel>
+                                           <asp:Panel runat="server" CssClass="col-lg-4">
+                                               <asp:UpdatePanel runat="server" ID="updateAccionesMarcas" UpdateMode="Conditional">
+                                                   <ContentTemplate>
+                                                       <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
+                                                           <asp:LinkButton ID="btnNuevaMarca" runat="server" CssClass="btn btn-primary" OnClick="btnNuevaMarca_Click">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                             Nuevo
+                                                           </asp:LinkButton>
+                                                           <asp:LinkButton ID="btnEditarMarca" runat="server" CssClass="btn btn-primary" OnClick="btnEditarMarca_Click">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Editar
+                                                           </asp:LinkButton>
+                                                       </asp:Panel>
+                                                       <asp:HiddenField runat="server" ID="accionesMarcas" Value="0" />
+                                                   </ContentTemplate>
+                                                   <Triggers>
+                                                       <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
+                                                       <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
+                                                   </Triggers>
+                                               </asp:UpdatePanel>
+                                               <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevaMarca" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                   <asp:Panel runat="server" CssClass="modal-dialog modal-md">
+                                                       <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarMarca">
+                                                           <asp:UpdatePanel ID="updateNuevaMarca" runat="server" UpdateMode="Conditional">
+                                                               <ContentTemplate>
+                                                                   <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
+                                                                       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                                                                       <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelModalMarca" Text="Alta de marcas" />
+                                                                   </asp:Panel>
+                                                                   <asp:Panel runat="server" CssClass="modal-body">
+                                                                       <asp:Panel runat="server" CssClass="row">
+                                                                           <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                                                           <asp:Panel runat="server" CssClass="col-lg-10">
+                                                                               <asp:Panel runat="server" ID="panel2" CssClass="form-group">
+                                                                                   <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
+                                                                                   <asp:TextBox runat="server" ID="txtMarca" CssClass="form-control" placeholder="Nombre" />
+                                                                               </asp:Panel>
+                                                                           </asp:Panel>
+                                                                       </asp:Panel>
+                                                                   </asp:Panel>
+                                                                   <asp:Panel runat="server" CssClass="modal-footer">
+                                                                       <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
+                                                                       <asp:LinkButton runat="server" ID="btnGrabarMarca" OnClick="btnGrabarMarca_Click" CssClass="btn btn-primary" Text="Grabar" />
+                                                                   </asp:Panel>
+                                                               </ContentTemplate>
+                                                               <Triggers>
+                                                                   <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
+                                                                   <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
+                                                               </Triggers>
+                                                           </asp:UpdatePanel>
+                                                       </asp:Panel>
+                                                   </asp:Panel>
+                                               </asp:Panel>
+                                           </asp:Panel>
+                                           <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                       </asp:Panel>
+                                   </asp:Panel>
+                                   <asp:Panel runat="server" CssClass="form-group">
+                                       <asp:Panel runat="server" CssClass="row">
+                                           <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                           <asp:Panel runat="server" CssClass="col-lg-10">
+                                               <asp:Table runat="server" ID="Table2" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
+                                                   <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
+                                                       <asp:TableCell>Tipos de equipos</asp:TableCell>
+                                                   </asp:TableRow>
+                                               </asp:Table>
+                                               <asp:Panel runat="server" Height="300px" ScrollBars="Auto">
+                                                   <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
+                                                       <ContentTemplate>
+                                                           <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvMarca" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                               AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idMarca" CellPadding="4" GridLines="Horizontal">
+                                                               <Columns>
+                                                                   <asp:BoundField HeaderText="Marcas" DataField="nomMarca" />
+                                                               </Columns>
+                                                           </asp:GridView>
+                                                       </ContentTemplate>
+                                                       <Triggers>
+                                                           <asp:AsyncPostBackTrigger ControlID="btnGrabarMarca" EventName="Click" />
+                                                       </Triggers>
+                                                   </asp:UpdatePanel>
+                                               </asp:Panel>
+                                               <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                           </asp:Panel>
+                                       </asp:Panel>
+                                   </asp:Panel>
+                               </asp:Panel>
+                        </asp:Panel>
+                        </asp:Panel>
                     </asp:Panel>
-                 </asp:Panel>             
-             </asp:Panel>
+                    </asp:Panel>
+                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                </form>
+            </asp:Panel>
+            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
         </asp:Panel>
-     </asp:Panel>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+    </asp:Panel>
+    <script type="text/javascript">
+        function activaTab(index) {
+            $('#myTab li:eq(' + index + ') a').tab('show'); // Select third tab (0-indexed)   
+        }
+    </script>
 </body>
 </html>
 

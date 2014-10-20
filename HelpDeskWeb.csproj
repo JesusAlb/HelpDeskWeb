@@ -111,6 +111,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Catalogos\catSolcitudesRespaldo.css" />
     <Content Include="Control\Equipos.aspx" />
     <Content Include="Control\Usuarios.aspx" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -162,10 +163,20 @@
     <Content Include="css\themes\semantic.min.css" />
     <Content Include="css\themes\semantic.rtl.css" />
     <Content Include="css\themes\semantic.rtl.min.css" />
+    <Content Include="Imagenes\cargar.gif" />
+    <Content Include="Imagenes\cargar2.gif" />
+    <Content Include="Imagenes\medallaN.png" />
     <Content Include="Imagenes\noEncuesta0.png" />
     <Content Include="Imagenes\noEncuesta1.png" />
+    <Content Include="Imagenes\noEncuesta2.gif" />
+    <Content Include="Imagenes\noEncuesta3.png" />
+    <Content Include="Imagenes\pAlta.png" />
+    <Content Include="Imagenes\pMedia.png" />
+    <Content Include="Imagenes\pNormal.png" />
     <Content Include="Imagenes\siEncuesta0.png" />
     <Content Include="Imagenes\siEncuesta1.png" />
+    <Content Include="Imagenes\siEncuesta2.gif" />
+    <Content Include="Imagenes\siEncuesta3.png" />
     <Content Include="js\alertify.js" />
     <Content Include="js\alertify.min.js" />
     <Content Include="js\bootstrap.js" />

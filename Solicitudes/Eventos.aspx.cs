@@ -40,9 +40,8 @@ namespace HelpDeskWeb.Solicitudes
             controlUsuario = new hdk_ControlUsuario(Control);
             controlLugar = new hdk_ControlLugar(Control);
             controlEncuestas = new hdk_ControlEncuestas(Control);
-            txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
-            txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
-            tabEnProceso.Attributes.Add("onclick", "activaTab('1')");
+          /*  txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
+            txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");*/
             lbelUsuario.Text = usuarioConectado.nomUsuario;
             if (!IsPostBack)
             {
@@ -54,11 +53,19 @@ namespace HelpDeskWeb.Solicitudes
                 if (Request["__EVENTTARGET"] == "tabAbierta")
                 {
                     this.limpiarSeleccion();
-                    Session["tab"] = Convert.ToInt32(this.Request.Params.Get("__EVENTARGUMENT"));
+                    tabItemSeleccionado.Value = this.Request.Params.Get("__EVENTARGUMENT");
                 }
-                this.cargarTablasEventos();
+                if (Request["__EVENTTARGET"] == "txtFiltro")
+                {
+                    this.cargarTablasEventos();
+                }
+                if (Request["__EVENTTARGET"] == "txtFiltroReq")
+                {
+                    this.cargarTablasRequerimientos();
+                }
+
             }
-            this.tblReqAsH1.Width = Unit.Percentage(gvRecursosAsignados.Columns[0].ItemStyle.Width.Value * 0.95);   
+            this.tblReqAsH1.Width = Unit.Percentage(gvRecursosAsignados.Columns[0].ItemStyle.Width.Value * 0.95);
         }
 
         protected void cargarCombosSoporte()
@@ -70,7 +77,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void limpiarSeleccion()
         {
-            Session["itemSeleccionado"] = null;
+            idEventoSeleccionado.Value = null;
             gvEventos_Abiertos.SelectedIndex = gvEventos_Cancelados.SelectedIndex = gvEventos_Cerrados.SelectedIndex = gvEventos_EnProceso.SelectedIndex = -1;
         }
 
@@ -85,24 +92,22 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (usuarioConectado.tipoUsuario == 0)
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSoporte(x, txtFiltro.Text, Convert.ToDateTime(txtFechaInicial.Text), Convert.ToDateTime(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSolicitante(usuarioConectado.idUsuario, x, txtFiltro.Text, Convert.ToDateTime(txtFechaInicial.Text), Convert.ToDateTime(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSolicitante(usuarioConectado.idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
-
         }
 
         protected void cargarTablasRequerimientos()
         {
-            gvRecursosNoAsignados.DataSource = controlRequerimientos.cargarTabla(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(Session["itemSeleccionado"]));
+            gvRecursosNoAsignados.DataSource = controlRequerimientos.cargarTabla(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosNoAsignados.DataBind();
-            gvRecursosAsignados.DataSource = controlRecursosAsignados.cargarTablaReqAsig(Convert.ToInt32(Session["itemSeleccionado"]));
+            gvRecursosAsignados.DataSource = controlRecursosAsignados.cargarTablaReqAsig(Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosAsignados.DataBind();
-                 
         }
 
         protected void cargarTablaEncuesta(int? datasource)
@@ -119,7 +124,7 @@ namespace HelpDeskWeb.Solicitudes
                 this.gvEncuestas.Columns[2].Visible = true;
                 this.gvEncuestas.Columns[3].Visible = false;
             }
-            
+
             gvEncuestas.DataBind();
         }
 
@@ -131,7 +136,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void gvEventos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session["itemSeleccionado"] = (sender as GridView).SelectedDataKey.Value.ToString();
+            idEventoSeleccionado.Value = (sender as GridView).SelectedDataKey.Value.ToString();
         }
 
         protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
@@ -142,11 +147,11 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnRecursos_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(Session["tab"]) <2 /*|| usuarioConectado.tipoUsuario == 1*/)
+            if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 /*|| usuarioConectado.tipoUsuario == 1*/)
             {
-                if (Session["itemSeleccionado"] != null)
+                if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTitulo.Text = registroEvento.titulo;
                     this.cargarTablasRequerimientos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnRecursosActivado", "$('#ModalRecursos').modal('show');", true);
@@ -156,25 +161,25 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-           // if (usuarioConectado.tipoUsuario == 1)
-          //  {
-                this.cargarComboLugares();
-                lbelTituloModal.Text = "Alta de eventos";
-                utilerias.limpiarControles(new Object[] { txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo });
-                Session["Accion"] = 0;
-                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
-           // }
+            // if (usuarioConectado.tipoUsuario == 1)
+            //  {
+            this.cargarComboLugares();
+            lbelTituloModal.Text = "Alta de eventos";
+            utilerias.limpiarControles(new Object[] { txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo });
+            accion.Value = "nuevo";
+            ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+            // }
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(Session["tab"]) < 2 /*|| usuarioConectado.tipoUsuario == 1*/)
+            if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 /*|| usuarioConectado.tipoUsuario == 1*/)
             {
-                if (Session["itemSeleccionado"] != null)
+                if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
                     this.cargarComboLugares();
                     lbelTituloModal.Text = "Modificar eventos";
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTituloNuevo.Text = registroEvento.titulo;
                     txtAcomodo.Text = registroEvento.acomodo;
                     txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString();
@@ -183,7 +188,7 @@ namespace HelpDeskWeb.Solicitudes
                     txtFecha.Text = registroEvento.FechaInicio.Value.Date.ToString("yyyy-MM-dd");
                     txtHoraFinal.Text = registroEvento.horaFn.Value.TimeOfDay.ToString();
                     txtHoraInicial.Text = registroEvento.horaIn.Value.TimeOfDay.ToString();
-                    Session["Accion"] = 1;
+                    accion.Value = "editar";
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnEditarActivado", "$('#ModalNuevo').modal('show');", true);
                 }
             }
@@ -191,24 +196,32 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (utilerias.verificarCamposVacios(new TextBox[]{txtTituloNuevo, txtAcomodo, txtAsistencia, txtDescripcion, txtFecha, txtHoraInicial, txtHoraFinal}))
+            if (utilerias.verificarCamposVacios(new TextBox[] { txtTituloNuevo, txtAcomodo, txtAsistencia, txtDescripcion, txtFecha, txtHoraInicial, txtHoraFinal }))
             {
-                if (Convert.ToInt32(Session["Accion"]) == 0)
+                if (accion.Value.Equals("nuevo"))
                 {
                     if (controlEventos.insertarEvento(usuarioConectado.idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "AsignacionCorrecta", "alertify.alert('Correcto', 'Evento creado correctamente', 'onok');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.alert('Correcto', 'Evento creado correctamente', 'onok');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
                     }
                 }
                 else
                 {
-                    if (controlEventos.editarEvento(Convert.ToInt32(Session["itemSeleccionado"]), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                    if (controlEventos.editarEvento(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "AsignacionCorrecta", "alertify.alert('Correcto', 'Evento editado exitosamente', 'onok');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionCorrecta", "alertify.alert('Correcto', 'Evento editado exitosamente', 'onok');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Error al editar el evento');", true);
                     }
                 }
             }
@@ -221,12 +234,12 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(Session["tab"]) < 2 /*|| usuarioConectado.tipoUsuario == 1*/)
+            if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 /*|| usuarioConectado.tipoUsuario == 1*/)
             {
-                if (Session["itemSeleccionado"] != null)
+                if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
                     this.cargarCombosSoporte();
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(Session["itemSeleccionado"]));
+                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     cbSeguimiento.SelectedValue = registroEvento.apoyo.ToString();
                     cbSoporte.SelectedValue = registroEvento.responsable.ToString();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnAsignarActivado", "$('#ModalAsignar').modal('show');", true);
@@ -234,19 +247,11 @@ namespace HelpDeskWeb.Solicitudes
             }
         }
 
-        protected void Page_Unload(object sender, System.EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-                Session["itemSeleccionado"] = null;
-            }
-        }
-
         protected void btnGrabarAsignacion_Click(object sender, EventArgs e)
         {
             if (!cbSoporte.SelectedItem.Text.Equals("S/A"))
             {
-                if (controlEventos.asignarResponsable(Convert.ToInt32(Session["itemSeleccionado"]), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+                if (controlEventos.asignarResponsable(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "$('#ModalAsignar').modal('hide');", true);
@@ -261,9 +266,9 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (Session["itemSeleccionado"] != null && Convert.ToInt32(Session["tab"]) < 2)
+            if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value) && Convert.ToInt32(tabItemSeleccionado.Value) < 2)
             {
-                if (controlEventos.cambiarStatus(Convert.ToInt32(Session["itemSeleccionado"]), 3))
+                if (controlEventos.cambiarStatus(Convert.ToInt32(idEventoSeleccionado.Value), 3))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, this.GetType(), "EventoCancelado", "alertify.alert('Correcto', 'Evento cancelado correctamente', 'onok');", true);
@@ -277,13 +282,13 @@ namespace HelpDeskWeb.Solicitudes
             {
                 ScriptManager.RegisterStartupScript(this.UpdateBtns, this.GetType(), "ErrorNoId", "alertify.alert('Error', 'Seleccione un evento abierto o en proceso', 'onok');", true);
             }
-
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if(Convert.ToInt32(Session["tab"]) == 1 && Session["itemSeleccionado"] != null){
-                if (controlEventos.cambiarStatus(Convert.ToInt32(Session["itemSeleccionado"]), 2))
+            if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
+            {
+                if (controlEventos.cerrarEvento(Convert.ToInt32(idEventoSeleccionado.Value)))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "CerrarEvento", "alertify.alert('Correcto', 'Evento cerrado exitosamente', 'onok');", true);
@@ -303,42 +308,48 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (gvRecursosAsignados.SelectedDataKey != null)
             {
-                if(controlRecursosAsignados.borrar(Convert.ToInt32(Session["itemSeleccionado"]),Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString()))){
+                if (controlRecursosAsignados.borrar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString())))
+                {
                     this.cargarTablasRequerimientos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "AñadirCantidad", "alertify.success('Se eliminó el recurso al evento');", true);
                     txtCantidadAs.Text = "";
                     gvRecursosAsignados.SelectedIndex = -1;
-                }else{
+                }
+                else
+                {
                     ScriptManager.RegisterStartupScript(this.UpdateBtnQuitar, GetType(), "ErrorQuitar", "alertify.alert('Error', 'Error al quitar el requerimiento', 'onok');", true);
                 }
             }
             else
             {
-               ScriptManager.RegisterStartupScript(this.UpdateBtnQuitar, GetType(), "ErrorSeleccion", "alertify.alert('Error', 'Seleccione el recurso a eliminar', 'onok');", true);                
+                ScriptManager.RegisterStartupScript(this.UpdateBtnQuitar, GetType(), "ErrorSeleccion", "alertify.alert('Error', 'Seleccione el recurso a eliminar', 'onok');", true);
             }
         }
 
         protected void btnAñadir_Click(object sender, EventArgs e)
         {
-           if (gvRecursosNoAsignados.SelectedDataKey != null)
+            if (gvRecursosNoAsignados.SelectedDataKey != null)
             {
                 int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
                 requerimientosSinAsignar_Result requerimiento = controlRequerimientos.obtenerRequerimiento(idReq, null);
                 if (requerimiento.tipo.Equals("Cuantificable"))
                 {
-                   try{
+                    try
+                    {
                         int cantidad = Convert.ToInt32(txtCantidad.Text);
                         this.insertarRequerimiento(cantidad);
-                   }catch{
-                       ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "ErrorAñadir", "alertify.error('Cantidad inválida');", true);
-                   }
-                            
+                    }
+                    catch
+                    {
+                        ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "ErrorAñadir", "alertify.error('Cantidad inválida');", true);
+                    }
+
                 }
                 else
                 {
                     this.insertarRequerimiento(null);
                 }
-                
+
             }
             else
             {
@@ -353,7 +364,7 @@ namespace HelpDeskWeb.Solicitudes
                 cantidad = 1;
             else
                 cantidad = cant.Value;
-            if (controlRecursosAsignados.insertar(Convert.ToInt32(Session["itemSeleccionado"]), Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString()), cantidad))
+            if (controlRecursosAsignados.insertar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString()), cantidad))
             {
                 ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "AñadirCantidad", "alertify.success('Se añadió el recurso al evento');", true);
                 this.cargarTablasRequerimientos();
@@ -370,7 +381,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtObservaciones.Text))
             {
-                if (controlEventos.editarObservaciones(Convert.ToInt32(Session["itemSeleccionado"]), txtObservaciones.Text))
+                if (controlEventos.editarObservaciones(Convert.ToInt32(idEventoSeleccionado.Value), txtObservaciones.Text))
                 {
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "SalirVentana", "mostrarModal('ModalRecursos','hide');", true);
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "GrabarObservaciones", "alertify.alert('Correcto', 'Evento guardado correctamente', 'onok');", true);
@@ -389,7 +400,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString());
-            tblrequerimientoaevento requerimiento = controlRecursosAsignados.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(Session["itemSeleccionado"]));
+            tblrequerimientoaevento requerimiento = controlRecursosAsignados.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(idEventoSeleccionado.Value));
             txtCantidadAs.Text = requerimiento.cantidad.ToString();
         }
 
@@ -408,27 +419,25 @@ namespace HelpDeskWeb.Solicitudes
             }
         }
 
-        protected void gvEventos_Cerrados_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Session["itemSeleccionado"] = (sender as GridView).SelectedDataKey.Value.ToString();
-        }
-
         protected void gvEventos_Cerrados_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ImageButton myImageButton = e.Row.FindControl("btnEncuesta") as ImageButton;
-                if (myImageButton != null)
+                ImageButton btnEncuestas = e.Row.FindControl("btnEncuesta") as ImageButton;
+                if (btnEncuestas != null)
                 {
+                    btnEncuestas.ImageAlign = ImageAlign.AbsMiddle;
+
                     if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "statusCal_Servicio")))
                     {
-                        myImageButton.ImageUrl = "../Imagenes/siEncuesta0.png";
+                        btnEncuestas.ImageUrl = "../Imagenes/siEncuesta3.png";
                     }
                     else
                     {
-                        myImageButton.ImageUrl = "../Imagenes/noEncuesta0.png";
+                        btnEncuestas.ImageUrl = "../Imagenes/noEncuesta3.png";
                     }
                 }
+
             }
         }
 
@@ -440,6 +449,7 @@ namespace HelpDeskWeb.Solicitudes
             gvEventos_Cerrados.SelectedIndex = renglon.RowIndex;
             int idEvento = Convert.ToInt32(gvEventos_Cerrados.SelectedDataKey.Value.ToString());
             VistaEventosCerrado eventoCerrado = controlEventos.cargarEventoCerrado(idEvento);
+            idCalidad.Value = eventoCerrado.idCalidad_Servicio.ToString();
             txtSolicitante.Text = eventoCerrado.solicitante;
             if (eventoCerrado.statusCal_Servicio)
             {
@@ -447,49 +457,56 @@ namespace HelpDeskWeb.Solicitudes
                 txtPromedio.Text = eventoCerrado.promedioCalidad.ToString();
                 this.cambiarImagenEncuesta(eventoCerrado.promedioCalidad.Value);
                 txtObEncuestas.Text = eventoCerrado.observacionesServicio;
-                btnGrabarEncuesta.Text = "Aceptar";             
+                txtObEncuestas.Enabled = false;
+                btnGrabarEncuesta.Text = "Aceptar";
             }
             else
             {
                 this.cargarTablaEncuesta(null);
+                txtObEncuestas.Enabled = true;
+                txtObEncuestas.Text = "";
+                txtPromedio.Text = "1";
+                btnGrabarEncuesta.Text = "Grabar";
             }
-            
+
             ScriptManager.RegisterStartupScript(this.UpGvEventosCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
         }
 
         protected void cbRespuesta_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.cambiarImagenEncuesta(promedioEncuesta());     
+            this.cambiarImagenEncuesta(promedioEncuesta());
         }
 
-        protected double promedioEncuesta(){
+        protected double promedioEncuesta()
+        {
             double suma = 0;
-             foreach(GridViewRow row in gvEncuestas.Rows) {
-                if(row.RowType == DataControlRowType.DataRow) {
+            foreach (GridViewRow row in gvEncuestas.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
                     DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
                     suma = suma + Convert.ToInt16(cbRespuesta.Text);
                 }
             }
-            return suma/Convert.ToDouble(gvEncuestas.Rows.Count);
+            return suma / Convert.ToDouble(gvEncuestas.Rows.Count);
         }
 
         protected void cambiarImagenEncuesta(double promedio)
-        {      
+        {
             txtPromedio.Text = promedio.ToString();
 
-            if(promedio <= 2.5){
+            if (promedio <= 2.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel0.png";
-            }else if(promedio > 2.5 && promedio <= 4){
+            else if (promedio > 2.5 && promedio <= 4)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel1.png";
-            }else if(promedio > 4 && promedio <= 5.5){
+            else if (promedio > 4 && promedio <= 5.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel2.png";
-            }else if(promedio > 5.5 && promedio <=7){
+            else if (promedio > 5.5 && promedio <= 7)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel3.png";
-            }else if(promedio > 7 && promedio <=8.5){
+            else if (promedio > 7 && promedio <= 8.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel4.png";
-            }else if(promedio > 8.5 && promedio <=10){
+            else if (promedio > 8.5 && promedio <= 10)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel5.png";
-            }           
         }
 
         protected void btnGrabarEncuesta_Click(object sender, EventArgs e)
@@ -500,10 +517,52 @@ namespace HelpDeskWeb.Solicitudes
             }
             else
             {
+                bool correcto = true;
+                foreach (GridViewRow row in gvEncuestas.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
+                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        {
+                            correcto = true;
+                        }
+                        else
+                        {
+                            correcto = false;
+                        }
+                    }
+                }
+                if (correcto)
+                {
+                    if(controlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture))){
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
+                        this.cargarTablasEventos();
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registro la encuesta');", true);  
+                    }else{
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('No se pudo registrar la encuesta');", true);
+                    }
+                }
+            }
 
+        }
+
+        protected DateTime? obtenerDateTimeDeString(string cadena)
+        {
+            try
+            {
+                return Convert.ToDateTime(cadena);
+            }
+            catch
+            {
+                return null;
             }
         }
 
+        protected void cbCuantificable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cargarTablasRequerimientos();
+        }
     }
     
 }

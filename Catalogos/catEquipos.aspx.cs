@@ -17,59 +17,36 @@ namespace HelpDeskWeb.Catalogos
         private hdk_ControlTipoEquipo controlTipoEquipo;
         private hdk_ControlAcceso Control;
         private hdk_ControlMarca controlMarcas;
-        private int tabItemIndex;
          
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["DatosUsuario"] == null)
+            {
+                Response.Redirect("../Index.aspx");
+            }
             lbelUsuario.Text =" " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlTipoEquipo = new hdk_ControlTipoEquipo(Control);
             controlMarcas  = new hdk_ControlMarca(Control);
-            if (IsPostBack)
+            if (!IsPostBack)
             {
-                if (panelCarTipoEquipo.Visible)
-                {
-                    tabItemIndex = 0;
-
-                }
-                else
-                {
-                    tabItemIndex = 1;
-                }
+                this.cargarTablasTipos();
+                this.cargarTablasMarcas();
             }
-            this.cargarTablas();
+            
        }
 
-        protected void cargarTablas()
+        protected void cargarTablasTipos()
         {
-            if (tabItemIndex == 0)
-            {
-                BoundField bf = new BoundField();
-                bf.HeaderText = "Tipo de equipo";
-                bf.DataField = "nomTipoEquipo";
-                gvTipoEquipos.Columns.Add(bf);
-                gvTipoEquipos.Columns.RemoveAt(0);
-                string[] keys = { "idTipoEquipo" };
-                gvTipoEquipos.DataKeyNames = keys;
-                gvTipoEquipos.DataSource = controlTipoEquipo.cargarTabla(txtFiltro.Text);
-                gvTipoEquipos.DataBind();
-            }
-            else
-            {
-                BoundField bf = new BoundField();
-                bf.HeaderText = "Marca";
-                bf.DataField = "nomMarca";
-                gvTipoEquipos.Columns.Add(bf);
-                gvTipoEquipos.Columns.RemoveAt(0);
-                string[] keys = { "idMarca" };
-                gvTipoEquipos.DataKeyNames = keys;
-                gvTipoEquipos.DataSource = controlMarcas.cargarTabla(txtFiltro.Text);
-                gvTipoEquipos.DataBind();              
-            }
-
-
+            gvTipoEquipos.DataSource = controlTipoEquipo.cargarTabla(txtFiltroTipo.Text);
+            gvTipoEquipos.DataBind();
         }
 
+        protected void cargarTablasMarcas()
+        {
+            gvMarca.DataSource = controlMarcas.cargarTabla("");
+            gvMarca.DataBind();
+        }
 
         protected void chTodos_CheckedChanged(object sender, EventArgs e)
         {
@@ -85,154 +62,137 @@ namespace HelpDeskWeb.Catalogos
 
         protected void btnGrabarTipo_Click(object sender, EventArgs e)
         {
-            bool insert = false;
-            int elementoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
-
-            if (tabItemIndex == 0)
+            if (!String.IsNullOrWhiteSpace(txtTipoEquipo.Text))
             {
-                if (btnGrabarTipo.Text.Equals("Grabar"))
+                if (accionesEquipos.Value.Equals("0"))
                 {
-                    if (controlTipoEquipo.insertar(txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (controlTipoEquipo.insertar(txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
-                        insert = true;
+                        this.cargarTablasTipos();
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.success('Tipo de equipo creado exitosamente')", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.error('No se pudo crear el tipo de equipo')", true);
                     }
                 }
                 else
                 {
-                    
-                    if (controlTipoEquipo.modificar(elementoEquipo,txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (controlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
-                        insert = true;
+                        this.cargarTablasTipos();
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.success('Tipo de equipo editado exitosamente')", true);
                     }
-                }
-
-                if (insert)
-                {
-                    txtNombre.Text = "";
-                    chDiscoD.Checked = chTeclado.Checked = chRed.Checked = chMouse.Checked = chMonitor.Checked = chRAM.Checked = chProcesador.Checked = false;
-                    cargarTablas();
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.error('No se pudo editar el tipo de equipo')", true);
+                    }
                 }
             }
             else
             {
-                if (btnGrabarTipo.Text.Equals("Grabar"))
-                {
-                    if (controlMarcas.insertar(txtNombre.Text))
-                    {
-                        insert = true;
-                    }
-                }
-                else
-                {
-                    if (controlMarcas.modificar(elementoEquipo, txtNombre.Text))
-                    {
-                        insert = true;
-                    }
-                }
-
-                if (insert)
-                {
-                    txtNombre.Text = "";
-                    cargarTablas();
-                }
+                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnError", "alertify.alert('Error', 'Escriba el nombre del tipo de equipo', 'onok');", true);
             }
             
         }
 
-        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        protected void btnNuevoTipo_Click(object sender, EventArgs e)        
         {
-            this.cargarTablas();
-            txtFiltro.Focus();
+            txtTipoEquipo.Text = "";
+            chTodos.Checked = false;
+            chTodos_CheckedChanged(sender, e);
+            lbelModal.Text = "Alta de tipos de equipos";
+            ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('show');", true);
         }
 
-        protected void gvTipoEquipos_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            try
-            {
-                btnGrabarTipo.Text = "Modificar";
-                int elementoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
-
-                if (tabItemIndex == 0)
-                {
-                    lbelAccion.Text = "Modificación de tipo de equipos";
-                    tbltipoequipo equipo = controlTipoEquipo.obtenerEquipo(elementoEquipo);
-                    txtNombre.Text = equipo.nomTipoEquipo;
-                    chDiscoD.Checked = equipo.siDiscoDuro;
-                    chRAM.Checked = equipo.siRAM;
-                    chRed.Checked = equipo.siRed;
-                    chTeclado.Checked = equipo.siTeclado;
-                    chProcesador.Checked = equipo.siProcesador;
-                    chMonitor.Checked = equipo.siMonitor;
-                    chMouse.Checked = equipo.siMouse;
-                }
-                else
-                {
-                    lbelAccion.Text = "Modificación de marcas";
-                    tblmarca marca = controlMarcas.obtenerMarca(elementoEquipo); 
-                    txtNombre.Text = marca.nomMarca;
-                }
-               
-            }
-            catch
-            {
-
-            }
+            hdk_utilerias ut = new hdk_utilerias();
+            ut.setRowCreated(sender, e);
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        protected void btnEditarTipo_Click(object sender, EventArgs e)
         {
-            txtNombre.Text = "";
-            btnGrabarTipo.Text = "Grabar";
-            gvTipoEquipos.SelectedIndex = -1;
-            if (tabItemIndex == 0)
+            if (gvTipoEquipos.SelectedIndex != -1)
             {
-                lbelAccion.Text = "Alta de tipo de equipos";
-                chTodos.Checked = false;
-                chTodos_CheckedChanged(sender, e);                               
+                accionesEquipos.Value = "1";
+                lbelModal.Text = "Modificar tipo de equipos";
+                int tipoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
+                tbltipoequipo equipo = controlTipoEquipo.obtenerEquipo(tipoEquipo);
+                txtTipoEquipo.Text = equipo.nomTipoEquipo;
+                chDiscoD.Checked = equipo.siDiscoDuro;
+                chRAM.Checked = equipo.siRAM;
+                chRed.Checked = equipo.siRed;
+                chTeclado.Checked = equipo.siTeclado;
+                chProcesador.Checked = equipo.siProcesador;
+                chMonitor.Checked = equipo.siMonitor;
+                chMouse.Checked = equipo.siMouse;
+                ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnEditarActivo", "$('#ModalNuevoTipoEquipos').modal('show');", true);
             }
             else
             {
-                lbelAccion.Text = "Alta de marcas";               
-            }
-            
-        }
-
-        protected void gvTipoEquipos_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow) {
-                e.Row.Attributes["onmouseover"] = "this.style.cursor='pointer';this.style.textDecoration='none';";
-                e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
-                e.Row.ToolTip = "Click para seleccionar el renglon";
-                e.Row.Attributes["onclick"] = this.Page.ClientScript.GetPostBackClientHyperlink(this.gvTipoEquipos, "Select$" + e.Row.RowIndex);
+                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione un tipo de equipo', 'onok');", true);
             }
         }
 
-        protected void btnMarcas_Click(object sender, EventArgs e)
+        protected void btnNuevaMarca_Click(object sender, EventArgs e)
         {
-            btnTipoEquipos.CssClass = "btn btn-default";           
-            btnMarcas.CssClass = "btn btn-primary active";
-            lbelAccion.Text = "Alta de marcas";
-            renglon.Height = 100;
-            tabItemIndex = 1;
-            this.cargarTablas();
-            panelCarTipoEquipo.Visible = false;
+            accionesMarcas.Value = "0";
+            lbelModalMarca.Text = "Alta de marcas";
+            txtMarca.Text = "";
+            ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('show');", true);
         }
 
-        protected void btnFiltrar_Click(object sender, EventArgs e)
+        protected void btnEditarMarca_Click(object sender, EventArgs e)
         {
-            this.cargarTablas();
+            if (gvMarca.SelectedIndex != -1)
+            {
+                accionesMarcas.Value = "1";
+                lbelModalMarca.Text = "Modificar marcas";
+                tblmarca marca = controlMarcas.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()));
+                txtMarca.Text = marca.nomMarca;
+                ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, GetType(), "btnEditarActivo", "$('#ModalNuevaMarca').modal('show');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione una marca', 'onok');", true);
+            }
         }
 
-        protected void btnTipoEquipos_Click(object sender, EventArgs e)
+        protected void btnGrabarMarca_Click(object sender, EventArgs e)
         {
-            btnMarcas.CssClass = "btn btn-default";
-            btnTipoEquipos.CssClass = "btn btn-primary active";
-            lbelAccion.Text = "Alta de tipos de equipos";
-            renglon.Height = 0;
-            tabItemIndex = 0;
-            this.cargarTablas();
-            panelCarTipoEquipo.Visible = true;
-        }
 
+            if (!String.IsNullOrWhiteSpace(txtMarca.Text))
+            {
+
+                if (accionesMarcas.Value.Equals("0"))
+                {
+
+                    if (controlMarcas.insertar(txtMarca.Text))
+                    {
+                        this.cargarTablasMarcas();
+                        ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnModificarActivo", "alertify.success('Marca creada exitosamente')", true);
+                    }
+
+                }
+                else
+                {
+                    if (controlMarcas.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()), txtMarca.Text))
+                    {
+                        this.cargarTablasMarcas();
+                        ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnModificarActivo", "alertify.success('Marca editada exitosamente')", true);
+                    }
+
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Escriba el nombre de la marca', 'onok');", true);
+            }
+        }
     }
 }

@@ -18,34 +18,57 @@ namespace HelpDeskWeb.Catalogos
         private hdk_ControlLugar controlLugar;
         private hdk_ControlRequerimientos controlRequerimientos;
         private hdk_ControlTipoIncidencia controlTipoIncidencia;
-        private int tabItemIndex;
+        hdk_utilerias utilerias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["DatosUsuario"] == null)
+            {
+                Response.Redirect("../index.aspx");
+            }
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlTipoIncidencia = new hdk_ControlTipoIncidencia(Control);
             controlRequerimientos = new hdk_ControlRequerimientos(Control);
+            utilerias = new hdk_utilerias();
             controlLugar = new hdk_ControlLugar(Control);
-            if (IsPostBack)
+            if (!IsPostBack)
             {
-                if (gvSolicitudes.DataKeyNames[0].Equals("idTipoIncidente"))
-                {
-                    tabItemIndex = 0;
-                }
-                else if (gvSolicitudes.DataKeyNames[0].Equals("idLugar"))
-                {
-                    tabItemIndex = 1;
-                }
-                else if (gvSolicitudes.DataKeyNames[0].Equals("idRequerimientos"))
-                {
-                    tabItemIndex = 2;
-                }
+                this.cargarTablaTipoIncidente();
             }
-            this.cargarTablas();
+           
         }
 
-        protected void cargarTablas()
+        protected void cargarTablaTipoIncidente()
+        {
+            gvTipoIncidentes.DataSource = controlTipoIncidencia.cargarTabla(txtFiltroTipoIncidentes.Text);
+            gvTipoIncidentes.DataBind();
+        }
+
+        protected void cargarTablaLugares()
+        {
+          //  gvLugares.DataSource = controlLugar.cargarTabla(txtFiltroLugares.Text);
+         //   gvLugares.DataBind();
+        }
+
+        protected void cargarTablaRequerimientos()
+        {
+            //  gvRequerimientos.DataSource = controlLugar.cargarTabla(txtFiltroLugares.Text);
+            //   gvRequerimientos.DataBind();
+        }
+
+        protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+
+            utilerias.setRowCreated(sender, e);
+        }
+
+        protected void btnGrabarMarca_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    /*    protected void cargarTablas()
         {
             if (tabItemIndex == 0)
             {
@@ -260,6 +283,6 @@ namespace HelpDeskWeb.Catalogos
         protected void btnFiltroSol_Click(object sender, EventArgs e)
         {
             cargarTablas();
-        }
+        }*/
     }
 }

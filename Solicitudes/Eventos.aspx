@@ -33,6 +33,12 @@
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
             })
         });
+
+        $(function () {
+            $("#<%=txtFiltroReq.ClientID%>").keyup(function () {
+                        __doPostBack("txtFiltroReq", $("#<%=txtFiltroReq.ClientID%>").val());
+            })
+        });
     </script>
 </head>
 <body>  
@@ -90,6 +96,17 @@
         <asp:Panel runat="server" CssClass="box">
             <form runat="server">
                 <asp:ScriptManager runat="server" ID="scrip" EnablePartialRendering="true"></asp:ScriptManager>
+          <!--      <asp:UpdateProgress runat="server" ID="upProgress" DynamicLayout="true"> 
+                    <ProgressTemplate>
+                        <div class="UpdateProgress">
+                            <div class="modalProgress">
+                                <div class="theProgress">
+                                    <asp:Image ID="imgWaitIcon" runat="server" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/cargar2.gif" />
+                                </div>
+                            </div>
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress> -->
                 <asp:Panel runat="server" CssClass="row panel-titulo">
                     Centro de atención a eventos </asp:Panel>
                 <asp:Panel runat="server" CssClass="row">
@@ -121,7 +138,7 @@
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                         </asp:LinkButton><asp:LinkButton ID="btnEditar" OnClick="btnEditar_Click" runat="server" CssClass="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                         </asp:LinkButton><asp:LinkButton ID="btnCancelar" OnClick="btnCancelar_Click" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-remove"></span>
@@ -144,6 +161,9 @@
                              Cerrar
                                                         </asp:LinkButton>
                                                     </asp:Panel>
+                                            <asp:HiddenField runat="server" ID="idEventoSeleccionado" />
+                                            <asp:HiddenField runat="server" ID="tabItemSeleccionado" Value="0" />
+                                            <asp:HiddenField runat="server" ID="accion" />
                                         </asp:Panel>
                                         </asp:Panel>
                                 </ContentTemplate>
@@ -307,7 +327,7 @@
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Panel runat="server" CssClass="input-group">
                                                                 <asp:Label runat="server" CssClass="input-group-addon" Text="Tipo">
-                                                                </asp:Label><asp:DropDownList runat="server" ID="cbCuantificable" CssClass="form-control">
+                                                                </asp:Label><asp:DropDownList runat="server" ID="cbCuantificable" CssClass="form-control" OnSelectedIndexChanged="cbCuantificable_SelectedIndexChanged" AutoPostBack="true">
                                                                     <asp:ListItem Text=""></asp:ListItem>
                                                                     <asp:ListItem Text="Cuantificable"></asp:ListItem>
                                                                     <asp:ListItem Text="No cuantificable"></asp:ListItem>
@@ -397,6 +417,8 @@
                                                                     <asp:AsyncPostBackTrigger ControlID="btnRecursos" EventName="Click" />
                                                                     <asp:AsyncPostBackTrigger ControlID="btnAñadir" EventName="Click" />
                                                                     <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
+                                                                    <asp:AsyncPostBackTrigger ControlID="txtFiltroReq" EventName="TextChanged" />
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbCuantificable" EventName="SelectedIndexChanged" />
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
                                                         </asp:Panel>
@@ -463,6 +485,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                <asp:Label runat="server" Text="Califique el servicio otorgado a traves de las siguientes preguntas"></asp:Label>
+                                                               <asp:HiddenField runat="server" ID="idCalidad" />
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" ScrollBars="Auto" Height="220" >
@@ -474,7 +497,7 @@
                                                                         <asp:BoundField HeaderText="Aspecto" DataField="txtPregunta"/>
                                                                         <asp:TemplateField HeaderText="Respuestas">
                                                                             <ItemTemplate>
-                                                                                <asp:DropDownList runat="server" ID="cbRespuesta" OnSelectedIndexChanged="cbRespuesta_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true">
+                                                                                <asp:DropDownList runat="server" ID="cbRespuesta"  OnSelectedIndexChanged="cbRespuesta_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true">
                                                                                     <asp:ListItem Text="1"></asp:ListItem>
                                                                                     <asp:ListItem Text="2"></asp:ListItem>
                                                                                     <asp:ListItem Text="3"></asp:ListItem>
@@ -638,7 +661,7 @@
                                         <asp:UpdatePanel runat="server" ID="UpGvEventosCerrados" UpdateMode="Conditional" >
                                             <ContentTemplate>
                                                 <asp:GridView runat="server" OnRowDataBound="gvEventos_Cerrados_RowDataBound" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cerrados" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true"  DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_Cerrados_SelectedIndexChanged">
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true"  DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" CssClass="DataGridFixedHeader" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="idEvento" />
@@ -669,6 +692,7 @@
                                                 <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click"/>  
                                                 <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click"/>    
                                                 <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click"/>  
+                                                <asp:AsyncPostBackTrigger ControlID="btnGrabarEncuesta" EventName="Click" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </asp:Panel>
