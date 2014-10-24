@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/paginaMaestra.Master" CodeBehind="principal.aspx.cs" Inherits="HelpDeskWeb.principal" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
+    <title>Centro de servicios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -28,7 +29,6 @@
     <div class="container">
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
-                <form runat="server" role="form">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
                     <div class="row" style="margin-top: 1%">
                         <div class="col-lg-7">
@@ -45,7 +45,7 @@
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <div class="well" style="background-color: #E6E6E6">
-                                            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="btn btn-danger btn-lg btn-block" role="button" Font-Size="18">
+                                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx" CssClass="btn btn-danger btn-lg btn-block" role="button" Font-Size="18">
                                             <div class="row">
                                                <div class="col-lg-9" >
                                                    Número de incidentes:
@@ -55,7 +55,7 @@
                                                 </div>
                                                 </div>
                                             </asp:HyperLink>
-                                            <asp:HyperLink ID="HyperLink2" runat="server" CssClass="btn btn-warning btn-lg btn-block" Font-Size="18">
+                                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx" CssClass="btn btn-warning btn-lg btn-block" Font-Size="18">
                                               <div class="row">
                                                <div class="col-lg-9" >
                                                    Número de eventos:
@@ -141,7 +141,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <asp:Panel runat="server" CssClass="medalla centrado-Horizontal" Height="120" Width="120">
-                                                    <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="5" Font-Size="40"></asp:Label>
+                                                    <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="S/C" Font-Size="40"></asp:Label>
                                                 </asp:Panel>                                                
                                             </div>
                                             <div class="col-lg-6">
@@ -154,7 +154,6 @@
 
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>

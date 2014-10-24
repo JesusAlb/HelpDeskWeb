@@ -109,11 +109,13 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="toolsASP">
+      <HintPath>..\toolsForASPControls\bin\Debug\toolsASP.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Catalogos\catSolcitudesRespaldo.css" />
-    <Content Include="Control\Equipos.aspx" />
-    <Content Include="Control\Usuarios.aspx" />
+    <Content Include="Administracion\Equipos.aspx" />
+    <Content Include="Administracion\Usuarios.aspx" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -298,18 +300,18 @@
     <Compile Include="Catalogos\catSolicitudes.aspx.designer.cs">
       <DependentUpon>catSolicitudes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Control\Equipos.aspx.cs">
+    <Compile Include="Administracion\Equipos.aspx.cs">
       <DependentUpon>Equipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Equipos.aspx.designer.cs">
+    <Compile Include="Administracion\Equipos.aspx.designer.cs">
       <DependentUpon>Equipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Control\Usuarios.aspx.cs">
+    <Compile Include="Administracion\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control\Usuarios.aspx.designer.cs">
+    <Compile Include="Administracion\Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Catalogos\catUsuarios.aspx.cs">
@@ -506,6 +508,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="logout.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Compile Include="Solicitudes\Eventos.aspx.cs">
       <DependentUpon>Eventos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

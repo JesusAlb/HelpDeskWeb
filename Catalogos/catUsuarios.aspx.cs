@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using toolsASP;
 
 namespace HelpDeskWeb.Catalogos
 {
@@ -20,312 +21,265 @@ namespace HelpDeskWeb.Catalogos
         private hdk_ControlDepartamento controlDepto;
         private hdk_ControlArea controlArea;
         private hdk_ControlPuesto controlPuesto;
-        private int tabItemIndex;
-        private string[] datosGrid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["DatosUsuario"] == null)
+            {
+                Response.Redirect("../Index.aspx");
+            }
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlCoordinacion = new hdk_ControlCoordinacion(Control);
             controlDepto = new hdk_ControlDepartamento(Control);
             controlArea = new hdk_ControlArea(Control);
             controlPuesto = new hdk_ControlPuesto(Control);
-            
-            if (IsPostBack)
+
+            if (!IsPostBack)
             {
-                if (gvUsuarios.DataKeyNames[0].Equals("idCoordinacion"))
-                {
-                    tabItemIndex = 0;
-                }
-                else if (gvUsuarios.DataKeyNames[0].Equals("idDepto"))
-                {
-                    tabItemIndex = 1;
-                }
-                else if (gvUsuarios.DataKeyNames[0].Equals("idArea"))
-                {
-                    tabItemIndex = 2;
-                }
-                else if (gvUsuarios.DataKeyNames[0].Equals("idPuesto"))
-                {
-                    tabItemIndex = 3;
-                }
+                this.cargarTablaArea();
+                this.cargarTablaCoordinacion();
+                this.cargarTablaDeptos();
+                this.cargarTablaPuesto();
+            }
+        }
+
+       protected void cargarTablaDeptos()
+        {
+            this.gvDeptos.DataSource = controlDepto.cargarTabla(txtFiltroDepto.Text, cbFiltroCoord.SelectedItem.Text);
+            this.gvDeptos.DataBind();
+        }
+
+        protected void cargarTablaCoordinacion()
+        {
+            this.cargarCombosCoordinacion();
+            this.gvCoordinaciones.DataSource = controlCoordinacion.cargarTabla(txtFiltroCoord.Text);
+            this.gvCoordinaciones.DataBind();
+        }
+
+        protected void cargarCombosCoordinacion()
+        {
+            this.cbFiltroCoord.DataSource = controlDepto.cargarComboCord(true);
+            this.cbCoordinaciones.DataSource = controlDepto.cargarComboCord(false);
+            this.cbCoordinaciones.DataBind();
+            this.cbFiltroCoord.DataBind();
+        }
+
+        protected void cargarTablaArea()
+        {
+            this.gvAreas.DataSource = controlArea.cargarTabla(txtFiltroArea.Text);
+            this.gvAreas.DataBind();
+        }
+
+        protected void cargarTablaPuesto()
+        {
+            this.gvPuestos.DataSource = controlPuesto.cargarTabla(txtFiltroPuesto.Text);
+            this.gvPuestos.DataBind();
+        }
+
+        protected void configurarModal(string titulo, string nomRegistro, bool panelVisible)
+        {
+            lbelModal.Text = titulo;
+            txtNombre.Text = nomRegistro;
+            panelCoordinaciones.Visible = panelVisible;  
+        }
+
+        protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+           forControls.crearEstiloSeleccionable(sender, e, this.Page);
+        }
+
+        protected void btnGrabar_Command(object sender, CommandEventArgs e)
+        {
+             string mensaje = null;
+
+             switch(e.CommandName)
+             {
+                 case "insertar":
+                     if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
+                         mensaje = "Se grabó el registro satisfactoriamente";
+                     else
+                         ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
+                     break;
+
+                 case "actualizar":
+                     if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
+                         mensaje = "Se actualizó el registro satiscartoriamente";
+                     else
+                         ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
+                     break;
+             }
+
+             if (mensaje != null)
+             {
+                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "quitarmodal", "$('#ModalNuevo').modal('hide');", true);
+                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Correcto', '" + mensaje + "', 'onok');", true);
+             }
+
+        }
+
+        protected bool insertar_CommandArgument(string argumento)
+        {
+            switch (argumento)
+            {
+                case "coordinacion":
+                    if (controlCoordinacion.insertar(txtNombre.Text)){
+                        this.cargarTablaCoordinacion();
+                        return true;
+                    }                        
+                    else
+                        return false;
+
+                case "depto":
+                    if (controlDepto.insertar(txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue))){
+                        this.cargarTablaDeptos();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                case "area":
+                    if (controlArea.insertar(txtNombre.Text))
+                    {
+                        this.cargarTablaArea();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                case "puesto":
+                    if (controlPuesto.insertar(txtNombre.Text))
+                    {
+                        this.cargarTablaPuesto();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected bool actualizar_CommandArgument(string argumento)
+        {
+            switch (argumento)
+            {
+                case "coordinacion":
+                    if (controlCoordinacion.modificar(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value), txtNombre.Text))
+                    {
+                        this.cargarTablaCoordinacion();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                case "depto":
+                    if (controlDepto.modificar(Convert.ToInt32(gvDeptos.SelectedDataKey.Value), txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
+                    {
+                        this.cargarTablaDeptos();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                case "area":
+                    if (controlArea.modificar(Convert.ToInt32(gvAreas.SelectedDataKey.Value), txtNombre.Text))
+                    {
+                        this.cargarTablaArea();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                case "puesto":
+                    if (controlPuesto.modificar(Convert.ToInt32(gvPuestos.SelectedDataKey.Value), txtNombre.Text))
+                    {
+                        this.cargarTablaPuesto();
+                        return true;
+                    }
+                    else
+                        return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected void btnEditar_Command(object sender, CommandEventArgs e)
+        {
+            bool seleccionado = false;
+
+            switch (e.CommandName)
+            {
+                case "abrirEditarCoord":
+                    if (gvCoordinaciones.SelectedIndex != -1)
+                    {
+                        tblcoordinacion coordSeleccionada = controlCoordinacion.obtenerCoordinacion(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value));
+                        this.configurarModal("Editar coordinaciones", coordSeleccionada.nomCoordinacion, false);
+                        seleccionado = true;
+                    }
+                    break;
+
+                case "abrirEditarDepto":
+                    if (gvDeptos.SelectedIndex != -1)
+                    {
+                        tbldepartamento deptoSeleccionado = controlDepto.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
+                        this.cbCoordinaciones.SelectedValue = deptoSeleccionado.coordinacion.ToString();
+                        this.configurarModal("Editar departamentos", deptoSeleccionado.nomDepto, true);
+                        seleccionado = true;
+                    }
+                    break;
+
+                case "abrirEditarArea":
+                    if (gvAreas.SelectedIndex != -1)
+                    {
+                        tblarea areaSeleccionada = this.controlArea.obtenerArea(Convert.ToInt32(gvAreas.SelectedDataKey.Value));
+                        this.configurarModal("Editar áreas", areaSeleccionada.nomArea, false);
+                        seleccionado = true;
+                    }
+                    break;
+
+                case "abrirEditarPuesto":
+                    if (gvPuestos.SelectedIndex != -1)
+                    {
+                        tblpuesto puestoSeleccionado = this.controlPuesto.obtenerPuesto(Convert.ToInt32(gvPuestos.SelectedDataKey.Value));
+                        this.configurarModal("Editar puestos", puestoSeleccionado.nomPuesto, false);
+                        seleccionado = true;
+                    }
+                    break;
+            }
+            if (seleccionado)
+            {
+                btnGrabar.CommandName = "actualizar";
+                btnGrabar.CommandArgument = e.CommandArgument.ToString();
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
             }
             else
-            {
-                cargarCombos();
-                cargarTablas();
-            }
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "insertarElemento", "alertify.alert('Correcto', 'Seleccione el elemento a modificar', 'onok');", true);
             
         }
 
-        protected void datosParaGrid()
+        protected void btnNuevo_Command(object sender, CommandEventArgs e)
         {
-            switch(tabItemIndex){
-                case 0:{
-                   datosGrid = new string[] {"Coordinaciones", "nomCoordinacion", "idCoordinacion"};
+            switch (e.CommandName)
+            {
+                case "abrirNuevaCoord":
+                    this.configurarModal("Alta de coordinaciones", "", false);
                     break;
-                }
-                case 1:{
-                    datosGrid = new string[] {"Departamentos", "nomDepto", "idDepto" };
+                case "abrirNuevoDepto":
+                    this.cbCoordinaciones.SelectedIndex = -1;
+                    this.configurarModal("Alta de departamentos", "", true);
                     break;
-                }
-                case 2:{
-                    datosGrid = new string[] { "Areas", "nomArea", "idArea" };
+                case "abrirNuevaArea":
+                    this.configurarModal("Alta de areas", "", false);
                     break;
-                } 
-                case 3:{
-                    datosGrid = new string[] { "Puestos", "nomPuesto", "idPuesto" };
+                case "abrirNuevoPuesto": 
+                    this.configurarModal("Alta de puestos", "", false);
                     break;
-                }
-            }           
-        }
-
-        protected void cargarCombos()
-        {
-            cbCoordinaciones.DataSource = controlDepto.cargarComboCord(false);
-            cbCoordinaciones.DataBind();
-            listCoords.DataSource = controlDepto.cargarComboCord(true);
-            listCoords.DataBind();
-        }
-
-        protected void cargarTablas()
-        {
-            datosParaGrid();
-            BoundField bf = new BoundField();
-            bf.HeaderText = datosGrid[0];
-            bf.DataField = datosGrid[1];
-            gvUsuarios.Columns.Add(bf);
-            gvUsuarios.Columns.RemoveAt(0);
-            string[] keys = { datosGrid[2] };
-            gvUsuarios.DataKeyNames = keys;
-            if (tabItemIndex == 1)
-            {
-                panelExtraDatos.Visible = filtroExtra.Visible = true;
-                gvUsuarios.DataSource = controlDepto.cargarTabla(txtFiltroUs.Text, listCoords.Text);
             }
-            else
-            {
-                panelExtraDatos.Visible = filtroExtra.Visible = false;
-                if (tabItemIndex == 0)
-                {
-                    gvUsuarios.DataSource = controlCoordinacion.cargarTabla(txtFiltroUs.Text);
-                    
-                }
-                else if (tabItemIndex == 2)
-                {
-                    gvUsuarios.DataSource = controlArea.cargarTabla(txtFiltroUs.Text);
-                    cargarCombos();
-                }
-                else if(tabItemIndex == 3){
-                    gvUsuarios.DataSource = controlPuesto.cargarTabla(txtFiltroUs.Text);
-                }
-            }
-            gvUsuarios.DataBind();
-        }
-
-        protected void btnCoordinaciones_Click(object sender, EventArgs e)
-        {
-            btnCoordinaciones.CssClass = "btn btn-primary active";
-            btnDepartamentos.CssClass = "btn btn-default";
-            btnArea.CssClass = "btn btn-default";
-            btnPuestos.CssClass = "btn btn-default";
-            lbelAccion.Text = "Alta de coordinaciones";
-            tabItemIndex = 0;
-            this.cargarTablas();
-        }
-
-        protected void btnDepartamentos_Click(object sender, EventArgs e)
-        {
-            btnCoordinaciones.CssClass = "btn btn-default";
-            btnDepartamentos.CssClass = "btn btn-primary active";
-            btnArea.CssClass = "btn btn-default";
-            btnPuestos.CssClass = "btn btn-default";
-            lbelAccion.Text = "Alta de departamentos";
-            tabItemIndex = 1;
-            this.cargarTablas();
-        }
-
-        protected void btnPuestos_Click(object sender, EventArgs e)
-        {
-            btnCoordinaciones.CssClass = "btn btn-default";
-            btnDepartamentos.CssClass = "btn btn-default";
-            btnArea.CssClass = "btn btn-default";
-            btnPuestos.CssClass = "btn btn-primary active";
-            lbelAccion.Text = "Alta de puestos";
-            tabItemIndex = 3;
-            this.cargarTablas();
-        }
-
-        protected void filtrarDatos(object sender, EventArgs e)
-        {
-            this.cargarTablas();
-        }
-
-        protected void btnNuevo_Click(object sender, EventArgs e)
-        {
-            txtNomUs.Text = "";
-            btnGrabarUs.Text = "Grabar";
-            gvUsuarios.SelectedIndex = -1;
-            if (tabItemIndex == 0)
-            {
-                lbelAccion.Text = "Alta de coordinaciones";
-            }
-            else if (tabItemIndex == 1)
-            {
-                lbelAccion.Text = "Alta de departamentos";
-            }
-            else if (tabItemIndex == 2)
-            {
-                lbelAccion.Text = "Alta de áreas";
-            }
-            else if (tabItemIndex == 3)
-            {
-                lbelAccion.Text = "Alta de puestos";
-            }
-        }
-
-        protected void gvUsuarios_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            hdk_utilerias herramienta = new hdk_utilerias();
-            herramienta.setRowCreated(sender, e);
-
-        }
-
-        protected void gvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                btnGrabarUs.Text = "Modificar";
-                int elementoSolicitud = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString());
-
-                if (tabItemIndex == 0)
-                {
-                    tblcoordinacion coordinacion = controlCoordinacion.obtenerCoordinacion(elementoSolicitud);
-                    txtNomUs.Text = coordinacion.nomCoordinacion;
-                    lbelAccion.Text = "Modificación de coordinaciones";
-                }
-                else if (tabItemIndex == 1)
-                {
-                    tbldepartamento depto = controlDepto.obtenerDepto(elementoSolicitud);
-                    txtNomUs.Text = depto.nomDepto;
-                    cbCoordinaciones.SelectedValue = depto.coordinacion.ToString();
-                    lbelAccion.Text = "Modificación de departamentos";
-                }
-                else if (tabItemIndex == 2)
-                {
-                    tblarea area = controlArea.obtenerArea(elementoSolicitud);
-                    txtNomUs.Text = area.nomArea;
-                    lbelAccion.Text = "Modificación de áreas";
-                }
-                else if (tabItemIndex == 3)
-                {
-                    tblpuesto puesto = controlPuesto.obtenerPuesto(elementoSolicitud);
-                    txtNomUs.Text = puesto.nomPuesto;
-                    lbelAccion.Text = "Modificación de puestos";
-                }
-
-            }
-            catch
-            {
-
-            }
-            
-        }
-
-        protected void btnGrabarUs_Click(object sender, EventArgs e)
-        {
-            bool insert = false;
-            int idElemento = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value.ToString());
-
-            if (tabItemIndex == 0)
-            {
-                if (btnGrabarUs.Text.Equals("Grabar"))
-                {
-                    if (controlCoordinacion.insertar(txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-                else
-                {
-                    if (controlCoordinacion.modificar(idElemento,txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-
-            }
-            else if (tabItemIndex == 1)
-            {
-                if (btnGrabarUs.Text.Equals("Grabar"))
-                {
-                    if (controlDepto.insertar(txtNomUs.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
-                    {
-                        insert = true;
-                    }
-                }
-                else
-                {
-                    if (controlDepto.modificar(idElemento, txtNomUs.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
-                    {
-                        insert = true;
-                    }
-                }
-            }
-            else if(tabItemIndex == 2)
-            {
-                if (btnGrabarUs.Text.Equals("Grabar"))
-                {
-                    if (controlArea.insertar(txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-                else
-                {
-                    if (controlArea.modificar(idElemento, txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-            }
-            else if(tabItemIndex == 3){
-
-                if (btnGrabarUs.Text.Equals("Grabar"))
-                {
-                    if (controlPuesto.insertar(txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-                else
-                {
-                    if (controlPuesto.modificar(idElemento, txtNomUs.Text))
-                    {
-                        insert = true;
-                    }
-                }
-            }
-            
-            if (insert)
-            {
-                txtNomUs.Text = "";
-                cbCoordinaciones.SelectedIndex = -1;
-                cargarTablas();
-                gvUsuarios.SelectedIndex = -1;
-            }
-        }
-
-        protected void btnArea_Click(object sender, EventArgs e)
-        {
-            btnCoordinaciones.CssClass = "btn btn-default";
-            btnDepartamentos.CssClass = "btn btn-default";
-            btnArea.CssClass = "btn btn-primary active";
-            btnPuestos.CssClass = "btn btn-default";
-            lbelAccion.Text = "Alta de Areas";
-            tabItemIndex = 2;
-            this.cargarTablas();
+            btnGrabar.CommandName = "insertar";
+            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
         }
     }
 }

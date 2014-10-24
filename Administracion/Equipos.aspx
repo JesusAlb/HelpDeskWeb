@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Equipos.aspx.cs" Inherits="HelpDeskWeb.Control.Equipos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Equipos.aspx.cs" Inherits="HelpDeskWeb.Administracion.Equipos" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,9 +43,9 @@
                         <asp:HyperLink runat="server" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Solicitudes</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Incidentes</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx">Incidentes</asp:HyperLink></li>
                             <li>
-                                <asp:HyperLink runat="server" href="#">Eventos</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx">Eventos</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li>
@@ -61,7 +61,7 @@
                                 <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
-                                <asp:HyperLink runat="server" href="#">Cerrar sesión</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li>

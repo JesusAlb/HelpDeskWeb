@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HelpDeskWeb.Control {
+namespace HelpDeskWeb.Administracion {
     
     
     public partial class Usuarios {

@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="../css/alertify.css"/>
     <link rel="stylesheet" href="../css/themes/default.css" />
     <link rel="stylesheet" href="../css/alertify.min.css" />
-    <style type="text/css">
-
-    </style>
-
     <!-- include boostrap theme  -->
     <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
     <!-- include alertify script -->
@@ -225,7 +221,9 @@
                                        <asp:Panel runat="server" CssClass="row">
                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                         <asp:Panel runat="server" CssClass="col-lg-6">
-                                            <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" placeholder="Buscar" />
+                                            <div class="form-group">
+                                                <asp:TextBox runat="server" ID="txtFiltroMarca" CssClass="form-control" placeholder="Buscar" />
+                                            </div>
                                         </asp:Panel>
                                            <asp:Panel runat="server" CssClass="col-lg-4">
                                                <asp:UpdatePanel runat="server" ID="updateAccionesMarcas" UpdateMode="Conditional">

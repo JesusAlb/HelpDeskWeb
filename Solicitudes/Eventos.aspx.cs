@@ -3,6 +3,7 @@ using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlBD.Solicitudes;
 using HelpDeskWeb.EntityFrameWork;
+using toolsASP;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using toolsASP;
+
+
 
 namespace HelpDeskWeb.Solicitudes
 {
@@ -165,7 +169,7 @@ namespace HelpDeskWeb.Solicitudes
             //  {
             this.cargarComboLugares();
             lbelTituloModal.Text = "Alta de eventos";
-            utilerias.limpiarControles(new Object[] { txtTituloNuevo, txtHoraInicial, txtHoraFinal, txtFecha, txtAcomodo, txtAsistencia, txtDescripcion, cbLugares, cbTipo });
+            forControls.limpiarPanel(this.panelModalNuevo.Controls);
             accion.Value = "nuevo";
             ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
             // }

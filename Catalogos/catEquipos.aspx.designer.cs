@@ -328,13 +328,13 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.Panel marcas;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control txtFiltroMarca.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroMarca;
         
         /// <summary>
         /// Control updateAccionesMarcas.

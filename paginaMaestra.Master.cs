@@ -31,5 +31,6 @@ namespace HelpDeskWeb
                 menuControl.Visible = false;
             }
         }
+
     }
 }

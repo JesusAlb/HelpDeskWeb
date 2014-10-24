@@ -64,9 +64,9 @@
                         <asp:HyperLink runat="server" ID="menuControl" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Control</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl="~/Control/Usuarios.aspx">Usuarios</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/Administracion/Usuarios.aspx">Usuarios</asp:HyperLink></li>
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl="~/Control/Equipos.aspx">Equipos</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li class="active dropdown">
@@ -90,7 +90,7 @@
                             <li>
                                 <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
-                                <asp:HyperLink runat="server" href="#">Cerrar sesión</asp:HyperLink></li></ul></li><li>
+                                <asp:HyperLink runat="server"  NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li></ul></li><li>
                         <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li></ul></div></div></asp:Panel>
     <asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">

@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HelpDeskWeb.Control
+namespace HelpDeskWeb.Administracion
 {
     public partial class Equipos : System.Web.UI.Page
     {

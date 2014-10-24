@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HelpDeskWeb.ControlBD.Acceso;
+using System.Web.Security;
 
 namespace HelpDeskWeb
 {
@@ -18,8 +19,7 @@ namespace HelpDeskWeb
         }
 
         protected void entrar_Click(object sender, EventArgs e)
-        {
-            
+        {         
             if (Control.encontrarUsuario(txtUsuario.Text, txtPassword.Text))
             {
                 Response.Redirect("principal.aspx");

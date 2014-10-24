@@ -100,6 +100,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void btnNuevoTipo_Click(object sender, EventArgs e)        
         {
+            accionesEquipos.Value = "0"; 
             txtTipoEquipo.Text = "";
             chTodos.Checked = false;
             chTodos_CheckedChanged(sender, e);
@@ -133,7 +134,7 @@ namespace HelpDeskWeb.Catalogos
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione un tipo de equipo', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione el tipo de equipo a editar', 'onok');", true);
             }
         }
 
@@ -157,7 +158,7 @@ namespace HelpDeskWeb.Catalogos
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione una marca', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione la marca a editar', 'onok');", true);
             }
         }
 
@@ -194,5 +195,44 @@ namespace HelpDeskWeb.Catalogos
                 ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Escriba el nombre de la marca', 'onok');", true);
             }
         }
+
+        /*Inicio de optimización
+
+        protected void configurarModal(string titulo, string nomElemento, bool panelVisible)
+        {
+            lbelModal.Text = titulo;
+            nomElemento.Text = nomElemento;
+            panelCarTipoEquipo.Visible = panelVisible;
+        }
+
+        protected void btnNuevo_Command(object sender, CommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "abrirNuevoTipoEquipo":
+
+                    break;
+
+                case "abrirNuevaMarca":
+                    break;
+
+            }
+        }
+
+        protected void btnEditar_Command(object sender, CommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "abrirNuevoTipoEquipo":
+
+                    break;
+
+                case "abrirNuevaMarca":
+                    break;
+
+            }
+        }
+
+        Fin de optimización  */
     }
 }
