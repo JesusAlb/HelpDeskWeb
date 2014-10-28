@@ -3,9 +3,6 @@
     <title>Centro de servicios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/styles2.css" rel="stylesheet" />
-    <link href="css/printstyles.css" rel="stylesheet" />
     <style type="text/css">
         .medalla {
             background: url(Imagenes/medallaN.png);
@@ -25,7 +22,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ContentPlaceHolderID="Main" Runat="Server">
+<asp:Content ContentPlaceHolderID="Contenido" Runat="Server">
     <div class="container">
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
@@ -141,7 +138,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <asp:Panel runat="server" CssClass="medalla centrado-Horizontal" Height="120" Width="120">
-                                                    <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="S/C" Font-Size="40"></asp:Label>
+                                                    <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="" Font-Size="40"></asp:Label>
                                                 </asp:Panel>                                                
                                             </div>
                                             <div class="col-lg-6">

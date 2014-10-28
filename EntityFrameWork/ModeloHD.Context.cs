@@ -45,7 +45,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tbltipoequipo> tbltipoequipoes { get; set; }
         public virtual DbSet<tbltipoincidencia> tbltipoincidencias { get; set; }
         public virtual DbSet<tblusuario> tblusuarios { get; set; }
-        public virtual DbSet<cantidadincidentespordepto> cantidadincidentespordeptoes { get; set; }
         public virtual DbSet<ViewDepartamento> ViewDepartamentos { get; set; }
         public virtual DbSet<ViewEventoConRequerimiento> ViewEventoConRequerimientos { get; set; }
         public virtual DbSet<ViewTipoIncidencia> ViewTipoIncidencias { get; set; }
@@ -59,24 +58,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<VistaIncidentesSinCerrar> VistaIncidentesSinCerrars { get; set; }
         public virtual DbSet<VistaPregunta> VistaPreguntas { get; set; }
     
-        public virtual ObjectResult<EventosXStatus_Result> EventosXStatus(Nullable<int> status)
-        {
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EventosXStatus_Result>("EventosXStatus", statusParameter);
-        }
-    
-        public virtual ObjectResult<IncidentesXStatus_Result> IncidentesXStatus(Nullable<int> status)
-        {
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IncidentesXStatus_Result>("IncidentesXStatus", statusParameter);
-        }
-    
         public virtual ObjectResult<ReqAsignados_Result> ReqAsignados(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -84,11 +65,6 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReqAsignados_Result>("ReqAsignados", idParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> UltimoEvento()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UltimoEvento");
         }
     
         public virtual int cerrarEvento(Nullable<int> idEv)
@@ -240,7 +216,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorTipo_Result>("numIncidentesPorTipo", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<numIncidentesPorUsuario_Result> numIncidentesPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual int numIncidentesPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -250,7 +226,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorUsuario_Result>("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
         }
     
         public virtual int promedioCalidadPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)

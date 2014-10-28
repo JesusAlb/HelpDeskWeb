@@ -166,24 +166,6 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.LinkButton btnGrabar;
         
         /// <summary>
-        /// Control tabItemSeleccionado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField tabItemSeleccionado;
-        
-        /// <summary>
-        /// Control acciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField acciones;
-        
-        /// <summary>
         /// Control myTabContent.
         /// </summary>
         /// <remarks>

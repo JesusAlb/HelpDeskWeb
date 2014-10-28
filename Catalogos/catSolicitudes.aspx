@@ -110,8 +110,8 @@
                                                                 <asp:Panel runat="server" ID="panelTipoRequerimiento" CssClass="form-group" Visible="false">
                                                                     <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>
                                                                     <asp:DropDownList runat="server" ID="cbTipoRequerimiento" CssClass="form-control">
-                                                                        <asp:ListItem Text="Cuantificable" Value="1"></asp:ListItem>
-                                                                        <asp:ListItem Text="No cuantificable" Value="0"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cuantificable" Value="true"></asp:ListItem>
+                                                                        <asp:ListItem Text="No cuantificable" Value="false"></asp:ListItem>
                                                                     </asp:DropDownList>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -119,10 +119,8 @@
                                                     </asp:Panel>
                                                     <asp:Panel runat="server" CssClass="modal-footer">
                                                         <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                                        <asp:LinkButton runat="server" ID="btnGrabar" OnClick="btnGrabar_Click" CssClass="btn btn-primary" Text="Grabar" />
+                                                        <asp:LinkButton runat="server" ID="btnGrabar" OnCommand="btnGrabar_Command" CommandName="insertar" CommandArgument="tipoIncidente" CssClass="btn btn-primary" Text="Grabar" />
                                                     </asp:Panel>
-                                                    <asp:HiddenField runat="Server" ID="tabItemSeleccionado" Value="0" />
-                                                    <asp:HiddenField runat="server" ID="acciones" Value="0" />
                                                 </ContentTemplate>
                                                 <Triggers>
                                                     <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
@@ -154,11 +152,11 @@
                                             <asp:UpdatePanel runat="server" ID="upAccionesTipos" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                        <asp:LinkButton ID="btnNuevoTipo" OnClick="btnNuevoTipo_Click" runat="server" CssClass="btn btn-primary">
+                                                        <asp:LinkButton ID="btnNuevoTipo" OnCommand="btnNuevo_Command" CommandName="abrirNuevoTipoIncidente" CommandArgument="tipoIncidente" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnEditarTipo" OnClick="btnEditarTipo_Click" runat="server" CssClass="btn btn-primary">
+                                                        <asp:LinkButton ID="btnEditarTipo" OnCommand="btnEditar_Command" CommandName="abrirEditarTipoIncidente" CommandArgument="tipoIncidente" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                         </asp:LinkButton>
@@ -215,11 +213,11 @@
                                                 <asp:UpdatePanel runat="server" ID="upAccionesLugares" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                            <asp:LinkButton ID="btnNuevoLugar" OnClick="btnNuevoLugar_Click" runat="server" CssClass="btn btn-primary">
+                                                            <asp:LinkButton ID="btnNuevoLugar" OnCommand="btnNuevo_Command" CommandName="abrirNuevoLugar" CommandArgument="lugar" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                             </asp:LinkButton>
-                                                            <asp:LinkButton ID="btnEditarLugar" OnClick="btnEditarLugar_Click" runat="server" CssClass="btn btn-primary">
+                                                            <asp:LinkButton ID="btnEditarLugar" OnCommand="btnEditar_Command" CommandName="abrirEditarLugar" CommandArgument="lugar" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                             </asp:LinkButton>
@@ -287,11 +285,11 @@
                                                 <asp:UpdatePanel runat="server" ID="upAccionesRequerimientos" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                            <asp:LinkButton ID="btnNuevoRequerimiento" OnClick="btnNuevoRequerimiento_Click" runat="server" CssClass="btn btn-primary">
+                                                            <asp:LinkButton ID="btnNuevoRequerimiento" OnCommand="btnNuevo_Command" CommandName="abrirNuevoRequerimiento" CommandArgument="requerimiento" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                             </asp:LinkButton>
-                                                            <asp:LinkButton ID="btnEditarRequerimiento" OnClick="btnEditarRequerimiento_Click" runat="server" CssClass="btn btn-primary">
+                                                            <asp:LinkButton ID="btnEditarRequerimiento" OnCommand="btnEditar_Command" CommandName="abrirEditarRequerimiento" CommandArgument="requerimiento" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                             </asp:LinkButton>
@@ -344,7 +342,6 @@
         <script type="text/javascript">
             function activaTab(index) {
                 $('#myTab li:eq(' + index + ') a').tab('show'); // Select third tab (0-indexed)   
-                __doPostBack('tabTipoIncidentes', index)
             }
     </script>
 </body>

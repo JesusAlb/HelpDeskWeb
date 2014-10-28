@@ -20,8 +20,8 @@ namespace HelpDeskWeb.EntityFrameWork
         }
     
         public int idRequerimientos { get; set; }
-        public string tipo { get; set; }
         public string nomRequerimiento { get; set; }
+        public bool cuantificable { get; set; }
     
         public virtual ICollection<tblrequerimientoaevento> tblrequerimientoaeventoes { get; set; }
     }

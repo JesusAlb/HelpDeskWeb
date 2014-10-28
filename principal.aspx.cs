@@ -78,7 +78,7 @@ namespace HelpDeskWeb
             }
             else
             {
-                lbelPromedioGeneral.Text = "Sin calificación";
+                lbelPromedioGeneral.Text = "S/C";
             }
         }
 

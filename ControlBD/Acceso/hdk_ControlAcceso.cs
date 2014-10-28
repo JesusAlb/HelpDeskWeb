@@ -51,7 +51,7 @@ namespace HelpDeskWeb.ControlBD.Acceso
             bool regreso = true;
             try
             {
-                var UsuarioItem = DB.ViewUsuarios.Where(x => x.nomUsuario == nombre && x.password == password).SingleOrDefault();
+                var UsuarioItem = DB.ViewUsuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
                 if (UsuarioItem != null)
                 {
                     

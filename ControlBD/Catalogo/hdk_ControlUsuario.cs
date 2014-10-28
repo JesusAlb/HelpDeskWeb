@@ -24,7 +24,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         public int obtenerIdUsuario_SinAsignar(){
             try
             {
-                return dbHelp.DB.tblusuarios.Where(a => a.nomUsuario.Equals("S/A")).SingleOrDefault().idUsuario;
+                return dbHelp.DB.tblusuarios.Where(a => a.username.Equals("S/A")).SingleOrDefault().idUsuario;
             }
             catch
             {
@@ -44,6 +44,19 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
+        public bool verificarSiExisteUsuario(string nomUsuario)
+        {
+            var item = dbHelp.DB.tblusuarios.SingleOrDefault(a => a.username.Equals(nomUsuario));
+            if (item != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public IList cargarComboUsuarios(int tip)
         {
             try{
@@ -53,7 +66,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 }
                 else if (tip == 1)
                 {
-                    return this.dbHelp.DB.ViewUsuarios.Where(a => a.tipoUsuario == 1 && !a.nomUsuario.Equals("S/A")).ToList();
+                    return this.dbHelp.DB.ViewUsuarios.Where(a => a.tipoUsuario == 1 && !a.username.Equals("S/A")).ToList();
                 }
                 else 
                 {
@@ -82,10 +95,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var query = dbHelp.DB.ViewUsuarios.Where(a => ((a.nomCompleto.Contains(filtro) || a.nomUsuario.Contains(filtro) ||
+                var query = dbHelp.DB.ViewUsuarios.Where(a => ((a.nomCompleto.Contains(filtro) || a.username.Contains(filtro) ||
                                                                a.nomCoordinacion.Contains(filtro) || a.nomDepto.Contains(filtro) ||
                                                                a.nomPuesto.Contains(filtro) || a.nomArea.Contains(filtro) || a.nomInstitucion.Contains(filtro)
-                                                               || a.tipoUsuarioString.Contains(filtro) || a.correo.Contains(filtro)) && !a.nomUsuario.Equals("S/A")));
+                                                               || a.tipoUsuarioString.Contains(filtro) || a.correo.Contains(filtro)) && !a.username.Equals("S/A")));
                 return query.ToList();
             }
             catch
@@ -113,63 +126,79 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int id, string us, string nom, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
+        public int modificar(int id, string us, string nom, string ape, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
         {
-            try
+            if (!this.verificarSiExisteUsuario(us))
             {
-                var ItemAmodificar = dbHelp.DB.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
-                if (ItemAmodificar != null)
+                try
                 {
-                    ItemAmodificar.nomUsuario = us;
-                    ItemAmodificar.nomCompleto = nom;
-                    ItemAmodificar.password = con;
-                    ItemAmodificar.tipoUsuario = niv;
-                    ItemAmodificar.exTel = ex;
-                    ItemAmodificar.correo = correo;
-                    ItemAmodificar.depto = dep;
-                    ItemAmodificar.area = are;
-                    ItemAmodificar.puesto = pues;
-                    ItemAmodificar.institucion = inst;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    var ItemAmodificar = dbHelp.DB.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
+                    if (ItemAmodificar != null)
+                    {
+                        ItemAmodificar.username = us;
+                        ItemAmodificar.nombre = nom;
+                        ItemAmodificar.apellidos = ape;
+                        ItemAmodificar.password = con;
+                        ItemAmodificar.tipoUsuario = niv;
+                        ItemAmodificar.exTel = ex;
+                        ItemAmodificar.correo = correo;
+                        ItemAmodificar.depto = dep;
+                        ItemAmodificar.area = are;
+                        ItemAmodificar.puesto = pues;
+                        ItemAmodificar.institucion = inst;
+                        dbHelp.DB.SaveChanges();
+                        dbHelp.actualizarModelo();
+                    }
+                    return 1;
                 }
-                return true;
+                catch
+                {
+                    return 0;
+                }
             }
-            catch
+            else
             {
-                return false;
+                return -1;
             }
         }
 
-        public bool insertar(string us, string nom, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
+        public int insertar(string us, string nom, string ape, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
         {
-            try
+            if (!this.verificarSiExisteUsuario(us))
             {
-                var user = new tblusuario
+                try
                 {
-                    nomUsuario = us,
-                    nomCompleto = nom,
-                    tipoUsuario = niv,
-                    depto = dep,
-                    exTel = ex,
-                    correo = email,
-                    password = con,
-                    area = are,
-                    puesto = pues,
-                    institucion = inst
-                };
-                if (user != null)
-                {
-                    dbHelp.DB.tblusuarios.Attach(user);
-                    dbHelp.DB.tblusuarios.Add(user);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    var user = new tblusuario
+                    {
+                        username = us,
+                        nombre = nom,
+                        apellidos = ape,
+                        tipoUsuario = niv,
+                        depto = dep,
+                        exTel = ex,
+                        correo = email,
+                        password = con,
+                        area = are,
+                        puesto = pues,
+                        institucion = inst
+                    };
+                    if (user != null)
+                    {
+                        dbHelp.DB.tblusuarios.Attach(user);
+                        dbHelp.DB.tblusuarios.Add(user);
+                        dbHelp.DB.SaveChanges();
+                        dbHelp.actualizarModelo();
+                    }
+                    return 1;
                 }
-                return true;
+                catch
+                {
+                    return 0;
+                }
             }
-            catch
+            else
             {
-                return false;
+                return -1;
             }
 
         }

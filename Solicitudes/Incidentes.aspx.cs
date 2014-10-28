@@ -24,7 +24,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void Page_Load(object sender, EventArgs e)
         {
             usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
-            lbelUsuario.Text = " " + usuarioConectado.nomUsuario;
+            lbelUsuario.Text = " " + usuarioConectado.username;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlIncidentes = new hdk_ControlIncidentes(Control);
             controlUsuario = new hdk_ControlUsuario(Control);

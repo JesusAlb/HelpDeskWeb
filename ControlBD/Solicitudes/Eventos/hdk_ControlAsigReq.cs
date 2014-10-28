@@ -21,7 +21,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             dbHelp = ca;
         }
 
-        public int getIdUltimoEvento(){
+ /*       public int getIdUltimoEvento(){
             try
             {
                 var registro = dbHelp.DB.UltimoEvento().SingleOrDefault();
@@ -31,7 +31,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             {              
                 return -1;
             }
-        }
+        }*/
 
           public IList cargarTablaReqAsig(int evento)
            {

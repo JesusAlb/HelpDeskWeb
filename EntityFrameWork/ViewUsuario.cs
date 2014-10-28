@@ -15,8 +15,8 @@ namespace HelpDeskWeb.EntityFrameWork
     public partial class ViewUsuario
     {
         public int idUsuario { get; set; }
+        public string username { get; set; }
         public string nomCompleto { get; set; }
-        public string nomUsuario { get; set; }
         public string password { get; set; }
         public string tipoUsuarioString { get; set; }
         public string exTel { get; set; }

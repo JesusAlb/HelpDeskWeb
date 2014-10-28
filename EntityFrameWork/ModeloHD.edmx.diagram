@@ -4,39 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="22e6350ca2e64b349e6bd01fd07e9f57" Name="Diagram1">
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblarea" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblcalidadservicio" Width="1.5" PointX="15.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblcoordinacion" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tbldepartamento" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblevento" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblincidente" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblinstitucion" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tbllugar" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblmarca" Width="1.5" PointX="11.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblpregunta" Width="1.5" PointX="15.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblpuesto" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblrequerimientoaevento" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblrequerimiento" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblresponsablequipo" Width="1.5" PointX="13.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblrespuesta" Width="1.5" PointX="18" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tbltipoequipo" Width="1.5" PointX="11.25" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tbltipoincidencia" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.tblusuario" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.cantidadincidentespordepto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.ViewDepartamento" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.ViewEventoConRequerimiento" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.ViewTipoIncidencia" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.ViewUsuario" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEncuesta" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEquipoReporte" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEquipos" Width="1.5" PointX="5.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEventosCerrado" Width="1.5" PointX="7.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEventosSinCerrar" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaIncidentesCerrado" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaIncidentesSinCerrar" Width="1.5" PointX="2.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskModel.VistaPregunta" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="370a942bf72d403c91fea678a607a7d3" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblarea" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblcalidadservicio" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblcoordinacion" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tbldepartamento" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblevento" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblincidente" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblinstitucion" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tbllugar" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblmarca" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblpregunta" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblpuesto" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblrequerimientoaevento" Width="1.5" PointX="12.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblrequerimiento" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblresponsablequipo" Width="1.5" PointX="7.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblrespuesta" Width="1.5" PointX="12.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tbltipoequipo" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tbltipoincidencia" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.tblusuario" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.ViewDepartamento" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.ViewEventoConRequerimiento" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.ViewTipoIncidencia" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.ViewUsuario" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEncuesta" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEquipoReporte" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEquipos" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEventosCerrado" Width="1.5" PointX="9.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaEventosSinCerrar" Width="1.5" PointX="11.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaIncidentesCerrado" Width="1.5" PointX="13.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaIncidentesSinCerrar" Width="1.5" PointX="15.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskModel.VistaPregunta" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="dbhelpdeskModel.area" ManuallyRouted="false" />
+        <AssociationConnector Association="dbhelpdeskModel.calificado" ManuallyRouted="false" />
         <AssociationConnector Association="dbhelpdeskModel.eventoa" ManuallyRouted="false" />
         <AssociationConnector Association="dbhelpdeskModel.incidente" ManuallyRouted="false" />
         <AssociationConnector Association="dbhelpdeskModel.servicioCalidad" ManuallyRouted="false" />

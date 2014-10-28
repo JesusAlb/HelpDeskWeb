@@ -47,6 +47,9 @@
     <Reference Include="AjaxMin">
       <HintPath>packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
+    <Reference Include="ASPtools">
+      <HintPath>..\toolsForASPControls\bin\Debug\ASPtools.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -65,6 +68,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAzure.Configuration">
       <HintPath>packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
@@ -109,9 +113,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="toolsASP">
-      <HintPath>..\toolsForASPControls\bin\Debug\toolsASP.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administracion\Equipos.aspx" />
@@ -278,6 +279,7 @@
     <Content Include="Imagenes\soporte.jpg" />
     <Content Include="Imagenes\Terminar2.png" />
     <Content Include="Imagenes\usuario.jpg" />
+    <Content Include="Reportes\reporte.aspx" />
     <Content Include="Solicitudes\Eventos.aspx" />
     <Content Include="Solicitudes\Incidentes.aspx" />
     <Content Include="Web.config">
@@ -339,15 +341,6 @@
     <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlEventos.cs" />
     <Compile Include="ControlBD\Solicitudes\hdk_ControlEncuestas.cs" />
     <Compile Include="ControlBD\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
-    <Compile Include="EntityFrameWork\cantidadincidentespordepto.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\EventosXStatus_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\IncidentesXStatus_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\ModeloHD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -370,9 +363,6 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\numIncidentesPorTipo_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
@@ -511,6 +501,13 @@
     <Content Include="logout.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Compile Include="Reportes\reporte.aspx.cs">
+      <DependentUpon>reporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\reporte.aspx.designer.cs">
+      <DependentUpon>reporte.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Solicitudes\Eventos.aspx.cs">
       <DependentUpon>Eventos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -534,6 +531,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

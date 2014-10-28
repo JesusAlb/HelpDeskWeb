@@ -16,6 +16,7 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblusuario()
         {
+            this.tblcalidadservicios = new HashSet<tblcalidadservicio>();
             this.tbleventoes = new HashSet<tblevento>();
             this.tbleventoes1 = new HashSet<tblevento>();
             this.tbleventoes2 = new HashSet<tblevento>();
@@ -26,8 +27,8 @@ namespace HelpDeskWeb.EntityFrameWork
         }
     
         public int idUsuario { get; set; }
-        public string nomCompleto { get; set; }
-        public string nomUsuario { get; set; }
+        public string nombre { get; set; }
+        public string username { get; set; }
         public string password { get; set; }
         public int tipoUsuario { get; set; }
         public int depto { get; set; }
@@ -36,8 +37,10 @@ namespace HelpDeskWeb.EntityFrameWork
         public int puesto { get; set; }
         public string correo { get; set; }
         public int institucion { get; set; }
+        public string apellidos { get; set; }
     
         public virtual tblarea tblarea { get; set; }
+        public virtual ICollection<tblcalidadservicio> tblcalidadservicios { get; set; }
         public virtual tbldepartamento tbldepartamento { get; set; }
         public virtual ICollection<tblevento> tbleventoes { get; set; }
         public virtual ICollection<tblevento> tbleventoes1 { get; set; }

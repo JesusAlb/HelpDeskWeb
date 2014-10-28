@@ -25,7 +25,9 @@ namespace HelpDeskWeb.EntityFrameWork
         public bool statusCal_Servicio { get; set; }
         public Nullable<int> evento { get; set; }
         public Nullable<double> promedioCalidad { get; set; }
+        public int usuario_calificado { get; set; }
     
+        public virtual tblusuario tblusuario { get; set; }
         public virtual tblevento tblevento { get; set; }
         public virtual tblincidente tblincidente { get; set; }
         public virtual ICollection<tblrespuesta> tblrespuestas { get; set; }

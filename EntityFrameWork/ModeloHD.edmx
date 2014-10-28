@@ -22,6 +22,7 @@
           <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
           <Property Name="evento" Type="int" />
           <Property Name="promedioCalidad" Type="float" />
+          <Property Name="usuario_calificado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblcoordinacion">
           <Key>
@@ -132,8 +133,8 @@
             <PropertyRef Name="idRequerimientos" />
           </Key>
           <Property Name="idRequerimientos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo" Type="varchar" MaxLength="25" />
           <Property Name="nomRequerimiento" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cuantificable" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblresponsablequipo">
           <Key>
@@ -192,8 +193,8 @@
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomUsuario" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="tipoUsuario" Type="int" Nullable="false" />
           <Property Name="depto" Type="int" Nullable="false" />
@@ -202,15 +203,7 @@
           <Property Name="puesto" Type="int" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="institucion" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.cantidadincidentespordepto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="cantidadincidentespordepto">
-          <Key>
-            <PropertyRef Name="Departamento" />
-          </Key>
-          <Property Name="Departamento" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="Cantidad" Type="int" />
+          <Property Name="apellidos" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewDepartamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -265,8 +258,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewUsuarios' no tiene defini
         <EntityType Name="ViewUsuarios">
           <Key>
             <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="username" />
             <PropertyRef Name="nomCompleto" />
-            <PropertyRef Name="nomUsuario" />
             <PropertyRef Name="password" />
             <PropertyRef Name="tipoUsuarioString" />
             <PropertyRef Name="nomDepto" />
@@ -277,8 +270,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewUsuarios' no tiene defini
             <PropertyRef Name="nomInstitucion" />
           </Key>
           <Property Name="idUsuario" Type="int" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomUsuario" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="tipoUsuarioString" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="exTel" Type="varchar" MaxLength="5" />
@@ -367,8 +360,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene defini
             <PropertyRef Name="nomTipoEquipo" />
             <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serieEquipo" />
-            <PropertyRef Name="memoriaRam" />
-            <PropertyRef Name="discoDuro" />
             <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serieMonitor" />
             <PropertyRef Name="ip" />
@@ -380,12 +371,12 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene defini
             <PropertyRef Name="procesador" />
           </Key>
           <Property Name="idResponEq" Type="int" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="nomTipoEquipo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="memoriaRam" Type="varchar" MaxLength="6" Nullable="false" />
-          <Property Name="discoDuro" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
+          <Property Name="discoDuro" Type="varchar" MaxLength="8" />
           <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
@@ -417,7 +408,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosCerrados' no tien
           </Key>
           <Property Name="idEvento" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="solicitante" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="responsable" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="apoyo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="fecha_Sol" Type="datetime" />
@@ -458,7 +449,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosSinCerrar' no tie
           </Key>
           <Property Name="idEvento" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="solicitante" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="responsable" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="apoyo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="fecha_Sol" Type="datetime" />
@@ -496,7 +487,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no t
           </Key>
           <Property Name="numIncidente" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="200" />
-          <Property Name="solicitante" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="prioridad" Type="varchar" MaxLength="6" />
           <Property Name="fecha_Sol" Type="datetime" />
           <Property Name="status" Type="int" Nullable="false" />
@@ -586,6 +577,18 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             </Principal>
             <Dependent Role="tblusuarios">
               <PropertyRef Name="area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="calificado">
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
+          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tblcalidadservicio">
+              <PropertyRef Name="usuario_calificado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -736,9 +739,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="pregunta">
-          <End Role="tblpregunta" Type="Self.tblpregunta" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="tblpregunta" Type="Self.tblpregunta" Multiplicity="1" />
           <End Role="tblrespuesta" Type="Self.tblrespuesta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblpregunta">
@@ -889,16 +890,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="EventosXStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="status" Type="int" Mode="In" />
-        </Function>
-        <Function Name="IncidentesXStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="status" Type="int" Mode="In" />
-        </Function>
         <Function Name="ReqAsignados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
-        <Function Name="UltimoEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="cerrarEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEv" Type="int" Mode="In" />
         </Function>
@@ -1001,12 +995,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <EntitySet Name="tbltipoequipo" EntityType="Self.tbltipoequipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbltipoincidencia" EntityType="Self.tbltipoincidencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblusuarios" EntityType="Self.tblusuarios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cantidadincidentespordepto" EntityType="Self.cantidadincidentespordepto" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [cantidadincidentespordepto].[Departamento] AS [Departamento], 
-    [cantidadincidentespordepto].[Cantidad] AS [Cantidad]
-    FROM [dbo].[cantidadincidentespordepto] AS [cantidadincidentespordepto]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="ViewDepartamentos" EntityType="Self.ViewDepartamentos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewDepartamentos].[idDepto] AS [idDepto], 
@@ -1042,8 +1030,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <EntitySet Name="ViewUsuarios" EntityType="Self.ViewUsuarios" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewUsuarios].[idUsuario] AS [idUsuario], 
+    [ViewUsuarios].[username] AS [username], 
     [ViewUsuarios].[nomCompleto] AS [nomCompleto], 
-    [ViewUsuarios].[nomUsuario] AS [nomUsuario], 
     [ViewUsuarios].[password] AS [password], 
     [ViewUsuarios].[tipoUsuarioString] AS [tipoUsuarioString], 
     [ViewUsuarios].[exTel] AS [exTel], 
@@ -1230,6 +1218,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <End Role="tblarea" EntitySet="tblarea" />
             <End Role="tblusuarios" EntitySet="tblusuarios" />
           </AssociationSet>
+          <AssociationSet Name="calificado" Association="Self.calificado">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
+          </AssociationSet>
           <AssociationSet Name="coordinacion" Association="Self.coordinacion">
             <End Role="tblcoordinacion" EntitySet="tblcoordinacion" />
             <End Role="tbldepartamentos" EntitySet="tbldepartamentos" />
@@ -1346,6 +1338,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <Property Name="statusCal_Servicio" Type="Boolean" Nullable="false" />
           <Property Name="evento" Type="Int32" />
           <Property Name="promedioCalidad" Type="Double" />
+          <Property Name="usuario_calificado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblusuario" Relationship="Self.calificado" FromRole="tblcalidadservicio" ToRole="tblusuarios" />
           <NavigationProperty Name="tblevento" Relationship="Self.eventoa" FromRole="tblcalidadservicio" ToRole="tblevento" />
           <NavigationProperty Name="tblincidente" Relationship="Self.incidente" FromRole="tblcalidadservicio" ToRole="tblincidente" />
           <NavigationProperty Name="tblrespuestas" Relationship="Self.servicioCalidad" FromRole="tblcalidadservicio" ToRole="tblrespuesta" />
@@ -1483,8 +1477,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="idRequerimientos" />
           </Key>
           <Property Name="idRequerimientos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="nomRequerimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cuantificable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblrequerimientoaeventoes" Relationship="Self.requerimiento" FromRole="tblrequerimientos" ToRole="tblrequerimientoaevento" />
         </EntityType>
         <EntityType Name="tblresponsablequipo">
@@ -1554,8 +1548,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nomCompleto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="depto" Type="Int32" Nullable="false" />
@@ -1564,7 +1558,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <Property Name="puesto" Type="Int32" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="institucion" Type="Int32" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblarea" Relationship="Self.area" FromRole="tblusuarios" ToRole="tblarea" />
+          <NavigationProperty Name="tblcalidadservicios" Relationship="Self.calificado" FromRole="tblusuarios" ToRole="tblcalidadservicio" />
           <NavigationProperty Name="tbldepartamento" Relationship="Self.depto" FromRole="tblusuarios" ToRole="tbldepartamentos" />
           <NavigationProperty Name="tbleventoes" Relationship="Self.apoyo" FromRole="tblusuarios" ToRole="tblevento" />
           <NavigationProperty Name="tbleventoes1" Relationship="Self.responsable" FromRole="tblusuarios" ToRole="tblevento" />
@@ -1575,13 +1571,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <NavigationProperty Name="tblinstitucion" Relationship="Self.Institucion" FromRole="tblusuarios" ToRole="tblinstitucion" />
           <NavigationProperty Name="tblpuesto" Relationship="Self.puesto" FromRole="tblusuarios" ToRole="tblpuesto" />
           <NavigationProperty Name="tblresponsablequipoes" Relationship="Self.respon" FromRole="tblusuarios" ToRole="tblresponsablequipo" />
-        </EntityType>
-        <EntityType Name="cantidadincidentespordepto">
-          <Key>
-            <PropertyRef Name="Departamento" />
-          </Key>
-          <Property Name="Departamento" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Cantidad" Type="Int32" />
         </EntityType>
         <EntityType Name="ViewDepartamento">
           <Key>
@@ -1628,8 +1617,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
         <EntityType Name="ViewUsuario">
           <Key>
             <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="username" />
             <PropertyRef Name="nomCompleto" />
-            <PropertyRef Name="nomUsuario" />
             <PropertyRef Name="password" />
             <PropertyRef Name="tipoUsuarioString" />
             <PropertyRef Name="nomDepto" />
@@ -1640,8 +1629,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="nomInstitucion" />
           </Key>
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="nomCompleto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipoUsuarioString" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="exTel" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
@@ -1724,8 +1713,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="nomTipoEquipo" />
             <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serieEquipo" />
-            <PropertyRef Name="memoriaRam" />
-            <PropertyRef Name="discoDuro" />
             <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serieMonitor" />
             <PropertyRef Name="ip" />
@@ -1737,12 +1724,12 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="procesador" />
           </Key>
           <Property Name="idResponEq" Type="Int32" Nullable="false" />
-          <Property Name="nomCompleto" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nomTipoEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nomMarcaEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="memoriaRam" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="discoDuro" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="discoDuro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="nomMarcaMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1772,7 +1759,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           </Key>
           <Property Name="idEvento" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="solicitante" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
@@ -1811,7 +1798,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           </Key>
           <Property Name="idEvento" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="solicitante" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
@@ -1847,7 +1834,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           </Key>
           <Property Name="numIncidente" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="solicitante" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" Nullable="false" />
@@ -1921,6 +1908,18 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             </Principal>
             <Dependent Role="tblusuarios">
               <PropertyRef Name="area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="calificado">
+          <End Role="tblusuarios" Type="Self.tblusuario" Multiplicity="1" />
+          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tblcalidadservicio">
+              <PropertyRef Name="usuario_calificado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2171,9 +2170,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="pregunta">
-          <End Role="tblpregunta" Type="Self.tblpregunta" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="tblpregunta" Type="Self.tblpregunta" Multiplicity="1" />
           <End Role="tblrespuesta" Type="Self.tblrespuesta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblpregunta">
@@ -2255,7 +2252,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <EntitySet Name="tbltipoequipoes" EntityType="Self.tbltipoequipo" />
           <EntitySet Name="tbltipoincidencias" EntityType="Self.tbltipoincidencia" />
           <EntitySet Name="tblusuarios" EntityType="Self.tblusuario" />
-          <EntitySet Name="cantidadincidentespordeptoes" EntityType="Self.cantidadincidentespordepto" />
           <EntitySet Name="ViewDepartamentos" EntityType="Self.ViewDepartamento" />
           <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimiento" />
           <EntitySet Name="ViewTipoIncidencias" EntityType="Self.ViewTipoIncidencia" />
@@ -2271,6 +2267,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <AssociationSet Name="area" Association="Self.area">
             <End Role="tblarea" EntitySet="tblareas" />
             <End Role="tblusuarios" EntitySet="tblusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="calificado" Association="Self.calificado">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicios" />
           </AssociationSet>
           <AssociationSet Name="eventoa" Association="Self.eventoa">
             <End Role="tblevento" EntitySet="tbleventoes" />
@@ -2368,16 +2368,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <End Role="tbltipoequipo" EntitySet="tbltipoequipoes" />
             <End Role="tblresponsablequipo" EntitySet="tblresponsablequipoes" />
           </AssociationSet>
-          <FunctionImport Name="EventosXStatus" ReturnType="Collection(dbhelpdeskModel.EventosXStatus_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="IncidentesXStatus" ReturnType="Collection(dbhelpdeskModel.IncidentesXStatus_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReqAsignados" ReturnType="Collection(dbhelpdeskModel.ReqAsignados_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UltimoEvento" ReturnType="Collection(Int32)" />
           <FunctionImport Name="cerrarEvento">
             <Parameter Name="idEv" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2422,7 +2415,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="numIncidentesPorUsuario" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorUsuario_Result)">
+          <FunctionImport Name="numIncidentesPorUsuario">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2462,41 +2455,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="EventosXStatus_Result">
-          <Property Type="Int32" Name="idEvento" Nullable="false" />
-          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="solicitante" Nullable="false" />
-          <Property Type="Int32" Name="responsable" Nullable="false" />
-          <Property Type="Int32" Name="apoyo" Nullable="false" />
-          <Property Type="DateTime" Name="fecha_Sol" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="lugar" Nullable="true" />
-          <Property Type="Int32" Name="asistencia_aprox" Nullable="true" />
-          <Property Type="String" Name="tipo_evento" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="acomodo" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="horaIn" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="horaFn" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="fecha_cierre" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="status" Nullable="false" />
-          <Property Type="DateTime" Name="FechaInicio" Nullable="true" Precision="23" />
-          <Property Type="String" Name="observaciones" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="titulo" Nullable="false" MaxLength="40" />
-        </ComplexType>
-        <ComplexType Name="IncidentesXStatus_Result">
-          <Property Type="Int32" Name="numIncidente" Nullable="false" />
-          <Property Type="Int32" Name="tipo" Nullable="false" />
-          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="solicitante" Nullable="false" />
-          <Property Type="String" Name="prioridad" Nullable="true" MaxLength="6" />
-          <Property Type="DateTime" Name="fecha_Sol" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="status" Nullable="false" />
-          <Property Type="DateTime" Name="horaIn" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="horaFn" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="fecha_Cierre" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="soporte" Nullable="false" />
-          <Property Type="String" Name="acciones" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="solucion" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="seguimiento" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="ReqAsignados_Result">
           <Property Type="String" Name="nomRequerimiento" Nullable="false" MaxLength="30" />
           <Property Type="Int32" Name="cantidad" Nullable="true" />
@@ -2513,14 +2471,11 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <Property Type="String" Name="Tipo" Nullable="false" MaxLength="25" />
           <Property Type="Int32" Name="Número" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="numIncidentesPorUsuario_Result">
-          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="25" />
-          <Property Type="Int32" Name="Número" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="requerimientosSinAsignar_Result">
           <Property Type="Int32" Name="idRequerimientos" Nullable="false" />
           <Property Type="String" Name="nomRequerimiento" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="tipo" Nullable="true" MaxLength="25" />
+          <Property Type="Boolean" Name="cuantificable" Nullable="false" />
+          <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
         </ComplexType>
         <ComplexType Name="topCincoRecursosMasUsados_Result">
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
@@ -2553,6 +2508,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
                 <ScalarProperty Name="statusCal_Servicio" ColumnName="statusCal_Servicio" />
                 <ScalarProperty Name="evento" ColumnName="evento" />
                 <ScalarProperty Name="promedioCalidad" ColumnName="promedioCalidad" />
+                <ScalarProperty Name="usuario_calificado" ColumnName="usuario_calificado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2673,8 +2629,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <EntityTypeMapping TypeName="dbhelpdeskModel.tblrequerimiento">
               <MappingFragment StoreEntitySet="tblrequerimientos">
                 <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+                <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2738,8 +2694,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <EntityTypeMapping TypeName="dbhelpdeskModel.tblusuario">
               <MappingFragment StoreEntitySet="tblusuarios">
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="nomCompleto" ColumnName="nomCompleto" />
-                <ScalarProperty Name="nomUsuario" ColumnName="nomUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
                 <ScalarProperty Name="depto" ColumnName="depto" />
@@ -2748,14 +2704,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
                 <ScalarProperty Name="puesto" ColumnName="puesto" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="institucion" ColumnName="institucion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cantidadincidentespordeptoes">
-            <EntityTypeMapping TypeName="dbhelpdeskModel.cantidadincidentespordepto">
-              <MappingFragment StoreEntitySet="cantidadincidentespordepto">
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2801,8 +2750,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <EntityTypeMapping TypeName="dbhelpdeskModel.ViewUsuario">
               <MappingFragment StoreEntitySet="ViewUsuarios">
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="nomCompleto" ColumnName="nomCompleto" />
-                <ScalarProperty Name="nomUsuario" ColumnName="nomUsuario" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="tipoUsuarioString" ColumnName="tipoUsuarioString" />
                 <ScalarProperty Name="exTel" ColumnName="exTel" />
@@ -2998,49 +2947,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="EventosXStatus" FunctionName="dbhelpdeskModel.Store.EventosXStatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbhelpdeskModel.EventosXStatus_Result">
-                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-                <ScalarProperty Name="responsable" ColumnName="responsable" />
-                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-                <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
-                <ScalarProperty Name="lugar" ColumnName="lugar" />
-                <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
-                <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
-                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-                <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-                <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-                <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="IncidentesXStatus" FunctionName="dbhelpdeskModel.Store.IncidentesXStatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbhelpdeskModel.IncidentesXStatus_Result">
-                <ScalarProperty Name="numIncidente" ColumnName="numIncidente" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-                <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-                <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-                <ScalarProperty Name="fecha_Cierre" ColumnName="fecha_Cierre" />
-                <ScalarProperty Name="soporte" ColumnName="soporte" />
-                <ScalarProperty Name="acciones" ColumnName="acciones" />
-                <ScalarProperty Name="solucion" ColumnName="solucion" />
-                <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReqAsignados" FunctionName="dbhelpdeskModel.Store.ReqAsignados">
             <ResultMapping>
               <ComplexTypeMapping TypeName="dbhelpdeskModel.ReqAsignados_Result">
@@ -3049,7 +2955,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UltimoEvento" FunctionName="dbhelpdeskModel.Store.UltimoEvento" />
           <FunctionImportMapping FunctionImportName="cerrarEvento" FunctionName="dbhelpdeskModel.Store.cerrarEvento" />
           <FunctionImportMapping FunctionImportName="cerrarIncidente" FunctionName="dbhelpdeskModel.Store.cerrarIncidente" />
           <FunctionImportMapping FunctionImportName="insertarEvento" FunctionName="dbhelpdeskModel.Store.insertarEvento" />
@@ -3080,14 +2985,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="numIncidentesPorUsuario" FunctionName="dbhelpdeskModel.Store.numIncidentesPorUsuario">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbhelpdeskModel.numIncidentesPorUsuario_Result">
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Número" ColumnName="Número" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="numIncidentesPorUsuario" FunctionName="dbhelpdeskModel.Store.numIncidentesPorUsuario" />
           <FunctionImportMapping FunctionImportName="promedioCalidadPorDepto" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorDepto" />
           <FunctionImportMapping FunctionImportName="promedioCalidadPorMesEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesEv" />
           <FunctionImportMapping FunctionImportName="promedioCalidadPorMesIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesIn" />
@@ -3099,6 +2997,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
               <ComplexTypeMapping TypeName="dbhelpdeskModel.requerimientosSinAsignar_Result">
                 <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
                 <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+                <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
               </ComplexTypeMapping>
             </ResultMapping>

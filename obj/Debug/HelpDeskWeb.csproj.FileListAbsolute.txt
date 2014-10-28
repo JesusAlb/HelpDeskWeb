@@ -82,5 +82,7 @@ C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Net.Http.Formatti
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.xml
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.WebHost.xml
 C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\HelpDeskWeb.csprojResolveAssemblyReference.cache
-C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\toolsASP.dll
-C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\toolsASP.pdb
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\RdlCompile.cache
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\obj\Debug\RdlCompile.compiled
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\ASPtools.dll
+C:\Users\Jesús Ocaña\Documents\GitHub\HelpDeskWeb\bin\ASPtools.pdb

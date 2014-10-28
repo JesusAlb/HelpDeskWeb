@@ -28,7 +28,7 @@ namespace HelpDeskWeb.Catalogos
             {
                 Response.Redirect("../Index.aspx");
             }
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
+            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlCoordinacion = new hdk_ControlCoordinacion(Control);
             controlDepto = new hdk_ControlDepartamento(Control);

@@ -15,7 +15,7 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
-            lbelUsuario.Text = usuarioConectado.nomUsuario;
+            lbelUsuario.Text = usuarioConectado.username;
             generarPrivilegios();
         }
 

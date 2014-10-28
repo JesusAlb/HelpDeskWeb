@@ -26,7 +26,7 @@ namespace HelpDeskWeb.Catalogos
             {
                 Response.Redirect("../index.aspx");
             }
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
+            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlTipoIncidencia = new hdk_ControlTipoIncidencia(Control);
             controlRequerimientos = new hdk_ControlRequerimientos(Control);
@@ -36,25 +36,7 @@ namespace HelpDeskWeb.Catalogos
                 this.cargarTablaTipoIncidente();
                 this.cargarTablaLugares();
                 this.cargarTablaRequerimientos();
-            }
-
-            if (Page.IsPostBack)
-            {
-                if (Request["__EVENTTARGET"] == "tabTipoIncidentes")
-                {
-                    this.limpiarSeleccion();
-                    tabItemSeleccionado.Value = this.Request.Params.Get("__EVENTARGUMENT");
-                    if (tabItemSeleccionado.Value.Equals("2"))
-                    {
-                        panelTipoRequerimiento.Visible = true;
-                    }
-                    else
-                    {
-                        panelTipoRequerimiento.Visible = false;
-                    }
-                }
-            }
-           
+            }         
         }
 
         protected void limpiarSeleccion()
@@ -88,7 +70,7 @@ namespace HelpDeskWeb.Catalogos
             utilerias.setRowCreated(sender, e);
         }
 
-        protected void btnGrabar_Click(object sender, EventArgs e)
+     /*   protected void btnGrabar_Click(object sender, EventArgs e)
         {
             bool registrosAlterados = false;
 
@@ -109,7 +91,7 @@ namespace HelpDeskWeb.Catalogos
                     }
                     else
                     {
-                        if (controlRequerimientos.insertar(txtNombre.Text, cbTipoRequerimiento.SelectedItem.Text))
+                        if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                             registrosAlterados = true;
                     }
                     if (!registrosAlterados)
@@ -236,9 +218,9 @@ namespace HelpDeskWeb.Catalogos
             {
                 ScriptManager.RegisterStartupScript(this.upAccionesRequerimientos, this.GetType(), "ReqNoSeleccionado", "alertify.alert('Error', 'Seleccione el recurso a editar', 'onok');", true);
             }
-        }
+        }*/
 
-        /*Desde aqui se optimizará el codigo
+        //Desde aqui se optimizará el codigo
 
         protected void configurarModal(string titulo, string nomElemento, bool panelVisible)
         {
@@ -283,7 +265,7 @@ namespace HelpDeskWeb.Catalogos
             switch (e.CommandName)
             {
                 case "abrirEditarTipoIncidente":
-                    if (gvTipoIncidentes.SelectedDataKey.Value != null)
+                    if (gvTipoIncidentes.SelectedIndex != -1)
                     {
                         tbltipoincidencia tipoInSeleccionado = controlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
                         this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nomTipoIncidente, false);
@@ -292,7 +274,7 @@ namespace HelpDeskWeb.Catalogos
                     break;
 
                 case "abrirEditarLugar":
-                    if (gvLugares.SelectedDataKey.Value != null)
+                    if (gvLugares.SelectedIndex != -1)
                     {
                         tbllugar lugarSeleccionado = controlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
                         this.configurarModal("Editar lugares", lugarSeleccionado.nomLugar, false);
@@ -301,10 +283,10 @@ namespace HelpDeskWeb.Catalogos
                     break;
 
                 case "abrirEditarRequerimiento":
-                    if (gvRequerimientos.SelectedDataKey.Value != null)
+                    if (gvRequerimientos.SelectedIndex != -1)
                     {
                         requerimientosSinAsignar_Result ReqSeleccionado = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
-                        this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento, false);
+                        this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento, true);
                         cbTipoRequerimiento.SelectedItem.Text = ReqSeleccionado.tipo;
                         seleccionado = true;
                     }
@@ -364,8 +346,8 @@ namespace HelpDeskWeb.Catalogos
                     else
                         return false;
 
-                case "requerimientos":
-                    if (controlRequerimientos.insertar(txtNombre.Text, cbTipoRequerimiento.Text))
+                case "requerimiento":
+                    if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;
@@ -400,8 +382,8 @@ namespace HelpDeskWeb.Catalogos
                     else
                         return false;
 
-                case "requerimientos":
-                    if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, cbTipoRequerimiento.Text))
+                case "requerimiento":
+                    if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;
@@ -414,7 +396,8 @@ namespace HelpDeskWeb.Catalogos
             }
         }
 
-        fin de optimización */
+
+       // fin de optimización 
 
     }
 }

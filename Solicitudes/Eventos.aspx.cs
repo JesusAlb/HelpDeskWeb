@@ -3,7 +3,6 @@ using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlBD.Solicitudes;
 using HelpDeskWeb.EntityFrameWork;
-using toolsASP;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +45,7 @@ namespace HelpDeskWeb.Solicitudes
             controlEncuestas = new hdk_ControlEncuestas(Control);
           /*  txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
             txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");*/
-            lbelUsuario.Text = usuarioConectado.nomUsuario;
+            lbelUsuario.Text = usuarioConectado.username;
             if (!IsPostBack)
             {
                 this.cargarTablasEventos();
@@ -169,7 +168,7 @@ namespace HelpDeskWeb.Solicitudes
             //  {
             this.cargarComboLugares();
             lbelTituloModal.Text = "Alta de eventos";
-            forControls.limpiarPanel(this.panelModalNuevo.Controls);
+            forControls.limpiarFormulario(this.panelModalNuevo.Controls);
             accion.Value = "nuevo";
             ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
             // }

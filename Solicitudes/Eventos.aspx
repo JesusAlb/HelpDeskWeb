@@ -739,9 +739,6 @@
             </form>
         </asp:Panel>
     </asp:Panel>
-    <asp:Panel CssClass="navbar navbar-fixed-bottom panel-inferior" runat="server">
-       
-    </asp:Panel>
     <script type="text/javascript">
         function activaTab(index) {
             $('#myTab li:eq(' + index + ') a').tab('show'); // Select third tab (0-indexed)   

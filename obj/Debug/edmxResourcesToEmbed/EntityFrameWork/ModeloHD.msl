@@ -18,6 +18,7 @@
           <ScalarProperty Name="statusCal_Servicio" ColumnName="statusCal_Servicio" />
           <ScalarProperty Name="evento" ColumnName="evento" />
           <ScalarProperty Name="promedioCalidad" ColumnName="promedioCalidad" />
+          <ScalarProperty Name="usuario_calificado" ColumnName="usuario_calificado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,8 +139,8 @@
       <EntityTypeMapping TypeName="dbhelpdeskModel.tblrequerimiento">
         <MappingFragment StoreEntitySet="tblrequerimientos">
           <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+          <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -203,8 +204,8 @@
       <EntityTypeMapping TypeName="dbhelpdeskModel.tblusuario">
         <MappingFragment StoreEntitySet="tblusuarios">
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="nomCompleto" ColumnName="nomCompleto" />
-          <ScalarProperty Name="nomUsuario" ColumnName="nomUsuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
           <ScalarProperty Name="depto" ColumnName="depto" />
@@ -213,14 +214,7 @@
           <ScalarProperty Name="puesto" ColumnName="puesto" />
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="institucion" ColumnName="institucion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="cantidadincidentespordeptoes">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.cantidadincidentespordepto">
-        <MappingFragment StoreEntitySet="cantidadincidentespordepto">
-          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -266,8 +260,8 @@
       <EntityTypeMapping TypeName="dbhelpdeskModel.ViewUsuario">
         <MappingFragment StoreEntitySet="ViewUsuarios">
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="nomCompleto" ColumnName="nomCompleto" />
-          <ScalarProperty Name="nomUsuario" ColumnName="nomUsuario" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="tipoUsuarioString" ColumnName="tipoUsuarioString" />
           <ScalarProperty Name="exTel" ColumnName="exTel" />
@@ -463,49 +457,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="EventosXStatus" FunctionName="dbhelpdeskModel.Store.EventosXStatus">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.EventosXStatus_Result">
-          <ScalarProperty Name="idEvento" ColumnName="idEvento" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-          <ScalarProperty Name="responsable" ColumnName="responsable" />
-          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-          <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
-          <ScalarProperty Name="lugar" ColumnName="lugar" />
-          <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
-          <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
-          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-          <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="IncidentesXStatus" FunctionName="dbhelpdeskModel.Store.IncidentesXStatus">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.IncidentesXStatus_Result">
-          <ScalarProperty Name="numIncidente" ColumnName="numIncidente" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-          <ScalarProperty Name="fecha_Sol" ColumnName="fecha_Sol" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-          <ScalarProperty Name="fecha_Cierre" ColumnName="fecha_Cierre" />
-          <ScalarProperty Name="soporte" ColumnName="soporte" />
-          <ScalarProperty Name="acciones" ColumnName="acciones" />
-          <ScalarProperty Name="solucion" ColumnName="solucion" />
-          <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ReqAsignados" FunctionName="dbhelpdeskModel.Store.ReqAsignados">
       <ResultMapping>
         <ComplexTypeMapping TypeName="dbhelpdeskModel.ReqAsignados_Result">
@@ -514,7 +465,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UltimoEvento" FunctionName="dbhelpdeskModel.Store.UltimoEvento" />
     <FunctionImportMapping FunctionImportName="cerrarEvento" FunctionName="dbhelpdeskModel.Store.cerrarEvento" />
     <FunctionImportMapping FunctionImportName="cerrarIncidente" FunctionName="dbhelpdeskModel.Store.cerrarIncidente" />
     <FunctionImportMapping FunctionImportName="insertarEvento" FunctionName="dbhelpdeskModel.Store.insertarEvento" />
@@ -545,14 +495,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="numIncidentesPorUsuario" FunctionName="dbhelpdeskModel.Store.numIncidentesPorUsuario">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.numIncidentesPorUsuario_Result">
-          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-          <ScalarProperty Name="Número" ColumnName="Número" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="numIncidentesPorUsuario" FunctionName="dbhelpdeskModel.Store.numIncidentesPorUsuario" />
     <FunctionImportMapping FunctionImportName="promedioCalidadPorDepto" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorDepto" />
     <FunctionImportMapping FunctionImportName="promedioCalidadPorMesEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesEv" />
     <FunctionImportMapping FunctionImportName="promedioCalidadPorMesIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesIn" />
@@ -564,6 +507,7 @@
         <ComplexTypeMapping TypeName="dbhelpdeskModel.requerimientosSinAsignar_Result">
           <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
           <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+          <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
         </ComplexTypeMapping>
       </ResultMapping>

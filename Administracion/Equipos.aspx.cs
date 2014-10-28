@@ -21,7 +21,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).nomUsuario;
+            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlEquipos = new hdk_ControlEquipos(Control);
             controlTEquipos = new hdk_ControlTipoEquipo(Control);

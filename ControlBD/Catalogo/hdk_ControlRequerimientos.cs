@@ -54,11 +54,11 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool insertar(string nombre, string rtipo)
+       public bool insertar(string nombre, bool rtipo)
        {
            try
            {
-               var cord = new tblrequerimiento { nomRequerimiento = nombre, tipo = rtipo };
+               var cord = new tblrequerimiento { nomRequerimiento = nombre, cuantificable = rtipo };
                if (cord != null)
                {
                    dbHelp.DB.tblrequerimientos.Attach(cord);
@@ -75,7 +75,7 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool modificar(int id, string nombre, string rtipo)
+       public bool modificar(int id, string nombre, bool rtipo)
        {
            try
            {
@@ -83,7 +83,7 @@ namespace HelpDeskWeb.ControlAltas
                if (ItemAmodificar != null)
                {
                    ItemAmodificar.nomRequerimiento = nombre;
-                   ItemAmodificar.tipo = rtipo;
+                   ItemAmodificar.cuantificable = rtipo;
                    dbHelp.DB.SaveChanges();
                    dbHelp.actualizarModelo();         
                }

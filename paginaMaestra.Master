@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <title>Centro de desarrollo</title>
+    <asp:ContentPlaceHolder ID="head" runat="server" ClientIDMode="static">
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -45,7 +46,7 @@
                         </ul>
                     </li>
                     <li runat="server" id="reporte">
-                        <asp:HyperLink runat="server" ID="menuReportes" href="#">Reportes</asp:HyperLink></li>
+                        <asp:HyperLink runat="server" ID="menuReportes" NavigateUrl="~/Reportes/reporte.aspx">Reportes</asp:HyperLink></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -66,7 +67,7 @@
             </div>
         </div>
     </asp:Panel>
-    <asp:ContentPlaceHolder ID="Main" runat="server" />
+    <asp:ContentPlaceHolder ID="Contenido" runat="server" ClientIDMode="Static" />
 </form>
 </body>
 
