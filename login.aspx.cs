@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace HelpDeskWeb
 {
-    public partial class index : System.Web.UI.Page
+    public partial class login : System.Web.UI.Page
     {
         hdk_ControlAcceso Control;
 

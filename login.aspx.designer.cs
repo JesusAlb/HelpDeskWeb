@@ -10,7 +10,7 @@
 namespace HelpDeskWeb {
     
     
-    public partial class index {
+    public partial class login {
         
         /// <summary>
         /// Control scriptM.

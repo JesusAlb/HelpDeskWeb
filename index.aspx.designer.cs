@@ -10,7 +10,7 @@
 namespace HelpDeskWeb {
     
     
-    public partial class index1 {
+    public partial class index {
         
         /// <summary>
         /// Control form1.
