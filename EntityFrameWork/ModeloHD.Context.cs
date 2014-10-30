@@ -57,6 +57,9 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<VistaIncidentesCerrado> VistaIncidentesCerrados { get; set; }
         public virtual DbSet<VistaIncidentesSinCerrar> VistaIncidentesSinCerrars { get; set; }
         public virtual DbSet<VistaPregunta> VistaPreguntas { get; set; }
+        public virtual DbSet<vistapromedioevento> vistapromedioeventos { get; set; }
+        public virtual DbSet<vistapromediogeneral> vistapromediogenerals { get; set; }
+        public virtual DbSet<vistapromedioincidente> vistapromedioincidentes { get; set; }
     
         public virtual ObjectResult<ReqAsignados_Result> ReqAsignados(Nullable<int> id)
         {

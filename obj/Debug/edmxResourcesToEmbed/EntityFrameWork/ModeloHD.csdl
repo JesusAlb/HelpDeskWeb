@@ -577,6 +577,30 @@
     <Property Name="statusPregunta" Type="Boolean" Nullable="false" />
     <Property Name="afinidad" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="vistapromedioevento">
+    <Key>
+      <PropertyRef Name="usuario" />
+    </Key>
+    <Property Name="promedioEventos" Type="Double" />
+    <Property Name="usuario" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vistapromediogeneral">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="promedioEventos" Type="Double" />
+    <Property Name="promedioIncidente" Type="Double" />
+    <Property Name="PromedioTotal" Type="Double" />
+    <Property Name="posicion" Type="Int64" />
+  </EntityType>
+  <EntityType Name="vistapromedioincidente">
+    <Key>
+      <PropertyRef Name="soporte" />
+    </Key>
+    <Property Name="soporte" Type="Int32" Nullable="false" />
+    <Property Name="promedioIncidente" Type="Double" />
+  </EntityType>
   <Association Name="area">
     <End Role="tblarea" Type="Self.tblarea" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -944,6 +968,9 @@
     <EntitySet Name="VistaIncidentesCerrados" EntityType="Self.VistaIncidentesCerrado" />
     <EntitySet Name="VistaIncidentesSinCerrars" EntityType="Self.VistaIncidentesSinCerrar" />
     <EntitySet Name="VistaPreguntas" EntityType="Self.VistaPregunta" />
+    <EntitySet Name="vistapromedioeventos" EntityType="Self.vistapromedioevento" />
+    <EntitySet Name="vistapromediogenerals" EntityType="Self.vistapromediogeneral" />
+    <EntitySet Name="vistapromedioincidentes" EntityType="Self.vistapromedioincidente" />
     <AssociationSet Name="area" Association="Self.area">
       <End Role="tblarea" EntitySet="tblareas" />
       <End Role="tblusuarios" EntitySet="tblusuarios" />

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="paginaMaestra.master.cs" Inherits="HelpDeskWeb.paginaMaestra" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="principalMaestra.Master.cs" Inherits="HelpDeskWeb.paginaMaestra" ClientIDMode="Static" %>
 
 <!DOCTYPE html>
 
@@ -67,7 +67,7 @@
             </div>
         </div>
     </asp:Panel>
-    <asp:ContentPlaceHolder ID="Contenido" runat="server" ClientIDMode="Static" />
+    <asp:ContentPlaceHolder ID="body" runat="server" ClientIDMode="Static" />
 </form>
 </body>
 

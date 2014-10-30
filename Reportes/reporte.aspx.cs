@@ -29,6 +29,7 @@ namespace HelpDeskWeb.Reportes
             ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.cargarTabla(""));
             reporte.LocalReport.DataSources.Add(datasource);
             reporte.LocalReport.Refresh();
+            datosBusqueda.CssClass = "panel-collapse collapse";
             panelReporte.Visible = true;
         }
 

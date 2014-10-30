@@ -128,8 +128,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 
         public int modificar(int id, string us, string nom, string ape, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
         {
-            if (!this.verificarSiExisteUsuario(us))
-            {
+
                 try
                 {
                     var ItemAmodificar = dbHelp.DB.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
@@ -156,11 +155,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     return 0;
                 }
             }
-            else
-            {
-                return -1;
-            }
-        }
+
 
         public int insertar(string us, string nom, string ape, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
         {

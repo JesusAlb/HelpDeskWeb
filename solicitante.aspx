@@ -1,29 +1,31 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/paginaMaestra.Master" CodeBehind="principal.aspx.cs" Inherits="HelpDeskWeb.principal" %>
-<asp:Content ContentPlaceHolderID="head" runat="server">
-    <title>Centro de servicios</title>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/principalMaestra.Master" CodeBehind="solicitante.aspx.cs" Inherits="HelpDeskWeb.solicitante" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="head">
+        <title>Centro de servicios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <style type="text/css">
-        .medalla {
-            background: url(Imagenes/medallaN.png);
+        .medalla{
+            background-repeat:no-repeat;
             background-size: 100% 100%;
-            background-repeat: no-repeat;
         }
-
         .centrado-Horizontal {
             margin-left: auto;
             margin-right: auto;
             display: table;
         }
-
         .centrado-vertical {
             display: table-cell;
             vertical-align: middle;
         }
     </style>
 </asp:Content>
-<asp:Content ContentPlaceHolderID="Contenido" Runat="Server">
-    <div class="container">
+
+
+
+
+<asp:Content runat="server" ContentPlaceHolderID="body">
+        <div class="container">
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
@@ -137,7 +139,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-lg-6">
-                                                <asp:Panel runat="server" CssClass="medalla centrado-Horizontal" Height="120" Width="120">
+                                                <asp:Panel ID="panelMedalla" runat="server" CssClass="centrado-Horizontal medalla" Height="120" Width="120" >
                                                     <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="" Font-Size="40"></asp:Label>
                                                 </asp:Panel>                                                
                                             </div>
@@ -155,6 +157,7 @@
         </div>
     </div>
     <script src="js/bootstrap.js"></script>
-        <script src="js/jquery-2.1.1.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 </asp:Content>

@@ -47,8 +47,7 @@ namespace HelpDeskWeb.ControlBD.Acceso
           set { Item = value; }
       }
 
-        public bool encontrarUsuario(String nombre, string password){
-            bool regreso = true;
+        public int encontrarUsuario(String nombre, string password){
             try
             {
                 var UsuarioItem = DB.ViewUsuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
@@ -57,18 +56,18 @@ namespace HelpDeskWeb.ControlBD.Acceso
                     
                     Session["DatosUsuario"] = UsuarioItem;
                     Session["Conexion"] = this;
+                    return UsuarioItem.tipoUsuario;
                 }
                 else
                 {               
-                    regreso = false;
+                    return -1;
                 }
             }
             catch 
            {             
-                regreso = false;
+                return -1;
            }
 
-          return regreso;
         }
 
     }

@@ -74,10 +74,10 @@
                                         <div class="col-lg-12">
                                             <div class="form-group" style="border-bottom:solid 1px #357ebd" >
                                                 <asp:LinkButton CssClass="btn btn-primary btn-lg btn-block" runat="server" data-toggle="collapse" href="#datosBusqueda" Text="Datos del reporte" />
-                                                <div id="datosBusqueda" class="panel-collapse collapse in active">
-                                                    <div class="panel-body">
-                                                        <div class="col-lg-2"></div>
-                                                        <div class="col-lg-8">
+                                                        <asp:Panel runat="server" ID="datosBusqueda" class="panel-collapse collapse in active">
+                                                            <div class="panel-body">
+                                                                <div class="col-lg-2"></div>
+                                                                <div class="col-lg-8">
                                                                     <div class="form-group">
                                                                         <h3 class="text-center">Busqueda avanzada</h3>
                                                                     </div>
@@ -163,24 +163,24 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                            <div class="form-group">
+                                                                    <div class="form-group">
                                                                         <div class="row">
                                                                             <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
                                                                             <div class="col-lg-5">
                                                                                 <asp:TextBox runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                                                             </div>
                                                                             <div class="col-lg-3">
-                                                                                <asp:LinkButton runat="server" CssClass="btn btn-block btn-primary" ID="btnGenerar" OnClick="btnGenerarReporte_Click">
+                                                                                <asp:Linkbutton runat="server"  CssClass="btn btn-block btn-primary" ID="btnGenerar" OnClick="btnGenerarReporte_Click">
                                                                 <span class="glyphicon glyphicon-search"></span>
                                                                  Generar                                   
-                                                                                </asp:LinkButton>
+                                                                                </asp:Linkbutton>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                        </div>
-                                                        <div class="col-lg-2"></div>
-                                                    </div>
-                                                </div>
+                                                                </div>
+                                                                <div class="col-lg-2"></div>
+                                                            </div>
+                                                        </asp:Panel>                                           
                                             </div>
                                             <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default" Visible="false">
                                                 <div class="panel-heading text-center">

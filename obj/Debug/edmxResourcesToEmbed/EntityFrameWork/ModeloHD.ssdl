@@ -549,6 +549,36 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
     <Property Name="statusPregunta" Type="bit" Nullable="false" />
     <Property Name="afinidad" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioeventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vistapromedioeventos">
+    <Key>
+      <PropertyRef Name="usuario" />
+    </Key>
+    <Property Name="promedioEventos" Type="float" />
+    <Property Name="usuario" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromediogeneral' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vistapromediogeneral">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="posicion" Type="bigint" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="promedioEventos" Type="float" />
+    <Property Name="promedioIncidente" Type="float" />
+    <Property Name="PromedioTotal" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vistapromedioincidentes">
+    <Key>
+      <PropertyRef Name="soporte" />
+    </Key>
+    <Property Name="soporte" Type="int" Nullable="false" />
+    <Property Name="promedioIncidente" Type="float" />
+  </EntityType>
   <Association Name="apoyo">
     <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
     <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
@@ -1204,6 +1234,27 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
     [VistaPregunta].[statusPregunta] AS [statusPregunta], 
     [VistaPregunta].[afinidad] AS [afinidad]
     FROM [dbo].[VistaPregunta] AS [VistaPregunta]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vistapromedioeventos" EntityType="Self.vistapromedioeventos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vistapromedioeventos].[promedioEventos] AS [promedioEventos], 
+    [vistapromedioeventos].[usuario] AS [usuario]
+    FROM [dbo].[vistapromedioeventos] AS [vistapromedioeventos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vistapromediogeneral" EntityType="Self.vistapromediogeneral" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vistapromediogeneral].[posicion] AS [posicion], 
+    [vistapromediogeneral].[idUsuario] AS [idUsuario], 
+    [vistapromediogeneral].[promedioEventos] AS [promedioEventos], 
+    [vistapromediogeneral].[promedioIncidente] AS [promedioIncidente], 
+    [vistapromediogeneral].[PromedioTotal] AS [PromedioTotal]
+    FROM [dbo].[vistapromediogeneral] AS [vistapromediogeneral]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vistapromedioincidentes" EntityType="Self.vistapromedioincidentes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vistapromedioincidentes].[soporte] AS [soporte], 
+    [vistapromedioincidentes].[promedioIncidente] AS [promedioIncidente]
+    FROM [dbo].[vistapromedioincidentes] AS [vistapromedioincidentes]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="apoyo" Association="Self.apoyo">
       <End Role="tblusuarios" EntitySet="tblusuarios" />

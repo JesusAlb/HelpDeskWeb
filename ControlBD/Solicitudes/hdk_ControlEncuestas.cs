@@ -112,28 +112,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public double? obtenterPromedioCalidadEnIncidentes(int idUsuario)
+        public vistapromediogeneral obtenerPromedioCalidad(int us)
         {
             try
             {
-                double sumaPromedio = dbHelp.DB.tblcalidadservicios.Where(a => a.incidente == a.tblincidente.numIncidente && a.statusCal_Servicio == true && a.tblincidente.soporte == idUsuario).Sum(a => a.promedioCalidad).Value;
-                int contador = dbHelp.DB.tblcalidadservicios.Where(a => a.incidente == a.tblincidente.numIncidente && a.statusCal_Servicio == true && a.tblincidente.soporte == idUsuario).Count();
-                return Math.Round((sumaPromedio / contador),2);
-
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public double? obtenterPromedioCalidadEnEventos(int idUsuario)
-        {
-            try
-            {
-                double sumaPromedio = dbHelp.DB.tblcalidadservicios.Where(a => a.evento == a.tblevento.idEvento && a.statusCal_Servicio == true && a.tblevento.responsable == idUsuario).Sum(a => a.promedioCalidad).Value;
-                int contador = dbHelp.DB.tblcalidadservicios.Where(a => a.evento == a.tblevento.idEvento && a.statusCal_Servicio == true && a.tblevento.responsable == idUsuario).Count();
-                return Math.Round((sumaPromedio / contador), 2);
+                return dbHelp.DB.vistapromediogenerals.SingleOrDefault(a => a.idUsuario == us);
             }
             catch
             {

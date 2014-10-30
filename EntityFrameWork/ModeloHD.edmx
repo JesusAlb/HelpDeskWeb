@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="idArea" />
@@ -553,6 +553,36 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <Property Name="txtPregunta" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="statusPregunta" Type="bit" Nullable="false" />
           <Property Name="afinidad" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioeventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vistapromedioeventos">
+          <Key>
+            <PropertyRef Name="usuario" />
+          </Key>
+          <Property Name="promedioEventos" Type="float" />
+          <Property Name="usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromediogeneral' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vistapromediogeneral">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="posicion" Type="bigint" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="promedioEventos" Type="float" />
+          <Property Name="promedioIncidente" Type="float" />
+          <Property Name="PromedioTotal" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vistapromedioincidentes">
+          <Key>
+            <PropertyRef Name="soporte" />
+          </Key>
+          <Property Name="soporte" Type="int" Nullable="false" />
+          <Property Name="promedioIncidente" Type="float" />
         </EntityType>
         <Association Name="apoyo">
           <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
@@ -1210,6 +1240,27 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
     [VistaPregunta].[afinidad] AS [afinidad]
     FROM [dbo].[VistaPregunta] AS [VistaPregunta]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vistapromedioeventos" EntityType="Self.vistapromedioeventos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vistapromedioeventos].[promedioEventos] AS [promedioEventos], 
+    [vistapromedioeventos].[usuario] AS [usuario]
+    FROM [dbo].[vistapromedioeventos] AS [vistapromedioeventos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vistapromediogeneral" EntityType="Self.vistapromediogeneral" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vistapromediogeneral].[posicion] AS [posicion], 
+    [vistapromediogeneral].[idUsuario] AS [idUsuario], 
+    [vistapromediogeneral].[promedioEventos] AS [promedioEventos], 
+    [vistapromediogeneral].[promedioIncidente] AS [promedioIncidente], 
+    [vistapromediogeneral].[PromedioTotal] AS [PromedioTotal]
+    FROM [dbo].[vistapromediogeneral] AS [vistapromediogeneral]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vistapromedioincidentes" EntityType="Self.vistapromedioincidentes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vistapromedioincidentes].[soporte] AS [soporte], 
+    [vistapromedioincidentes].[promedioIncidente] AS [promedioIncidente]
+    FROM [dbo].[vistapromedioincidentes] AS [vistapromedioincidentes]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="apoyo" Association="Self.apoyo">
             <End Role="tblusuarios" EntitySet="tblusuarios" />
             <End Role="tblevento" EntitySet="tblevento" />
@@ -1315,8 +1366,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbhelpdeskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1897,6 +1947,30 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <Property Name="statusPregunta" Type="Boolean" Nullable="false" />
           <Property Name="afinidad" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vistapromedioevento">
+          <Key>
+            <PropertyRef Name="usuario" />
+          </Key>
+          <Property Name="promedioEventos" Type="Double" />
+          <Property Name="usuario" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vistapromediogeneral">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="promedioEventos" Type="Double" />
+          <Property Name="promedioIncidente" Type="Double" />
+          <Property Name="PromedioTotal" Type="Double" />
+          <Property Name="posicion" Type="Int64" />
+        </EntityType>
+        <EntityType Name="vistapromedioincidente">
+          <Key>
+            <PropertyRef Name="soporte" />
+          </Key>
+          <Property Name="soporte" Type="Int32" Nullable="false" />
+          <Property Name="promedioIncidente" Type="Double" />
+        </EntityType>
         <Association Name="area">
           <End Role="tblarea" Type="Self.tblarea" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -2264,6 +2338,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
           <EntitySet Name="VistaIncidentesCerrados" EntityType="Self.VistaIncidentesCerrado" />
           <EntitySet Name="VistaIncidentesSinCerrars" EntityType="Self.VistaIncidentesSinCerrar" />
           <EntitySet Name="VistaPreguntas" EntityType="Self.VistaPregunta" />
+          <EntitySet Name="vistapromedioeventos" EntityType="Self.vistapromedioevento" />
+          <EntitySet Name="vistapromediogenerals" EntityType="Self.vistapromediogeneral" />
+          <EntitySet Name="vistapromedioincidentes" EntityType="Self.vistapromedioincidente" />
           <AssociationSet Name="area" Association="Self.area">
             <End Role="tblarea" EntitySet="tblareas" />
             <End Role="tblusuarios" EntitySet="tblusuarios" />
@@ -2369,10 +2446,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <End Role="tblresponsablequipo" EntitySet="tblresponsablequipoes" />
           </AssociationSet>
           <FunctionImport Name="ReqAsignados" ReturnType="Collection(dbhelpdeskModel.ReqAsignados_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="cerrarEvento">
-            <Parameter Name="idEv" Mode="In" Type="Int32" />
+          <Parameter Name="idEv" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="cerrarIncidente">
             <Parameter Name="idIn" Mode="In" Type="Int32" />
@@ -2444,7 +2521,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="requerimientosSinAsignar" ReturnType="Collection(dbhelpdeskModel.requerimientosSinAsignar_Result)">
-            <Parameter Name="idEvento" Mode="In" Type="Int32" />
+          <Parameter Name="idEvento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="topCincoRecursosMasUsados" ReturnType="Collection(dbhelpdeskModel.topCincoRecursosMasUsados_Result)">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
@@ -2944,6 +3021,33 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
                 <ScalarProperty Name="txtPregunta" ColumnName="txtPregunta" />
                 <ScalarProperty Name="statusPregunta" ColumnName="statusPregunta" />
                 <ScalarProperty Name="afinidad" ColumnName="afinidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vistapromedioeventos">
+            <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromedioevento">
+              <MappingFragment StoreEntitySet="vistapromedioeventos">
+                <ScalarProperty Name="promedioEventos" ColumnName="promedioEventos" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vistapromediogenerals">
+            <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromediogeneral">
+              <MappingFragment StoreEntitySet="vistapromediogeneral">
+                <ScalarProperty Name="posicion" ColumnName="posicion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="promedioEventos" ColumnName="promedioEventos" />
+                <ScalarProperty Name="promedioIncidente" ColumnName="promedioIncidente" />
+                <ScalarProperty Name="PromedioTotal" ColumnName="PromedioTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vistapromedioincidentes">
+            <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromedioincidente">
+              <MappingFragment StoreEntitySet="vistapromedioincidentes">
+                <ScalarProperty Name="soporte" ColumnName="soporte" />
+                <ScalarProperty Name="promedioIncidente" ColumnName="promedioIncidente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

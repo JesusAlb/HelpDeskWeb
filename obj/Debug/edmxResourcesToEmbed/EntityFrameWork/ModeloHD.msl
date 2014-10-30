@@ -457,6 +457,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vistapromedioeventos">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromedioevento">
+        <MappingFragment StoreEntitySet="vistapromedioeventos">
+          <ScalarProperty Name="promedioEventos" ColumnName="promedioEventos" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vistapromediogenerals">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromediogeneral">
+        <MappingFragment StoreEntitySet="vistapromediogeneral">
+          <ScalarProperty Name="posicion" ColumnName="posicion" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="promedioEventos" ColumnName="promedioEventos" />
+          <ScalarProperty Name="promedioIncidente" ColumnName="promedioIncidente" />
+          <ScalarProperty Name="PromedioTotal" ColumnName="PromedioTotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vistapromedioincidentes">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.vistapromedioincidente">
+        <MappingFragment StoreEntitySet="vistapromedioincidentes">
+          <ScalarProperty Name="soporte" ColumnName="soporte" />
+          <ScalarProperty Name="promedioIncidente" ColumnName="promedioIncidente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="ReqAsignados" FunctionName="dbhelpdeskModel.Store.ReqAsignados">
       <ResultMapping>
         <ComplexTypeMapping TypeName="dbhelpdeskModel.ReqAsignados_Result">

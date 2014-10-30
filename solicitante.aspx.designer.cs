@@ -10,7 +10,7 @@
 namespace HelpDeskWeb {
     
     
-    public partial class principal {
+    public partial class solicitante {
         
         /// <summary>
         /// Control script.
@@ -110,6 +110,15 @@ namespace HelpDeskWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbelCalificacionEventos;
+        
+        /// <summary>
+        /// Control panelMedalla.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelMedalla;
         
         /// <summary>
         /// Control lbelPosicion.

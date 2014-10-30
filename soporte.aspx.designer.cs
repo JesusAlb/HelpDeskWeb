@@ -7,171 +7,135 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HelpDeskWeb.Reportes {
+namespace HelpDeskWeb {
     
     
-    public partial class WebForm1 {
+    public partial class principal {
         
         /// <summary>
-        /// Control Menu.
+        /// Control script.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Menu;
+        protected global::System.Web.UI.ScriptManager script;
         
         /// <summary>
-        /// Control menuCatalogos.
+        /// Control imca.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink menuCatalogos;
+        protected global::System.Web.UI.WebControls.Image imca;
         
         /// <summary>
-        /// Control menuControl.
+        /// Control HyperLink1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink menuControl;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
         
         /// <summary>
-        /// Control Li1.
+        /// Control lbelNumIncidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li1;
+        protected global::System.Web.UI.WebControls.Label lbelNumIncidentes;
         
         /// <summary>
-        /// Control menuReportes.
+        /// Control HyperLink2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink menuReportes;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
         
         /// <summary>
-        /// Control menuUsuario.
+        /// Control lbelNumEventos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink menuUsuario;
+        protected global::System.Web.UI.WebControls.Label lbelNumEventos;
         
         /// <summary>
-        /// Control lbelUsuario.
+        /// Control lbelNomUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbelUsuario;
+        protected global::System.Web.UI.WebControls.Label lbelNomUsuario;
         
         /// <summary>
-        /// Control datosBusqueda.
+        /// Control lbelCargo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel datosBusqueda;
+        protected global::System.Web.UI.WebControls.Label lbelCargo;
         
         /// <summary>
-        /// Control rbCalidad.
+        /// Control lbelInstitucion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbCalidad;
+        protected global::System.Web.UI.WebControls.Label lbelInstitucion;
         
         /// <summary>
-        /// Control rbRegistros.
+        /// Control lbelCalificacionIncidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbRegistros;
+        protected global::System.Web.UI.WebControls.Label lbelCalificacionIncidentes;
         
         /// <summary>
-        /// Control rbGrafico.
+        /// Control lbelCalificacionEventos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbGrafico;
+        protected global::System.Web.UI.WebControls.Label lbelCalificacionEventos;
         
         /// <summary>
-        /// Control rbTabular.
+        /// Control panelMedalla.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbTabular;
+        protected global::System.Web.UI.WebControls.Panel panelMedalla;
         
         /// <summary>
-        /// Control cbObjeto.
+        /// Control lbelPosicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cbObjeto;
+        protected global::System.Web.UI.WebControls.Label lbelPosicion;
         
         /// <summary>
-        /// Control txtFiltroInt.
+        /// Control lbelPromedioGeneral.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroInt;
-        
-        /// <summary>
-        /// Control cbEstatus.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cbEstatus;
-        
-        /// <summary>
-        /// Control btnGenerar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGenerar;
-        
-        /// <summary>
-        /// Control panelReporte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelReporte;
-        
-        /// <summary>
-        /// Control reporte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer reporte;
+        protected global::System.Web.UI.WebControls.Label lbelPromedioGeneral;
     }
 }
