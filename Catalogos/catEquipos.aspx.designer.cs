@@ -13,6 +13,15 @@ namespace HelpDeskWeb.Catalogos {
     public partial class catEquipos {
         
         /// <summary>
+        /// Control linkPrincipal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkPrincipal;
+        
+        /// <summary>
         /// Control menuCatalogos.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace HelpDeskWeb.Catalogos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink menuControl;
+        
+        /// <summary>
+        /// Control reporte.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reporte;
         
         /// <summary>
         /// Control menuReportes.

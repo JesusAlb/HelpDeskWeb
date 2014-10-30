@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/principalMaestra.Master" CodeBehind="solicitante.aspx.cs" Inherits="HelpDeskWeb.solicitante" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="head">
-        <title>Centro de servicios</title>
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <title>Centro de servicios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <style type="text/css">
@@ -20,16 +20,12 @@
         }
     </style>
 </asp:Content>
-
-
-
-
-<asp:Content runat="server" ContentPlaceHolderID="body">
-        <div class="container">
+<asp:Content ContentPlaceHolderID="body" Runat="Server">
+    <div class="container">
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 1%">
+                    <div class="row" style="margin-top: 5%;">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -79,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-4" >
                                             <div class="form-group">
-                                                <asp:Image runat="server" ImageUrl="~/Imagenes/soporte.png" Width="120" Height="120" />
+                                                <asp:Image runat="server" ImageUrl="~/Imagenes/soporte.png" Width="120" Height="150" />
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
@@ -144,7 +140,7 @@
                                                 </asp:Panel>                                                
                                             </div>
                                             <div class="col-lg-6">
-                                                <asp:Label runat="server" ID="lbelPromedioGeneral" Text="Sin calificación" Font-Size="60" Height="120" CssClass="text-center" style="border-bottom:5px solid Green"  Enabled="false"></asp:Label>
+                                                <asp:Label runat="server" ID="lbelPromedioGeneral" Text="S/C" Font-Size="60" Height="120" CssClass="text-center" style="border-bottom:5px solid Green"  Enabled="false"></asp:Label>
                                             </div>
                                         </div>
                                     </div>
@@ -159,5 +155,4 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
 </asp:Content>

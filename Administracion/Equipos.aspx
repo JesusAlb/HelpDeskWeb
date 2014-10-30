@@ -17,39 +17,39 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <asp:HyperLink runat="server" class="navbar-brand" Text="HelpDesk" ImageUrl="~/Imagenes/IMCA IAP.png" ImageHeight="30" ImageWidth="80" NavigateUrl="~/principal.aspx" />
+                <asp:HyperLink runat="server" ID="linkPrincipal" class="navbar-brand" Text="HelpDesk" ImageUrl="~/Imagenes/IMCA IAP.png" ImageHeight="30" ImageWidth="80" NavigateUrl="~/soporte.aspx" />
             </div>
             <div class="collapse navbar-collapse ">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <li id="catalogos" class="dropdown">
                         <asp:HyperLink runat="server" ID="menuCatalogos" href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
-                            <li>
+                            <li id="paraUsuarios">
                                 <asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catUsuarios.aspx">Para usuarios</asp:HyperLink></li>
-                            <li>
+                            <li id="paraSolicitudes">
                                 <asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catSolicitudes.aspx">Para solicitudes</asp:HyperLink></li>
-                            <li>
+                            <li id="paraEquipos">
                                 <asp:HyperLink runat="server" NavigateUrl="~/Catalogos/catEquipos.aspx">Para equipos</asp:HyperLink></li>
                         </ul>
                     </li>
-                    <li class="active dropdown">
+                    <li id="control" class="dropdown">
                         <asp:HyperLink runat="server" ID="menuControl" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Control</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active"><a href="#">Usuarios</a></li>
-                            <li><a href="#">Equipos</a></li>
+                            <li id="usuarios"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Usuarios.aspx">Usuarios</asp:HyperLink></li>
+                            <li id="equipos"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li id="solicitudes" class="dropdown">
                         <asp:HyperLink runat="server" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Solicitudes</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
-                            <li>
+                            <li id="incidentes">
                                 <asp:HyperLink runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx">Incidentes</asp:HyperLink></li>
-                            <li>
+                            <li id="eventos">
                                 <asp:HyperLink runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx">Eventos</asp:HyperLink></li>
                         </ul>
                     </li>
-                    <li>
-                        <asp:HyperLink runat="server" ID="menuReportes" href="#">Reportes</asp:HyperLink></li>
+                    <li runat="server" id="reporte">
+                        <asp:HyperLink runat="server" ID="menuReportes" NavigateUrl="~/Reportes/reporte.aspx">Reportes</asp:HyperLink></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

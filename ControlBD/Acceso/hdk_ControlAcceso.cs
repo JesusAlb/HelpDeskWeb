@@ -55,6 +55,7 @@ namespace HelpDeskWeb.ControlBD.Acceso
                 {
                     
                     Session["DatosUsuario"] = UsuarioItem;
+                    Session["Conexion"] = this;
                     return UsuarioItem.tipoUsuario;
                 }
                 else

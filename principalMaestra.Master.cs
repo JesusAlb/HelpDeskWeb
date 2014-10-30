@@ -15,6 +15,14 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
+            if (usuarioConectado.tipoUsuario == 0)
+            {
+                linkPrincipal.NavigateUrl = "~/soporte.aspx";
+            }
+            else
+            {
+                linkPrincipal.NavigateUrl = "~/solicitante.aspx";
+            }
             lbelUsuario.Text = usuarioConectado.username;
             generarPrivilegios();
         }

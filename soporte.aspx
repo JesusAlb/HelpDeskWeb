@@ -24,7 +24,7 @@
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 1%">
+                    <div class="row" style="margin-top: 5%;">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -74,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-lg-4" >
                                             <div class="form-group">
-                                                <asp:Image runat="server" ImageUrl="~/Imagenes/soporte.png" Width="120" Height="120" />
+                                                <asp:Image runat="server" ImageUrl="~/Imagenes/soporte.png" Width="120" Height="150" />
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
