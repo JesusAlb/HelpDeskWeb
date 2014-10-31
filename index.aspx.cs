@@ -12,8 +12,11 @@ namespace HelpDeskWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
+
+        protected void tmIntro_Tick(object sender, EventArgs e){        
             hdk_ControlAcceso Control = new hdk_ControlAcceso();
-            Session["Conexion"] = Control;
+            Control.DB.tblareas.SingleOrDefault(a => a.idArea == 1);          
         }
 
         

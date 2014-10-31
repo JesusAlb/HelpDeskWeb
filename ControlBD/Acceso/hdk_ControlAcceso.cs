@@ -53,7 +53,6 @@ namespace HelpDeskWeb.ControlBD.Acceso
                 var UsuarioItem = DB.ViewUsuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
                 if (UsuarioItem != null)
                 {
-                    
                     Session["DatosUsuario"] = UsuarioItem;
                     Session["Conexion"] = this;
                     return UsuarioItem.tipoUsuario;

@@ -22,9 +22,9 @@
 <asp:Content ContentPlaceHolderID="body" Runat="Server">
     <div class="container">
         <div class="container-panel">
-            <div class="row" style="margin-top: 2%">
+            <div class="row">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 5%;">
+                    <div class="row" style="margin-top:1%">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -139,7 +139,7 @@
                                                 </asp:Panel>                                                
                                             </div>
                                             <div class="col-lg-6">
-                                                <asp:Label runat="server" ID="lbelPromedioGeneral" Text="Sin calificación" Font-Size="60" Height="120" CssClass="text-center" style="border-bottom:5px solid Green"  Enabled="false"></asp:Label>
+                                                <asp:Label runat="server" ID="lbelPromedioGeneral" ClientIDMode="Static" Text="Sin calificación" Font-Size="60" Height="120" CssClass="text-center" style="border-bottom:5px solid Green"  Enabled="false"></asp:Label>
                                             </div>
                                         </div>
                                     </div>

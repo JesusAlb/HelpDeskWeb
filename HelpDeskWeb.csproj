@@ -168,6 +168,7 @@
     <Content Include="css\themes\semantic.rtl.min.css" />
     <Content Include="Imagenes\cargar.gif" />
     <Content Include="Imagenes\cargar2.gif" />
+    <Content Include="Imagenes\intro1.png" />
     <Content Include="Imagenes\medalla1.png" />
     <Content Include="Imagenes\medalla2.png" />
     <Content Include="Imagenes\medalla3.png" />

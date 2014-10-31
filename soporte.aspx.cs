@@ -22,10 +22,11 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["DatosUsuario"] == null)
+            if (Session["Conexion"] == null)
             {
                 Response.Redirect("index.aspx");
             }
+
             usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
             Control = (hdk_ControlAcceso)Session["Conexion"];
             controlIncidentes = new hdk_ControlIncidentes(Control);
