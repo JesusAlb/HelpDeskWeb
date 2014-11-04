@@ -94,21 +94,21 @@ namespace HelpDeskWeb {
         protected global::System.Web.UI.WebControls.Label lbelInstitucion;
         
         /// <summary>
-        /// Control lbelCalificacionIncidentes.
+        /// Control lbelNumeroIncidentes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbelCalificacionIncidentes;
+        protected global::System.Web.UI.WebControls.Label lbelNumeroIncidentes;
         
         /// <summary>
-        /// Control lbelCalificacionEventos.
+        /// Control lbelNumeroEventos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbelCalificacionEventos;
+        protected global::System.Web.UI.WebControls.Label lbelNumeroEventos;
     }
 }

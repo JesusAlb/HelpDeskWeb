@@ -24,7 +24,7 @@
                 <div class="row" >
                     <asp:UpdatePanel runat="server" ID="upImagen" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:Image runat="server" ID="imgIntro" style="margin-top:4%; margin-left:auto; margin-right:auto; display:table" ImageUrl="~/Imagenes/intro1.png" />
+                            <asp:Image runat="server" ID="imgIntro" style="margin-top:6%; margin-left:auto; margin-right:auto; display:table" ImageUrl="~/Imagenes/intro1.png" />
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="tmIntro" EventName="Tick" />

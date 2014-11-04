@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this,true, 0, 0);
-            lbelUsuario.Text =" " + ((ViewUsuario)(Session["DatosUsuario"])).username;
+            lbelUsuario.Text =" " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
             if (!IsPostBack)
             {
                 this.cargarTablasTipos();

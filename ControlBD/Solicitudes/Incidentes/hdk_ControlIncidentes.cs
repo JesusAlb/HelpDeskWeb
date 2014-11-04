@@ -204,8 +204,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                int resultado = dbhelp.modelo.insertarIncidente(descripcion, sol);
-               if (resultado != 0)
+               var resultado = dbhelp.modelo.insertarIncidente(descripcion, sol);
+               if (resultado != null)
                {
                    dbhelp.modelo.SaveChanges();
                    return true;
@@ -328,6 +328,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             catch
             {
                 return null;
+            }
+        }
+
+        public static int obtenerNumeroDeIncidentesSolicitados(int usuario)
+        {
+            try
+            {
+                return dbhelp.modelo.tblincidentes.Count(a => a.solicitante == usuario);
+            }
+            catch{
+                return -1;
             }
         }
 

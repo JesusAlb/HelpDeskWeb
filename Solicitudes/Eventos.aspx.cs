@@ -18,16 +18,13 @@ namespace HelpDeskWeb.Solicitudes
 {
     public partial class Eventos : System.Web.UI.Page
     {
-        private ViewUsuario usuarioConectado;
         private tblevento registroEvento;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
-          /*  txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
-            txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");*/
-            lbelUsuario.Text = usuarioConectado.username;
+            lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            this.generarPrivilegios();
             if (!IsPostBack)
             {
                 this.cargarTablasEventos();
@@ -75,13 +72,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (usuarioConectado.tipoUsuario == 0)
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSolicitante(usuarioConectado.idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSolicitante(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -184,7 +181,7 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (accion.Value.Equals("nuevo"))
                 {
-                    if (hdk_ControlEventos.insertarEvento(usuarioConectado.idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                    if (hdk_ControlEventos.insertarEvento(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -547,6 +544,15 @@ namespace HelpDeskWeb.Solicitudes
         protected void cbCuantificable_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.cargarTablasRequerimientos();
+        }
+
+        protected void generarPrivilegios()
+        {
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            {
+                menuCatalogos.Visible = false;
+                menuControl.Visible = false;
+            }
         }
     }
     

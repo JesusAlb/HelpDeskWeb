@@ -1,4 +1,5 @@
-﻿using HelpDeskWeb.EntityFrameWork;
+﻿using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,10 @@ namespace HelpDeskWeb
 {
     public partial class paginaMaestra : System.Web.UI.MasterPage
     {
-        private ViewUsuario usuarioConectado;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
-            if (usuarioConectado.tipoUsuario == 0)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 0)
             {
                 linkInicio.NavigateUrl = linkPrincipal.NavigateUrl = "~/soporte.aspx";
             }
@@ -23,17 +22,13 @@ namespace HelpDeskWeb
             {
                 linkInicio.NavigateUrl = linkPrincipal.NavigateUrl = "~/solicitante.aspx";
             }
-            lbelUsuario.Text = usuarioConectado.username;
+            lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).username;
             generarPrivilegios();
         }
 
         protected void generarPrivilegios()
         {
-            if (usuarioConectado.tipoUsuario == 0)
-            {
-
-            }
-            else
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

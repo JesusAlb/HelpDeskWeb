@@ -171,17 +171,12 @@
     <Content Include="Imagenes\medalla2.png" />
     <Content Include="Imagenes\medalla3.png" />
     <Content Include="Imagenes\medallaN.png" />
-    <Content Include="Imagenes\noEncuesta0.png" />
-    <Content Include="Imagenes\noEncuesta1.png" />
-    <Content Include="Imagenes\noEncuesta2.gif" />
     <Content Include="Imagenes\noEncuesta3.png" />
     <Content Include="Imagenes\pAlta.png" />
     <Content Include="Imagenes\pMedia.png" />
     <Content Include="Imagenes\pNormal.png" />
-    <Content Include="Imagenes\siEncuesta0.png" />
-    <Content Include="Imagenes\siEncuesta1.png" />
-    <Content Include="Imagenes\siEncuesta2.gif" />
     <Content Include="Imagenes\siEncuesta3.png" />
+    <Content Include="Imagenes\solicitante.png" />
     <Content Include="index.aspx" />
     <Content Include="js\alertify.js" />
     <Content Include="js\alertify.min.js" />
@@ -201,8 +196,6 @@
     <Content Include="css\styles.css" />
     <Content Include="css\styles2.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Imagenes\Fondo1.jpg" />
-    <Content Include="Imagenes\helpDesk.png" />
     <Content Include="login.aspx" />
     <EntityDeploy Include="EntityFrameWork\ModeloHD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -276,10 +269,8 @@
     <Content Include="Imagenes\Institucionalidad y Trasparencia.png" />
     <Content Include="Imagenes\JAP.png" />
     <Content Include="Imagenes\Print.png" />
-    <Content Include="Imagenes\reAbrir.png" />
     <Content Include="Imagenes\rem.png" />
     <Content Include="Imagenes\rEncuesta.png" />
-    <Content Include="Imagenes\soporte.jpg" />
     <Content Include="Imagenes\Terminar2.png" />
     <Content Include="Imagenes\usuario.jpg" />
     <Content Include="Reportes\reporte.aspx" />

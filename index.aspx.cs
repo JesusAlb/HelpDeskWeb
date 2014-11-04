@@ -15,9 +15,8 @@ namespace HelpDeskWeb
             hdk_utilerias.checarSession(this, false, 1, 0);
         }
 
-        protected void tmIntro_Tick(object sender, EventArgs e){        
-            hdk_ControlAcceso Control = new hdk_ControlAcceso();
-            Control.DB.tblareas.SingleOrDefault(a => a.idArea == 1);          
+        protected void tmIntro_Tick(object sender, EventArgs e){
+            dbhelp.modelo.tblareas.Where(a => a.idArea == 1);
         }
 
         

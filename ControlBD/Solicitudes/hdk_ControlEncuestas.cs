@@ -14,23 +14,24 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
     class hdk_ControlEncuestas
     {
 
-        public static int obtenerNumeroEncuestasIn(int us){
+        public static int obtenerNumeroDeEncuestasSinResponderEnIncidentes(int usuario)
+        {
             try
             {
-                return dbhelp.modelo.VistaIncidentesCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.VistaIncidentesCerrados.Where(a => a.idSolicitante == usuario && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {
-                return -1;
+                return 0;
             }
 
         }
 
-        public static int obtenerNumeroEncuestasEv(int us)
+        public static int obtenerNumeroDeEncuestasSinResponderEnEventos(int usuario)
         {
             try
             {
-                return dbhelp.modelo.VistaEventosCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.VistaEventosCerrados.Where(a => a.idSolicitante == usuario && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {
@@ -84,14 +85,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static bool guardarCambiosEncuesta(int idCalidad, string ob, float promedio)
+        public static bool guardarCambiosEncuesta(int idCalidad, string observacion, float promedio)
         {      
             try
             {
                 var calidadAModificar = dbhelp.modelo.tblcalidadservicios.SingleOrDefault(a => a.idCalidad_Servicio == idCalidad);
                 if (calidadAModificar != null)
                 {
-                    calidadAModificar.observacionesServicio = ob;
+                    calidadAModificar.observacionesServicio = observacion;
                     calidadAModificar.statusCal_Servicio = true;
                     calidadAModificar.promedioCalidad = promedio;
                     dbhelp.modelo.SaveChanges();
@@ -104,11 +105,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static vistapromediogeneral obtenerPromedioCalidad(int us)
+        public static vistapromediogeneral obtenerPromedioCalidad(int usuario)
         {
             try
             {
-                return dbhelp.modelo.vistapromediogenerals.SingleOrDefault(a => a.idUsuario == us);
+                return dbhelp.modelo.vistapromediogenerals.SingleOrDefault(a => a.idUsuario == usuario);
             }
             catch
             {

@@ -15,38 +15,6 @@ namespace HelpDeskWeb.ControlBD.Acceso
 {
   public class hdk_ControlAcceso : System.Web.UI.Page
     {
-        private dbhelpdeskEntities db;
-        private ViewUsuario Item;
-
-
-        public hdk_ControlAcceso()
-        {
-            this.actualizarModelo();
-        }
-
-        public void actualizarModelo()
-        {
-            try
-            {
-                DB = new dbhelpdeskEntities();
-            }
-            catch  
-            {
-                DB=null;
-            }
-        } 
-
-        public dbhelpdeskEntities DB
-        {
-            get { return db; }
-            set { db = value; }
-        }
-
-        public ViewUsuario item
-      {
-          get { return Item; }
-          set { Item = value; }
-      }
 
         public static int encontrarUsuario(String nombre, string password, Page pagina){
             try

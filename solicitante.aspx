@@ -25,7 +25,7 @@
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 3%;">
+                    <div class="row" style="margin-top: 4%;">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -43,7 +43,7 @@
                                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx" CssClass="btn btn-danger btn-lg btn-block" role="button" Font-Size="18">
                                             <div class="row">
                                                <div class="col-lg-9" >
-                                                   Número de incidentes:
+                                                   Encuestas en incidentes:
                                                </div> 
                                                 <div class="col-lg-3">
                                                     <asp:Label runat="server" ID="lbelNumIncidentes" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" style="border-radius:5px; border:1px solid #d43f3a;"  Width="60" BackColor="#E6E6E6" ForeColor="Green"></asp:Label>
@@ -53,7 +53,7 @@
                                             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx" CssClass="btn btn-warning btn-lg btn-block" Font-Size="18">
                                               <div class="row">
                                                <div class="col-lg-9" >
-                                                   Número de eventos:
+                                                   Encuestas en eventos:
                                                </div> 
                                                 <div class="col-lg-3">
                                                     <asp:Label runat="server" ID="lbelNumEventos" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" style="border-radius:5px; border:1px solid #eea236;"  Width="60" BackColor="#E6E6E6" ForeColor="green"></asp:Label>
@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-4" >
                                             <div class="form-group">
-                                                <asp:Image runat="server" ImageUrl="~/Imagenes/soporte.png" Width="120" Height="150" />
+                                                <asp:Image runat="server" ImageUrl="~/Imagenes/solicitante.png" Width="140" Height="110" />
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
@@ -110,7 +110,7 @@
                                                     Incidentes
                                                 </div>
                                                 <div class="panel-body">
-                                                        <asp:Label ID="lbelCalificacionIncidentes" runat="server" CssClass="text-center" Enabled="false" Text="1" Height="50" Font-Size="24" ></asp:Label>
+                                                        <asp:Label ID="lbelNumeroIncidentes" runat="server" CssClass="text-center" Enabled="false" Text="1" Height="50" Font-Size="24" ></asp:Label>
                                                 </div>
                                             </div>
                                             
@@ -121,7 +121,7 @@
                                                     Eventos
                                                 </div>
                                                 <div class="panel-body">
-                                                        <asp:Label ID="lbelCalificacionEventos" runat="server" CssClass="text-center" Enabled="false" Text="1" Height="50" Font-Size="24" ></asp:Label>
+                                                        <asp:Label ID="lbelNumeroEventos" runat="server" CssClass="text-center" Enabled="false" Text="1" Height="50" Font-Size="24" ></asp:Label>
                                                 </div>
                                             </div>
                                         </div>

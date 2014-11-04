@@ -14,18 +14,12 @@ namespace HelpDeskWeb.Solicitudes
 {
     public partial class Incidentes : System.Web.UI.Page
     {
-        private hdk_ControlAcceso Control;
-        private hdk_ControlIncidentes controlIncidentes;
-        private hdk_ControlUsuario controlUsuario;
-        private ViewUsuario usuarioConectado;
-        private hdk_ControlEncuestas controlEncuestas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
-            lbelUsuario.Text = " " + usuarioConectado.username;
-            Control = (hdk_ControlAcceso)Session["Conexion"];
+            lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            this.generarPrivilegios();
             if (!IsPostBack)
             {
                 this.cargarComboFiltro();
@@ -57,13 +51,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (usuarioConectado.tipoUsuario == 0)
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(usuarioConectado.idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -123,7 +117,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                if (hdk_ControlIncidentes.insertarIncidente(usuarioConectado.idUsuario, txtDescripcion.Text))
+                if (hdk_ControlIncidentes.insertarIncidente(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtDescripcion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -273,7 +267,6 @@ namespace HelpDeskWeb.Solicitudes
             }
         }
 
-
         protected double promedioEncuesta()
         {
             double suma = 0;
@@ -391,5 +384,13 @@ namespace HelpDeskWeb.Solicitudes
             this.insertarImagenPrioridad(e);
         }
 
+        protected void generarPrivilegios()
+        {
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            {
+                menuCatalogos.Visible = false;
+                menuControl.Visible = false;
+            }
+        }
     }
 }

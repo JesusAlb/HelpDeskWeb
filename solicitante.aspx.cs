@@ -1,4 +1,6 @@
 ﻿using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.ControlBD.Solicitudes;
+using HelpDeskWeb.ControlBD.Solicitudes.Incidentes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,8 @@ namespace HelpDeskWeb
         {
             hdk_utilerias.checarSession(this, true, 1, 0);
             this.cargarInformacionUsuario();
+            this.cargarNumeroDeServicios();
+            this.cargarEncuestasSinResponder();
         }
 
         protected void cargarInformacionUsuario()
@@ -25,7 +29,27 @@ namespace HelpDeskWeb
 
         protected void cargarNumeroDeServicios()
         {
+            lbelNumeroEventos.Text = hdk_ControlEventos.obtenerNumeroDeEventosSolicitados(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
+            lbelNumeroIncidentes.Text = hdk_ControlIncidentes.obtenerNumeroDeIncidentesSolicitados(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
+        }
 
+        protected void cargarEncuestasSinResponder()
+        {
+            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEncuestas.obtenerNumeroDeEncuestasSinResponderEnEventos(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario));
+            this.pintarNumeroDeSucesos(lbelNumIncidentes, hdk_ControlEncuestas.obtenerNumeroDeEncuestasSinResponderEnIncidentes(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario));
+        }
+
+        protected void pintarNumeroDeSucesos(Label label, int numero)
+        {
+            if (numero > 0)
+            {
+                label.ForeColor = System.Drawing.ColorTranslator.FromHtml("#d43f3a");
+            }
+            else
+            {
+                label.ForeColor = System.Drawing.ColorTranslator.FromHtml("Green");
+            }
+            label.Text = numero.ToString();
         }
     }
 }

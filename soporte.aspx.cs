@@ -14,16 +14,13 @@ namespace HelpDeskWeb
 {
     public partial class principal : System.Web.UI.Page
     {
-        ViewUsuario usuarioConectado;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
-            lbelNomUsuario.Text = usuarioConectado.nomCompleto;
-            lbelCargo.Text = usuarioConectado.nomPuesto;
-            lbelInstitucion.Text = usuarioConectado.nomInstitucion;
-           // lbelTipoUsuario.Text = usuarioConectado.tipoUsuarioString;
+            lbelNomUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
+            lbelCargo.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
+            lbelInstitucion.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
             if (!IsPostBack)
             {
                 this.pintarCalificaciones();
@@ -33,7 +30,7 @@ namespace HelpDeskWeb
 
         protected void pintarCalificaciones()
         {
-            vistapromediogeneral promedioCalidad = hdk_ControlEncuestas.obtenerPromedioCalidad(usuarioConectado.idUsuario);
+            vistapromediogeneral promedioCalidad = hdk_ControlEncuestas.obtenerPromedioCalidad(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
             if (promedioCalidad.PromedioTotal == null)
             {
                 lbelCalificacionEventos.Text = "S/C";
@@ -71,7 +68,7 @@ namespace HelpDeskWeb
         protected void obtenerNumeroDeSucesos()
         {
             this.pintarNumeroDeSucesos(lbelNumIncidentes, hdk_ControlIncidentes.obtenerNumeroIncidentes());
-            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEventos.obtenerNumeroEventos());
+            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEventos.obtenerNumeroEventosAbiertos());
         }
 
         protected void pintarNumeroDeSucesos(Label label, int numero)
@@ -113,6 +110,11 @@ namespace HelpDeskWeb
                     panelMedalla.BackImageUrl = "Imagenes/medallaN.png";
                     break;
             }
+        }
+
+        protected void timerIncidentes_Tick(object sender, EventArgs e)
+        {
+            this.obtenerNumeroDeSucesos();
         }
     }
 }

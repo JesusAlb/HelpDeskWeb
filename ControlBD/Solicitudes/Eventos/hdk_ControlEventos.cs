@@ -308,7 +308,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static int obtenerNumeroEventos()
+        public static int obtenerNumeroEventosAbiertos()
         {
             try
             {
@@ -317,6 +317,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             catch
             {
                 return 0;
+            }
+        }
+
+        public static int obtenerNumeroDeEventosSolicitados(int usuario)
+        {
+            try
+            {
+                return dbhelp.modelo.tbleventoes.Count(a => a.solicitante == usuario);
+            }
+            catch{
+                return -1;
             }
         }
 

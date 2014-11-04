@@ -22,6 +22,15 @@ namespace HelpDeskWeb {
         protected global::System.Web.UI.ScriptManager script;
         
         /// <summary>
+        /// Control timerIncidentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.Timer timerIncidentes;
+        
+        /// <summary>
         /// Control imca.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace HelpDeskWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imca;
+        
+        /// <summary>
+        /// Control upPanelTimer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upPanelTimer;
         
         /// <summary>
         /// Control HyperLink1.

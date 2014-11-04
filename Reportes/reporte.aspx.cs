@@ -17,6 +17,8 @@ namespace HelpDeskWeb.Reportes
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this,true, 2, 2);
+            this.generarPrivilegios();
+            lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
         }
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
@@ -94,6 +96,15 @@ namespace HelpDeskWeb.Reportes
         protected void rbTabular_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void generarPrivilegios()
+        {
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            {
+                menuCatalogos.Visible = false;
+                menuControl.Visible = false;
+            }
         }
     }
 }

@@ -21,14 +21,14 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" ></div>
     <div class="container">
-       <div style="margin-left:5%; margin-right:5%;  margin-top:10%; ">
+       <div style="margin-left:5%; margin-right:5%;  margin-top:15%; ">
             <div class="row">
                 <div class="col-lg-6" style="border-right:solid LightGray 2px">
                     <div class="row" style="margin:2% 2% 5% 2%" >
                         <asp:Image runat="server" ImageUrl="~/Imagenes/IMCA IAP.png" Height="180px" Width="442px" />
                     </div>
                     <div class="row" >
-                        <h1 class="text-center" style="font-family:Aharoni;">HelpDesK V2.0</h1>
+                        <h1 class="text-center" style="font-family:'Comic Sans MS'; color:#d43f3a">HelpDesk IMCA</h1>
                     </div>
                 </div>
                 <div class="col-lg-6" >

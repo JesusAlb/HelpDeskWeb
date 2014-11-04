@@ -99,7 +99,6 @@ C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\System.Net.Http.Formatting.dll
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\System.Spatial.dll
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.dll
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\System.Web.Http.WebHost.dll
-C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\ASPtools.pdb
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\HtmlAgilityPack.pdb
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\HtmlAgilityPack.xml
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\bin\Microsoft.Data.Edm.xml

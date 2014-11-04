@@ -24,7 +24,8 @@
         <div class="container-panel">
             <div class="row">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top:1%">
+                    <asp:Timer runat="server" ID="timerIncidentes" Interval="3000" OnTick="timerIncidentes_Tick"></asp:Timer>
+                    <div class="row" style="margin-top:5%">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -39,26 +40,33 @@
                                 <div class="col-lg-8">
                                     <div class="form-group">
                                         <div class="well" style="background-color: #E6E6E6">
-                                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx" CssClass="btn btn-danger btn-lg btn-block" role="button" Font-Size="18">
-                                            <div class="row">
-                                               <div class="col-lg-9" >
-                                                   Número de incidentes:
-                                               </div> 
-                                                <div class="col-lg-3">
-                                                    <asp:Label runat="server" ID="lbelNumIncidentes" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" style="border-radius:5px; border:1px solid #d43f3a;"  Width="60" BackColor="#E6E6E6" ForeColor="Green"></asp:Label>
-                                                </div>
-                                                </div>
-                                            </asp:HyperLink>
-                                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx" CssClass="btn btn-warning btn-lg btn-block" Font-Size="18">
-                                              <div class="row">
-                                               <div class="col-lg-9" >
-                                                   Número de eventos:
-                                               </div> 
-                                                <div class="col-lg-3">
-                                                    <asp:Label runat="server" ID="lbelNumEventos" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" style="border-radius:5px; border:1px solid #eea236;"  Width="60" BackColor="#E6E6E6" ForeColor="green"></asp:Label>
-                                                </div>
-                                                </div>
-                                            </asp:HyperLink>
+                                            <asp:UpdatePanel runat="server" ID="upPanelTimer" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Solicitudes/Incidentes.aspx" CssClass="btn btn-danger btn-lg btn-block" role="button" Font-Size="18">
+                                                        <div class="row">
+                                                            <div class="col-lg-9">
+                                                                Número de incidentes:
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <asp:Label runat="server" ID="lbelNumIncidentes" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" Style="border-radius: 5px; border: 1px solid #d43f3a;" Width="60" BackColor="#E6E6E6" ForeColor="Green"></asp:Label>
+                                                            </div>
+                                                        </div>
+                                                    </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Solicitudes/Eventos.aspx" CssClass="btn btn-warning btn-lg btn-block" Font-Size="18">
+                                                        <div class="row">
+                                                            <div class="col-lg-9">
+                                                                Número de eventos:
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <asp:Label runat="server" ID="lbelNumEventos" CssClass="text-center" Font-Bold="true" Enabled="false" Text="0" Font-Size="18" Style="border-radius: 5px; border: 1px solid #eea236;" Width="60" BackColor="#E6E6E6" ForeColor="green"></asp:Label>
+                                                            </div>
+                                                        </div>
+                                                    </asp:HyperLink>
+                                                </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="timerIncidentes" EventName="Tick" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +75,7 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="panel panel-primary" style="background-color: white">
-                                <div class="panel-heading" style="font-size:24px; background-color:#E6E6E6; color:black">
+                                <div class="panel-heading" style="font-size: 24px; background-color: #E6E6E6; color: black">
                                     Información del usuario
                                 </div>
                                 <div class="panel-body">
