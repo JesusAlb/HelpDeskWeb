@@ -44,7 +44,7 @@
                         <asp:HyperLink runat="server" ID="menuControl" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Control</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
                             <li id="usuarios"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Usuarios.aspx">Usuarios</asp:HyperLink></li>
-                            <li id="equipos"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
+                            <li id="liequipos"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li id="solicitudes" class="dropdown">
@@ -115,11 +115,11 @@
                                             <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                        <asp:LinkButton ID="btnNuevoTipo" runat="server" CssClass="btn btn-primary" OnClick="btnNuevoTipo_Click">
+                                                        <asp:LinkButton ID="btnNuevoTipo" runat="server" CssClass="btn btn-primary" OnCommand="btnNuevo_Command" CommandName="abrirNuevoTipoEquipo">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnEditarTipo" runat="server" CssClass="btn btn-primary" OnClick="btnEditarTipo_Click">
+                                                        <asp:LinkButton ID="btnEditarTipo" runat="server" CssClass="btn btn-primary" OnCommand="btnEditar_Command" CommandName="abrirEditarTipoEquipo">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                         </asp:LinkButton>
@@ -132,10 +132,10 @@
                                                     <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
                                                 </Triggers>
                                             </asp:UpdatePanel>
-                                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevoTipoEquipos" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarTipo">
-                                                        <asp:UpdatePanel ID="updateNuevoTipo" runat="server" UpdateMode="Conditional">
+                                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabar">
+                                                        <asp:UpdatePanel ID="updateModalNuevo" runat="server" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
                                                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
@@ -147,7 +147,7 @@
                                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                                             <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
                                                                                 <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                                <asp:TextBox runat="server" ID="txtTipoEquipo" CssClass="form-control" placeholder="Nombre" />
+                                                                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
                                                                             </asp:Panel>
                                                                             <asp:Panel runat="server" CssClass="panel panel-primary" ID="panelCarTipoEquipo">
                                                                                 <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel>
@@ -184,18 +184,19 @@
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>
-
                                                                         </asp:Panel>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="modal-footer">
                                                                             <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                                                            <asp:LinkButton runat="server" ID="btnGrabarTipo" CssClass="btn btn-primary" OnClick="btnGrabarTipo_Click" Text="Grabar" />
+                                                                            <asp:LinkButton runat="server" ID="btnGrabar" CssClass="btn btn-primary" OnCommand="btnGrabar_Command" CommandName="insertar" CommandArgument="tipoEquipo" Text="Grabar" />
                                                                 </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
                                                                 <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
@@ -225,7 +226,7 @@
                                                         </asp:GridView>
                                                     </ContentTemplate>
                                                     <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabarTipo" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </asp:Panel>
@@ -247,55 +248,21 @@
                                                <asp:UpdatePanel runat="server" ID="updateAccionesMarcas" UpdateMode="Conditional">
                                                    <ContentTemplate>
                                                        <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                           <asp:LinkButton ID="btnNuevaMarca" runat="server" CssClass="btn btn-primary" OnClick="btnNuevaMarca_Click">
+                                                           <asp:LinkButton ID="btnNuevaMarca" runat="server" CssClass="btn btn-primary" CommandName="abrirNuevaMarca" OnCommand="btnNuevo_Command" >
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                            </asp:LinkButton>
-                                                           <asp:LinkButton ID="btnEditarMarca" runat="server" CssClass="btn btn-primary" OnClick="btnEditarMarca_Click">
+                                                           <asp:LinkButton ID="btnEditarMarca" CommandName="abrirEditarMarca" runat="server" CssClass="btn btn-primary" OnCommand="btnEditar_Command">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                            </asp:LinkButton>
                                                        </asp:Panel>
-                                                       <asp:HiddenField runat="server" ID="accionesMarcas" Value="0" />
                                                    </ContentTemplate>
                                                    <Triggers>
                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
                                                        <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
                                                    </Triggers>
                                                </asp:UpdatePanel>
-                                               <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevaMarca" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                   <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                                       <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarMarca">
-                                                           <asp:UpdatePanel ID="updateNuevaMarca" runat="server" UpdateMode="Conditional">
-                                                               <ContentTemplate>
-                                                                   <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                                                       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                                                       <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelModalMarca" Text="Alta de marcas" />
-                                                                   </asp:Panel>
-                                                                   <asp:Panel runat="server" CssClass="modal-body">
-                                                                       <asp:Panel runat="server" CssClass="row">
-                                                                           <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-                                                                           <asp:Panel runat="server" CssClass="col-lg-10">
-                                                                               <asp:Panel runat="server" ID="panel2" CssClass="form-group">
-                                                                                   <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                                   <asp:TextBox runat="server" ID="txtMarca" CssClass="form-control" placeholder="Nombre" />
-                                                                               </asp:Panel>
-                                                                           </asp:Panel>
-                                                                       </asp:Panel>
-                                                                   </asp:Panel>
-                                                                   <asp:Panel runat="server" CssClass="modal-footer">
-                                                                       <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                                                       <asp:LinkButton runat="server" ID="btnGrabarMarca" OnClick="btnGrabarMarca_Click" CssClass="btn btn-primary" Text="Grabar" />
-                                                                   </asp:Panel>
-                                                               </ContentTemplate>
-                                                               <Triggers>
-                                                                   <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
-                                                                   <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
-                                                               </Triggers>
-                                                           </asp:UpdatePanel>
-                                                       </asp:Panel>
-                                                   </asp:Panel>
-                                               </asp:Panel>
                                            </asp:Panel>
                                            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                        </asp:Panel>
@@ -306,7 +273,7 @@
                                            <asp:Panel runat="server" CssClass="col-lg-10">
                                                <asp:Table runat="server" ID="Table2" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                    <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
-                                                       <asp:TableCell>Tipos de equipos</asp:TableCell>
+                                                       <asp:TableCell>Marcas</asp:TableCell>
                                                    </asp:TableRow>
                                                </asp:Table>
                                                <asp:Panel runat="server" Height="300px" ScrollBars="Auto">
@@ -320,7 +287,7 @@
                                                            </asp:GridView>
                                                        </ContentTemplate>
                                                        <Triggers>
-                                                           <asp:AsyncPostBackTrigger ControlID="btnGrabarMarca" EventName="Click" />
+                                                           <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                                        </Triggers>
                                                    </asp:UpdatePanel>
                                                </asp:Panel>

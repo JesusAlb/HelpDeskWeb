@@ -166,22 +166,22 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.HiddenField accionesEquipos;
         
         /// <summary>
-        /// Control ModalNuevoTipoEquipos.
+        /// Control ModalNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ModalNuevoTipoEquipos;
+        protected global::System.Web.UI.WebControls.Panel ModalNuevo;
         
         /// <summary>
-        /// Control updateNuevoTipo.
+        /// Control updateModalNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateNuevoTipo;
+        protected global::System.Web.UI.UpdatePanel updateModalNuevo;
         
         /// <summary>
         /// Control lbelModal.
@@ -202,13 +202,13 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.Panel panelNombre;
         
         /// <summary>
-        /// Control txtTipoEquipo.
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoEquipo;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
         /// Control panelCarTipoEquipo.
@@ -301,13 +301,13 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.CheckBox chTodos;
         
         /// <summary>
-        /// Control btnGrabarTipo.
+        /// Control btnGrabar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGrabarTipo;
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabar;
         
         /// <summary>
         /// Control Table1.
@@ -380,69 +380,6 @@ namespace HelpDeskWeb.Catalogos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnEditarMarca;
-        
-        /// <summary>
-        /// Control accionesMarcas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField accionesMarcas;
-        
-        /// <summary>
-        /// Control ModalNuevaMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ModalNuevaMarca;
-        
-        /// <summary>
-        /// Control updateNuevaMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateNuevaMarca;
-        
-        /// <summary>
-        /// Control lbelModalMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbelModalMarca;
-        
-        /// <summary>
-        /// Control panel2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel2;
-        
-        /// <summary>
-        /// Control txtMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMarca;
-        
-        /// <summary>
-        /// Control btnGrabarMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGrabarMarca;
         
         /// <summary>
         /// Control Table2.
