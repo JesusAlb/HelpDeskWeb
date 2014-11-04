@@ -14,30 +14,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
   public  class hdk_ControlAsigReq
     {
-        hdk_ControlAcceso dbHelp;
-
-        public hdk_ControlAsigReq(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
- /*       public int getIdUltimoEvento(){
-            try
-            {
-                var registro = dbHelp.DB.UltimoEvento().SingleOrDefault();
-                return registro.Value;
-            }
-            catch
-            {              
-                return -1;
-            }
-        }*/
-
-          public IList cargarTablaReqAsig(int evento)
+          public static IList cargarTablaReqAsig(int evento)
            {
                try
                {
-                   return dbHelp.DB.ViewEventoConRequerimientos.Where(a => a.evento == evento).ToList();
+                   return dbhelp.modelo.ViewEventoConRequerimientos.Where(a => a.evento == evento).ToList();
                }
                catch
                {                  
@@ -45,7 +26,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                }
            }
 
-          public bool insertar(int id, int req, int? cantidad)
+          public static bool insertar(int id, int req, int? cantidad)
           {
               try
               {
@@ -70,9 +51,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                   }           
                   if (asigReq != null)
                   {
-                      dbHelp.DB.tblrequerimientoaeventoes.Attach(asigReq);
-                      dbHelp.DB.tblrequerimientoaeventoes.Add(asigReq);
-                      dbHelp.DB.SaveChanges();
+                      dbhelp.modelo.tblrequerimientoaeventoes.Attach(asigReq);
+                      dbhelp.modelo.tblrequerimientoaeventoes.Add(asigReq);
+                      dbhelp.modelo.SaveChanges();
                   }
                   return true;
               }
@@ -82,16 +63,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
               }
           }
 
-          public bool editar(int id, int req, int cantidad)
+          public static bool editar(int id, int req, int cantidad)
           {
               try
               {
-                  var ItemAmodificar = dbHelp.DB.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == req);
+                  var ItemAmodificar = dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == req);
                   if (ItemAmodificar != null)
                   {
                       ItemAmodificar.cantidad = cantidad;
-                      dbHelp.DB.SaveChanges();
-                      dbHelp.actualizarModelo();
+                      dbhelp.modelo.SaveChanges();                     
                   }
                   return true;
               }
@@ -101,15 +81,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
               }
           }
 
-          public bool borrar(int id, int idreq)
+          public static bool borrar(int id, int idreq)
           {
               try
               {
-                  var itemRemover = dbHelp.DB.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == idreq);
+                  var itemRemover = dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == idreq);
                   if (itemRemover != null)
                   {
-                      dbHelp.DB.tblrequerimientoaeventoes.Remove(itemRemover);
-                      dbHelp.DB.SaveChanges();
+                      dbhelp.modelo.tblrequerimientoaeventoes.Remove(itemRemover);                      
                   }
                   return true;
               }
@@ -119,11 +98,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
               }
           }
 
-          public tblrequerimientoaevento obtenerRequerimientoAsignado(int req, int idEv)
+          public static tblrequerimientoaevento obtenerRequerimientoAsignado(int req, int idEv)
           {
               try
               {
-                  return dbHelp.DB.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == idEv && x.requerimiento == req);
+                  return dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == idEv && x.requerimiento == req);
               }
               catch
               {

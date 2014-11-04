@@ -14,37 +14,27 @@ namespace HelpDeskWeb.Catalogos
 {
     public partial class catEquipos : System.Web.UI.Page
     {
-        private hdk_ControlTipoEquipo controlTipoEquipo;
-        private hdk_ControlAcceso Control;
-        private hdk_ControlMarca controlMarcas;
          
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["DatosUsuario"] == null)
-            {
-                Response.Redirect("../Index.aspx");
-            }
+            hdk_utilerias.checarSession(this,true, 0, 0);
             lbelUsuario.Text =" " + ((ViewUsuario)(Session["DatosUsuario"])).username;
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlTipoEquipo = new hdk_ControlTipoEquipo(Control);
-            controlMarcas  = new hdk_ControlMarca(Control);
             if (!IsPostBack)
             {
                 this.cargarTablasTipos();
                 this.cargarTablasMarcas();
-            }
-            
+            }           
        }
 
         protected void cargarTablasTipos()
         {
-            gvTipoEquipos.DataSource = controlTipoEquipo.cargarTabla(txtFiltroTipo.Text);
+            gvTipoEquipos.DataSource = hdk_ControlTipoEquipo.cargarTabla(txtFiltroTipo.Text);
             gvTipoEquipos.DataBind();
         }
 
         protected void cargarTablasMarcas()
         {
-            gvMarca.DataSource = controlMarcas.cargarTabla("");
+            gvMarca.DataSource = hdk_ControlMarca.cargarTabla("");
             gvMarca.DataBind();
         }
 
@@ -66,7 +56,7 @@ namespace HelpDeskWeb.Catalogos
             {
                 if (accionesEquipos.Value.Equals("0"))
                 {
-                    if (controlTipoEquipo.insertar(txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (hdk_ControlTipoEquipo.insertar(txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
                         this.cargarTablasTipos();
                         ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
@@ -79,7 +69,7 @@ namespace HelpDeskWeb.Catalogos
                 }
                 else
                 {
-                    if (controlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (hdk_ControlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
                         this.cargarTablasTipos();
                         ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
@@ -110,8 +100,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias ut = new hdk_utilerias();
-            ut.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void btnEditarTipo_Click(object sender, EventArgs e)
@@ -121,7 +110,7 @@ namespace HelpDeskWeb.Catalogos
                 accionesEquipos.Value = "1";
                 lbelModal.Text = "Modificar tipo de equipos";
                 int tipoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
-                tbltipoequipo equipo = controlTipoEquipo.obtenerEquipo(tipoEquipo);
+                tbltipoequipo equipo = hdk_ControlTipoEquipo.obtenerEquipo(tipoEquipo);
                 txtTipoEquipo.Text = equipo.nomTipoEquipo;
                 chDiscoD.Checked = equipo.siDiscoDuro;
                 chRAM.Checked = equipo.siRAM;
@@ -152,7 +141,7 @@ namespace HelpDeskWeb.Catalogos
             {
                 accionesMarcas.Value = "1";
                 lbelModalMarca.Text = "Modificar marcas";
-                tblmarca marca = controlMarcas.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()));
+                tblmarca marca = hdk_ControlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()));
                 txtMarca.Text = marca.nomMarca;
                 ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, GetType(), "btnEditarActivo", "$('#ModalNuevaMarca').modal('show');", true);
             }
@@ -171,7 +160,7 @@ namespace HelpDeskWeb.Catalogos
                 if (accionesMarcas.Value.Equals("0"))
                 {
 
-                    if (controlMarcas.insertar(txtMarca.Text))
+                    if (hdk_ControlMarca.insertar(txtMarca.Text))
                     {
                         this.cargarTablasMarcas();
                         ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);
@@ -181,7 +170,7 @@ namespace HelpDeskWeb.Catalogos
                 }
                 else
                 {
-                    if (controlMarcas.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()), txtMarca.Text))
+                    if (hdk_ControlMarca.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()), txtMarca.Text))
                     {
                         this.cargarTablasMarcas();
                         ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);

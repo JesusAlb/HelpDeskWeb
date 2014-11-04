@@ -12,18 +12,12 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlPuesto
     {
-        hdk_ControlAcceso dbHelp;
 
-        public hdk_ControlPuesto(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public IList cargarTabla(string filtro)
+        public static IList cargarTabla(string filtro)
         {
             try
             {
-                return dbHelp.DB.tblpuestoes.Where(a => a.nomPuesto.Contains(filtro)).ToList();
+                return dbhelp.modelo.tblpuestoes.Where(a => a.nomPuesto.Contains(filtro)).ToList();
             }
             catch
             {
@@ -31,11 +25,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarCombo()
+        public static IList cargarCombo()
         {
             try
             {
-                return dbHelp.DB.tblpuestoes.OrderBy(a => a.idPuesto).ToList();
+                return dbhelp.modelo.tblpuestoes.OrderBy(a => a.idPuesto).ToList();
             }
             catch
             {
@@ -43,17 +37,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool insertar(string nombre)
+        public static bool insertar(string nombre)
         {
             try
             {
                 var puesto = new tblpuesto { nomPuesto = nombre };
                 if (puesto != null)
                 {
-                    dbHelp.DB.tblpuestoes.Attach(puesto);
-                    dbHelp.DB.tblpuestoes.Add(puesto);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblpuestoes.Attach(puesto);
+                    dbhelp.modelo.tblpuestoes.Add(puesto);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -63,16 +56,15 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int id, string nombre)
+        public static bool modificar(int id, string nombre)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tblpuestoes.SingleOrDefault(x => x.idPuesto == id);
+                var ItemAmodificar = dbhelp.modelo.tblpuestoes.SingleOrDefault(x => x.idPuesto == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomPuesto = nombre;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -82,11 +74,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tblpuesto obtenerPuesto(int id)
+        public static tblpuesto obtenerPuesto(int id)
         {
             try
             {
-                return dbHelp.DB.tblpuestoes.SingleOrDefault(a => a.idPuesto == id);
+                return dbhelp.modelo.tblpuestoes.SingleOrDefault(a => a.idPuesto == id);
             }
             catch
             {

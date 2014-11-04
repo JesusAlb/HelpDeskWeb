@@ -13,20 +13,17 @@ namespace HelpDeskWeb.Reportes
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        hdk_ControlAcceso Control;
-        hdk_ControlEquipos controlEquipos;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Control = new hdk_ControlAcceso();
-            controlEquipos = new hdk_ControlEquipos(Control);
+            hdk_utilerias.checarSession(this,true, 2, 2);
         }
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
             reporte.Reset();
             reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
-            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.cargarTabla(""));
+            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", hdk_ControlEquipos.cargarTabla(""));
             reporte.LocalReport.DataSources.Add(datasource);
             reporte.LocalReport.Refresh();
             datosBusqueda.CssClass = "panel-collapse collapse";

@@ -13,18 +13,12 @@ namespace HelpDeskWeb.ControlAltas
 {
    public class hdk_ControlTipoIncidencia
     {
-       hdk_ControlAcceso dbHelp;
 
-       public hdk_ControlTipoIncidencia(hdk_ControlAcceso ca)
-       {
-           dbHelp = ca;
-       }
-
-       public IList cargarTabla(string filtro)
+       public static IList cargarTabla(string filtro)
        {
            try
            {
-               return dbHelp.DB.tbltipoincidencias.Where(a => a.nomTipoIncidente.Contains(filtro)).ToList();
+               return dbhelp.modelo.tbltipoincidencias.Where(a => a.nomTipoIncidente.Contains(filtro)).ToList();
            }
            catch
            {
@@ -32,16 +26,15 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public bool borrarRegistro(int id)
+       public static bool borrarRegistro(int id)
        {
            try
            {
-               var ItemARemover = dbHelp.DB.tbltipoincidencias.SingleOrDefault(x => x.idTipoIncidente == id);
+               var ItemARemover = dbhelp.modelo.tbltipoincidencias.SingleOrDefault(x => x.idTipoIncidente == id);
                if (ItemARemover != null)
                {
-                   dbHelp.DB.tbltipoincidencias.Remove(ItemARemover);
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();
+                   dbhelp.modelo.tbltipoincidencias.Remove(ItemARemover);
+                   dbhelp.modelo.SaveChanges();
                }
                return true;
            }
@@ -52,17 +45,16 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool insertar(string nombre)
+       public static bool insertar(string nombre)
        {
            try
            {
                var cord = new tbltipoincidencia { nomTipoIncidente = nombre };
                if (cord != null)
                {
-                   dbHelp.DB.tbltipoincidencias.Attach(cord);
-                   dbHelp.DB.tbltipoincidencias.Add(cord);
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();
+                   dbhelp.modelo.tbltipoincidencias.Attach(cord);
+                   dbhelp.modelo.tbltipoincidencias.Add(cord);
+                   dbhelp.modelo.SaveChanges();
                }
                return true;
            }
@@ -73,16 +65,15 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool modificar(int id, string nombre)
+       public static bool modificar(int id, string nombre)
        {
            try
            {
-               var ItemAmodificar = dbHelp.DB.tbltipoincidencias.SingleOrDefault(x => x.idTipoIncidente == id);
+               var ItemAmodificar = dbhelp.modelo.tbltipoincidencias.SingleOrDefault(x => x.idTipoIncidente == id);
                if (ItemAmodificar != null)
                {
                    ItemAmodificar.nomTipoIncidente = nombre;
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();
+                   dbhelp.modelo.SaveChanges();                 
                }
                return true;
            }
@@ -92,11 +83,11 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public tbltipoincidencia obtenerTipoIncidencia(int id)
+       public static tbltipoincidencia obtenerTipoIncidencia(int id)
        {
            try
            {
-               return dbHelp.DB.tbltipoincidencias.SingleOrDefault(a => a.idTipoIncidente == id);
+               return dbhelp.modelo.tbltipoincidencias.SingleOrDefault(a => a.idTipoIncidente == id);
            }
            catch
            {

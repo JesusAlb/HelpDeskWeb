@@ -14,14 +14,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
     class hdk_ControlEventos
     {
-        hdk_ControlAcceso dbHelp;
 
-        public hdk_ControlEventos(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public IList cargarTablasSolicitante(int idSol, int status, string filtro, DateTime? FechaInicio, DateTime? FechaFinal)
+        public static IList cargarTablasSolicitante(int idSol, int status, string filtro, DateTime? FechaInicio, DateTime? FechaFinal)
         {
             DateTime busquedaFecha;
             int numero;
@@ -38,14 +32,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
                                                          a.tipo_evento.Contains(filtro))).ToList();
                     }
                     else
                     {
-                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosSinCerrars.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                            a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||                          
                                            a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro))).ToList();
 
@@ -55,14 +49,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) ||
                                                          a.tipo_evento.Contains(filtro))).ToList();
                     }
                     else
                     {
-                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosCerrados.Where(a => (a.status == status && a.idSolicitante == idSol && (a.FechaInicio >= FechaInicio && a.FechaInicio <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                            a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.FechaInicio.Value.Equals(busquedaFecha) ||                         
                                            a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.responsable.Contains(filtro) || a.tipo_evento.Contains(filtro))).ToList();
 
@@ -75,11 +69,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public tblevento cargarEvento(int evento)
+        public static tblevento cargarEvento(int evento)
         {
             try
             {
-                return dbHelp.DB.tbleventoes.SingleOrDefault(a => a.idEvento == evento);
+                return dbhelp.modelo.tbleventoes.SingleOrDefault(a => a.idEvento == evento);
             }
             catch
             {
@@ -87,11 +81,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public VistaEventosCerrado cargarEventoCerrado(int evento)
+        public static VistaEventosCerrado cargarEventoCerrado(int evento)
         {
             try
             {
-                return dbHelp.DB.VistaEventosCerrados.SingleOrDefault(a => a.idEvento == evento);
+                return dbhelp.modelo.VistaEventosCerrados.SingleOrDefault(a => a.idEvento == evento);
             }
             catch
             {
@@ -99,7 +93,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public IList cargarTablasSoporte(int status, string filtro, DateTime? FechaInicio, DateTime? FechaFinal)
+        public static IList cargarTablasSoporte(int status, string filtro, DateTime? FechaInicio, DateTime? FechaFinal)
         {
 
             DateTime busquedaFecha;
@@ -117,7 +111,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -129,7 +123,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     }
                     else
                     {
-                        return dbHelp.DB.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosSinCerrars.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -145,7 +139,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -157,7 +151,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     }
                     else
                     {
-                        return dbHelp.DB.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
+                        return dbhelp.modelo.VistaEventosCerrados.Where(a => (a.descripcion.Contains(filtro) || a.titulo.Contains(filtro) ||
                                                          a.fecha_Sol.Value.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.FechaInicio.Value.Equals(busquedaFecha) ||
                                                          a.titulo.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -176,14 +170,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool insertarEvento(int? id, string tit, int? lug, string ac, string tipo, DateTime feIn, int? asis, DateTime? In, DateTime? Fn, string desc)
+        public static bool insertarEvento(int? id, string tit, int? lug, string ac, string tipo, DateTime feIn, int? asis, DateTime? In, DateTime? Fn, string desc)
         {       
             try
             {
-                   var evento = dbHelp.DB.insertarEvento(tit, lug, ac, asis, In, Fn, desc, tipo, id, feIn);
+                   var evento = dbhelp.modelo.insertarEvento(tit, lug, ac, asis, In, Fn, desc, tipo, id, feIn);
                    if (evento != 0)
                    {
-                       dbHelp.actualizarModelo();
+                       dbhelp.modelo.SaveChanges();
                    }
                    return true; 
             }
@@ -194,16 +188,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             
         }
 
-        public bool cambiarStatus(int id, int status)
+        public static bool cambiarStatus(int id, int status)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbleventoes.SingleOrDefault(x => x.idEvento == id);
+                var ItemAmodificar = dbhelp.modelo.tbleventoes.SingleOrDefault(x => x.idEvento == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.status = status;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                     return true;
                 }
                 else
@@ -218,15 +211,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool cerrarEvento(int id)
+        public static bool cerrarEvento(int id)
         {
             try
             {
-                var eventoModificado = dbHelp.DB.cerrarEvento(id);
+                var eventoModificado = dbhelp.modelo.cerrarEvento(id);
                 if (eventoModificado !=0 )
                 {
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();               
                     return true;
                 }
                 else
@@ -240,18 +232,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool asignarResponsable(int id, int res, int apo)
+        public static bool asignarResponsable(int id, int res, int apo)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbleventoes.SingleOrDefault(x => x.idEvento == id);
+                var ItemAmodificar = dbhelp.modelo.tbleventoes.SingleOrDefault(x => x.idEvento == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.status = 1;
                     ItemAmodificar.responsable = res;
                     ItemAmodificar.apoyo = apo;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -261,11 +252,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool editarEvento(int id, string tit, int lug, string aco, string tipo, DateTime feIn, int asis, DateTime In, DateTime Fn, string desc)
+        public static bool editarEvento(int id, string tit, int lug, string aco, string tipo, DateTime feIn, int asis, DateTime In, DateTime Fn, string desc)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbleventoes.SingleOrDefault(x => x.idEvento == id);
+                var ItemAmodificar = dbhelp.modelo.tbleventoes.SingleOrDefault(x => x.idEvento == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.titulo = tit;
@@ -277,8 +268,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     ItemAmodificar.FechaInicio = feIn;
                     ItemAmodificar.horaIn = In;
                     ItemAmodificar.horaFn = Fn;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -288,16 +278,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool editarObservaciones(int id, String ob)
+        public static bool editarObservaciones(int id, String ob)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbleventoes.SingleOrDefault(x => x.idEvento == id);
+                var ItemAmodificar = dbhelp.modelo.tbleventoes.SingleOrDefault(x => x.idEvento == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.observaciones = ob;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -307,11 +296,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public int obtenerUltimoEvento()
+        public static int obtenerUltimoEvento()
         {
             try
             {
-                return dbHelp.DB.tbleventoes.Max(a => a.idEvento);
+                return dbhelp.modelo.tbleventoes.Max(a => a.idEvento);
             }
             catch
             {
@@ -319,11 +308,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public int obtenerNumeroEventos()
+        public static int obtenerNumeroEventos()
         {
             try
             {
-                return dbHelp.DB.tbleventoes.Where(a => a.status == 0).Count();
+                return dbhelp.modelo.tbleventoes.Where(a => a.status == 0).Count();
             }
             catch
             {

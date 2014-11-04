@@ -14,23 +14,11 @@ namespace HelpDeskWeb.Catalogos
 {
     public partial class catSolicitudes : System.Web.UI.Page
     {
-        private hdk_ControlAcceso Control;
-        private hdk_ControlLugar controlLugar;
-        private hdk_ControlRequerimientos controlRequerimientos;
-        private hdk_ControlTipoIncidencia controlTipoIncidencia;
-        private hdk_utilerias utilerias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["DatosUsuario"] == null)
-            {
-                Response.Redirect("../index.aspx");
-            }
+            hdk_utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlTipoIncidencia = new hdk_ControlTipoIncidencia(Control);
-            controlRequerimientos = new hdk_ControlRequerimientos(Control);
-            controlLugar = new hdk_ControlLugar(Control);
             if (!IsPostBack)
             {
                 this.cargarTablaTipoIncidente();
@@ -48,26 +36,25 @@ namespace HelpDeskWeb.Catalogos
 
         protected void cargarTablaTipoIncidente()
         {
-            gvTipoIncidentes.DataSource = controlTipoIncidencia.cargarTabla(txtFiltroTipoIncidentes.Text);
+            gvTipoIncidentes.DataSource = hdk_ControlTipoIncidencia.cargarTabla(txtFiltroTipoIncidentes.Text);
             gvTipoIncidentes.DataBind();
         }
 
         protected void cargarTablaLugares()
         {
-              gvLugares.DataSource = controlLugar.cargarTabla(txtFiltroLugares.Text);
+            gvLugares.DataSource = hdk_ControlLugar.cargarTabla(txtFiltroLugares.Text);
               gvLugares.DataBind();
         }
 
         protected void cargarTablaRequerimientos()
         {
-             gvRequerimientos.DataSource = controlRequerimientos.cargarTabla(txtFiltroReq.Text, cbFiltroTipo.Text, null);
+            gvRequerimientos.DataSource = hdk_ControlRequerimientos.cargarTabla(txtFiltroReq.Text, cbFiltroTipo.Text, null);
              gvRequerimientos.DataBind();
         }
 
         protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            utilerias = new hdk_utilerias();
-            utilerias.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
      /*   protected void btnGrabar_Click(object sender, EventArgs e)
@@ -267,7 +254,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarTipoIncidente":
                     if (gvTipoIncidentes.SelectedIndex != -1)
                     {
-                        tbltipoincidencia tipoInSeleccionado = controlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
+                        tbltipoincidencia tipoInSeleccionado = hdk_ControlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
                         this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nomTipoIncidente, false);
                         seleccionado = true;
                     }
@@ -276,7 +263,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarLugar":
                     if (gvLugares.SelectedIndex != -1)
                     {
-                        tbllugar lugarSeleccionado = controlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
+                        tbllugar lugarSeleccionado = hdk_ControlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
                         this.configurarModal("Editar lugares", lugarSeleccionado.nomLugar, false);
                         seleccionado = true;
                     }
@@ -285,7 +272,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarRequerimiento":
                     if (gvRequerimientos.SelectedIndex != -1)
                     {
-                        requerimientosSinAsignar_Result ReqSeleccionado = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
+                        requerimientosSinAsignar_Result ReqSeleccionado = hdk_ControlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
                         this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento, true);
                         cbTipoRequerimiento.SelectedItem.Text = ReqSeleccionado.tipo;
                         seleccionado = true;
@@ -329,7 +316,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "tipoIncidente":
-                    if (controlTipoIncidencia.insertar(txtNombre.Text))
+                    if (hdk_ControlTipoIncidencia.insertar(txtNombre.Text))
                     {
                         this.cargarTablaTipoIncidente();
                         return true;
@@ -338,7 +325,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "lugar":
-                    if (controlLugar.insertar(txtNombre.Text))
+                    if (hdk_ControlLugar.insertar(txtNombre.Text))
                     {
                         this.cargarTablaLugares();
                         return true;
@@ -347,7 +334,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (hdk_ControlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;
@@ -365,7 +352,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "tipoIncidente":
-                    if (controlTipoIncidencia.modificar(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value), txtNombre.Text))
+                    if (hdk_ControlTipoIncidencia.modificar(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaTipoIncidente();
                         return true;
@@ -374,7 +361,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "lugar":
-                    if (controlLugar.modificar(Convert.ToInt32(gvLugares.SelectedDataKey.Value), txtNombre.Text))
+                    if (hdk_ControlLugar.modificar(Convert.ToInt32(gvLugares.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaLugares();
                         return true;
@@ -383,7 +370,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (hdk_ControlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;

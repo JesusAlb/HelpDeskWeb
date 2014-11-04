@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelpDeskWeb.EntityFrameWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,54 +10,81 @@ namespace HelpDeskWeb
 {
     public class hdk_utilerias : System.Web.UI.Page
     {
-        public void setRowCreated(object sender, GridViewRowEventArgs e)
+        public static void setRowCreated(object sender, GridViewRowEventArgs e, Page pagina)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 e.Row.Attributes["onmouseover"] = "this.style.cursor='pointer';this.style.textDecoration='none';";
                 e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
-                e.Row.Attributes["onclick"] = this.Page.ClientScript.GetPostBackClientHyperlink((sender as GridView), "Select$" + e.Row.RowIndex);
+                e.Row.Attributes["onclick"] = pagina.ClientScript.GetPostBackClientHyperlink((sender as GridView), "Select$" + e.Row.RowIndex);
             }
         }
 
-        public void limpiarControles(object[] ob)
+        public static void limpiarControles(ControlCollection controles)
         {
-            foreach (object x in ob)
+            foreach (Control control in controles)
             {
-                if (x is TextBox)
+                if (control is TextBox)
                 {
-                    (x as TextBox).Text = "";
+                    (control as TextBox).Text = "";
                 }
-                else if (x is DropDownList)
+                else if (control is DropDownList)
                 {
-                    (x as DropDownList).SelectedIndex = -1;
+                    (control as DropDownList).SelectedIndex = -1;
                 }
+
+                limpiarControles(control.Controls);
             }
         }
 
-
-        public bool verificarCamposVacios(TextBox[] controles)
+        public static bool verificarCamposVacios(string[] controles)
         {
-            foreach (TextBox control in controles)
+            foreach (string texto in controles)
             {
-                    if (String.IsNullOrWhiteSpace(control.Text))
+                    if (String.IsNullOrWhiteSpace(texto))
                     {
                         return false;
-                    }
-                    else if(control.TextMode == TextBoxMode.Date || control.TextMode == TextBoxMode.Time)
-                    {
-                        try
-                        {
-                            Convert.ToDateTime(control.Text); 
-                        }
-                        catch
-                        {
-                            return false;
-                        }
-                    }                
+                    }            
              }
 
             return true;
+        }
+
+        public static void checarSession(Page pagina, bool despues, int tipoObligatorio, int tipoActual)
+        {
+                if (despues)
+                  {
+                      if (pagina.Session["DatosUsuario"] == null)
+                      {
+                          pagina.Response.Redirect("~/login.aspx");
+                      }
+                      else
+                      {
+                          if (tipoActual != 2)
+                          {
+                              tipoActual = ((ViewUsuario)pagina.Session["DatosUsuario"]).tipoUsuario;
+                          }
+
+                          if (tipoObligatorio != tipoActual)
+                          {
+                              if (tipoActual == 0)
+                              {
+                                  pagina.Response.Redirect("~/soporte.aspx");
+                              }
+                              else if(tipoActual == 1)
+                              {
+                                  pagina.Response.Redirect("~/solicitante.aspx");
+                              }
+                          }
+                      }
+                  }
+                  else
+                  {
+                     if (pagina.Session["DatosUsuario"] != null)
+                      {
+                          pagina.Response.Redirect("~/soporte.aspx");
+                      }              
+                  }
         }
     }
 

@@ -16,19 +16,13 @@ namespace HelpDeskWeb.Datos
 
     public class hdk_ControlCoordinacion
     {
-        hdk_ControlAcceso dbHelp;
         
-        public hdk_ControlCoordinacion(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-            
-        }
 
-        public IList cargarTabla(string filtro)
+        public static IList cargarTabla(string filtro)
         {
             try
             {
-                return dbHelp.DB.tblcoordinacions.Where(a => a.nomCoordinacion.Contains(filtro)).ToList();
+                return dbhelp.modelo.tblcoordinacions.Where(a => a.nomCoordinacion.Contains(filtro)).ToList();
             }
             catch
             {              
@@ -37,16 +31,15 @@ namespace HelpDeskWeb.Datos
 
         }
 
-        public bool borrarRegistro(int id)
+        public static bool borrarRegistro(int id)
         {
             try
             {
-                var ItemARemover = dbHelp.DB.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
+                var ItemARemover = dbhelp.modelo.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
                 if (ItemARemover != null)
                 {
-                    dbHelp.DB.tblcoordinacions.Remove(ItemARemover);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblcoordinacions.Remove(ItemARemover);
+                    dbhelp.modelo.SaveChanges();
                 }               
                 return true;
             }
@@ -56,17 +49,16 @@ namespace HelpDeskWeb.Datos
             }
         }
 
-        public bool insertar(string nombre)
+        public static bool insertar(string nombre)
         {
             try
             {
                 var cord = new tblcoordinacion { nomCoordinacion = nombre };
                 if (cord != null)
                 {
-                    dbHelp.DB.tblcoordinacions.Attach(cord);
-                    dbHelp.DB.tblcoordinacions.Add(cord);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblcoordinacions.Attach(cord);
+                    dbhelp.modelo.tblcoordinacions.Add(cord);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -76,17 +68,15 @@ namespace HelpDeskWeb.Datos
             }   
         }
 
-        public bool modificar(int id, string nombre)
+        public static bool modificar(int id, string nombre)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
+                var ItemAmodificar = dbhelp.modelo.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomCoordinacion = nombre;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
-                    
+                    dbhelp.modelo.SaveChanges();        
                 }
                 return true;
             }
@@ -96,11 +86,11 @@ namespace HelpDeskWeb.Datos
             }
         }
 
-        public tblcoordinacion obtenerCoordinacion(int id)
+        public static tblcoordinacion obtenerCoordinacion(int id)
         {
             try
             {
-                return dbHelp.DB.tblcoordinacions.SingleOrDefault(a => a.idCoordinacion == id);
+                return dbhelp.modelo.tblcoordinacions.SingleOrDefault(a => a.idCoordinacion == id);
             }catch{
                 return null;
             }

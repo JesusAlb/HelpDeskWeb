@@ -16,19 +16,16 @@ namespace HelpDeskWeb.Solicitudes
     {
         private hdk_ControlAcceso Control;
         private hdk_ControlIncidentes controlIncidentes;
-        private hdk_utilerias utilerias;
         private hdk_ControlUsuario controlUsuario;
         private ViewUsuario usuarioConectado;
         private hdk_ControlEncuestas controlEncuestas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdk_utilerias.checarSession(this, true, 2, 2);
             usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
             lbelUsuario.Text = " " + usuarioConectado.username;
             Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlIncidentes = new hdk_ControlIncidentes(Control);
-            controlUsuario = new hdk_ControlUsuario(Control);
-            controlEncuestas = new hdk_ControlEncuestas(Control);
             if (!IsPostBack)
             {
                 this.cargarComboFiltro();
@@ -62,11 +59,11 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (usuarioConectado.tipoUsuario == 0)
                 {
-                    (objeto[x] as GridView).DataSource = controlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = controlIncidentes.cargarTablaSolicitante(usuarioConectado.idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(usuarioConectado.idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -74,8 +71,8 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboBoxs()
         {
-            cbTipoIncidente.DataSource = controlIncidentes.cargarComboTipo();
-            cbSeguimiento.DataSource = cbSoporte.DataSource = controlUsuario.cargarComboUsuarios(0);
+            cbTipoIncidente.DataSource = hdk_ControlIncidentes.cargarComboTipo();
+            cbSeguimiento.DataSource = cbSoporte.DataSource = hdk_ControlUsuario.cargarComboUsuarios(0);
             cbTipoIncidente.DataBind();
             cbSoporte.DataBind();
             cbSeguimiento.DataBind();
@@ -83,7 +80,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboFiltro()
         {
-            cbTipoFiltro.DataSource = controlIncidentes.cargarComboTipo();
+            cbTipoFiltro.DataSource = hdk_ControlIncidentes.cargarComboTipo();
             cbTipoFiltro.DataBind();
         }
 
@@ -91,13 +88,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (datasource != null)
             {
-                gvEncuestas.DataSource = controlEncuestas.cargarTablaEncuesta(datasource.Value);
+                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaEncuesta(datasource.Value);
                 this.gvEncuestas.Columns[2].Visible = false;
                 this.gvEncuestas.Columns[3].Visible = true;
             }
             else
             {
-                gvEncuestas.DataSource = controlEncuestas.cargarTablaPreguntas(1);
+                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaPreguntas(1);
                 this.gvEncuestas.Columns[2].Visible = true;
                 this.gvEncuestas.Columns[3].Visible = false;
             }
@@ -119,15 +116,14 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void gvIncidentes_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            utilerias = new hdk_utilerias();
-            utilerias.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                if (controlIncidentes.insertarIncidente(usuarioConectado.idUsuario, txtDescripcion.Text))
+                if (hdk_ControlIncidentes.insertarIncidente(usuarioConectado.idUsuario, txtDescripcion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -146,7 +142,7 @@ namespace HelpDeskWeb.Solicitudes
             if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
             {
                 this.cargarComboBoxs();
-                tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
+                tblincidente itemIncidente = hdk_ControlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
                 cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
                 cbPrioridad.Text = itemIncidente.prioridad;
                 cbSoporte.SelectedValue = itemIncidente.soporte.ToString();
@@ -168,7 +164,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
             {
-                    if (controlIncidentes.cambiarStatus(Convert.ToInt32(idIncidenteSeleccionado.Value), 3))
+                if (hdk_ControlIncidentes.cambiarStatus(Convert.ToInt32(idIncidenteSeleccionado.Value), 3))
                     {
                         this.cargarTablasIncidentes();
                         ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidente", "alertify.alert('Correcto', 'Incidente cancelado correctamente', 'onok');", true);
@@ -203,7 +199,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void BtnGrabarAsignacion_Click(object sender, EventArgs e)
         {
-            if (controlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), cbPrioridad.Text, Convert.ToInt32(cbTipoIncidente.SelectedValue)))
+            if (hdk_ControlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), cbPrioridad.Text, Convert.ToInt32(cbTipoIncidente.SelectedValue)))
             {
                 this.cargarTablasIncidentes();
                 ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "SalirVentanaAsign", "$('#ModalAsignar').modal('hide');", true);
@@ -219,7 +215,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtAcciones.Text) || !String.IsNullOrWhiteSpace(txtSolucion.Text))
             {
-                if (controlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text))
+                if (hdk_ControlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "SalirVentanaCerrar", "$('#ModalCerrar').modal('hide');", true);
@@ -316,7 +312,7 @@ namespace HelpDeskWeb.Solicitudes
             TableCell celda = (TableCell)imgBtn.Parent;
             GridViewRow renglon = (GridViewRow)celda.Parent;
             gvIncidentes_Cerrados.SelectedIndex = renglon.RowIndex;
-            VistaIncidentesCerrado incidenteCerrado = controlIncidentes.obtenerIncidenteCerrado(Convert.ToInt32(gvIncidentes_Cerrados.SelectedDataKey.Value.ToString()));
+            VistaIncidentesCerrado incidenteCerrado = hdk_ControlIncidentes.obtenerIncidenteCerrado(Convert.ToInt32(gvIncidentes_Cerrados.SelectedDataKey.Value.ToString()));
             idCalidad.Value = incidenteCerrado.idCalidad_Servicio.ToString();
             txtSolicitante.Text = incidenteCerrado.solicitante;
             if (incidenteCerrado.statusCal_Servicio)
@@ -354,7 +350,7 @@ namespace HelpDeskWeb.Solicitudes
                     if (row.RowType == DataControlRowType.DataRow)
                     {
                         DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
-                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        if (hdk_ControlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
                         {
                             correcto = true;
                         }
@@ -366,7 +362,7 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 if (correcto)
                 {
-                    if (controlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
+                    if (hdk_ControlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
                     {
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
                         this.cargarTablasIncidentes();

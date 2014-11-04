@@ -15,13 +15,14 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdk_utilerias.checarSession(this, false, 1, 0);
             Control = new hdk_ControlAcceso();
            // Control.DB.tblareas.SingleOrDefault(a => a.idArea == 1);
         }
 
         protected void entrar_Click(object sender, EventArgs e)
         {    
-            int usuario = Control.encontrarUsuario(txtUsuario.Text, txtPassword.Text);
+            int usuario = hdk_ControlAcceso.encontrarUsuario(txtUsuario.Text, txtPassword.Text, this.Page);
             if (usuario != -1)
             {
                 if (usuario == 0)

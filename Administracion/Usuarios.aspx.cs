@@ -9,33 +9,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using toolsASP;
 
 namespace HelpDeskWeb.Administracion
 {
     public partial class Usuarios : System.Web.UI.Page
     {
 
-        hdk_ControlAcceso Control;
-        hdk_ControlUsuario controlUsuario;
-        hdk_ControlDepartamento cDepto;
-        hdk_ControlArea cArea;
-        hdk_ControlPuesto cPuesto;
-        hdk_utilerias utilerias;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["DatosUsuario"] == null)
-            {
-                Response.Redirect("index.aspx");
-            }
+            hdk_utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlUsuario = new hdk_ControlUsuario(Control);
-            cDepto = new hdk_ControlDepartamento(Control);
-            cArea = new hdk_ControlArea(Control);
-            utilerias = new hdk_utilerias();
-            cPuesto = new hdk_ControlPuesto(Control);
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -46,10 +29,10 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarCombos()
         {
-            cbCoordinaciones.DataSource = cDepto.cargarComboCord(false);
-            cbArea.DataSource = cArea.cargarCombo();
-            cbPuesto.DataSource = cPuesto.cargarCombo();
-            cbInstitucion.DataSource = Control.DB.tblinstitucions.Where(a=> a.status == true).ToList();
+            cbCoordinaciones.DataSource = hdk_ControlDepartamento.cargarComboCord(false);
+            cbArea.DataSource = hdk_ControlArea.cargarCombo();
+            cbPuesto.DataSource = hdk_ControlPuesto.cargarCombo();
+            cbInstitucion.DataSource = hdk_ControlInstitucion.cargarTablaInsitucion();
             cbInstitucion.DataBind();
             cbCoordinaciones.DataBind();
             cbArea.DataBind();
@@ -58,20 +41,19 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarDeptos(int idCoord)
         {
-            cbDepto.DataSource = cDepto.cargarComboDep(idCoord);
+            cbDepto.DataSource = hdk_ControlDepartamento.cargarComboDep(idCoord);
             cbDepto.DataBind();
         }
 
         protected void cargarTabla()
-        {           
-            gvUsuarios.DataSource = controlUsuario.cargarTabla(txtFiltro.Text);
+        {
+            gvUsuarios.DataSource = hdk_ControlUsuario.cargarTabla(txtFiltro.Text);
             gvUsuarios.DataBind();
         }
 
         protected void gvUsuarios_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias utilerias = new hdk_utilerias();
-            utilerias.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void cbCoordinaciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +79,7 @@ namespace HelpDeskWeb.Administracion
 
                 case "nuevo":
                     lbelTituloModal.Text = "Alta de usuarios";
-                    forControls.limpiarFormulario(this.panelFormulario.Controls);
+                    hdk_utilerias.limpiarControles(this.panelFormulario.Controls);
                     txtPassword.Attributes.Remove("Value");
                     this.cargarDeptos(1);
                     ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
@@ -108,7 +90,7 @@ namespace HelpDeskWeb.Administracion
                     {
                         lbelTituloModal.Text = "Modificar usuario";
                         int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value);
-                        tblusuario usuario = controlUsuario.obtenerUsuario(idUsuario);
+                        tblusuario usuario = hdk_ControlUsuario.obtenerUsuario(idUsuario);
                         txtNomUsuario.Text = usuario.username;
                         txtNombre.Text = usuario.nombre;
                         txtApellido.Text = usuario.apellidos;
@@ -119,8 +101,8 @@ namespace HelpDeskWeb.Administracion
                         cbInstitucion.SelectedValue = usuario.institucion.ToString();
                         cbArea.SelectedValue = usuario.area.ToString();
                         cbPuesto.SelectedValue = usuario.puesto.ToString();
-                        cbCoordinaciones.SelectedValue = ((tbldepartamento)cDepto.obtenerDepto(usuario.depto)).coordinacion.ToString();
-                        cbDepto.DataSource = cDepto.cargarComboDep(Convert.ToInt32(cbCoordinaciones.SelectedValue));
+                        cbCoordinaciones.SelectedValue = ((tbldepartamento)hdk_ControlDepartamento.obtenerDepto(usuario.depto)).coordinacion.ToString();
+                        cbDepto.DataSource = hdk_ControlDepartamento.cargarComboDep(Convert.ToInt32(cbCoordinaciones.SelectedValue));
                         cbDepto.DataBind();
                         cbDepto.SelectedValue = usuario.depto.ToString();
                         ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
@@ -134,17 +116,17 @@ namespace HelpDeskWeb.Administracion
         }
 
         protected void btnGrabar_Command(object sender, CommandEventArgs e){
-            if (forControls.verificarCamposVacios(new string[] { txtNomUsuario.Text, txtNombre.Text, txtPassword.Text, txtPasswordVer.Text, txtExtension.Text, txtCorreo.Text }) && cbDepto.SelectedIndex != -1)
+            if (hdk_utilerias.verificarCamposVacios(new string[] { txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, cbTipoUs.Text, cbDepto.Text, txtExtension.Text, txtCorreo.Text, txtPassword.Text, cbArea.Text, cbPuesto.Text, cbInstitucion.Text }) && cbDepto.SelectedIndex != -1)
             {
                 int resultado = 0;
                 switch (e.CommandName)
                 {
                     case "nuevo":
-                        resultado = controlUsuario.insertar(txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                        resultado = hdk_ControlUsuario.insertar(txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
                         break;
 
                     case "editar":
-                        resultado = controlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                        resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
                         break;
                 }
                 if (resultado == 1)

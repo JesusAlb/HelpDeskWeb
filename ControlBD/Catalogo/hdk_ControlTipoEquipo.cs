@@ -13,18 +13,12 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlTipoEquipo
     {
-        hdk_ControlAcceso dbHelp;
 
-        public hdk_ControlTipoEquipo(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public IList cargarTabla(string filtro)
+        public static IList cargarTabla(string filtro)
         {
             try
             {
-                return dbHelp.DB.tbltipoequipoes.Where(a => a.nomTipoEquipo.Contains(filtro)).ToList();
+                return dbhelp.modelo.tbltipoequipoes.Where(a => a.nomTipoEquipo.Contains(filtro)).ToList();
             }
             catch
             {             
@@ -32,17 +26,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }          
         }
 
-        public bool insertar(string nombre, bool cpu, bool dd, bool red, bool monitor, bool mouse, bool teclado, bool ram, bool procesador)
+        public static bool insertar(string nombre, bool cpu, bool dd, bool red, bool monitor, bool mouse, bool teclado, bool ram, bool procesador)
         {
             try
             {
                 var tipoEquipos = new tbltipoequipo { nomTipoEquipo = nombre, siEquipo = cpu, siDiscoDuro = dd, siRed = red, siMonitor = monitor, siMouse = mouse, siTeclado = teclado, siRAM = ram, siProcesador = procesador };
                 if (tipoEquipos != null)
                 {
-                    dbHelp.DB.tbltipoequipoes.Attach(tipoEquipos);
-                    dbHelp.DB.tbltipoequipoes.Add(tipoEquipos);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tbltipoequipoes.Attach(tipoEquipos);
+                    dbhelp.modelo.tbltipoequipoes.Add(tipoEquipos);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -52,11 +45,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int idTipoEq, string nombre, bool cpu, bool dd, bool red, bool monitor, bool mouse, bool teclado, bool ram, bool procesador)
+        public static bool modificar(int idTipoEq, string nombre, bool cpu, bool dd, bool red, bool monitor, bool mouse, bool teclado, bool ram, bool procesador)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbltipoequipoes.SingleOrDefault(x => x.idTipoEquipo == idTipoEq);
+                var ItemAmodificar = dbhelp.modelo.tbltipoequipoes.SingleOrDefault(x => x.idTipoEquipo == idTipoEq);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomTipoEquipo = nombre;
@@ -68,8 +61,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     ItemAmodificar.siRed = red;
                     ItemAmodificar.siRAM = ram;
                     ItemAmodificar.siProcesador = procesador;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -79,11 +71,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarCombo(int tipo)
+        public static IList cargarCombo(int tipo)
         {
             try
             {
-                return dbHelp.DB.tbltipoequipoes.ToList();
+                return dbhelp.modelo.tbltipoequipoes.ToList();
             }
             catch
             {
@@ -91,11 +83,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tbltipoequipo obtenerEquipo(int index)
+        public static tbltipoequipo obtenerEquipo(int index)
         {
             try
             {
-               return dbHelp.DB.tbltipoequipoes.SingleOrDefault(a => a.idTipoEquipo == index);
+                return dbhelp.modelo.tbltipoequipoes.SingleOrDefault(a => a.idTipoEquipo == index);
             }
             catch
             {

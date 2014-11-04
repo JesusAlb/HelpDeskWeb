@@ -12,21 +12,11 @@ namespace HelpDeskWeb.Administracion
 {
     public partial class Equipos : System.Web.UI.Page
     {
-        private hdk_ControlEquipos controlEquipos;
-        private hdk_ControlTipoEquipo controlTEquipos;
-        private hdk_ControlMarca controlMarca;
-        private hdk_ControlUsuario controlUsuario;
-        private hdk_ControlAcceso Control;
-        private hdk_utilerias utilerias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdk_utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlEquipos = new hdk_ControlEquipos(Control);
-            controlTEquipos = new hdk_ControlTipoEquipo(Control);
-            controlMarca = new hdk_ControlMarca(Control);
-            controlUsuario = new hdk_ControlUsuario(Control);
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -37,15 +27,15 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarComboEquipos()
         {
-            cbTipoEquipo.DataSource = controlTEquipos.cargarCombo(0);
+            cbTipoEquipo.DataSource = hdk_ControlTipoEquipo.cargarCombo(0);
             cbTipoEquipo.DataBind();
-            cbResponsable.DataSource = controlUsuario.cargarComboUsuarios(2);
+            cbResponsable.DataSource = hdk_ControlUsuario.cargarComboUsuarios(2);
             cbResponsable.DataBind();
         }
 
         protected void cargarTabla()
         {
-            gvEquipo.DataSource = controlEquipos.cargarTabla(txtFiltro.Text);
+            gvEquipo.DataSource = hdk_ControlEquipos.cargarTabla(txtFiltro.Text);
             gvEquipo.DataBind();
         }
 
@@ -75,13 +65,13 @@ namespace HelpDeskWeb.Administracion
 
             if(Convert.ToInt16(Session["Accion"]) == 0)
             {
-                controlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
                     Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
                     ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
             }
             else
             {
-                controlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
                     Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
                     ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
             }
@@ -91,7 +81,7 @@ namespace HelpDeskWeb.Administracion
         {
             this.cargarControles();
             lbelTituloModal.Text = "Modificar usuario";
-            tblresponsablequipo equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+            tblresponsablequipo equipos = hdk_ControlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
             cbResponsable.SelectedValue = equipos.responsable.ToString();
             cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();           
             string[]division = equipos.discoDuro.Split(' ');
@@ -126,8 +116,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void gvEquipo_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            utilerias = new hdk_utilerias();
-            utilerias.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void cbTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,7 +126,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarControles()
         {
-            tbltipoequipo tipoEquipo = controlTEquipos.obtenerEquipo(Convert.ToInt32(cbTipoEquipo.SelectedValue));
+            tbltipoequipo tipoEquipo = hdk_ControlTipoEquipo.obtenerEquipo(Convert.ToInt32(cbTipoEquipo.SelectedValue));
             this.cargarCombosMarcas(new DropDownList[] {cbMarcaEquipo, cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado }, new bool[] {tipoEquipo.siEquipo, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
             this.cargarTextBox(new TextBox[] { txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado }, new bool[] { tipoEquipo.siDiscoDuro, tipoEquipo.siProcesador, tipoEquipo.siRAM, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
             txtIP1.Enabled = txtIP2.Enabled = txtIP3.Enabled = txtIP4.Enabled = txtMAC1.Enabled = txtMAC2.Enabled = txtMAC3.Enabled = txtMAC4.Enabled = txtMAC5.Enabled = txtMAC6.Enabled = tipoEquipo.siRed;
@@ -149,12 +138,12 @@ namespace HelpDeskWeb.Administracion
             {
                 if (vbol[x])
                 {
-                    cb[x].DataSource = controlMarca.cargarCombo(1);
+                    cb[x].DataSource = hdk_ControlMarca.cargarCombo(1);
                     cb[x].DataBind();
                 }
                 else
                 {
-                    cb[x].DataSource = controlMarca.cargarCombo(0);
+                    cb[x].DataSource = hdk_ControlMarca.cargarCombo(0);
                     cb[x].DataBind();
                     cb[x].SelectedItem.Text = "N/A";
                 }

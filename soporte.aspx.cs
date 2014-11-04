@@ -22,20 +22,12 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Conexion"] == null)
-            {
-                Response.Redirect("index.aspx");
-            }
-
+            hdk_utilerias.checarSession(this, true, 0, 0);
             usuarioConectado = (ViewUsuario)(Session["DatosUsuario"]);
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlIncidentes = new hdk_ControlIncidentes(Control);
-            controlEventos = new hdk_ControlEventos(Control);
             lbelNomUsuario.Text = usuarioConectado.nomCompleto;
             lbelCargo.Text = usuarioConectado.nomPuesto;
             lbelInstitucion.Text = usuarioConectado.nomInstitucion;
            // lbelTipoUsuario.Text = usuarioConectado.tipoUsuarioString;
-            controlEncuestas = new hdk_ControlEncuestas(Control);
             if (!IsPostBack)
             {
                 this.pintarCalificaciones();
@@ -45,7 +37,7 @@ namespace HelpDeskWeb
 
         protected void pintarCalificaciones()
         {
-            vistapromediogeneral promedioCalidad = controlEncuestas.obtenerPromedioCalidad(usuarioConectado.idUsuario);
+            vistapromediogeneral promedioCalidad = hdk_ControlEncuestas.obtenerPromedioCalidad(usuarioConectado.idUsuario);
             if (promedioCalidad.PromedioTotal == null)
             {
                 lbelCalificacionEventos.Text = "S/C";
@@ -82,8 +74,8 @@ namespace HelpDeskWeb
 
         protected void obtenerNumeroDeSucesos()
         {
-            this.pintarNumeroDeSucesos(lbelNumIncidentes, controlIncidentes.obtenerNumeroIncidentes());
-            this.pintarNumeroDeSucesos(lbelNumEventos, controlEventos.obtenerNumeroEventos());
+            this.pintarNumeroDeSucesos(lbelNumIncidentes, hdk_ControlIncidentes.obtenerNumeroIncidentes());
+            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEventos.obtenerNumeroEventos());
         }
 
         protected void pintarNumeroDeSucesos(Label label, int numero)

@@ -14,17 +14,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
     class hdk_ControlEncuestas
     {
 
-        hdk_ControlAcceso dbHelp;
-
-        public hdk_ControlEncuestas(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public int obtenerNumeroEncuestasIn(int us){
+        public static int obtenerNumeroEncuestasIn(int us){
             try
             {
-                return dbHelp.DB.VistaIncidentesCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.VistaIncidentesCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {
@@ -33,11 +26,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 
         }
 
-        public int obtenerNumeroEncuestasEv(int us)
+        public static int obtenerNumeroEncuestasEv(int us)
         {
             try
             {
-                return dbHelp.DB.VistaEventosCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.VistaEventosCerrados.Where(a => a.idSolicitante == us && a.statusCal_Servicio == false && a.status == 2).Count();
             }
             catch
             {
@@ -45,11 +38,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public IList cargarTablaPreguntas(int tema)
+        public static IList cargarTablaPreguntas(int tema)
         {
             try
             {
-                return dbHelp.DB.VistaPreguntas.Where(a => a.afinidad == tema || a.afinidad == 2).ToList();
+                return dbhelp.modelo.VistaPreguntas.Where(a => a.afinidad == tema || a.afinidad == 2).ToList();
             }
             catch 
             {
@@ -57,11 +50,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public IList cargarTablaEncuesta(int calidad)
+        public static IList cargarTablaEncuesta(int calidad)
         {
             try
             {
-                return dbHelp.DB.VistaEncuestas.Where(a => a.idCalidad_Servicio == calidad).ToList();
+                return dbhelp.modelo.VistaEncuestas.Where(a => a.idCalidad_Servicio == calidad).ToList();
             }
             catch
             {
@@ -69,7 +62,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool insertarRespuesta(int calidad, int preg, int resp){
+        public static bool insertarRespuesta(int calidad, int preg, int resp){
 
             try{
                 var respuesta =  new tblrespuesta {
@@ -80,8 +73,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     };
                 if (respuesta != null)
                 {
-                    dbHelp.DB.tblrespuestas.Attach(respuesta);
-                    dbHelp.DB.tblrespuestas.Add(respuesta);    
+                    dbhelp.modelo.tblrespuestas.Attach(respuesta);
+                    dbhelp.modelo.tblrespuestas.Add(respuesta);    
                 }
                 return true;
             } 
@@ -91,18 +84,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public bool guardarCambiosEncuesta(int idCalidad, string ob, float promedio)
+        public static bool guardarCambiosEncuesta(int idCalidad, string ob, float promedio)
         {      
             try
             {
-                var calidadAModificar = dbHelp.DB.tblcalidadservicios.SingleOrDefault(a => a.idCalidad_Servicio == idCalidad);
+                var calidadAModificar = dbhelp.modelo.tblcalidadservicios.SingleOrDefault(a => a.idCalidad_Servicio == idCalidad);
                 if (calidadAModificar != null)
                 {
                     calidadAModificar.observacionesServicio = ob;
                     calidadAModificar.statusCal_Servicio = true;
-                    calidadAModificar.promedioCalidad = promedio; 
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    calidadAModificar.promedioCalidad = promedio;
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -112,11 +104,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public vistapromediogeneral obtenerPromedioCalidad(int us)
+        public static vistapromediogeneral obtenerPromedioCalidad(int us)
         {
             try
             {
-                return dbHelp.DB.vistapromediogenerals.SingleOrDefault(a => a.idUsuario == us);
+                return dbhelp.modelo.vistapromediogenerals.SingleOrDefault(a => a.idUsuario == us);
             }
             catch
             {

@@ -13,19 +13,17 @@ namespace HelpDeskWeb.ControlAltas
 {
     public class hdk_ControlDepartamento
     {
-        hdk_ControlAcceso dbHelp;
 
         public hdk_ControlDepartamento(hdk_ControlAcceso ca)
         {
-            dbHelp = ca;
         }
 
 
-       public IList cargarTabla(string filtro, string cord)
+       public static IList cargarTabla(string filtro, string cord)
         {
             try
             {
-                var query = dbHelp.DB.ViewDepartamentos.Where(x => x.nomDepto.Contains(filtro) && x.nomCoordinacion.Contains(cord));
+                var query = dbhelp.modelo.ViewDepartamentos.Where(x => x.nomDepto.Contains(filtro) && x.nomCoordinacion.Contains(cord));
 
                 return query.ToList();
             }
@@ -36,16 +34,15 @@ namespace HelpDeskWeb.ControlAltas
             
         }
 
-       public bool borrarRegistro(int id)
+       public static bool borrarRegistro(int id)
         {
             try
             {
-                var ItemARemover = dbHelp.DB.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
+                var ItemARemover = dbhelp.modelo.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
                 if (ItemARemover != null)
                 {
-                    dbHelp.DB.tbldepartamentos.Remove(ItemARemover);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tbldepartamentos.Remove(ItemARemover);
+                    dbhelp.modelo.SaveChanges();
                     return true;
                 }
                 else
@@ -60,17 +57,16 @@ namespace HelpDeskWeb.ControlAltas
 
         }
 
-       public bool insertar(string nombre, int idCord)
+       public static bool insertar(string nombre, int idCord)
         {
             try
             {
                 var cord = new tbldepartamento { nomDepto = nombre, coordinacion = idCord };
                 if (cord != null)
                 {
-                    dbHelp.DB.tbldepartamentos.Attach(cord);
-                    dbHelp.DB.tbldepartamentos.Add(cord);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tbldepartamentos.Attach(cord);
+                    dbhelp.modelo.tbldepartamentos.Add(cord);
+                    dbhelp.modelo.SaveChanges();
                     return true;
                 }
                 else
@@ -86,17 +82,16 @@ namespace HelpDeskWeb.ControlAltas
 
         }
 
-       public bool modificar(int id, string nombre, int cord)
+       public static bool modificar(int id, string nombre, int cord)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
+                var ItemAmodificar = dbhelp.modelo.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomDepto = nombre;
                     ItemAmodificar.coordinacion = cord;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                     return true;
                 }
                 else
@@ -110,11 +105,11 @@ namespace HelpDeskWeb.ControlAltas
             }
         }
 
-       public IList cargarComboCord(bool filtro)
+       public static IList cargarComboCord(bool filtro)
         {
             try
             {
-                var items = dbHelp.DB.tblcoordinacions.OrderBy(a => a.idCoordinacion).ToList();
+                var items = dbhelp.modelo.tblcoordinacions.OrderBy(a => a.idCoordinacion).ToList();
                 if (filtro)
                 {
                     items.Insert(0, new tblcoordinacion { idCoordinacion = 0, nomCoordinacion = "" });  
@@ -125,11 +120,11 @@ namespace HelpDeskWeb.ControlAltas
             }
         }
 
-        public tbldepartamento obtenerDepto(int id)
+       public static tbldepartamento obtenerDepto(int id)
         {
             try
             {
-                return dbHelp.DB.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
+                return dbhelp.modelo.tbldepartamentos.SingleOrDefault(x => x.idDepto == id);
 
             }
             catch
@@ -139,17 +134,17 @@ namespace HelpDeskWeb.ControlAltas
 
         }
 
-        public IList cargarComboDep(int cord)
+       public static IList cargarComboDep(int cord)
         {
             try
             {
                 if (cord != -1)
                 {
-                    return dbHelp.DB.tbldepartamentos.Where(a => a.coordinacion == cord).ToList();
+                    return dbhelp.modelo.tbldepartamentos.Where(a => a.coordinacion == cord).ToList();
                 }
                 else
                 {
-                    return dbHelp.DB.tbldepartamentos.ToList();
+                    return dbhelp.modelo.tbldepartamentos.ToList();
                 }
             } catch{
                 return null;

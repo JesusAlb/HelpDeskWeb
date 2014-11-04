@@ -14,19 +14,12 @@ namespace HelpDeskWeb.ControlAltas
 {
     class hdk_ControlRequerimientos
     {
-        hdk_ControlAcceso dbHelp;
 
-       public hdk_ControlRequerimientos(hdk_ControlAcceso ca)
-       {
-           dbHelp = ca;
-       }
-
-
-       public IList cargarTabla(string filtro, string tipo, int? evento)
+        public static IList cargarTabla(string filtro, string tipo, int? evento)
        {
            try
            {
-               return dbHelp.DB.requerimientosSinAsignar(evento).Where( a => a.nomRequerimiento.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
+               return dbhelp.modelo.requerimientosSinAsignar(evento).Where( a => a.nomRequerimiento.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
            }
            catch
            {
@@ -34,16 +27,15 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public bool borrarRegistro(int id)
+       public static bool borrarRegistro(int id)
        {
            try
            {
-               var ItemARemover = dbHelp.DB.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
+               var ItemARemover = dbhelp.modelo.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
                if (ItemARemover != null)
                {
-                   dbHelp.DB.tblrequerimientos.Remove(ItemARemover);
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();
+                   dbhelp.modelo.tblrequerimientos.Remove(ItemARemover);
+                   dbhelp.modelo.SaveChanges();
                }
                return true;
            }
@@ -54,17 +46,17 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool insertar(string nombre, bool rtipo)
+       public static bool insertar(string nombre, bool rtipo)
        {
            try
            {
                var cord = new tblrequerimiento { nomRequerimiento = nombre, cuantificable = rtipo };
                if (cord != null)
                {
-                   dbHelp.DB.tblrequerimientos.Attach(cord);
-                   dbHelp.DB.tblrequerimientos.Add(cord);
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();
+                   dbhelp.modelo.tblrequerimientos.Attach(cord);
+                   dbhelp.modelo.tblrequerimientos.Add(cord);
+                   dbhelp.modelo.SaveChanges();
+                  
                }
                return true;
            }
@@ -75,17 +67,16 @@ namespace HelpDeskWeb.ControlAltas
 
        }
 
-       public bool modificar(int id, string nombre, bool rtipo)
+       public static bool modificar(int id, string nombre, bool rtipo)
        {
            try
            {
-               var ItemAmodificar = dbHelp.DB.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
+               var ItemAmodificar = dbhelp.modelo.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
                if (ItemAmodificar != null)
                {
                    ItemAmodificar.nomRequerimiento = nombre;
                    ItemAmodificar.cuantificable = rtipo;
-                   dbHelp.DB.SaveChanges();
-                   dbHelp.actualizarModelo();         
+                   dbhelp.modelo.SaveChanges();                      
                }
                return true;
            }
@@ -95,11 +86,11 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public requerimientosSinAsignar_Result obtenerRequerimiento(int id, int? evento)
+       public static requerimientosSinAsignar_Result obtenerRequerimiento(int id, int? evento)
        {
            try
            {
-               return dbHelp.DB.requerimientosSinAsignar(evento).SingleOrDefault(a => a.idRequerimientos == id);
+               return dbhelp.modelo.requerimientosSinAsignar(evento).SingleOrDefault(a => a.idRequerimientos == id);
            }
            catch
            {

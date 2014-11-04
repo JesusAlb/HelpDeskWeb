@@ -13,18 +13,12 @@ using System.Windows;
 namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlUsuario
-    {
-        private hdk_ControlAcceso dbHelp;
-        
-        public hdk_ControlUsuario(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
+    {  
 
-        public int obtenerIdUsuario_SinAsignar(){
+        public static int obtenerIdUsuario_SinAsignar(){
             try
             {
-                return dbHelp.DB.tblusuarios.Where(a => a.username.Equals("S/A")).SingleOrDefault().idUsuario;
+                return dbhelp.modelo.tblusuarios.Where(a => a.username.Equals("S/A")).SingleOrDefault().idUsuario;
             }
             catch
             {
@@ -32,11 +26,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tblusuario obtenerUsuario(int id)
+        public static tblusuario obtenerUsuario(int id)
         {
             try
             {
-                return dbHelp.DB.tblusuarios.Where(a => a.idUsuario == id).SingleOrDefault();
+                return dbhelp.modelo.tblusuarios.Where(a => a.idUsuario == id).SingleOrDefault();
             }
             catch 
             {
@@ -44,9 +38,9 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool verificarSiExisteUsuario(string nomUsuario)
+        public static bool verificarSiExisteUsuario(string nomUsuario)
         {
-            var item = dbHelp.DB.tblusuarios.SingleOrDefault(a => a.username.Equals(nomUsuario));
+            var item = dbhelp.modelo.tblusuarios.SingleOrDefault(a => a.username.Equals(nomUsuario));
             if (item != null)
             {
                 return true;
@@ -57,16 +51,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarComboUsuarios(int tip)
+        public static IList cargarComboUsuarios(int tip)
         {
             try{
                 if (tip == 0)
                 {
-                    return this.dbHelp.DB.ViewUsuarios.Where(a => a.tipoUsuario == 0).ToList();
+                    return dbhelp.modelo.ViewUsuarios.Where(a => a.tipoUsuario == 0).ToList();
                 }
                 else if (tip == 1)
                 {
-                    return this.dbHelp.DB.ViewUsuarios.Where(a => a.tipoUsuario == 1 && !a.username.Equals("S/A")).ToList();
+                    return dbhelp.modelo.ViewUsuarios.Where(a => a.tipoUsuario == 1 && !a.username.Equals("S/A")).ToList();
                 }
                 else 
                 {
@@ -80,22 +74,22 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarComboInstitucion()
+        public static IList cargarComboInstitucion()
         {
             try
             {
-                return dbHelp.DB.tblinstitucions.Where(a => a.status == true).ToList();
+                return dbhelp.modelo.tblinstitucions.Where(a => a.status == true).ToList();
 
             }catch{
                 return null;
             }
         }
 
-        public IList cargarTabla(string filtro)
+        public static IList cargarTabla(string filtro)
         {
             try
             {
-                var query = dbHelp.DB.ViewUsuarios.Where(a => ((a.nomCompleto.Contains(filtro) || a.username.Contains(filtro) ||
+                var query = dbhelp.modelo.ViewUsuarios.Where(a => ((a.nomCompleto.Contains(filtro) || a.username.Contains(filtro) ||
                                                                a.nomCoordinacion.Contains(filtro) || a.nomDepto.Contains(filtro) ||
                                                                a.nomPuesto.Contains(filtro) || a.nomArea.Contains(filtro) || a.nomInstitucion.Contains(filtro)
                                                                || a.tipoUsuarioString.Contains(filtro) || a.correo.Contains(filtro)) && !a.username.Equals("S/A")));
@@ -107,16 +101,15 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool borrarRegistro(int id)
+        public static bool borrarRegistro(int id)
         {
             try
             {
-                var itemRemover = dbHelp.DB.tblusuarios.Single(x => x.idUsuario == id);
+                var itemRemover = dbhelp.modelo.tblusuarios.Single(x => x.idUsuario == id);
                 if (itemRemover != null)
                 {
-                    dbHelp.DB.tblusuarios.Remove(itemRemover);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblusuarios.Remove(itemRemover);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -126,12 +119,12 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public int modificar(int id, string us, string nom, string ape, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
+        public static int modificar(int id, string us, string nom, string ape, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
         {
 
                 try
                 {
-                    var ItemAmodificar = dbHelp.DB.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
+                    var ItemAmodificar = dbhelp.modelo.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
                     if (ItemAmodificar != null)
                     {
                         ItemAmodificar.username = us;
@@ -145,8 +138,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                         ItemAmodificar.area = are;
                         ItemAmodificar.puesto = pues;
                         ItemAmodificar.institucion = inst;
-                        dbHelp.DB.SaveChanges();
-                        dbHelp.actualizarModelo();
+                        dbhelp.modelo.SaveChanges();
                     }
                     return 1;
                 }
@@ -156,10 +148,9 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 }
             }
 
-
-        public int insertar(string us, string nom, string ape, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
+        public static int insertar(string us, string nom, string ape, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
         {
-            if (!this.verificarSiExisteUsuario(us))
+            if (!verificarSiExisteUsuario(us))
             {
                 try
                 {
@@ -179,10 +170,9 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     };
                     if (user != null)
                     {
-                        dbHelp.DB.tblusuarios.Attach(user);
-                        dbHelp.DB.tblusuarios.Add(user);
-                        dbHelp.DB.SaveChanges();
-                        dbHelp.actualizarModelo();
+                        dbhelp.modelo.tblusuarios.Attach(user);
+                        dbhelp.modelo.tblusuarios.Add(user);
+                        dbhelp.modelo.SaveChanges();
                     }
                     return 1;
                 }

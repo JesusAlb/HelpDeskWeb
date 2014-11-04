@@ -14,18 +14,13 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlArea
     {
-        hdk_ControlAcceso dbHelp;
 
-        public hdk_ControlArea(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
 
-        public IList cargarTabla(string area)
+        public static IList cargarTabla(string area)
         {
             try
             {
-                return dbHelp.DB.tblareas.Where(a => a.nomArea.Contains(area)).ToList();
+                return dbhelp.modelo.tblareas.Where(a => a.nomArea.Contains(area)).ToList();
             }
             catch 
             {              
@@ -33,11 +28,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarCombo()
+        public static IList cargarCombo()
         {
             try
             {
-                return dbHelp.DB.tblareas.OrderBy(a => a.idArea).ToList();
+                return dbhelp.modelo.tblareas.OrderBy(a => a.idArea).ToList();
             }
             catch 
             {
@@ -45,17 +40,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool insertar(string nombre)
+        public static bool insertar(string nombre)
         {
             try
             {
                 var area = new tblarea { nomArea = nombre };
                 if (area != null)
                 {
-                    dbHelp.DB.tblareas.Attach(area);
-                    dbHelp.DB.tblareas.Add(area);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();                
+                    dbhelp.modelo.tblareas.Attach(area);
+                    dbhelp.modelo.tblareas.Add(area);
+                    dbhelp.modelo.SaveChanges();            
                 }
                 return true;
             }
@@ -65,17 +59,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int id, string nombre)
+        public static bool modificar(int id, string nombre)
         {
             try
             {
 
-                var ItemAmodificar = dbHelp.DB.tblareas.SingleOrDefault(x => x.idArea == id);
+                var ItemAmodificar = dbhelp.modelo.tblareas.SingleOrDefault(x => x.idArea == id);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomArea = nombre;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -85,11 +78,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tblarea obtenerArea(int id)
+        public static tblarea obtenerArea(int id)
         {
             try
             {
-                return dbHelp.DB.tblareas.SingleOrDefault(a=>a.idArea==id);
+                return dbhelp.modelo.tblareas.SingleOrDefault(a => a.idArea == id);
             }
             catch
             {

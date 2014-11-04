@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Threading;
 using System.IO;
 using HelpDeskWeb.EntityFrameWork;
+using System.Web.UI;
 
 namespace HelpDeskWeb.ControlBD.Acceso
 {
@@ -47,24 +48,23 @@ namespace HelpDeskWeb.ControlBD.Acceso
           set { Item = value; }
       }
 
-        public int encontrarUsuario(String nombre, string password){
+        public static int encontrarUsuario(String nombre, string password, Page pagina){
             try
             {
-                var UsuarioItem = DB.ViewUsuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
+                var UsuarioItem = dbhelp.modelo.ViewUsuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
                 if (UsuarioItem != null)
                 {
-                    Session["DatosUsuario"] = UsuarioItem;
-                    Session["Conexion"] = this;
+                    pagina.Session["DatosUsuario"] = UsuarioItem;
                     return UsuarioItem.tipoUsuario;
                 }
                 else
-                {               
+                {
                     return -1;
                 }
             }
             catch 
-           {             
-                return -1;
+           {
+               return -1;
            }
 
         }

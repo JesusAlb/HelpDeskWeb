@@ -10,7 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using toolsASP;
+
 
 
 
@@ -18,31 +18,13 @@ namespace HelpDeskWeb.Solicitudes
 {
     public partial class Eventos : System.Web.UI.Page
     {
-        private hdk_ControlAcceso Control;
-        private hdk_ControlEventos controlEventos;
-        private hdk_ControlRequerimientos controlRequerimientos;
-        private hdk_ControlUsuario controlUsuario;
-        private hdk_utilerias utilerias;
         private ViewUsuario usuarioConectado;
-        private hdk_ControlLugar controlLugar;
-        private hdk_ControlAsigReq controlRecursosAsignados;
         private tblevento registroEvento;
-        private hdk_ControlEncuestas controlEncuestas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["DatosUsuario"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
+            hdk_utilerias.checarSession(this, true, 2, 2);
             usuarioConectado = ((ViewUsuario)(Session["DatosUsuario"]));
-            Control = (hdk_ControlAcceso)Session["Conexion"];
-            controlRecursosAsignados = new hdk_ControlAsigReq(Control);
-            controlRequerimientos = new hdk_ControlRequerimientos(Control);
-            controlEventos = new hdk_ControlEventos(Control);
-            controlUsuario = new hdk_ControlUsuario(Control);
-            controlLugar = new hdk_ControlLugar(Control);
-            controlEncuestas = new hdk_ControlEncuestas(Control);
           /*  txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
             txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");*/
             lbelUsuario.Text = usuarioConectado.username;
@@ -73,7 +55,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarCombosSoporte()
         {
-            cbSeguimiento.DataSource = cbSoporte.DataSource = controlUsuario.cargarComboUsuarios(0);
+            cbSeguimiento.DataSource = cbSoporte.DataSource = hdk_ControlUsuario.cargarComboUsuarios(0);
             cbSoporte.DataBind();
             cbSeguimiento.DataBind();
         }
@@ -95,11 +77,11 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (usuarioConectado.tipoUsuario == 0)
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.cargarTablasSolicitante(usuarioConectado.idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSolicitante(usuarioConectado.idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -107,9 +89,9 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarTablasRequerimientos()
         {
-            gvRecursosNoAsignados.DataSource = controlRequerimientos.cargarTabla(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(idEventoSeleccionado.Value));
+            gvRecursosNoAsignados.DataSource = hdk_ControlRequerimientos.cargarTabla(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosNoAsignados.DataBind();
-            gvRecursosAsignados.DataSource = controlRecursosAsignados.cargarTablaReqAsig(Convert.ToInt32(idEventoSeleccionado.Value));
+            gvRecursosAsignados.DataSource = hdk_ControlAsigReq.cargarTablaReqAsig(Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosAsignados.DataBind();
         }
 
@@ -117,13 +99,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (datasource != null)
             {
-                gvEncuestas.DataSource = controlEncuestas.cargarTablaEncuesta(datasource.Value);
+                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaEncuesta(datasource.Value);
                 this.gvEncuestas.Columns[2].Visible = false;
                 this.gvEncuestas.Columns[3].Visible = true;
             }
             else
             {
-                gvEncuestas.DataSource = controlEncuestas.cargarTablaPreguntas(1);
+                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaPreguntas(1);
                 this.gvEncuestas.Columns[2].Visible = true;
                 this.gvEncuestas.Columns[3].Visible = false;
             }
@@ -133,7 +115,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboLugares()
         {
-            cbLugares.DataSource = controlLugar.cargarCombo();
+            cbLugares.DataSource = hdk_ControlLugar.cargarCombo();
             cbLugares.DataBind();
         }
 
@@ -144,8 +126,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            utilerias = new hdk_utilerias();
-            utilerias.setRowCreated(sender, e);
+            hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void btnRecursos_Click(object sender, EventArgs e)
@@ -154,7 +135,7 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
+                    registroEvento = hdk_ControlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTitulo.Text = registroEvento.titulo;
                     this.cargarTablasRequerimientos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnRecursosActivado", "$('#ModalRecursos').modal('show');", true);
@@ -168,7 +149,7 @@ namespace HelpDeskWeb.Solicitudes
             //  {
             this.cargarComboLugares();
             lbelTituloModal.Text = "Alta de eventos";
-            forControls.limpiarFormulario(this.panelModalNuevo.Controls);
+            hdk_utilerias.limpiarControles(this.panelModalNuevo.Controls);
             accion.Value = "nuevo";
             ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
             // }
@@ -182,7 +163,7 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     this.cargarComboLugares();
                     lbelTituloModal.Text = "Modificar eventos";
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
+                    registroEvento = hdk_ControlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTituloNuevo.Text = registroEvento.titulo;
                     txtAcomodo.Text = registroEvento.acomodo;
                     txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString();
@@ -199,11 +180,11 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (utilerias.verificarCamposVacios(new TextBox[] { txtTituloNuevo, txtAcomodo, txtAsistencia, txtDescripcion, txtFecha, txtHoraInicial, txtHoraFinal }))
+            if (hdk_utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, txtAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text }))
             {
                 if (accion.Value.Equals("nuevo"))
                 {
-                    if (controlEventos.insertarEvento(usuarioConectado.idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                    if (hdk_ControlEventos.insertarEvento(usuarioConectado.idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraFinal.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -216,7 +197,7 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 else
                 {
-                    if (controlEventos.editarEvento(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                    if (hdk_ControlEventos.editarEvento(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -242,7 +223,7 @@ namespace HelpDeskWeb.Solicitudes
                 if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
                     this.cargarCombosSoporte();
-                    registroEvento = controlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
+                    registroEvento = hdk_ControlEventos.cargarEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     cbSeguimiento.SelectedValue = registroEvento.apoyo.ToString();
                     cbSoporte.SelectedValue = registroEvento.responsable.ToString();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnAsignarActivado", "$('#ModalAsignar').modal('show');", true);
@@ -254,7 +235,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!cbSoporte.SelectedItem.Text.Equals("S/A"))
             {
-                if (controlEventos.asignarResponsable(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+                if (hdk_ControlEventos.asignarResponsable(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "$('#ModalAsignar').modal('hide');", true);
@@ -271,7 +252,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value) && Convert.ToInt32(tabItemSeleccionado.Value) < 2)
             {
-                if (controlEventos.cambiarStatus(Convert.ToInt32(idEventoSeleccionado.Value), 3))
+                if (hdk_ControlEventos.cambiarStatus(Convert.ToInt32(idEventoSeleccionado.Value), 3))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, this.GetType(), "EventoCancelado", "alertify.alert('Correcto', 'Evento cancelado correctamente', 'onok');", true);
@@ -291,7 +272,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
             {
-                if (controlEventos.cerrarEvento(Convert.ToInt32(idEventoSeleccionado.Value)))
+                if (hdk_ControlEventos.cerrarEvento(Convert.ToInt32(idEventoSeleccionado.Value)))
                 {
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "CerrarEvento", "alertify.alert('Correcto', 'Evento cerrado exitosamente', 'onok');", true);
@@ -311,7 +292,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (gvRecursosAsignados.SelectedDataKey != null)
             {
-                if (controlRecursosAsignados.borrar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString())))
+                if (hdk_ControlAsigReq.borrar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString())))
                 {
                     this.cargarTablasRequerimientos();
                     ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "AñadirCantidad", "alertify.success('Se eliminó el recurso al evento');", true);
@@ -334,7 +315,7 @@ namespace HelpDeskWeb.Solicitudes
             if (gvRecursosNoAsignados.SelectedDataKey != null)
             {
                 int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-                requerimientosSinAsignar_Result requerimiento = controlRequerimientos.obtenerRequerimiento(idReq, null);
+                requerimientosSinAsignar_Result requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
                 if (requerimiento.tipo.Equals("Cuantificable"))
                 {
                     try
@@ -367,7 +348,7 @@ namespace HelpDeskWeb.Solicitudes
                 cantidad = 1;
             else
                 cantidad = cant.Value;
-            if (controlRecursosAsignados.insertar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString()), cantidad))
+            if (hdk_ControlAsigReq.insertar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString()), cantidad))
             {
                 ScriptManager.RegisterStartupScript(this.UpdateBtnAñadir, GetType(), "AñadirCantidad", "alertify.success('Se añadió el recurso al evento');", true);
                 this.cargarTablasRequerimientos();
@@ -384,7 +365,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtObservaciones.Text))
             {
-                if (controlEventos.editarObservaciones(Convert.ToInt32(idEventoSeleccionado.Value), txtObservaciones.Text))
+                if (hdk_ControlEventos.editarObservaciones(Convert.ToInt32(idEventoSeleccionado.Value), txtObservaciones.Text))
                 {
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "SalirVentana", "mostrarModal('ModalRecursos','hide');", true);
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "GrabarObservaciones", "alertify.alert('Correcto', 'Evento guardado correctamente', 'onok');", true);
@@ -403,14 +384,14 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString());
-            tblrequerimientoaevento requerimiento = controlRecursosAsignados.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(idEventoSeleccionado.Value));
+            tblrequerimientoaevento requerimiento = hdk_ControlAsigReq.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(idEventoSeleccionado.Value));
             txtCantidadAs.Text = requerimiento.cantidad.ToString();
         }
 
         protected void gvRecursosNoAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-            requerimientosSinAsignar_Result requerimiento = controlRequerimientos.obtenerRequerimiento(idReq, null);
+            requerimientosSinAsignar_Result requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
             txtCantidad.Text = "1";
             if (requerimiento.tipo.Equals("Cuantificable"))
             {
@@ -451,7 +432,7 @@ namespace HelpDeskWeb.Solicitudes
             GridViewRow renglon = (GridViewRow)celda.Parent;
             gvEventos_Cerrados.SelectedIndex = renglon.RowIndex;
             int idEvento = Convert.ToInt32(gvEventos_Cerrados.SelectedDataKey.Value.ToString());
-            VistaEventosCerrado eventoCerrado = controlEventos.cargarEventoCerrado(idEvento);
+            VistaEventosCerrado eventoCerrado = hdk_ControlEventos.cargarEventoCerrado(idEvento);
             idCalidad.Value = eventoCerrado.idCalidad_Servicio.ToString();
             txtSolicitante.Text = eventoCerrado.solicitante;
             if (eventoCerrado.statusCal_Servicio)
@@ -526,7 +507,7 @@ namespace HelpDeskWeb.Solicitudes
                     if (row.RowType == DataControlRowType.DataRow)
                     {
                         DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
-                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        if (hdk_ControlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
                         {
                             correcto = true;
                         }
@@ -538,7 +519,8 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 if (correcto)
                 {
-                    if(controlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture))){
+                    if (hdk_ControlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
+                    {
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registro la encuesta');", true);  

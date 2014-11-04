@@ -12,18 +12,12 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlEquipos
     {
-        hdk_ControlAcceso dbHelp; 
 
-        public hdk_ControlEquipos(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public IList cargarTabla(string filtro)
+        public static IList cargarTabla(string filtro)
         {
             try
             {
-               return dbHelp.DB.VistaEquipoReportes.Where(a => a.nomCompleto.Contains(filtro) || a.nomMarcaEquipo.Contains(filtro) ||
+               return dbhelp.modelo.VistaEquipoReportes.Where(a => a.nomCompleto.Contains(filtro) || a.nomMarcaEquipo.Contains(filtro) ||
                                                 a.nomMarcaMonitor.Contains(filtro) || a.nomMarcaMouse.Contains(filtro) ||
                                                 a.nomMarcaTeclado.Contains(filtro) || a.nomTipoEquipo.Contains(filtro) ||
                                                 a.procesador.Contains(filtro) || a.serieEquipo.Contains(filtro) ||
@@ -37,7 +31,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool insertar(int res, string dd, string Ip, string Mac, int mEquipo, int mMonitor, int mMouse, int mTeclado, string ram, string proces, string sEquipo, string sMonitor, string sMouse, string sTeclado, int tEquipo)
+        public static bool insertar(int res, string dd, string Ip, string Mac, int mEquipo, int mMonitor, int mMouse, int mTeclado, string ram, string proces, string sEquipo, string sMonitor, string sMouse, string sTeclado, int tEquipo)
         {
             try
             {
@@ -48,10 +42,9 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                                                         serieTeclado =sTeclado, tipoEquipo = tEquipo };
                 if (equipo != null)
                 {
-                    dbHelp.DB.tblresponsablequipoes.Attach(equipo);
-                    dbHelp.DB.tblresponsablequipoes.Add(equipo);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblresponsablequipoes.Attach(equipo);
+                    dbhelp.modelo.tblresponsablequipoes.Add(equipo);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -61,11 +54,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int equipo, int res, string dd, string Ip, string Mac, int mEquipo, int mMonitor, int mMouse, int mTeclado, string ram, string proces, string sEquipo, string sMonitor, string sMouse, string sTeclado, int tEquipo)
+        public static bool modificar(int equipo, int res, string dd, string Ip, string Mac, int mEquipo, int mMonitor, int mMouse, int mTeclado, string ram, string proces, string sEquipo, string sMonitor, string sMouse, string sTeclado, int tEquipo)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tblresponsablequipoes.SingleOrDefault(x => x.idResponEq == equipo);
+                var ItemAmodificar = dbhelp.modelo.tblresponsablequipoes.SingleOrDefault(x => x.idResponEq == equipo);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.discoDuro = dd;
@@ -83,8 +76,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     ItemAmodificar.serieMouse = sMouse;
                     ItemAmodificar.serieTeclado = sTeclado;
                     ItemAmodificar.tipoEquipo = tEquipo;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -94,11 +86,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tblresponsablequipo obtenerEquipo(int id)
+        public static tblresponsablequipo obtenerEquipo(int id)
         {
             try
             {
-                return dbHelp.DB.tblresponsablequipoes.SingleOrDefault(a => a.idResponEq == id);
+                return dbhelp.modelo.tblresponsablequipoes.SingleOrDefault(a => a.idResponEq == id);
             }
             catch
             {

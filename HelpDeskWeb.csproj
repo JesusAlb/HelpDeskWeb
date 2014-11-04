@@ -47,9 +47,6 @@
     <Reference Include="AjaxMin">
       <HintPath>packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="ASPtools">
-      <HintPath>..\toolsForASPControls\bin\Debug\ASPtools.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -117,6 +114,7 @@
   <ItemGroup>
     <Content Include="Administracion\Equipos.aspx" />
     <Content Include="Administracion\Usuarios.aspx" />
+    <Content Include="autologin.aspx" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -294,6 +292,13 @@
     <Content Include="soporte.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="autologin.aspx.cs">
+      <DependentUpon>autologin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="autologin.aspx.designer.cs">
+      <DependentUpon>autologin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos\catEquipos.aspx.cs">
       <DependentUpon>catEquipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -336,6 +341,7 @@
     <Compile Include="ControlBD\Catalogo\hdk_ControlCoordinacion.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlDepartamento.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlEquipos.cs" />
+    <Compile Include="ControlBD\Catalogo\hdk_ControlInstitucion.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlLugar.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlMarca.cs" />
     <Compile Include="ControlBD\Catalogo\hdk_ControlPuesto.cs" />
@@ -499,7 +505,7 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Model\dbHelpDesk.cs" />
+    <Compile Include="dbhelp.cs" />
     <Compile Include="principalMaestra.Master.cs">
       <DependentUpon>principalMaestra.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -562,7 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -15,16 +15,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
     {
         hdk_ControlAcceso dbHelp;
 
-        public hdk_ControlMarca(hdk_ControlAcceso ca)
-        {
-            dbHelp = ca;
-        }
-
-        public IList cargarTabla(string ma)
+        public static IList cargarTabla(string ma)
         {
             try
             {
-                return dbHelp.DB.tblmarcas.Where(a => a.nomMarca.Contains(ma) && !a.nomMarca.Equals("N/A")).ToList();
+                return dbhelp.modelo.tblmarcas.Where(a => a.nomMarca.Contains(ma) && !a.nomMarca.Equals("N/A")).ToList();
             }
             catch
             {
@@ -32,11 +27,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public int obtenerMarcaNoAplica()
+        public static int obtenerMarcaNoAplica()
         {
             try
             {
-                return dbHelp.DB.tblmarcas.Where(a => a.nomMarca.Equals("N/A")).SingleOrDefault().idMarca;
+                return dbhelp.modelo.tblmarcas.Where(a => a.nomMarca.Equals("N/A")).SingleOrDefault().idMarca;
             }
             catch
             {
@@ -44,17 +39,17 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public IList cargarCombo(int tipo)
+        public static IList cargarCombo(int tipo)
         {
             try
             {
                 if (tipo == 0)
                 {
-                    return dbHelp.DB.tblmarcas.ToList();
+                    return dbhelp.modelo.tblmarcas.ToList();
                 }
                 else
                 {
-                    return this.cargarTabla("");
+                    return cargarTabla("");
                 }
             }
             catch
@@ -64,17 +59,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 
         }
 
-        public bool insertar(string ma)
+        public static bool insertar(string ma)
         {
             try
             {
                 var marca = new tblmarca { nomMarca = ma };
                 if (marca!= null)
                 {
-                    dbHelp.DB.tblmarcas.Attach(marca);
-                    dbHelp.DB.tblmarcas.Add(marca);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblmarcas.Attach(marca);
+                    dbhelp.modelo.tblmarcas.Add(marca);
+                    dbhelp.modelo.SaveChanges();                  
                 }
                 return true;
             }
@@ -84,16 +78,15 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public bool modificar(int idMa, string nomMa)
+        public static bool modificar(int idMa, string nomMa)
         {
             try
             {
-                var ItemAmodificar = dbHelp.DB.tblmarcas.SingleOrDefault(x => x.idMarca == idMa);
+                var ItemAmodificar = dbhelp.modelo.tblmarcas.SingleOrDefault(x => x.idMarca == idMa);
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.nomMarca = nomMa;
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -103,11 +96,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public tblmarca obtenerMarca(int id)
+        public static tblmarca obtenerMarca(int id)
         {
             try
             {
-                return dbHelp.DB.tblmarcas.SingleOrDefault(a => a.idMarca == id);
+                return dbhelp.modelo.tblmarcas.SingleOrDefault(a => a.idMarca == id);
 
             }catch
             {

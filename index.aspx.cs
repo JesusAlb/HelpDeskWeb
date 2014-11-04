@@ -12,6 +12,7 @@ namespace HelpDeskWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdk_utilerias.checarSession(this, false, 1, 0);
         }
 
         protected void tmIntro_Tick(object sender, EventArgs e){        
