@@ -25,7 +25,7 @@
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 5%;">
+                    <div class="row" style="margin-top: 3%;">
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="form-group">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <div class="panel panel-primary" style="background-color: white">
+                            <div class="panel panel-primary" style="background-color: white; margin-top:4%">
                                 <div class="panel-heading" style="font-size:24px; background-color:#E6E6E6; color:black">
                                     Información del usuario
                                 </div>
@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="text-center" style="font-size:20px; background-color:#E6E6E6; color:black; margin-bottom:2%">
-                                            Calificaciones
+                                           Servicios de soporte solicitados
                                         </div>
                                     </div>
                                     <div class="row">
@@ -125,23 +125,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="text-center" style="font-size:16px; background-color:#E6E6E6; color:black; margin-bottom:2%">
-                                            Total
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-lg-6">
-                                                <asp:Panel ID="panelMedalla" runat="server" CssClass="centrado-Horizontal medalla" Height="120" Width="120" >
-                                                    <asp:Label runat="server" ID="lbelPosicion" CssClass="centrado-vertical" Text="" Font-Size="40"></asp:Label>
-                                                </asp:Panel>                                                
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <asp:Label runat="server" ID="lbelPromedioGeneral" Text="S/C" Font-Size="60" Height="120" CssClass="text-center" style="border-bottom:5px solid Green"  Enabled="false"></asp:Label>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

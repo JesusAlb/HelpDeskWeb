@@ -1,0 +1,6 @@
+Objetivos del dia:
+	- Crear la pagina para solicitantes
+	- Checar el filtro en cada una de las pagina
+	- Cambiar alertify de modo ventana a notificación
+	- Agregar autorefrescar pagina cada cierto tiempo
+	- Agregar MaxLength a los campo

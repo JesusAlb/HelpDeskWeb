@@ -15,10 +15,6 @@ namespace HelpDeskWeb
     public partial class principal : System.Web.UI.Page
     {
         ViewUsuario usuarioConectado;
-        hdk_ControlAcceso Control;
-        hdk_ControlIncidentes controlIncidentes;
-        hdk_ControlEventos controlEventos;
-        hdk_ControlEncuestas controlEncuestas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
