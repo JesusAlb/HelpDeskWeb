@@ -159,7 +159,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" ID="txtFiltroCoord" CssClass="form-control" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" ID="txtFiltroCoord" MaxLength="25" CssClass="form-control" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -213,7 +213,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroDepto" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroDepto" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -289,7 +289,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroArea" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroArea" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -350,7 +350,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroPuesto" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroPuesto" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">

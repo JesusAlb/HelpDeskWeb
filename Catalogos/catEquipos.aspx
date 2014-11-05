@@ -100,39 +100,7 @@
                                     <asp:LinkButton runat="server" ID="tabMarcas" OnClientClick="activaTab('1')" href="#marcas" role="tab">Marcas</asp:LinkButton></li>
                             </ul>
                         </asp:Panel>
-                        <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
-                               <asp:Panel runat="server" ID="equipos" CssClass="tab-pane fade in active">
-                                <asp:Panel runat="server" CssClass="form-group">
-                                    <asp:Panel runat="server" CssClass="row">
-                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-                                        <asp:Panel runat="server" CssClass="col-lg-6">
-                                            <asp:Panel runat="server" CssClass="form-group">
-                                                <asp:TextBox runat="server" ID="txtFiltroTipo" CssClass="form-control" placeholder="Buscar" />
-                                            </asp:Panel>
-
-                                        </asp:Panel>
-                                        <asp:Panel runat="server" CssClass="col-lg-4">
-                                            <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
-                                                <ContentTemplate>
-                                                    <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                        <asp:LinkButton ID="btnNuevoTipo" runat="server" CssClass="btn btn-primary" OnCommand="btnNuevo_Command" CommandName="abrirNuevoTipoEquipo">
-                            <span class="glyphicon glyphicon-plus-sign"></span>
-                             Nuevo
-                                                        </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnEditarTipo" runat="server" CssClass="btn btn-primary" OnCommand="btnEditar_Command" CommandName="abrirEditarTipoEquipo">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                             Editar
-                                                        </asp:LinkButton>
-
-                                                    </asp:Panel>
-                                                    <asp:HiddenField runat="server" ID="accionesEquipos" Value="0" />
-                                                </ContentTemplate>
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
-                                                    <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
-                                                </Triggers>
-                                            </asp:UpdatePanel>
-                                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                    <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                                     <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabar">
                                                         <asp:UpdatePanel ID="updateModalNuevo" runat="server" UpdateMode="Conditional">
@@ -149,7 +117,8 @@
                                                                                 <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
                                                                                 <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
                                                                             </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="panel panel-primary" ID="panelCarTipoEquipo">
+                                                                            <asp:Panel runat="server" CssClass="form-group" ID="panelCarTipoEquipo" Visible="true">
+                                                                            <asp:Panel runat="server" CssClass="panel panel-primary" >
                                                                                 <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="panel-body">
                                                                                     <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
@@ -184,6 +153,7 @@
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>
+                                                                            </asp:Panel>
                                                                         </asp:Panel>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
@@ -196,12 +166,43 @@
                                                                 <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
                                                                 <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
                                                                 <asp:AsyncPostBackTrigger ControlID="btnNuevaMarca" EventName="Click" />
-                                                                <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnEditarMarca" EventName="Click" />    
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
                                                 </asp:Panel>
                                             </asp:Panel>
+                        <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
+                               <asp:Panel runat="server" ID="equipos" CssClass="tab-pane fade in active">
+                                <asp:Panel runat="server" CssClass="form-group">
+                                    <asp:Panel runat="server" CssClass="row">
+                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-6">
+                                            <asp:Panel runat="server" CssClass="form-group">
+                                                <asp:TextBox runat="server" ID="txtFiltroTipo" CssClass="form-control" placeholder="Buscar" />
+                                            </asp:Panel>
+
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="col-lg-4">
+                                            <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
+                                                        <asp:LinkButton ID="btnNuevoTipo" runat="server" CssClass="btn btn-primary" CommandArgument="tipoEquipo" OnCommand="btnNuevo_Command" CommandName="abrirNuevoTipoEquipo">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                             Nuevo
+                                                        </asp:LinkButton>
+                                                        <asp:LinkButton ID="btnEditarTipo" runat="server" CssClass="btn btn-primary" CommandArgument="tipoEquipo" OnCommand="btnEditar_Command" CommandName="abrirEditarTipoEquipo">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Editar
+                                                        </asp:LinkButton>
+
+                                                    </asp:Panel>
+                                                </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="btnNuevoTipo" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                     </asp:Panel>
@@ -248,11 +249,11 @@
                                                <asp:UpdatePanel runat="server" ID="updateAccionesMarcas" UpdateMode="Conditional">
                                                    <ContentTemplate>
                                                        <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
-                                                           <asp:LinkButton ID="btnNuevaMarca" runat="server" CssClass="btn btn-primary" CommandName="abrirNuevaMarca" OnCommand="btnNuevo_Command" >
+                                                           <asp:LinkButton ID="btnNuevaMarca" runat="server" CssClass="btn btn-primary"  CommandName="abrirNuevaMarca" CommandArgument="marca" OnCommand="btnNuevo_Command" >
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
                                                            </asp:LinkButton>
-                                                           <asp:LinkButton ID="btnEditarMarca" CommandName="abrirEditarMarca" runat="server" CssClass="btn btn-primary" OnCommand="btnEditar_Command">
+                                                           <asp:LinkButton ID="btnEditarMarca" CommandName="abrirEditarMarca" runat="server" CssClass="btn btn-primary" CommandArgument="marca" OnCommand="btnEditar_Command">
                             <span class="glyphicon glyphicon-pencil"></span>
                              Editar
                                                            </asp:LinkButton>

@@ -308,6 +308,7 @@ namespace HelpDeskWeb.Catalogos
                     break;
             }
             btnGrabar.CommandName = "insertar";
+            btnGrabar.CommandArgument = e.CommandArgument.ToString();
             ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "abrirNuevoModal", "$('#ModalNuevo').modal('show');", true);
         }
 
