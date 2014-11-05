@@ -79,7 +79,7 @@
                         <asp:Panel runat="server" CssClass="col-lg-8">
                             <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                             <asp:Panel runat="server" CssClass="input-group">
-                                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" placeholder="Buscar" />
+                                <asp:TextBox runat="server" ID="txtFiltro" MaxLength="30" CssClass="form-control" placeholder="Buscar" />
                                 <span class="input-group-btn">
                                     <asp:Button runat="server" Text="Filtrar" ID="btnFiltro" CssClass="btn btn-default" />
                                 </span>
@@ -126,12 +126,12 @@
                                                                                 <asp:Panel runat="server" CssClass="col-lg-4">
                                                                                     <asp:Label runat="server" Text="Procesador" Font-Bold="true"></asp:Label>
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <asp:TextBox runat="server" ID="txtProcesador" CssClass="form-control" TextMode="Number" step="0.01" min="0" />
+                                                                                        <asp:TextBox runat="server" ID="txtProcesador" MaxLength="4" CssClass="form-control" TextMode="Number" step="0.01" min="0" />
                                                                                         <span class="input-group-addon">GHZ</span>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                                    <asp:Label runat="server" Text="Memoria RAM" Font-Bold="true"></asp:Label>
+                                                                                    <asp:Label runat="server" Text="Memoria RAM" MaxLength="4" Font-Bold="true"></asp:Label>
                                                                                     <asp:Panel runat="server" CssClass="input-group">
                                                                                         <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" TextMode="Number" min="1" />
                                                                                         <span class="input-group-addon">GB</span>
@@ -140,11 +140,12 @@
                                                                                 <asp:Panel runat="server" CssClass="col-lg-4">
                                                                                     <asp:Label runat="server" Text="Almacenamiento" Font-Bold="true"></asp:Label>
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <asp:TextBox runat="server" ID="txtDD" CssClass="form-control" TextMode="Number" min="1" />
+                                                                                        <asp:TextBox runat="server" ID="txtDD" MaxLength="4" CssClass="form-control" TextMode="Number" min="1" />
                                                                                         <span class="input-group-addon">
                                                                                             <asp:DropDownList runat="server" ID="cbDD" Style="background-color: #eee; border-color: transparent">
                                                                                                 <asp:ListItem Text="GB" Value="GB"></asp:ListItem>
                                                                                                 <asp:ListItem Text="TB" Value="TB"></asp:ListItem>
+                                                                                                <asp:ListItem Text="MB" Value="GB"></asp:ListItem>
                                                                                             </asp:DropDownList>
                                                                                         </span>
                                                                                     </asp:Panel>

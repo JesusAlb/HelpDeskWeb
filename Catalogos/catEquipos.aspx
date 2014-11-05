@@ -115,7 +115,7 @@
                                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                                             <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
                                                                                 <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
+                                                                                <asp:TextBox runat="server" ID="txtNombre" MaxLength="30" CssClass="form-control" placeholder="Nombre" />
                                                                             </asp:Panel>
                                                                             <asp:Panel runat="server" CssClass="form-group" ID="panelCarTipoEquipo" Visible="true">
                                                                             <asp:Panel runat="server" CssClass="panel panel-primary" >
@@ -179,7 +179,7 @@
                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                         <asp:Panel runat="server" CssClass="col-lg-6">
                                             <asp:Panel runat="server" CssClass="form-group">
-                                                <asp:TextBox runat="server" ID="txtFiltroTipo" CssClass="form-control" placeholder="Buscar" />
+                                                <asp:TextBox runat="server" ID="txtFiltroTipo" MaxLength="25" CssClass="form-control" placeholder="Buscar" />
                                             </asp:Panel>
 
                                         </asp:Panel>
@@ -242,7 +242,7 @@
                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                         <asp:Panel runat="server" CssClass="col-lg-6">
                                             <div class="form-group">
-                                                <asp:TextBox runat="server" ID="txtFiltroMarca" CssClass="form-control" placeholder="Buscar" />
+                                                <asp:TextBox runat="server" ID="txtFiltroMarca" MaxLength="25" CssClass="form-control" placeholder="Buscar" />
                                             </div>
                                         </asp:Panel>
                                            <asp:Panel runat="server" CssClass="col-lg-4">

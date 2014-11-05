@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
+            lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
             if (!IsPostBack)
             {
                 this.cargarTablaTipoIncidente();
@@ -57,162 +57,11 @@ namespace HelpDeskWeb.Catalogos
             hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
 
-     /*   protected void btnGrabar_Click(object sender, EventArgs e)
-        {
-            bool registrosAlterados = false;
-
-            if (!String.IsNullOrWhiteSpace(txtNombre.Text))
-            {
-                if (acciones.Value.Equals("0"))
-                {
-                    if (tabItemSeleccionado.Value.Equals("0"))
-                    {
-                        if (controlTipoIncidencia.insertar(txtNombre.Text))
-                            registrosAlterados = true;
-                        
-                    }
-                    else if(tabItemSeleccionado.Value.Equals("1"))
-                    {
-                        if (controlLugar.insertar(txtNombre.Text))
-                            registrosAlterados = true;
-                    }
-                    else
-                    {
-                        if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
-                            registrosAlterados = true;
-                    }
-                    if (!registrosAlterados)
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "txtNombreVacio", "alertify.alert('Error','Error al insertar el registro','onok');", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "DesaparecerModal", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "GrabadoCorrecto", "alertify.alert('Correcto','Registro grabado satisfactoriamente','onok');", true);
-                    }
-                }
-                else
-                {
-                    if (tabItemSeleccionado.Value.Equals("0"))
-                    {
-                        if (controlTipoIncidencia.modificar(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value.ToString()), txtNombre.Text))
-                            registrosAlterados = true;
-                    }
-                    else if (tabItemSeleccionado.Value.Equals("1"))
-                    {
-                        if (controlLugar.modificar(Convert.ToInt32(gvLugares.SelectedDataKey.Value.ToString()), txtNombre.Text))
-                            registrosAlterados = true;
-                    }
-                    else
-                    {
-                        if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value.ToString()), txtNombre.Text, cbTipoRequerimiento.SelectedItem.Text))
-                            registrosAlterados = true;
-                    }
-
-                    if (!registrosAlterados)
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "txtNombreVacio", "alertify.alert('Error','Error al editar el registro','onok');", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "DesaparecerModal", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "EdicionCorrecta", "alertify.alert('Correcto','Registro editado satisfactoriamente','onok');", true);
-                    }
-                }
-
-                if (registrosAlterados)
-                {
-                    this.limpiarSeleccion();
-                    this.cargarTablaLugares();
-                    this.cargarTablaRequerimientos();
-                    this.cargarTablaTipoIncidente();                
-                }
-            }
-            else
-            {
-              ScriptManager.RegisterStartupScript(this.updateModalNuevo, this.GetType(), "txtNombreVacio", "alertify.alert('Error','Por favor proporcione el  nombre','onok');", true);
-            }
-        }
-
-        protected void btnEditarTipo_Click(object sender, EventArgs e)
-        {
-            if (gvTipoIncidentes.SelectedIndex != -1)
-            {
-                acciones.Value = "1";
-                tbltipoincidencia tipoincidente = controlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value.ToString()));
-                txtNombre.Text = tipoincidente.nomTipoIncidente;
-                lbelModal.Text = "Editar tipo de incidente";
-                ScriptManager.RegisterStartupScript(this.upAccionesTipos, this.GetType(), "btnEditarActivo", "$('#ModalNuevo').modal('show');", true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.upAccionesTipos, this.GetType(), "TipoNoSeleccionado", "alertify.alert('Error', 'Seleccione el tipo de incidente a editar', 'onok');", true);
-            }
-        }
-
-        protected void btnNuevoTipo_Click(object sender, EventArgs e)
-        {
-            txtNombre.Text = "";
-            lbelModal.Text = "Alta de tipos de incidencia";
-            acciones.Value = "0";
-            ScriptManager.RegisterStartupScript(this.upAccionesTipos, GetType(), "btnNuevoTipoActivo", "$('#ModalNuevo').modal('show');", true);
-        }
-
-        protected void btnNuevoLugar_Click(object sender, EventArgs e)
-        {
-            txtNombre.Text = "";
-            lbelModal.Text = "Alta de lugares";
-            acciones.Value = "0";
-            ScriptManager.RegisterStartupScript(this.upAccionesLugares, GetType(), "btnNuevoLugarActivo", "$('#ModalNuevo').modal('show');", true);
-        }
-
-        protected void btnEditarLugar_Click(object sender, EventArgs e)
-        {
-            if (gvLugares.SelectedIndex != -1)
-            {
-                tbllugar lugar = controlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value.ToString()));
-                txtNombre.Text = lugar.nomLugar;
-                lbelModal.Text = "Editar lugar";
-                acciones.Value = "1";
-                ScriptManager.RegisterStartupScript(this.upAccionesLugares, this.GetType(), "btnEditarLugarActivo", "$('#ModalNuevo').modal('show');", true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.upAccionesLugares, this.GetType(), "LugarNoSeleccionado", "alertify.alert('Error', 'Seleccione el lugar a editar', 'onok');", true);
-            }
-        }
-
-        protected void btnNuevoRequerimiento_Click(object sender, EventArgs e)
-        {
-            txtNombre.Text = "";
-            lbelModal.Text = "Alta de Requerimientos";
-            acciones.Value = "0";
-            ScriptManager.RegisterStartupScript(this.upAccionesRequerimientos, GetType(), "btnNuevoReqActivo", "$('#ModalNuevo').modal('show');", true);
-        }
-
-        protected void btnEditarRequerimiento_Click(object sender, EventArgs e)
-        {
-            if (gvRequerimientos.SelectedIndex != -1)
-            {
-                acciones.Value = "1";
-                requerimientosSinAsignar_Result recurso = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value.ToString()), null);
-                txtNombre.Text = recurso.nomRequerimiento;
-                cbTipoRequerimiento.SelectedItem.Text = recurso.tipo;
-                lbelModal.Text = "Editar recurso";
-                ScriptManager.RegisterStartupScript(this.upAccionesRequerimientos, this.GetType(), "btnEditarReqActivo", "$('#ModalNuevo').modal('show');", true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.upAccionesRequerimientos, this.GetType(), "ReqNoSeleccionado", "alertify.alert('Error', 'Seleccione el recurso a editar', 'onok');", true);
-            }
-        }*/
-
-        //Desde aqui se optimizará el codigo
-
-        protected void configurarModal(string titulo, string nomElemento, bool panelVisible)
+        protected void configurarModal(string titulo, string nomElemento, int maxlength, bool panelVisible)
         {
             lbelModal.Text = titulo;
             txtNombre.Text = nomElemento;
+            txtNombre.MaxLength = maxlength;
             panelTipoRequerimiento.Visible = panelVisible;
         }
 
@@ -220,21 +69,28 @@ namespace HelpDeskWeb.Catalogos
         {
             string mensaje = null;
 
-            switch (e.CommandName)
+            if (!String.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                case "insertar":
-                    if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
-                        mensaje = "Se grabó el registro satisfactoriamente";
-                    else
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
-                    break;
+                switch (e.CommandName)
+                {
+                    case "insertar":
+                        if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
+                            mensaje = "Se grabó el registro satisfactoriamente";
+                        else
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
+                        break;
 
-                case "actualizar":
-                    if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
-                        mensaje = "Se actualizó el registro satiscartoriamente";
-                    else
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
-                    break;
+                    case "actualizar":
+                        if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
+                            mensaje = "Se actualizó el registro satiscartoriamente";
+                        else
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
+                        break;
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Llene el campo Nombre, 'onok');", true);
             }
 
             if (mensaje != null)
@@ -255,7 +111,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvTipoIncidentes.SelectedIndex != -1)
                     {
                         tbltipoincidencia tipoInSeleccionado = hdk_ControlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
-                        this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nomTipoIncidente, false);
+                        this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nomTipoIncidente, 29, false);
                         seleccionado = true;
                     }
                     break;
@@ -264,7 +120,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvLugares.SelectedIndex != -1)
                     {
                         tbllugar lugarSeleccionado = hdk_ControlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
-                        this.configurarModal("Editar lugares", lugarSeleccionado.nomLugar, false);
+                        this.configurarModal("Editar lugares", lugarSeleccionado.nomLugar,59, false);
                         seleccionado = true;
                     }
                     break;
@@ -273,7 +129,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvRequerimientos.SelectedIndex != -1)
                     {
                         requerimientosSinAsignar_Result ReqSeleccionado = hdk_ControlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
-                        this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento, true);
+                        this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento,29, true);
                         cbTipoRequerimiento.SelectedItem.Text = ReqSeleccionado.tipo;
                         seleccionado = true;
                     }
@@ -295,16 +151,16 @@ namespace HelpDeskWeb.Catalogos
             switch (e.CommandName)
             {
                 case "abrirNuevoTipoIncidente":
-                    this.configurarModal("Alta de tipos de incidentes", "", false);
+                    this.configurarModal("Alta de tipos de incidentes", "",29, false);
                     break;
 
                 case "abrirNuevoLugar":
-                    this.configurarModal("Alta de lugares", "", false);
+                    this.configurarModal("Alta de lugares", "",59, false);
                     break;
 
                 case "abrirNuevoRequerimiento":
                     cbTipoRequerimiento.SelectedIndex = -1;
-                    this.configurarModal("Alta de recursos", "", true);
+                    this.configurarModal("Alta de recursos", "",29, true);
                     break;
             }
             btnGrabar.CommandName = "insertar";

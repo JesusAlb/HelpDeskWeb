@@ -77,22 +77,28 @@ namespace HelpDeskWeb.Catalogos
         protected void btnGrabar_Command(object sender, CommandEventArgs e)
         {
              string mensaje = null;
-
-             switch(e.CommandName)
+             if (!String.IsNullOrWhiteSpace(txtNombre.Text))
              {
-                 case "insertar":
-                     if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
-                         mensaje = "Se grabó el registro satisfactoriamente";
-                     else
-                         ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
-                     break;
+                 switch (e.CommandName)
+                 {
+                     case "insertar":
+                         if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
+                             mensaje = "Se grabó el registro satisfactoriamente";
+                         else
+                             ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
+                         break;
 
-                 case "actualizar":
-                     if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
-                         mensaje = "Se actualizó el registro satiscartoriamente";
-                     else
-                         ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
-                     break;
+                     case "actualizar":
+                         if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
+                             mensaje = "Se actualizó el registro satiscartoriamente";
+                         else
+                             ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
+                         break;
+                 }
+             }
+             else
+             {
+                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Llene el campo nombre', 'onok');", true);
              }
 
              if (mensaje != null)

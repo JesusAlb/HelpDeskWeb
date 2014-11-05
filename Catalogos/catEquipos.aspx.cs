@@ -50,142 +50,10 @@ namespace HelpDeskWeb.Catalogos
             }
         }
 
-     /*   protected void btnGrabarTipo_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrWhiteSpace(txtTipoEquipo.Text))
-            {
-                if (accionesEquipos.Value.Equals("0"))
-                {
-                    if (hdk_ControlTipoEquipo.insertar(txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
-                    {
-                        this.cargarTablasTipos();
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.success('Tipo de equipo creado exitosamente')", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.error('No se pudo crear el tipo de equipo')", true);
-                    }
-                }
-                else
-                {
-                    if (hdk_ControlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtTipoEquipo.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
-                    {
-                        this.cargarTablasTipos();
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.success('Tipo de equipo editado exitosamente')", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.updateNuevoTipo, GetType(), "btnModificarActivo", "alertify.error('No se pudo editar el tipo de equipo')", true);
-                    }
-                }
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnError", "alertify.alert('Error', 'Escriba el nombre del tipo de equipo', 'onok');", true);
-            }
-            
-        }
-
-        protected void btnNuevoTipo_Click(object sender, EventArgs e)        
-        {
-            accionesEquipos.Value = "0"; 
-            txtTipoEquipo.Text = "";
-            chTodos.Checked = false;
-            chTodos_CheckedChanged(sender, e);
-            lbelModal.Text = "Alta de tipos de equipos";
-            ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivo", "$('#ModalNuevoTipoEquipos').modal('show');", true);
-        }*/
-
         protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
         {
             hdk_utilerias.setRowCreated(sender, e, this.Page);
         }
-
-        /*    protected void btnEditarTipo_Click(object sender, EventArgs e)
-            {
-                if (gvTipoEquipos.SelectedIndex != -1)
-                {
-                    accionesEquipos.Value = "1";
-                    lbelModal.Text = "Modificar tipo de equipos";
-                    int tipoEquipo = Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString());
-                    tbltipoequipo equipo = hdk_ControlTipoEquipo.obtenerEquipo(tipoEquipo);
-                    txtTipoEquipo.Text = equipo.nomTipoEquipo;
-                    chDiscoD.Checked = equipo.siDiscoDuro;
-                    chRAM.Checked = equipo.siRAM;
-                    chRed.Checked = equipo.siRed;
-                    chTeclado.Checked = equipo.siTeclado;
-                    chProcesador.Checked = equipo.siProcesador;
-                    chMonitor.Checked = equipo.siMonitor;
-                    chMouse.Checked = equipo.siMouse;
-                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnEditarActivo", "$('#ModalNuevoTipoEquipos').modal('show');", true);
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione el tipo de equipo a editar', 'onok');", true);
-                }
-            }
-
-            protected void btnNuevaMarca_Click(object sender, EventArgs e)
-            {
-                accionesMarcas.Value = "0";
-                lbelModalMarca.Text = "Alta de marcas";
-                txtMarca.Text = "";
-                ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('show');", true);
-            }
-
-            protected void btnEditarMarca_Click(object sender, EventArgs e)
-            {
-                if (gvMarca.SelectedIndex != -1)
-                {
-                    accionesMarcas.Value = "1";
-                    lbelModalMarca.Text = "Modificar marcas";
-                    tblmarca marca = hdk_ControlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()));
-                    txtMarca.Text = marca.nomMarca;
-                    ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, GetType(), "btnEditarActivo", "$('#ModalNuevaMarca').modal('show');", true);
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this.updateAccionesMarcas, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Seleccione la marca a editar', 'onok');", true);
-                }
-            }
-
-            protected void btnGrabarMarca_Click(object sender, EventArgs e)
-            {
-
-                if (!String.IsNullOrWhiteSpace(txtMarca.Text))
-                {
-
-                    if (accionesMarcas.Value.Equals("0"))
-                    {
-
-                        if (hdk_ControlMarca.insertar(txtMarca.Text))
-                        {
-                            this.cargarTablasMarcas();
-                            ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);
-                            ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnModificarActivo", "alertify.success('Marca creada exitosamente')", true);
-                        }
-
-                    }
-                    else
-                    {
-                        if (hdk_ControlMarca.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value.ToString()), txtMarca.Text))
-                        {
-                            this.cargarTablasMarcas();
-                            ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnNuevoActivo", "$('#ModalNuevaMarca').modal('hide');", true);
-                            ScriptManager.RegisterStartupScript(this.updateNuevaMarca, GetType(), "btnModificarActivo", "alertify.success('Marca editada exitosamente')", true);
-                        }
-
-                    }
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this.updateNuevoTipo, this.GetType(), "btnEditarError", "alertify.alert('Error', 'Escriba el nombre de la marca', 'onok');", true);
-                }
-            }*/
-
-        //Inicio de optimización
 
         protected void configurarModal(string titulo, string nomElemento, bool panelVisible)
         {
@@ -258,27 +126,34 @@ namespace HelpDeskWeb.Catalogos
         {
             string mensaje = null;
 
-            switch (e.CommandName)
+            if (!String.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                case "insertar":
-                    if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
-                        mensaje = "Se grabó el registro satisfactoriamente";
-                    else
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al registrar');", true);
-                    break;
+                switch (e.CommandName)
+                {
+                    case "insertar":
+                        if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
+                            mensaje = "Se grabó el registro satisfactoriamente";
+                        else
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al registrar');", true);
+                        break;
 
-                case "actualizar":
-                    if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
-                        mensaje = "Se actualizó el registro satisfactoriamente";
-                    else
-                        ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al actualizar');", true);
-                    break;
+                    case "actualizar":
+                        if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
+                            mensaje = "Se actualizó el registro satisfactoriamente";
+                        else
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al actualizar');", true);
+                        break;
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Llene el campo Nombre');", true);
             }
 
             if (mensaje != null)
             {
                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "quitarmodal", "$('#ModalNuevo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.success('Correcto', '" + mensaje + "', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Correcto', '" + mensaje + "', 'onok');", true);
             }
 
         }
