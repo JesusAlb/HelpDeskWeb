@@ -79,7 +79,7 @@
                         <asp:Panel runat="server" CssClass="col-lg-8">
                             <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                             <asp:Panel runat="server" CssClass="input-group">
-                                <asp:TextBox runat="server" ID="txtFiltro" MaxLength="30" CssClass="form-control" placeholder="Buscar" />
+                                <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" CssClass="form-control" placeholder="Buscar" />
                                 <span class="input-group-btn">
                                     <asp:Button runat="server" Text="Filtrar" ID="btnFiltro" CssClass="btn btn-default" />
                                 </span>

@@ -94,7 +94,7 @@
                             <asp:Panel runat="server" CssClass="col-lg-6">
                                 <div class="form-group">
                                     <asp:Panel runat="server" CssClass="input-group">
-                                        <asp:TextBox runat="server" ID="txtFiltro" OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" CssClass="form-control" placeholder="Buscar" />
+                                        <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" CssClass="form-control" placeholder="Buscar" />
                                         <span class="input-group-btn">
                                             <asp:Button runat="server" Text="Filtrar" OnClick="btnFiltro_Click" ID="btnFiltro" CssClass="btn btn-default" />
                                         </span>
