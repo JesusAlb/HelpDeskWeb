@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-8">
-                                    <h2 class="text-center">Control de acceso</h2>
+                                    <div class="form-group text-center"><img src="Imagenes/usuario.png" class="text-center"/></div>
                                     <div class="form-group">
                                          <asp:TextBox runat="server" ID="txtUsuario" type="text" class="form-control" placeholder="Usuario" required autofocus />
                                     </div>

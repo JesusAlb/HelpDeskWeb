@@ -1,5 +1,6 @@
 ﻿
 using HelpDeskWeb.ControlBD.Acceso;
+using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows;
 
 namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
@@ -146,12 +148,12 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-      /*  public static bool insertarIncidenteCompleto(int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
+        public static bool insertarIncidenteCompleto(Page pagina, int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
         {
             try
             {
                 int st = 0;
-                if (dbHelp.item.tipoUsuario == 0)
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(pagina).tipoUsuario == 0)
                 {
                     st = 2;
                 }
@@ -175,10 +177,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 };
                 if (incidente != null)
                 {
-                    dbHelp.DB.tblincidentes.Attach(incidente);
-                    dbHelp.DB.tblincidentes.Add(incidente);
-                    dbHelp.DB.SaveChanges();
-                    dbHelp.actualizarModelo();
+                    dbhelp.modelo.tblincidentes.Attach(incidente);
+                    dbhelp.modelo.tblincidentes.Add(incidente);
+                    dbhelp.modelo.SaveChanges();
                 }
                 return true;
             }
@@ -198,14 +199,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 }
                 return false;
                 }
-        }*/
+        }
 
         public static bool insertarIncidente(int sol, string descripcion)
         {
             try
             {
                var resultado = dbhelp.modelo.insertarIncidente(descripcion, sol);
-               if (resultado != null)
+               if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
                    return true;

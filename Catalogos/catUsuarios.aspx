@@ -12,12 +12,12 @@
     <script src="../js/ie10-viewport-bug-workaround.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-        <!-- include alertify.css -->
-    <link rel="stylesheet" href="../css/alertify.css"/>
+    <!-- include alertify.css -->
+    <link rel="stylesheet" href="../css/alertify.css" />
     <link rel="stylesheet" href="../css/themes/default.css" />
     <link rel="stylesheet" href="../css/alertify.min.css" />
     <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
+    <link rel="stylesheet" href="../css/themes/bootstrap.css" />
     <!-- include alertify script -->
     <script src="../js/alertify.js"></script>
     <script src="../js/alertify.min.js"></script>
@@ -44,8 +44,10 @@
                     <li id="control" class="dropdown">
                         <asp:HyperLink runat="server" ID="menuControl" href="#" CssClass="dropdown-toggle" data-toggle="dropdown">Control</asp:HyperLink>
                         <ul class="dropdown-menu" role="menu">
-                            <li id="usuarios"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Usuarios.aspx">Usuarios</asp:HyperLink></li>
-                            <li id="equipos"><asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
+                            <li id="usuarios">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Administracion/Usuarios.aspx">Usuarios</asp:HyperLink></li>
+                            <li id="equipos">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Administracion/Equipos.aspx">Equipos</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li id="solicitudes" class="dropdown">
@@ -84,9 +86,10 @@
             <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
-                    <asp:Panel runat="server" CssClass="panel panel-default" BorderColor="Gray" >
+                    <asp:Panel runat="server" CssClass="panel panel-default" BorderColor="Gray">
                         <asp:Panel runat="server" CssClass="panel-heading" Font-Size="Large" HorizontalAlign="Center" BackColor="#E6E6E6">
                             Catálogos para usuarios
+                       
                         </asp:Panel>
                         <div class="panel-body">
                             <form role="form" runat="server">
@@ -142,10 +145,7 @@
                                                         <asp:AsyncPostBackTrigger ControlID="btnEditarArea" EventName="Click" />
                                                         <asp:AsyncPostBackTrigger ControlID="btnNuevoPuesto" EventName="Click" />
                                                         <asp:AsyncPostBackTrigger ControlID="btnEditarPuesto" EventName="Click" />
-                                                        <asp:AsyncPostBackTrigger ControlID="tabCoordinaciones" EventName="Click" />
-                                                        <asp:AsyncPostBackTrigger ControlID="tabAreas" EventName="Click" />
-                                                        <asp:AsyncPostBackTrigger ControlID="tabDepartamentos" EventName="Click" />
-                                                        <asp:AsyncPostBackTrigger ControlID="tabPuestos" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </asp:Panel>
@@ -242,11 +242,19 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-10">
                                                     <div class="form-group">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">Coordinación</span>
-                                                            <asp:DropDownList runat="server" ID="cbFiltroCoord" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion">
-                                                        </asp:DropDownList>
-                                                        </div>
+                                                        <asp:UpdatePanel runat="server" ID="uPFiltroCoordinacion" UpdateMode="Conditional">
+                                                            <ContentTemplate>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">Coordinación</span>
+                                                                    <asp:DropDownList runat="server" ID="cbFiltroCoord" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion">
+                                                                    </asp:DropDownList>
+                                                                </div>
+                                                            </ContentTemplate>
+                                                            <Triggers>
+                                                                <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                            </Triggers>
+                                                        </asp:UpdatePanel>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-1"></div>

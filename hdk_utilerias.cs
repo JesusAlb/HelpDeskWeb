@@ -50,6 +50,11 @@ namespace HelpDeskWeb
             return true;
         }
 
+     /*   public static bool verificarCombosUsuarios()
+        {
+
+        }*/
+
         public static void checarSession(Page pagina, bool despues, int tipoObligatorio, int tipoActual)
         {
                 if (despues)

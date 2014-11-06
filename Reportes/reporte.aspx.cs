@@ -54,13 +54,13 @@ namespace HelpDeskWeb.Reportes
         {
             if (index == 0 || index == 1)
             {
-                txtFiltroInt.Visible = false;
+                txtFiltroNumero.Visible = false;
                 cbEstatus.Visible = true;
             }
             else
             {
-                txtFiltroInt.Visible = true;
-                txtFiltroInt.Enabled = true;
+                txtFiltroNumero.Visible = true;
+                txtFiltroNumero.Enabled = true;
                 cbEstatus.Visible = false;
             }
         }

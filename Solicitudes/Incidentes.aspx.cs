@@ -23,6 +23,7 @@ namespace HelpDeskWeb.Solicitudes
             if (!IsPostBack)
             {
                 this.cargarComboFiltro();
+                this.cargarComboBoxs();
                 this.cargarTablasIncidentes();
             }
             if (Page.IsPostBack)
@@ -66,10 +67,15 @@ namespace HelpDeskWeb.Solicitudes
         protected void cargarComboBoxs()
         {
             cbTipoIncidente.DataSource = hdk_ControlIncidentes.cargarComboTipo();
-            cbSeguimiento.DataSource = cbSoporte.DataSource = hdk_ControlUsuario.cargarComboUsuarios(0);
+            cbSoporte2.DataSource = cbSeguimiento2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource =  hdk_ControlUsuario.cargarComboUsuarios(0);
+            cbSolicitante.DataSource = cbSolicitante2.DataSource = hdk_ControlUsuario.cargarComboUsuarios(2);
             cbTipoIncidente.DataBind();
             cbSoporte.DataBind();
             cbSeguimiento.DataBind();
+            cbSolicitante.DataBind();
+            cbSolicitante2.DataBind();
+            cbSoporte2.DataBind();
+            cbSeguimiento2.DataBind();
         }
 
         protected void cargarComboFiltro()
@@ -117,12 +123,18 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                if (hdk_ControlIncidentes.insertarIncidente(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtDescripcion.Text))
+                int solicitante = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+                {
+                    solicitante = Convert.ToInt32(cbSolicitante.SelectedValue);
+                }
+
+                if (hdk_ControlIncidentes.insertarIncidente(solicitante, txtDescripcion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.alert('Correcto', 'Incidente creado correctamente', 'onok');", true);
-                    
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.alert('Correcto', 'Incidente creado correctamente', 'onok');", true);                   
                 }
                 else
                 {
@@ -135,7 +147,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
             {
-                this.cargarComboBoxs();
+
                 tblincidente itemIncidente = hdk_ControlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
                 cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
                 cbPrioridad.Text = itemIncidente.prioridad;
@@ -151,7 +163,28 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            {
+                if (!tabItemSeleccionado.Value.Equals("2"))
+                {
+                    hdk_utilerias.limpiarControles(upModalNuevo.Controls);
+                    panelSolcitante.Visible = true;
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+                }
+                else
+                {
+                    hdk_utilerias.limpiarControles(upIncidenteCompleto.Controls);
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevoCompleto').modal('show');", true);
+                }
+
+            }
+            else
+            {
+                txtDescripcion.Text = "";
+                panelSolcitante.Visible = false;
+                ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+            }
+
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -391,6 +424,11 @@ namespace HelpDeskWeb.Solicitudes
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;
             }
+        }
+
+        protected void btnGrabarCompleto_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

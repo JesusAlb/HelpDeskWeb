@@ -52,7 +52,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static IList cargarComboUsuarios(int tip)
+        public static IList<ViewUsuario> cargarComboUsuarios(int tip)
         {
             try{
                 if (tip == 0)
@@ -75,18 +75,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static IList cargarComboInstitucion()
-        {
-            try
-            {
-                return dbhelp.modelo.tblinstitucions.Where(a => a.status == true).ToList();
-
-            }catch{
-                return null;
-            }
-        }
-
-        public static IList cargarTabla(string filtro)
+        public static IList<ViewUsuario> cargarTabla(string filtro)
         {
             try
             {

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using HelpDeskWeb;
 using System.Collections;
+using HelpDeskWeb.EntityFrameWork;
 
 namespace HelpDeskWeb.ControlBD.Catalogo
 {
     public class hdk_ControlInstitucion
     {
-        public static IList cargarTablaInsitucion()
+        public static IList<tblinstitucion> cargarTablaInsitucion()
         {
             try
             {

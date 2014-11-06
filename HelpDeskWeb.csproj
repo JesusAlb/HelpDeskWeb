@@ -177,6 +177,7 @@
     <Content Include="Imagenes\pNormal.png" />
     <Content Include="Imagenes\siEncuesta3.png" />
     <Content Include="Imagenes\solicitante.png" />
+    <Content Include="Imagenes\usuario.png" />
     <Content Include="index.aspx" />
     <Content Include="js\alertify.js" />
     <Content Include="js\alertify.min.js" />
@@ -272,7 +273,6 @@
     <Content Include="Imagenes\rem.png" />
     <Content Include="Imagenes\rEncuesta.png" />
     <Content Include="Imagenes\Terminar2.png" />
-    <Content Include="Imagenes\usuario.jpg" />
     <Content Include="Reportes\reporte.aspx" />
     <Content Include="solicitante.aspx" />
     <Content Include="Solicitudes\Eventos.aspx" />
