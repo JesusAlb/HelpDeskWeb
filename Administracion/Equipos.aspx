@@ -133,7 +133,7 @@
                                                                                 <asp:Panel runat="server" CssClass="col-lg-4">
                                                                                     <asp:Label runat="server" Text="Memoria RAM" MaxLength="4" Font-Bold="true"></asp:Label>
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" TextMode="Number" min="1" />
+                                                                                        <asp:TextBox runat="server" ID="txtRAM" MaxLength="3" CssClass="form-control" TextMode="Number" min="1" />
                                                                                         <span class="input-group-addon">GB</span>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
@@ -171,7 +171,7 @@
                                                                                     <asp:Panel runat="server" CssClass="form-group">
                                                                                         <asp:Panel runat="server" CssClass="input-group">
                                                                                             <span runat="server" class="input-group-addon">Serie</span>
-                                                                                            <asp:TextBox runat="server" ID="txtSerieEquipo" CssClass="form-control" placeholder="0000-0000-0000" required></asp:TextBox>
+                                                                                            <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" CssClass="form-control" placeholder="" required></asp:TextBox>
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
@@ -192,7 +192,7 @@
                                                                                     <asp:Panel runat="server" CssClass="form-group">
                                                                                         <asp:Panel runat="server" CssClass="input-group">
                                                                                             <span runat="server" class="input-group-addon">Serie</span>
-                                                                                            <asp:TextBox runat="server" ID="txtSerieMonitor" CssClass="form-control" placeholder="0000-0000-0000" required></asp:TextBox>
+                                                                                            <asp:TextBox runat="server" ID="txtSerieMonitor" MaxLength="20" CssClass="form-control" placeholder="" required></asp:TextBox>
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
@@ -217,7 +217,7 @@
                                                                                     <asp:Panel runat="server" CssClass="form-group">
                                                                                         <asp:Panel runat="server" CssClass="input-group">
                                                                                             <span runat="server" class="input-group-addon">Serie</span>
-                                                                                            <asp:TextBox runat="server" ID="txtSerieTeclado" CssClass="form-control" placeholder="0000-0000-0000" required></asp:TextBox>
+                                                                                            <asp:TextBox runat="server" ID="txtSerieTeclado" MaxLength="20" CssClass="form-control" placeholder="" required></asp:TextBox>
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
@@ -238,7 +238,7 @@
                                                                                     <asp:Panel runat="server" CssClass="form-group">
                                                                                         <asp:Panel runat="server" CssClass="input-group">
                                                                                             <span runat="server" class="input-group-addon">Serie</span>
-                                                                                            <asp:TextBox runat="server" ID="txtSerieMouse" CssClass="form-control" placeholder="0000-0000-0000" required></asp:TextBox>
+                                                                                            <asp:TextBox runat="server" ID="txtSerieMouse" MaxLength="20" CssClass="form-control" placeholder="Ej. 0213ESD12D123" required></asp:TextBox>
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
@@ -259,13 +259,13 @@
                                                                                         <asp:Panel runat="server" CssClass="col-lg-8">
                                                                                             <asp:Label runat="server" Text="Dirección IP" Font-Bold="true"></asp:Label>
                                                                                             <asp:Panel runat="server" CssClass="input-group">
-                                                                                                <asp:TextBox runat="server" ID="txtIP1" CssClass="form-control" TextMode="Number" min="0" max="255" />
+                                                                                                <asp:TextBox runat="server" ID="txtIP1" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
                                                                                                 <span runat="server" class="input-group-addon">.</span>
-                                                                                                <asp:TextBox runat="server" ID="txtIP2" CssClass="form-control" TextMode="Number" min="0" max="255" />
+                                                                                                <asp:TextBox runat="server" ID="txtIP2" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
                                                                                                 <span runat="server" class="input-group-addon">.</span>
-                                                                                                <asp:TextBox runat="server" ID="txtIP3" CssClass="form-control" TextMode="Number" min="0" max="255" />
+                                                                                                <asp:TextBox runat="server" ID="txtIP3" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
                                                                                                 <span runat="server" class="input-group-addon">.</span>
-                                                                                                <asp:TextBox runat="server" ID="txtIP4" CssClass="form-control" TextMode="Number" min="0" max="255" />
+                                                                                                <asp:TextBox runat="server" ID="txtIP4" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
                                                                                             </asp:Panel>
                                                                                         </asp:Panel>
                                                                                         <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
@@ -277,17 +277,17 @@
                                                                                         <asp:Panel runat="server" CssClass="col-lg-8">
                                                                                             <asp:Label runat="server" Text="Dirección MAC" Font-Bold="true"></asp:Label>
                                                                                             <asp:Panel runat="server" CssClass="input-group">
-                                                                                                <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control" MaxLength="2" />
                                                                                                 <span runat="server" class="input-group-addon">-</span>
-                                                                                                <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control" MaxLength="2" />
                                                                                                 <span runat="server" class="input-group-addon">-</span>
-                                                                                                <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control" MaxLength="2" />
                                                                                                 <span runat="server" class="input-group-addon">-</span>
-                                                                                                <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control" MaxLength="2" />
                                                                                                 <span runat="server" class="input-group-addon">-</span>
-                                                                                                <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control" MaxLength="2" />
                                                                                                 <span runat="server" class="input-group-addon">-</span>
-                                                                                                <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control" />
+                                                                                                <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control" MaxLength="2" />
                                                                                             </asp:Panel>
                                                                                         </asp:Panel>
                                                                                         <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>

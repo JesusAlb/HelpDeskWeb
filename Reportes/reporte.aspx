@@ -150,7 +150,7 @@
                                                                             <div class="col-lg-3">
                                                                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                                     <ContentTemplate>
-                                                                                        <asp:TextBox runat="server" ToolTip="clave" ID="txtFiltroInt" Visible="true" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                                                                        <asp:TextBox runat="server" ToolTip="clave" ID="txtFiltroNumero" TextMode="Number" MaxLength="6"  Visible="true" CssClass="form-control" Enabled="false"></asp:TextBox>
                                                                                         <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control" Visible="false">
                                                                                             <asp:ListItem Text="Usar filtro" Value=""></asp:ListItem>
                                                                                             <asp:ListItem Text="Abierto" Value="0"></asp:ListItem>
@@ -174,7 +174,7 @@
                                                                         <div class="row">
                                                                             <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
                                                                             <div class="col-lg-5">
-                                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                                <asp:TextBox runat="server" ID="txtFiltroAbierto" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                                                             </div>
                                                                             <div class="col-lg-3">
                                                                                 <asp:Linkbutton runat="server"  CssClass="btn btn-block btn-primary" ID="btnGenerar" OnClick="btnGenerarReporte_Click">

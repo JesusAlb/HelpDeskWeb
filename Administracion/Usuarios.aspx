@@ -134,21 +134,21 @@
                                                     <asp:Panel runat="server" CssClass="col-lg-10">
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNomUsuario" CssClass="form-control" placeholder="Nombre de usuario"/>
+                                                            <asp:TextBox runat="server" ID="txtNomUsuario" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario"/>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre completo del usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre(s)"/>
-                                                            <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" placeholder="Apellidos" style="margin-top:2%"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtNombre" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)"/>
+                                                            <asp:TextBox runat="server" ID="txtApellido" MaxLength="40" CssClass="form-control" placeholder="Apellidos" style="margin-top:2%"></asp:TextBox>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
                                                             <asp:Panel runat="server" CssClass="row">
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Contraseñas" />
+                                                                    <asp:TextBox runat="server" ID="txtPassword" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseñas" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPasswordVer" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
+                                                                    <asp:TextBox runat="server" ID="txtPasswordVer" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>
@@ -163,7 +163,7 @@
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:Label runat="server" Text="Extensión Telefonica" Font-Bold="true" />
-                                                                    <asp:TextBox runat="server" ID="txtExtension" TextMode="Number" placeholder="000" CssClass="form-control" />
+                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" TextMode="Number" placeholder="000" CssClass="form-control" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>

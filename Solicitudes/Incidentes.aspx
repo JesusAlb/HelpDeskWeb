@@ -105,7 +105,7 @@
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="col-lg-7">
                                         <asp:Panel runat="server" CssClass="input-group">
-                                            <asp:TextBox runat="server" ID="txtFiltro" placeholder="Buscar" CssClass="form-control" />
+                                            <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" placeholder="Buscar" CssClass="form-control" />
                                             <span class="input-group-btn">
                                                 <asp:Button runat="server" ID="btnFiltrar" Text="Fitrar" CssClass="btn btn-default" />
                                             </span>
@@ -186,7 +186,7 @@
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:Panel runat="server" CssClass="form-group">
                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label>
-                                                <asp:TextBox runat="server" ID="txtDescripcion" placeholder="Describa su incidente de tal forma que podamos ayudarle." style="resize:none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." style="resize:none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                             </asp:Panel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
@@ -267,11 +267,11 @@
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:Panel runat="server" CssClass="form-group">
                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label>
-                                                <asp:TextBox runat="server" ID="txtAcciones" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" style="resize:none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtAcciones" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" style="resize:none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                             </asp:Panel>
                                             <asp:Panel runat="server" CssClass="form-group">
                                                 <asp:Label runat="server" Text="Solución" />
-                                                <asp:TextBox runat="server" ID="txtSolucion" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtSolucion" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                             </asp:Panel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
@@ -357,7 +357,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label>
-                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" CssClass="form-control" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" MaxLength="200" CssClass="form-control" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
                                                                     </td>
                                                                 </table>
                                                             </asp:Panel>

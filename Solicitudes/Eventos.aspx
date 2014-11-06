@@ -198,7 +198,8 @@
                                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Título" Font-Bold="true"></asp:Label><asp:TextBox runat="server" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" Style="resize: none"  CssClass="form-control">
+                                                                <asp:Label runat="server" Text="Título" Font-Bold="true"></asp:Label>
+                                                                <asp:TextBox runat="server" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" Style="resize: none"  CssClass="form-control">
                                                                 </asp:TextBox>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
@@ -207,7 +208,8 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Acomodo"></asp:Label><asp:TextBox runat="server" CssClass="form-control"  ID="txtAcomodo"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Acomodo"></asp:Label>
+                                                                        <asp:TextBox runat="server" CssClass="form-control"  ID="txtAcomodo" MaxLength="30"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo">
@@ -220,10 +222,12 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Asistencia aproximada"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Number"  ID="txtAsistencia"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Asistencia aproximada"></asp:Label>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" TextMode="Number" MaxLength="5"  ID="txtAsistencia"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Fecha de realización"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Date" ID="txtFecha"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Fecha de realización"></asp:Label>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" TextMode="Date" ID="txtFecha"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -238,7 +242,8 @@
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label><asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                                <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
+                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" MaxLength="200" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                     </asp:Panel>
@@ -324,7 +329,7 @@
                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Panel runat="server" CssClass="input-group">
-                                                                <asp:TextBox runat="server" ID="txtFiltroReq" placeholder="Buscar" CssClass="form-control" />
+                                                                <asp:TextBox runat="server" ID="txtFiltroReq" MaxLength="25" placeholder="Buscar" CssClass="form-control" />
                                                                 <span class="input-group-btn">
                                                                     <asp:Button runat="server" ID="btnFiltrarReq" Text="Fitrar" CssClass="btn btn-default" />
                                                                 </span>
@@ -385,7 +390,7 @@
                                                             <ContentTemplate>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Cantidad</span>
-                                                                    <asp:TextBox runat="server" ID="txtCantidadAs" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtCantidadAs" MaxLength="5" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                                     <div class="input-group-btn">
                                                                         <asp:LinkButton ID="btnQuitar" runat="server" CssClass="btn btn-primary" OnClick="btnQuitar_Click">
                                                             <span class="glyphicon glyphicon-minus-sign"></span>
@@ -434,7 +439,7 @@
                                                             <ContentTemplate>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Cantidad</span>
-                                                                    <asp:TextBox runat="server" ID="txtCantidad" Text="1" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtCantidad" MaxLength="5" Text="1" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                                     <div class="input-group-btn">
                                                                         <asp:LinkButton ID="btnAñadir" runat="server" OnClick="btnAñadir_Click" CssClass="btn btn-primary">
                                                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -454,7 +459,7 @@
                                                 <asp:Panel runat="server" CssClass="col-lg-12">
                                                     <asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Font-Bold="true" Text="Comentarios"></asp:Label>
-                                                        <asp:TextBox runat="server" ID="txtObservaciones" Height="100" placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtObservaciones" Height="100" MaxLength="250" placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                     </asp:Panel>
                                                 </asp:Panel>
                                             </asp:Panel>
