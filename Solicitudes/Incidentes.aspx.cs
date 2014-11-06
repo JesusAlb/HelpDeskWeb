@@ -66,10 +66,11 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboBoxs()
         {
-            cbTipoIncidente.DataSource = hdk_ControlIncidentes.cargarComboTipo();
+            cbTipoIncidente2.DataSource = cbTipoIncidente.DataSource = hdk_ControlIncidentes.cargarComboTipo();
             cbSoporte2.DataSource = cbSeguimiento2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource =  hdk_ControlUsuario.cargarComboUsuarios(0);
             cbSolicitante.DataSource = cbSolicitante2.DataSource = hdk_ControlUsuario.cargarComboUsuarios(2);
             cbTipoIncidente.DataBind();
+            cbTipoIncidente2.DataBind();
             cbSoporte.DataBind();
             cbSeguimiento.DataBind();
             cbSolicitante.DataBind();
@@ -428,7 +429,26 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGrabarCompleto_Click(object sender, EventArgs e)
         {
-
+            if(hdk_utilerias.verificarCamposVacios(new string[]{
+                txtAcciones2.Text, txtDescripcion2.Text, txtFechaInicio.Text, txtFechaFinal.Text, txtHoraInicio.Text, txtHoraFinal.Text, txtAcciones2.Text, txtSolucion2.Text, cbPrioridad2.Text, cbTipoIncidente2.Text
+            }) && hdk_utilerias.verificarCombosUsuarios(new string[]{
+                cbSeguimiento2.Text, cbSoporte2.Text
+            }))
+            {
+                if (hdk_ControlIncidentes.insertarIncidenteCompleto(Convert.ToInt32(cbSolicitante2.SelectedValue), Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, Convert.ToInt32(cbTipoIncidente2.SelectedValue), Convert.ToDateTime(txtFechaInicio.Text), Convert.ToDateTime(txtFechaFinal.Text), cbPrioridad2.Text, Convert.ToDateTime(txtHoraInicio.Text), Convert.ToDateTime(txtHoraFinal.Text)))
+                {
+                    this.cargarTablasIncidentes();
+                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "cerrar", "$('#ModalNuevoCompleto').modal('hide');", true);
+                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.success('Incidente registrado')", true);
+                }
+                else{
+                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Error al registrar el incidente')", true);
+                }               
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Llene todos los campos')", true);
+            }
         }
     }
 }

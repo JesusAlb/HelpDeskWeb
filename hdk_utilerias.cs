@@ -50,10 +50,19 @@ namespace HelpDeskWeb
             return true;
         }
 
-     /*   public static bool verificarCombosUsuarios()
+        public static bool verificarCombosUsuarios(string[] cbusuario)
         {
+            foreach (string usuario in cbusuario)
+            {
+                if (usuario == "Sin asignar")
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-        }*/
+
 
         public static void checarSession(Page pagina, bool despues, int tipoObligatorio, int tipoActual)
         {

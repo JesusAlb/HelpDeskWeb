@@ -236,16 +236,20 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
+                                                                        <div class="form-group">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo" />
                                                                         <asp:DropDownList runat="server" ID="cbTipoIncidente" DataValueField="idTipoIncidente" DataTextField="nomTipoIncidente" CssClass="form-control" />
+                                                                        </div>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
+                                                                        <div class="form-group">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
                                                                         <asp:DropDownList runat="server" ID="cbPrioridad" CssClass="form-control">
                                                                             <asp:ListItem Text="Alta"></asp:ListItem>
                                                                             <asp:ListItem Text="Media"></asp:ListItem>
                                                                             <asp:ListItem Text="Normal"></asp:ListItem>
                                                                         </asp:DropDownList>
+                                                                        </div>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -468,6 +472,26 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="form*group">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
+                                                                            <asp:DropDownList runat="server" ID="cbPrioridad2" CssClass="form-control">
+                                                                                <asp:ListItem Text="Alta"></asp:ListItem>
+                                                                                <asp:ListItem Text="Media"></asp:ListItem>
+                                                                                <asp:ListItem Text="Normal"></asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <asp:Label runat="server" Font-Bold="true" Text="Tipo" />
+                                                                            <asp:DropDownList runat="server" ID="cbTipoIncidente2" DataValueField="idTipoIncidente" DataTextField="nomTipoIncidente" CssClass="form-control" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <asp:Label runat="server" Text="Soporte" Font-Bold="true"></asp:Label>
                                                                 <asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
@@ -494,7 +518,7 @@
                                             </asp:UpdatePanel>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
-                                            <asp:UpdatePanel runat="server" ID="UpdatePanel4" UpdateMode="Conditional">
+                                            <asp:UpdatePanel runat="server" ID="updateGrabarCompleto" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
                                                     <asp:Button runat="server" ID="btnGrabarCompleto" CssClass="btn btn-primary" Text="Grabar" OnClick="btnGrabarCompleto_Click" />

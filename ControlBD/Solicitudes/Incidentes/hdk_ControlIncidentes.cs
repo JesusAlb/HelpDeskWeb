@@ -148,16 +148,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public static bool insertarIncidenteCompleto(Page pagina, int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
+        public static bool insertarIncidenteCompleto(int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
         {
             try
             {
-                int st = 0;
-                if (hdk_ControlUsuario.obtenerUsuarioDeSession(pagina).tipoUsuario == 0)
-                {
-                    st = 2;
-                }
-
                 var incidente = new tblincidente
                 {
                     descripcion = desc,
@@ -167,7 +161,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                     tipo = tipo,
                     fecha_Sol = feIn,
                     fecha_Cierre = feFn,
-                    status = st,
+                    status = 2,
                     prioridad = priory,
                     horaIn = In,
                     horaFn = Fn,
