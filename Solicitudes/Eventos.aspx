@@ -607,9 +607,9 @@
                                                         <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" />
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" />
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" />
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}" />
                                                         <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
                                                         <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
                                                     </Columns>
@@ -644,9 +644,9 @@
                                                         <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" />
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" />
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" />
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}"/>
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}"/>
                                                         <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
                                                         <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
                                                     </Columns>

@@ -317,6 +317,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cambiarImagenEncuesta(double promedio)
         {
+            double promedioAcotado = Math.Round(promedio, 2);
             txtPromedio.Text = promedio.ToString();
 
             if (promedio <= 2.5)
