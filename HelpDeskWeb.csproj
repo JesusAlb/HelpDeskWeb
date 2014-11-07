@@ -231,6 +231,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="js\jquery-2.1.1.min.map" />
+    <Content Include="perfil.aspx" />
     <Content Include="principalMaestra.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -497,6 +498,13 @@
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="dbhelp.cs" />
+    <Compile Include="perfil.aspx.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="perfil.aspx.designer.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
+    </Compile>
     <Compile Include="principalMaestra.Master.cs">
       <DependentUpon>principalMaestra.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

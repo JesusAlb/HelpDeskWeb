@@ -21,5 +21,17 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 return null;
             }
         }
+
+        public static tblinstitucion obtenerInstitucion(int id)
+        {
+            try
+            {
+                return dbhelp.modelo.tblinstitucions.SingleOrDefault(a => a.idInstitucion == id);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

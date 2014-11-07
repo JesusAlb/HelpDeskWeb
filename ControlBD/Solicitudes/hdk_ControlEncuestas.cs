@@ -13,6 +13,24 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
     class hdk_ControlEncuestas
     {
+        public static tblcalidadservicio insertarEncuesta(int solicitante, int? idIncidente, int? idEvento){
+            try
+            {
+                var encuesta = new tblcalidadservicio { incidente = idIncidente, observacionesServicio = "Sin observaciones", promedioCalidad = 0, statusCal_Servicio = false, usuario_calificado = solicitante, evento = idEvento };
+                if (encuesta != null)
+                {                  
+                    return encuesta;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public static int obtenerNumeroDeEncuestasSinResponderEnIncidentes(int usuario)
         {

@@ -145,7 +145,7 @@
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
                                                             <asp:Panel runat="server" CssClass="row">
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPassword" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseñas" />
+                                                                    <asp:TextBox runat="server" ID="txtPassword" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseña" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:TextBox runat="server" ID="txtPasswordVer" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />

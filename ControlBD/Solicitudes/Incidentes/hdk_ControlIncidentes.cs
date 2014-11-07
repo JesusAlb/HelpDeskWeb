@@ -148,15 +148,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public static bool insertarIncidenteCompleto(int sol, int sop, int seg, string desc, string ac, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
+        public static bool insertarIncidenteCompleto(int solicitante, int soporte, int seguimiento, string descripcion, string acciones, string solucion, int tipo, DateTime feIn, DateTime? feFn, string priory, DateTime In, DateTime? Fn)
         {
             try
             {
                 var incidente = new tblincidente
                 {
-                    descripcion = desc,
-                    solicitante = sol,
-                    acciones = ac,
+                    descripcion = descripcion,
+                    solicitante = solicitante,
+                    acciones = acciones,
                     solucion = solucion,
                     tipo = tipo,
                     fecha_Sol = feIn,
@@ -165,15 +165,24 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                     prioridad = priory,
                     horaIn = In,
                     horaFn = Fn,
-                    soporte = sop,
-                    seguimiento = seg
+                    soporte = soporte,
+                    seguimiento = seguimiento
 
                 };
                 if (incidente != null)
                 {
-                    dbhelp.modelo.tblincidentes.Attach(incidente);
-                    dbhelp.modelo.tblincidentes.Add(incidente);
-                    dbhelp.modelo.SaveChanges();
+                    tblcalidadservicio encuesta = hdk_ControlEncuestas.insertarEncuesta(solicitante,dbhelp.modelo.tblincidentes.Max(a => a.numIncidente), null); 
+                    if (encuesta!= null)
+                    {
+                        dbhelp.modelo.tblincidentes.Add(incidente);
+                        dbhelp.modelo.tblcalidadservicios.Add(encuesta);
+                        dbhelp.modelo.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -183,7 +192,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 {
                     using (StreamWriter w = File.AppendText("../../altaIncidentes.txt"))
                     {
-                        string registro = feIn.ToShortDateString() + "    " + tipo + "    " + desc + "    " + sol + "    " + priory + "    " + In.ToShortTimeString() + "    " + "0";
+                        string registro = feIn.ToShortDateString() + "    " + tipo + "    " + descripcion + "    " + solicitante + "    " + priory + "    " + In.ToShortTimeString() + "    " + "0";
                         w.WriteLine(registro);
                     }
                 }
