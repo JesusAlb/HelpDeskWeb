@@ -94,6 +94,15 @@ namespace HelpDeskWeb {
         protected global::System.Web.UI.ScriptManager scriptManager;
         
         /// <summary>
+        /// Control updateAcciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateAcciones;
+        
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -157,15 +166,6 @@ namespace HelpDeskWeb {
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
-        /// Control updateInstitucion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateInstitucion;
-        
-        /// <summary>
         /// Control txtCorreo.
         /// </summary>
         /// <remarks>
@@ -202,15 +202,6 @@ namespace HelpDeskWeb {
         protected global::System.Web.UI.WebControls.DropDownList cbCoordinacion;
         
         /// <summary>
-        /// Control updateDepto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateDepto;
-        
-        /// <summary>
         /// Control cbDepto.
         /// </summary>
         /// <remarks>
@@ -236,5 +227,23 @@ namespace HelpDeskWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbPuesto;
+        
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelar;
+        
+        /// <summary>
+        /// Control btnGrabar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGrabar;
     }
 }

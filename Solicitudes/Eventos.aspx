@@ -10,9 +10,6 @@
     <title>Atención a eventos</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-    <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/styles2.css" rel="stylesheet" />
-    <link href="../css/printstyles.css" rel="stylesheet" />
         <!-- include alertify.css -->
     <link rel="stylesheet" href="../css/alertify.css"/>
     <link rel="stylesheet" href="../css/themes/default.css" />

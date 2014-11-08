@@ -13,28 +13,34 @@ namespace HelpDeskWeb
 {
     public partial class perfil : System.Web.UI.Page
     {
+        tblusuario usuarioActual;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            tblusuario usuario = hdk_ControlUsuario.obtenerUsuario(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
-            this.cargarCombos();
-            txtNombre.Text = usuario.nombre;
-            txtApellidos.Text = usuario.apellidos;
-            txtNombreUsuario.Text = usuario.username;
-            txtPassword.Attributes.Add("Value", usuario.password);
-            txtTelefono.Text = usuario.exTel;
-            cbTipoUsuario.SelectedValue = usuario.tipoUsuario.ToString();
-            cbArea.SelectedValue = usuario.area.ToString();
-            cbInstitucion.SelectedValue = usuario.institucion.ToString();
-            this.cambiarCorreo(usuario.institucion);
-            string[] correoDividio = usuario.correo.Split('@');          
-            txtCorreo.Text = correoDividio[0];
-            lbelInstitucion.Text = "@" + correoDividio[1];
-            cbPuesto.SelectedValue = usuario.puesto.ToString();
-            int idCoordinacion = hdk_ControlCoordinacion.obtenerCoordinacion(usuario.depto).idCoordinacion;
-            this.cargarComboDepto(idCoordinacion);
-            cbDepto.SelectedValue = usuario.depto.ToString();
-            cbCoordinacion.SelectedValue = idCoordinacion.ToString();
+            if (!IsPostBack)
+            {
+                usuarioActual = hdk_ControlUsuario.obtenerUsuario(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
+                lbelUsuario.Text = usuarioActual.username;
+                this.cargarCombos();
+                txtNombre.Text = usuarioActual.nombre;
+                txtApellidos.Text = usuarioActual.apellidos;
+                txtNombreUsuario.Text = usuarioActual.username;
+                txtPassword.Attributes.Add("Value", usuarioActual.password);
+                txtTelefono.Text = usuarioActual.exTel;
+                cbTipoUsuario.SelectedValue = usuarioActual.tipoUsuario.ToString();
+                cbArea.SelectedValue = usuarioActual.area.ToString();
+                cbInstitucion.SelectedValue = usuarioActual.institucion.ToString();
+                this.cambiarCorreo(usuarioActual.institucion);
+                string[] correoDividio = usuarioActual.correo.Split('@');
+                txtCorreo.Text = correoDividio[0];
+                lbelInstitucion.Text = "@" + correoDividio[1];
+                cbPuesto.SelectedValue = usuarioActual.puesto.ToString();
+                int idCoordinacion = hdk_ControlCoordinacion.obtenerCoordinacion(usuarioActual.depto).idCoordinacion;
+                this.cargarComboDepto(idCoordinacion);
+                cbDepto.SelectedValue = usuarioActual.depto.ToString();
+                cbCoordinacion.SelectedValue = idCoordinacion.ToString();
+            }
         }
 
         protected void cargarCombos()
@@ -67,8 +73,36 @@ namespace HelpDeskWeb
 
         protected void cbInstitucion_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // this.cambiarCorreo(Convert.ToInt32((sender as DropDownList).SelectedValue));
-            lbelInstitucion.Text = "ASDASDASD";
+           this.cambiarCorreo(Convert.ToInt32((sender as DropDownList).SelectedValue));
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (usuarioActual.tipoUsuario == 0)
+            {
+                this.Response.Redirect("soporte.aspx");
+            }else{
+                this.Response.Redirect("solicitante.aspx");
+            }
+
+        }
+
+        protected void btnGrabar_Click(object sender, EventArgs e)
+        {
+            if (hdk_utilerias.verificarTodosLosCampos(updateAcciones.Controls) && txtVerificarPassword.Text.Equals(txtPassword.Text))
+            {
+               if(hdk_ControlUsuario.modificar(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
+               }
+               else
+               {
+                   ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.error('Error al modificar el perfil');", true);
+               }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.error('Llene todos los campos');", true);
+            }
         }
 
     }

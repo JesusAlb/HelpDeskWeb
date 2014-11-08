@@ -129,8 +129,12 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                         ItemAmodificar.puesto = pues;
                         ItemAmodificar.institucion = inst;
                         dbhelp.modelo.SaveChanges();
+                        return 1;
                     }
-                    return 1;
+                    else
+                    {
+                        return 0;
+                    }
                 }
                 catch
                 {
@@ -138,25 +142,25 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 }
             }
 
-        public static int insertar(string us, string nom, string ape, int niv, int dep, string ex, string email, string con, int are, int pues, int inst)
+        public static int insertar(string username, string nombre, string apellido, int tipo, int depto, string extension, string email, string password, int area, int puesto, int institucion)
         {
-            if (!verificarSiExisteUsuario(us))
+            if (!verificarSiExisteUsuario(username))
             {
                 try
                 {
                     var user = new tblusuario
                     {
-                        username = us,
-                        nombre = nom,
-                        apellidos = ape,
-                        tipoUsuario = niv,
-                        depto = dep,
-                        exTel = ex,
+                        username = username,
+                        nombre = nombre,
+                        apellidos = apellido,
+                        tipoUsuario = tipo,
+                        depto = depto,
+                        exTel = extension,
                         correo = email,
-                        password = con,
-                        area = are,
-                        puesto = pues,
-                        institucion = inst
+                        password = password,
+                        area = area,
+                        puesto = puesto,
+                        institucion = institucion
                     };
                     if (user != null)
                     {
