@@ -25,9 +25,9 @@
             <div class="row">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
                     <asp:Timer runat="server" ID="timerIncidentes" Interval="3000" OnTick="timerIncidentes_Tick"></asp:Timer>
-                    <div class="row" style="margin-top:5%">
+                    <div class="row" style="margin-top:1%">
                         <div class="col-lg-7">
-                            <div class="row">
+                            <div class="row" style="margin-top:8%">
                                 <div class="form-group">
                                     <asp:Image runat="server" ID="imca" ImageUrl="~/Imagenes/IMCA IAP.png" Height="230" Width="550" />
                                 </div>

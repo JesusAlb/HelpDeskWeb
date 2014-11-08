@@ -21,17 +21,21 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" ></div>
     <div class="container">
-       <div style="margin-left:5%; margin-right:5%;  margin-top:15%; ">
+       <div style="margin-left:5%; margin-right:5%;  margin-top:10%; ">
             <div class="row">
-                <div class="col-lg-6" style="border-right:solid LightGray 2px">
-                    <div class="row" style="margin:2% 2% 5% 2%" >
-                        <asp:Image runat="server" ImageUrl="~/Imagenes/IMCA IAP.png" Height="180px" Width="442px" />
+                <div class="col-lg-6"  style="border-right: solid 1px #E6E6E6;">
+                    <div class="form-group">
+                        <div class="row" style="margin: 2% 2% 5% 2%">
+                            <asp:Image runat="server" ImageUrl="~/Imagenes/IMCA IAP.png" Height="180px" Width="442px" />
+                        </div>
                     </div>
-                    <div class="row" >
-                        <h1 class="text-center" style="font-family:'Comic Sans MS'; color:#d43f3a">HelpDesk IMCA</h1>
+                    <div class="form-group">
+                        <div class="row">
+                            <h1 class="text-center" style="font-family: 'Comic Sans MS'; color: #d43f3a">HelpDesk IMCA</h1>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6" >
+                <div class="col-lg-6">
                     <form role="form" runat="server">
                         <asp:ScriptManager runat="server" ID="scriptM" EnablePartialRendering="true"></asp:ScriptManager>
                             <div class="row">

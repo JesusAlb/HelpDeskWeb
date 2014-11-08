@@ -1,17 +1,48 @@
 --Script de instalación de registros para el sistema Help Desk IMCA--
---Alta de coordinacion
+
+--Alta de coordinacion (1)
 INSERT INTO [dbhelpdesk].[dbo].[tblcoordinacion]
            ([nomCoordinacion])
      VALUES
            ('Desarrollo Tecnológico e Innovación')
 GO
--- Alta de departamento
+-- Alta de departamento (1.1)
 INSERT INTO [dbhelpdesk].[dbo].[tbldepartamentos]
            ([nomDepto]
            ,[coordinacion])
      VALUES
            ('Soporte Tecnológico y Redes',1)
 GO
+----------- Alta de la Coordinación de Gestión de Calidad y Seguridad, con sus departamentos que lo integran -----------------
+-- Alta de coordinación (2) --
+INSERT INTO [dbhelpdesk].[dbo].[tblcoordinacion]
+           ([nomCoordinacion])
+     VALUES
+           ('Gestión de Calidad y Seguridad')
+GO
+--Alta de departamento (2.1) --
+INSERT INTO [dbhelpdesk].[dbo].[tbldepartamentos]
+           ([nomDepto]
+           ,[coordinacion])
+     VALUES
+           ('Gestión de Calidad y Seguridad',2)
+GO
+-- Alta de departamento (2.2) --
+INSERT INTO [dbhelpdesk].[dbo].[tbldepartamentos]
+           ([nomDepto]
+           ,[coordinacion])
+     VALUES
+           ('Procesos y Certificación',2)
+GO
+-- Alde del departamento (2.3)
+INSERT INTO [dbhelpdesk].[dbo].[tbldepartamentos]
+           ([nomDepto]
+           ,[coordinacion])
+     VALUES
+           ('Mantenimiento y Servicios Generales',2)
+GO
+----------------------------------------------------------------------------------------------------------------------------------
+
 --Alta de áreas
 INSERT INTO [dbhelpdesk].[dbo].[tblarea]
            ([nomArea])
@@ -24,7 +55,9 @@ INSERT INTO [dbhelpdesk].[dbo].[tblpuesto]
      VALUES
            ('Jefe de Departamento')
 GO 
---Alta de la institución
+
+-------------------------------------------- Alta de instituciones ------------------------------------------
+-- Alta del Centro de Innovación y Educación--
 INSERT INTO [dbhelpdesk].[dbo].[tblinstitucion]
            ([nomInstitucion]
            ,[correoInstitucion]
@@ -33,6 +66,26 @@ INSERT INTO [dbhelpdesk].[dbo].[tblinstitucion]
            ('Centro de Innovación y Educación'
            ,'cie.org.mx', 1)
 GO
+-- Alta del Trapiche --
+INSERT INTO [dbhelpdesk].[dbo].[tblinstitucion]
+           ([nomInstitucion]
+           ,[correoInstitucion]
+           ,[status])
+     VALUES
+           ('Trapiche Museo Interactivo'
+           ,'trapiche.org.mx', 1)
+GO
+-- Alta de IMCA --
+INSERT INTO [dbhelpdesk].[dbo].[tblinstitucion]
+           ([nomInstitucion]
+           ,[correoInstitucion]
+           ,[status])
+     VALUES
+           ('Impulsora de la Cultura y de las Artes IAP'
+           ,'imcaiap.org.mx', 1)
+GO
+-----------------------------------------------------------------------------------------------------------
+
 --Alta del usuario por defecto
 INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
            ([nombre]
@@ -49,7 +102,7 @@ INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
      VALUES
            ('Sin'
            ,'asignar'
-           ,'SA'
+           ,'S/A'
 					 ,'1'
            ,0
            ,1
