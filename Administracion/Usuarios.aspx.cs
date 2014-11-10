@@ -108,7 +108,7 @@ namespace HelpDeskWeb.Administracion
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "NoSeleccionado", "alertify.error('Seleccione al usuario')", true);
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "NoSeleccionado", "alertify.error('Seleccione el usuario a modificar')", true);
                     }
                     break;
             }
@@ -118,33 +118,44 @@ namespace HelpDeskWeb.Administracion
             if (hdk_utilerias.verificarCamposVacios(new string[] { txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, cbTipoUs.Text, cbDepto.Text, txtExtension.Text, txtCorreo.Text, txtPassword.Text, cbArea.Text, cbPuesto.Text, cbInstitucion.Text }) && cbDepto.SelectedIndex != -1)
             {
                 int resultado = 0;
-                switch (e.CommandName)
+                string mensaje = null;
+                if (txtPassword.Text.Equals(txtPasswordVer.Text))
                 {
-                    case "nuevo":
-                        resultado = hdk_ControlUsuario.insertar(txtNomUsuario.Text, "", txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
-                        break;
+                    switch (e.CommandName)
+                    {
+                        case "nuevo":
+                            resultado = hdk_ControlUsuario.insertar(txtNomUsuario.Text, "", txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                            mensaje = "Usuario registrado exitosamente";
+                            break;
 
-                    case "editar":
-                        resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), hdk_ControlUsuario.obtenerUsuarioDeSession(this).username, txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
-                        break;
-                }
-                if (resultado == 1)
-                {
-                    this.cargarTabla();
-                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "cerrarModal", "$('#ModalNuevo').modal('hide');", true);
-                }
-                else if (resultado == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Error de conexión')", true);
+                        case "editar":
+                            resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), hdk_ControlUsuario.obtenerUsuarioDeSession(this).username, txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                            mensaje = "Usuario actualizado exitosamente";
+                            break;
+                    }
+                    if (resultado == 1)
+                    {
+                        this.cargarTabla();
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "cerrarModal", "$('#ModalNuevo').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.success('" + mensaje + "');", true);
+                    }
+                    else if (resultado == 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Error de conexión');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Usuario en uso');", true);
+                    }
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Usuario en uso')", true);
+                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Contraseña de verficiación incorrecta');", true);
                 }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Llene todos los campos')", true);
+                ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Llene todos los campos');", true);
             }
         }
     }

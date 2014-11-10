@@ -9,22 +9,13 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
     <!--Inicio de Alertify -->
-    <link href="../css/alertify/css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify/css/alertify-bootstrap3.css" rel="stylesheet" />
-    <script src="../css/alertify/js/alertify.js"></script>
+    <link href="../css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-        <script>
-            function mostrarModal(a) {
-                if (a == true) {
-                    $('#myModal').modal('show');
-                } else {
-                    $('#myModal').modal('hide');
-                }
-            }
-    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -71,42 +62,46 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li>
                 </ul>
             </div>
         </div>
     </div>
     <asp:Panel runat="server" CssClass="container">
-            <asp:Panel runat="server" Style="margin: 2% 2% 2% 2%">
-            <form id="form1" runat="server">               
+            <asp:Panel runat="server" CssClass="box">
+            <form role="form" runat="server">               
                 <asp:ScriptManager runat="server" ID="script" EnablePartialRendering="true" ></asp:ScriptManager>
                 <asp:Panel runat="server" CssClass="row panel-titulo">
                     <asp:Label runat="server" Text="Control de Equipos"/>
                 </asp:Panel>
                 <section>
                     <asp:Panel runat="server" CssClass="row">
-                        <asp:Panel runat="server" CssClass="col-lg-8">
-                            <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
-                            <asp:Panel runat="server" CssClass="input-group">
+                        <div class="col-lg-1"></div>
+                        <asp:Panel runat="server" CssClass="col-lg-6">
+                            <asp:Panel runat="server" CssClass="form-group">
                                 <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" CssClass="form-control" placeholder="Buscar" />
-                                <span class="input-group-btn">
-                                    <asp:Button runat="server" Text="Filtrar" ID="btnFiltro" CssClass="btn btn-default" />
-                                </span>
                             </asp:Panel>
                         </asp:Panel>
                         <asp:Panel runat="server" CssClass="col-lg-4">
-                            <asp:LinkButton ID="btnNuevo" OnClientClick="mostrarModal(true)" OnClick="btnNuevo_Click" runat="server" CssClass="btn btn-primary">
+                            <div class="form-group">
+                            <div class="btn-group btn-group-justified">
+                                <asp:LinkButton ID="btnNuevo" OnCommand="btnAccionarModal_Command" CommandName="nuevo" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
-                            </asp:LinkButton>
-                            <asp:Panel runat="server" CssClass="modal fade" ID="myModal" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                </asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="btnModificar" OnCommand="btnAccionarModal_Command" CommandName="editar" CssClass="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                                </asp:LinkButton>
+                            </div>
+                            </div>
+                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-lg">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:UpdatePanel runat="server" ID="updateModal" UpdateMode="Conditional">
@@ -319,11 +314,11 @@
                                                 </asp:Panel>
                                                 <asp:Panel runat="server" CssClass="modal-footer">
                                                     <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
-                                                    <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="btn btn-primary" Text="Grabar" />
+                                                    <asp:Button runat="server" ID="btnGrabar" OnCommand="btnGrabar_Command" CssClass="btn btn-primary" Text="Grabar" />
                                                 </asp:Panel>
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
+                                                <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="cbTipoEquipo" EventName="SelectedIndexChanged" />
                                                 <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
@@ -332,17 +327,16 @@
                                     </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
-                            <asp:LinkButton runat="server" ID="btnModificar" OnClientClick="mostrarModal(true)" OnClick="btnModificar_Click" CssClass="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span> Editar
-                        </asp:LinkButton>
-                            </asp:Panel>
+
+                        </asp:Panel>
+
+                        <div class="col-lg-1"></div>
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
-                        <asp:Panel runat="server" CssClass="box">
-                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="400">
+                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="450">
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvEquipo_RowCreated" runat="server" ID="gvEquipo" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                        <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvEquipo_RowCreated" runat="server" ID="gvEquipo" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                             AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idResponEq" CellPadding="4" GridLines="Horizontal">
                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" Wrap="false" />
                                             <Columns>
@@ -370,13 +364,11 @@
                                         </asp:GridView>
                                     </ContentTemplate>
                                     <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnFiltro" EventName="Click" />
                                         <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
-                                        <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </asp:Panel>
-                        </asp:Panel>
                     </asp:Panel>
                 </section>
             </form>

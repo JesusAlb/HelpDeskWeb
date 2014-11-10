@@ -10,17 +10,12 @@
     <title>Atención a eventos</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-        <!-- include alertify.css -->
-    <link rel="stylesheet" href="../css/alertify.css"/>
-    <link rel="stylesheet" href="../css/themes/default.css" />
-    <link rel="stylesheet" href="../css/alertify.min.css" />
-
-
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <!-- include alertify script -->
+     <!--Inicio de Alertify -->
+    <link href="../css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
-    <script src="../js/alertify.min.js"></script>
+    <!--Fin de Alertify-->
+    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -325,12 +320,7 @@
                                                     </asp:Panel>
                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                         <asp:Panel runat="server" CssClass="form-group">
-                                                            <asp:Panel runat="server" CssClass="input-group">
                                                                 <asp:TextBox runat="server" ID="txtFiltroReq" MaxLength="25" placeholder="Buscar" CssClass="form-control" />
-                                                                <span class="input-group-btn">
-                                                                    <asp:Button runat="server" ID="btnFiltrarReq" Text="Fitrar" CssClass="btn btn-default" />
-                                                                </span>
-                                                            </asp:Panel>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Panel runat="server" CssClass="input-group">
@@ -385,7 +375,7 @@
                                                     <asp:Panel runat="server" CssClass="form-group text-center">
                                                         <asp:UpdatePanel runat="server" ID="UpdateBtnQuitar" UpdateMode="Conditional">
                                                             <ContentTemplate>
-                                                                <div class="input-group">
+                                                                <asp:Panel runat="server"  CssClass="input-group" DefaultButton="btnQuitar">
                                                                     <span class="input-group-addon">Cantidad</span>
                                                                     <asp:TextBox runat="server" ID="txtCantidadAs" MaxLength="5" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                                     <div class="input-group-btn">
@@ -394,7 +384,7 @@
                                                             Quitar
                                                                         </asp:LinkButton>
                                                                     </div>
-                                                                </div>
+                                                                </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="gvRecursosAsignados" EventName="SelectedIndexChanged" />
@@ -434,7 +424,7 @@
                                                     <asp:Panel runat="server" CssClass="form-group">
                                                         <asp:UpdatePanel runat="server" ID="UpdateBtnAñadir" UpdateMode="Conditional">
                                                             <ContentTemplate>
-                                                                <div class="input-group">
+                                                                <asp:Panel runat="server" class="input-group" DefaultButton="btnAñadir">
                                                                     <span class="input-group-addon">Cantidad</span>
                                                                     <asp:TextBox runat="server" ID="txtCantidad" MaxLength="5" Text="1" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                                     <div class="input-group-btn">
@@ -443,7 +433,7 @@
                                                             Añadir
                                                                         </asp:LinkButton>
                                                                     </div>
-                                                                </div>
+                                                                </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="gvRecursosNoAsignados" EventName="SelectedIndexChanged" />
@@ -576,7 +566,6 @@
                         </asp:Panel>
                     </asp:Panel>
                 <asp:Panel runat="server" CssClass="row">
-                    <asp:Panel runat="server" CssClass="box">
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
                             <li class="active">
                                 <asp:LinkButton runat="server" ID="tabAbierta" OnClientClick="activaTab('0')" href="#abierta" role="tab">Abierta</asp:LinkButton></li>
@@ -588,29 +577,28 @@
                                 <asp:LinkButton runat="server" ID="tabCancelada" OnClientClick="activaTab('3')" href="#cancelada" role="tab">Cancelada</asp:LinkButton>
                             </li>
                         </ul>
-                            <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
+                        <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
                                 <asp:Panel runat="server" ID="abierta" CssClass="tab-pane fade in active">
-                                    <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView ToolTip="Asigne el soporte a los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Abiertos" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idEvento" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged" CellPadding="4" GridLines="Horizontal">
+                                                <asp:GridView ToolTip="Asigne el soporte a los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Abiertos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2000" DataKeyNames="idEvento" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged" CellPadding="4" GridLines="Horizontal">
                                                     <HeaderStyle Font-Bold="True"  ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="idEvento" />
-                                                        <asp:BoundField HeaderText="Título" DataField="titulo" />
+                                                        <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
                                                         <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
-                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" />
-                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
-                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
-                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}" />
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}" />
-                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250"/>
+                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
-                                                    <RowStyle Wrap="false" />
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
@@ -627,27 +615,28 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="enProceso" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel1" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel1" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView ToolTip="Cierre los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_EnProceso" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
+                                                <asp:GridView ToolTip="Cierre los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_EnProceso" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2200" DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="idEvento" />
-                                                        <asp:BoundField HeaderText="Título" DataField="titulo" />
+                                                        <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
                                                         <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
-                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" />
-                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
-                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
-                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}"/>
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}"/>
-                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Soporte" DataField="responsable" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Apoyo" DataField="apoyo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250"/>
+                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" DataFormatString="{0:D}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" DataFormatString="{0:t}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
-                                                    <RowStyle Wrap="false" />
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
@@ -665,32 +654,33 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cerrada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel2" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel2" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpGvEventosCerrados" UpdateMode="Conditional" >
                                             <ContentTemplate>
-                                                <asp:GridView runat="server" OnRowDataBound="gvEventos_Cerrados_RowDataBound" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cerrados" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true"  DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
+                                                <asp:GridView runat="server" OnRowDataBound="gvEventos_Cerrados_RowDataBound" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cerrados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2300"  DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" CssClass="DataGridFixedHeader" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="idEvento" />
-                                                        <asp:TemplateField HeaderText="Encuesta" ItemStyle-CssClass="text-center" >
+                                                        <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false" />
+                                                        <asp:TemplateField HeaderText="Encuesta" ItemStyle-CssClass="text-center" ItemStyle-Wrap="false">
                                                             <ItemTemplate>
                                                                          <asp:ImageButton runat="server" ID="btnEncuesta" OnClick="btnEncuesta_Click" />                                                        
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField HeaderText="Título" DataField="titulo" />
+                                                        <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300"/>
                                                         <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-Width="400" />
-                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" />
-                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
-                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
-                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" />
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" />
-                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Soporte" DataField="responsable" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Apoyo" DataField="apoyo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250" />
+                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false"/>
                                                     </Columns>
-                                                    <RowStyle Wrap="false" />
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
@@ -706,27 +696,26 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cancelada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel3" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel3" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel4" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cancelados" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idEvento" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
+                                                <asp:GridView runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cancelados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idEvento" Width="2000" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvEventos_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                      <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="idEvento" />
-                                                        <asp:BoundField HeaderText="Título" DataField="titulo" />
+                                                        <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false"  />
+                                                        <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
                                                         <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
-                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" />
-                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" />
-                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" />
-                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" />
-                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" />
-                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" />
-                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250" />
+                                                        <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Tipo" DataField="tipo_evento" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora Inicial" DataField="horaIn" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora Final" DataField="horaFn" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false"/>
+                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
-                                                    <RowStyle Wrap="false" />
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
@@ -742,7 +731,6 @@
                                 </asp:Panel>
                             </asp:Panel>
                         </asp:Panel>
-                    </asp:Panel>
                     </asp:Panel>              
             </form>
         </asp:Panel>

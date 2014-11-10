@@ -48,42 +48,193 @@ namespace HelpDeskWeb.Administracion
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+     /*   protected void btnNuevo_Click(object sender, EventArgs e)
         {
             this.cargarControles();
             Session["Accion"] = 0;
+        }*/
+
+        protected void btnAccionarModal_Command(object sender, CommandEventArgs e)
+        {
+            btnGrabar.CommandName = e.CommandName;
+            this.cargarControles();
+
+            switch (e.CommandName)
+            {
+
+                case "nuevo":
+                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
+                    break;
+
+                case "editar":
+                    if (gvEquipo.SelectedIndex != -1)
+                    {
+                        lbelTituloModal.Text = "Modificar usuario";
+                        tblresponsablequipo equipos = hdk_ControlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+                        cbResponsable.SelectedValue = equipos.responsable.ToString();
+                        cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();
+                        string[] division = equipos.discoDuro.Split(' ');
+                        txtDD.Text = division[0];
+                        division = equipos.procesador.Split(' ');
+                        txtProcesador.Text = division[0];
+                        division = equipos.memoriaRam.Split(' ');
+                        txtRAM.Text = division[0];
+                        cbMarcaEquipo.SelectedValue = equipos.marcaEquipo.ToString();
+                        txtSerieEquipo.Text = equipos.serieEquipo;
+                        cbMarcaMonitor.SelectedValue = equipos.marcaMonitor.ToString();
+                        txtSerieMonitor.Text = equipos.serieMonitor;
+                        cbMarcaMouse.SelectedValue = equipos.marcaMouse.ToString();
+                        txtSerieMouse.Text = equipos.serieMouse;
+                        cbMarcaTeclado.SelectedValue = equipos.marcaTeclado.ToString();
+                        txtSerieTeclado.Text = equipos.serieTeclado;
+                        if (txtIP1.Enabled)
+                        {
+                            division = equipos.ip.Split('.');
+                            txtIP1.Text = division[0];
+                            txtIP2.Text = division[1];
+                            txtIP3.Text = division[2];
+                            txtIP4.Text = division[3];
+                            division = equipos.mac.Split('-');
+                            txtMAC1.Text = division[0];
+                            txtMAC2.Text = division[1];
+                            txtMAC3.Text = division[2];
+                            txtMAC4.Text = division[3];
+                            txtMAC5.Text = division[4];
+                            txtMAC6.Text = division[5];
+                        }
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "NoSeleccionado", "alertify.error('Seleccione al usuario')", true);
+                    }
+                    break;
+            }
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGrabar_Command(object sender, CommandEventArgs e)
         {
-            string discoDuro = txtDD.Text + " "+ cbDD.Text;
-            string ram = txtRAM.Text + " GB";
-            string procesador = txtProcesador.Text + " GHZ";
-            string ip = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
-            string mac = txtMAC1.Text + "-" + txtMAC2.Text + "-" + txtMAC3.Text + "-" + txtMAC4.Text + "-" + txtMAC5.Text + "-" + txtMAC6.Text;
-
-            if(Convert.ToInt16(Session["Accion"]) == 0)
+            bool validado = true;
+            string ip = null;
+            string mac = null;
+            if (txtIP1.Enabled == false)
             {
-                if(hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
-                    Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
-                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue)))
+                ip = "N/A";
+                mac = "N/A";
+            }
+            else
+            {
+                if (hdk_utilerias.verificarCamposVacios(new string[] { txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text, txtMAC1.Text, txtMAC2.Text, txtMAC3.Text, txtMAC4.Text, txtMAC5.Text, txtMAC6.Text }))
                 {
-                    ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Equipo correctamente asignado');", true);
+                    ip = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
+                    mac = txtMAC1.Text + "-" + txtMAC2.Text + "-" + txtMAC3.Text + "-" + txtMAC4.Text + "-" + txtMAC5.Text + "-" + txtMAC6.Text;
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Erro al asignar un responsable a un equipo');", true);
+                    validado = false;
+                }
+            }
+
+            if (validado && hdk_utilerias.verificarCamposVacios(new string[] { txtDD.Text, txtRAM.Text, txtProcesador.Text, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text }))
+            {
+                string discoDuro = txtDD.Text + " " + cbDD.Text;
+                string ram = txtRAM.Text + " GB";
+                string procesador = txtProcesador.Text + " GHZ";
+
+                switch (e.CommandName)
+                {
+                    case "nuevo":
+                        if (hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                            Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                            ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue)))
+                        {
+                            ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Equipo asignado correctamente');", true);
+                            this.cargarTabla();
+                             ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('hide');", true);
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Error al asignar un responsable a un equipo');", true);
+                        }
+                        break;
+
+                    case "editar":
+                        if(hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey.Value), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                           Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                           ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue))){
+                                ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Equipo actualizado correctamente');", true);
+                                this.cargarTabla();
+                                ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('hide');", true);
+                           }
+                        break;
                 }
             }
             else
             {
-                hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey.Value), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
-                    Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
-                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
+                ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Llene todos los campos disponibles');", true);
             }
         }
 
-        protected void btnModificar_Click(object sender, EventArgs e)
+
+     /*   protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            bool validado = true;
+            string ip = null;
+            string mac = null;
+            if (txtIP1.Enabled == false)
+            {
+                ip = "N/A";
+                mac = "N/A";
+            }
+            else
+            {
+                if (hdk_utilerias.verificarCamposVacios(new string[] { txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text, txtMAC1.Text, txtMAC2.Text, txtMAC3.Text, txtMAC4.Text, txtMAC5.Text, txtMAC6.Text }))
+                {
+                    ip = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
+                    mac = txtMAC1.Text + "-" + txtMAC2.Text + "-" + txtMAC3.Text + "-" + txtMAC4.Text + "-" + txtMAC5.Text + "-" + txtMAC6.Text;
+                }
+                else
+                {
+                    validado = false;
+                }
+            }
+
+            if (validado && hdk_utilerias.verificarCamposVacios(new string[] { txtDD.Text, txtRAM.Text, txtProcesador.Text, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text }))
+            {
+            string discoDuro = txtDD.Text + " " + cbDD.Text;
+            string ram = txtRAM.Text + " GB";
+            string procesador = txtProcesador.Text + " GHZ";
+
+
+                if (Convert.ToInt16(Session["Accion"]) == 0)
+                {
+                    if (hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                        Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                        ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue)))
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Equipo asignado correctamente');", true);
+                        this.cargarTabla();
+
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Error al asignar un responsable a un equipo');", true);
+                    }
+                }
+                else
+                {
+                    hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey.Value), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                        Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
+                        ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Llene todos los campos disponibles');", true);
+            }
+        }*/
+
+    /*    protected void btnModificar_Click(object sender, EventArgs e)
         {
             this.cargarControles();
             lbelTituloModal.Text = "Modificar usuario";
@@ -117,8 +268,7 @@ namespace HelpDeskWeb.Administracion
             txtMAC5.Text = division[4];
             txtMAC6.Text = division[5];
             Session["Accion"] = 1;
-
-        }
+        }*/
 
         protected void gvEquipo_RowCreated(object sender, GridViewRowEventArgs e)
         {

@@ -76,15 +76,6 @@ namespace HelpDeskWeb.Administracion {
         protected global::System.Web.UI.WebControls.Label lbelUsuario;
         
         /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// Control script.
         /// </summary>
         /// <remarks>
@@ -103,15 +94,6 @@ namespace HelpDeskWeb.Administracion {
         protected global::System.Web.UI.WebControls.TextBox txtFiltro;
         
         /// <summary>
-        /// Control btnFiltro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltro;
-        
-        /// <summary>
         /// Control btnNuevo.
         /// </summary>
         /// <remarks>
@@ -121,13 +103,22 @@ namespace HelpDeskWeb.Administracion {
         protected global::System.Web.UI.WebControls.LinkButton btnNuevo;
         
         /// <summary>
-        /// Control myModal.
+        /// Control btnModificar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel myModal;
+        protected global::System.Web.UI.WebControls.LinkButton btnModificar;
+        
+        /// <summary>
+        /// Control ModalNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ModalNuevo;
         
         /// <summary>
         /// Control updateModal.
@@ -418,22 +409,13 @@ namespace HelpDeskWeb.Administracion {
         protected global::System.Web.UI.WebControls.TextBox txtMAC6;
         
         /// <summary>
-        /// Control btnGuardar.
+        /// Control btnGrabar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
-        
-        /// <summary>
-        /// Control btnModificar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnModificar;
+        protected global::System.Web.UI.WebControls.Button btnGrabar;
         
         /// <summary>
         /// Control ContenedorTabla.

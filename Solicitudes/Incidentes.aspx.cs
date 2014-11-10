@@ -168,6 +168,10 @@ namespace HelpDeskWeb.Solicitudes
                     ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "AsignarIncidenteTab", "alertify.error('Seleccione un incidente abierto o en proceso');", true);
                 }
             }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "restriccion", "alertify.error('Acción solamente para usuarios de soporte');", true);
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -228,6 +232,10 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CerrarIncidenteTab", "alertify.error('Seleccione un incidente en proceso');", true);
                 }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "restriccion", "alertify.error('Acción solamente para usuarios de soporte');", true);
             }
         }
 
@@ -372,7 +380,11 @@ namespace HelpDeskWeb.Solicitudes
                 txtPromedio.Text = "1";
                 btnGrabarEncuesta.Text = "Grabar";
                 ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
-            }           
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, this.GetType(), "restriccion", "alertify.error('Encuesta no realizada');", true);
+            }
         }
 
         protected void btnGrabarEncuesta_Click(object sender, EventArgs e)

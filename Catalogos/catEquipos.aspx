@@ -8,15 +8,11 @@
     <title>Centro de servicio</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/helpdesk-template.css" rel="stylesheet"/>
-            <!-- include alertify.css -->
-    <link rel="stylesheet" href="../css/alertify.css"/>
-    <link rel="stylesheet" href="../css/themes/default.css" />
-    <link rel="stylesheet" href="../css/alertify.min.css" />
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <!-- include alertify script -->
+     <!--Inicio de Alertify -->
+    <link href="../css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
-    <script src="../js/alertify.min.js"></script>
+    <!--Fin de Alertify-->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>

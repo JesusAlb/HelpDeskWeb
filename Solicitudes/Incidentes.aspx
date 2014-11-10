@@ -8,10 +8,10 @@
     <title>Centro de soluciones</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-        <!--Inicio de Alertify -->
-    <link href="../css/alertify/css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify/css/alertify-bootstrap3.css" rel="stylesheet" />
-    <script src="../css/alertify/js/alertify.js"></script>
+     <!--Inicio de Alertify -->
+    <link href="../css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
@@ -608,8 +608,8 @@
                                         <asp:UpdatePanel runat="server" ID="UpIncidentesCerrados" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cerrados" OnRowDataBound="gvIncidentes_Cerrados_RowDataBound" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
-                                                    <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" Wrap="true" />
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2200" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
+                                                    <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Encuesta" ItemStyle-CssClass="text-center">
@@ -618,9 +618,9 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" />
+                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-Width="400" />
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
-                                                        <asp:TemplateField HeaderText="Prioridad" ItemStyle-CssClass="text-center">
+                                                        <asp:TemplateField HeaderText="Prioridad" ItemStyle-CssClass="text-center" ItemStyle-Wrap="false">
                                                             <ItemTemplate>
                                                                 <asp:Image runat="server" ID="imgPrioridad" Height="48" Width="48" />
                                                             </ItemTemplate>

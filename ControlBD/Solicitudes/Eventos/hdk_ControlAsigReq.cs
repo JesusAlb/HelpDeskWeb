@@ -18,7 +18,16 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
            {
                try
                {
-                   return dbhelp.modelo.ViewEventoConRequerimientos.Where(a => a.evento == evento).ToList();
+                   var resultado = from reqAsignado in dbhelp.modelo.tblrequerimientoaeventoes
+                                   from requerimiento in dbhelp.modelo.tblrequerimientos
+                                   where reqAsignado.requerimiento == requerimiento.idRequerimientos
+                                   select new
+                                   {
+                                       requerimiento.idRequerimientos,
+                                       requerimiento.nomRequerimiento,
+                                       reqAsignado.cantidad
+                                   };
+                   return resultado.ToList();
                }
                catch
                {                  
@@ -88,7 +97,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                   var itemRemover = dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == idreq);
                   if (itemRemover != null)
                   {
-                      dbhelp.modelo.tblrequerimientoaeventoes.Remove(itemRemover);                      
+                      dbhelp.modelo.tblrequerimientoaeventoes.Remove(itemRemover);
+                      dbhelp.modelo.SaveChanges();
                   }
                   return true;
               }

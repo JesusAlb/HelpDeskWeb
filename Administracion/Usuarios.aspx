@@ -9,16 +9,12 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
     <script src="../js/bootstrap.js"></script>
-                <!-- include alertify.css -->
-    <link rel="stylesheet" href="../css/alertify.css"/>
-    <link rel="stylesheet" href="../css/themes/default.css" />
-    <link rel="stylesheet" href="../css/alertify.min.css" />
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <!-- include alertify script -->
+    <!--Inicio de Alertify -->
+    <link href="../css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
-    <script src="../js/alertify.min.js"></script>
-        <script src="../js/jquery-2.1.1.js"></script>
+    <!--Fin de Alertify-->
+    <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
 </head>
@@ -67,14 +63,14 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
                         </ul>
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li>
                 </ul>
             </div>
         </div>
@@ -93,12 +89,7 @@
                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                             <asp:Panel runat="server" CssClass="col-lg-6">
                                 <div class="form-group">
-                                    <asp:Panel runat="server" CssClass="input-group">
                                         <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" CssClass="form-control" placeholder="Buscar" />
-                                        <span class="input-group-btn">
-                                            <asp:Button runat="server" Text="Filtrar" OnClick="btnFiltro_Click" ID="btnFiltro" CssClass="btn btn-default" />
-                                        </span>
-                                    </asp:Panel>
                                 </div>
                             </asp:Panel>
                             <asp:Panel runat="server" CssClass="col-lg-4">
@@ -117,8 +108,6 @@
                             </asp:Panel>
                             <div class="col-lg-1"></div>
                         </asp:Panel>
-
-                        <!-- Modal -->
                         <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <asp:Panel runat="server" CssClass="modal-dialog">
                                 <asp:Panel runat="server" CssClass="modal-content">
@@ -216,11 +205,10 @@
 
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
-                        <asp:Panel runat="server" CssClass="box">
-                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="400">
+                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="450">
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvUsuarios_RowCreated" runat="server" ID="gvUsuarios" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                        <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvUsuarios_RowCreated" runat="server" ID="gvUsuarios" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                             AlternatingRowStyle-BackColor="#e0e0e0" DataKeyNames="idUsuario" CellPadding="4" GridLines="Horizontal">
                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                             <Columns>
@@ -240,13 +228,11 @@
                                         </asp:GridView>
                                     </ContentTemplate>
                                     <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnFiltro" EventName="Click" />
                                         <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
                                         <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </asp:Panel>
-                        </asp:Panel>
                     </asp:Panel>
                 </asp:Panel>
             </form>

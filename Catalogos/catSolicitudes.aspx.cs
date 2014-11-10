@@ -77,26 +77,26 @@ namespace HelpDeskWeb.Catalogos
                         if (this.insertar_CommandArgument(e.CommandArgument.ToString()))
                             mensaje = "Se grabó el registro satisfactoriamente";
                         else
-                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al registrar', 'onok');", true);
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al registrar');", true);
                         break;
 
                     case "actualizar":
                         if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
                             mensaje = "Se actualizó el registro satiscartoriamente";
                         else
-                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Error al actualizar', 'onok');", true);
+                            ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al actualizar');", true);
                         break;
                 }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Error', 'Llene el campo Nombre, 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Llene el campo Nombre');", true);
             }
 
             if (mensaje != null)
             {
                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "quitarmodal", "$('#ModalNuevo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Correcto', '" + mensaje + "', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.success('" + mensaje + "');", true);
             }
 
         }
@@ -143,7 +143,7 @@ namespace HelpDeskWeb.Catalogos
                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
             }
             else
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "insertarElemento", "alertify.alert('Correcto', 'Seleccione el elemento a modificar', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "insertarElemento", "alertify.error('Seleccione el elemento a modificar');", true);
         }
 
         protected void btnNuevo_Command(object sender, CommandEventArgs e)

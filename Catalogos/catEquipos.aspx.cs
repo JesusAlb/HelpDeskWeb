@@ -119,7 +119,7 @@ namespace HelpDeskWeb.Catalogos
                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
             }
             else
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "insertarElemento", "alertify.alert('Correcto', 'Seleccione el elemento a modificar', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "insertarElemento", "alertify.error('Seleccione el elemento a modificar');", true);
         }
 
         protected void btnGrabar_Command(object sender, CommandEventArgs e)
@@ -147,13 +147,13 @@ namespace HelpDeskWeb.Catalogos
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Llene el campo Nombre');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Llene el campo Nombre');", true);
             }
 
             if (mensaje != null)
             {
                 ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "quitarmodal", "$('#ModalNuevo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.alert('Correcto', '" + mensaje + "', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.success('" + mensaje + "');", true);
             }
 
         }

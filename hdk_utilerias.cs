@@ -68,7 +68,7 @@ namespace HelpDeskWeb
                   {
                       if (pagina.Session["DatosUsuario"] == null)
                       {
-                          pagina.Response.Redirect("~/login.aspx");
+                          pagina.Response.Redirect("~/index.aspx");
                       }
                       else
                       {
