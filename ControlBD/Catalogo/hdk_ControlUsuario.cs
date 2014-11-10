@@ -15,7 +15,6 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class hdk_ControlUsuario
     {  
-
         public static int obtenerIdUsuario_SinAsignar(){
             try
             {
@@ -39,16 +38,23 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static bool verificarSiExisteUsuario(string nomUsuario)
+        public static bool verificarSiExisteUsuario(string nombreNuevo, string nombreAnterior)
         {
-            var item = dbhelp.modelo.tblusuarios.SingleOrDefault(a => a.username.Equals(nomUsuario));
-            if (item != null)
+            if (!nombreNuevo.Equals(nombreAnterior))
             {
-                return true;
+                var item = dbhelp.modelo.tblusuarios.SingleOrDefault(a => a.username.Equals(nombreNuevo));
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -109,25 +115,26 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static int modificar(int id, string us, string nom, string ape, int niv, int dep, string ex, string correo, string con, int are, int pues, int inst)
+        public static int modificar(int id, string usuarioNuevo, string nombreAnterior, string nombre, string apellido, int tipo, int depto, string extel, string correo, string password, int area, int puesto, int institucion)
         {
-
+            if (verificarSiExisteUsuario(usuarioNuevo, nombreAnterior))
+            {
                 try
                 {
                     var ItemAmodificar = dbhelp.modelo.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
                     if (ItemAmodificar != null)
                     {
-                        ItemAmodificar.username = us;
-                        ItemAmodificar.nombre = nom;
-                        ItemAmodificar.apellidos = ape;
-                        ItemAmodificar.password = con;
-                        ItemAmodificar.tipoUsuario = niv;
-                        ItemAmodificar.exTel = ex;
+                        ItemAmodificar.username = usuarioNuevo;
+                        ItemAmodificar.nombre = nombre;
+                        ItemAmodificar.apellidos = apellido;
+                        ItemAmodificar.password = password;
+                        ItemAmodificar.tipoUsuario = tipo;
+                        ItemAmodificar.exTel = extel;
                         ItemAmodificar.correo = correo;
-                        ItemAmodificar.depto = dep;
-                        ItemAmodificar.area = are;
-                        ItemAmodificar.puesto = pues;
-                        ItemAmodificar.institucion = inst;
+                        ItemAmodificar.depto = depto;
+                        ItemAmodificar.area = area;
+                        ItemAmodificar.puesto = puesto;
+                        ItemAmodificar.institucion = institucion;
                         dbhelp.modelo.SaveChanges();
                         return 1;
                     }
@@ -141,16 +148,21 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     return 0;
                 }
             }
+            else
+            {
+                return 0;
+            }
+          }
 
-        public static int insertar(string username, string nombre, string apellido, int tipo, int depto, string extension, string email, string password, int area, int puesto, int institucion)
+        public static int insertar(string usuarioNuevo, string usuarioViejo, string nombre, string apellido, int tipo, int depto, string extension, string email, string password, int area, int puesto, int institucion)
         {
-            if (!verificarSiExisteUsuario(username))
+            if (!verificarSiExisteUsuario(usuarioNuevo, usuarioViejo))
             {
                 try
                 {
                     var user = new tblusuario
                     {
-                        username = username,
+                        username = usuarioNuevo,
                         nombre = nombre,
                         apellidos = apellido,
                         tipoUsuario = tipo,

@@ -8,20 +8,11 @@
     <title>Centro de soluciones</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-    <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/styles2.css" rel="stylesheet" />
-    <link href="../css/printstyles.css" rel="stylesheet" />
-           <!-- include alertify.css -->
-    <link rel="stylesheet" href="../css/alertify.css"/>
-    <link rel="stylesheet" href="../css/themes/default.css" />
-    <link rel="stylesheet" href="../css/alertify.min.css" />
-
-
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <!-- include alertify script -->
-    <script src="../js/alertify.js"></script>
-    <script src="../js/alertify.min.js"></script>
+        <!--Inicio de Alertify -->
+    <link href="../css/alertify/css/alertify.css" rel="stylesheet" />
+    <link href="../css/alertify/css/alertify-bootstrap3.css" rel="stylesheet" />
+    <script src="../css/alertify/js/alertify.js"></script>
+    <!--Fin de Alertify-->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -107,29 +98,30 @@
                             <asp:Panel runat="server" CssClass="col-lg-11">
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="col-lg-7">
-                                        <asp:Panel runat="server" CssClass="input-group">
+                                        <asp:Panel runat="server" CssClass="form-group">
                                             <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" placeholder="Buscar" CssClass="form-control" />
-                                            <span class="input-group-btn">
-                                                <asp:Button runat="server" ID="btnFiltrar" Text="Fitrar" CssClass="btn btn-default" />
-                                            </span>
                                         </asp:Panel>
                                     </asp:Panel>
                                     <asp:Panel runat="server" CssClass="col-lg-5">
+                                        <div class="form-group">
                                         <asp:Panel runat="server" CssClass="input-group">
                                             <span class="input-group-addon">Tipo</span>
                                             <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoFiltro" DataTextField="nomTipoIncidente" DataValueField="idTipoIncidente" OnSelectedIndexChanged="cbTipoFiltro_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </asp:Panel>
+                                        </div>
                                     </asp:Panel>
                                 </asp:Panel>
-                                <asp:Panel runat="server" CssClass="row" Style="margin-top: 2%">
+                                <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="col-lg-12">
-                                        <asp:Panel runat="server" CssClass="input-group">
-                                            <span class="input-group-addon">Filtrar por fecha</span>
-                                            <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaInicial" CssClass="form-control"></asp:TextBox>
-                                            <span class="input-group-addon">a</span>
-                                            <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaFinal" CssClass="form-control"></asp:TextBox>
-                                        </asp:Panel>
+                                        <div class="form-group">
+                                            <asp:Panel runat="server" CssClass="input-group">
+                                                <span class="input-group-addon">Filtrar por fecha</span>
+                                                <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaInicial" CssClass="form-control"></asp:TextBox>
+                                                <span class="input-group-addon">a</span>
+                                                <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaFinal" CssClass="form-control"></asp:TextBox>
+                                            </asp:Panel>
+                                        </div>
                                     </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
@@ -531,7 +523,6 @@
                         </asp:Panel>
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
-                        <asp:Panel runat="server" CssClass="box">
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li class="active">
                                     <asp:LinkButton runat="server" ID="tabAbierta" OnClientClick="activaTab('0')" href="#abierta" role="tab">Abierta</asp:LinkButton></li>
@@ -544,10 +535,10 @@
                             </ul>
                             <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
                                 <asp:Panel runat="server" ID="abierta" CssClass="tab-pane fade in active">
-                                    <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="update1" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView ToolTip="Asigne el soporte a los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Abiertos" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                <asp:GridView ToolTip="Asigne el soporte a los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Abiertos"  AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                                     AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="numIncidente" CellPadding="4" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged" GridLines="Horizontal">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
@@ -574,10 +565,10 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="enProceso" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel1" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel1" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_EnProceso" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_EnProceso" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                                     AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" OnRowDataBound="gvIncidentes_EnProceso_RowDataBound" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
@@ -613,10 +604,10 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cerrada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel2" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel2" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpIncidentesCerrados" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cerrados" OnRowDataBound="gvIncidentes_Cerrados_RowDataBound" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                <asp:GridView runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cerrados" OnRowDataBound="gvIncidentes_Cerrados_RowDataBound" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                                     AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" Wrap="true" />
                                                     <Columns>
@@ -660,10 +651,10 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cancelada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel3" ScrollBars="Auto" Height="300" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel3" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cancelados" Style="margin: 1% 1% 1% 1%" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cancelados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                                     AlternatingRowStyle-BackColor="#e0e0e0" DataKeyNames="numIncidente" ShowHeaderWhenEmpty="true" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
@@ -688,7 +679,7 @@
                                     </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
-                        </asp:Panel>
+
                     </asp:Panel>
                 </asp:Panel>
             </form>

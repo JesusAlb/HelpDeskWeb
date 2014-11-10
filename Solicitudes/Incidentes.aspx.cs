@@ -14,14 +14,19 @@ namespace HelpDeskWeb.Solicitudes
 {
     public partial class Incidentes : System.Web.UI.Page
     {
+        int tipoUsuario;
+        int idUsuario;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 2, 2);
-            lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
-            this.generarPrivilegios();
+            idUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+            tipoUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
+
             if (!IsPostBack)
             {
+                hdk_utilerias.checarSession(this, true, 2, 2);
+                lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+                this.generarPrivilegios();
                 this.cargarComboFiltro();
                 this.cargarComboBoxs();
                 this.cargarTablasIncidentes();
@@ -52,13 +57,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+                if (tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -124,7 +129,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                int solicitante = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+                int solicitante = idUsuario;
 
                 if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
@@ -135,30 +140,33 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.alert('Correcto', 'Incidente creado correctamente', 'onok');", true);                   
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.success('Incidente registrado satisfactoriamente');", true);                   
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidenteIncorrecto", "alertify.error('Error al crear el incidente');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidenteIncorrecto", "alertify.error('Error al registrar el incidente');", true);
                 }
             }
         }
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
+            if (tipoUsuario == 0)
             {
+                if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
+                {
 
-                tblincidente itemIncidente = hdk_ControlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
-                cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
-                cbPrioridad.Text = itemIncidente.prioridad;
-                cbSoporte.SelectedValue = itemIncidente.soporte.ToString();
-                cbSeguimiento.SelectedValue = itemIncidente.seguimiento.ToString();
-                ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnAsginarActivado", "$('#ModalAsignar').modal('show');", true);     
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "AsignarIncidenteTab", "alertify.alert('Error', 'Seleccione un incidente abierto o en proceso', 'onok');", true);
+                    tblincidente itemIncidente = hdk_ControlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
+                    cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
+                    cbPrioridad.Text = itemIncidente.prioridad;
+                    cbSoporte.SelectedValue = itemIncidente.soporte.ToString();
+                    cbSeguimiento.SelectedValue = itemIncidente.seguimiento.ToString();
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnAsginarActivado", "$('#ModalAsignar').modal('show');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "AsignarIncidenteTab", "alertify.error('Seleccione un incidente abierto o en proceso');", true);
+                }
             }
         }
 
@@ -195,7 +203,7 @@ namespace HelpDeskWeb.Solicitudes
                 if (hdk_ControlIncidentes.cambiarStatus(Convert.ToInt32(idIncidenteSeleccionado.Value), 3))
                     {
                         this.cargarTablasIncidentes();
-                        ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidente", "alertify.alert('Correcto', 'Incidente cancelado correctamente', 'onok');", true);
+                        ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidente", "alertify.success('Incidente cancelado correctamente');", true);
                     }
                     else
                     {
@@ -204,19 +212,22 @@ namespace HelpDeskWeb.Solicitudes
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidenteTab", "alertify.alert('Error', 'Seleccione un incidente " + tabItemSeleccionado.Value + " abierto o en proceso', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidenteTab", "alertify.error('Seleccione un incidente abierto o en proceso');", true);
             }
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
+            if (tipoUsuario == 0)
             {
-                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnCerrarActivado", "$('#ModalCerrar').modal('show');", true);                   
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CerrarIncidenteTab", "alertify.alert('Error', 'Seleccione un incidente en proceso', 'onok');", true);
+                if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
+                {
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnCerrarActivado", "$('#ModalCerrar').modal('show');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CerrarIncidenteTab", "alertify.error('Seleccione un incidente en proceso');", true);
+                }
             }
         }
 
@@ -231,11 +242,11 @@ namespace HelpDeskWeb.Solicitudes
             {
                 this.cargarTablasIncidentes();
                 ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "SalirVentanaAsign", "$('#ModalAsignar').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.alert('Correcto', 'Soporte asignado correctamente', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.error('Correcto', 'Error al asignar el soporte', 'onok');", true);
+                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.error('Error al asignar el soporte');", true);
             }
         }
 
@@ -247,11 +258,11 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "SalirVentanaCerrar", "$('#ModalCerrar').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "CerrarCorrecta", "alertify.alert('Correcto', 'Incidente cerrado correctamente', 'onok');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "CerrarCorrecta", "alertify.success('Incidente cerrado correctamente');", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "CerrarCorrecta", "alertify.error('Correcto', 'Error al cerrar el incidente', 'onok');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "CerrarCorrecta", "alertify.error('Error al cerrar el incidente');", true);
                 }
             }
         }
@@ -318,19 +329,19 @@ namespace HelpDeskWeb.Solicitudes
         protected void cambiarImagenEncuesta(double promedio)
         {
             double promedioAcotado = Math.Round(promedio, 2);
-            txtPromedio.Text = promedio.ToString();
+            txtPromedio.Text = promedioAcotado.ToString();
 
-            if (promedio <= 2.5)
+            if (promedioAcotado <= 2.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel0.png";
-            else if (promedio > 2.5 && promedio <= 4)
+            else if (promedioAcotado > 2.5 && promedio <= 4)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel1.png";
-            else if (promedio > 4 && promedio <= 5.5)
+            else if (promedioAcotado > 4 && promedio <= 5.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel2.png";
-            else if (promedio > 5.5 && promedio <= 7)
+            else if (promedioAcotado > 5.5 && promedio <= 7)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel3.png";
-            else if (promedio > 7 && promedio <= 8.5)
+            else if (promedioAcotado > 7 && promedio <= 8.5)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel4.png";
-            else if (promedio > 8.5 && promedio <= 10)
+            else if (promedioAcotado > 8.5 && promedio <= 10)
                 imgSatisfaccion.ImageUrl = "~/Imagenes/iconos/nivel5.png";
         }
 
@@ -351,17 +362,17 @@ namespace HelpDeskWeb.Solicitudes
                 txtObEncuestas.Text = incidenteCerrado.observacionesServicio;
                 txtObEncuestas.Enabled = false;
                 btnGrabarEncuesta.Text = "Aceptar";
+                ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
             }
-            else
+            else if(incidenteCerrado.statusCal_Servicio == false && hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 this.cargarTablaEncuesta(null);
                 txtObEncuestas.Enabled = true;
                 txtObEncuestas.Text = "";
                 txtPromedio.Text = "1";
                 btnGrabarEncuesta.Text = "Grabar";
-            }
-
-            ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
+                ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
+            }           
         }
 
         protected void btnGrabarEncuesta_Click(object sender, EventArgs e)
@@ -394,11 +405,11 @@ namespace HelpDeskWeb.Solicitudes
                     {
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
                         this.cargarTablasIncidentes();
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registro la encuesta');", true);
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Encuesta registrada correctamente');", true);
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('No se pudo registrar la encuesta');", true);
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('Error al registrar la encuesta');", true);
                     }
                 }
             }
@@ -421,7 +432,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            if (tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;
@@ -440,7 +451,7 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "cerrar", "$('#ModalNuevoCompleto').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.success('Incidente registrado')", true);
+                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.success('Incidente registrado correctamente')", true);
                 }
                 else{
                     ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Error al registrar el incidente')", true);

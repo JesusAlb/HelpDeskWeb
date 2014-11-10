@@ -18,9 +18,9 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
+            usuarioActual = hdk_ControlUsuario.obtenerUsuario(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
             if (!IsPostBack)
             {
-                usuarioActual = hdk_ControlUsuario.obtenerUsuario(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
                 lbelUsuario.Text = usuarioActual.username;
                 this.cargarCombos();
                 txtNombre.Text = usuarioActual.nombre;
@@ -78,20 +78,14 @@ namespace HelpDeskWeb
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (usuarioActual.tipoUsuario == 0)
-            {
-                this.Response.Redirect("soporte.aspx");
-            }else{
-                this.Response.Redirect("solicitante.aspx");
-            }
-
+                this.Response.Redirect("perfil.aspx");
         }
 
         protected void btnGrabar_Click(object sender, EventArgs e)
         {
-            if (hdk_utilerias.verificarTodosLosCampos(updateAcciones.Controls) && txtVerificarPassword.Text.Equals(txtPassword.Text))
+            if (txtVerificarPassword.Text.Equals(txtPassword.Text))
             {
-               if(hdk_ControlUsuario.modificar(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
+               if(hdk_ControlUsuario.modificar(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, hdk_ControlUsuario.obtenerUsuarioDeSession(this).username, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
                     ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
                }
                else

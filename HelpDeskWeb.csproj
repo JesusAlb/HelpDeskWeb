@@ -152,6 +152,10 @@
     <Content Include="css\alertify.min.css" />
     <Content Include="css\alertify.rtl.css" />
     <Content Include="css\alertify.rtl.min.css" />
+    <Content Include="css\alertify\css\alertify-bootstrap-3.css" />
+    <Content Include="css\alertify\css\alertify-bootstrap.css" />
+    <Content Include="css\alertify\css\alertify.css" />
+    <Content Include="css\alertify\js\alertify.js" />
     <Content Include="css\themes\bootstrap.css" />
     <Content Include="css\themes\bootstrap.min.css" />
     <Content Include="css\themes\bootstrap.rtl.css" />
@@ -215,6 +219,7 @@
       <DependentUpon>ModeloHD.edmx</DependentUpon>
       <LastGenOutput>ModeloHD.cs</LastGenOutput>
     </Content>
+    <Content Include="css\alertify\js\alertify.js.map" />
     <None Include="js\jquery-2.1.1-vsdoc.js" />
     <None Include="js\jquery-2.1.1.intellisense.js" />
     <Content Include="js\jquery-2.1.1.js" />

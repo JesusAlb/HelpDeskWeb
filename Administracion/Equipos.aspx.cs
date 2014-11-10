@@ -56,22 +56,28 @@ namespace HelpDeskWeb.Administracion
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
             string discoDuro = txtDD.Text + " "+ cbDD.Text;
-            string ram = txtRAM + " GB";
-            string procesador = txtProcesador + " GHZ";
+            string ram = txtRAM.Text + " GB";
+            string procesador = txtProcesador.Text + " GHZ";
             string ip = txtIP1.Text + "." + txtIP2.Text + "." + txtIP3.Text + "." + txtIP4.Text;
             string mac = txtMAC1.Text + "-" + txtMAC2.Text + "-" + txtMAC3.Text + "-" + txtMAC4.Text + "-" + txtMAC5.Text + "-" + txtMAC6.Text;
 
             if(Convert.ToInt16(Session["Accion"]) == 0)
             {
-                hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                if(hdk_ControlEquipos.insertar(Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
                     Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
-                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
+                    ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue)))
+                {
+                    ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Equipo correctamente asignado');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.success('Erro al asignar un responsable a un equipo');", true);
+                }
             }
             else
             {
-                hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
+                hdk_ControlEquipos.modificar(Convert.ToInt32(gvEquipo.SelectedDataKey.Value), Convert.ToInt32(cbResponsable.SelectedValue), discoDuro, ip, mac, Convert.ToInt32(cbMarcaEquipo.SelectedValue),
                     Convert.ToInt32(cbMarcaMonitor.SelectedValue), Convert.ToInt32(cbMarcaMouse.SelectedValue), Convert.ToInt32(cbMarcaTeclado.SelectedValue),
                     ram, procesador, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text, Convert.ToInt32(cbTipoEquipo.SelectedValue));
             }

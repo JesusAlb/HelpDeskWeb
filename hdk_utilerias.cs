@@ -50,25 +50,6 @@ namespace HelpDeskWeb
             return true;
         }
 
-        public static bool verificarTodosLosCampos(ControlCollection controles)
-        {
-            foreach (Control control in controles)
-            {
-                if (control is TextBox)
-                {
-                    if(String.IsNullOrWhiteSpace((control as TextBox).Text))
-                        return false;
-                }
-                else if (control is DropDownList)
-                {
-                    if (String.IsNullOrWhiteSpace((control as DropDownList).Text))
-                        return false;
-                }
-                verificarTodosLosCampos(control.Controls);
-            }
-            return true;
-        }
-
         public static bool verificarCombosUsuarios(string[] cbusuario)
         {
             foreach (string usuario in cbusuario)
@@ -80,8 +61,6 @@ namespace HelpDeskWeb
             }
             return true;
         }
-
-
 
         public static void checarSession(Page pagina, bool despues, int tipoObligatorio, int tipoActual)
         {

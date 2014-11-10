@@ -91,8 +91,7 @@
                                     Perfil de usuario
                                 </div>
                                 <div class="panel-body">
-                                    <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
-                                        <ContentTemplate>
+   
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -158,11 +157,18 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Correo" Font-Bold="true"></asp:Label>
-                                                            <div class="input-group">
-                                                                <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right"></asp:TextBox>
-                                                                <span class="input-group-addon">
-                                                                    <asp:Label runat="server" ID="lbelInstitucion"></asp:Label></span>
-                                                            </div>
+                                                            <asp:UpdatePanel runat="server" ID="updateInsitucion" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <div class="input-group">
+                                                                        <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right"></asp:TextBox>
+                                                                        <span class="input-group-addon">
+                                                                            <asp:Label runat="server" ID="lbelInstitucion"></asp:Label></span>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbInstitucion" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-1"></div>
@@ -194,12 +200,19 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Departamento" Font-Bold="true"></asp:Label>
-                                                            <asp:DropDownList runat="server" DataTextField="nomDepto" CssClass="form-control" DataValueField="idDepto" ID="cbDepto"></asp:DropDownList>
+                                                            <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:DropDownList runat="server" DataTextField="nomDepto" CssClass="form-control" DataValueField="idDepto" ID="cbDepto"></asp:DropDownList>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbCoordinacion" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                    <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
@@ -231,13 +244,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="cbCoordinacion" EventName="SelectedIndexChanged" />
-                                            <asp:AsyncPostBackTrigger ControlID="cbInstitucion" EventName="SelectedIndexChanged" />
-                                            <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
-                                        </Triggers>
-                                    </asp:UpdatePanel>
+
                                 </div>
                             </div>
                         </div>
