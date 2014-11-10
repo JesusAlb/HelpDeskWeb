@@ -27,6 +27,27 @@ namespace HelpDeskWeb.Catalogos
                 this.cargarTablaDeptos();
                 this.cargarTablaPuesto();
             }
+
+            if (Page.IsPostBack)
+            {
+                if (Request["__EVENTTARGET"] == "txtFiltroCoord")
+                {
+                    this.cargarTablaCoordinacion();
+                }
+                if (Request["__EVENTTARGET"] == "txtFiltroDepto")
+                {
+                    this.cargarTablaDeptos();
+                }
+                if (Request["__EVENTTARGET"] == "txtFiltroDepto")
+                {
+                    this.cargarTablaDeptos();
+                }
+                if (Request["__EVENTTARGET"] == "txtFiltroDepto")
+                {
+                    this.cargarTablaDeptos();
+                }
+            }
+        
         }
 
        protected void cargarTablaDeptos()

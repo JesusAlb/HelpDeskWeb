@@ -17,6 +17,31 @@
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
+    <script type="text/javascript">
+        $(function () {
+            $("#<%=txtFiltroCoord.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroCoord", $("#<%=txtFiltroCoord.ClientID%>").val());
+            })
+        });
+
+        $(function () {
+            $("#<%=txtFiltroDepto.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroDepto", $("#<%=txtFiltroDepto.ClientID%>").val());
+            })
+        });
+
+        $(function () {
+            $("#<%=txtFiltroArea.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroArea", $("#<%=txtFiltroArea.ClientID%>").val());
+            })
+        });
+
+        $(function () {
+            $("#<%=txtFiltroPuesto.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroPuesto", $("#<%=txtFiltroPuesto.ClientID%>").val());
+            })
+                });
+    </script>
     <script src="../js/validador.js"></script>
 </head>
 <body>
@@ -118,7 +143,7 @@
                                                                 <asp:Panel runat="server" CssClass="col-lg-10">
                                                                     <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
                                                                         <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                        <asp:TextBox runat="server" ID="txtNombre" onkeyup="keyUP(event.keyCode);" onkeydown="return isAlpha(event.keyCode);" MaxLength="59" CssClass="form-control" placeholder="Nombre" />
+                                                                        <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="59" CssClass="form-control" placeholder="Nombre" />
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" ID="panelCoordinaciones" CssClass="form-group" Visible="false">
                                                                         <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>
@@ -156,7 +181,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" ID="txtFiltroCoord" MaxLength="25" CssClass="form-control" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" ID="txtFiltroCoord" onkeydown="return isAlpha(event.keyCode);" MaxLength="25" CssClass="form-control" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -210,7 +235,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroDepto" MaxLength="25" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroDepto" onkeydown="return isAlpha(event.keyCode);" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -294,7 +319,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroArea" MaxLength="25" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroArea" onkeydown="return isAlpha(event.keyCode);" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -355,7 +380,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroPuesto" MaxLength="25" placeholder="Buscar" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroPuesto" onkeydown="return isAlpha(event.keyCode);" MaxLength="25" placeholder="Buscar" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
