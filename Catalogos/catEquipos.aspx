@@ -16,6 +16,20 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validador.js"></script>
+        <script type="text/javascript" lang="js">
+            $(function () {
+                $("#<%=txtFiltroTipo.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroTipo", $("#<%=txtFiltroTipo.ClientID%>").val());
+            })
+            });
+
+            $(function () {
+                $("#<%=txtFiltroMarca.ClientID%>").keyup(function () {
+                                __doPostBack("txtFiltroMarca", $("#<%=txtFiltroMarca.ClientID%>").val());
+                })
+            });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -111,13 +125,13 @@
                                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                                             <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
                                                                                 <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                                <asp:TextBox runat="server" ID="txtNombre" MaxLength="30" CssClass="form-control" placeholder="Nombre" />
+                                                                                <asp:TextBox runat="server" ID="txtNombre"  onkeyup="keyUP(event.keyCode);" onkeydown="return isAlpha(event.keyCode);" MaxLength="30" CssClass="form-control keyup-numeric" placeholder="Nombre" />
                                                                             </asp:Panel>
                                                                             <asp:Panel runat="server" CssClass="form-group" ID="panelCarTipoEquipo" Visible="true">
-                                                                            <asp:Panel runat="server" CssClass="panel panel-primary" >
-                                                                                <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel>
-                                                                                <asp:Panel runat="server" CssClass="panel-body">
-                                                                                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                                                                <asp:Panel runat="server" CssClass="panel panel-primary">
+                                                                                    <asp:Panel runat="server" CssClass="panel-heading" Font-Size="12">Características a capturar</asp:Panel>
+                                                                                    <asp:Panel runat="server" CssClass="panel-body">
+                                                                                        <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-9">
                                                                                         <div class="row">
                                                                                             <asp:CheckBox runat="server" CssClass="checkbox-inline" ID="chEquipo" Checked="true" Enabled="false" Text="Marca del equipo" />
@@ -224,6 +238,7 @@
                                                     </ContentTemplate>
                                                     <Triggers>
                                                         <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="txtFiltroTipo" EventName="TextChanged" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </asp:Panel>
@@ -285,6 +300,7 @@
                                                        </ContentTemplate>
                                                        <Triggers>
                                                            <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                           <asp:AsyncPostBackTrigger ControlID="txtFiltroMarca" EventName="TextChanged" />
                                                        </Triggers>
                                                    </asp:UpdatePanel>
                                                </asp:Panel>

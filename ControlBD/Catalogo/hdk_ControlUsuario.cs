@@ -42,7 +42,8 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             if (!nombreNuevo.Equals(nombreAnterior))
             {
-                var item = dbhelp.modelo.tblusuarios.SingleOrDefault(a => a.username.Equals(nombreNuevo));
+                var item = dbhelp.modelo.ViewUsuarios.Where(x => x.username == nombreNuevo).SingleOrDefault();
+
                 if (item != null)
                 {
                     return true;
@@ -54,7 +55,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
@@ -117,7 +118,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 
         public static int modificar(int id, string usuarioNuevo, string nombreAnterior, string nombre, string apellido, int tipo, int depto, string extel, string correo, string password, int area, int puesto, int institucion)
         {
-            if (verificarSiExisteUsuario(usuarioNuevo, nombreAnterior))
+            if (!verificarSiExisteUsuario(usuarioNuevo, nombreAnterior))
             {
                 try
                 {
@@ -150,7 +151,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
             else
             {
-                return 0;
+                return -1;
             }
           }
 

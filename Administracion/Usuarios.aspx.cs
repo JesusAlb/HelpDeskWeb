@@ -14,7 +14,6 @@ namespace HelpDeskWeb.Administracion
 {
     public partial class Usuarios : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
@@ -90,6 +89,7 @@ namespace HelpDeskWeb.Administracion
                         lbelTituloModal.Text = "Modificar usuario";
                         int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value);
                         tblusuario usuario = hdk_ControlUsuario.obtenerUsuario(idUsuario);
+                        username.Value = usuario.username;
                         txtNomUsuario.Text = usuario.username;
                         txtNombre.Text = usuario.nombre;
                         txtApellido.Text = usuario.apellidos;
@@ -129,7 +129,7 @@ namespace HelpDeskWeb.Administracion
                             break;
 
                         case "editar":
-                            resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), hdk_ControlUsuario.obtenerUsuarioDeSession(this).username, txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                            resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), txtNomUsuario.Text, username.Value, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
                             mensaje = "Usuario actualizado exitosamente";
                             break;
                     }

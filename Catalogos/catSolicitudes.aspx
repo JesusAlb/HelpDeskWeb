@@ -18,6 +18,7 @@
     <link href="../css/alertify.css" rel="stylesheet" />
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
+    <script src="../js/validador.js"></script>
     <!--Fin de Alertify-->
 </head>
 <body>
@@ -116,7 +117,7 @@
                                                             <asp:Panel runat="server" CssClass="col-lg-10">
                                                                 <asp:Panel runat="server" ID="panel2" CssClass="form-group">
                                                                     <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                    <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" placeholder="Nombre" />
+                                                                    <asp:TextBox runat="server" ID="txtNombre" onkeyup="keyUP(event.keyCode);" onkeydown="return isAlpha(event.keyCode);" CssClass="form-control" placeholder="Nombre" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" ID="panelTipoRequerimiento" CssClass="form-group" Visible="false">
                                                                     <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>

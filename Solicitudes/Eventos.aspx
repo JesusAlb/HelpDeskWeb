@@ -10,6 +10,7 @@
     <title>Atención a eventos</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
+    <link href="../js/validador.js" rel="stylesheet" />
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
@@ -19,6 +20,7 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mask.min.js"></script>
     <script type="text/javascript" lang="js">
         $(function () {
             $("#<%=txtFiltro.ClientID%>").keyup(function () {               
@@ -114,7 +116,7 @@
                             <asp:Panel runat="server" CssClass="col-lg-11">
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="form-group">
-                                        <asp:TextBox runat="server" ID="txtFiltro"   placeholder="Buscar" CssClass="form-control" />
+                                        <asp:TextBox runat="server" ID="txtFiltro"   placeholder="Buscar" CssClass="form-control prueba" />
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" CssClass="row">
@@ -191,7 +193,7 @@
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Título" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" Style="resize: none"  CssClass="form-control">
+                                                                <asp:TextBox runat="server" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" Style="resize: none"  CssClass="form-control NumerosLetras">
                                                                 </asp:TextBox>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
@@ -226,7 +228,7 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time"  ID="txtHoraInicial"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" ID="txtHoraInicial"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" ID="txtHoraFinal"></asp:TextBox>

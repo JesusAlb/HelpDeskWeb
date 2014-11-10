@@ -16,7 +16,7 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, false, 1, 0);
-            dbhelp.modelo.tblareas.SingleOrDefault(a => a.idArea == 1);
+            hdk_ControlAcceso.encontrarUsuario("", "", this);
         }
 
         protected void entrar_Click(object sender, EventArgs e)

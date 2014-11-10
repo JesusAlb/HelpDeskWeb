@@ -23,7 +23,20 @@ namespace HelpDeskWeb.Catalogos
             {
                 this.cargarTablasTipos();
                 this.cargarTablasMarcas();
-            }           
+            }
+            if (Page.IsPostBack)
+            {
+                if (Request["__EVENTTARGET"] == "txtFiltroTipo")
+                {
+                    this.cargarTablasTipos(); 
+                }
+
+                if (Request["__EVENTTARGET"] == "txtFiltroMarca")
+                {
+                    this.cargarTablasMarcas();
+                }
+
+            }
        }
 
         protected void cargarTablasTipos()
@@ -34,7 +47,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void cargarTablasMarcas()
         {
-            gvMarca.DataSource = hdk_ControlMarca.cargarTabla("");
+            gvMarca.DataSource = hdk_ControlMarca.cargarTabla(txtFiltroMarca.Text);
             gvMarca.DataBind();
         }
 

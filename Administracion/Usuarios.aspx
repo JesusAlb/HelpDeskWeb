@@ -124,6 +124,7 @@
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
                                                             <asp:TextBox runat="server" ID="txtNomUsuario" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario"/>
+                                                            <asp:HiddenField runat="server" ID="username" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre completo del usuario" Font-Bold="true" />
