@@ -381,8 +381,8 @@ namespace HelpDeskWeb.Solicitudes
             if (gvRecursosNoAsignados.SelectedDataKey != null)
             {
                 int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-                requerimientosSinAsignar_Result requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
-                if (requerimiento.tipo.Equals("Cuantificable"))
+                tblrequerimiento requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+                if (requerimiento.cuantificable)
                 {
                     try
                     {
@@ -458,9 +458,9 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosNoAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-            requerimientosSinAsignar_Result requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+            tblrequerimiento requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
             txtCantidad.Text = "1";
-            if (requerimiento.tipo.Equals("Cuantificable"))
+            if (requerimiento.cuantificable)
             {
                 txtCantidad.Enabled = true;
             }

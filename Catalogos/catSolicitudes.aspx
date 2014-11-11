@@ -20,6 +20,25 @@
     <script src="../js/alertify.js"></script>
     <script src="../js/validador.js"></script>
     <!--Fin de Alertify-->
+     <script type="text/javascript" lang="js">
+            $(function () {
+                    $("#<%=txtFiltroLugares.ClientID%>").keyup(function () {
+                        __doPostBack("txtFiltroLugares", $("#<%=txtFiltroLugares.ClientID%>").val());
+                })
+            });
+
+            $(function () {
+                $("#<%=txtFiltroTipoIncidentes.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltroTipoIncidentes", $("#<%=txtFiltroTipoIncidentes.ClientID%>").val());
+                })
+            });
+
+            $(function () {
+             $("#<%=txtFiltroReq.ClientID%>").keyup(function () {
+                 __doPostBack("txtFiltroReq", $("#<%=txtFiltroReq.ClientID%>").val());
+                })
+             });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -122,8 +141,8 @@
                                                                 <asp:Panel runat="server" ID="panelTipoRequerimiento" CssClass="form-group" Visible="false">
                                                                     <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>
                                                                     <asp:DropDownList runat="server" ID="cbTipoRequerimiento" CssClass="form-control">
-                                                                        <asp:ListItem Text="Cuantificable" Value="true"></asp:ListItem>
-                                                                        <asp:ListItem Text="No cuantificable" Value="false"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cuantificable" Value="True"></asp:ListItem>
+                                                                        <asp:ListItem Text="No cuantificable" Value="False"></asp:ListItem>
                                                                     </asp:DropDownList>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -204,6 +223,7 @@
                                                         </ContentTemplate>
                                                         <Triggers>
                                                             <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                            <asp:AsyncPostBackTrigger ControlID="txtFiltroTipoIncidentes" EventName="TextChanged" />
                                                         </Triggers>
                                                     </asp:UpdatePanel>
                                                 </asp:Panel>
@@ -265,6 +285,7 @@
                                                     </ContentTemplate>
                                                     <Triggers>
                                                         <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="txtFiltroLugares" EventName="TextChanged" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </asp:Panel>
@@ -285,7 +306,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Tipo</span>
-                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="cbFiltroTipo">
+                                                        <asp:DropDownList runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="cbFiltroTipo_SelectedIndexChanged" ID="cbFiltroTipo">
                                                             <asp:ListItem Text="" Value=""></asp:ListItem>
                                                             <asp:ListItem Text="Cuantificable" Value="1"></asp:ListItem>
                                                             <asp:ListItem Text="No cuantificable" Value="0"></asp:ListItem>
@@ -335,6 +356,8 @@
                                                         </ContentTemplate>
                                                         <Triggers>
                                                             <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                            <asp:AsyncPostBackTrigger ControlID="txtFiltroReq" EventName="TextChanged" />
+                                                            <asp:AsyncPostBackTrigger ControlID="cbFiltroTipo" EventName="SelectedIndexChanged" />
                                                         </Triggers>
                                                     </asp:UpdatePanel>
                                                 </asp:Panel>

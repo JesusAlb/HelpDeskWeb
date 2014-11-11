@@ -6,17 +6,19 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Centro de servicio</title>
+    <script src="../js/jquery-2.1.1.js"></script>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
     <script src="../js/ie-emulation-modes-warning.js"></script>
     <script src="../js/ie10-viewport-bug-workaround.js"></script>
-    <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
+
     <script type="text/javascript">
         $(function () {
             $("#<%=txtFiltroCoord.ClientID%>").keyup(function () {
@@ -40,7 +42,7 @@
             $("#<%=txtFiltroPuesto.ClientID%>").keyup(function () {
                 __doPostBack("txtFiltroPuesto", $("#<%=txtFiltroPuesto.ClientID%>").val());
             })
-                });
+           });
     </script>
     <script src="../js/validador.js"></script>
 </head>
@@ -221,6 +223,7 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroCoord" EventName="TextChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
@@ -268,7 +271,7 @@
                                                             <ContentTemplate>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Coordinación</span>
-                                                                    <asp:DropDownList runat="server" ID="cbFiltroCoord" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion">
+                                                                    <asp:DropDownList runat="server" ID="cbFiltroCoord" AutoPostBack="true" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion" OnSelectedIndexChanged="cbFiltroCoord_SelectedIndexChanged">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </ContentTemplate>
@@ -305,6 +308,8 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroDepto" EventName="TextChanged" />
+                                                                <asp:AsyncPostBackTrigger ControlID="cbFiltroCoord" EventName="SelectedIndexChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
@@ -366,6 +371,7 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroArea" EventName="TextChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>
@@ -427,6 +433,7 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroPuesto" EventName="TextChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </asp:Panel>

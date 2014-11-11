@@ -19,7 +19,7 @@ namespace HelpDeskWeb.ControlAltas
        {
            try
            {
-               return dbhelp.modelo.requerimientosSinAsignar(evento).Where( a => a.nomRequerimiento.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
+              return dbhelp.modelo.requerimientosSinAsignar(evento).Where( a => a.nomRequerimiento.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
            }
            catch
            {
@@ -86,11 +86,11 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public static requerimientosSinAsignar_Result obtenerRequerimiento(int id, int? evento)
+       public static tblrequerimiento obtenerRequerimiento(int id, int? evento)
        {
            try
            {
-               return dbhelp.modelo.requerimientosSinAsignar(evento).SingleOrDefault(a => a.idRequerimientos == id);
+               return dbhelp.modelo.tblrequerimientos.SingleOrDefault(a => a.idRequerimientos == id);
            }
            catch
            {

@@ -38,13 +38,13 @@ namespace HelpDeskWeb.Catalogos
                 {
                     this.cargarTablaDeptos();
                 }
-                if (Request["__EVENTTARGET"] == "txtFiltroDepto")
+                if (Request["__EVENTTARGET"] == "txtFiltroArea")
                 {
-                    this.cargarTablaDeptos();
+                    this.cargarTablaArea();
                 }
-                if (Request["__EVENTTARGET"] == "txtFiltroDepto")
+                if (Request["__EVENTTARGET"] == "txtFiltroPuesto")
                 {
-                    this.cargarTablaDeptos();
+                    this.cargarTablaPuesto();
                 }
             }
         
@@ -294,6 +294,11 @@ namespace HelpDeskWeb.Catalogos
             }
             btnGrabar.CommandName = "insertar";
             ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
+        }
+
+        protected void cbFiltroCoord_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cargarTablaDeptos();
         }
     }
 }
