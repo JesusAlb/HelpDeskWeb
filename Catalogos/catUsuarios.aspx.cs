@@ -20,15 +20,14 @@ namespace HelpDeskWeb.Catalogos
             hdk_utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
 
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
                 this.cargarTablaArea();
                 this.cargarTablaCoordinacion();
                 this.cargarTablaDeptos();
                 this.cargarTablaPuesto();
             }
-
-            if (Page.IsPostBack)
+            else
             {
                 if (Request["__EVENTTARGET"] == "txtFiltroCoord")
                 {
@@ -46,7 +45,7 @@ namespace HelpDeskWeb.Catalogos
                 {
                     this.cargarTablaPuesto();
                 }
-            }
+            }  
         
         }
 

@@ -17,6 +17,13 @@
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/validador.js"></script>
+        <script type="text/javascript" lang="js">
+            $(function () {
+                $("#<%=txtFiltro.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
+            })
+        });
+    </script>
 </head>
 <body>
     <asp:Panel runat="server" CssClass="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -89,7 +96,7 @@
                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                             <asp:Panel runat="server" CssClass="col-lg-6">
                                 <div class="form-group">
-                                        <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" CssClass="form-control" placeholder="Buscar" />
+                                        <asp:TextBox runat="server" ID="txtFiltro" MaxLength="40" OnTextChanged="txtFiltro_TextChanged"  CssClass="form-control" placeholder="Buscar" />
                                 </div>
                             </asp:Panel>
                             <asp:Panel runat="server" CssClass="col-lg-4">
@@ -123,13 +130,23 @@
                                                     <asp:Panel runat="server" CssClass="col-lg-10">
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario"/>
+                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario" />
                                                             <asp:HiddenField runat="server" ID="username" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre completo del usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)"/>
-                                                            <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Apellidos" style="margin-top:2%"></asp:TextBox>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">Nombre</span>
+                                                                    <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">Apellido</span>
+                                                                    <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Apellidos"></asp:TextBox>
+                                                                </div>
+                                                            </div>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
@@ -153,17 +170,20 @@
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:Label runat="server" Text="Extensión Telefonica" Font-Bold="true" />
-                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" TextMode="Number" onkeydown="return isNumeric(event.keyCode);" placeholder="000" CssClass="form-control" />
+                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" onkeydown="return isNumeric(event.keyCode);" placeholder="000" CssClass="form-control" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Institución" Font-Bold="true"/>
-                                                            <asp:DropDownList runat="server" ID="cbInstitucion" CssClass="form-control" DataTextField ="nomInstitucion" DataValueField="idInstitucion" />
+                                                            <asp:DropDownList runat="server" ID="cbInstitucion" AutoPostBack="true" OnSelectedIndexChanged="cbInstitucion_SelectedIndexChanged" CssClass="form-control" DataTextField ="nomInstitucion" DataValueField="idInstitucion" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Correo electronico" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtCorreo" TextMode="Email" CssClass="form-control" placeholder="Ejemplo@cie.org.mx" />
+                                                            <div class="input-group">
+                                                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right" MaxLength="30"/>
+                                                            <span class="input-group-addon"><asp:Label runat="server" ID="lbelCorreo" Text="@cie.org.mx"></asp:Label></span>
+                                                             </div>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Coordinación" Font-Bold="true" />
@@ -197,6 +217,7 @@
                                         <Triggers>
                                             <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
                                             <asp:AsyncPostBackTrigger ControlID="cbCoordinaciones" EventName="SelectedIndexChanged" />
+                                            <asp:AsyncPostBackTrigger ControlID="cbInstitucion" EventName="SelectedIndexChanged" />
                                             <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
                                         </Triggers>
                                     </asp:UpdatePanel>
@@ -210,7 +231,7 @@
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvUsuarios_RowCreated" runat="server" ID="gvUsuarios" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                            AlternatingRowStyle-BackColor="#e0e0e0" DataKeyNames="idUsuario" CellPadding="4" GridLines="Horizontal">
+                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idUsuario" CellPadding="4" GridLines="Horizontal">
                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                             <Columns>
                                                 <asp:BoundField HeaderText="Usuario" DataField="username" />

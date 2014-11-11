@@ -19,14 +19,13 @@ namespace HelpDeskWeb.Catalogos
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
                 this.cargarTablaTipoIncidente();
                 this.cargarTablaLugares();
                 this.cargarTablaRequerimientos();
             }
-
-            if (Page.IsPostBack)
+            else
             {
                 if (Request["__EVENTTARGET"] == "txtFiltroLugares")
                 {
@@ -43,6 +42,7 @@ namespace HelpDeskWeb.Catalogos
                     this.cargarTablaRequerimientos();
                 }
             }
+            
         }
 
         protected void limpiarSeleccion()

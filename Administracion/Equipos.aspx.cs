@@ -17,11 +17,16 @@ namespace HelpDeskWeb.Administracion
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
-            if (!IsPostBack)
+            lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            if (!Page.IsPostBack)
             {
                 this.cargarTabla();
                 this.cargarComboEquipos();
+            }
+            else
+            {
+                if (Request["__EVENTTARGET"] == "txtFiltro")
+                    this.cargarTabla();
             }
 
         }
@@ -64,6 +69,8 @@ namespace HelpDeskWeb.Administracion
             {
 
                 case "nuevo":
+                    hdk_utilerias.limpiarControles(this.ModalContenido.Controls);
+                    this.cargarControles();
                     ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
                     break;
 
@@ -88,6 +95,7 @@ namespace HelpDeskWeb.Administracion
                         txtSerieMouse.Text = equipos.serieMouse;
                         cbMarcaTeclado.SelectedValue = equipos.marcaTeclado.ToString();
                         txtSerieTeclado.Text = equipos.serieTeclado;
+                        this.cargarControles();
                         if (txtIP1.Enabled)
                         {
                             division = equipos.ip.Split('.');

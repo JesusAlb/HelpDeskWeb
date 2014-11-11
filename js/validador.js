@@ -17,7 +17,11 @@ function isAlphaNumeric(keyCode) {
 }
 
 function isNumeric(keyCode) {
-    return ((keyCode >= 48 && keyCode <= 57 || keyCode == 8 ||
-          (keyCode >= 96 && keyCode <= 105)));
+    if (keyCode == 16)
+        isShift = true;
+    var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) || keyCode == 8 || (keyCode >= 96 && keyCode <= 105));
+    return res;
 }
+
+
 

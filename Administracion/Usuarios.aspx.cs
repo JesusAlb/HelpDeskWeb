@@ -17,12 +17,17 @@ namespace HelpDeskWeb.Administracion
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
+            lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
             if (!IsPostBack)
             {
                 this.cargarTabla();
                 this.cargarCombos();
-            } 
+            }
+            else
+            {
+                if (Request["__EVENTTARGET"] == "txtFiltro")
+                    this.cargarTabla();
+            }
         }
 
         protected void cargarCombos()
@@ -93,7 +98,8 @@ namespace HelpDeskWeb.Administracion
                         txtNomUsuario.Text = usuario.username;
                         txtNombre.Text = usuario.nombre;
                         txtApellido.Text = usuario.apellidos;
-                        txtCorreo.Text = usuario.correo;
+                        string[] parteCorreo = usuario.correo.Split('@'); 
+                        txtCorreo.Text = parteCorreo[0];
                         txtExtension.Text = usuario.exTel;
                         txtPassword.Attributes.Add("Value", usuario.password);
                         cbTipoUs.SelectedValue = usuario.tipoUsuario.ToString();
@@ -121,15 +127,17 @@ namespace HelpDeskWeb.Administracion
                 string mensaje = null;
                 if (txtPassword.Text.Equals(txtPasswordVer.Text))
                 {
+                    string correo = txtCorreo.Text + lbelCorreo.Text;
+
                     switch (e.CommandName)
                     {
                         case "nuevo":
-                            resultado = hdk_ControlUsuario.insertar(txtNomUsuario.Text, "", txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                            resultado = hdk_ControlUsuario.insertar(txtNomUsuario.Text, "", txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, correo, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
                             mensaje = "Usuario registrado exitosamente";
                             break;
 
                         case "editar":
-                            resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), txtNomUsuario.Text, username.Value, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, txtCorreo.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
+                            resultado = hdk_ControlUsuario.modificar(Convert.ToInt32(gvUsuarios.SelectedDataKey.Value), txtNomUsuario.Text, username.Value, txtNombre.Text, txtApellido.Text, Convert.ToInt32(cbTipoUs.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtExtension.Text, correo, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue));
                             mensaje = "Usuario actualizado exitosamente";
                             break;
                     }
@@ -157,6 +165,16 @@ namespace HelpDeskWeb.Administracion
             {
                 ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Llene todos los campos');", true);
             }
+        }
+
+        protected void cbInstitucion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cambiarCorreo(Convert.ToInt32((sender as DropDownList).SelectedValue));
+        }
+
+        protected void cambiarCorreo(int institucion)
+        {
+            lbelCorreo.Text = "@" + hdk_ControlInstitucion.obtenerInstitucion(institucion).correoInstitucion;
         }
     }
 }

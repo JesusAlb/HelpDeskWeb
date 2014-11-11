@@ -115,7 +115,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" ID="txtNombreUsuario" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtNombreUsuario" Enabled="false" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">

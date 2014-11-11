@@ -17,6 +17,38 @@
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/validador.js"></script>
+    <script type="text/javascript" lang="js">
+        $(function () {
+            $("#<%=txtFiltro.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
+                })
+        });
+
+        var inputQuantity = [];
+        $(function () {
+            $(".numero").each(function (i) {
+                inputQuantity[i] = this.defaultValue;
+                $(this).data("idx", i); // save this field's index to access later
+            });
+            $(".numero").on("keyup", function (e) {
+                var $field = $(this),
+                    val = this.value,
+                    $thisIndex = parseInt($field.data("idx"), 10); // retrieve the index
+                //        window.console && console.log($field.is(":invalid"));
+                //  $field.is(":invalid") is for Safari, it must be the last to not error in IE8
+                if (this.validity && this.validity.badInput || isNaN(val) || $field.is(":invalid")) {
+                    this.value = inputQuantity[$thisIndex];
+                    return;
+                }
+                if (val.length > Number($field.attr("maxlength"))) {
+                    val = val.slice(0, 5);
+                    $field.val(val);
+                }
+                inputQuantity[$thisIndex] = val;
+            });
+        });
+
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -63,20 +95,10 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
-                            <li class="divider"></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <asp:Panel runat="server" CssClass="container">
-            <asp:Panel runat="server" CssClass="box">
+                                <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li></ul></li><li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li></ul></div></div></div><asp:Panel runat="server" CssClass="container">
             <form role="form" runat="server">               
                 <asp:ScriptManager runat="server" ID="script" EnablePartialRendering="true" ></asp:ScriptManager>
                 <asp:Panel runat="server" CssClass="row panel-titulo">
@@ -96,22 +118,17 @@
                                 <asp:LinkButton ID="btnNuevo" OnCommand="btnAccionarModal_Command" CommandName="nuevo" runat="server" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
-                                </asp:LinkButton>
-                                <asp:LinkButton runat="server" ID="btnModificar" OnCommand="btnAccionarModal_Command" CommandName="editar" CssClass="btn btn-primary">
+                                </asp:LinkButton><asp:LinkButton runat="server" ID="btnModificar" OnCommand="btnAccionarModal_Command" CommandName="editar" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-pencil"></span> Editar
-                                </asp:LinkButton>
-                            </div>
-                            </div>
-                            <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                </asp:LinkButton></div></div><asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-lg">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:UpdatePanel runat="server" ID="updateModal" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                                    <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de equipos" />
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de equipos" />
                                                 </asp:Panel>
-                                                <asp:Panel runat="server" CssClass="modal-body">
+                                                <asp:Panel runat="server" ID="ModalContenido" CssClass="modal-body">
                                                     <asp:Panel runat="server" CssClass="row">
                                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
@@ -119,13 +136,11 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-8">
-                                                                        <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label>
-                                                                        <asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nomCompleto" AutoPostBack="true" CssClass="form-control" DataValueField="idUsuario">
+                                                                        <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nomCompleto" AutoPostBack="true" CssClass="form-control" DataValueField="idUsuario">
                                                                         </asp:DropDownList>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                        <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label>
-                                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nomTipoEquipo" DataValueField="idTipoEquipo"></asp:DropDownList>
+                                                                        <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nomTipoEquipo" DataValueField="idTipoEquipo"></asp:DropDownList>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -133,152 +148,80 @@
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="panel panel-default" ID="panelCapacidad">
                                                                         <asp:Panel runat="server" CssClass="panel-heading text-center">
-                                                                            <asp:Label runat="server" Text="Capacidad" Font-Bold="true"></asp:Label>
-                                                                        </asp:Panel>
-                                                                        <asp:Panel runat="server" CssClass="panel-body">
+                                                                            <asp:Label runat="server" Text="Capacidad" Font-Bold="true"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                             <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                                <asp:Label runat="server" Text="Procesador" Font-Bold="true"></asp:Label>
-                                                                                <asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtProcesador"  CssClass="form-control" TextMode="Number" step="0.01" min="1" max="10" />
-                                                                                    <span class="input-group-addon">GHZ</span>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                                <asp:Label runat="server" Text="Memoria RAM" MaxLength="4" Font-Bold="true"></asp:Label>
-                                                                                <asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" TextMode="Number" min="1" max="256" />
-                                                                                    <span class="input-group-addon">GB</span>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                                <asp:Label runat="server" Text="Almacenamiento" Font-Bold="true"></asp:Label>
-                                                                                <asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtDD" CssClass="form-control" TextMode="Number" min="1" max="1000" />
+                                                                                <asp:Label runat="server" Text="Procesador" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
+                                                                                    <asp:TextBox runat="server" ID="txtProcesador"  CssClass="form-control" />
+                                                                                    <span class="input-group-addon">GHZ</span> </asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-4">
+                                                                                <asp:Label runat="server" Text="Memoria RAM" MaxLength="4" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
+                                                                                    <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" />
+                                                                                    <span class="input-group-addon">GB</span> </asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-4">
+                                                                                <asp:Label runat="server" Text="Almacenamiento" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
+                                                                                    <asp:TextBox runat="server" ID="txtDD" CssClass="form-control" T/>
                                                                                     <span class="input-group-addon">
                                                                                         <asp:DropDownList runat="server" ID="cbDD" Style="background-color: #eee; border-color: transparent">
-                                                                                            <asp:ListItem Text="MB" Value="MB"></asp:ListItem>
-                                                                                            <asp:ListItem Text="GB" Selected="True" Value="GB"></asp:ListItem>
-                                                                                            <asp:ListItem Text="TB" Value="TB"></asp:ListItem>
-                                                                                        </asp:DropDownList>
-                                                                                    </span>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                </asp:Panel>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
+                                                                                            <asp:ListItem Text="MB" Value="MB"></asp:ListItem><asp:ListItem Text="GB" Selected="True" Value="GB"></asp:ListItem><asp:ListItem Text="TB" Value="TB"></asp:ListItem></asp:DropDownList></span></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelEquipo">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
-                                                                                <asp:Label runat="server" Font-Bold="true" Text="Equipo"></asp:Label>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="panel-body">
+                                                                                <asp:Label runat="server" Font-Bold="true" Text="Equipo"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span>
-                                                                                        <asp:DropDownList runat="server" ID="cbMarcaEquipo" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaEquipo" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" CssClass="serie form-control" required></asp:TextBox>
-                                                                                    </asp:Panel>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                    <asp:Panel runat="server" CssClass="col-lg-6">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" CssClass="serie form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelMonitor">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
-                                                                                <asp:Label runat="server" Font-Bold="true" Text="Monitor"></asp:Label>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="panel-body">
+                                                                                <asp:Label runat="server" Font-Bold="true" Text="Monitor"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span>
-                                                                                        <asp:DropDownList runat="server" ID="cbMarcaMonitor" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMonitor" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieMonitor" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
-                                                                                    </asp:Panel>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                </asp:Panel>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMonitor" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelTeclado">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
-                                                                                <asp:Label runat="server" Font-Bold="true" Text="Teclado"></asp:Label>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="panel-body">
+                                                                                <asp:Label runat="server" Font-Bold="true" Text="Teclado"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span>
-                                                                                        <asp:DropDownList runat="server" ID="cbMarcaTeclado" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaTeclado" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieTeclado" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
-                                                                                    </asp:Panel>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                    <asp:Panel runat="server" CssClass="col-lg-6">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieTeclado" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelMouse">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
-                                                                                <asp:Label runat="server" Font-Bold="true" Text="Mouse"></asp:Label>
-                                                                            </asp:Panel>
-                                                                            <asp:Panel runat="server" CssClass="panel-body">
+                                                                                <asp:Label runat="server" Font-Bold="true" Text="Mouse"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span>
-                                                                                        <asp:DropDownList runat="server" ID="cbMarcaMouse" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMouse" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieMouse" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
-                                                                                    </asp:Panel>
-                                                                                </asp:Panel>
-                                                                            </asp:Panel>
-                                                                        </asp:Panel>
-                                                                    </asp:Panel>
-                                                                </asp:Panel>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMouse" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="panel panel-default" ID="panelRed">
                                                                         <asp:Panel runat="server" CssClass="panel-heading text-center">
-                                                                            <asp:Label runat="server" Text="Red" Font-Bold="true"></asp:Label>
-                                                                        </asp:Panel>
-                                                                        <asp:Panel runat="server" CssClass="panel-body">
+                                                                            <asp:Label runat="server" Text="Red" Font-Bold="true"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                                 <asp:Panel runat="server" CssClass="row">
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-8">
-                                                                                        <asp:Label runat="server" Text="Dirección IP" Font-Bold="true"></asp:Label>
-                                                                                        <asp:Panel runat="server" CssClass="input-group">
-                                                                                            <asp:TextBox runat="server" ID="txtIP1" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
-                                                                                            <span runat="server" class="input-group-addon">.</span>
-                                                                                            <asp:TextBox runat="server" ID="txtIP2" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
-                                                                                            <span runat="server" class="input-group-addon">.</span>
-                                                                                            <asp:TextBox runat="server" ID="txtIP3" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
-                                                                                            <span runat="server" class="input-group-addon">.</span>
-                                                                                            <asp:TextBox runat="server" ID="txtIP4" CssClass="form-control" MaxLength="3" TextMode="Number" min="0" max="255" />
+                                                                                        <asp:Label runat="server" Text="Dirección IP" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
+                                                                                            <asp:TextBox runat="server" ID="txtIP1" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" maxlength="3" />
+                                                                                            <span runat="server" class="input-group-addon">.</span> <asp:TextBox runat="server" ID="txtIP2" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="3"  />
+                                                                                            <span runat="server" class="input-group-addon">.</span> <asp:TextBox runat="server" ID="txtIP3" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="3"  />
+                                                                                            <span runat="server" class="input-group-addon">.</span> <asp:TextBox runat="server" ID="txtIP4" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="3"  />
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
@@ -288,19 +231,13 @@
                                                                                 <asp:Panel runat="server" CssClass="row">
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-8">
-                                                                                        <asp:Label runat="server" Text="Dirección MAC" Font-Bold="true"></asp:Label>
-                                                                                        <asp:Panel runat="server" CssClass="input-group">
-                                                                                            <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span>
-                                                                                            <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span>
-                                                                                            <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span>
-                                                                                            <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span>
-                                                                                            <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span>
-                                                                                            <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control" MaxLength="2" />
+                                                                                        <asp:Label runat="server" Text="Dirección MAC" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
+                                                                                            <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
@@ -330,7 +267,6 @@
                             </asp:Panel>
 
                         </asp:Panel>
-
                         <div class="col-lg-1"></div>
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
@@ -373,7 +309,7 @@
                     </asp:Panel>
                 </section>
             </form>
-            </asp:Panel>
+
     </asp:Panel>
 </body>
 </html>

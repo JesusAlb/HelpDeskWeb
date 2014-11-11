@@ -19,24 +19,22 @@ namespace HelpDeskWeb.Catalogos
         {
             hdk_utilerias.checarSession(this,true, 0, 0);
             lbelUsuario.Text =" " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
                 this.cargarTablasTipos();
                 this.cargarTablasMarcas();
             }
-            if (Page.IsPostBack)
-            {
+            else{
                 if (Request["__EVENTTARGET"] == "txtFiltroTipo")
                 {
-                    this.cargarTablasTipos(); 
+                    this.cargarTablasTipos();
                 }
 
                 if (Request["__EVENTTARGET"] == "txtFiltroMarca")
                 {
                     this.cargarTablasMarcas();
                 }
-
-            }
+            }   
        }
 
         protected void cargarTablasTipos()
