@@ -151,6 +151,7 @@
     <Content Include="css\alertify-bootstrap-3.css" />
     <Content Include="css\alertify-bootstrap.css" />
     <Content Include="css\alertify.css" />
+    <Content Include="Imagenes\solicitante2.png" />
     <Content Include="js\alertify.js" />
     <Content Include="css\themes\bootstrap.css" />
     <Content Include="css\themes\bootstrap.min.css" />
@@ -176,7 +177,6 @@
     <Content Include="Imagenes\pMedia.png" />
     <Content Include="Imagenes\pNormal.png" />
     <Content Include="Imagenes\siEncuesta3.png" />
-    <Content Include="Imagenes\solicitante.png" />
     <Content Include="Imagenes\usuario.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />

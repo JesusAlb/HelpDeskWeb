@@ -16,6 +16,7 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validador.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -183,7 +184,7 @@
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
                                                                                         <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" CssClass="form-control" required></asp:TextBox>
+                                                                                        <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" CssClass="serie form-control" required></asp:TextBox>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>
@@ -204,7 +205,7 @@
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
                                                                                         <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieMonitor" MaxLength="20" CssClass="form-control" required></asp:TextBox>
+                                                                                        <asp:TextBox runat="server" ID="txtSerieMonitor" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>
@@ -229,7 +230,7 @@
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
                                                                                         <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieTeclado" MaxLength="20" CssClass="form-control" required></asp:TextBox>
+                                                                                        <asp:TextBox runat="server" ID="txtSerieTeclado" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>
@@ -250,7 +251,7 @@
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
                                                                                         <span runat="server" class="input-group-addon">Serie</span>
-                                                                                        <asp:TextBox runat="server" ID="txtSerieMouse" MaxLength="20" CssClass="form-control" required></asp:TextBox>
+                                                                                        <asp:TextBox runat="server" ID="txtSerieMouse" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox>
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                             </asp:Panel>

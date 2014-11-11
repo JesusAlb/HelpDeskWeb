@@ -125,7 +125,7 @@
                                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                                             <asp:Panel runat="server" ID="panelNombre" CssClass="form-group">
                                                                                 <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
-                                                                                <asp:TextBox runat="server" ID="txtNombre"  onkeyup="keyUP(event.keyCode);" onkeydown="return isAlpha(event.keyCode);" MaxLength="30" CssClass="form-control keyup-numeric" placeholder="Nombre" />
+                                                                                <asp:TextBox runat="server" ID="txtNombre"  onkeydown="return isAlpha(event.keyCode);" MaxLength="30" CssClass="form-control keyup-numeric" placeholder="Nombre" />
                                                                             </asp:Panel>
                                                                             <asp:Panel runat="server" CssClass="form-group" ID="panelCarTipoEquipo" Visible="true">
                                                                                 <asp:Panel runat="server" CssClass="panel panel-primary">

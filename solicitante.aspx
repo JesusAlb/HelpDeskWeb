@@ -25,10 +25,10 @@
         <div class="container-panel">
             <div class="row" style="margin-top: 2%">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
-                    <div class="row" style="margin-top: 4%;">
+                    <div class="row" style="margin-top: 1%;">
                         <div class="col-lg-7">
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group" style="margin-top:2%">
                                     <asp:Image runat="server" ID="imca" ImageUrl="~/Imagenes/IMCA IAP.png" Height="230" Width="550" />
                                 </div>
                                 <div class="form-group" style="margin-top:5%">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <div class="panel panel-primary" style="background-color: white; margin-top:4%">
+                            <div class="panel panel-primary" style="background-color: white; margin-top:12%">
                                 <div class="panel-heading" style="font-size:24px; background-color:#E6E6E6; color:black">
                                     Información del usuario
                                 </div>
@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-4" >
                                             <div class="form-group">
-                                                <asp:Image runat="server" ImageUrl="~/Imagenes/solicitante.png" Width="140" Height="110" />
+                                                <asp:Image runat="server" ImageUrl="~/Imagenes/solicitante2.png" Width="140" Height="110" />
                                             </div>
                                         </div>
                                         <div class="col-lg-8">

@@ -16,7 +16,7 @@
     <!--Fin de Alertify-->
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-
+    <script src="../js/validador.js"></script>
 </head>
 <body>
     <asp:Panel runat="server" CssClass="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -123,22 +123,22 @@
                                                     <asp:Panel runat="server" CssClass="col-lg-10">
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNomUsuario" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario"/>
+                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario"/>
                                                             <asp:HiddenField runat="server" ID="username" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre completo del usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNombre" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)"/>
-                                                            <asp:TextBox runat="server" ID="txtApellido" MaxLength="40" CssClass="form-control" placeholder="Apellidos" style="margin-top:2%"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)"/>
+                                                            <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Apellidos" style="margin-top:2%"></asp:TextBox>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
                                                             <asp:Panel runat="server" CssClass="row">
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPassword" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseña" />
+                                                                    <asp:TextBox runat="server" ID="txtPassword" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseña" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPasswordVer" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
+                                                                    <asp:TextBox runat="server" ID="txtPasswordVer" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>
@@ -153,7 +153,7 @@
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:Label runat="server" Text="Extensión Telefonica" Font-Bold="true" />
-                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" TextMode="Number" placeholder="000" CssClass="form-control" />
+                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" TextMode="Number" onkeydown="return isNumeric(event.keyCode);" placeholder="000" CssClass="form-control" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>

@@ -21,11 +21,9 @@ namespace HelpDeskWeb
             lbelNomUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
             lbelCargo.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
             lbelInstitucion.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
-            if (!IsPostBack)
-            {
-                this.pintarCalificaciones();
-                this.obtenerNumeroDeSucesos();
-            }
+            this.pintarCalificaciones();
+            this.obtenerNumeroDeSucesos();
+            
         }
 
         protected void pintarCalificaciones()
