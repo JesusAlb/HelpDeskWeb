@@ -28,6 +28,13 @@ function validateDecimal(txt)    {
     if (ex.test(txt.value) == false) {
         txt.value = txt.value.substring(0, txt.value.length - 1);
     }
+
+    function isDescription(KeyCode) {
+        if (keyCode == 16)
+            isShift = true;
+        var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) || (keyCode >= 65 && keyCode <= 90) || keyCode == 8 || (keyCode >= 96 && keyCode <= 105));
+        return res;
+    }
 }
 
 

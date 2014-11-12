@@ -203,31 +203,45 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (hdk_utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, txtAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text }))
             {
-                if (accion.Value.Equals("nuevo"))
+                if (hdk_utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraInicial, txtHoraFinal }))
                 {
-                    if (hdk_ControlEventos.insertarEvento(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                    if (hdk_utilerias.convertirFecha(txtHoraInicial.Text) < hdk_utilerias.convertirFecha(txtHoraFinal.Text))
                     {
-                        this.cargarTablasEventos();
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.success('Evento creado correctamente');", true);
+                        if (accion.Value.Equals("nuevo"))
+                        {
+                            if (hdk_ControlEventos.insertarEvento(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                            {
+                                this.cargarTablasEventos();
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.success('Evento creado correctamente');", true);
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
+                            }
+                        }
+                        else
+                        {
+                            if (hdk_ControlEventos.editarEvento(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                            {
+                                this.cargarTablasEventos();
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionCorrecta", "alertify.success('Evento editado exitosamente');", true);
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Error al editar el evento');", true);
+                            }
+                        }
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('Hora inicial mayor a la hora de finalización');", true);
                     }
                 }
                 else
                 {
-                    if (hdk_ControlEventos.editarEvento(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
-                    {
-                        this.cargarTablasEventos();
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionCorrecta", "alertify.success('Evento editado exitosamente');", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Error al editar el evento');", true);
-                    }
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('Fecha y/o tiempos inválidos');", true);
                 }
             }
             else
@@ -622,6 +636,7 @@ namespace HelpDeskWeb.Solicitudes
                 menuControl.Visible = false;
             }
         }
+
     }
     
 }

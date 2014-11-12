@@ -21,6 +21,7 @@
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.mask.min.js"></script>
+    <script src="../js/validador.js"></script>
     <script type="text/javascript" lang="js">
         $(function () {
             $("#<%=txtFiltro.ClientID%>").keyup(function () {               
@@ -97,17 +98,6 @@
         <asp:Panel runat="server" CssClass="box">
             <form runat="server">
                 <asp:ScriptManager runat="server" ID="scrip" EnablePartialRendering="true"></asp:ScriptManager>
-                <!--      <asp:UpdateProgress runat="server" ID="upProgress" DynamicLayout="true"> 
-                    <ProgressTemplate>
-                        <div class="UpdateProgress">
-                            <div class="modalProgress">
-                                <div class="theProgress">
-                                    <asp:Image ID="imgWaitIcon" runat="server" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/cargar2.gif" />
-                                </div>
-                            </div>
-                        </div>
-                    </ProgressTemplate>
-                </asp:UpdateProgress> -->
                 <asp:Panel runat="server" CssClass="row panel-titulo">
                     Centro de atención a eventos </asp:Panel>
                 <asp:Panel runat="server" CssClass="row">
@@ -117,14 +107,14 @@
                             <asp:Panel runat="server" CssClass="col-lg-11">
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="form-group">
-                                        <asp:TextBox runat="server" ID="txtFiltro"   placeholder="Buscar" CssClass="form-control prueba" />
+                                        <asp:TextBox runat="server" ID="txtFiltro" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30"  placeholder="Buscar" CssClass="form-control prueba" />
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="input-group">
                                         <span class="input-group-addon">Filtrar por fecha</span>
-                                        <asp:TextBox runat="server" TextMode="Date" ID="txtFechaInicial" CssClass="form-control"></asp:TextBox><span class="input-group-addon">a</span>
-                                        <asp:TextBox runat="server" TextMode="Date" ID="txtFechaFinal" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox runat="server" TextMode="Date" ID="txtFechaInicial" CssClass="form-control" MaxLength="10" ></asp:TextBox><span class="input-group-addon">a</span>
+                                        <asp:TextBox runat="server" TextMode="Date" ID="txtFechaFinal" CssClass="form-control" MaxLength="10"></asp:TextBox>
                                     </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
@@ -204,7 +194,7 @@
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Acomodo"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control"  ID="txtAcomodo" MaxLength="30"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control"  ID="txtAcomodo" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlpha(event.keyCode);" MaxLength="30"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo">
@@ -218,21 +208,21 @@
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Asistencia aproximada"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" TextMode="Number" MaxLength="5"  ID="txtAsistencia"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="5"  ID="txtAsistencia"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Fecha de realización"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" TextMode="Date" ID="txtFecha"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" MaxLength="10" TextMode="Date" ID="txtFecha"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" ID="txtHoraInicial"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" MaxLength="15" ID="txtHoraInicial"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" ID="txtHoraFinal"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" MaxLength="15" ID="txtHoraFinal"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>

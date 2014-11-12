@@ -16,6 +16,7 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validador.js"></script>
      <script type="text/javascript" lang="js">
          $(function () {
              $("#<%=txtFiltro.ClientID%>").keyup(function () {
@@ -190,7 +191,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                                <asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                                             </asp:Panel>
                                                         </div>
                                                         <div class="col-lg-1"></div>

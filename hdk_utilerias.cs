@@ -98,6 +98,31 @@ namespace HelpDeskWeb
                       }              
                   }
         }
+
+        public static bool validarFechas(TextBox[] textboxs)
+        {
+            foreach (TextBox txt in textboxs)
+            {
+                if (convertirFecha(txt.Text) == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static DateTime? convertirFecha(string fecha)
+        {
+            try
+            {
+                return Convert.ToDateTime(fecha);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 
 }
