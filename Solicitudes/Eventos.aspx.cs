@@ -19,15 +19,11 @@ namespace HelpDeskWeb.Solicitudes
     public partial class Eventos : System.Web.UI.Page
     {
         private tblevento registroEvento;
-        private int idUsuario;
-        private int tipoUsuario;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
             lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
-            idUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
-            tipoUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
             if (!IsPostBack)
             {
                 this.generarPrivilegios();
@@ -78,7 +74,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (tipoUsuario == 0)
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = hdk_ControlEventos.cargarTablasSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
@@ -134,7 +130,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnRecursos_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
@@ -159,7 +155,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if(tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 lbelTituloModal.Text = "Alta de eventos";
                 hdk_utilerias.limpiarControles(this.panelModalNuevo.Controls);
@@ -174,7 +170,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -243,7 +239,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 0)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -283,7 +279,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value) && Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
@@ -310,7 +306,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 0)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -620,7 +616,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

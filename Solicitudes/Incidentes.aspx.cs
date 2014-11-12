@@ -14,17 +14,11 @@ namespace HelpDeskWeb.Solicitudes
 {
     public partial class Incidentes : System.Web.UI.Page
     {
-        int tipoUsuario;
-        int idUsuario;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            idUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
-            tipoUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
-
+            hdk_utilerias.checarSession(this, true, 2, 2);
             if (!IsPostBack)
             {
-                hdk_utilerias.checarSession(this, true, 2, 2);
                 lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
                 this.generarPrivilegios();
                 this.cargarComboFiltro();
@@ -57,13 +51,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (tipoUsuario == 0)
+                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
                     (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -129,7 +123,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                int solicitante = idUsuario;
+                int solicitante = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
 
                 if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
@@ -151,7 +145,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 0)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
@@ -222,7 +216,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (tipoUsuario == 0)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
@@ -444,7 +438,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (tipoUsuario == 1)
+            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

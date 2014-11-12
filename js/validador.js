@@ -23,5 +23,12 @@ function isNumeric(keyCode) {
     return res;
 }
 
+function validateDecimal(txt)    {
+    var ex = /^[0-9]+\.?[0-9]*$/;
+    if (ex.test(txt.value) == false) {
+        txt.value = txt.value.substring(0, txt.value.length - 1);
+    }
+}
+
 
 

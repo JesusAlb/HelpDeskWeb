@@ -33,6 +33,7 @@
                         __doPostBack("txtFiltroReq", $("#<%=txtFiltroReq.ClientID%>").val());
             })
         });
+
     </script>
 </head>
 <body>
@@ -228,7 +229,7 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" ID="txtHoraInicial"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" ID="txtHoraInicial"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" ID="txtHoraFinal"></asp:TextBox>

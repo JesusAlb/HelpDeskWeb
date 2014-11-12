@@ -151,13 +151,13 @@
                                                                             <asp:Label runat="server" Text="Capacidad" Font-Bold="true"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                             <asp:Panel runat="server" CssClass="col-lg-4">
                                                                                 <asp:Label runat="server" Text="Procesador" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtProcesador"  CssClass="form-control" />
+                                                                                    <asp:TextBox runat="server" ID="txtProcesador"  CssClass="form-control" MaxLength="4" onkeyup="validateDecimal(this);" />
                                                                                     <span class="input-group-addon">GHZ</span> </asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-4">
                                                                                 <asp:Label runat="server" Text="Memoria RAM" MaxLength="4" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" />
+                                                                                    <asp:TextBox runat="server" ID="txtRAM" CssClass="form-control" MaxLength="4" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" />
                                                                                     <span class="input-group-addon">GB</span> </asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-4">
                                                                                 <asp:Label runat="server" Text="Almacenamiento" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
-                                                                                    <asp:TextBox runat="server" ID="txtDD" CssClass="form-control" T/>
+                                                                                    <asp:TextBox runat="server" ID="txtDD" CssClass="form-control" MaxLength="4" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);"/>
                                                                                     <span class="input-group-addon">
                                                                                         <asp:DropDownList runat="server" ID="cbDD" Style="background-color: #eee; border-color: transparent">
                                                                                             <asp:ListItem Text="MB" Value="MB"></asp:ListItem><asp:ListItem Text="GB" Selected="True" Value="GB"></asp:ListItem><asp:ListItem Text="TB" Value="TB"></asp:ListItem></asp:DropDownList></span></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
