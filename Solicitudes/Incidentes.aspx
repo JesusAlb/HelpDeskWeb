@@ -25,7 +25,27 @@
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
             })
          });
+         $(document).ready(function () {
 
+             $('textarea[maxlength]').keyup(function () {
+                 //get the limit from maxlength attribute  
+                 var limit = parseInt($(this).attr('maxlength'));
+                 //get the current text inside the textarea  
+                 var text = $(this).val();
+                 //count the number of characters in the text  
+                 var chars = text.length;
+
+                 //check if there are more characters then allowed  
+                 if (chars > limit) {
+                     //and if there are use substr to get the text before the limit  
+                     var new_text = text.substr(0, limit);
+
+                     //and change the current text with the new text  
+                     $(this).val(new_text);
+                 }
+             });
+
+         });
     </script>
 </head>
 <body>
@@ -160,7 +180,7 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control noCopiar"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" maxlenght="200" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
@@ -240,7 +260,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-10">
                                                     <asp:Panel runat="server" CssClass="form-group">
-                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones"  MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Text="Solución" Font-Bold="true" />
                                                         <asp:TextBox runat="server" ID="txtSolucion" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                             </div>
@@ -333,7 +353,7 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></div><div class="form-group">
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></div><div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora inicial del incidente" Font-Bold="true">
                                                                 </asp:Label><div class="row">
                                                                     <div class="col-lg-6">
@@ -368,9 +388,9 @@
                                                                 <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Solución" Font-Bold="true" />
-                                                                <asp:TextBox runat="server" ID="txtSolucion2" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                                <asp:TextBox runat="server" ID="txtSolucion2" maxlenght="200"  placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
@@ -442,7 +462,11 @@
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Width="800" ItemStyle-Wrap="true" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Prioridad" ItemStyle-CssClass="text-center">
                                                             <ItemTemplate>
@@ -486,7 +510,11 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-Width="400" />
+                                               <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Prioridad" ItemStyle-CssClass="text-center" ItemStyle-Wrap="false">
                                                             <ItemTemplate>
@@ -499,8 +527,16 @@
                                                         <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Fecha cierre" DataField="fecha_Cierre" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Hora final" DataField="horaFn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Acciones" DataField="acciones" ItemStyle-Wrap="true" ItemStyle-Width="400" />
-                                                        <asp:BoundField HeaderText="Solución" DataField="solucion" ItemStyle-Wrap="true" ItemStyle-Width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("acciones")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("solucion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -527,7 +563,11 @@
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="numIncidente" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" HeaderStyle-Width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="500">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
                                                         <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
                                                         <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />

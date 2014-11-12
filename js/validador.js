@@ -2,7 +2,7 @@
 var isShift = false;
 
 function keyUP(keyCode) {
-    if (keyCode == 16)
+    if (keyCode == 16 )
         isShift = false;
 }
 
@@ -34,7 +34,7 @@ function validateDecimal(txt) {
  function isDescription(keyCode) {
         if (keyCode == 16)
             isShift = true;
-        var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) ||
+        var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) || (keyCode >=37 && keyCode <= 40) ||
             (keyCode >= 65 && keyCode <= 90) || (keyCode == 8 || keyCode == 32) ||
             (keyCode == 110 || keyCode == 190) || (keyCode == 13 || keyCode == 109) ||
             (keyCode >= 96 && keyCode <= 105) || keyCode == 192);

@@ -227,7 +227,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
-                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" MaxLength="200" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  MaxLength="200" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                     </asp:Panel>
@@ -580,7 +580,11 @@
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
                                                         <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250"/>
                                                         <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false"/>
@@ -616,7 +620,11 @@
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
                                                         <asp:BoundField HeaderText="Soporte" DataField="responsable" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Apoyo" DataField="apoyo" ItemStyle-Wrap="false" />
@@ -660,7 +668,11 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300"/>
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-Width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
                                                         <asp:BoundField HeaderText="Soporte" DataField="responsable" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Apoyo" DataField="apoyo" ItemStyle-Wrap="false" />
@@ -697,7 +709,11 @@
                                                      <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="idEvento" ItemStyle-Wrap="false"  />
                                                         <asp:BoundField HeaderText="Título" DataField="titulo" ItemStyle-Wrap="true" ItemStyle-Width="300" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Wrap="true" ItemStyle-width="400" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false"/>
                                                         <asp:BoundField HeaderText="Lugar" DataField="lugar" ItemStyle-Wrap="true" ItemStyle-Width="250" />
                                                         <asp:BoundField HeaderText="Acomodo" DataField="acomodo" ItemStyle-Wrap="false" />
