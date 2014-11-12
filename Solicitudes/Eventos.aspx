@@ -10,18 +10,17 @@
     <title>Atención a eventos</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-    <link href="../js/validador.js" rel="stylesheet" />
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
-    <script src="../js/alertify.js"></script>
+    <script src="../js/alertify.js" type="text/javascript"></script>
     <!--Fin de Alertify-->
     <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/jquery-2.1.1.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.mask.min.js"></script>
-    <script src="../js/validador.js"></script>
+    <script src="../js/bootstrap.js" type="text/javascript"></script>
+    <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mask.min.js" type="text/javascript"></script>
+    <script src="../js/validador.js" type="text/javascript"></script>
     <script type="text/javascript" lang="js">
         $(function () {
             $("#<%=txtFiltro.ClientID%>").keyup(function () {               

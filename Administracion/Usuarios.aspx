@@ -14,15 +14,15 @@
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
-    <script src="../js/jquery-2.1.1.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/validador.js"></script>
+    <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/validador.js" type="text/javascript"></script>
         <script type="text/javascript" lang="js">
             $(function () {
                 $("#<%=txtFiltro.ClientID%>").keyup(function () {
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
-            })
-        });
+                })
+            });
     </script>
 </head>
 <body>
@@ -83,7 +83,6 @@
         </div>
     </asp:Panel>
     <asp:Panel runat="server" CssClass="container">
-        <asp:Panel runat="server" CssClass="box">
             <form runat="server" role="form">
                 <asp:ScriptManager runat="server" ID="ScriptManager" EnablePartialRendering="true">
                 </asp:ScriptManager>
@@ -124,7 +123,7 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                                                 <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de usuarios" />
                                             </asp:Panel>
-                                            <asp:Panel runat="server" ID="panelFormulario" CssClass="modal-body">
+                                            <asp:Panel runat="server" ID="panelFormulario" CssClass="modal-body" DefaultButton="btnGrabar">
                                                 <asp:Panel runat="server" CssClass="row">
                                                     <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                     <asp:Panel runat="server" CssClass="col-lg-10">
@@ -258,7 +257,6 @@
                     </asp:Panel>
                 </asp:Panel>
             </form>
-        </asp:Panel>
     </asp:Panel>
 
 </body>

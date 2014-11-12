@@ -11,18 +11,21 @@
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
-    <script src="../js/alertify.js"></script>
+    <script src="../js/alertify.js" type="text/javascript"></script>
     <!--Fin de Alertify-->
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/jquery-2.1.1.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/validador.js"></script>
+    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
+    <script src="../js/bootstrap.js" type="text/javascript"></script>
+    <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.mask.min.js" type="text/javascript"></script>
+    <script src="../js/validador.js" type="text/javascript"></script>
      <script type="text/javascript" lang="js">
          $(function () {
              $("#<%=txtFiltro.ClientID%>").keyup(function () {
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
             })
-        });
+         });
+
     </script>
 </head>
 <body>
@@ -72,27 +75,15 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
-                            <li class="divider"></li>
+                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
-                                <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li>
-                </ul>
-            </div>
-        </div>
-    </asp:Panel>
-    <asp:Panel runat="server" CssClass="container">
+                                <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li></ul></li><li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li></ul></div></div></asp:Panel><asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">
             <form runat="server" role="form">
                 <asp:ScriptManager runat="server" ID="script" EnablePartialRendering="true"></asp:ScriptManager>
                 <asp:Panel runat="server" CssClass="row panel-titulo">
-                    Centro de atención a incidencias
-               
-                </asp:Panel>
-                <asp:Panel runat="server" CssClass="row">
+                    Centro de atención a incidencias </asp:Panel><asp:Panel runat="server" CssClass="row">
                     <asp:Panel runat="server" CssClass="row">
                         <asp:Panel runat="server" CssClass="col-lg-8">
                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
@@ -106,8 +97,7 @@
                                     <asp:Panel runat="server" CssClass="col-lg-5">
                                         <div class="form-group">
                                         <asp:Panel runat="server" CssClass="input-group">
-                                            <span class="input-group-addon">Tipo</span>
-                                            <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoFiltro" DataTextField="nomTipoIncidente" DataValueField="idTipoIncidente" OnSelectedIndexChanged="cbTipoFiltro_SelectedIndexChanged" AutoPostBack="true">
+                                            <span class="input-group-addon">Tipo</span> <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoFiltro" DataTextField="nomTipoIncidente" DataValueField="idTipoIncidente" OnSelectedIndexChanged="cbTipoFiltro_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </asp:Panel>
                                         </div>
@@ -117,17 +107,7 @@
                                     <asp:Panel runat="server" CssClass="col-lg-12">
                                         <div class="form-group">
                                             <asp:Panel runat="server" CssClass="input-group">
-                                                <span class="input-group-addon">Filtrar por fecha</span>
-                                                <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaInicial" CssClass="form-control"></asp:TextBox>
-                                                <span class="input-group-addon">a</span>
-                                                <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaFinal" CssClass="form-control"></asp:TextBox>
-                                            </asp:Panel>
-                                        </div>
-                                    </asp:Panel>
-                                </asp:Panel>
-                            </asp:Panel>
-                        </asp:Panel>
-                        <asp:Panel runat="server" CssClass="col-lg-3">
+                                                <span class="input-group-addon">Filtrar por fecha</span> <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaInicial" CssClass="form-control"></asp:TextBox><span class="input-group-addon">a</span> <asp:TextBox runat="server" TextMode="Date" ID="filtroFechaFinal" CssClass="form-control"></asp:TextBox></asp:Panel></div></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-3">
                             <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:Panel runat="server" CssClass="form-group">
@@ -136,27 +116,19 @@
                                                 <asp:LinkButton ID="btnNuevo" Style="margin-bottom: -8%" runat="server" OnClick="btnNuevo_Click" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-plus-sign"></span>
                              Nuevo
-                                                </asp:LinkButton>
-                                                <asp:LinkButton ID="btnCancelar" Style="margin-bottom: -8%" runat="server" OnClick="btnCancelar_Click" CssClass="btn btn-primary">
+                                                </asp:LinkButton><asp:LinkButton ID="btnCancelar" Style="margin-bottom: -8%" runat="server" OnClick="btnCancelar_Click" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-remove"></span>
                              Cancelar
-                                                </asp:LinkButton>
-                                            </asp:Panel>
-                                        </asp:Panel>
-                                    </asp:Panel>
-                                    <asp:Panel runat="server" CssClass="form-group">
+                                                </asp:LinkButton></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                         <asp:Panel runat="server" CssClass="row" Style="margin-top: 2%">
                                             <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
                                                 <asp:LinkButton ID="btnCerrar" Style="margin-bottom: -8%" runat="server" OnClick="btnCerrar_Click" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-lock"></span>
                              Cerrar
-                                                </asp:LinkButton>
-                                                <asp:LinkButton ID="btnAsignar" Style="margin-bottom: -8%" runat="server" OnClick="btnAsignar_Click" CssClass="btn btn-primary">
+                                                </asp:LinkButton><asp:LinkButton ID="btnAsignar" Style="margin-bottom: -8%" runat="server" OnClick="btnAsignar_Click" CssClass="btn btn-primary">
                             <span class="glyphicon glyphicon-user"></span>
                              soporte
-                                                </asp:LinkButton>
-                                            </asp:Panel>
-                                            <asp:HiddenField runat="server" ID="idIncidenteSeleccionado" />
+                                                </asp:LinkButton></asp:Panel><asp:HiddenField runat="server" ID="idIncidenteSeleccionado" />
                                             <asp:HiddenField runat="server" ID="tabItemSeleccionado" Value="0" />
                                         </asp:Panel>
                                     </asp:Panel>
@@ -176,8 +148,7 @@
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                            <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de incidente" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de incidente" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:UpdatePanel runat="server" ID="upModalNuevo" UpdateMode="Conditional">
@@ -186,15 +157,10 @@
                                                         <div class="col-lg-1"></div>
                                                         <div class="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group" ID="panelSolcitante" Visible="false">
-                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                            </asp:Panel>
-                                                        </div>
-                                                        <div class="col-lg-1"></div>
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" MaxLength="200" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control noCopiar"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
@@ -217,8 +183,7 @@
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                            <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label1" Text="Asignar soporte a incidente" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label1" Text="Asignar soporte a incidente" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:UpdatePanel runat="server" ID="UpdateModalAsignar" UpdateMode="Conditional">
@@ -238,21 +203,11 @@
                                                                         <div class="form-group">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
                                                                         <asp:DropDownList runat="server" ID="cbPrioridad" CssClass="form-control">
-                                                                            <asp:ListItem Text="Alta"></asp:ListItem>
-                                                                            <asp:ListItem Text="Media"></asp:ListItem>
-                                                                            <asp:ListItem Text="Normal"></asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        </div>
-                                                                    </asp:Panel>
-                                                                </asp:Panel>
+                                                                            <asp:ListItem Text="Alta"></asp:ListItem><asp:ListItem Text="Media"></asp:ListItem><asp:ListItem Text="Normal"></asp:ListItem></asp:DropDownList></div></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSoporte" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Font-Bold="true" Text="Seguimiento"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSeguimiento" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Font-Bold="true" Text="Seguimiento"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                         </asp:Panel>
@@ -278,23 +233,16 @@
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                            <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label2" Text="Alta de incidente" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label2" Text="Alta de incidente" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <div class="row">
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-10">
                                                     <asp:Panel runat="server" CssClass="form-group">
-                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label>
-                                                        <asp:TextBox runat="server" ID="txtAcciones" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="form-group">
+                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Text="Solución" Font-Bold="true" />
-                                                        <asp:TextBox runat="server" ID="txtSolucion" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                    </asp:Panel>
-                                                </div>
-                                                <div class="col-lg-1"></div>
+                                                        <asp:TextBox runat="server" ID="txtSolucion" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                             </div>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
@@ -323,13 +271,8 @@
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="input-group">
-                                                                    <span class="input-group-addon">Solicitante</span>
-                                                                    <asp:TextBox runat="server" ID="txtSolicitante" Enabled="false" CssClass="form-control"></asp:TextBox>
-                                                                </asp:Panel>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Califique el servicio otorgado a traves de las siguientes preguntas"></asp:Label>
-                                                                <asp:HiddenField runat="server" ID="idCalidad" />
+                                                                    <span class="input-group-addon">Solicitante</span> <asp:TextBox runat="server" ID="txtSolicitante" Enabled="false" CssClass="form-control"></asp:TextBox></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Text="Califique el servicio otorgado a traves de las siguientes preguntas"></asp:Label><asp:HiddenField runat="server" ID="idCalidad" />
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" ScrollBars="Auto" Height="220">
@@ -342,20 +285,7 @@
                                                                                     <asp:TemplateField HeaderText="Respuestas">
                                                                                         <ItemTemplate>
                                                                                             <asp:DropDownList runat="server" ID="cbRespuesta" OnSelectedIndexChanged="cbRespuesta_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true">
-                                                                                                <asp:ListItem Text="1"></asp:ListItem>
-                                                                                                <asp:ListItem Text="2"></asp:ListItem>
-                                                                                                <asp:ListItem Text="3"></asp:ListItem>
-                                                                                                <asp:ListItem Text="4"></asp:ListItem>
-                                                                                                <asp:ListItem Text="5"></asp:ListItem>
-                                                                                                <asp:ListItem Text="6"></asp:ListItem>
-                                                                                                <asp:ListItem Text="7"></asp:ListItem>
-                                                                                                <asp:ListItem Text="8"></asp:ListItem>
-                                                                                                <asp:ListItem Text="9"></asp:ListItem>
-                                                                                                <asp:ListItem Text="10"></asp:ListItem>
-                                                                                            </asp:DropDownList>
-                                                                                        </ItemTemplate>
-                                                                                    </asp:TemplateField>
-                                                                                    <asp:BoundField HeaderText="Respuestas" DataField="valorRespuesta" />
+                                                                                                <asp:ListItem Text="1"></asp:ListItem><asp:ListItem Text="2"></asp:ListItem><asp:ListItem Text="3"></asp:ListItem><asp:ListItem Text="4"></asp:ListItem><asp:ListItem Text="5"></asp:ListItem><asp:ListItem Text="6"></asp:ListItem><asp:ListItem Text="7"></asp:ListItem><asp:ListItem Text="8"></asp:ListItem><asp:ListItem Text="9"></asp:ListItem><asp:ListItem Text="10"></asp:ListItem></asp:DropDownList></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="Respuestas" DataField="valorRespuesta" />
                                                                                 </Columns>
                                                                             </asp:GridView>
                                                                         </ContentTemplate>
@@ -364,28 +294,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <table class="table table-bordered">
-                                                                    <td style="width: 35%; height: 163px">
-                                                                        <asp:UpdatePanel runat="server" ID="upResultado" UpdateMode="Conditional">
-                                                                            <ContentTemplate>
-                                                                                <asp:Image runat="server" ID="imgSatisfaccion" ImageUrl="~/Imagenes/iconos/nivel0.png" />
-                                                                                <div class="input-group">
-                                                                                    <span class="input-group-addon">Promedio</span>
-                                                                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtPromedio" Text="1" MaxLength="3" Enabled="false"></asp:TextBox>
-                                                                                </div>
-                                                                            </ContentTemplate>
-                                                                            <Triggers>
-                                                                                <asp:AsyncPostBackTrigger ControlID="gvEncuestas" />
-                                                                            </Triggers>
-                                                                        </asp:UpdatePanel>
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label>
-                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" MaxLength="200" CssClass="form-control" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
-                                                                    </td>
-                                                                </table>
-                                                            </asp:Panel>
-                                                        </asp:Panel>
-                                                        <asp:Panel runat="server" CssClass="col-lg-1">
+                                                                    <tr><td style="width: 35%; height: 163px"><asp:UpdatePanel ID="upResultado" runat="server" UpdateMode="Conditional"><ContentTemplate><asp:Image ID="imgSatisfaccion" runat="server" ImageUrl="~/Imagenes/iconos/nivel0.png" /><div class="input-group"><span class="input-group-addon">Promedio</span> <asp:TextBox ID="txtPromedio" runat="server" CssClass="form-control" Enabled="false" MaxLength="3" Text="1"></asp:TextBox></div></ContentTemplate><Triggers><asp:AsyncPostBackTrigger ControlID="gvEncuestas" /></Triggers></asp:UpdatePanel></td><td><asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label><asp:TextBox ID="txtObEncuestas" runat="server" CssClass="form-control" MaxLength="200" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" Style="height: 95%; resize: none" TextMode="MultiLine"></asp:TextBox></td></tr></table></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-1">
                                                         </asp:Panel>
                                                     </asp:Panel>
                                                 </ContentTemplate>
@@ -412,8 +321,7 @@
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                                            <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label4" Text="Registrar incidente completo" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label4" Text="Registrar incidente completo" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:UpdatePanel runat="server" ID="upIncidenteCompleto" UpdateMode="Conditional">
@@ -422,62 +330,30 @@
                                                         <div class="col-lg-1"></div>
                                                         <div class="col-lg-10">
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" ID="txtDescripcion2" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                            </div>
-                                                            <div class="form-group">
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></div><div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora inicial del incidente" Font-Bold="true">
-                                                                </asp:Label>
-                                                                <div class="row">
+                                                                </asp:Label><div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Fecha</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicio" TextMode="Date"></asp:TextBox>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
+                                                                            <span class="input-group-addon">Fecha</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicio" TextMode="Date"></asp:TextBox></div></div><div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Hora</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraInicio" TextMode="Time"></asp:TextBox>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
+                                                                            <span class="input-group-addon">Hora</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraInicio" TextMode="Time"></asp:TextBox></div></div></div></div><div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora final del incidente" Font-Bold="true">
-                                                                </asp:Label>
-                                                                <div class="row">
+                                                                </asp:Label><div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Fecha</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
+                                                                            <span class="input-group-addon">Fecha</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox></div></div><div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Hora</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraFinal" TextMode="Time"></asp:TextBox>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form*group">
+                                                                            <span class="input-group-addon">Hora</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraFinal" TextMode="Time"></asp:TextBox></div></div></div></div><div class="form*group">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
                                                                             <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
                                                                             <asp:DropDownList runat="server" ID="cbPrioridad2" CssClass="form-control">
-                                                                                <asp:ListItem Text="Alta"></asp:ListItem>
-                                                                                <asp:ListItem Text="Media"></asp:ListItem>
-                                                                                <asp:ListItem Text="Normal"></asp:ListItem>
-                                                                            </asp:DropDownList>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
+                                                                                <asp:ListItem Text="Alta"></asp:ListItem><asp:ListItem Text="Media"></asp:ListItem><asp:ListItem Text="Normal"></asp:ListItem></asp:DropDownList></div></div><div class="col-lg-6">
                                                                         <div class="form-group">
                                                                             <asp:Label runat="server" Font-Bold="true" Text="Tipo" />
                                                                             <asp:DropDownList runat="server" ID="cbTipoIncidente2" DataValueField="idTipoIncidente" DataTextField="nomTipoIncidente" CssClass="form-control" />
@@ -486,23 +362,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Soporte" Font-Bold="true"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Soporte" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label>
-                                                                <asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" ID="txtAcciones2" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                            </asp:Panel>
-                                                            <asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Solución" Font-Bold="true" />
-                                                                <asp:TextBox runat="server" ID="txtSolucion2" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                                            </asp:Panel>
-                                                        </div>
-                                                        <div class="col-lg-1"></div>
+                                                                <asp:TextBox runat="server" ID="txtSolucion2" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
@@ -526,15 +394,10 @@
                     <asp:Panel runat="server" CssClass="row">
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li class="active">
-                                    <asp:LinkButton runat="server" ID="tabAbierta" OnClientClick="activaTab('0')" href="#abierta" role="tab">Abierta</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton runat="server" ID="tabEnProceso" OnClientClick="activaTab('1')" href="#enProceso" role="tab">En proceso</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton runat="server" ID="tabCerrada" OnClientClick="activaTab('2')" href="#cerrada" role="tab">Cerrada</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton runat="server" ID="tabCancelada" OnClientClick="activaTab('3')" href="#cancelada" role="tab">Cancelada</asp:LinkButton></li>
-                            </ul>
-                            <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
+                                    <asp:LinkButton runat="server" ID="tabAbierta" OnClientClick="activaTab('0')" href="#abierta" role="tab">Abierta</asp:LinkButton></li><li>
+                                    <asp:LinkButton runat="server" ID="tabEnProceso" OnClientClick="activaTab('1')" href="#enProceso" role="tab">En proceso</asp:LinkButton></li><li>
+                                    <asp:LinkButton runat="server" ID="tabCerrada" OnClientClick="activaTab('2')" href="#cerrada" role="tab">Cerrada</asp:LinkButton></li><li>
+                                    <asp:LinkButton runat="server" ID="tabCancelada" OnClientClick="activaTab('3')" href="#cancelada" role="tab">Cancelada</asp:LinkButton></li></ul><asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
                                 <asp:Panel runat="server" ID="abierta" CssClass="tab-pane fade in active">
                                     <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="update1" UpdateMode="Conditional">
@@ -543,11 +406,15 @@
                                                     AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="numIncidente" CellPadding="4" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged" GridLines="Horizontal">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" HeaderStyle-Width="350" />
-                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="500">
+                                                            <ItemTemplate>
+                                                                <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -575,7 +442,7 @@
                                                     <Columns>
                                                         <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Width="400" ItemStyle-Wrap="true" />
+                                                        <asp:BoundField HeaderText="Descripción" DataField="descripcion" ItemStyle-Width="800" ItemStyle-Wrap="true" />
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Prioridad" ItemStyle-CssClass="text-center">
                                                             <ItemTemplate>
