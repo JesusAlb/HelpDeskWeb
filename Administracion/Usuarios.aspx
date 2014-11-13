@@ -129,7 +129,7 @@
                                                     <asp:Panel runat="server" CssClass="col-lg-10">
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control" placeholder="Nombre de usuario" />
+                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control"  />
                                                             <asp:HiddenField runat="server" ID="username" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
@@ -137,13 +137,13 @@
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Nombre</span>
-                                                                    <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Nombre(s)" />
+                                                                    <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Apellido</span>
-                                                                    <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" placeholder="Apellidos"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" ></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </asp:Panel>
@@ -151,7 +151,7 @@
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
                                                             <asp:Panel runat="server" CssClass="row">
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPassword" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Contraseña" />
+                                                                    <asp:TextBox runat="server" ID="txtPassword" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control"  />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:TextBox runat="server" ID="txtPasswordVer" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
@@ -169,7 +169,7 @@
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:Label runat="server" Text="Extensión Telefonica" Font-Bold="true" />
-                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" onkeydown="return isNumeric(event.keyCode);" placeholder="000" CssClass="form-control" />
+                                                                    <asp:TextBox runat="server" ID="txtExtension" MaxLength="3" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" placeholder="000" CssClass="form-control" />
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>
@@ -180,8 +180,8 @@
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Correo electronico" Font-Bold="true" />
                                                             <div class="input-group">
-                                                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right" MaxLength="30"/>
-                                                            <span class="input-group-addon"><asp:Label runat="server" ID="lbelCorreo" Text="@cie.org.mx"></asp:Label></span>
+                                                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);"  MaxLength="30"/>
+                                                            <span class="input-group-addon"><asp:Label runat="server" ID="lbelCorreo"  Text="@cie.org.mx"></asp:Label></span>
                                                              </div>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">

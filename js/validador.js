@@ -7,13 +7,19 @@ function keyUP(keyCode) {
 }
 
 function isAlpha(keyCode) {
-    return (((keyCode >= 65 && keyCode <= 90) || (keyCode >=8 && keyCode <=46))|| keyCode == 192)
+    if (keyCode == 16)
+        isShift = true;
+    var res = (((keyCode >= 65 && keyCode <= 90) || (keyCode >= 8 && keyCode <= 46)) || keyCode == 192)
+    return res;
 }
 
 function isAlphaNumeric(keyCode) {
     if (keyCode == 16)
         isShift = true;
-    var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) || ((keyCode >= 65 && keyCode <= 90) || (keyCode == 8 || keyCode == 9) || keyCode == 13 || (keyCode >= 96 && keyCode <= 105)));
+    var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) ||
+        ((keyCode >= 65 && keyCode <= 90) || (keyCode == 8 || keyCode == 9) ||
+        (keyCode == 13 || keyCode == 192) || (keyCode >= 96 && keyCode <= 105))
+        || (keyCode >= 37 && keyCode <= 40));
     return res;
 }
 
@@ -41,7 +47,17 @@ function validateDecimal(txt) {
         return res;
  }
 
+ $(function () {
+     $(".form-control").on("paste", function () {
+         return false;
+     });
+ });
 
+ $(function () {
+     $("textarea").on("keypress", function () {
+         if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }
+     });
+ });
 
 
 

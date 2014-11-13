@@ -5,7 +5,7 @@
       <PropertyRef Name="idArea" />
     </Key>
     <Property Name="idArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomArea" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nomArea" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="tblcalidadservicio">
     <Key>
@@ -24,14 +24,14 @@
       <PropertyRef Name="idCoordinacion" />
     </Key>
     <Property Name="idCoordinacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="varchar" MaxLength="45" />
+    <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="tbldepartamentos">
     <Key>
       <PropertyRef Name="idDepto" />
     </Key>
     <Property Name="idDepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomDepto" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomDepto" Type="varchar" MaxLength="60" />
     <Property Name="coordinacion" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblevento">
@@ -39,7 +39,7 @@
       <PropertyRef Name="idEvento" />
     </Key>
     <Property Name="idEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="300" />
     <Property Name="solicitante" Type="int" Nullable="false" />
     <Property Name="responsable" Type="int" Nullable="false" />
     <Property Name="apoyo" Type="int" Nullable="false" />
@@ -53,8 +53,8 @@
     <Property Name="fecha_cierre" Type="datetime" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="FechaInicio" Type="datetime" />
-    <Property Name="observaciones" Type="varchar" MaxLength="250" />
-    <Property Name="titulo" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="observaciones" Type="varchar" MaxLength="350" />
+    <Property Name="titulo" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="tblincidente">
     <Key>
@@ -62,7 +62,7 @@
     </Key>
     <Property Name="numIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipo" Type="int" Nullable="false" />
-    <Property Name="descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="descripcion" Type="varchar" MaxLength="300" />
     <Property Name="solicitante" Type="int" Nullable="false" />
     <Property Name="prioridad" Type="varchar" MaxLength="6" />
     <Property Name="fecha_Sol" Type="datetime" />
@@ -71,8 +71,8 @@
     <Property Name="horaFn" Type="datetime" />
     <Property Name="fecha_Cierre" Type="datetime" />
     <Property Name="soporte" Type="int" Nullable="false" />
-    <Property Name="acciones" Type="varchar" MaxLength="200" />
-    <Property Name="solucion" Type="varchar" MaxLength="200" />
+    <Property Name="acciones" Type="varchar" MaxLength="300" />
+    <Property Name="solucion" Type="varchar" MaxLength="300" />
     <Property Name="seguimiento" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblinstitucion">
@@ -80,7 +80,7 @@
       <PropertyRef Name="idInstitucion" />
     </Key>
     <Property Name="idInstitucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomInstitucion" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomInstitucion" Type="varchar" MaxLength="60" />
     <Property Name="correoInstitucion" Type="varchar" MaxLength="20" />
     <Property Name="status" Type="bit" Nullable="false" />
   </EntityType>
@@ -89,14 +89,14 @@
       <PropertyRef Name="idLugar" />
     </Key>
     <Property Name="idLugar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomLugar" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomLugar" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="tblmarca">
     <Key>
       <PropertyRef Name="idMarca" />
     </Key>
     <Property Name="idMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomMarca" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarca" Type="varchar" MaxLength="40" />
   </EntityType>
   <EntityType Name="tblpregunta">
     <Key>
@@ -112,7 +112,7 @@
       <PropertyRef Name="idPuesto" />
     </Key>
     <Property Name="idPuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomPuesto" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomPuesto" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="tblrequerimientoaevento">
     <Key>
@@ -166,7 +166,7 @@
       <PropertyRef Name="idTipoEquipo" />
     </Key>
     <Property Name="idTipoEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" />
     <Property Name="siMonitor" Type="bit" Nullable="false" />
     <Property Name="siEquipo" Type="bit" Nullable="false" />
     <Property Name="siDiscoDuro" Type="bit" Nullable="false" />
@@ -181,7 +181,7 @@
       <PropertyRef Name="idTipoIncidente" />
     </Key>
     <Property Name="idTipoIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomTipoIncidente" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomTipoIncidente" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="tblusuarios">
     <Key>
@@ -189,7 +189,7 @@
     </Key>
     <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="40" />
     <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="tipoUsuario" Type="int" Nullable="false" />
     <Property Name="depto" Type="int" Nullable="false" />
@@ -205,12 +205,12 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewDepartamentos' no tiene d
   <EntityType Name="ViewDepartamentos">
     <Key>
       <PropertyRef Name="idDepto" />
-      <PropertyRef Name="nomDepto" />
       <PropertyRef Name="coordinacion" />
+      <PropertyRef Name="nomDepto" />
     </Key>
     <Property Name="idDepto" Type="int" Nullable="false" />
-    <Property Name="nomDepto" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="varchar" MaxLength="45" />
+    <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
     <Property Name="coordinacion" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
@@ -218,12 +218,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewEventoConRequerimientos' 
   <EntityType Name="ViewEventoConRequerimientos">
     <Key>
       <PropertyRef Name="evento" />
-      <PropertyRef Name="titulo" />
-      <PropertyRef Name="nomLugar" />
+      <PropertyRef Name="solicitante" />
       <PropertyRef Name="nomRequerimiento" />
       <PropertyRef Name="idRequerimientos" />
+      <PropertyRef Name="titulo" />
+      <PropertyRef Name="nomLugar" />
     </Key>
     <Property Name="evento" Type="int" Nullable="false" />
+    <Property Name="solicitante" Type="int" Nullable="false" />
     <Property Name="cantidad" Type="int" />
     <Property Name="asistencia_aprox" Type="int" />
     <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
@@ -231,10 +233,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewEventoConRequerimientos' 
     <Property Name="horaIn" Type="datetime" />
     <Property Name="horaFn" Type="datetime" />
     <Property Name="FechaInicio" Type="datetime" />
-    <Property Name="observaciones" Type="varchar" MaxLength="250" />
-    <Property Name="titulo" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="nomLugar" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="varchar" MaxLength="45" />
+    <Property Name="observaciones" Type="varchar" MaxLength="350" />
+    <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomLugar" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
     <Property Name="nomRequerimiento" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="idRequerimientos" Type="int" Nullable="false" />
   </EntityType>
@@ -246,34 +248,34 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewTipoIncidencia' no tiene 
       <PropertyRef Name="nomTipoIncidente" />
     </Key>
     <Property Name="idTipoIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nomTipoIncidente" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomTipoIncidente" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewUsuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ViewUsuarios">
     <Key>
       <PropertyRef Name="idUsuario" />
-      <PropertyRef Name="username" />
       <PropertyRef Name="nomCompleto" />
       <PropertyRef Name="password" />
       <PropertyRef Name="tipoUsuarioString" />
-      <PropertyRef Name="nomDepto" />
-      <PropertyRef Name="nomArea" />
-      <PropertyRef Name="nomPuesto" />
       <PropertyRef Name="tipoUsuario" />
       <PropertyRef Name="correo" />
       <PropertyRef Name="nomInstitucion" />
+      <PropertyRef Name="username" />
+      <PropertyRef Name="nomDepto" />
+      <PropertyRef Name="nomArea" />
+      <PropertyRef Name="nomPuesto" />
     </Key>
     <Property Name="idUsuario" Type="int" Nullable="false" />
-    <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="tipoUsuarioString" Type="varchar" MaxLength="11" Nullable="false" />
     <Property Name="exTel" Type="varchar" MaxLength="5" />
-    <Property Name="nomDepto" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="varchar" MaxLength="45" />
-    <Property Name="nomArea" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="nomPuesto" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
+    <Property Name="nomArea" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomPuesto" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="tipoUsuario" Type="int" Nullable="false" />
     <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nomInstitucion" Type="varchar" MaxLength="40" Nullable="false" />
@@ -308,43 +310,43 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipoReporte' no tiene 
   <EntityType Name="VistaEquipoReporte">
     <Key>
       <PropertyRef Name="idResponEq" />
-      <PropertyRef Name="nomTipoEquipo" />
-      <PropertyRef Name="nomMarcaEquipo" />
       <PropertyRef Name="serieEquipo" />
-      <PropertyRef Name="nomMarcaMonitor" />
       <PropertyRef Name="serieMonitor" />
       <PropertyRef Name="ip" />
       <PropertyRef Name="mac" />
-      <PropertyRef Name="nomMarcaMouse" />
       <PropertyRef Name="serieMouse" />
-      <PropertyRef Name="nomMarcaTeclado" />
       <PropertyRef Name="serieTeclado" />
       <PropertyRef Name="procesador" />
       <PropertyRef Name="nomCompleto" />
+      <PropertyRef Name="nomTipoEquipo" />
+      <PropertyRef Name="nomMarcaEquipo" />
+      <PropertyRef Name="nomMarcaMonitor" />
+      <PropertyRef Name="nomMarcaMouse" />
+      <PropertyRef Name="nomMarcaTeclado" />
       <PropertyRef Name="nomDepto" />
       <PropertyRef Name="nomArea" />
       <PropertyRef Name="nomPuesto" />
     </Key>
     <Property Name="idResponEq" Type="int" Nullable="false" />
-    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
     <Property Name="discoDuro" Type="varchar" MaxLength="8" />
-    <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-    <Property Name="nomMarcaMouse" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieMouse" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieTeclado" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="nomCompleto" Type="varchar" MaxLength="70" Nullable="false" />
-    <Property Name="nomDepto" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="varchar" MaxLength="45" />
-    <Property Name="nomArea" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="nomPuesto" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
+    <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
+    <Property Name="nomArea" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="nomPuesto" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -352,33 +354,33 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene defini
     <Key>
       <PropertyRef Name="idResponEq" />
       <PropertyRef Name="nomCompleto" />
-      <PropertyRef Name="nomTipoEquipo" />
-      <PropertyRef Name="nomMarcaEquipo" />
       <PropertyRef Name="serieEquipo" />
-      <PropertyRef Name="nomMarcaMonitor" />
       <PropertyRef Name="serieMonitor" />
       <PropertyRef Name="ip" />
       <PropertyRef Name="mac" />
-      <PropertyRef Name="nomMarcaMouse" />
       <PropertyRef Name="serieMouse" />
-      <PropertyRef Name="nomMarcaTeclado" />
       <PropertyRef Name="serieTeclado" />
       <PropertyRef Name="procesador" />
+      <PropertyRef Name="nomTipoEquipo" />
+      <PropertyRef Name="nomMarcaEquipo" />
+      <PropertyRef Name="nomMarcaMonitor" />
+      <PropertyRef Name="nomMarcaMouse" />
+      <PropertyRef Name="nomMarcaTeclado" />
     </Key>
     <Property Name="idResponEq" Type="int" Nullable="false" />
     <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
-    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
     <Property Name="discoDuro" Type="varchar" MaxLength="8" />
-    <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-    <Property Name="nomMarcaMouse" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieMouse" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="serieTeclado" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
@@ -389,23 +391,23 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosCerrados' no tien
       <PropertyRef Name="idEvento" />
       <PropertyRef Name="descripcion" />
       <PropertyRef Name="solicitante" />
-      <PropertyRef Name="responsable" />
-      <PropertyRef Name="apoyo" />
       <PropertyRef Name="status" />
       <PropertyRef Name="idSolicitante" />
       <PropertyRef Name="idResponsable" />
       <PropertyRef Name="idApoyo" />
-      <PropertyRef Name="lugar" />
-      <PropertyRef Name="titulo" />
       <PropertyRef Name="statusCal_Servicio" />
       <PropertyRef Name="idCalidad_Servicio" />
       <PropertyRef Name="observacionesServicio" />
+      <PropertyRef Name="responsable" />
+      <PropertyRef Name="apoyo" />
+      <PropertyRef Name="lugar" />
+      <PropertyRef Name="titulo" />
     </Key>
     <Property Name="idEvento" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-    <Property Name="responsable" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="apoyo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="responsable" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="fecha_Sol" Type="datetime" />
     <Property Name="asistencia_aprox" Type="int" />
     <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
@@ -418,9 +420,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosCerrados' no tien
     <Property Name="idSolicitante" Type="int" Nullable="false" />
     <Property Name="idResponsable" Type="int" Nullable="false" />
     <Property Name="idApoyo" Type="int" Nullable="false" />
-    <Property Name="lugar" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="observaciones" Type="varchar" MaxLength="250" />
-    <Property Name="titulo" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
     <Property Name="idCalidad_Servicio" Type="int" Nullable="false" />
     <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
@@ -433,20 +435,20 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosSinCerrar' no tie
       <PropertyRef Name="idEvento" />
       <PropertyRef Name="descripcion" />
       <PropertyRef Name="solicitante" />
-      <PropertyRef Name="responsable" />
-      <PropertyRef Name="apoyo" />
       <PropertyRef Name="status" />
       <PropertyRef Name="idSolicitante" />
       <PropertyRef Name="idResponsable" />
       <PropertyRef Name="idApoyo" />
+      <PropertyRef Name="responsable" />
+      <PropertyRef Name="apoyo" />
       <PropertyRef Name="lugar" />
       <PropertyRef Name="titulo" />
     </Key>
     <Property Name="idEvento" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-    <Property Name="responsable" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="apoyo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="responsable" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="fecha_Sol" Type="datetime" />
     <Property Name="asistencia_aprox" Type="int" />
     <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
@@ -459,9 +461,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosSinCerrar' no tie
     <Property Name="idSolicitante" Type="int" Nullable="false" />
     <Property Name="idResponsable" Type="int" Nullable="false" />
     <Property Name="idApoyo" Type="int" Nullable="false" />
-    <Property Name="lugar" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="observaciones" Type="varchar" MaxLength="250" />
-    <Property Name="titulo" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -470,15 +472,15 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no t
       <PropertyRef Name="numIncidente" />
       <PropertyRef Name="solicitante" />
       <PropertyRef Name="status" />
-      <PropertyRef Name="soporte" />
-      <PropertyRef Name="seguimiento" />
       <PropertyRef Name="idSolicitante" />
       <PropertyRef Name="idSoporte" />
       <PropertyRef Name="idSeguimiento" />
-      <PropertyRef Name="tipo" />
       <PropertyRef Name="statusCal_Servicio" />
       <PropertyRef Name="idCalidad_Servicio" />
       <PropertyRef Name="observacionesServicio" />
+      <PropertyRef Name="soporte" />
+      <PropertyRef Name="seguimiento" />
+      <PropertyRef Name="tipo" />
     </Key>
     <Property Name="numIncidente" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="200" />
@@ -489,14 +491,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no t
     <Property Name="horaIn" Type="datetime" />
     <Property Name="horaFn" Type="datetime" />
     <Property Name="fecha_Cierre" Type="datetime" />
-    <Property Name="soporte" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="acciones" Type="varchar" MaxLength="200" />
     <Property Name="solucion" Type="varchar" MaxLength="200" />
-    <Property Name="seguimiento" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="seguimiento" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="idSolicitante" Type="int" Nullable="false" />
     <Property Name="idSoporte" Type="int" Nullable="false" />
     <Property Name="idSeguimiento" Type="int" Nullable="false" />
-    <Property Name="tipo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
     <Property Name="idCalidad_Servicio" Type="int" Nullable="false" />
     <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
@@ -507,19 +509,19 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesSinCerrar' no 
   <EntityType Name="VistaIncidentesSinCerrar">
     <Key>
       <PropertyRef Name="numIncidente" />
-      <PropertyRef Name="tipo" />
       <PropertyRef Name="status" />
       <PropertyRef Name="solicitante" />
       <PropertyRef Name="idSolicitante" />
       <PropertyRef Name="idSoporte" />
+      <PropertyRef Name="idSeguimiento" />
+      <PropertyRef Name="tipo" />
       <PropertyRef Name="soporte" />
       <PropertyRef Name="seguimiento" />
-      <PropertyRef Name="idSeguimiento" />
     </Key>
     <Property Name="numIncidente" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="200" />
     <Property Name="prioridad" Type="varchar" MaxLength="6" />
-    <Property Name="tipo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="fecha_Sol" Type="datetime" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="horaIn" Type="datetime" />
@@ -527,11 +529,11 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesSinCerrar' no 
     <Property Name="fecha_Cierre" Type="datetime" />
     <Property Name="acciones" Type="varchar" MaxLength="200" />
     <Property Name="solucion" Type="varchar" MaxLength="200" />
-    <Property Name="solicitante" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
     <Property Name="idSolicitante" Type="int" Nullable="false" />
     <Property Name="idSoporte" Type="int" Nullable="false" />
-    <Property Name="soporte" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="seguimiento" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="seguimiento" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="idSeguimiento" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
@@ -1031,6 +1033,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
     <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimientos" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [ViewEventoConRequerimientos].[evento] AS [evento], 
+    [ViewEventoConRequerimientos].[solicitante] AS [solicitante], 
     [ViewEventoConRequerimientos].[cantidad] AS [cantidad], 
     [ViewEventoConRequerimientos].[asistencia_aprox] AS [asistencia_aprox], 
     [ViewEventoConRequerimientos].[tipo_evento] AS [tipo_evento], 

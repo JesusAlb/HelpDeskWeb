@@ -227,7 +227,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
-                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  MaxLength="200" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                     </asp:Panel>
@@ -438,7 +438,7 @@
                                                 <asp:Panel runat="server" CssClass="col-lg-12">
                                                     <asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Font-Bold="true" Text="Comentarios"></asp:Label>
-                                                        <asp:TextBox runat="server" ID="txtObservaciones" Height="100" MaxLength="250" placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtObservaciones" Height="100"  placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                     </asp:Panel>
                                                 </asp:Panel>
                                             </asp:Panel>
@@ -526,7 +526,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label>
-                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" CssClass="form-control" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" CssClass="form-control"  placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
                                                                     </td>
                                                                 </table>
                                                             </asp:Panel>

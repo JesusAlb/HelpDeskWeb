@@ -24,30 +24,6 @@
                 })
         });
 
-        var inputQuantity = [];
-        $(function () {
-            $(".numero").each(function (i) {
-                inputQuantity[i] = this.defaultValue;
-                $(this).data("idx", i); // save this field's index to access later
-            });
-            $(".numero").on("keyup", function (e) {
-                var $field = $(this),
-                    val = this.value,
-                    $thisIndex = parseInt($field.data("idx"), 10); // retrieve the index
-                //        window.console && console.log($field.is(":invalid"));
-                //  $field.is(":invalid") is for Safari, it must be the last to not error in IE8
-                if (this.validity && this.validity.badInput || isNaN(val) || $field.is(":invalid")) {
-                    this.value = inputQuantity[$thisIndex];
-                    return;
-                }
-                if (val.length > Number($field.attr("maxlength"))) {
-                    val = val.slice(0, 5);
-                    $field.val(val);
-                }
-                inputQuantity[$thisIndex] = val;
-            });
-        });
-
     </script>
 </head>
 <body>
@@ -173,7 +149,7 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" CssClass="serie form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieEquipo" MaxLength="20" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" CssClass="form-control mayusculas" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelMonitor">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Monitor"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
@@ -184,7 +160,7 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMonitor" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMonitor" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control mayusculas" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelTeclado">
@@ -197,7 +173,7 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieTeclado" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieTeclado" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control mayusculas" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Panel runat="server" CssClass="panel panel-default" ID="panelMouse">
                                                                             <asp:Panel runat="server" CssClass="panel-heading">
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Mouse"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
@@ -208,7 +184,7 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMouse" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                                        <span runat="server" class="input-group-addon">Serie</span> <asp:TextBox runat="server" ID="txtSerieMouse" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="20" CssClass="form-control mayusculas" required></asp:TextBox></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="panel panel-default" ID="panelRed">
                                                                         <asp:Panel runat="server" CssClass="panel-heading text-center">
@@ -232,12 +208,12 @@
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-8">
                                                                                         <asp:Label runat="server" Text="Dirección MAC" Font-Bold="true"></asp:Label><asp:Panel runat="server" CssClass="input-group">
-                                                                                            <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
-                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <asp:TextBox runat="server" ID="txtMAC1" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC2" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC3" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC4" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC5" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
+                                                                                            <span runat="server" class="input-group-addon">-</span> <asp:TextBox runat="server" ID="txtMAC6" CssClass="form-control mayusculas" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="2" />
                                                                                         </asp:Panel>
                                                                                     </asp:Panel>
                                                                                     <asp:Panel runat="server" CssClass="col-lg-2"></asp:Panel>

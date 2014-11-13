@@ -139,15 +139,6 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.WebControls.DropDownList cbObjeto;
         
         /// <summary>
-        /// Control txtFiltroNumero.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroNumero;
-        
-        /// <summary>
         /// Control cbEstatus.
         /// </summary>
         /// <remarks>
@@ -173,6 +164,24 @@ namespace HelpDeskWeb.Reportes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnGenerar;
+        
+        /// <summary>
+        /// Control updateGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateGrid;
+        
+        /// <summary>
+        /// Control gvEventos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEventos;
         
         /// <summary>
         /// Control panelReporte.

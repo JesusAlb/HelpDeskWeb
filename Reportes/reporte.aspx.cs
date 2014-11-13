@@ -1,5 +1,6 @@
 ﻿using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.ControlBD.Solicitudes;
 using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections;
@@ -19,6 +20,15 @@ namespace HelpDeskWeb.Reportes
             hdk_utilerias.checarSession(this,true, 2, 2);
             this.generarPrivilegios();
             lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            this.cargarEventos();
+        }
+
+        protected void cargarEventos()
+        {
+            int tipo =  hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
+            int idUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+            gvEventos.DataSource = hdk_ControlEventos.obtenerEventoConRequerimientos(tipo, idUsuario);
+            gvEventos.DataBind();
         }
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
@@ -39,7 +49,7 @@ namespace HelpDeskWeb.Reportes
                 cbObjeto.Items.Add("Incidentes");
                 cbObjeto.Items.Add("Eventos");
                 cbObjeto.Items.Add("Recursos a eventos");
-                cbObjeto.Items.Add("Responsables de equipso");
+                cbObjeto.Items.Add("Responsables de equipos");
             }
             else
             {
@@ -54,14 +64,15 @@ namespace HelpDeskWeb.Reportes
         {
             if (index == 0 || index == 1)
             {
-                txtFiltroNumero.Visible = false;
                 cbEstatus.Visible = true;
             }
             else
             {
-                txtFiltroNumero.Visible = true;
-                txtFiltroNumero.Enabled = true;
                 cbEstatus.Visible = false;
+                if (index == 2)
+                {
+                    this.cargarEventos();
+                }
             }
         }
 
@@ -105,6 +116,11 @@ namespace HelpDeskWeb.Reportes
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;
             }
+        }
+
+        protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            hdk_utilerias.setRowCreated(sender, e, this);
         }
     }
 }

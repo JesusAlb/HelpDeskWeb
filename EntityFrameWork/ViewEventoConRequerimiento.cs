@@ -28,5 +28,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public string nomCoordinacion { get; set; }
         public string nomRequerimiento { get; set; }
         public int idRequerimientos { get; set; }
+        public int solicitante { get; set; }
     }
 }

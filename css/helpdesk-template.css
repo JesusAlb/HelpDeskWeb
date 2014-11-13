@@ -97,5 +97,7 @@ body {
     font-size:14px;
 }
 
-
+.mayusculas {
+    text-transform:uppercase;
+}
 

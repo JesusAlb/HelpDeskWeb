@@ -14,6 +14,8 @@
     <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/validador.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" ></div>
@@ -41,10 +43,10 @@
                                     <div class="form-group text-center"><img src="Imagenes/usuario.png" class="text-center"/></div>
                                     <h3 class="text-center">Control de acceso</h3>
                                     <div class="form-group">
-                                         <asp:TextBox runat="server" ID="txtUsuario" type="text" class="form-control" placeholder="Usuario" required autofocus />
+                                         <asp:TextBox runat="server" ID="txtUsuario" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" type="text" class="form-control" placeholder="Usuario" required autofocus />
                                     </div>
                                     <div class="form-group">
-                                        <asp:TextBox runat="server" ID="txtPassword" type="password" class="form-control" placeholder="Contraseña" required />
+                                        <asp:TextBox runat="server" ID="txtPassword" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);"  type="password" class="form-control" placeholder="Contraseña" required />
                                     </div>
                                     <asp:UpdatePanel runat="server" ID="Update" UpdateMode="Conditional">
                                         <ContentTemplate>

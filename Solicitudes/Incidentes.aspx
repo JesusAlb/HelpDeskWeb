@@ -25,27 +25,6 @@
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
             })
          });
-         $(document).ready(function () {
-
-             $('textarea[maxlength]').keyup(function () {
-                 //get the limit from maxlength attribute  
-                 var limit = parseInt($(this).attr('maxlength'));
-                 //get the current text inside the textarea  
-                 var text = $(this).val();
-                 //count the number of characters in the text  
-                 var chars = text.length;
-
-                 //check if there are more characters then allowed  
-                 if (chars > limit) {
-                     //and if there are use substr to get the text before the limit  
-                     var new_text = text.substr(0, limit);
-
-                     //and change the current text with the new text  
-                     $(this).val(new_text);
-                 }
-             });
-
-         });
     </script>
 </head>
 <body>
@@ -180,7 +159,7 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" maxlenght="200" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" maxlenght="200" onkeyup="keyUP(event.keyCode)" onkeypress="if (this.value.length > 100) { return false; }" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>

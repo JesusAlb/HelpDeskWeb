@@ -331,5 +331,24 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
+        public static IList<ViewEventoConRequerimiento> obtenerEventoConRequerimientos(int tipo, int solicitante)
+        {
+            try
+            {
+                if (tipo == 1)
+                {
+                    return dbhelp.modelo.ViewEventoConRequerimientos.Where(a => a.solicitante == solicitante).ToList();
+                }
+                else
+                {
+                    return dbhelp.modelo.ViewEventoConRequerimientos.ToList();
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

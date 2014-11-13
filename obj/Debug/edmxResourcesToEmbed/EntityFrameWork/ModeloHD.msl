@@ -231,6 +231,7 @@
     <EntitySetMapping Name="ViewEventoConRequerimientos">
       <EntityTypeMapping TypeName="dbhelpdeskModel.ViewEventoConRequerimiento">
         <MappingFragment StoreEntitySet="ViewEventoConRequerimientos">
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
           <ScalarProperty Name="evento" ColumnName="evento" />
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />
           <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
