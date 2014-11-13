@@ -349,7 +349,7 @@
                                                             <asp:UpdatePanel runat="server" ID="UpdatePanel5" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:GridView ToolTip="Tabla de recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvRecursosAsignados" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                        ShowHeader="false" DataKeyNames="idRequerimientos" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none" OnSelectedIndexChanged="gvRecursosAsignados_SelectedIndexChanged">
+                                                                        ShowHeader="false" DataKeyNames="idRequerimiento" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none" OnSelectedIndexChanged="gvRecursosAsignados_SelectedIndexChanged">
                                                                         <Columns>
                                                                             <asp:BoundField HeaderText="Recurso" ItemStyle-Width="70%" DataField="nomRequerimiento" />
                                                                             <asp:BoundField HeaderText="Cantidad"  DataField="cantidad" />

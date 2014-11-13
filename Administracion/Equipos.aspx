@@ -74,13 +74,13 @@
                                 <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li></ul></li><li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li></ul></div></div></div><asp:Panel runat="server" CssClass="container">
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li></ul></div></div></div>
+    <asp:Panel runat="server" CssClass="container">
             <form role="form" runat="server">               
                 <asp:ScriptManager runat="server" ID="script" EnablePartialRendering="true" ></asp:ScriptManager>
                 <asp:Panel runat="server" CssClass="row panel-titulo">
                     <asp:Label runat="server" Text="Control de Equipos"/>
                 </asp:Panel>
-                <section>
                     <asp:Panel runat="server" CssClass="row">
                         <div class="col-lg-1"></div>
                         <asp:Panel runat="server" CssClass="col-lg-6">
@@ -283,9 +283,7 @@
                                 </asp:UpdatePanel>
                             </asp:Panel>
                     </asp:Panel>
-                </section>
             </form>
-
     </asp:Panel>
 </body>
 </html>

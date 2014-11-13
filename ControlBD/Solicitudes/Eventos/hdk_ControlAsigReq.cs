@@ -14,20 +14,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
   public  class hdk_ControlAsigReq
     {
-          public static IList cargarTablaReqAsig(int evento)
+          public static IList cargarTablaReqAsig(int idEvento)
            {
                try
                {
-                   var resultado = from reqAsignado in dbhelp.modelo.tblrequerimientoaeventoes
-                                   from requerimiento in dbhelp.modelo.tblrequerimientos
-                                   where reqAsignado.requerimiento == requerimiento.idRequerimientos
-                                   select new
-                                   {
-                                       requerimiento.idRequerimientos,
-                                       requerimiento.nomRequerimiento,
-                                       reqAsignado.cantidad
-                                   };
-                   return resultado.ToList();
+                   return dbhelp.modelo.ViewEventoConRequerimientos.Where(a => a.evento == idEvento).Select(x => new {
+                       idRequerimiento = x.idRequerimientos,
+                       nomRequerimiento = x.nomRequerimiento,
+                       cantidad = x.cantidad
+                   }).ToList();
                }
                catch
                {                  

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reporte.aspx.cs" Inherits="HelpDeskWeb.Reportes.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reporte.aspx.cs" Inherits="HelpDeskWeb.Reportes.reporte" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -172,10 +172,12 @@
                                             <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                        ShowHeader="false" DataKeyNames="evento" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                         ShowHeaderWhenEmpty="true" Visible="false" DataKeyNames="evento"  AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                        <HeaderStyle Wrap="false" />
                                                         <Columns>
                                                             <asp:BoundField HeaderText="ID" DataField="evento" />
                                                             <asp:BoundField HeaderText="Nombre" DataField="titulo"/>
+                                                            <asp:BoundField HeaderText="Fecha" DataField="FechaInicio" DataFormatString="{0:D}" />
                                                         </Columns>
                                                     </asp:GridView>
                                                 </ContentTemplate>
@@ -194,7 +196,7 @@
                             <div class="panel-heading text-center">
                                 <asp:Label runat="server" Text="Reporte" Font-Size="Larger" Font-Bold="true"></asp:Label></div>
                                                 <div class="panel-body">
-                                                    <rsweb:ReportViewer ID="reporte" runat="server" Height="500px" Width="100%" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
+                                                    <rsweb:ReportViewer ID="vt_reporte" runat="server" Height="500px" Width="100%" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
                                                         <LocalReport ReportEmbeddedResource="HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc"></LocalReport>
                                                     </rsweb:ReportViewer>
                                                 </div>

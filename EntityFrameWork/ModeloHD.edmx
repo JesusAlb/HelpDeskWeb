@@ -4,246 +4,244 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="idArea" />
           </Key>
-          <Property Name="idArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomArea" Type="varchar" MaxLength="60" />
+          <Property Name="idArea" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomArea" MaxLength="60" Type="varchar" />
         </EntityType>
         <EntityType Name="tblcalidadservicio">
           <Key>
             <PropertyRef Name="idCalidad_Servicio" />
           </Key>
-          <Property Name="idCalidad_Servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="idCalidad_Servicio" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="observacionesServicio" Nullable="false" MaxLength="200" Type="varchar" />
           <Property Name="incidente" Type="int" />
-          <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
+          <Property Name="statusCal_Servicio" Nullable="false" Type="bit" />
           <Property Name="evento" Type="int" />
           <Property Name="promedioCalidad" Type="float" />
-          <Property Name="usuario_calificado" Type="int" Nullable="false" />
+          <Property Name="usuario_calificado" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="tblcoordinacion">
           <Key>
             <PropertyRef Name="idCoordinacion" />
           </Key>
-          <Property Name="idCoordinacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
+          <Property Name="idCoordinacion" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomCoordinacion" MaxLength="60" Type="varchar" />
         </EntityType>
         <EntityType Name="tbldepartamentos">
           <Key>
             <PropertyRef Name="idDepto" />
           </Key>
-          <Property Name="idDepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomDepto" Type="varchar" MaxLength="60" />
-          <Property Name="coordinacion" Type="int" Nullable="false" />
+          <Property Name="idDepto" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomDepto" MaxLength="60" Type="varchar" />
+          <Property Name="coordinacion" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="tblevento">
           <Key>
             <PropertyRef Name="idEvento" />
           </Key>
-          <Property Name="idEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="300" />
-          <Property Name="solicitante" Type="int" Nullable="false" />
-          <Property Name="responsable" Type="int" Nullable="false" />
-          <Property Name="apoyo" Type="int" Nullable="false" />
+          <Property Name="idEvento" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" Type="int" />
+          <Property Name="responsable" Nullable="false" Type="int" />
+          <Property Name="apoyo" Nullable="false" Type="int" />
           <Property Name="fecha_Sol" Type="datetime" />
           <Property Name="lugar" Type="int" />
           <Property Name="asistencia_aprox" Type="int" />
-          <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" />
+          <Property Name="tipo_evento" MaxLength="25" Type="varchar" />
+          <Property Name="acomodo" MaxLength="25" Type="varchar" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_cierre" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="FechaInicio" Type="datetime" />
-          <Property Name="observaciones" Type="varchar" MaxLength="350" />
-          <Property Name="titulo" Type="varchar" MaxLength="60" />
+          <Property Name="observaciones" MaxLength="250" Type="varchar" />
+          <Property Name="titulo" MaxLength="60" Type="varchar" />
         </EntityType>
         <EntityType Name="tblincidente">
           <Key>
             <PropertyRef Name="numIncidente" />
           </Key>
-          <Property Name="numIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="300" />
-          <Property Name="solicitante" Type="int" Nullable="false" />
-          <Property Name="prioridad" Type="varchar" MaxLength="6" />
+          <Property Name="numIncidente" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="tipo" Nullable="false" Type="int" />
+          <Property Name="descripcion" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" Type="int" />
+          <Property Name="prioridad" MaxLength="6" Type="varchar" />
           <Property Name="fecha_Sol" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_Cierre" Type="datetime" />
-          <Property Name="soporte" Type="int" Nullable="false" />
-          <Property Name="acciones" Type="varchar" MaxLength="300" />
-          <Property Name="solucion" Type="varchar" MaxLength="300" />
-          <Property Name="seguimiento" Type="int" Nullable="false" />
+          <Property Name="soporte" Nullable="false" Type="int" />
+          <Property Name="acciones" MaxLength="200" Type="varchar" />
+          <Property Name="solucion" MaxLength="200" Type="varchar" />
+          <Property Name="seguimiento" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="tblinstitucion">
           <Key>
             <PropertyRef Name="idInstitucion" />
           </Key>
-          <Property Name="idInstitucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomInstitucion" Type="varchar" MaxLength="60" />
-          <Property Name="correoInstitucion" Type="varchar" MaxLength="20" />
-          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="idInstitucion" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomInstitucion" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="correoInstitucion" MaxLength="20" Type="varchar" />
+          <Property Name="status" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="tbllugar">
           <Key>
             <PropertyRef Name="idLugar" />
           </Key>
-          <Property Name="idLugar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomLugar" Type="varchar" MaxLength="60" />
+          <Property Name="idLugar" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomLugar" MaxLength="60" Type="varchar" />
         </EntityType>
         <EntityType Name="tblmarca">
           <Key>
             <PropertyRef Name="idMarca" />
           </Key>
-          <Property Name="idMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomMarca" Type="varchar" MaxLength="40" />
+          <Property Name="idMarca" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomMarca" MaxLength="40" Type="varchar" />
         </EntityType>
         <EntityType Name="tblpregunta">
           <Key>
             <PropertyRef Name="idPregunta" />
           </Key>
-          <Property Name="idPregunta" Type="int" Nullable="false" />
-          <Property Name="txtPregunta" Type="varchar" MaxLength="70" Nullable="false" />
-          <Property Name="statusPregunta" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
+          <Property Name="idPregunta" Nullable="false" Type="int" />
+          <Property Name="txtPregunta" Nullable="false" MaxLength="70" Type="varchar" />
+          <Property Name="statusPregunta" Nullable="false" Type="bit" />
+          <Property Name="afinidad" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="tblpuesto">
           <Key>
             <PropertyRef Name="idPuesto" />
           </Key>
-          <Property Name="idPuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomPuesto" Type="varchar" MaxLength="60" />
+          <Property Name="idPuesto" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomPuesto" MaxLength="60" Type="varchar" />
         </EntityType>
         <EntityType Name="tblrequerimientoaevento">
           <Key>
             <PropertyRef Name="evento" />
             <PropertyRef Name="requerimiento" />
           </Key>
-          <Property Name="evento" Type="int" Nullable="false" />
-          <Property Name="requerimiento" Type="int" Nullable="false" />
+          <Property Name="evento" Nullable="false" Type="int" />
+          <Property Name="requerimiento" Nullable="false" Type="int" />
           <Property Name="cantidad" Type="int" />
         </EntityType>
         <EntityType Name="tblrequerimientos">
           <Key>
             <PropertyRef Name="idRequerimientos" />
           </Key>
-          <Property Name="idRequerimientos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomRequerimiento" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="cuantificable" Type="bit" Nullable="false" />
+          <Property Name="idRequerimientos" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomRequerimiento" Nullable="false" MaxLength="30" Type="varchar" />
+          <Property Name="cuantificable" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="tblresponsablequipo">
           <Key>
             <PropertyRef Name="idResponEq" />
           </Key>
-          <Property Name="idResponEq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="responsable" Type="int" Nullable="false" />
-          <Property Name="tipoEquipo" Type="int" Nullable="false" />
-          <Property Name="marcaEquipo" Type="int" Nullable="false" />
-          <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
-          <Property Name="discoDuro" Type="varchar" MaxLength="8" />
-          <Property Name="marcaMonitor" Type="int" Nullable="false" />
-          <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="marcaMouse" Type="int" Nullable="false" />
-          <Property Name="serieMouse" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="marcaTeclado" Type="int" Nullable="false" />
-          <Property Name="serieTeclado" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="idResponEq" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="responsable" Nullable="false" Type="int" />
+          <Property Name="tipoEquipo" Nullable="false" Type="int" />
+          <Property Name="marcaEquipo" Nullable="false" Type="int" />
+          <Property Name="serieEquipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="memoriaRam" MaxLength="8" Type="varchar" />
+          <Property Name="discoDuro" MaxLength="8" Type="varchar" />
+          <Property Name="marcaMonitor" Nullable="false" Type="int" />
+          <Property Name="serieMonitor" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="ip" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="mac" Nullable="false" MaxLength="17" Type="varchar" />
+          <Property Name="marcaMouse" Nullable="false" Type="int" />
+          <Property Name="serieMouse" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="marcaTeclado" Nullable="false" Type="int" />
+          <Property Name="serieTeclado" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="procesador" Nullable="false" MaxLength="10" Type="varchar" />
         </EntityType>
         <EntityType Name="tblrespuesta">
           <Key>
             <PropertyRef Name="idRespuesta" />
           </Key>
-          <Property Name="idRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="valorRespuesta" Type="int" Nullable="false" />
-          <Property Name="pregunta" Type="int" Nullable="false" />
-          <Property Name="calidadServicio" Type="int" Nullable="false" />
+          <Property Name="idRespuesta" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="valorRespuesta" Nullable="false" Type="int" />
+          <Property Name="pregunta" Nullable="false" Type="int" />
+          <Property Name="calidadServicio" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="tbltipoequipo">
           <Key>
             <PropertyRef Name="idTipoEquipo" />
           </Key>
-          <Property Name="idTipoEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" />
-          <Property Name="siMonitor" Type="bit" Nullable="false" />
-          <Property Name="siEquipo" Type="bit" Nullable="false" />
-          <Property Name="siDiscoDuro" Type="bit" Nullable="false" />
-          <Property Name="siMouse" Type="bit" Nullable="false" />
-          <Property Name="siTeclado" Type="bit" Nullable="false" />
-          <Property Name="siRed" Type="bit" Nullable="false" />
-          <Property Name="siRAM" Type="bit" Nullable="false" />
-          <Property Name="siProcesador" Type="bit" Nullable="false" />
+          <Property Name="idTipoEquipo" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomTipoEquipo" MaxLength="40" Type="varchar" />
+          <Property Name="siMonitor" Nullable="false" Type="bit" />
+          <Property Name="siEquipo" Nullable="false" Type="bit" />
+          <Property Name="siDiscoDuro" Nullable="false" Type="bit" />
+          <Property Name="siMouse" Nullable="false" Type="bit" />
+          <Property Name="siTeclado" Nullable="false" Type="bit" />
+          <Property Name="siRed" Nullable="false" Type="bit" />
+          <Property Name="siRAM" Nullable="false" Type="bit" />
+          <Property Name="siProcesador" Nullable="false" Type="bit" />
         </EntityType>
         <EntityType Name="tbltipoincidencia">
           <Key>
             <PropertyRef Name="idTipoIncidente" />
           </Key>
-          <Property Name="idTipoIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomTipoIncidente" Type="varchar" MaxLength="30" />
+          <Property Name="idTipoIncidente" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomTipoIncidente" MaxLength="30" Type="varchar" />
         </EntityType>
         <EntityType Name="tblusuarios">
           <Key>
             <PropertyRef Name="idUsuario" />
           </Key>
-          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="40" />
-          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="tipoUsuario" Type="int" Nullable="false" />
-          <Property Name="depto" Type="int" Nullable="false" />
-          <Property Name="exTel" Type="varchar" MaxLength="5" />
-          <Property Name="area" Type="int" Nullable="false" />
-          <Property Name="puesto" Type="int" Nullable="false" />
-          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="institucion" Type="int" Nullable="false" />
-          <Property Name="apellidos" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="idUsuario" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nombre" Nullable="false" MaxLength="60" Type="varchar" />
+          <Property Name="username" MaxLength="40" Type="varchar" />
+          <Property Name="password" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="tipoUsuario" Nullable="false" Type="int" />
+          <Property Name="depto" Nullable="false" Type="int" />
+          <Property Name="exTel" MaxLength="5" Type="varchar" />
+          <Property Name="area" Nullable="false" Type="int" />
+          <Property Name="puesto" Nullable="false" Type="int" />
+          <Property Name="correo" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="institucion" Nullable="false" Type="int" />
+          <Property Name="apellidos" Nullable="false" MaxLength="60" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewDepartamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ViewDepartamentos">
           <Key>
             <PropertyRef Name="idDepto" />
-            <PropertyRef Name="coordinacion" />
             <PropertyRef Name="nomDepto" />
+            <PropertyRef Name="coordinacion" />
           </Key>
-          <Property Name="idDepto" Type="int" Nullable="false" />
-          <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="coordinacion" Type="int" Nullable="false" />
+          <Property Name="idDepto" Nullable="false" Type="int" />
+          <Property Name="nomDepto" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="nomCoordinacion" MaxLength="45" Type="varchar" />
+          <Property Name="coordinacion" Nullable="false" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewEventoConRequerimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ViewEventoConRequerimientos">
           <Key>
             <PropertyRef Name="evento" />
-            <PropertyRef Name="solicitante" />
             <PropertyRef Name="nomRequerimiento" />
             <PropertyRef Name="idRequerimientos" />
-            <PropertyRef Name="titulo" />
-            <PropertyRef Name="nomLugar" />
+            <PropertyRef Name="solicitante" />
           </Key>
-          <Property Name="evento" Type="int" Nullable="false" />
-          <Property Name="solicitante" Type="int" Nullable="false" />
+          <Property Name="evento" Nullable="false" Type="int" />
           <Property Name="cantidad" Type="int" />
           <Property Name="asistencia_aprox" Type="int" />
-          <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" />
+          <Property Name="tipo_evento" MaxLength="25" Type="varchar" />
+          <Property Name="acomodo" MaxLength="25" Type="varchar" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="FechaInicio" Type="datetime" />
-          <Property Name="observaciones" Type="varchar" MaxLength="350" />
-          <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomLugar" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nomRequerimiento" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="idRequerimientos" Type="int" Nullable="false" />
+          <Property Name="observaciones" MaxLength="250" Type="varchar" />
+          <Property Name="titulo" MaxLength="60" Type="varchar" />
+          <Property Name="nomLugar" MaxLength="60" Type="varchar" />
+          <Property Name="nomCoordinacion" MaxLength="60" Type="varchar" />
+          <Property Name="nomRequerimiento" Nullable="false" MaxLength="30" Type="varchar" />
+          <Property Name="idRequerimientos" Nullable="false" Type="int" />
+          <Property Name="solicitante" Nullable="false" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewTipoIncidencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -252,38 +250,38 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewTipoIncidencia' no tiene 
             <PropertyRef Name="idTipoIncidente" />
             <PropertyRef Name="nomTipoIncidente" />
           </Key>
-          <Property Name="idTipoIncidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nomTipoIncidente" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="idTipoIncidente" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="nomTipoIncidente" Nullable="false" MaxLength="25" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.ViewUsuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ViewUsuarios">
           <Key>
             <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="username" />
             <PropertyRef Name="nomCompleto" />
             <PropertyRef Name="password" />
             <PropertyRef Name="tipoUsuarioString" />
-            <PropertyRef Name="tipoUsuario" />
-            <PropertyRef Name="correo" />
-            <PropertyRef Name="nomInstitucion" />
-            <PropertyRef Name="username" />
             <PropertyRef Name="nomDepto" />
             <PropertyRef Name="nomArea" />
             <PropertyRef Name="nomPuesto" />
+            <PropertyRef Name="tipoUsuario" />
+            <PropertyRef Name="correo" />
+            <PropertyRef Name="nomInstitucion" />
           </Key>
-          <Property Name="idUsuario" Type="int" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="tipoUsuarioString" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="exTel" Type="varchar" MaxLength="5" />
-          <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nomArea" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomPuesto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="tipoUsuario" Type="int" Nullable="false" />
-          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nomInstitucion" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="idUsuario" Nullable="false" Type="int" />
+          <Property Name="username" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="nomCompleto" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="password" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="tipoUsuarioString" Nullable="false" MaxLength="11" Type="varchar" />
+          <Property Name="exTel" MaxLength="5" Type="varchar" />
+          <Property Name="nomDepto" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="nomCoordinacion" MaxLength="45" Type="varchar" />
+          <Property Name="nomArea" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="nomPuesto" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="tipoUsuario" Nullable="false" Type="int" />
+          <Property Name="correo" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="nomInstitucion" Nullable="false" MaxLength="40" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEncuesta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -299,14 +297,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEncuesta' no tiene defin
             <PropertyRef Name="statusCal_Servicio" />
           </Key>
           <Property Name="numPregunta" Type="bigint" />
-          <Property Name="idPregunta" Type="int" Nullable="false" />
-          <Property Name="txtPregunta" Type="varchar" MaxLength="70" Nullable="false" />
-          <Property Name="statusPregunta" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
-          <Property Name="valorRespuesta" Type="int" Nullable="false" />
-          <Property Name="idCalidad_Servicio" Type="int" Nullable="false" />
-          <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
+          <Property Name="idPregunta" Nullable="false" Type="int" />
+          <Property Name="txtPregunta" Nullable="false" MaxLength="70" Type="varchar" />
+          <Property Name="statusPregunta" Nullable="false" Type="bit" />
+          <Property Name="afinidad" Nullable="false" Type="int" />
+          <Property Name="valorRespuesta" Nullable="false" Type="int" />
+          <Property Name="idCalidad_Servicio" Nullable="false" Type="int" />
+          <Property Name="observacionesServicio" Nullable="false" MaxLength="200" Type="varchar" />
+          <Property Name="statusCal_Servicio" Nullable="false" Type="bit" />
           <Property Name="incidente" Type="int" />
           <Property Name="evento" Type="int" />
         </EntityType>
@@ -315,43 +313,43 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipoReporte' no tiene 
         <EntityType Name="VistaEquipoReporte">
           <Key>
             <PropertyRef Name="idResponEq" />
+            <PropertyRef Name="nomTipoEquipo" />
+            <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serieEquipo" />
+            <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serieMonitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nomMarcaMouse" />
             <PropertyRef Name="serieMouse" />
+            <PropertyRef Name="nomMarcaTeclado" />
             <PropertyRef Name="serieTeclado" />
             <PropertyRef Name="procesador" />
             <PropertyRef Name="nomCompleto" />
-            <PropertyRef Name="nomTipoEquipo" />
-            <PropertyRef Name="nomMarcaEquipo" />
-            <PropertyRef Name="nomMarcaMonitor" />
-            <PropertyRef Name="nomMarcaMouse" />
-            <PropertyRef Name="nomMarcaTeclado" />
             <PropertyRef Name="nomDepto" />
             <PropertyRef Name="nomArea" />
             <PropertyRef Name="nomPuesto" />
           </Key>
-          <Property Name="idResponEq" Type="int" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
-          <Property Name="discoDuro" Type="varchar" MaxLength="8" />
-          <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieMouse" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieTeclado" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="nomDepto" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nomArea" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nomPuesto" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="idResponEq" Nullable="false" Type="int" />
+          <Property Name="nomTipoEquipo" Nullable="false" MaxLength="30" Type="varchar" />
+          <Property Name="nomMarcaEquipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieEquipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="memoriaRam" MaxLength="8" Type="varchar" />
+          <Property Name="discoDuro" MaxLength="8" Type="varchar" />
+          <Property Name="nomMarcaMonitor" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieMonitor" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="ip" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="mac" Nullable="false" MaxLength="17" Type="varchar" />
+          <Property Name="nomMarcaMouse" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieMouse" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="nomMarcaTeclado" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieTeclado" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="procesador" Nullable="false" MaxLength="10" Type="varchar" />
+          <Property Name="nomCompleto" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="nomDepto" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="nomCoordinacion" MaxLength="45" Type="varchar" />
+          <Property Name="nomArea" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="nomPuesto" Nullable="false" MaxLength="40" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -359,35 +357,35 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEquipos' no tiene defini
           <Key>
             <PropertyRef Name="idResponEq" />
             <PropertyRef Name="nomCompleto" />
+            <PropertyRef Name="nomTipoEquipo" />
+            <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serieEquipo" />
+            <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serieMonitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nomMarcaMouse" />
             <PropertyRef Name="serieMouse" />
+            <PropertyRef Name="nomMarcaTeclado" />
             <PropertyRef Name="serieTeclado" />
             <PropertyRef Name="procesador" />
-            <PropertyRef Name="nomTipoEquipo" />
-            <PropertyRef Name="nomMarcaEquipo" />
-            <PropertyRef Name="nomMarcaMonitor" />
-            <PropertyRef Name="nomMarcaMouse" />
-            <PropertyRef Name="nomMarcaTeclado" />
           </Key>
-          <Property Name="idResponEq" Type="int" Nullable="false" />
-          <Property Name="nomCompleto" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieEquipo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
-          <Property Name="discoDuro" Type="varchar" MaxLength="8" />
-          <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieMonitor" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieMouse" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="serieTeclado" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="idResponEq" Nullable="false" Type="int" />
+          <Property Name="nomCompleto" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="nomTipoEquipo" Nullable="false" MaxLength="30" Type="varchar" />
+          <Property Name="nomMarcaEquipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieEquipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="memoriaRam" MaxLength="8" Type="varchar" />
+          <Property Name="discoDuro" MaxLength="8" Type="varchar" />
+          <Property Name="nomMarcaMonitor" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieMonitor" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="ip" Nullable="false" MaxLength="15" Type="varchar" />
+          <Property Name="mac" Nullable="false" MaxLength="17" Type="varchar" />
+          <Property Name="nomMarcaMouse" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieMouse" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="nomMarcaTeclado" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="serieTeclado" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="procesador" Nullable="false" MaxLength="10" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosCerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -396,41 +394,41 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosCerrados' no tien
             <PropertyRef Name="idEvento" />
             <PropertyRef Name="descripcion" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="responsable" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="status" />
             <PropertyRef Name="idSolicitante" />
             <PropertyRef Name="idResponsable" />
             <PropertyRef Name="idApoyo" />
+            <PropertyRef Name="lugar" />
+            <PropertyRef Name="titulo" />
             <PropertyRef Name="statusCal_Servicio" />
             <PropertyRef Name="idCalidad_Servicio" />
             <PropertyRef Name="observacionesServicio" />
-            <PropertyRef Name="responsable" />
-            <PropertyRef Name="apoyo" />
-            <PropertyRef Name="lugar" />
-            <PropertyRef Name="titulo" />
           </Key>
-          <Property Name="idEvento" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="responsable" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="idEvento" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="responsable" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="apoyo" Nullable="false" MaxLength="25" Type="varchar" />
           <Property Name="fecha_Sol" Type="datetime" />
           <Property Name="asistencia_aprox" Type="int" />
-          <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" />
+          <Property Name="tipo_evento" MaxLength="25" Type="varchar" />
+          <Property Name="acomodo" MaxLength="25" Type="varchar" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_cierre" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="FechaInicio" Type="datetime" />
-          <Property Name="idSolicitante" Type="int" Nullable="false" />
-          <Property Name="idResponsable" Type="int" Nullable="false" />
-          <Property Name="idApoyo" Type="int" Nullable="false" />
-          <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="observaciones" Type="varchar" MaxLength="250" />
-          <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
-          <Property Name="idCalidad_Servicio" Type="int" Nullable="false" />
-          <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="idSolicitante" Nullable="false" Type="int" />
+          <Property Name="idResponsable" Nullable="false" Type="int" />
+          <Property Name="idApoyo" Nullable="false" Type="int" />
+          <Property Name="lugar" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="observaciones" MaxLength="250" Type="varchar" />
+          <Property Name="titulo" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="statusCal_Servicio" Nullable="false" Type="bit" />
+          <Property Name="idCalidad_Servicio" Nullable="false" Type="int" />
+          <Property Name="observacionesServicio" Nullable="false" MaxLength="200" Type="varchar" />
           <Property Name="promedioCalidad" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
@@ -440,35 +438,35 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaEventosSinCerrar' no tie
             <PropertyRef Name="idEvento" />
             <PropertyRef Name="descripcion" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="responsable" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="status" />
             <PropertyRef Name="idSolicitante" />
             <PropertyRef Name="idResponsable" />
             <PropertyRef Name="idApoyo" />
-            <PropertyRef Name="responsable" />
-            <PropertyRef Name="apoyo" />
             <PropertyRef Name="lugar" />
             <PropertyRef Name="titulo" />
           </Key>
-          <Property Name="idEvento" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="responsable" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="idEvento" Nullable="false" Type="int" />
+          <Property Name="descripcion" Nullable="false" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="responsable" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="apoyo" Nullable="false" MaxLength="25" Type="varchar" />
           <Property Name="fecha_Sol" Type="datetime" />
           <Property Name="asistencia_aprox" Type="int" />
-          <Property Name="tipo_evento" Type="varchar" MaxLength="25" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" />
+          <Property Name="tipo_evento" MaxLength="25" Type="varchar" />
+          <Property Name="acomodo" MaxLength="25" Type="varchar" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_cierre" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="FechaInicio" Type="datetime" />
-          <Property Name="idSolicitante" Type="int" Nullable="false" />
-          <Property Name="idResponsable" Type="int" Nullable="false" />
-          <Property Name="idApoyo" Type="int" Nullable="false" />
-          <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="observaciones" Type="varchar" MaxLength="250" />
-          <Property Name="titulo" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="idSolicitante" Nullable="false" Type="int" />
+          <Property Name="idResponsable" Nullable="false" Type="int" />
+          <Property Name="idApoyo" Nullable="false" Type="int" />
+          <Property Name="lugar" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="observaciones" MaxLength="250" Type="varchar" />
+          <Property Name="titulo" Nullable="false" MaxLength="40" Type="varchar" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -477,36 +475,36 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesCerrados' no t
             <PropertyRef Name="numIncidente" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="status" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="seguimiento" />
             <PropertyRef Name="idSolicitante" />
             <PropertyRef Name="idSoporte" />
             <PropertyRef Name="idSeguimiento" />
+            <PropertyRef Name="tipo" />
             <PropertyRef Name="statusCal_Servicio" />
             <PropertyRef Name="idCalidad_Servicio" />
             <PropertyRef Name="observacionesServicio" />
-            <PropertyRef Name="soporte" />
-            <PropertyRef Name="seguimiento" />
-            <PropertyRef Name="tipo" />
           </Key>
-          <Property Name="numIncidente" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="200" />
-          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="prioridad" Type="varchar" MaxLength="6" />
+          <Property Name="numIncidente" Nullable="false" Type="int" />
+          <Property Name="descripcion" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="prioridad" MaxLength="6" Type="varchar" />
           <Property Name="fecha_Sol" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_Cierre" Type="datetime" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="acciones" Type="varchar" MaxLength="200" />
-          <Property Name="solucion" Type="varchar" MaxLength="200" />
-          <Property Name="seguimiento" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="idSolicitante" Type="int" Nullable="false" />
-          <Property Name="idSoporte" Type="int" Nullable="false" />
-          <Property Name="idSeguimiento" Type="int" Nullable="false" />
-          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="statusCal_Servicio" Type="bit" Nullable="false" />
-          <Property Name="idCalidad_Servicio" Type="int" Nullable="false" />
-          <Property Name="observacionesServicio" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="soporte" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="acciones" MaxLength="200" Type="varchar" />
+          <Property Name="solucion" MaxLength="200" Type="varchar" />
+          <Property Name="seguimiento" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="idSolicitante" Nullable="false" Type="int" />
+          <Property Name="idSoporte" Nullable="false" Type="int" />
+          <Property Name="idSeguimiento" Nullable="false" Type="int" />
+          <Property Name="tipo" Nullable="false" MaxLength="25" Type="varchar" />
+          <Property Name="statusCal_Servicio" Nullable="false" Type="bit" />
+          <Property Name="idCalidad_Servicio" Nullable="false" Type="int" />
+          <Property Name="observacionesServicio" Nullable="false" MaxLength="200" Type="varchar" />
           <Property Name="promedioCalidad" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
@@ -523,23 +521,23 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaIncidentesSinCerrar' no 
             <PropertyRef Name="soporte" />
             <PropertyRef Name="seguimiento" />
           </Key>
-          <Property Name="numIncidente" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="200" />
-          <Property Name="prioridad" Type="varchar" MaxLength="6" />
-          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="numIncidente" Nullable="false" Type="int" />
+          <Property Name="descripcion" MaxLength="200" Type="varchar" />
+          <Property Name="prioridad" MaxLength="6" Type="varchar" />
+          <Property Name="tipo" Nullable="false" MaxLength="30" Type="varchar" />
           <Property Name="fecha_Sol" Type="datetime" />
-          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="status" Nullable="false" Type="int" />
           <Property Name="horaIn" Type="datetime" />
           <Property Name="horaFn" Type="datetime" />
           <Property Name="fecha_Cierre" Type="datetime" />
-          <Property Name="acciones" Type="varchar" MaxLength="200" />
-          <Property Name="solucion" Type="varchar" MaxLength="200" />
-          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="idSolicitante" Type="int" Nullable="false" />
-          <Property Name="idSoporte" Type="int" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="seguimiento" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="idSeguimiento" Type="int" Nullable="false" />
+          <Property Name="acciones" MaxLength="200" Type="varchar" />
+          <Property Name="solucion" MaxLength="200" Type="varchar" />
+          <Property Name="solicitante" Nullable="false" MaxLength="121" Type="varchar" />
+          <Property Name="idSolicitante" Nullable="false" Type="int" />
+          <Property Name="idSoporte" Nullable="false" Type="int" />
+          <Property Name="soporte" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="seguimiento" Nullable="false" MaxLength="40" Type="varchar" />
+          <Property Name="idSeguimiento" Nullable="false" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -551,10 +549,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.VistaPregunta' no tiene defin
             <PropertyRef Name="afinidad" />
           </Key>
           <Property Name="numPregunta" Type="bigint" />
-          <Property Name="idPregunta" Type="int" Nullable="false" />
-          <Property Name="txtPregunta" Type="varchar" MaxLength="70" Nullable="false" />
-          <Property Name="statusPregunta" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
+          <Property Name="idPregunta" Nullable="false" Type="int" />
+          <Property Name="txtPregunta" Nullable="false" MaxLength="70" Type="varchar" />
+          <Property Name="statusPregunta" Nullable="false" Type="bit" />
+          <Property Name="afinidad" Nullable="false" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioeventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -563,7 +561,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioeventos' no tien
             <PropertyRef Name="usuario" />
           </Key>
           <Property Name="promedioEventos" Type="float" />
-          <Property Name="usuario" Type="int" Nullable="false" />
+          <Property Name="usuario" Nullable="false" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromediogeneral' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -572,7 +570,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromediogeneral' no tien
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="posicion" Type="bigint" />
-          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Nullable="false" Type="int" />
           <Property Name="promedioEventos" Type="float" />
           <Property Name="promedioIncidente" Type="float" />
           <Property Name="PromedioTotal" Type="float" />
@@ -583,12 +581,12 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Key>
             <PropertyRef Name="soporte" />
           </Key>
-          <Property Name="soporte" Type="int" Nullable="false" />
+          <Property Name="soporte" Nullable="false" Type="int" />
           <Property Name="promedioIncidente" Type="float" />
         </EntityType>
         <Association Name="apoyo">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblevento" Multiplicity="*" Role="tblevento" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -599,10 +597,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="area">
-          <End Role="tblarea" Type="Self.tblarea" Multiplicity="1">
+          <End Type="Self.tblarea" Multiplicity="1" Role="tblarea">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="*" Role="tblusuarios" />
           <ReferentialConstraint>
             <Principal Role="tblarea">
               <PropertyRef Name="idArea" />
@@ -613,8 +611,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="calificado">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblcalidadservicio" Multiplicity="*" Role="tblcalidadservicio" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -625,10 +623,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="coordinacion">
-          <End Role="tblcoordinacion" Type="Self.tblcoordinacion" Multiplicity="1">
+          <End Type="Self.tblcoordinacion" Multiplicity="1" Role="tblcoordinacion">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tbldepartamentos" Type="Self.tbldepartamentos" Multiplicity="*" />
+          <End Type="Self.tbldepartamentos" Multiplicity="*" Role="tbldepartamentos" />
           <ReferentialConstraint>
             <Principal Role="tblcoordinacion">
               <PropertyRef Name="idCoordinacion" />
@@ -639,10 +637,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="depto">
-          <End Role="tbldepartamentos" Type="Self.tbldepartamentos" Multiplicity="1">
+          <End Type="Self.tbldepartamentos" Multiplicity="1" Role="tbldepartamentos">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="*" Role="tblusuarios" />
           <ReferentialConstraint>
             <Principal Role="tbldepartamentos">
               <PropertyRef Name="idDepto" />
@@ -653,10 +651,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="evento">
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="1">
+          <End Type="Self.tblevento" Multiplicity="1" Role="tblevento">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblrequerimientoaevento" Type="Self.tblrequerimientoaevento" Multiplicity="*" />
+          <End Type="Self.tblrequerimientoaevento" Multiplicity="*" Role="tblrequerimientoaevento" />
           <ReferentialConstraint>
             <Principal Role="tblevento">
               <PropertyRef Name="idEvento" />
@@ -667,10 +665,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="eventoa">
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="0..1">
+          <End Type="Self.tblevento" Multiplicity="0..1" Role="tblevento">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+          <End Type="Self.tblcalidadservicio" Multiplicity="*" Role="tblcalidadservicio" />
           <ReferentialConstraint>
             <Principal Role="tblevento">
               <PropertyRef Name="idEvento" />
@@ -681,10 +679,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="incidente">
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="0..1">
+          <End Type="Self.tblincidente" Multiplicity="0..1" Role="tblincidente">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+          <End Type="Self.tblcalidadservicio" Multiplicity="*" Role="tblcalidadservicio" />
           <ReferentialConstraint>
             <Principal Role="tblincidente">
               <PropertyRef Name="numIncidente" />
@@ -695,10 +693,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="Institucion">
-          <End Role="tblinstitucion" Type="Self.tblinstitucion" Multiplicity="1">
+          <End Type="Self.tblinstitucion" Multiplicity="1" Role="tblinstitucion">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="*" Role="tblusuarios" />
           <ReferentialConstraint>
             <Principal Role="tblinstitucion">
               <PropertyRef Name="idInstitucion" />
@@ -709,10 +707,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="lugar ">
-          <End Role="tbllugar" Type="Self.tbllugar" Multiplicity="0..1">
+          <End Type="Self.tbllugar" Multiplicity="0..1" Role="tbllugar">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <End Type="Self.tblevento" Multiplicity="*" Role="tblevento" />
           <ReferentialConstraint>
             <Principal Role="tbllugar">
               <PropertyRef Name="idLugar" />
@@ -723,8 +721,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="marcaEquipo">
-          <End Role="tblmarca" Type="Self.tblmarca" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tblmarca" Multiplicity="1" Role="tblmarca" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tblmarca">
               <PropertyRef Name="idMarca" />
@@ -735,8 +733,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="marcaMonitor">
-          <End Role="tblmarca" Type="Self.tblmarca" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tblmarca" Multiplicity="1" Role="tblmarca" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tblmarca">
               <PropertyRef Name="idMarca" />
@@ -747,8 +745,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="marcaMouse">
-          <End Role="tblmarca" Type="Self.tblmarca" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tblmarca" Multiplicity="1" Role="tblmarca" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tblmarca">
               <PropertyRef Name="idMarca" />
@@ -759,8 +757,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="marcaTeclado">
-          <End Role="tblmarca" Type="Self.tblmarca" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tblmarca" Multiplicity="1" Role="tblmarca" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tblmarca">
               <PropertyRef Name="idMarca" />
@@ -771,8 +769,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="pregunta">
-          <End Role="tblpregunta" Type="Self.tblpregunta" Multiplicity="1" />
-          <End Role="tblrespuesta" Type="Self.tblrespuesta" Multiplicity="*" />
+          <End Type="Self.tblpregunta" Multiplicity="1" Role="tblpregunta" />
+          <End Type="Self.tblrespuesta" Multiplicity="*" Role="tblrespuesta" />
           <ReferentialConstraint>
             <Principal Role="tblpregunta">
               <PropertyRef Name="idPregunta" />
@@ -783,10 +781,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="puesto">
-          <End Role="tblpuesto" Type="Self.tblpuesto" Multiplicity="1">
+          <End Type="Self.tblpuesto" Multiplicity="1" Role="tblpuesto">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="*" Role="tblusuarios" />
           <ReferentialConstraint>
             <Principal Role="tblpuesto">
               <PropertyRef Name="idPuesto" />
@@ -797,10 +795,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="requerimiento">
-          <End Role="tblrequerimientos" Type="Self.tblrequerimientos" Multiplicity="1">
+          <End Type="Self.tblrequerimientos" Multiplicity="1" Role="tblrequerimientos">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblrequerimientoaevento" Type="Self.tblrequerimientoaevento" Multiplicity="*" />
+          <End Type="Self.tblrequerimientoaevento" Multiplicity="*" Role="tblrequerimientoaevento" />
           <ReferentialConstraint>
             <Principal Role="tblrequerimientos">
               <PropertyRef Name="idRequerimientos" />
@@ -811,8 +809,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="respon">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -823,8 +821,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="responsable">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblevento" Multiplicity="*" Role="tblevento" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -835,8 +833,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="seguimiento">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblincidente" Multiplicity="*" Role="tblincidente" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -847,10 +845,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="servicioCalidad">
-          <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="1">
+          <End Type="Self.tblcalidadservicio" Multiplicity="1" Role="tblcalidadservicio">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblrespuesta" Type="Self.tblrespuesta" Multiplicity="*" />
+          <End Type="Self.tblrespuesta" Multiplicity="*" Role="tblrespuesta" />
           <ReferentialConstraint>
             <Principal Role="tblcalidadservicio">
               <PropertyRef Name="idCalidad_Servicio" />
@@ -861,8 +859,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="solicitante">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblincidente" Multiplicity="*" Role="tblincidente" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -873,10 +871,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="solicitante2">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1">
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <End Type="Self.tblevento" Multiplicity="*" Role="tblevento" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -887,8 +885,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="soporte">
-          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <End Type="Self.tblusuarios" Multiplicity="1" Role="tblusuarios" />
+          <End Type="Self.tblincidente" Multiplicity="*" Role="tblincidente" />
           <ReferentialConstraint>
             <Principal Role="tblusuarios">
               <PropertyRef Name="idUsuario" />
@@ -899,8 +897,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="tipo">
-          <End Role="tbltipoincidencia" Type="Self.tbltipoincidencia" Multiplicity="1" />
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <End Type="Self.tbltipoincidencia" Multiplicity="1" Role="tbltipoincidencia" />
+          <End Type="Self.tblincidente" Multiplicity="*" Role="tblincidente" />
           <ReferentialConstraint>
             <Principal Role="tbltipoincidencia">
               <PropertyRef Name="idTipoIncidente" />
@@ -911,8 +909,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </ReferentialConstraint>
         </Association>
         <Association Name="tipoE">
-          <End Role="tbltipoequipo" Type="Self.tbltipoequipo" Multiplicity="1" />
-          <End Role="tblresponsablequipo" Type="Self.tblresponsablequipo" Multiplicity="*" />
+          <End Type="Self.tbltipoequipo" Multiplicity="1" Role="tbltipoequipo" />
+          <End Type="Self.tblresponsablequipo" Multiplicity="*" Role="tblresponsablequipo" />
           <ReferentialConstraint>
             <Principal Role="tbltipoequipo">
               <PropertyRef Name="idTipoEquipo" />
@@ -922,9 +920,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="ReqAsignados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
         <Function Name="cerrarEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEv" Type="int" Mode="In" />
         </Function>
@@ -997,6 +992,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="ReqAsignados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="requerimientosSinAsignar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEvento" Type="int" Mode="In" />
         </Function>
@@ -1038,7 +1036,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimientos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewEventoConRequerimientos].[evento] AS [evento], 
-    [ViewEventoConRequerimientos].[solicitante] AS [solicitante], 
     [ViewEventoConRequerimientos].[cantidad] AS [cantidad], 
     [ViewEventoConRequerimientos].[asistencia_aprox] AS [asistencia_aprox], 
     [ViewEventoConRequerimientos].[tipo_evento] AS [tipo_evento], 
@@ -1051,7 +1048,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
     [ViewEventoConRequerimientos].[nomLugar] AS [nomLugar], 
     [ViewEventoConRequerimientos].[nomCoordinacion] AS [nomCoordinacion], 
     [ViewEventoConRequerimientos].[nomRequerimiento] AS [nomRequerimiento], 
-    [ViewEventoConRequerimientos].[idRequerimientos] AS [idRequerimientos]
+    [ViewEventoConRequerimientos].[idRequerimientos] AS [idRequerimientos], 
+    [ViewEventoConRequerimientos].[solicitante] AS [solicitante]
     FROM [dbo].[ViewEventoConRequerimientos] AS [ViewEventoConRequerimientos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewTipoIncidencia" EntityType="Self.ViewTipoIncidencia" store:Type="Views" store:Schema="dbo">
@@ -1265,108 +1263,108 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
     FROM [dbo].[vistapromedioincidentes] AS [vistapromedioincidentes]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="apoyo" Association="Self.apoyo">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblevento" EntitySet="tblevento" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblevento" Role="tblevento" />
           </AssociationSet>
           <AssociationSet Name="area" Association="Self.area">
-            <End Role="tblarea" EntitySet="tblarea" />
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End EntitySet="tblarea" Role="tblarea" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
           </AssociationSet>
           <AssociationSet Name="calificado" Association="Self.calificado">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblcalidadservicio" Role="tblcalidadservicio" />
           </AssociationSet>
           <AssociationSet Name="coordinacion" Association="Self.coordinacion">
-            <End Role="tblcoordinacion" EntitySet="tblcoordinacion" />
-            <End Role="tbldepartamentos" EntitySet="tbldepartamentos" />
+            <End EntitySet="tblcoordinacion" Role="tblcoordinacion" />
+            <End EntitySet="tbldepartamentos" Role="tbldepartamentos" />
           </AssociationSet>
           <AssociationSet Name="depto" Association="Self.depto">
-            <End Role="tbldepartamentos" EntitySet="tbldepartamentos" />
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End EntitySet="tbldepartamentos" Role="tbldepartamentos" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
           </AssociationSet>
           <AssociationSet Name="evento" Association="Self.evento">
-            <End Role="tblevento" EntitySet="tblevento" />
-            <End Role="tblrequerimientoaevento" EntitySet="tblrequerimientoaevento" />
+            <End EntitySet="tblevento" Role="tblevento" />
+            <End EntitySet="tblrequerimientoaevento" Role="tblrequerimientoaevento" />
           </AssociationSet>
           <AssociationSet Name="eventoa" Association="Self.eventoa">
-            <End Role="tblevento" EntitySet="tblevento" />
-            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
+            <End EntitySet="tblevento" Role="tblevento" />
+            <End EntitySet="tblcalidadservicio" Role="tblcalidadservicio" />
           </AssociationSet>
           <AssociationSet Name="incidente" Association="Self.incidente">
-            <End Role="tblincidente" EntitySet="tblincidente" />
-            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
+            <End EntitySet="tblincidente" Role="tblincidente" />
+            <End EntitySet="tblcalidadservicio" Role="tblcalidadservicio" />
           </AssociationSet>
           <AssociationSet Name="Institucion" Association="Self.Institucion">
-            <End Role="tblinstitucion" EntitySet="tblinstitucion" />
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End EntitySet="tblinstitucion" Role="tblinstitucion" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
           </AssociationSet>
           <AssociationSet Name="lugar " Association="Self.lugar ">
-            <End Role="tbllugar" EntitySet="tbllugar" />
-            <End Role="tblevento" EntitySet="tblevento" />
+            <End EntitySet="tbllugar" Role="tbllugar" />
+            <End EntitySet="tblevento" Role="tblevento" />
           </AssociationSet>
           <AssociationSet Name="marcaEquipo" Association="Self.marcaEquipo">
-            <End Role="tblmarca" EntitySet="tblmarca" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tblmarca" Role="tblmarca" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
           <AssociationSet Name="marcaMonitor" Association="Self.marcaMonitor">
-            <End Role="tblmarca" EntitySet="tblmarca" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tblmarca" Role="tblmarca" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
           <AssociationSet Name="marcaMouse" Association="Self.marcaMouse">
-            <End Role="tblmarca" EntitySet="tblmarca" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tblmarca" Role="tblmarca" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
           <AssociationSet Name="marcaTeclado" Association="Self.marcaTeclado">
-            <End Role="tblmarca" EntitySet="tblmarca" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tblmarca" Role="tblmarca" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
           <AssociationSet Name="pregunta" Association="Self.pregunta">
-            <End Role="tblpregunta" EntitySet="tblpregunta" />
-            <End Role="tblrespuesta" EntitySet="tblrespuesta" />
+            <End EntitySet="tblpregunta" Role="tblpregunta" />
+            <End EntitySet="tblrespuesta" Role="tblrespuesta" />
           </AssociationSet>
           <AssociationSet Name="puesto" Association="Self.puesto">
-            <End Role="tblpuesto" EntitySet="tblpuesto" />
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End EntitySet="tblpuesto" Role="tblpuesto" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
           </AssociationSet>
           <AssociationSet Name="requerimiento" Association="Self.requerimiento">
-            <End Role="tblrequerimientos" EntitySet="tblrequerimientos" />
-            <End Role="tblrequerimientoaevento" EntitySet="tblrequerimientoaevento" />
+            <End EntitySet="tblrequerimientos" Role="tblrequerimientos" />
+            <End EntitySet="tblrequerimientoaevento" Role="tblrequerimientoaevento" />
           </AssociationSet>
           <AssociationSet Name="respon" Association="Self.respon">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
           <AssociationSet Name="responsable" Association="Self.responsable">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblevento" EntitySet="tblevento" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblevento" Role="tblevento" />
           </AssociationSet>
           <AssociationSet Name="seguimiento" Association="Self.seguimiento">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblincidente" Role="tblincidente" />
           </AssociationSet>
           <AssociationSet Name="servicioCalidad" Association="Self.servicioCalidad">
-            <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
-            <End Role="tblrespuesta" EntitySet="tblrespuesta" />
+            <End EntitySet="tblcalidadservicio" Role="tblcalidadservicio" />
+            <End EntitySet="tblrespuesta" Role="tblrespuesta" />
           </AssociationSet>
           <AssociationSet Name="solicitante" Association="Self.solicitante">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblincidente" Role="tblincidente" />
           </AssociationSet>
           <AssociationSet Name="solicitante2" Association="Self.solicitante2">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblevento" EntitySet="tblevento" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblevento" Role="tblevento" />
           </AssociationSet>
           <AssociationSet Name="soporte" Association="Self.soporte">
-            <End Role="tblusuarios" EntitySet="tblusuarios" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
+            <End EntitySet="tblusuarios" Role="tblusuarios" />
+            <End EntitySet="tblincidente" Role="tblincidente" />
           </AssociationSet>
           <AssociationSet Name="tipo" Association="Self.tipo">
-            <End Role="tbltipoincidencia" EntitySet="tbltipoincidencia" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
+            <End EntitySet="tbltipoincidencia" Role="tbltipoincidencia" />
+            <End EntitySet="tblincidente" Role="tblincidente" />
           </AssociationSet>
           <AssociationSet Name="tipoE" Association="Self.tipoE">
-            <End Role="tbltipoequipo" EntitySet="tbltipoequipo" />
-            <End Role="tblresponsablequipo" EntitySet="tblresponsablequipo" />
+            <End EntitySet="tbltipoequipo" Role="tbltipoequipo" />
+            <End EntitySet="tblresponsablequipo" Role="tblresponsablequipo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1420,7 +1418,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="idEvento" />
           </Key>
           <Property Name="idEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="solicitante" Type="Int32" Nullable="false" />
           <Property Name="responsable" Type="Int32" Nullable="false" />
           <Property Name="apoyo" Type="Int32" Nullable="false" />
@@ -1433,8 +1431,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="horaFn" Type="DateTime" Precision="3" />
           <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="observaciones" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Precision="3" Type="DateTime" />
+          <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblcalidadservicios" Relationship="Self.eventoa" FromRole="tblevento" ToRole="tblcalidadservicio" />
           <NavigationProperty Name="tblusuario" Relationship="Self.apoyo" FromRole="tblevento" ToRole="tblusuarios" />
@@ -1449,7 +1447,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </Key>
           <Property Name="numIncidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="solicitante" Type="Int32" Nullable="false" />
           <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
@@ -1458,8 +1456,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="horaFn" Type="DateTime" Precision="3" />
           <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
           <Property Name="soporte" Type="Int32" Nullable="false" />
-          <Property Name="acciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="solucion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="seguimiento" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblcalidadservicios" Relationship="Self.incidente" FromRole="tblincidente" ToRole="tblcalidadservicio" />
           <NavigationProperty Name="tblusuario" Relationship="Self.seguimiento" FromRole="tblincidente" ToRole="tblusuarios" />
@@ -1472,7 +1470,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="idInstitucion" />
           </Key>
           <Property Name="idInstitucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nomInstitucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nomInstitucion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correoInstitucion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblusuarios" Relationship="Self.Institucion" FromRole="tblinstitucion" ToRole="tblusuarios" />
@@ -1632,34 +1630,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="coordinacion" />
           </Key>
           <Property Name="idDepto" Type="Int32" Nullable="false" />
-          <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="coordinacion" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ViewEventoConRequerimiento">
-          <Key>
-            <PropertyRef Name="evento" />
-            <PropertyRef Name="titulo" />
-            <PropertyRef Name="nomLugar" />
-            <PropertyRef Name="nomRequerimiento" />
-            <PropertyRef Name="idRequerimientos" />
-            <PropertyRef Name="solicitante" />
-          </Key>
-          <Property Name="evento" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" />
-          <Property Name="asistencia_aprox" Type="Int32" />
-          <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="horaIn" Type="DateTime" Precision="3" />
-          <Property Name="horaFn" Type="DateTime" Precision="3" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="observaciones" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomLugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nomRequerimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idRequerimientos" Type="Int32" Nullable="false" />
-          <Property Name="solicitante" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ViewTipoIncidencia">
           <Key>
@@ -1667,7 +1640,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="nomTipoIncidente" />
           </Key>
           <Property Name="idTipoIncidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nomTipoIncidente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomTipoIncidente" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ViewUsuario">
           <Key>
@@ -1684,15 +1657,15 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="nomInstitucion" />
           </Key>
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipoUsuarioString" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="exTel" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nomArea" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomPuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nomArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomPuesto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nomInstitucion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1741,25 +1714,25 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <PropertyRef Name="nomPuesto" />
           </Key>
           <Property Name="idResponEq" Type="Int32" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomTipoEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="discoDuro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nomArea" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomPuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nomArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomPuesto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="VistaEquipos">
           <Key>
@@ -1780,18 +1753,18 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           </Key>
           <Property Name="idResponEq" Type="Int32" Nullable="false" />
           <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomTipoEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="discoDuro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serieTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
@@ -1815,8 +1788,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="idEvento" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="responsable" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
           <Property Name="asistencia_aprox" Type="Int32" />
           <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -1829,9 +1802,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="idSolicitante" Type="Int32" Nullable="false" />
           <Property Name="idResponsable" Type="Int32" Nullable="false" />
           <Property Name="idApoyo" Type="Int32" Nullable="false" />
-          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lugar" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="statusCal_Servicio" Type="Boolean" Nullable="false" />
           <Property Name="idCalidad_Servicio" Type="Int32" Nullable="false" />
           <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1854,8 +1827,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="idEvento" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="responsable" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
           <Property Name="asistencia_aprox" Type="Int32" />
           <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -1868,9 +1841,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="idSolicitante" Type="Int32" Nullable="false" />
           <Property Name="idResponsable" Type="Int32" Nullable="false" />
           <Property Name="idApoyo" Type="Int32" Nullable="false" />
-          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lugar" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="VistaIncidentesCerrado">
           <Key>
@@ -1896,14 +1869,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Name="horaIn" Type="DateTime" Precision="3" />
           <Property Name="horaFn" Type="DateTime" Precision="3" />
           <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soporte" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="seguimiento" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="seguimiento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idSolicitante" Type="Int32" Nullable="false" />
           <Property Name="idSoporte" Type="Int32" Nullable="false" />
           <Property Name="idSeguimiento" Type="Int32" Nullable="false" />
-          <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="statusCal_Servicio" Type="Boolean" Nullable="false" />
           <Property Name="idCalidad_Servicio" Type="Int32" Nullable="false" />
           <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
@@ -2332,7 +2305,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <EntitySet Name="tbltipoincidencias" EntityType="Self.tbltipoincidencia" />
           <EntitySet Name="tblusuarios" EntityType="Self.tblusuario" />
           <EntitySet Name="ViewDepartamentos" EntityType="Self.ViewDepartamento" />
-          <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimiento" />
           <EntitySet Name="ViewTipoIncidencias" EntityType="Self.ViewTipoIncidencia" />
           <EntitySet Name="ViewUsuarios" EntityType="Self.ViewUsuario" />
           <EntitySet Name="VistaEncuestas" EntityType="Self.VistaEncuesta" />
@@ -2451,91 +2423,92 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
             <End Role="tblresponsablequipo" EntitySet="tblresponsablequipoes" />
           </AssociationSet>
           <FunctionImport Name="ReqAsignados" ReturnType="Collection(dbhelpdeskModel.ReqAsignados_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Type="Int32" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="cerrarEvento">
-          <Parameter Name="idEv" Mode="In" Type="Int32" />
+          <Parameter Name="idEv" Type="Int32" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="cerrarIncidente">
-            <Parameter Name="idIn" Mode="In" Type="Int32" />
-            <Parameter Name="Acci" Mode="In" Type="String" />
-            <Parameter Name="Solu" Mode="In" Type="String" />
+            <Parameter Name="idIn" Type="Int32" Mode="In" />
+            <Parameter Name="Acci" Type="String" Mode="In" />
+            <Parameter Name="Solu" Type="String" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="insertarEvento">
-            <Parameter Name="titulo" Mode="In" Type="String" />
-            <Parameter Name="lugar" Mode="In" Type="Int32" />
-            <Parameter Name="acomodo" Mode="In" Type="String" />
-            <Parameter Name="asistencia" Mode="In" Type="Int32" />
-            <Parameter Name="horaIn" Mode="In" Type="DateTime" />
-            <Parameter Name="HoraFn" Mode="In" Type="DateTime" />
-            <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="tipoEvento" Mode="In" Type="String" />
-            <Parameter Name="solicitante" Mode="In" Type="Int32" />
-            <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
+            <Parameter Name="titulo" Type="String" Mode="In" />
+            <Parameter Name="lugar" Type="Int32" Mode="In" />
+            <Parameter Name="acomodo" Type="String" Mode="In" />
+            <Parameter Name="asistencia" Type="Int32" Mode="In" />
+            <Parameter Name="horaIn" Type="DateTime" Mode="In" />
+            <Parameter Name="HoraFn" Type="DateTime" Mode="In" />
+            <Parameter Name="descripcion" Type="String" Mode="In" />
+            <Parameter Name="tipoEvento" Type="String" Mode="In" />
+            <Parameter Name="solicitante" Type="Int32" Mode="In" />
+            <Parameter Name="FechaEvento" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="insertarIncidente">
-            <Parameter Name="Descr" Mode="In" Type="String" />
-            <Parameter Name="Soli" Mode="In" Type="Int32" />
+            <Parameter Name="Descr" Type="String" Mode="In" />
+            <Parameter Name="Soli" Type="Int32" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numEventosPorMes" ReturnType="Collection(dbhelpdeskModel.numEventosPorMes_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numEventosPorUsuario">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numIncidentesPorDepto">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numIncidentesPorMes" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorMes_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numIncidentesPorTipo" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorTipo_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="numIncidentesPorUsuario">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorDepto">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorMesEv">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorMesIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorTipoIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorUsuarioEv">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="promedioCalidadPorUsuarioIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="requerimientosSinAsignar" ReturnType="Collection(dbhelpdeskModel.requerimientosSinAsignar_Result)">
-          <Parameter Name="idEvento" Mode="In" Type="Int32" />
+          <Parameter Name="idEvento" Type="Int32" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="topCincoRecursosMasUsados" ReturnType="Collection(dbhelpdeskModel.topCincoRecursosMasUsados_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
           <FunctionImport Name="topCincoRecursosMenosUsados" ReturnType="Collection(dbhelpdeskModel.topCincoRecursosMenosUsados_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+            <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
           </FunctionImport>
+          <EntitySet Name="ViewEventoConRequerimientos" EntityType="dbhelpdeskModel.ViewEventoConRequerimiento" />
         </EntityContainer>
         <ComplexType Name="ReqAsignados_Result">
           <Property Type="String" Name="nomRequerimiento" Nullable="false" MaxLength="30" />
@@ -2567,6 +2540,29 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="ViewEventoConRequerimiento">
+          <Key>
+            <PropertyRef Name="evento" />
+            <PropertyRef Name="nomRequerimiento" />
+            <PropertyRef Name="idRequerimientos" />
+            <PropertyRef Name="solicitante" />
+          </Key>
+          <Property Name="evento" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="asistencia_aprox" Type="Int32" />
+          <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="horaIn" Type="DateTime" Precision="3" />
+          <Property Name="horaFn" Type="DateTime" Precision="3" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nomLugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nomRequerimiento" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="idRequerimientos" Type="Int32" Nullable="false" />
+          <Property Name="solicitante" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2797,27 +2793,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
                 <ScalarProperty Name="nomDepto" ColumnName="nomDepto" />
                 <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
                 <ScalarProperty Name="coordinacion" ColumnName="coordinacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ViewEventoConRequerimientos">
-            <EntityTypeMapping TypeName="dbhelpdeskModel.ViewEventoConRequerimiento">
-              <MappingFragment StoreEntitySet="ViewEventoConRequerimientos">
-                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-                <ScalarProperty Name="evento" ColumnName="evento" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
-                <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
-                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-                <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-                <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="nomLugar" ColumnName="nomLugar" />
-                <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
-                <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
-                <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3128,6 +3103,27 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vistapromedioincidentes' no t
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ViewEventoConRequerimientos">
+            <EntityTypeMapping TypeName="dbhelpdeskModel.ViewEventoConRequerimiento">
+              <MappingFragment StoreEntitySet="ViewEventoConRequerimientos">
+                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+                <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
+                <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+                <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
+                <ScalarProperty Name="nomLugar" ColumnName="nomLugar" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="horaFn" ColumnName="horaFn" />
+                <ScalarProperty Name="horaIn" ColumnName="horaIn" />
+                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+                <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
+                <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

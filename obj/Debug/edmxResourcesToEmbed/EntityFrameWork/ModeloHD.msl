@@ -228,27 +228,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ViewEventoConRequerimientos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.ViewEventoConRequerimiento">
-        <MappingFragment StoreEntitySet="ViewEventoConRequerimientos">
-          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-          <ScalarProperty Name="evento" ColumnName="evento" />
-          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-          <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
-          <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
-          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
-          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
-          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="nomLugar" ColumnName="nomLugar" />
-          <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
-          <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
-          <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ViewTipoIncidencias">
       <EntityTypeMapping TypeName="dbhelpdeskModel.ViewTipoIncidencia">
         <MappingFragment StoreEntitySet="ViewTipoIncidencia">
@@ -556,5 +535,26 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="ViewEventoConRequerimientos">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.ViewEventoConRequerimiento">
+        <MappingFragment StoreEntitySet="ViewEventoConRequerimientos">
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+          <ScalarProperty Name="idRequerimientos" ColumnName="idRequerimientos" />
+          <ScalarProperty Name="nomRequerimiento" ColumnName="nomRequerimiento" />
+          <ScalarProperty Name="nomCoordinacion" ColumnName="nomCoordinacion" />
+          <ScalarProperty Name="nomLugar" ColumnName="nomLugar" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="horaFn" ColumnName="horaFn" />
+          <ScalarProperty Name="horaIn" ColumnName="horaIn" />
+          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+          <ScalarProperty Name="tipo_evento" ColumnName="tipo_evento" />
+          <ScalarProperty Name="asistencia_aprox" ColumnName="asistencia_aprox" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="evento" ColumnName="evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

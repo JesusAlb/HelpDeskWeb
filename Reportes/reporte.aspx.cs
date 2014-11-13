@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace HelpDeskWeb.Reportes
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class reporte : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,11 +33,11 @@ namespace HelpDeskWeb.Reportes
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
-            reporte.Reset();
-            reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
+            vt_reporte.Reset();
+            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
             ReportDataSource datasource = new ReportDataSource("DataSetEquipos", hdk_ControlEquipos.cargarTabla(""));
-            reporte.LocalReport.DataSources.Add(datasource);
-            reporte.LocalReport.Refresh();
+            vt_reporte.LocalReport.DataSources.Add(datasource);
+            vt_reporte.LocalReport.Refresh();
             datosBusqueda.CssClass = "panel-collapse collapse";
             panelReporte.Visible = true;
         }
@@ -71,7 +71,7 @@ namespace HelpDeskWeb.Reportes
                 cbEstatus.Visible = false;
                 if (index == 2)
                 {
-                    this.cargarEventos();
+                    gvEventos.Visible = true;
                 }
             }
         }

@@ -47,7 +47,7 @@
       <PropertyRef Name="idEvento" />
     </Key>
     <Property Name="idEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="solicitante" Type="Int32" Nullable="false" />
     <Property Name="responsable" Type="Int32" Nullable="false" />
     <Property Name="apoyo" Type="Int32" Nullable="false" />
@@ -60,8 +60,8 @@
     <Property Name="horaFn" Type="DateTime" Precision="3" />
     <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
     <Property Name="status" Type="Int32" Nullable="false" />
-    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
-    <Property Name="observaciones" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInicio" Precision="3" Type="DateTime" />
+    <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblcalidadservicios" Relationship="Self.eventoa" FromRole="tblevento" ToRole="tblcalidadservicio" />
     <NavigationProperty Name="tblusuario" Relationship="Self.apoyo" FromRole="tblevento" ToRole="tblusuarios" />
@@ -76,7 +76,7 @@
     </Key>
     <Property Name="numIncidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tipo" Type="Int32" Nullable="false" />
-    <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="solicitante" Type="Int32" Nullable="false" />
     <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
@@ -85,8 +85,8 @@
     <Property Name="horaFn" Type="DateTime" Precision="3" />
     <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
     <Property Name="soporte" Type="Int32" Nullable="false" />
-    <Property Name="acciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="solucion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="seguimiento" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblcalidadservicios" Relationship="Self.incidente" FromRole="tblincidente" ToRole="tblcalidadservicio" />
     <NavigationProperty Name="tblusuario" Relationship="Self.seguimiento" FromRole="tblincidente" ToRole="tblusuarios" />
@@ -99,7 +99,7 @@
       <PropertyRef Name="idInstitucion" />
     </Key>
     <Property Name="idInstitucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nomInstitucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nomInstitucion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="correoInstitucion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tblusuarios" Relationship="Self.Institucion" FromRole="tblinstitucion" ToRole="tblusuarios" />
@@ -259,34 +259,9 @@
       <PropertyRef Name="coordinacion" />
     </Key>
     <Property Name="idDepto" Type="Int32" Nullable="false" />
-    <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="coordinacion" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ViewEventoConRequerimiento">
-    <Key>
-      <PropertyRef Name="evento" />
-      <PropertyRef Name="titulo" />
-      <PropertyRef Name="nomLugar" />
-      <PropertyRef Name="nomRequerimiento" />
-      <PropertyRef Name="idRequerimientos" />
-      <PropertyRef Name="solicitante" />
-    </Key>
-    <Property Name="evento" Type="Int32" Nullable="false" />
-    <Property Name="cantidad" Type="Int32" />
-    <Property Name="asistencia_aprox" Type="Int32" />
-    <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="horaIn" Type="DateTime" Precision="3" />
-    <Property Name="horaFn" Type="DateTime" Precision="3" />
-    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
-    <Property Name="observaciones" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomLugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="nomRequerimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="idRequerimientos" Type="Int32" Nullable="false" />
-    <Property Name="solicitante" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewTipoIncidencia">
     <Key>
@@ -294,7 +269,7 @@
       <PropertyRef Name="nomTipoIncidente" />
     </Key>
     <Property Name="idTipoIncidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nomTipoIncidente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomTipoIncidente" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewUsuario">
     <Key>
@@ -311,15 +286,15 @@
       <PropertyRef Name="nomInstitucion" />
     </Key>
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
-    <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="tipoUsuarioString" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="exTel" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="nomArea" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomPuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nomArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomPuesto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="tipoUsuario" Type="Int32" Nullable="false" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nomInstitucion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
@@ -368,25 +343,25 @@
       <PropertyRef Name="nomPuesto" />
     </Key>
     <Property Name="idResponEq" Type="Int32" Nullable="false" />
-    <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomTipoEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
     <Property Name="discoDuro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomDepto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="nomArea" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomPuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomDepto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomCoordinacion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nomArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomPuesto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="VistaEquipos">
     <Key>
@@ -407,18 +382,18 @@
     </Key>
     <Property Name="idResponEq" Type="Int32" Nullable="false" />
     <Property Name="nomCompleto" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomTipoEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieEquipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
     <Property Name="discoDuro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-    <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieMonitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieMouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomMarcaTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="serieTeclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
@@ -442,8 +417,8 @@
     <Property Name="idEvento" Type="Int32" Nullable="false" />
     <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="responsable" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
     <Property Name="asistencia_aprox" Type="Int32" />
     <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -456,9 +431,9 @@
     <Property Name="idSolicitante" Type="Int32" Nullable="false" />
     <Property Name="idResponsable" Type="Int32" Nullable="false" />
     <Property Name="idApoyo" Type="Int32" Nullable="false" />
-    <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lugar" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="statusCal_Servicio" Type="Boolean" Nullable="false" />
     <Property Name="idCalidad_Servicio" Type="Int32" Nullable="false" />
     <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
@@ -481,8 +456,8 @@
     <Property Name="idEvento" Type="Int32" Nullable="false" />
     <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="responsable" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="responsable" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apoyo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fecha_Sol" Type="DateTime" Precision="3" />
     <Property Name="asistencia_aprox" Type="Int32" />
     <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -495,9 +470,9 @@
     <Property Name="idSolicitante" Type="Int32" Nullable="false" />
     <Property Name="idResponsable" Type="Int32" Nullable="false" />
     <Property Name="idApoyo" Type="Int32" Nullable="false" />
-    <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lugar" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="VistaIncidentesCerrado">
     <Key>
@@ -523,14 +498,14 @@
     <Property Name="horaIn" Type="DateTime" Precision="3" />
     <Property Name="horaFn" Type="DateTime" Precision="3" />
     <Property Name="fecha_Cierre" Type="DateTime" Precision="3" />
-    <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="soporte" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="seguimiento" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="seguimiento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idSolicitante" Type="Int32" Nullable="false" />
     <Property Name="idSoporte" Type="Int32" Nullable="false" />
     <Property Name="idSeguimiento" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="statusCal_Servicio" Type="Boolean" Nullable="false" />
     <Property Name="idCalidad_Servicio" Type="Int32" Nullable="false" />
     <Property Name="observacionesServicio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
@@ -959,7 +934,6 @@
     <EntitySet Name="tbltipoincidencias" EntityType="Self.tbltipoincidencia" />
     <EntitySet Name="tblusuarios" EntityType="Self.tblusuario" />
     <EntitySet Name="ViewDepartamentos" EntityType="Self.ViewDepartamento" />
-    <EntitySet Name="ViewEventoConRequerimientos" EntityType="Self.ViewEventoConRequerimiento" />
     <EntitySet Name="ViewTipoIncidencias" EntityType="Self.ViewTipoIncidencia" />
     <EntitySet Name="ViewUsuarios" EntityType="Self.ViewUsuario" />
     <EntitySet Name="VistaEncuestas" EntityType="Self.VistaEncuesta" />
@@ -1078,91 +1052,92 @@
       <End Role="tblresponsablequipo" EntitySet="tblresponsablequipoes" />
     </AssociationSet>
     <FunctionImport Name="ReqAsignados" ReturnType="Collection(dbhelpdeskModel.ReqAsignados_Result)">
-      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="id" Type="Int32" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="cerrarEvento">
-      <Parameter Name="idEv" Mode="In" Type="Int32" />
+      <Parameter Name="idEv" Type="Int32" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="cerrarIncidente">
-      <Parameter Name="idIn" Mode="In" Type="Int32" />
-      <Parameter Name="Acci" Mode="In" Type="String" />
-      <Parameter Name="Solu" Mode="In" Type="String" />
+      <Parameter Name="idIn" Type="Int32" Mode="In" />
+      <Parameter Name="Acci" Type="String" Mode="In" />
+      <Parameter Name="Solu" Type="String" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="insertarEvento">
-      <Parameter Name="titulo" Mode="In" Type="String" />
-      <Parameter Name="lugar" Mode="In" Type="Int32" />
-      <Parameter Name="acomodo" Mode="In" Type="String" />
-      <Parameter Name="asistencia" Mode="In" Type="Int32" />
-      <Parameter Name="horaIn" Mode="In" Type="DateTime" />
-      <Parameter Name="HoraFn" Mode="In" Type="DateTime" />
-      <Parameter Name="descripcion" Mode="In" Type="String" />
-      <Parameter Name="tipoEvento" Mode="In" Type="String" />
-      <Parameter Name="solicitante" Mode="In" Type="Int32" />
-      <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
+      <Parameter Name="titulo" Type="String" Mode="In" />
+      <Parameter Name="lugar" Type="Int32" Mode="In" />
+      <Parameter Name="acomodo" Type="String" Mode="In" />
+      <Parameter Name="asistencia" Type="Int32" Mode="In" />
+      <Parameter Name="horaIn" Type="DateTime" Mode="In" />
+      <Parameter Name="HoraFn" Type="DateTime" Mode="In" />
+      <Parameter Name="descripcion" Type="String" Mode="In" />
+      <Parameter Name="tipoEvento" Type="String" Mode="In" />
+      <Parameter Name="solicitante" Type="Int32" Mode="In" />
+      <Parameter Name="FechaEvento" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="insertarIncidente">
-      <Parameter Name="Descr" Mode="In" Type="String" />
-      <Parameter Name="Soli" Mode="In" Type="Int32" />
+      <Parameter Name="Descr" Type="String" Mode="In" />
+      <Parameter Name="Soli" Type="Int32" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numEventosPorMes" ReturnType="Collection(dbhelpdeskModel.numEventosPorMes_Result)">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numEventosPorUsuario">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numIncidentesPorDepto">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numIncidentesPorMes" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorMes_Result)">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numIncidentesPorTipo" ReturnType="Collection(dbhelpdeskModel.numIncidentesPorTipo_Result)">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="numIncidentesPorUsuario">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorDepto">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorMesEv">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorMesIn">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorTipoIn">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorUsuarioEv">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="promedioCalidadPorUsuarioIn">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="requerimientosSinAsignar" ReturnType="Collection(dbhelpdeskModel.requerimientosSinAsignar_Result)">
-      <Parameter Name="idEvento" Mode="In" Type="Int32" />
+      <Parameter Name="idEvento" Type="Int32" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="topCincoRecursosMasUsados" ReturnType="Collection(dbhelpdeskModel.topCincoRecursosMasUsados_Result)">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
     <FunctionImport Name="topCincoRecursosMenosUsados" ReturnType="Collection(dbhelpdeskModel.topCincoRecursosMenosUsados_Result)">
-      <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-      <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="fechaInicio" Type="DateTime" Mode="In" />
+      <Parameter Name="fechaFinal" Type="DateTime" Mode="In" />
     </FunctionImport>
+    <EntitySet Name="ViewEventoConRequerimientos" EntityType="dbhelpdeskModel.ViewEventoConRequerimiento" />
   </EntityContainer>
   <ComplexType Name="ReqAsignados_Result">
     <Property Type="String" Name="nomRequerimiento" Nullable="false" MaxLength="30" />
@@ -1194,4 +1169,27 @@
     <Property Type="Int32" Name="Cantidad" Nullable="true" />
     <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
   </ComplexType>
+  <EntityType Name="ViewEventoConRequerimiento">
+    <Key>
+      <PropertyRef Name="evento" />
+      <PropertyRef Name="nomRequerimiento" />
+      <PropertyRef Name="idRequerimientos" />
+      <PropertyRef Name="solicitante" />
+    </Key>
+    <Property Name="evento" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="asistencia_aprox" Type="Int32" />
+    <Property Name="tipo_evento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="horaIn" Type="DateTime" Precision="3" />
+    <Property Name="horaFn" Type="DateTime" Precision="3" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nomLugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nomCoordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nomRequerimiento" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="idRequerimientos" Type="Int32" Nullable="false" />
+    <Property Name="solicitante" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

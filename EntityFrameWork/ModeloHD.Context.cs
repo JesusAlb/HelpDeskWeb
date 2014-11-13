@@ -46,7 +46,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tbltipoincidencia> tbltipoincidencias { get; set; }
         public virtual DbSet<tblusuario> tblusuarios { get; set; }
         public virtual DbSet<ViewDepartamento> ViewDepartamentos { get; set; }
-        public virtual DbSet<ViewEventoConRequerimiento> ViewEventoConRequerimientos { get; set; }
         public virtual DbSet<ViewTipoIncidencia> ViewTipoIncidencias { get; set; }
         public virtual DbSet<ViewUsuario> ViewUsuarios { get; set; }
         public virtual DbSet<VistaEncuesta> VistaEncuestas { get; set; }
@@ -60,6 +59,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<vistapromedioevento> vistapromedioeventos { get; set; }
         public virtual DbSet<vistapromediogeneral> vistapromediogenerals { get; set; }
         public virtual DbSet<vistapromedioincidente> vistapromedioincidentes { get; set; }
+        public virtual DbSet<ViewEventoConRequerimiento> ViewEventoConRequerimientos { get; set; }
     
         public virtual ObjectResult<ReqAsignados_Result> ReqAsignados(Nullable<int> id)
         {
