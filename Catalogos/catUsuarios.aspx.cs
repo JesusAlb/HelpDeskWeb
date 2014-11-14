@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + ((ViewUsuario)(Session["DatosUsuario"])).username;
+            lbelUsuario.Text = " " + ((vt_usuarios)(Session["DatosUsuario"])).username;
 
             if (!Page.IsPostBack)
             {
@@ -51,34 +51,34 @@ namespace HelpDeskWeb.Catalogos
 
        protected void cargarTablaDeptos()
         {
-            this.gvDeptos.DataSource = hdk_ControlDepartamento.cargarTabla(txtFiltroDepto.Text, cbFiltroCoord.SelectedItem.Text);
+            this.gvDeptos.DataSource = accionesDepto.obtenerDataSource(txtFiltroDepto.Text, cbFiltroCoord.SelectedItem.Text);
             this.gvDeptos.DataBind();
         }
 
         protected void cargarTablaCoordinacion()
         {
             this.cargarCombosCoordinacion();
-            this.gvCoordinaciones.DataSource = hdk_ControlCoordinacion.cargarTabla(txtFiltroCoord.Text);
+            this.gvCoordinaciones.DataSource = accionesCoordinacion.obtenerDataSource(false, txtFiltroCoord.Text);
             this.gvCoordinaciones.DataBind();
         }
 
         protected void cargarCombosCoordinacion()
         {
-            this.cbFiltroCoord.DataSource = hdk_ControlDepartamento.cargarComboCord(true);
-            this.cbCoordinaciones.DataSource = hdk_ControlDepartamento.cargarComboCord(false);
+            this.cbFiltroCoord.DataSource = accionesCoordinacion.obtenerDataSource(true, "");
+            this.cbCoordinaciones.DataSource = accionesCoordinacion.obtenerDataSource(false, "");
             this.cbCoordinaciones.DataBind();
             this.cbFiltroCoord.DataBind();
         }
 
         protected void cargarTablaArea()
         {
-            this.gvAreas.DataSource = hdk_ControlArea.cargarTabla(txtFiltroArea.Text);
+            this.gvAreas.DataSource = controlArea.obtenerDataSource(txtFiltroArea.Text);
             this.gvAreas.DataBind();
         }
 
         protected void cargarTablaPuesto()
         {
-            this.gvPuestos.DataSource = hdk_ControlPuesto.cargarTabla(txtFiltroPuesto.Text);
+            this.gvPuestos.DataSource = controlPuesto.obtenerDataSource(txtFiltroPuesto.Text);
             this.gvPuestos.DataBind();
         }
 
@@ -134,7 +134,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "coordinacion":
-                    if (hdk_ControlCoordinacion.insertar(txtNombre.Text))
+                    if (accionesCoordinacion.insertar(txtNombre.Text))
                     {
                         this.cargarTablaCoordinacion();
                         return true;
@@ -143,7 +143,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "depto":
-                    if (hdk_ControlDepartamento.insertar(txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
+                    if (accionesDepto.insertar(txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
                     {
                         this.cargarTablaDeptos();
                         return true;
@@ -152,7 +152,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "area":
-                    if (hdk_ControlArea.insertar(txtNombre.Text))
+                    if (controlArea.insertar(txtNombre.Text))
                     {
                         this.cargarTablaArea();
                         return true;
@@ -161,7 +161,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "puesto":
-                    if (hdk_ControlPuesto.insertar(txtNombre.Text))
+                    if (controlPuesto.insertar(txtNombre.Text))
                     {
                         this.cargarTablaPuesto();
                         return true;
@@ -179,7 +179,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "coordinacion":
-                    if (hdk_ControlCoordinacion.modificar(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value), txtNombre.Text))
+                    if (accionesCoordinacion.modificar(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaCoordinacion();
                         return true;
@@ -188,7 +188,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "depto":
-                    if (hdk_ControlDepartamento.modificar(Convert.ToInt32(gvDeptos.SelectedDataKey.Value), txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
+                    if (accionesDepto.modificar(Convert.ToInt32(gvDeptos.SelectedDataKey.Value), txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
                     {
                         this.cargarTablaDeptos();
                         return true;
@@ -197,7 +197,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "area":
-                    if (hdk_ControlArea.modificar(Convert.ToInt32(gvAreas.SelectedDataKey.Value), txtNombre.Text))
+                    if (controlArea.modificar(Convert.ToInt32(gvAreas.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaArea();
                         return true;
@@ -206,7 +206,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "puesto":
-                    if (hdk_ControlPuesto.modificar(Convert.ToInt32(gvPuestos.SelectedDataKey.Value), txtNombre.Text))
+                    if (controlPuesto.modificar(Convert.ToInt32(gvPuestos.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaPuesto();
                         return true;
@@ -228,7 +228,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarCoord":
                     if (gvCoordinaciones.SelectedIndex != -1)
                     {
-                        tblcoordinacion coordSeleccionada = hdk_ControlCoordinacion.obtenerCoordinacion(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value));
+                        tblcoordinacion coordSeleccionada = accionesCoordinacion.obtenerCoordinacion(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value));
                         this.configurarModal("Editar coordinaciones", coordSeleccionada.nomCoordinacion, false);
                         seleccionado = true;
                     }
@@ -237,7 +237,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarDepto":
                     if (gvDeptos.SelectedIndex != -1)
                     {
-                        tbldepartamento deptoSeleccionado = hdk_ControlDepartamento.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
+                        tbldepartamento deptoSeleccionado = accionesDepto.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
                         this.cbCoordinaciones.SelectedValue = deptoSeleccionado.coordinacion.ToString();
                         this.configurarModal("Editar departamentos", deptoSeleccionado.nomDepto, true);
                         seleccionado = true;
@@ -247,7 +247,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarArea":
                     if (gvAreas.SelectedIndex != -1)
                     {
-                        tblarea areaSeleccionada = hdk_ControlArea.obtenerArea(Convert.ToInt32(gvAreas.SelectedDataKey.Value));
+                        tblarea areaSeleccionada = controlArea.obtenerArea(Convert.ToInt32(gvAreas.SelectedDataKey.Value));
                         this.configurarModal("Editar áreas", areaSeleccionada.nomArea, false);
                         seleccionado = true;
                     }
@@ -256,7 +256,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarPuesto":
                     if (gvPuestos.SelectedIndex != -1)
                     {
-                        tblpuesto puestoSeleccionado = hdk_ControlPuesto.obtenerPuesto(Convert.ToInt32(gvPuestos.SelectedDataKey.Value));
+                        tblpuesto puestoSeleccionado = controlPuesto.obtenerPuesto(Convert.ToInt32(gvPuestos.SelectedDataKey.Value));
                         this.configurarModal("Editar puestos", puestoSeleccionado.nomPuesto, false);
                         seleccionado = true;
                     }

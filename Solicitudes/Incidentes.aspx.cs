@@ -19,7 +19,7 @@ namespace HelpDeskWeb.Solicitudes
             hdk_utilerias.checarSession(this, true, 2, 2);
             if (!IsPostBack)
             {
-                lbelUsuario.Text = " " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+                lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).username;
                 this.generarPrivilegios();
                 this.cargarComboFiltro();
                 this.cargarComboBoxs();
@@ -51,13 +51,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlIncidentes.obtenerDataSourceSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = hdk_ControlIncidentes.cargarTablaSolicitante(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlIncidentes.obtenerDataSourceSolicitante(controlUsuario.obtenerUsuarioDeSession(this).idUsuario, cbTipoFiltro.SelectedItem.Text, x, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -65,9 +65,9 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboBoxs()
         {
-            cbTipoIncidente2.DataSource = cbTipoIncidente.DataSource = hdk_ControlIncidentes.cargarComboTipo();
-            cbSoporte2.DataSource = cbSeguimiento2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource =  hdk_ControlUsuario.cargarComboUsuarios(0);
-            cbSolicitante.DataSource = cbSolicitante2.DataSource = hdk_ControlUsuario.cargarComboUsuarios(2);
+            cbTipoIncidente2.DataSource = cbTipoIncidente.DataSource = controlIncidentes.obtenerDataSourceCombBoxTipo();
+            cbSoporte2.DataSource = cbSeguimiento2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource =  controlUsuario.dataSourceComboBox(0);
+            cbSolicitante.DataSource = cbSolicitante2.DataSource = controlUsuario.dataSourceComboBox(2);
             cbTipoIncidente.DataBind();
             cbTipoIncidente2.DataBind();
             cbSoporte.DataBind();
@@ -80,7 +80,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarComboFiltro()
         {
-            cbTipoFiltro.DataSource = hdk_ControlIncidentes.cargarComboTipo();
+            cbTipoFiltro.DataSource = controlIncidentes.obtenerDataSourceCombBoxTipo();
             cbTipoFiltro.DataBind();
         }
 
@@ -88,13 +88,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (datasource != null)
             {
-                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaEncuesta(datasource.Value);
+                gvEncuestas.DataSource = controlEncuestas.obtenerDataSourceEncuesta(datasource.Value);
                 this.gvEncuestas.Columns[2].Visible = false;
                 this.gvEncuestas.Columns[3].Visible = true;
             }
             else
             {
-                gvEncuestas.DataSource = hdk_ControlEncuestas.cargarTablaPreguntas(1);
+                gvEncuestas.DataSource = controlEncuestas.obtenerDataSourcePreguntas(1);
                 this.gvEncuestas.Columns[2].Visible = true;
                 this.gvEncuestas.Columns[3].Visible = false;
             }
@@ -123,14 +123,14 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                int solicitante = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+                int solicitante = controlUsuario.obtenerUsuarioDeSession(this).idUsuario;
 
-                if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
                 {
                     solicitante = Convert.ToInt32(cbSolicitante.SelectedValue);
                 }
 
-                if (hdk_ControlIncidentes.insertarIncidente(solicitante, txtDescripcion.Text))
+                if (controlIncidentes.insertarIncidente(solicitante, txtDescripcion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -145,12 +145,12 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
 
-                    tblincidente itemIncidente = hdk_ControlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
+                    tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
                     cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
                     cbPrioridad.Text = itemIncidente.prioridad;
                     cbSoporte.SelectedValue = itemIncidente.soporte.ToString();
@@ -170,7 +170,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (!tabItemSeleccionado.Value.Equals("2"))
                 {
@@ -198,7 +198,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
             {
-                if (hdk_ControlIncidentes.cambiarStatus(Convert.ToInt32(idIncidenteSeleccionado.Value), 3))
+                if (controlIncidentes.cambiarStatus(Convert.ToInt32(idIncidenteSeleccionado.Value), 3))
                     {
                         this.cargarTablasIncidentes();
                         ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "CancelarIncidente", "alertify.success('Incidente cancelado correctamente');", true);
@@ -216,7 +216,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
@@ -240,7 +240,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void BtnGrabarAsignacion_Click(object sender, EventArgs e)
         {
-            if (hdk_ControlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), cbPrioridad.Text, Convert.ToInt32(cbTipoIncidente.SelectedValue)))
+            if (controlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), cbPrioridad.Text, Convert.ToInt32(cbTipoIncidente.SelectedValue)))
             {
                 this.cargarTablasIncidentes();
                 ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "SalirVentanaAsign", "$('#ModalAsignar').modal('hide');", true);
@@ -256,7 +256,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtAcciones.Text) || !String.IsNullOrWhiteSpace(txtSolucion.Text))
             {
-                if (hdk_ControlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text))
+                if (controlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "SalirVentanaCerrar", "$('#ModalCerrar').modal('hide');", true);
@@ -353,7 +353,7 @@ namespace HelpDeskWeb.Solicitudes
             TableCell celda = (TableCell)imgBtn.Parent;
             GridViewRow renglon = (GridViewRow)celda.Parent;
             gvIncidentes_Cerrados.SelectedIndex = renglon.RowIndex;
-            VistaIncidentesCerrado incidenteCerrado = hdk_ControlIncidentes.obtenerIncidenteCerrado(Convert.ToInt32(gvIncidentes_Cerrados.SelectedDataKey.Value.ToString()));
+            vt_incidentes_cerrados incidenteCerrado = controlIncidentes.obtenerIncidenteCerrado(Convert.ToInt32(gvIncidentes_Cerrados.SelectedDataKey.Value.ToString()));
             idCalidad.Value = incidenteCerrado.idCalidad_Servicio.ToString();
             txtSolicitante.Text = incidenteCerrado.solicitante;
             if (incidenteCerrado.statusCal_Servicio)
@@ -366,7 +366,7 @@ namespace HelpDeskWeb.Solicitudes
                 btnGrabarEncuesta.Text = "Aceptar";
                 ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
             }
-            else if(incidenteCerrado.statusCal_Servicio == false && hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            else if(incidenteCerrado.statusCal_Servicio == false && controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 this.cargarTablaEncuesta(null);
                 txtObEncuestas.Enabled = true;
@@ -395,7 +395,7 @@ namespace HelpDeskWeb.Solicitudes
                     if (row.RowType == DataControlRowType.DataRow)
                     {
                         DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
-                        if (hdk_ControlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
                         {
                             correcto = true;
                         }
@@ -407,7 +407,7 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 if (correcto)
                 {
-                    if (hdk_ControlEncuestas.guardarCambiosEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
+                    if (controlEncuestas.SaveChangesEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
                     {
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
                         this.cargarTablasIncidentes();
@@ -438,7 +438,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;
@@ -453,7 +453,7 @@ namespace HelpDeskWeb.Solicitudes
                 cbSeguimiento2.Text, cbSoporte2.Text
             }))
             {
-                if (hdk_ControlIncidentes.insertarIncidenteCompleto(Convert.ToInt32(cbSolicitante2.SelectedValue), Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, Convert.ToInt32(cbTipoIncidente2.SelectedValue), Convert.ToDateTime(txtFechaInicio.Text), Convert.ToDateTime(txtFechaFinal.Text), cbPrioridad2.Text, Convert.ToDateTime(txtHoraInicio.Text), Convert.ToDateTime(txtHoraFinal.Text)))
+                if (controlIncidentes.insertarIncidenteCompleto(Convert.ToInt32(cbSolicitante2.SelectedValue), Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, Convert.ToInt32(cbTipoIncidente2.SelectedValue), Convert.ToDateTime(txtFechaInicio.Text), Convert.ToDateTime(txtFechaFinal.Text), cbPrioridad2.Text, Convert.ToDateTime(txtHoraInicio.Text), Convert.ToDateTime(txtHoraFinal.Text)))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "cerrar", "$('#ModalNuevoCompleto').modal('hide');", true);

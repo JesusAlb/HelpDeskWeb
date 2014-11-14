@@ -18,7 +18,7 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            usuarioActual = hdk_ControlUsuario.obtenerUsuario(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
+            usuarioActual = controlUsuario.obtenerUsuario(controlUsuario.obtenerUsuarioDeSession(this).idUsuario);
             if (!IsPostBack)
             {
                 lbelUsuario.Text = usuarioActual.username;
@@ -36,7 +36,7 @@ namespace HelpDeskWeb
                 txtCorreo.Text = correoDividio[0];
                 lbelInstitucion.Text = "@" + correoDividio[1];
                 cbPuesto.SelectedValue = usuarioActual.puesto.ToString();
-                int idCoordinacion = hdk_ControlCoordinacion.obtenerCoordinacion(usuarioActual.depto).idCoordinacion;
+                int idCoordinacion = accionesCoordinacion.obtenerCoordinacion(usuarioActual.depto).idCoordinacion;
                 this.cargarComboDepto(idCoordinacion);
                 cbDepto.SelectedValue = usuarioActual.depto.ToString();
                 cbCoordinacion.SelectedValue = idCoordinacion.ToString();
@@ -44,11 +44,11 @@ namespace HelpDeskWeb
         }
 
         protected void cargarCombos()
-        {   
-            cbCoordinacion.DataSource = hdk_ControlDepartamento.cargarComboCord(false);
-            cbArea.DataSource = hdk_ControlArea.cargarCombo();
-            cbPuesto.DataSource = hdk_ControlPuesto.cargarCombo();
-            cbInstitucion.DataSource = hdk_ControlInstitucion.cargarTablaInsitucion();
+        {
+            cbCoordinacion.DataSource = accionesCoordinacion.obtenerDataSource(false, "");
+            cbArea.DataSource = controlArea.obtenerDataSource("");
+            cbPuesto.DataSource = controlPuesto.obtenerDataSource("");
+            cbInstitucion.DataSource = controlInstitucion.obtenerDataSource();
             cbInstitucion.DataBind();
             cbCoordinacion.DataBind();
             cbArea.DataBind();
@@ -57,7 +57,7 @@ namespace HelpDeskWeb
 
         protected void cargarComboDepto(int idCoordinacion)
         {
-            cbDepto.DataSource = hdk_ControlDepartamento.cargarComboDep(idCoordinacion);
+            cbDepto.DataSource = accionesDepto.obtenerDataSourceComboBox(idCoordinacion);
             cbDepto.DataBind();
         }
 
@@ -68,7 +68,7 @@ namespace HelpDeskWeb
 
         protected void cambiarCorreo(int institucion)
         {
-            lbelInstitucion.Text = "@" + hdk_ControlInstitucion.obtenerInstitucion(institucion).correoInstitucion;
+            lbelInstitucion.Text = "@" + controlInstitucion.obtenerInstitucion(institucion).correoInstitucion;
         }
 
         protected void cbInstitucion_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace HelpDeskWeb
         {
             if (txtVerificarPassword.Text.Equals(txtPassword.Text))
             {
-               if(hdk_ControlUsuario.modificar(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, hdk_ControlUsuario.obtenerUsuarioDeSession(this).username, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
+               if(controlUsuario.modificar(controlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, controlUsuario.obtenerUsuarioDeSession(this).username, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
                     ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
                }
                else

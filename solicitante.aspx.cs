@@ -22,21 +22,21 @@ namespace HelpDeskWeb
 
         protected void cargarInformacionUsuario()
         {
-            lbelNomUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
-            lbelInstitucion.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
-            lbelCargo.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
+            lbelNomUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
+            lbelInstitucion.Text = controlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
+            lbelCargo.Text = controlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
         }
 
         protected void cargarNumeroDeServicios()
         {
-            lbelNumeroEventos.Text = hdk_ControlEventos.obtenerNumeroDeEventosSolicitados(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
-            lbelNumeroIncidentes.Text = hdk_ControlIncidentes.obtenerNumeroDeIncidentesSolicitados(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
+            lbelNumeroEventos.Text = controlEventos.obtenerNumeroDeEventosSolicitados(controlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
+            lbelNumeroIncidentes.Text = controlIncidentes.obtenerNumeroDeIncidentesSolicitados(controlUsuario.obtenerUsuarioDeSession(this).idUsuario).ToString();
         }
 
         protected void cargarEncuestasSinResponder()
         {
-            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEncuestas.obtenerNumeroDeEncuestasSinResponderEnEventos(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario));
-            this.pintarNumeroDeSucesos(lbelNumIncidentes, hdk_ControlEncuestas.obtenerNumeroDeEncuestasSinResponderEnIncidentes(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario));
+            this.pintarNumeroDeSucesos(lbelNumEventos, controlEncuestas.obtenerNumeroDeEncuestasSinResponderEnEventos(controlUsuario.obtenerUsuarioDeSession(this).idUsuario));
+            this.pintarNumeroDeSucesos(lbelNumIncidentes, controlEncuestas.obtenerNumeroDeEncuestasSinResponderEnIncidentes(controlUsuario.obtenerUsuarioDeSession(this).idUsuario));
         }
 
         protected void pintarNumeroDeSucesos(Label label, int numero)

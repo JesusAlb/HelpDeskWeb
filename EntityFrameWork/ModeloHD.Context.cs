@@ -45,21 +45,21 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tbltipoequipo> tbltipoequipoes { get; set; }
         public virtual DbSet<tbltipoincidencia> tbltipoincidencias { get; set; }
         public virtual DbSet<tblusuario> tblusuarios { get; set; }
-        public virtual DbSet<ViewDepartamento> ViewDepartamentos { get; set; }
-        public virtual DbSet<ViewTipoIncidencia> ViewTipoIncidencias { get; set; }
-        public virtual DbSet<ViewUsuario> ViewUsuarios { get; set; }
-        public virtual DbSet<VistaEncuesta> VistaEncuestas { get; set; }
-        public virtual DbSet<VistaEquipoReporte> VistaEquipoReportes { get; set; }
-        public virtual DbSet<VistaEquipos> VistaEquipos { get; set; }
-        public virtual DbSet<VistaEventosCerrado> VistaEventosCerrados { get; set; }
-        public virtual DbSet<VistaEventosSinCerrar> VistaEventosSinCerrars { get; set; }
-        public virtual DbSet<VistaIncidentesCerrado> VistaIncidentesCerrados { get; set; }
-        public virtual DbSet<VistaIncidentesSinCerrar> VistaIncidentesSinCerrars { get; set; }
-        public virtual DbSet<VistaPregunta> VistaPreguntas { get; set; }
-        public virtual DbSet<vistapromedioevento> vistapromedioeventos { get; set; }
-        public virtual DbSet<vistapromediogeneral> vistapromediogenerals { get; set; }
-        public virtual DbSet<vistapromedioincidente> vistapromedioincidentes { get; set; }
-        public virtual DbSet<ViewEventoConRequerimiento> ViewEventoConRequerimientos { get; set; }
+        public virtual DbSet<vt_departamentos> vt_departamentos { get; set; }
+        public virtual DbSet<vt_encuestas> vt_encuestas { get; set; }
+        public virtual DbSet<vt_equipos> vt_equipos { get; set; }
+        public virtual DbSet<vt_eventos_cerrados> vt_eventos_cerrados { get; set; }
+        public virtual DbSet<vt_eventos_sin_cerrar> vt_eventos_sin_cerrar { get; set; }
+        public virtual DbSet<vt_incidentes_cerrados> vt_incidentes_cerrados { get; set; }
+        public virtual DbSet<vt_incidentes_sin_cerrar> vt_incidentes_sin_cerrar { get; set; }
+        public virtual DbSet<vt_preguntas> vt_preguntas { get; set; }
+        public virtual DbSet<vt_promedio_eventos> vt_promedio_eventos { get; set; }
+        public virtual DbSet<vt_promedio_general> vt_promedio_general { get; set; }
+        public virtual DbSet<vt_promedio_incidentes> vt_promedio_incidentes { get; set; }
+        public virtual DbSet<vt_reporte_equipos> vt_reporte_equipos { get; set; }
+        public virtual DbSet<vt_requerimientos_asignados> vt_requerimientos_asignados { get; set; }
+        public virtual DbSet<vt_tipoincidentes> vt_tipoincidentes { get; set; }
+        public virtual DbSet<vt_usuarios> vt_usuarios { get; set; }
     
         public virtual ObjectResult<ReqAsignados_Result> ReqAsignados(Nullable<int> id)
         {
@@ -68,90 +68,6 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReqAsignados_Result>("ReqAsignados", idParameter);
-        }
-    
-        public virtual int cerrarEvento(Nullable<int> idEv)
-        {
-            var idEvParameter = idEv.HasValue ?
-                new ObjectParameter("idEv", idEv) :
-                new ObjectParameter("idEv", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cerrarEvento", idEvParameter);
-        }
-    
-        public virtual int cerrarIncidente(Nullable<int> idIn, string acci, string solu)
-        {
-            var idInParameter = idIn.HasValue ?
-                new ObjectParameter("idIn", idIn) :
-                new ObjectParameter("idIn", typeof(int));
-    
-            var acciParameter = acci != null ?
-                new ObjectParameter("Acci", acci) :
-                new ObjectParameter("Acci", typeof(string));
-    
-            var soluParameter = solu != null ?
-                new ObjectParameter("Solu", solu) :
-                new ObjectParameter("Solu", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cerrarIncidente", idInParameter, acciParameter, soluParameter);
-        }
-    
-        public virtual int insertarEvento(string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, string tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento)
-        {
-            var tituloParameter = titulo != null ?
-                new ObjectParameter("titulo", titulo) :
-                new ObjectParameter("titulo", typeof(string));
-    
-            var lugarParameter = lugar.HasValue ?
-                new ObjectParameter("lugar", lugar) :
-                new ObjectParameter("lugar", typeof(int));
-    
-            var acomodoParameter = acomodo != null ?
-                new ObjectParameter("acomodo", acomodo) :
-                new ObjectParameter("acomodo", typeof(string));
-    
-            var asistenciaParameter = asistencia.HasValue ?
-                new ObjectParameter("asistencia", asistencia) :
-                new ObjectParameter("asistencia", typeof(int));
-    
-            var horaInParameter = horaIn.HasValue ?
-                new ObjectParameter("horaIn", horaIn) :
-                new ObjectParameter("horaIn", typeof(System.DateTime));
-    
-            var horaFnParameter = horaFn.HasValue ?
-                new ObjectParameter("HoraFn", horaFn) :
-                new ObjectParameter("HoraFn", typeof(System.DateTime));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("descripcion", descripcion) :
-                new ObjectParameter("descripcion", typeof(string));
-    
-            var tipoEventoParameter = tipoEvento != null ?
-                new ObjectParameter("tipoEvento", tipoEvento) :
-                new ObjectParameter("tipoEvento", typeof(string));
-    
-            var solicitanteParameter = solicitante.HasValue ?
-                new ObjectParameter("solicitante", solicitante) :
-                new ObjectParameter("solicitante", typeof(int));
-    
-            var fechaEventoParameter = fechaEvento.HasValue ?
-                new ObjectParameter("FechaEvento", fechaEvento) :
-                new ObjectParameter("FechaEvento", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarEvento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter);
-        }
-    
-        public virtual int insertarIncidente(string descr, Nullable<int> soli)
-        {
-            var descrParameter = descr != null ?
-                new ObjectParameter("Descr", descr) :
-                new ObjectParameter("Descr", typeof(string));
-    
-            var soliParameter = soli.HasValue ?
-                new ObjectParameter("Soli", soli) :
-                new ObjectParameter("Soli", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarIncidente", descrParameter, soliParameter);
         }
     
         public virtual ObjectResult<numEventosPorMes_Result> numEventosPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
@@ -219,7 +135,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorTipo_Result>("numIncidentesPorTipo", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual int numIncidentesPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
+        public virtual ObjectResult<numIncidentesPorUsuario_Result> numIncidentesPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {
             var fechaInicioParameter = fechaInicio.HasValue ?
                 new ObjectParameter("fechaInicio", fechaInicio) :
@@ -229,7 +145,7 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("fechaFinal", fechaFinal) :
                 new ObjectParameter("fechaFinal", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<numIncidentesPorUsuario_Result>("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
         }
     
         public virtual int promedioCalidadPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
@@ -310,13 +226,97 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorUsuarioIn", fechaInicioParameter, fechaFinalParameter);
         }
     
-        public virtual ObjectResult<requerimientosSinAsignar_Result> requerimientosSinAsignar(Nullable<int> idEvento)
+        public virtual int sp_cerrar_evento(Nullable<int> idEv)
+        {
+            var idEvParameter = idEv.HasValue ?
+                new ObjectParameter("idEv", idEv) :
+                new ObjectParameter("idEv", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_evento", idEvParameter);
+        }
+    
+        public virtual int sp_cerrar_incidente(Nullable<int> idIn, string acci, string solu)
+        {
+            var idInParameter = idIn.HasValue ?
+                new ObjectParameter("idIn", idIn) :
+                new ObjectParameter("idIn", typeof(int));
+    
+            var acciParameter = acci != null ?
+                new ObjectParameter("Acci", acci) :
+                new ObjectParameter("Acci", typeof(string));
+    
+            var soluParameter = solu != null ?
+                new ObjectParameter("Solu", solu) :
+                new ObjectParameter("Solu", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_incidente", idInParameter, acciParameter, soluParameter);
+        }
+    
+        public virtual int sp_insertar_evento(string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, string tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("titulo", titulo) :
+                new ObjectParameter("titulo", typeof(string));
+    
+            var lugarParameter = lugar.HasValue ?
+                new ObjectParameter("lugar", lugar) :
+                new ObjectParameter("lugar", typeof(int));
+    
+            var acomodoParameter = acomodo != null ?
+                new ObjectParameter("acomodo", acomodo) :
+                new ObjectParameter("acomodo", typeof(string));
+    
+            var asistenciaParameter = asistencia.HasValue ?
+                new ObjectParameter("asistencia", asistencia) :
+                new ObjectParameter("asistencia", typeof(int));
+    
+            var horaInParameter = horaIn.HasValue ?
+                new ObjectParameter("horaIn", horaIn) :
+                new ObjectParameter("horaIn", typeof(System.DateTime));
+    
+            var horaFnParameter = horaFn.HasValue ?
+                new ObjectParameter("HoraFn", horaFn) :
+                new ObjectParameter("HoraFn", typeof(System.DateTime));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var tipoEventoParameter = tipoEvento != null ?
+                new ObjectParameter("tipoEvento", tipoEvento) :
+                new ObjectParameter("tipoEvento", typeof(string));
+    
+            var solicitanteParameter = solicitante.HasValue ?
+                new ObjectParameter("solicitante", solicitante) :
+                new ObjectParameter("solicitante", typeof(int));
+    
+            var fechaEventoParameter = fechaEvento.HasValue ?
+                new ObjectParameter("FechaEvento", fechaEvento) :
+                new ObjectParameter("FechaEvento", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_evento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter);
+        }
+    
+        public virtual int sp_insertar_incidente(string descr, Nullable<int> soli)
+        {
+            var descrParameter = descr != null ?
+                new ObjectParameter("Descr", descr) :
+                new ObjectParameter("Descr", typeof(string));
+    
+            var soliParameter = soli.HasValue ?
+                new ObjectParameter("Soli", soli) :
+                new ObjectParameter("Soli", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_incidente", descrParameter, soliParameter);
+        }
+    
+        public virtual ObjectResult<sp_requerimientos_sin_asignar_Result> sp_requerimientos_sin_asignar(Nullable<int> idEvento)
         {
             var idEventoParameter = idEvento.HasValue ?
                 new ObjectParameter("idEvento", idEvento) :
                 new ObjectParameter("idEvento", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<requerimientosSinAsignar_Result>("requerimientosSinAsignar", idEventoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_requerimientos_sin_asignar_Result>("sp_requerimientos_sin_asignar", idEventoParameter);
         }
     
         public virtual ObjectResult<topCincoRecursosMasUsados_Result> topCincoRecursosMasUsados(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)

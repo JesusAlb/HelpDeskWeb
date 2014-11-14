@@ -76,6 +76,7 @@
       <HintPath>packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -191,6 +192,7 @@
     <Content Include="css\helpdesk-template.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.aspx" />
+    <Content Include="js\alertify.js.map" />
     <EntityDeploy Include="EntityFrameWork\ModeloHD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloHD.Designer.cs</LastGenOutput>
@@ -208,7 +210,6 @@
       <DependentUpon>ModeloHD.edmx</DependentUpon>
       <LastGenOutput>ModeloHD.cs</LastGenOutput>
     </Content>
-    <Content Include="js\alertify.js.map" />
     <None Include="js\jquery-2.1.1-vsdoc.js" />
     <None Include="js\jquery-2.1.1.intellisense.js" />
     <Content Include="js\jquery-2.1.1.js" />
@@ -319,25 +320,25 @@
     <Compile Include="Catalogos\catUsuarios.aspx.designer.cs">
       <DependentUpon>catUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ControlBD\Acceso\hdk_ControlAcceso.cs">
+    <Compile Include="ControlBD\Acceso\controlAcceso.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlBD\Catalogo\hdk_ControlArea.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlCoordinacion.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlDepartamento.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlEquipos.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlInstitucion.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlLugar.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlMarca.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlPuesto.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlRequerimientos.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlTipoEquipo.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlTipoIncidencia.cs" />
-    <Compile Include="ControlBD\Catalogo\hdk_ControlUsuario.cs" />
-    <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlAsigReq.cs" />
-    <Compile Include="ControlBD\Solicitudes\Eventos\hdk_ControlEventos.cs" />
-    <Compile Include="ControlBD\Solicitudes\hdk_ControlEncuestas.cs" />
-    <Compile Include="ControlBD\Solicitudes\Incidentes\hdk_ControlIncidentes.cs" />
+    <Compile Include="ControlBD\Catalogo\controlArea.cs" />
+    <Compile Include="ControlBD\Catalogo\controlCoordinacion.cs" />
+    <Compile Include="ControlBD\Catalogo\controlDepto.cs" />
+    <Compile Include="ControlBD\Catalogo\controlEquipos.cs" />
+    <Compile Include="ControlBD\Catalogo\controlInstitucion.cs" />
+    <Compile Include="ControlBD\Catalogo\controlLugar.cs" />
+    <Compile Include="ControlBD\Catalogo\controlMarca.cs" />
+    <Compile Include="ControlBD\Catalogo\controlPuesto.cs" />
+    <Compile Include="ControlBD\Catalogo\controlRequerimiento.cs" />
+    <Compile Include="ControlBD\Catalogo\controlTipoEquipo.cs" />
+    <Compile Include="ControlBD\Catalogo\controlTipoIncidencia.cs" />
+    <Compile Include="ControlBD\Catalogo\controlUsuario.cs" />
+    <Compile Include="ControlBD\Solicitudes\Eventos\controlRecursosAsignados.cs" />
+    <Compile Include="ControlBD\Solicitudes\Eventos\controlEventos.cs" />
+    <Compile Include="ControlBD\Solicitudes\controlEncuestas.cs" />
+    <Compile Include="ControlBD\Solicitudes\Incidentes\controlIncidentes.cs" />
     <Compile Include="EntityFrameWork\ModeloHD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -362,10 +363,13 @@
     <Compile Include="EntityFrameWork\numIncidentesPorTipo_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\requerimientosSinAsignar_Result.cs">
+    <Compile Include="EntityFrameWork\sp_requerimientos_sin_asignar_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblarea.cs">
@@ -428,49 +432,49 @@
     <Compile Include="EntityFrameWork\topCincoRecursosMenosUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\ViewDepartamento.cs">
+    <Compile Include="EntityFrameWork\vt_departamentos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\ViewEventoConRequerimiento.cs">
+    <Compile Include="EntityFrameWork\vt_encuestas.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\ViewTipoIncidencia.cs">
+    <Compile Include="EntityFrameWork\vt_equipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\ViewUsuario.cs">
+    <Compile Include="EntityFrameWork\vt_eventos_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEncuesta.cs">
+    <Compile Include="EntityFrameWork\vt_eventos_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEquipoReporte.cs">
+    <Compile Include="EntityFrameWork\vt_incidentes_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEquipos.cs">
+    <Compile Include="EntityFrameWork\vt_incidentes_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEventosCerrado.cs">
+    <Compile Include="EntityFrameWork\vt_preguntas.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaEventosSinCerrar.cs">
+    <Compile Include="EntityFrameWork\vt_promedio_eventos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaIncidentesCerrado.cs">
+    <Compile Include="EntityFrameWork\vt_promedio_general.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaIncidentesSinCerrar.cs">
+    <Compile Include="EntityFrameWork\vt_promedio_incidentes.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\VistaPregunta.cs">
+    <Compile Include="EntityFrameWork\vt_reporte_equipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vistapromedioevento.cs">
+    <Compile Include="EntityFrameWork\vt_requerimientos_asignados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vistapromediogeneral.cs">
+    <Compile Include="EntityFrameWork\vt_tipoincidentes.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vistapromedioincidente.cs">
+    <Compile Include="EntityFrameWork\vt_usuarios.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="hdk_utilerias.cs">
@@ -544,6 +548,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -552,6 +557,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReportEventos.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -19,15 +19,15 @@ namespace HelpDeskWeb.Reportes
         {
             hdk_utilerias.checarSession(this,true, 2, 2);
             this.generarPrivilegios();
-            lbelUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).username;
             this.cargarEventos();
         }
 
         protected void cargarEventos()
         {
-            int tipo =  hdk_ControlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
-            int idUsuario = hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario;
-            gvEventos.DataSource = hdk_ControlEventos.obtenerEventoConRequerimientos(tipo, idUsuario);
+            int tipo =  controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
+            int idUsuario = controlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+            gvEventos.DataSource = controlEventos.obtenerEventoConRequerimientos(tipo, idUsuario);
             gvEventos.DataBind();
         }
 
@@ -35,7 +35,7 @@ namespace HelpDeskWeb.Reportes
         {
             vt_reporte.Reset();
             vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
-            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", hdk_ControlEquipos.cargarTabla(""));
+            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.dataSource(""));
             vt_reporte.LocalReport.DataSources.Add(datasource);
             vt_reporte.LocalReport.Refresh();
             datosBusqueda.CssClass = "panel-collapse collapse";
@@ -111,7 +111,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void generarPrivilegios()
         {
-            if (hdk_ControlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

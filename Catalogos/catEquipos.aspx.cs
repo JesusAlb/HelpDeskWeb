@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this,true, 0, 0);
-            lbelUsuario.Text =" " + hdk_ControlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text =" " + controlUsuario.obtenerUsuarioDeSession(this).username;
             if (!Page.IsPostBack)
             {
                 this.cargarTablasTipos();
@@ -39,13 +39,13 @@ namespace HelpDeskWeb.Catalogos
 
         protected void cargarTablasTipos()
         {
-            gvTipoEquipos.DataSource = hdk_ControlTipoEquipo.cargarTabla(txtFiltroTipo.Text);
+            gvTipoEquipos.DataSource = controlTipoEquipo.obtenerDataSource(txtFiltroTipo.Text);
             gvTipoEquipos.DataBind();
         }
 
         protected void cargarTablasMarcas()
         {
-            gvMarca.DataSource = hdk_ControlMarca.cargarTabla(txtFiltroMarca.Text);
+            gvMarca.DataSource = controlMarca.obtenerDataSource(txtFiltroMarca.Text);
             gvMarca.DataBind();
         }
 
@@ -101,7 +101,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarTipoEquipo":
                     if (gvTipoEquipos.SelectedIndex != -1)
                     {
-                        tbltipoequipo tipoEquipo = hdk_ControlTipoEquipo.obtenerEquipo(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value));
+                        tbltipoequipo tipoEquipo = controlTipoEquipo.obtenerEquipo(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value));
                         chDiscoD.Checked = tipoEquipo.siDiscoDuro;
                         chRAM.Checked = tipoEquipo.siRAM;
                         chRed.Checked = tipoEquipo.siRed;
@@ -117,7 +117,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarMarca":
                     if (gvMarca.SelectedIndex != -1)
                     {
-                        this.configurarModal("Editar marca", hdk_ControlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value)).nomMarca, false);
+                        this.configurarModal("Editar marca", controlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value)).nomMarca, false);
                         seleccionado = true;
                     }
                     break;
@@ -174,7 +174,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "tipoEquipo":
-                    if (hdk_ControlTipoEquipo.insertar(txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (controlTipoEquipo.insertar(txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
                         this.cargarTablasTipos();
                         return true;
@@ -183,7 +183,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "marca":
-                    if (hdk_ControlMarca.insertar(txtNombre.Text))
+                    if (controlMarca.insertar(txtNombre.Text))
                     {
                         this.cargarTablasMarcas();
                         return true;
@@ -201,7 +201,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "tipoEquipo":
-                    if (hdk_ControlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
+                    if (controlTipoEquipo.modificar(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value.ToString()), txtNombre.Text, chEquipo.Checked, chDiscoD.Checked, chRed.Checked, chMonitor.Checked, chMouse.Checked, chTeclado.Checked, chRAM.Checked, chProcesador.Checked))
                     {
                         this.cargarTablasTipos();
                         return true;
@@ -210,7 +210,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "marca":
-                    if (hdk_ControlMarca.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value), txtNombre.Text))
+                    if (controlMarca.modificar(Convert.ToInt32(gvMarca.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablasMarcas();
                         return true;

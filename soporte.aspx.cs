@@ -18,9 +18,9 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelNomUsuario.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
-            lbelCargo.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
-            lbelInstitucion.Text = hdk_ControlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
+            lbelNomUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
+            lbelCargo.Text = controlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
+            lbelInstitucion.Text = controlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
             this.pintarCalificaciones();
             this.obtenerNumeroDeSucesos();
             
@@ -28,7 +28,7 @@ namespace HelpDeskWeb
 
         protected void pintarCalificaciones()
         {
-            vistapromediogeneral promedioCalidad = hdk_ControlEncuestas.obtenerPromedioCalidad(hdk_ControlUsuario.obtenerUsuarioDeSession(this).idUsuario);
+            vt_promedio_general promedioCalidad = controlEncuestas.obtenerPromedioCalidad(controlUsuario.obtenerUsuarioDeSession(this).idUsuario);
             if (promedioCalidad.PromedioTotal == null)
             {
                 lbelCalificacionEventos.Text = "S/C";
@@ -65,8 +65,8 @@ namespace HelpDeskWeb
 
         protected void obtenerNumeroDeSucesos()
         {
-            this.pintarNumeroDeSucesos(lbelNumIncidentes, hdk_ControlIncidentes.obtenerNumeroIncidentes());
-            this.pintarNumeroDeSucesos(lbelNumEventos, hdk_ControlEventos.obtenerNumeroEventosAbiertos());
+            this.pintarNumeroDeSucesos(lbelNumIncidentes, controlIncidentes.obtenerNumeroIncidentes());
+            this.pintarNumeroDeSucesos(lbelNumEventos, controlEventos.obtenerNumeroEventosAbiertos());
         }
 
         protected void pintarNumeroDeSucesos(Label label, int numero)

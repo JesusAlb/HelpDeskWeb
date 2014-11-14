@@ -148,7 +148,7 @@
                                                                         <asp:TextBox runat="server" ID="txtNombre" onkeydown="return isAlpha(event.keyCode);" MaxLength="59" CssClass="form-control" placeholder="Nombre" />
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" ID="panelCoordinaciones" CssClass="form-group" Visible="false">
-                                                                        <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>
+                                                                        <asp:Label runat="server" Text="Coordinación" Font-Bold="true"></asp:Label>
                                                                         <asp:DropDownList runat="server" ID="cbCoordinaciones" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion">
                                                                         </asp:DropDownList>
                                                                     </asp:Panel>

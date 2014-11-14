@@ -1,4 +1,5 @@
-﻿using HelpDeskWeb.EntityFrameWork;
+﻿using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,7 @@ namespace HelpDeskWeb
                       {
                           if (tipoActual != 2)
                           {
-                              tipoActual = ((ViewUsuario)pagina.Session["DatosUsuario"]).tipoUsuario;
+                              tipoActual = controlUsuario.obtenerUsuarioDeSession(pagina).tipoUsuario;
                           }
 
                           if (tipoObligatorio != tipoActual)
