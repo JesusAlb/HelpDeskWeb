@@ -86,7 +86,8 @@ INSERT INTO [dbhelpdesk].[dbo].[tblinstitucion]
 GO
 -----------------------------------------------------------------------------------------------------------
 
---Alta del usuario por defecto
+------------------------------ Alta de usuarios -----------------------------------------------------------
+--Alta del usuario por defecto ----
 INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
            ([nombre]
 					 ,[apellidos]
@@ -112,7 +113,7 @@ INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
            ,'SA@cie.org.mx'
            ,1)
 GO
--- Alta del jefe de departamento de soporte 
+-- Alta del jefe de departamento de soporte --
 INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
            ([nombre]
 					 ,[apellidos]
@@ -138,6 +139,8 @@ INSERT INTO [dbhelpdesk].[dbo].[tblusuarios]
            ,'jcanedo@cie.org.mx'
            ,1)
 GO
+-----------------------------------------------------------------------------------------------------
+
 --Alta de tipos de equipos
 INSERT INTO [dbhelpdesk].[dbo].[tbltipoequipo]
            ([nomTipoEquipo]
@@ -172,27 +175,30 @@ INSERT INTO [dbhelpdesk].[dbo].[tblmarca]
      VALUES
            ('Apple')
 GO
+-------------------- Alta de tipos de incidentes ----------------------------------------
 -- Alta del tipo de incidente por defecto
 INSERT INTO [dbhelpdesk].[dbo].[tbltipoincidencia]
-           ([nombre])
+           ([nomTipoIncidente])
      VALUES
            ('General')
 GO
 -- Alta de los tipos de incidentes más comunes
 INSERT INTO [dbhelpdesk].[dbo].[tbltipoincidencia]
-           ([nombre])
+           ([nomTipoIncidente])
      VALUES
            ('Hardware')
 GO
 INSERT INTO [dbhelpdesk].[dbo].[tbltipoincidencia]
-           ([nombre])
+           ([nomTipoIncidente])
      VALUES
            ('Software')
 GO
 INSERT INTO [dbhelpdesk].[dbo].[tbltipoincidencia]
-           ([nombre])
+           ([nomTipoIncidente])
      VALUES
            ('Red')
+-----------------------------------------------------------------------------------------
+
 -- Alta de los lugares para eventos
 INSERT INTO [dbhelpdesk].[dbo].[tbllugar]
            ([nomLugar])
@@ -201,12 +207,48 @@ INSERT INTO [dbhelpdesk].[dbo].[tbllugar]
 GO
 -- Alta de un requerimiento para evento
 INSERT INTO [dbhelpdesk].[dbo].[tblrequerimientos]
-           ([tipo]
-           ,[nombreReq])
+           ([cuantificable]
+           ,[nomRequerimiento])
      VALUES
            (1
            , 'Sillas')
 GO
 
-
+------------ Alta de preguntas para la evaluación de la calidad del servicio --------------
+------------ Alta de pregunta de tipo general (2)-----------------
+-- Alta de pregunta 1.1 --
+INSERT INTO [dbhelpdesk].[dbo].[tblpregunta]
+           ([idPregunta]
+           ,[txtPregunta]
+           ,[statusPregunta]
+           ,[afinidad])
+     VALUES
+           (1
+           ,'Se realizó de manera rapida y eficiente'
+           ,1
+           ,2)
+GO
+--Alta de pregunta 1.2 --
+INSERT INTO [dbhelpdesk].[dbo].[tblpregunta]
+           ([idPregunta]
+           ,[txtPregunta]
+           ,[statusPregunta]
+           ,[afinidad])
+     VALUES
+           (2
+           ,'Cumplió con sus expectativas'
+           ,1
+           ,2)
+GO
+-- Alta de pregunta 1.3 --
+INSERT INTO [dbhelpdesk].[dbo].[tblpregunta]
+           ([idPregunta]
+           ,[txtPregunta]
+           ,[statusPregunta]
+           ,[afinidad])
+     VALUES
+           (3
+           ,'Trato'
+           ,1
+           ,2)
 
