@@ -41,7 +41,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarTabla()
         {
-            gvEquipo.DataSource = controlEquipos.dataSource(txtFiltro.Text);
+            gvEquipo.DataSource = controlEquipos.obtenerDataSource(txtFiltro.Text);
             gvEquipo.DataBind();
         }
 

@@ -137,7 +137,7 @@
                                                     <div class="col-lg-8">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Institución" Font-Bold="true"></asp:Label>
-                                                            <asp:DropDownList runat="server" AutoPostBack="true" ID="cbInstitucion" OnSelectedIndexChanged="cbInstitucion_SelectedIndexChanged" DataTextField="nomInstitucion" DataValueField="idInstitucion" CssClass="form-control"></asp:DropDownList>
+                                                            <asp:DropDownList runat="server" AutoPostBack="true" ID="cbInstitucion" OnSelectedIndexChanged="cbInstitucion_SelectedIndexChanged" DataTextField="nombre" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -191,7 +191,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Coordinación" Font-Bold="true"></asp:Label>
-                                                            <asp:DropDownList runat="server" ID="cbCoordinacion" AutoPostBack="true" OnSelectedIndexChanged="cbCoordinacion_SelectedIndexChanged" DataTextField="nomCoordinacion" DataValueField="idCoordinacion" CssClass="form-control"></asp:DropDownList>
+                                                            <asp:DropDownList runat="server" ID="cbCoordinacion" AutoPostBack="true" OnSelectedIndexChanged="cbCoordinacion_SelectedIndexChanged" DataTextField="nombre" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
@@ -199,7 +199,7 @@
                                                             <asp:Label runat="server" Text="Departamento" Font-Bold="true"></asp:Label>
                                                             <asp:UpdatePanel runat="server" ID="updateAcciones" UpdateMode="Conditional">
                                                                 <ContentTemplate>
-                                                                    <asp:DropDownList runat="server" DataTextField="nomDepto" CssClass="form-control" DataValueField="idDepto" ID="cbDepto"></asp:DropDownList>
+                                                                    <asp:DropDownList runat="server" DataTextField="nombre" CssClass="form-control" DataValueField="id" ID="cbDepto"></asp:DropDownList>
                                                                 </ContentTemplate>
                                                                 <Triggers>
                                                                     <asp:AsyncPostBackTrigger ControlID="cbCoordinacion" EventName="SelectedIndexChanged" />
@@ -214,14 +214,14 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Área" Font-Bold="true"></asp:Label>
-                                                            <asp:DropDownList runat="server" ID="cbArea" DataTextField="nomArea" DataValueField="idArea" CssClass="form-control"></asp:DropDownList>
+                                                            <asp:DropDownList runat="server" ID="cbArea" DataTextField="nombre" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                         </div>
 
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Puesto" Font-Bold="true"></asp:Label>
-                                                            <asp:DropDownList runat="server" DataTextField="nomPuesto" CssClass="form-control" DataValueField="idPuesto" ID="cbPuesto"></asp:DropDownList>
+                                                            <asp:DropDownList runat="server" DataTextField="nombre" CssClass="form-control" DataValueField="id" ID="cbPuesto"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                 </div>

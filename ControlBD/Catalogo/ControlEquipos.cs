@@ -13,7 +13,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
     class controlEquipos
     {
 
-        public static IList<vt_reporte_equipos> dataSource(string filtro)
+        public static IList<vt_reporte_equipos> obtenerDataSource(string filtro)
         {
             try
             {

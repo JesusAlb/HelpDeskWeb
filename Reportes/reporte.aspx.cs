@@ -35,7 +35,7 @@ namespace HelpDeskWeb.Reportes
         {
             vt_reporte.Reset();
             vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
-            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.dataSource(""));
+            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.obtenerDataSource(""));
             vt_reporte.LocalReport.DataSources.Add(datasource);
             vt_reporte.LocalReport.Refresh();
             datosBusqueda.CssClass = "panel-collapse collapse";
