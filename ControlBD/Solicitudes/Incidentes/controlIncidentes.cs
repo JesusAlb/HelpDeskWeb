@@ -17,21 +17,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
     public class controlIncidentes
     {
 
-        public static IList<tbltipoincidencia> obtenerDataSourceCombBoxTipo()
-        {
-            try
-            {
-                var items = dbhelp.modelo.tbltipoincidencias.ToList();
-                items.Insert(0, new tbltipoincidencia { idTipoIncidente = 0, nomTipoIncidente = "" });
-                return items.ToList();
-            }
-            catch 
-            {
-                return null;
-            }
-        }
-
-        public static IList obtenerDataSourceSolicitante(int idSol, string cbtipo, int status, string filtro, DateTime? limiteIn, DateTime? limiteSp)
+        public static IList obtenerDataSourceSolicitante(int idSolicitante, string tipo, int status, string filtro, DateTime? limiteIn, DateTime? limiteSp)
         {
 
             DateTime busquedaFecha;
@@ -45,44 +31,106 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
 
             try
             {
-                if (status != 2)
+                if (status == 2)
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo))).ToList();
+                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.fk_idusuario_solicitante == idSolicitante && a.tipo.Contains(tipo))).Select(x => new {
+                                id = x.id,
+                                estatus_calidad = x.estatus_calidad,
+                                tipo = x.tipo,
+                                descripcion = x.descripcion,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                                }).ToList();
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp))).ToList();
+                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.fk_idusuario_solicitante == idSolicitante && a.tipo.Contains(tipo) && (a.fecha_solicitud >= limiteIn && a.fecha_solicitud <= limiteSp))).Select(x => new
+                            {
+                                id = x.id,
+                                estatus_calidad = x.estatus_calidad,
+                                descripcion = x.descripcion,
+                                tipo = x.tipo,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                 }
                 else
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo))).ToList();
+                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.fk_idusuario_solicitante == idSolicitante && a.tipo.Contains(tipo))).Select(x => new
+                            {
+                                id = x.id,
+                                descripcion = x.descripcion,
+                                tipo = x.tipo,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) || a.tipo.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.idSolicitante == idSol && a.tipo.Contains(cbtipo) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp))).ToList();
+                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.fk_idusuario_solicitante == idSolicitante && a.tipo.Contains(tipo) && (a.fecha_solicitud >= limiteIn && a.fecha_solicitud <= limiteSp))).Select(x => new
+                            {
+                                id = x.id,
+                                descripcion = x.descripcion,
+                                solicitante = x.solicitante,
+                                tipo = x.tipo,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                 }
+                
             }
             catch 
             {
@@ -90,7 +138,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public static IList obtenerDataSourceSoporte(int status, string cbtipo, string filtro, DateTime? limiteIn, DateTime? limiteSp)
+        public static IList obtenerDataSourceSoporte(int status, string tipo, string filtro, DateTime? limiteIn, DateTime? limiteSp)
         {
 
             DateTime busquedaFecha;
@@ -103,88 +151,154 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             try
             {
-                if (status != 2)
+                if (status == 2)
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo))).ToList();
+                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.tipo.Contains(tipo))).Select(x => new
+                            {
+                                id = x.id,
+                                estatus_calidad = x.estatus_calidad,
+                                tipo = x.tipo,
+                                descripcion = x.descripcion,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo)) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp)).ToList();
+                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.tipo.Contains(tipo)) && (a.fecha_solicitud >= limiteIn && a.fecha_solicitud <= limiteSp)).Select(x => new
+                            {
+                                id = x.id,
+                                estatus_calidad = x.estatus_calidad,
+                                descripcion = x.descripcion,
+                                tipo = x.tipo,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                 }
                 else
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo))).ToList();
+                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.tipo.Contains(tipo))).Select(x => new
+                            {
+                                id = x.id,
+                                descripcion = x.descripcion,
+                                tipo = x.tipo,
+                                solicitante = x.solicitante,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidentes_cerrados.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
-                            a.seguimiento.Contains(filtro) || a.solicitante.Contains(filtro) ||
-                            a.soporte.Contains(filtro) || a.numIncidente == numero || a.prioridad.Contains(filtro) ||
-                            a.fecha_Cierre.Value.Equals(busquedaFecha) || a.fecha_Sol.Value.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.status == status && a.tipo.Contains(cbtipo)) && (a.fecha_Sol >= limiteIn && a.fecha_Sol <= limiteSp)).ToList();
+                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                            a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
+                            a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
+                            a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
+                            a.solucion.Contains(filtro)) && (a.estatus_incidente == status && a.tipo.Contains(tipo)) && (a.fecha_solicitud >= limiteIn && a.fecha_solicitud <= limiteSp)).Select(x => new
+                            {
+                                id = x.id,
+                                descripcion = x.descripcion,
+                                solicitante = x.solicitante,
+                                tipo = x.tipo,
+                                prioridad = x.prioridad,
+                                soporte = x.soporte,
+                                apoyo = x.apoyo,
+                                fecha_solicitud = x.fecha_solicitud,
+                                fecha_cierre = x.fecha_cierre,
+                                hora_inicial = x.hora_inicial,
+                                hora_final = x.hora_final,
+                                acciones = x.acciones,
+                                solucion = x.solucion
+                            }).ToList();
                     }
                 }
             }
-            catch 
+            catch
             {
                 return null;
             }
         }
 
-        public static bool insertarIncidenteCompleto(int solicitante, int soporte, int seguimiento, string descripcion, string acciones, string solucion, int tipo, DateTime feIn, DateTime? feFn, string prioridad, DateTime In, DateTime? Fn)
+        public static bool insertarIncidenteCompleto(int solicitante, int soporte, int seguimiento, string descripcion, string acciones, string solucion, int tipo, DateTime feIn, DateTime? feFn, int prioridad, DateTime In, DateTime? Fn)
         {
             try
             {
-                var incidente = new tblincidente
-                {
-                    descripcion = descripcion,
-                    solicitante = solicitante,
-                    acciones = acciones,
-                    solucion = solucion,
-                    tipo = tipo,
-                    fecha_Sol = feIn,
-                    fecha_Cierre = feFn,
-                    status = 2,
-                    prioridad = prioridad,
-                    horaIn = In,
-                    horaFn = Fn,
-                    soporte = soporte,
-                    seguimiento = seguimiento
+                var servicio = controlServicios.insertar(descripcion, solicitante, soporte, seguimiento, 2, feIn, feFn, In, Fn);
 
-                };
-                if (incidente != null)
+                if (servicio != null)
                 {
-                    tblcalidadservicio encuesta = controlEncuestas.insertar(solicitante,dbhelp.modelo.tblincidentes.Max(a => a.numIncidente), null); 
-                    if (encuesta!= null)
+                    var incidente = new tblincidente
                     {
-                        dbhelp.modelo.tblincidentes.Add(incidente);
-                        dbhelp.modelo.tblcalidadservicios.Add(encuesta);
-                        dbhelp.modelo.SaveChanges();
-                        return true;
+                        acciones = acciones,
+                        solucion = solucion,
+                        tipo = tipo,
+                        prioridad = prioridad,
+                        fk_idservicio = servicio.id
+                    };
+                    if (incidente != null)
+                    {
+                        tblcalidadservicio encuesta = controlEncuestas.insertar(servicio.id);
+                        if (encuesta != null)
+                        {
+                            dbhelp.modelo.tblservicio.Add(servicio);
+                            dbhelp.modelo.tblincidente.Add(incidente);
+                            dbhelp.modelo.tblcalidadservicio.Add(encuesta);
+                            dbhelp.modelo.SaveChanges();
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         return false;
                     }
                 }
-                return true;
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
@@ -198,17 +312,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 }
                 catch
                 {
-
+                    
                 }
                 return false;
-                }
+           }
         }
 
         public static bool insertarIncidente(int idSolicitante, string descripcion)
         {
             try
             {
-               var resultado = dbhelp.modelo.sp_insertar_incidente(descripcion, idSolicitante);
+               var resultado = dbhelp.modelo.sp_insertar_incidente(idSolicitante, descripcion);
                if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
@@ -218,24 +332,6 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                {
                    return false;
                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static bool cambiarStatus(int id, int status)
-        {
-            try
-            {
-                var ItemAmodificar = dbhelp.modelo.tblincidentes.SingleOrDefault(x => x.numIncidente == id);
-                if (ItemAmodificar != null)
-                {
-                    ItemAmodificar.status = status;
-                    dbhelp.modelo.SaveChanges();
-                }
-                return true;
             }
             catch
             {
@@ -265,18 +361,18 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
         }
 
-        public static bool asignarSoporte(int id, int sop, int seg, string prioridad, int tipo)
+        public static bool asignarSoporte(int id, int soporte, int seguimiento, int prioridad, int tipo)
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.tblincidentes.SingleOrDefault(x => x.numIncidente == id);
+                var ItemAmodificar = dbhelp.modelo.tblincidente.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.status = 1;
-                    ItemAmodificar.soporte = sop;
-                    ItemAmodificar.seguimiento = seg;
+                    ItemAmodificar.tblservicio.estatus = 1;
                     ItemAmodificar.tipo = tipo;
                     ItemAmodificar.prioridad = prioridad;
+                    ItemAmodificar.tblservicio.fk_idusuario_soporte = soporte;
+                    ItemAmodificar.tblservicio.fk_idusuario_apoyo = seguimiento;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -291,7 +387,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.tblincidentes.Where(a => a.status == 0).Count();
+                return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => a.estatus_incidente == 0).Count();
             }
             catch
             {
@@ -303,7 +399,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.tblincidentes.Max(a => a.numIncidente);
+                return dbhelp.modelo.tblincidente.Max(a => a.id);
             }
             catch
             {
@@ -315,7 +411,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.tblincidentes.SingleOrDefault(a => a.numIncidente == idIncidente);
+                return dbhelp.modelo.tblincidente.SingleOrDefault(a => a.id == idIncidente);
             }
             catch
             {
@@ -327,7 +423,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.vt_incidentes_cerrados.SingleOrDefault(a => a.numIncidente == idIncidente);
+                return dbhelp.modelo.vt_incidentes_cerrados.SingleOrDefault(a => a.id == idIncidente);
             }
             catch
             {
@@ -339,7 +435,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.tblincidentes.Count(a => a.solicitante == usuario);
+                return dbhelp.modelo.tblincidente.Count(a => a.tblservicio.fk_idusuario_solicitante == usuario);
             }
             catch{
                 return -1;

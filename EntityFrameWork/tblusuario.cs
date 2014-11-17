@@ -16,40 +16,32 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblusuario()
         {
-            this.tblcalidadservicios = new HashSet<tblcalidadservicio>();
-            this.tbleventoes = new HashSet<tblevento>();
-            this.tbleventoes1 = new HashSet<tblevento>();
-            this.tbleventoes2 = new HashSet<tblevento>();
-            this.tblincidentes = new HashSet<tblincidente>();
-            this.tblincidentes1 = new HashSet<tblincidente>();
-            this.tblincidentes2 = new HashSet<tblincidente>();
-            this.tblresponsablequipoes = new HashSet<tblresponsablequipo>();
+            this.tblequipoasignado = new HashSet<tblequipoasignado>();
+            this.tblservicio = new HashSet<tblservicio>();
+            this.tblservicio1 = new HashSet<tblservicio>();
+            this.tblservicio2 = new HashSet<tblservicio>();
         }
     
-        public int idUsuario { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
-        public string username { get; set; }
+        public string nombre_usuario { get; set; }
         public string password { get; set; }
-        public int tipoUsuario { get; set; }
-        public int depto { get; set; }
-        public string exTel { get; set; }
-        public int area { get; set; }
-        public int puesto { get; set; }
+        public int tipo { get; set; }
+        public int fk_iddepto { get; set; }
+        public string extension_telefonica { get; set; }
+        public int fk_idarea { get; set; }
+        public int fk_idpuesto { get; set; }
         public string correo { get; set; }
-        public int institucion { get; set; }
+        public int fk_idinstitucion { get; set; }
         public string apellidos { get; set; }
     
         public virtual tblarea tblarea { get; set; }
-        public virtual ICollection<tblcalidadservicio> tblcalidadservicios { get; set; }
         public virtual tbldepartamento tbldepartamento { get; set; }
-        public virtual ICollection<tblevento> tbleventoes { get; set; }
-        public virtual ICollection<tblevento> tbleventoes1 { get; set; }
-        public virtual ICollection<tblevento> tbleventoes2 { get; set; }
-        public virtual ICollection<tblincidente> tblincidentes { get; set; }
-        public virtual ICollection<tblincidente> tblincidentes1 { get; set; }
-        public virtual ICollection<tblincidente> tblincidentes2 { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado { get; set; }
         public virtual tblinstitucion tblinstitucion { get; set; }
         public virtual tblpuesto tblpuesto { get; set; }
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes { get; set; }
+        public virtual ICollection<tblservicio> tblservicio { get; set; }
+        public virtual ICollection<tblservicio> tblservicio1 { get; set; }
+        public virtual ICollection<tblservicio> tblservicio2 { get; set; }
     }
 }

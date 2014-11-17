@@ -14,10 +14,10 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class tblrespuesta
     {
-        public int idRespuesta { get; set; }
-        public int valorRespuesta { get; set; }
-        public int pregunta { get; set; }
-        public int calidadServicio { get; set; }
+        public int id { get; set; }
+        public int valor { get; set; }
+        public int fk_idpregunta { get; set; }
+        public int fk_idcalidad { get; set; }
     
         public virtual tblcalidadservicio tblcalidadservicio { get; set; }
         public virtual tblpregunta tblpregunta { get; set; }

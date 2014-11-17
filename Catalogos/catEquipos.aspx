@@ -230,9 +230,9 @@
                                                 <asp:UpdatePanel runat="server" ID="UpdatePanel5" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:GridView OnRowCreated="gv_RowCreated"  runat="server" ID="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idTipoEquipo" CellPadding="4" GridLines="Horizontal">
+                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                             <Columns>
-                                                                <asp:BoundField HeaderText="Tipo de equipo" DataField="nomTipoEquipo" />
+                                                                <asp:BoundField HeaderText="Tipo de equipo" DataField="nombre" />
                                                             </Columns>
                                                         </asp:GridView>
                                                     </ContentTemplate>
@@ -292,9 +292,9 @@
                                                    <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
                                                        <ContentTemplate>
                                                            <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvMarca" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                               AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idMarca" CellPadding="4" GridLines="Horizontal">
+                                                               AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                <Columns>
-                                                                   <asp:BoundField HeaderText="Marcas" DataField="nomMarca" />
+                                                                   <asp:BoundField HeaderText="Marcas" DataField="nombre" />
                                                                </Columns>
                                                            </asp:GridView>
                                                        </ContentTemplate>

@@ -12,26 +12,29 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class vt_incidentes_cerrados
+    public partial class tblservicio
     {
+        public tblservicio()
+        {
+            this.tblevento = new HashSet<tblevento>();
+            this.tblincidente = new HashSet<tblincidente>();
+        }
+    
         public int id { get; set; }
         public string descripcion { get; set; }
-        public string tipo { get; set; }
-        public string prioridad { get; set; }
-        public string acciones { get; set; }
-        public string solucion { get; set; }
+        public int fk_idusuario_solicitante { get; set; }
+        public int fk_idusuario_soporte { get; set; }
+        public int fk_idusuario_apoyo { get; set; }
         public System.DateTime fecha_solicitud { get; set; }
         public Nullable<System.DateTime> fecha_cierre { get; set; }
         public Nullable<System.DateTime> hora_inicial { get; set; }
         public Nullable<System.DateTime> hora_final { get; set; }
-        public int estatus_incidente { get; set; }
-        public string solicitante { get; set; }
-        public int fk_idusuario_solicitante { get; set; }
-        public string soporte { get; set; }
-        public string apoyo { get; set; }
-        public int idcalidad { get; set; }
-        public bool estatus_calidad { get; set; }
-        public double promedio { get; set; }
-        public string observaciones { get; set; }
+        public int estatus { get; set; }
+    
+        public virtual ICollection<tblevento> tblevento { get; set; }
+        public virtual ICollection<tblincidente> tblincidente { get; set; }
+        public virtual tblusuario tblusuario { get; set; }
+        public virtual tblusuario tblusuario1 { get; set; }
+        public virtual tblusuario tblusuario2 { get; set; }
     }
 }

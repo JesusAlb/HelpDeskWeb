@@ -16,12 +16,12 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblcoordinacion()
         {
-            this.tbldepartamentos = new HashSet<tbldepartamento>();
+            this.tbldepartamento = new HashSet<tbldepartamento>();
         }
     
-        public int idCoordinacion { get; set; }
-        public string nomCoordinacion { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
     
-        public virtual ICollection<tbldepartamento> tbldepartamentos { get; set; }
+        public virtual ICollection<tbldepartamento> tbldepartamento { get; set; }
     }
 }

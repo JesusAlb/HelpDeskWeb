@@ -10,17 +10,17 @@ using HelpDeskWeb.EntityFrameWork;
 namespace HelpDeskWeb.Datos
 {
 
-    public class accionesCoordinacion
+    public class controlCoordinacion
     {
         
         public static IList<tblcoordinacion> obtenerDataSource(bool esFiltro, string txtFiltro)
         {
             try
             {
-                var Coordinaciones = dbhelp.modelo.tblcoordinacions.Where(a => a.nomCoordinacion.Contains(txtFiltro)).OrderBy(a => a.nomCoordinacion).ToList();
+                var Coordinaciones = dbhelp.modelo.tblcoordinacion.Where(a => a.nombre.Contains(txtFiltro)).OrderBy(a => a.nombre).ToList();
                 if (esFiltro)
                 {
-                    Coordinaciones.Insert(0, new tblcoordinacion { idCoordinacion = 0, nomCoordinacion = "" });
+                    Coordinaciones.Insert(0, new tblcoordinacion { id = 0, nombre = "" });
                 }
                 return Coordinaciones;
             }
@@ -35,10 +35,10 @@ namespace HelpDeskWeb.Datos
         {
             try
             {
-                var ItemARemover = dbhelp.modelo.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
+                var ItemARemover = dbhelp.modelo.tblcoordinacion.SingleOrDefault(x => x.id == id);
                 if (ItemARemover != null)
                 {
-                    dbhelp.modelo.tblcoordinacions.Remove(ItemARemover);
+                    dbhelp.modelo.tblcoordinacion.Remove(ItemARemover);
                     dbhelp.modelo.SaveChanges();
                 }               
                 return true;
@@ -53,11 +53,11 @@ namespace HelpDeskWeb.Datos
         {
             try
             {
-                var cord = new tblcoordinacion { nomCoordinacion = nombre };
+                var cord = new tblcoordinacion { nombre = nombre };
                 if (cord != null)
                 {
-                    dbhelp.modelo.tblcoordinacions.Attach(cord);
-                    dbhelp.modelo.tblcoordinacions.Add(cord);
+                    dbhelp.modelo.tblcoordinacion.Attach(cord);
+                    dbhelp.modelo.tblcoordinacion.Add(cord);
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -72,10 +72,10 @@ namespace HelpDeskWeb.Datos
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.tblcoordinacions.SingleOrDefault(x => x.idCoordinacion == id);
+                var ItemAmodificar = dbhelp.modelo.tblcoordinacion.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.nomCoordinacion = nombre;
+                    ItemAmodificar.nombre = nombre;
                     dbhelp.modelo.SaveChanges();        
                 }
                 return true;
@@ -90,7 +90,7 @@ namespace HelpDeskWeb.Datos
         {
             try
             {
-                return dbhelp.modelo.tblcoordinacions.SingleOrDefault(a => a.idCoordinacion == id);
+                return dbhelp.modelo.tblcoordinacion.SingleOrDefault(a => a.id == id);
             }catch{
                 return null;
             }

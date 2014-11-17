@@ -12,25 +12,22 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class tblevento
+    public partial class vt_recursos_asignados
     {
-        public tblevento()
-        {
-            this.tblrecursoasignado = new HashSet<tblrecursoasignado>();
-        }
-    
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public int tipo { get; set; }
-        public int fk_idlugar { get; set; }
+        public int idevento { get; set; }
+        public Nullable<int> idsolicitante { get; set; }
+        public Nullable<int> cantidad { get; set; }
         public int asistencia { get; set; }
+        public string tipo { get; set; }
         public string acomodo { get; set; }
+        public Nullable<System.DateTime> hora_inicial { get; set; }
+        public Nullable<System.DateTime> hora_final { get; set; }
         public System.DateTime fecha_realizacion { get; set; }
-        public string observacion { get; set; }
-        public int fk_idservicio { get; set; }
-    
-        public virtual ICollection<tblrecursoasignado> tblrecursoasignado { get; set; }
-        public virtual tblservicio tblservicio { get; set; }
-        public virtual tbllugar tbllugar { get; set; }
+        public string observacion_evento { get; set; }
+        public string nom_evento { get; set; }
+        public string lugar { get; set; }
+        public string nom_coordinacion { get; set; }
+        public string nom_recurso { get; set; }
+        public int idrecurso { get; set; }
     }
 }

@@ -335,6 +335,7 @@
     <Compile Include="ControlBD\Catalogo\controlTipoEquipo.cs" />
     <Compile Include="ControlBD\Catalogo\controlTipoIncidencia.cs" />
     <Compile Include="ControlBD\Catalogo\controlUsuario.cs" />
+    <Compile Include="ControlBD\Solicitudes\controlServicios.cs" />
     <Compile Include="ControlBD\Solicitudes\Eventos\controlRecursosAsignados.cs" />
     <Compile Include="ControlBD\Solicitudes\Eventos\controlEventos.cs" />
     <Compile Include="ControlBD\Solicitudes\controlEncuestas.cs" />
@@ -354,21 +355,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloHD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\numEventosPorMes_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorMes_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorTipo_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\sp_requerimientos_sin_asignar_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -382,6 +368,9 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tbldepartamento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblequipoasignado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblevento.cs">
@@ -405,16 +394,16 @@
     <Compile Include="EntityFrameWork\tblpuesto.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\tblrequerimiento.cs">
+    <Compile Include="EntityFrameWork\tblrecurso.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\tblrequerimientoaevento.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\tblresponsablequipo.cs">
+    <Compile Include="EntityFrameWork\tblrecursoasignado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblrespuesta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblservicio.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tbltipoequipo.cs">
@@ -424,12 +413,6 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblusuario.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\topCincoRecursosMasUsados_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\topCincoRecursosMenosUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_departamentos.cs">
@@ -444,13 +427,13 @@
     <Compile Include="EntityFrameWork\vt_eventos_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_eventos_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_evento_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_incidentes_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_incidentes_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_incidente_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_preguntas.cs">
@@ -465,13 +448,13 @@
     <Compile Include="EntityFrameWork\vt_promedio_incidentes.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\vt_recursos_asignados.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\vt_reporte_equipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_requerimientos_asignados.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\vt_tipoincidentes.cs">
+    <Compile Include="EntityFrameWork\vt_servicios.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_usuarios.cs">

@@ -17,7 +17,7 @@ namespace HelpDeskWeb.Administracion
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!IsPostBack)
             {
                 this.cargarTabla();
@@ -32,7 +32,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarCombos()
         {
-            cbCoordinaciones.DataSource = accionesCoordinacion.obtenerDataSource(false, "");
+            cbCoordinaciones.DataSource = controlCoordinacion.obtenerDataSource(false, "");
             cbArea.DataSource = controlArea.obtenerDataSource("");
             cbPuesto.DataSource = controlPuesto.obtenerDataSource("");
             cbInstitucion.DataSource = controlInstitucion.obtenerDataSource();
@@ -94,22 +94,22 @@ namespace HelpDeskWeb.Administracion
                         lbelTituloModal.Text = "Modificar usuario";
                         int idUsuario = Convert.ToInt32(gvUsuarios.SelectedDataKey.Value);
                         tblusuario usuario = controlUsuario.obtenerUsuario(idUsuario);
-                        username.Value = usuario.username;
-                        txtNomUsuario.Text = usuario.username;
+                        username.Value = usuario.nombre_usuario;
+                        txtNomUsuario.Text = usuario.nombre_usuario;
                         txtNombre.Text = usuario.nombre;
                         txtApellido.Text = usuario.apellidos;
                         string[] parteCorreo = usuario.correo.Split('@'); 
                         txtCorreo.Text = parteCorreo[0];
-                        txtExtension.Text = usuario.exTel;
+                        txtExtension.Text = usuario.extension_telefonica;
                         txtPassword.Attributes.Add("Value", usuario.password);
-                        cbTipoUs.SelectedValue = usuario.tipoUsuario.ToString();
-                        cbInstitucion.SelectedValue = usuario.institucion.ToString();
-                        cbArea.SelectedValue = usuario.area.ToString();
-                        cbPuesto.SelectedValue = usuario.puesto.ToString();
-                        cbCoordinaciones.SelectedValue = ((tbldepartamento)accionesDepto.obtenerDepto(usuario.depto)).coordinacion.ToString();
+                        cbTipoUs.SelectedValue = usuario.tipo.ToString();
+                        cbInstitucion.SelectedValue = usuario.fk_idinstitucion.ToString();
+                        cbArea.SelectedValue = usuario.fk_idarea.ToString();
+                        cbPuesto.SelectedValue = usuario.fk_idpuesto.ToString();
+                        cbCoordinaciones.SelectedValue = ((tbldepartamento)accionesDepto.obtenerDepto(usuario.fk_iddepto)).fk_idcoordinacion.ToString();
                         cbDepto.DataSource = accionesDepto.obtenerDataSourceComboBox(Convert.ToInt32(cbCoordinaciones.SelectedValue));
                         cbDepto.DataBind();
-                        cbDepto.SelectedValue = usuario.depto.ToString();
+                        cbDepto.SelectedValue = usuario.fk_iddepto.ToString();
                         ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
                     }
                     else
@@ -174,7 +174,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void cambiarCorreo(int institucion)
         {
-            lbelCorreo.Text = "@" + controlInstitucion.obtenerInstitucion(institucion).correoInstitucion;
+            lbelCorreo.Text = "@" + controlInstitucion.obtenerInstitucion(institucion).correo;
         }
     }
 }

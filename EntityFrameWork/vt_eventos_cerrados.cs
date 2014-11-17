@@ -14,29 +14,26 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_eventos_cerrados
     {
-        public int idEvento { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
         public string descripcion { get; set; }
-        public string solicitante { get; set; }
-        public string responsable { get; set; }
-        public string apoyo { get; set; }
-        public Nullable<System.DateTime> fecha_Sol { get; set; }
-        public Nullable<int> asistencia_aprox { get; set; }
-        public string tipo_evento { get; set; }
-        public string acomodo { get; set; }
-        public Nullable<System.DateTime> horaIn { get; set; }
-        public Nullable<System.DateTime> horaFn { get; set; }
+        public System.DateTime fecha_solicitud { get; set; }
         public Nullable<System.DateTime> fecha_cierre { get; set; }
-        public int status { get; set; }
-        public Nullable<System.DateTime> FechaInicio { get; set; }
-        public int idSolicitante { get; set; }
-        public int idResponsable { get; set; }
-        public int idApoyo { get; set; }
+        public Nullable<System.DateTime> hora_inicial { get; set; }
+        public Nullable<System.DateTime> hora_final { get; set; }
+        public int estatus_evento { get; set; }
+        public string solicitante { get; set; }
+        public string soporte { get; set; }
+        public string apoyo { get; set; }
+        public string tipo { get; set; }
         public string lugar { get; set; }
+        public int asistencia { get; set; }
+        public string acomodo { get; set; }
+        public System.DateTime fecha_realizacion { get; set; }
+        public int idcalidad { get; set; }
+        public bool estatus_calidad { get; set; }
+        public double promedio { get; set; }
         public string observaciones { get; set; }
-        public string titulo { get; set; }
-        public bool statusCal_Servicio { get; set; }
-        public int idCalidad_Servicio { get; set; }
-        public string observacionesServicio { get; set; }
-        public Nullable<double> promedioCalidad { get; set; }
+        public int idsolicitante { get; set; }
     }
 }

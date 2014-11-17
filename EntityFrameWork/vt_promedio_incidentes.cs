@@ -15,6 +15,6 @@ namespace HelpDeskWeb.EntityFrameWork
     public partial class vt_promedio_incidentes
     {
         public int soporte { get; set; }
-        public Nullable<double> promedioIncidente { get; set; }
+        public Nullable<double> promedio_incidente { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace HelpDeskWeb.ControlAltas
        {
            try
            {
-              return dbhelp.modelo.sp_requerimientos_sin_asignar(evento).Where( a => a.nomRequerimiento.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
+               return dbhelp.modelo.sp_requerimientos_sin_asignar(evento).Where(a => a.nombre.Contains(filtro) && a.tipo.Contains(tipo)).ToList();
            }
            catch
            {
@@ -29,10 +29,10 @@ namespace HelpDeskWeb.ControlAltas
        {
            try
            {
-               var ItemARemover = dbhelp.modelo.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
+               var ItemARemover = dbhelp.modelo.tblrecurso.SingleOrDefault(x => x.id == id);
                if (ItemARemover != null)
                {
-                   dbhelp.modelo.tblrequerimientos.Remove(ItemARemover);
+                   dbhelp.modelo.tblrecurso.Remove(ItemARemover);
                    dbhelp.modelo.SaveChanges();
                }
                return true;
@@ -48,11 +48,11 @@ namespace HelpDeskWeb.ControlAltas
        {
            try
            {
-               var cord = new tblrequerimiento { nomRequerimiento = nombre, cuantificable = tipo };
+               var cord = new tblrecurso { nombre = nombre, cuantificable = tipo };
                if (cord != null)
                {
-                   dbhelp.modelo.tblrequerimientos.Attach(cord);
-                   dbhelp.modelo.tblrequerimientos.Add(cord);
+                   dbhelp.modelo.tblrecurso.Attach(cord);
+                   dbhelp.modelo.tblrecurso.Add(cord);
                    dbhelp.modelo.SaveChanges();
                   
                }
@@ -69,10 +69,10 @@ namespace HelpDeskWeb.ControlAltas
        {
            try
            {
-               var ItemAmodificar = dbhelp.modelo.tblrequerimientos.SingleOrDefault(x => x.idRequerimientos == id);
+               var ItemAmodificar = dbhelp.modelo.tblrecurso.SingleOrDefault(x => x.id == id);
                if (ItemAmodificar != null)
                {
-                   ItemAmodificar.nomRequerimiento = nombre;
+                   ItemAmodificar.nombre = nombre;
                    ItemAmodificar.cuantificable = tipo;
                    dbhelp.modelo.SaveChanges();                      
                }
@@ -84,11 +84,11 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
-       public static tblrequerimiento obtenerRequerimiento(int id, int? idEvento)
+       public static tblrecurso obtenerRequerimiento(int id, int? idEvento)
        {
            try
            {
-               return dbhelp.modelo.tblrequerimientos.SingleOrDefault(a => a.idRequerimientos == id);
+               return dbhelp.modelo.tblrecurso.SingleOrDefault(a => a.id == id);
            }
            catch
            {

@@ -112,11 +112,11 @@
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-8">
-                                                                        <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nomCompleto" AutoPostBack="true" CssClass="form-control" DataValueField="idUsuario">
+                                                                        <asp:Label runat="server" Text="Responsable" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbResponsable" DataTextField="nom_completo" AutoPostBack="true" CssClass="form-control" DataValueField="id">
                                                                         </asp:DropDownList>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-4">
-                                                                        <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nomTipoEquipo" DataValueField="idTipoEquipo"></asp:DropDownList>
+                                                                        <asp:Label runat="server" Text="Tipo de equipo" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="cbTipoEquipo_SelectedIndexChanged" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -144,7 +144,7 @@
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Equipo"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaEquipo" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaEquipo" DataTextField="nombre" DataValueField="id" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
@@ -155,7 +155,7 @@
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Monitor"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMonitor" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMonitor" DataTextField="nombre" DataValueField="id" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
@@ -168,7 +168,7 @@
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Teclado"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaTeclado" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaTeclado" DataTextField="nombre" DataValueField="id" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
@@ -179,7 +179,7 @@
                                                                                 <asp:Label runat="server" Font-Bold="true" Text="Mouse"></asp:Label></asp:Panel><asp:Panel runat="server" CssClass="panel-body">
                                                                                 <asp:Panel runat="server" CssClass="form-group">
                                                                                     <asp:Panel runat="server" CssClass="input-group">
-                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMouse" DataTextField="nomMarca" DataValueField="idMarca" CssClass="form-control" />
+                                                                                        <span runat="server" class="input-group-addon">Marca</span> <asp:DropDownList runat="server" ID="cbMarcaMouse" DataTextField="nombre" DataValueField="id" CssClass="form-control" />
                                                                                     </asp:Panel>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel runat="server" CssClass="form-group">
@@ -250,26 +250,26 @@
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvEquipo_RowCreated" runat="server" ID="gvEquipo" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="idResponEq" CellPadding="4" GridLines="Horizontal">
+                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                             <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" Wrap="false" />
                                             <Columns>
-                                                <asp:BoundField HeaderText="Nombre de usuario" DataField="nomCompleto" />
-                                                <asp:BoundField HeaderText="Coordinación" DataField="nomCoordinacion" />
-                                                <asp:BoundField HeaderText="Departamento" DataField="nomDepto" />
-                                                <asp:BoundField HeaderText="Área" DataField="nomArea" />
-                                                <asp:BoundField HeaderText="Puesto" DataField="nomPuesto" />
-                                                <asp:BoundField HeaderText="Tipo de equipo" DataField="nomTipoEquipo" />
-                                                <asp:BoundField HeaderText="Marca equipo" DataField="nomMarcaEquipo" />
-                                                <asp:BoundField HeaderText="Serie equipo" DataField="serieEquipo"/>
-                                                <asp:BoundField HeaderText="Memoria RAM" DataField="memoriaRam" />
-                                                <asp:BoundField HeaderText="Disco Duro" DataField="discoDuro" />
+                                                <asp:BoundField HeaderText="Nombre de usuario" DataField="nom_completo" />
+                                                <asp:BoundField HeaderText="Coordinación" DataField="nom_coordinacion" />
+                                                <asp:BoundField HeaderText="Departamento" DataField="nom_depto" />
+                                                <asp:BoundField HeaderText="Área" DataField="nom_area" />
+                                                <asp:BoundField HeaderText="Puesto" DataField="nom_puesto" />
+                                                <asp:BoundField HeaderText="Tipo de equipo" DataField="nom_tipo_equipo" />
+                                                <asp:BoundField HeaderText="Marca equipo" DataField="nom_marca_equipo" />
+                                                <asp:BoundField HeaderText="Serie equipo" DataField="serie_equipo"/>
+                                                <asp:BoundField HeaderText="Memoria RAM" DataField="memoria_ram" />
+                                                <asp:BoundField HeaderText="Disco Duro" DataField="disco_duro" />
                                                 <asp:BoundField HeaderText="Procesador" DataField="procesador" />
-                                                <asp:BoundField HeaderText="Marca monitor" DataField="nomMarcaMonitor" />
-                                                <asp:BoundField HeaderText="Serie monitor" DataField="serieMonitor" />
-                                                <asp:BoundField HeaderText="Marca teclado" DataField="nomMarcaTeclado" />
-                                                <asp:BoundField HeaderText="Serie teclado" DataField="serieTeclado" />
-                                                <asp:BoundField HeaderText="Marca mouse" DataField="nomMarcaMouse" />
-                                                <asp:BoundField HeaderText="Serie mouse" DataField="serieMouse" />
+                                                <asp:BoundField HeaderText="Marca monitor" DataField="nom_marca_monitor" />
+                                                <asp:BoundField HeaderText="Serie monitor" DataField="serie_monitor" />
+                                                <asp:BoundField HeaderText="Marca teclado" DataField="nom_marca_teclado" />
+                                                <asp:BoundField HeaderText="Serie teclado" DataField="serie_teclado" />
+                                                <asp:BoundField HeaderText="Marca mouse" DataField="nom_marca_mouse" />
+                                                <asp:BoundField HeaderText="Serie mouse" DataField="serie_mouse" />
                                                 <asp:BoundField HeaderText="IP" DataField="ip" />
                                                 <asp:BoundField HeaderText="MAC" DataField="mac" />
                                             </Columns>

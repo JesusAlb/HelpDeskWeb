@@ -149,7 +149,7 @@
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" ID="panelCoordinaciones" CssClass="form-group" Visible="false">
                                                                         <asp:Label runat="server" Text="Coordinación" Font-Bold="true"></asp:Label>
-                                                                        <asp:DropDownList runat="server" ID="cbCoordinaciones" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion">
+                                                                        <asp:DropDownList runat="server" ID="cbCoordinaciones" DataTextField="nombre" CssClass="form-control" DataValueField="id">
                                                                         </asp:DropDownList>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
@@ -215,9 +215,9 @@
                                                         <asp:UpdatePanel runat="server" ID="upGvCoordinaciones" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvCoordinaciones" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idCoordinacion" CellPadding="4" GridLines="Horizontal">
+                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                     <Columns>
-                                                                        <asp:BoundField HeaderText="Coordinaciones" DataField="nomCoordinacion" />
+                                                                        <asp:BoundField HeaderText="Coordinaciones" DataField="nombre" />
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </ContentTemplate>
@@ -271,7 +271,7 @@
                                                             <ContentTemplate>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Coordinación</span>
-                                                                    <asp:DropDownList runat="server" ID="cbFiltroCoord" AutoPostBack="true" DataTextField="nomCoordinacion" CssClass="form-control" DataValueField="idCoordinacion" OnSelectedIndexChanged="cbFiltroCoord_SelectedIndexChanged">
+                                                                    <asp:DropDownList runat="server" ID="cbFiltroCoord" AutoPostBack="true" DataTextField="nombre" CssClass="form-control" DataValueField="id" OnSelectedIndexChanged="cbFiltroCoord_SelectedIndexChanged">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </ContentTemplate>
@@ -299,10 +299,10 @@
                                                         <asp:UpdatePanel runat="server" ID="upGvDeptos" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvDeptos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idDepto" CellPadding="4" GridLines="Horizontal">
+                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                     <Columns>
-                                                                        <asp:BoundField HeaderText="Departamentos" DataField="nomDepto" ItemStyle-Width="250" ItemStyle-Wrap="true" />
-                                                                        <asp:BoundField HeaderText="Coordinación" DataField="nomCoordinacion" ItemStyle-Width="250" ItemStyle-Wrap="true" />
+                                                                        <asp:BoundField HeaderText="Departamentos" DataField="nombre" ItemStyle-Width="250" ItemStyle-Wrap="true" />
+                                                                        <asp:BoundField HeaderText="Coordinación" DataField="nom_coordinacion" ItemStyle-Width="250" ItemStyle-Wrap="true" />
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </ContentTemplate>
@@ -363,9 +363,9 @@
                                                         <asp:UpdatePanel runat="server" ID="upGvArea" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvAreas" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idArea" CellPadding="4" GridLines="Horizontal">
+                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                     <Columns>
-                                                                        <asp:BoundField HeaderText="Áreas" DataField="nomArea" />
+                                                                        <asp:BoundField HeaderText="Áreas" DataField="nombre" />
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </ContentTemplate>
@@ -425,9 +425,9 @@
                                                         <asp:UpdatePanel runat="server" ID="upGvPuestos" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvPuestos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idPuesto" CellPadding="4" GridLines="Horizontal">
+                                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                     <Columns>
-                                                                        <asp:BoundField HeaderText="Puestos" DataField="nomPuesto" />
+                                                                        <asp:BoundField HeaderText="Puestos" DataField="nombre" />
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </ContentTemplate>

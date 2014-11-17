@@ -14,10 +14,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 {
     class controlUsuario
     {  
-        public static int obtener_IdUsuario_sin_asignar(){
+        public static int obtener_idUsuario_sinAsignar(){
             try
             {
-                return dbhelp.modelo.tblusuarios.Where(a => a.username.Equals("S/A")).SingleOrDefault().idUsuario;
+                return dbhelp.modelo.tblusuario.Where(a => a.nombre_usuario.Equals("S/A")).SingleOrDefault().id;
             }
             catch
             {
@@ -29,7 +29,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblusuarios.Where(a => a.idUsuario == id).SingleOrDefault();
+                return dbhelp.modelo.tblusuario.Where(a => a.id == id).SingleOrDefault();
             }
             catch 
             {
@@ -37,11 +37,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static bool verificar_si_existe_Usuario(string nombreNuevo, string nombreAnterior)
+        public static bool verificar_usuario_en_uso(string nombreNuevo, string nombreAnterior)
         {
             if (!nombreNuevo.Equals(nombreAnterior))
             {
-                var item = dbhelp.modelo.vt_usuarios.Where(x => x.username == nombreNuevo).SingleOrDefault();
+                var item = dbhelp.modelo.vt_usuarios.Where(x => x.nombre_usuario == nombreNuevo).SingleOrDefault();
 
                 if (item != null)
                 {
@@ -63,11 +63,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try{
                 if (tipo == 0)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipoUsuario == 0).ToList();
+                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipo == 0).ToList();
                 }
                 else if (tipo == 1)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipoUsuario == 1 && !a.username.Equals("S/A")).ToList();
+                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipo == 1 && !a.nombre_usuario.Equals("S/A")).ToList();
                 }
                 else 
                 {
@@ -85,10 +85,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var query = dbhelp.modelo.vt_usuarios.Where(a => ((a.nomCompleto.Contains(filtro) || a.username.Contains(filtro) ||
-                                                               a.nomCoordinacion.Contains(filtro) || a.nomDepto.Contains(filtro) ||
-                                                               a.nomPuesto.Contains(filtro) || a.nomArea.Contains(filtro) || a.nomInstitucion.Contains(filtro)
-                                                               || a.tipoUsuarioString.Contains(filtro) || a.correo.Contains(filtro)) && !a.username.Equals("S/A")));
+                var query = dbhelp.modelo.vt_usuarios.Where(a => ((a.nom_completo.Contains(filtro) || a.nombre_usuario.Contains(filtro) ||
+                                                               a.nom_coordinacion.Contains(filtro) || a.nom_depto.Contains(filtro) ||
+                                                               a.nom_puesto.Contains(filtro) || a.nom_area.Contains(filtro) || a.nom_institucion.Contains(filtro)
+                                                               || a.tipo_usuario_string.Contains(filtro) || a.correo.Contains(filtro)) && !a.nombre_usuario.Equals("S/A")));
                 return query.ToList();
             }
             catch
@@ -101,10 +101,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var itemRemover = dbhelp.modelo.tblusuarios.Single(x => x.idUsuario == id);
+                var itemRemover = dbhelp.modelo.tblusuario.Single(x => x.id == id);
                 if (itemRemover != null)
                 {
-                    dbhelp.modelo.tblusuarios.Remove(itemRemover);
+                    dbhelp.modelo.tblusuario.Remove(itemRemover);
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -117,24 +117,24 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 
         public static int modificar(int id, string usuarioNuevo, string nombreAnterior, string nombre, string apellido, int tipo, int depto, string extel, string email, string password, int area, int puesto, int institucion)
         {
-            if (!verificar_si_existe_Usuario(usuarioNuevo, nombreAnterior))
+            if (!verificar_usuario_en_uso(usuarioNuevo, nombreAnterior))
             {
                 try
                 {
-                    var ItemAmodificar = dbhelp.modelo.tblusuarios.SingleOrDefault(x => x.idUsuario == id);
+                    var ItemAmodificar = dbhelp.modelo.tblusuario.SingleOrDefault(x => x.id == id);
                     if (ItemAmodificar != null)
                     {
-                        ItemAmodificar.username = usuarioNuevo;
+                        ItemAmodificar.nombre_usuario = usuarioNuevo;
                         ItemAmodificar.nombre = nombre;
                         ItemAmodificar.apellidos = apellido;
                         ItemAmodificar.password = password;
-                        ItemAmodificar.tipoUsuario = tipo;
-                        ItemAmodificar.exTel = extel;
+                        ItemAmodificar.tipo = tipo;
+                        ItemAmodificar.extension_telefonica = extel;
                         ItemAmodificar.correo = email;
-                        ItemAmodificar.depto = depto;
-                        ItemAmodificar.area = area;
-                        ItemAmodificar.puesto = puesto;
-                        ItemAmodificar.institucion = institucion;
+                        ItemAmodificar.fk_iddepto = depto;
+                        ItemAmodificar.fk_idarea = area;
+                        ItemAmodificar.fk_idpuesto = puesto;
+                        ItemAmodificar.fk_idinstitucion = institucion;
                         dbhelp.modelo.SaveChanges();
                         return 1;
                     }
@@ -156,28 +156,28 @@ namespace HelpDeskWeb.ControlBD.Catalogo
 
         public static int insertar(string usuarioNuevo, string usuarioViejo, string nombre, string apellido, int tipo, int depto, string extel, string email, string password, int area, int puesto, int institucion)
         {
-            if (!verificar_si_existe_Usuario(usuarioNuevo, usuarioViejo))
+            if (!verificar_usuario_en_uso(usuarioNuevo, usuarioViejo))
             {
                 try
                 {
                     var user = new tblusuario
                     {
-                        username = usuarioNuevo,
+                        nombre_usuario = usuarioNuevo,
                         nombre = nombre,
                         apellidos = apellido,
-                        tipoUsuario = tipo,
-                        depto = depto,
-                        exTel = extel,
+                        tipo = tipo,
+                        fk_iddepto = depto,
+                        extension_telefonica = extel,
                         correo = email,
                         password = password,
-                        area = area,
-                        puesto = puesto,
-                        institucion = institucion
+                        fk_idarea = area,
+                        fk_idpuesto = puesto,
+                        fk_idinstitucion = institucion
                     };
                     if (user != null)
                     {
-                        dbhelp.modelo.tblusuarios.Attach(user);
-                        dbhelp.modelo.tblusuarios.Add(user);
+                        dbhelp.modelo.tblusuario.Attach(user);
+                        dbhelp.modelo.tblusuario.Add(user);
                         dbhelp.modelo.SaveChanges();
                     }
                     return 1;

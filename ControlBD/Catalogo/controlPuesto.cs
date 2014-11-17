@@ -17,7 +17,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblpuestoes.Where(a => a.nomPuesto.Contains(filtro)).OrderBy(a=>a.nomPuesto).ToList();
+                return dbhelp.modelo.tblpuesto.Where(a => a.nombre.Contains(filtro)).OrderBy(a => a.nombre).ToList();
             }
             catch
             {
@@ -29,11 +29,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var puesto = new tblpuesto { nomPuesto = nombre };
+                var puesto = new tblpuesto { nombre = nombre };
                 if (puesto != null)
                 {
-                    dbhelp.modelo.tblpuestoes.Attach(puesto);
-                    dbhelp.modelo.tblpuestoes.Add(puesto);
+                    dbhelp.modelo.tblpuesto.Attach(puesto);
+                    dbhelp.modelo.tblpuesto.Add(puesto);
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -48,10 +48,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.tblpuestoes.SingleOrDefault(x => x.idPuesto == id);
+                var ItemAmodificar = dbhelp.modelo.tblpuesto.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.nomPuesto = nombre;
+                    ItemAmodificar.nombre = nombre;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -66,7 +66,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblpuestoes.SingleOrDefault(a => a.idPuesto == id);
+                return dbhelp.modelo.tblpuesto.SingleOrDefault(a => a.id == id);
             }
             catch
             {

@@ -23,7 +23,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!IsPostBack)
             {
                 this.generarPrivilegios();
@@ -74,13 +74,13 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
                 {
                     (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSolicitante(controlUsuario.obtenerUsuarioDeSession(this).idUsuario, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSolicitante(controlUsuario.obtenerUsuarioDeSession(this).id, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -130,14 +130,14 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnRecursos_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
                     if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                     {
                         registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
-                        txtTitulo.Text = registroEvento.titulo;
+                        txtTitulo.Text = registroEvento.nombre;
                         this.cargarTablasRequerimientos();
                         ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnRecursosActivado", "$('#ModalRecursos').modal('show');", true);
                     }
@@ -155,7 +155,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 lbelTituloModal.Text = "Alta de eventos";
                 hdk_utilerias.limpiarControles(this.panelModalNuevo.Controls);
@@ -170,20 +170,20 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
                     lbelTituloModal.Text = "Modificar eventos";
                     registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
-                    txtTituloNuevo.Text = registroEvento.titulo;
+                    txtTituloNuevo.Text = registroEvento.nombre;
                     txtAcomodo.Text = registroEvento.acomodo;
-                    txtAsistencia.Text = registroEvento.asistencia_aprox.Value.ToString();
-                    txtDescripcion.Text = registroEvento.descripcion;
-                    cbLugares.SelectedValue = registroEvento.lugar.ToString();
-                    txtFecha.Text = registroEvento.FechaInicio.Value.Date.ToString("yyyy-MM-dd");
-                    txtHoraFinal.Text = registroEvento.horaFn.Value.TimeOfDay.ToString();
-                    txtHoraInicial.Text = registroEvento.horaIn.Value.TimeOfDay.ToString();
+                    txtAsistencia.Text = registroEvento.asistencia.ToString();
+                    txtDescripcion.Text = registroEvento.tblservicio.descripcion;
+                    cbLugares.SelectedValue = registroEvento.fk_idlugar.ToString();
+                    txtFecha.Text = registroEvento.fecha_realizacion.Date.ToString("yyyy-MM-dd");
+                    txtHoraFinal.Text = registroEvento.tblservicio.hora_inicial.Value.TimeOfDay.ToString();
+                    txtHoraInicial.Text = registroEvento.tblservicio.hora_final.Value.TimeOfDay.ToString();
                     accion.Value = "editar";
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnEditarActivado", "$('#ModalNuevo').modal('show');", true);
                 }
@@ -209,7 +209,7 @@ namespace HelpDeskWeb.Solicitudes
                     {
                         if (accion.Value.Equals("nuevo"))
                         {
-                            if (controlEventos.insertar(controlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                            if (controlEventos.insertar(controlUsuario.obtenerUsuarioDeSession(this).id, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                             {
                                 this.cargarTablasEventos();
                                 ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -222,7 +222,7 @@ namespace HelpDeskWeb.Solicitudes
                         }
                         else
                         {
-                            if (controlEventos.modificar(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, cbTipo.Text, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                            if (controlEventos.modificar(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
                             {
                                 this.cargarTablasEventos();
                                 ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
@@ -253,14 +253,13 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
-                        //this.cargarCombosSoporte();
                         registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
-                        cbSeguimiento.SelectedValue = registroEvento.apoyo.ToString();
-                        cbSoporte.SelectedValue = registroEvento.responsable.ToString();
+                        cbSeguimiento.SelectedValue = registroEvento.tblservicio.fk_idusuario_apoyo.ToString();
+                        cbSoporte.SelectedValue = registroEvento.tblservicio.fk_idusuario_soporte.ToString();
                         ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnAsignarActivado", "$('#ModalAsignar').modal('show');", true);
                 }
                 else
@@ -278,8 +277,10 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!cbSoporte.SelectedItem.Text.Equals("S/A"))
             {
-                if (controlEventos.asignarResponsable(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+                if (controlEventos.asignarSoporte(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
                 {
+                    gvEventos_EnProceso.DataSource = null;
+                    gvEventos_EnProceso.DataBind();
                     this.cargarTablasEventos();
                     ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "$('#ModalAsignar').modal('hide');", true);
                     ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
@@ -293,11 +294,11 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value) && Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
-                    if (controlEventos.cambiarStatus(Convert.ToInt32(idEventoSeleccionado.Value), 3))
+                    if (controlServicios.modificarEstatus(controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value)).fk_idservicio, 3))
                     {
                         this.cargarTablasEventos();
                         ScriptManager.RegisterStartupScript(this.UpdateBtns, this.GetType(), "EventoCancelado", "alertify.success('Evento cancelado correctamente');", true);
@@ -320,7 +321,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -391,7 +392,7 @@ namespace HelpDeskWeb.Solicitudes
             if (gvRecursosNoAsignados.SelectedDataKey != null)
             {
                 int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-                tblrequerimiento requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+                tblrecurso requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
                 if (requerimiento.cuantificable)
                 {
                     try
@@ -460,7 +461,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString());
-            tblrequerimientoaevento requerimiento = controlRecursosAsignados.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(idEventoSeleccionado.Value));
+            tblrecursoasignado requerimiento = controlRecursosAsignados.obtenerRequerimientoAsignado(idReq, Convert.ToInt32(idEventoSeleccionado.Value));
             txtCantidadAs.Text = requerimiento.cantidad.ToString();
             txtCantidadAs.Focus();
         }
@@ -468,7 +469,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosNoAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-            tblrequerimiento requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+            tblrecurso requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
             txtCantidad.Text = "1";
             if (requerimiento.cuantificable)
             {
@@ -490,7 +491,7 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     btnEncuestas.ImageAlign = ImageAlign.AbsMiddle;
 
-                    if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "statusCal_Servicio")))
+                    if (Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "estatus_calidad")))
                     {
                         btnEncuestas.ImageUrl = "../Imagenes/siEncuesta3.png";
                     }
@@ -510,20 +511,21 @@ namespace HelpDeskWeb.Solicitudes
             GridViewRow renglon = (GridViewRow)celda.Parent;
             gvEventos_Cerrados.SelectedIndex = renglon.RowIndex;
             int idEvento = Convert.ToInt32(gvEventos_Cerrados.SelectedDataKey.Value.ToString());
-            vt_eventos_cerrados eventoCerrado = controlEventos.cargarEventoCerrado(idEvento);
-            idCalidad.Value = eventoCerrado.idCalidad_Servicio.ToString();
-            txtSolicitante.Text = eventoCerrado.solicitante;
-            if (eventoCerrado.statusCal_Servicio)
+            tblevento evento = controlEventos.obtenerEvento(idEvento);
+            tblcalidadservicio calidad = controlEncuestas.obtenerCalidadServicio(evento.fk_idservicio);
+            idCalidad.Value = calidad.id.ToString();
+            txtSolicitante.Text = evento.tblservicio.tblusuario.nombre + evento.tblservicio.tblusuario.apellidos;
+            if (calidad.estatus)
             {
-                this.cargarTablaEncuesta(eventoCerrado.idCalidad_Servicio);
-                txtPromedio.Text = eventoCerrado.promedioCalidad.ToString();
-                this.cambiarImagenEncuesta(eventoCerrado.promedioCalidad.Value);
-                txtObEncuestas.Text = eventoCerrado.observacionesServicio;
+                this.cargarTablaEncuesta(calidad.id);
+                txtPromedio.Text = calidad.promedio.ToString();
+                this.cambiarImagenEncuesta(calidad.promedio);
+                txtObEncuestas.Text = calidad.observaciones;
                 txtObEncuestas.Enabled = false;
                 btnGrabarEncuesta.Text = "Aceptar";
                 ScriptManager.RegisterStartupScript(this.UpGvEventosCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
             }
-            else if(eventoCerrado.statusCal_Servicio == false && controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            else if(calidad.estatus == false && controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 this.cargarTablaEncuesta(null);
                 txtObEncuestas.Enabled = true;
@@ -531,6 +533,10 @@ namespace HelpDeskWeb.Solicitudes
                 txtPromedio.Text = "1";
                 btnGrabarEncuesta.Text = "Grabar";
                 ScriptManager.RegisterStartupScript(this.UpGvEventosCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.UpGvEventosCerrados, this.GetType(), "restriccion", "alertify.error('Encuesta no realizada');", true);
             }
         }
 
@@ -630,7 +636,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

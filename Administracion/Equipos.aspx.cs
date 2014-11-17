@@ -17,7 +17,7 @@ namespace HelpDeskWeb.Administracion
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!Page.IsPostBack)
             {
                 this.cargarTabla();
@@ -78,24 +78,24 @@ namespace HelpDeskWeb.Administracion
                     if (gvEquipo.SelectedIndex != -1)
                     {
                         lbelTituloModal.Text = "Modificar usuario";
-                        tblresponsablequipo equipos = controlEquipos.obtenerRegistro(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
-                        cbResponsable.SelectedValue = equipos.responsable.ToString();
-                        cbTipoEquipo.SelectedValue = equipos.tipoEquipo.ToString();
+                        tblequipoasignado equipos = controlEquipos.obtenerRegistro(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+                        cbResponsable.SelectedValue = equipos.fk_idusuario_responsable.ToString();
+                        cbTipoEquipo.SelectedValue = equipos.fk_tipoequipo.ToString();
                         this.cargarControles();
-                        string[] division = equipos.discoDuro.Split(' ');
+                        string[] division = equipos.disco_duro.Split(' ');
                         txtDD.Text = division[0];
                         division = equipos.procesador.Split(' ');
                         txtProcesador.Text = division[0];
-                        division = equipos.memoriaRam.Split(' ');
+                        division = equipos.ram.Split(' ');
                         txtRAM.Text = division[0];
-                        cbMarcaEquipo.SelectedValue = equipos.marcaEquipo.ToString();
-                        txtSerieEquipo.Text = equipos.serieEquipo;
-                        cbMarcaMonitor.SelectedValue = equipos.marcaMonitor.ToString();
-                        txtSerieMonitor.Text = equipos.serieMonitor;
-                        cbMarcaMouse.SelectedValue = equipos.marcaMouse.ToString();
-                        txtSerieMouse.Text = equipos.serieMouse;
-                        cbMarcaTeclado.SelectedValue = equipos.marcaTeclado.ToString();
-                        txtSerieTeclado.Text = equipos.serieTeclado;
+                        cbMarcaEquipo.SelectedValue = equipos.fk_idmarca_equipo.ToString();
+                        txtSerieEquipo.Text = equipos.serie_equipo;
+                        cbMarcaMonitor.SelectedValue = equipos.fk_idmarca_monitor.ToString();
+                        txtSerieMonitor.Text = equipos.serie_monitor;
+                        cbMarcaMouse.SelectedValue = equipos.fk_idmarca_mouse.ToString();
+                        txtSerieMouse.Text = equipos.serie_mouse;
+                        cbMarcaTeclado.SelectedValue = equipos.fk_idmarca_teclado.ToString();
+                        txtSerieTeclado.Text = equipos.serie_teclado;
 
                         if (txtIP1.Enabled)
                         {
@@ -214,9 +214,9 @@ namespace HelpDeskWeb.Administracion
         protected void cargarControles()
         {
             tbltipoequipo tipoEquipo = controlTipoEquipo.obtenerEquipo(Convert.ToInt32(cbTipoEquipo.SelectedValue));
-            this.cargarCombosMarcas(new DropDownList[] {cbMarcaEquipo, cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado }, new bool[] {tipoEquipo.siEquipo, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
-            this.cargarTextBox(new TextBox[] { txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado }, new bool[] { tipoEquipo.siDiscoDuro, tipoEquipo.siProcesador, tipoEquipo.siRAM, tipoEquipo.siMonitor, tipoEquipo.siMouse, tipoEquipo.siTeclado });
-            txtIP1.Enabled = txtIP2.Enabled = txtIP3.Enabled = txtIP4.Enabled = txtMAC1.Enabled = txtMAC2.Enabled = txtMAC3.Enabled = txtMAC4.Enabled = txtMAC5.Enabled = txtMAC6.Enabled = tipoEquipo.siRed;
+            this.cargarCombosMarcas(new DropDownList[] {cbMarcaEquipo, cbMarcaMonitor, cbMarcaMouse, cbMarcaTeclado }, new bool[] {tipoEquipo.equipo, tipoEquipo.monitor, tipoEquipo.mouse, tipoEquipo.teclado });
+            this.cargarTextBox(new TextBox[] { txtDD, txtProcesador, txtRAM, txtSerieMonitor, txtSerieMouse, txtSerieTeclado }, new bool[] { tipoEquipo.disco_duro, tipoEquipo.procesador, tipoEquipo.ram, tipoEquipo.monitor, tipoEquipo.mouse, tipoEquipo.teclado });
+            txtIP1.Enabled = txtIP2.Enabled = txtIP3.Enabled = txtIP4.Enabled = txtMAC1.Enabled = txtMAC2.Enabled = txtMAC3.Enabled = txtMAC4.Enabled = txtMAC5.Enabled = txtMAC6.Enabled = tipoEquipo.red;
         }
 
         protected void cargarCombosMarcas(DropDownList []cb, bool []vbol)

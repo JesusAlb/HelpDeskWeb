@@ -19,14 +19,14 @@ namespace HelpDeskWeb.Reportes
         {
             hdk_utilerias.checarSession(this,true, 2, 2);
             this.generarPrivilegios();
-            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             this.cargarEventos();
         }
 
         protected void cargarEventos()
         {
-            int tipo =  controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
-            int idUsuario = controlUsuario.obtenerUsuarioDeSession(this).idUsuario;
+            int tipo =  controlUsuario.obtenerUsuarioDeSession(this).tipo;
+            int idUsuario = controlUsuario.obtenerUsuarioDeSession(this).id;
             gvEventos.DataSource = controlEventos.obtenerEventoConRequerimientos(tipo, idUsuario);
             gvEventos.DataBind();
         }
@@ -111,7 +111,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

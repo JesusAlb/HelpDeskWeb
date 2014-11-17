@@ -14,10 +14,10 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_preguntas
     {
-        public Nullable<long> numPregunta { get; set; }
-        public int idPregunta { get; set; }
-        public string txtPregunta { get; set; }
-        public bool statusPregunta { get; set; }
+        public Nullable<long> numero { get; set; }
+        public int id { get; set; }
+        public string pregunta { get; set; }
+        public bool estatus { get; set; }
         public int afinidad { get; set; }
     }
 }
