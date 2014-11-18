@@ -73,3 +73,4 @@ C:\Users\CD04\Documents\GitHub\HelpDeskWeb\obj\Release\RdlCompile.cache
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\obj\Release\RdlCompile.compiled
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\obj\Release\HelpDeskWeb.dll
 C:\Users\CD04\Documents\GitHub\HelpDeskWeb\obj\Release\HelpDeskWeb.pdb
+C:\Users\CD04\Documents\GitHub\HelpDeskWeb\obj\Release\HelpDeskWeb.csprojResolveAssemblyReference.cache
