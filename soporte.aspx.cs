@@ -29,8 +29,8 @@ namespace HelpDeskWeb
         protected void pintarCalificaciones()
         {
             vt_promedio_general promedioCalidad = controlEncuestas.obtenerPromedioCalidad(controlUsuario.obtenerUsuarioDeSession(this).idUsuario);
-            if (promedioCalidad.PromedioTotal == null)
-            {
+            
+            if (promedioCalidad != null){
                 lbelCalificacionEventos.Text = "S/C";
                 lbelCalificacionIncidentes.Text = "S/C";
                 lbelPromedioGeneral.Text = "S/C";
