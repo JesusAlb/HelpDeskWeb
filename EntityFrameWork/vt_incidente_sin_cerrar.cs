@@ -12,24 +12,22 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class vt_incidentes_sin_cerrar
+    public partial class vt_incidente_sin_cerrar
     {
-        public int numIncidente { get; set; }
+        public int id { get; set; }
         public string descripcion { get; set; }
-        public string prioridad { get; set; }
         public string tipo { get; set; }
-        public Nullable<System.DateTime> fecha_Sol { get; set; }
-        public int status { get; set; }
-        public Nullable<System.DateTime> horaIn { get; set; }
-        public Nullable<System.DateTime> horaFn { get; set; }
-        public Nullable<System.DateTime> fecha_Cierre { get; set; }
+        public string prioridad { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
+        public System.DateTime fecha_solicitud { get; set; }
+        public Nullable<System.DateTime> fecha_cierre { get; set; }
+        public Nullable<System.DateTime> hora_inicial { get; set; }
+        public Nullable<System.DateTime> hora_final { get; set; }
+        public int estatus_incidente { get; set; }
         public string solicitante { get; set; }
-        public int idSolicitante { get; set; }
-        public int idSoporte { get; set; }
+        public int fk_idusuario_solicitante { get; set; }
         public string soporte { get; set; }
-        public string seguimiento { get; set; }
-        public int idSeguimiento { get; set; }
+        public string apoyo { get; set; }
     }
 }

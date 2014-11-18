@@ -13,10 +13,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
     class controlEncuestas
     {
-        public static tblcalidadservicio insertar(int solicitante, int? idIncidente, int? idEvento){
+        public static tblcalidadservicio insertar(int idservicio){
             try
             {
-                var encuesta = new tblcalidadservicio { incidente = idIncidente, observacionesServicio = "Sin observaciones", promedioCalidad = 0, statusCal_Servicio = false, usuario_calificado = solicitante, evento = idEvento };
+                var encuesta = new tblcalidadservicio { fk_idservicio = idservicio, observaciones = "Sin observaciones", promedio = 0, estatus = false };
                 if (encuesta != null)
                 {                  
                     return encuesta;
@@ -36,7 +36,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_incidentes_cerrados.Where(a => a.idSolicitante == usuario && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.vt_incidentes_cerrados.Where(a => a.fk_idusuario_solicitante == usuario && a.estatus_calidad == false && a.estatus_incidente == 2).Count();
             }
             catch
             {
@@ -49,7 +49,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_eventos_cerrados.Where(a => a.idSolicitante == usuario && a.statusCal_Servicio == false && a.status == 2).Count();
+                return dbhelp.modelo.vt_eventos_cerrados.Where(a => a.idsolicitante == usuario && a.estatus_calidad == false && a.estatus_evento == 2).Count();
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_encuestas.Where(a => a.idCalidad_Servicio == idEncuesta).ToList();
+                return dbhelp.modelo.vt_encuestas.Where(a => a.idcalidad == idEncuesta).ToList();
             }
             catch
             {
@@ -86,14 +86,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             try{
                 var respuestaAñadida =  new tblrespuesta {
 
-                    calidadServicio = calidad,
-                    pregunta = pregunta,
-                    valorRespuesta = respuesta
+                    fk_idcalidad = calidad,
+                    fk_idpregunta = pregunta,
+                    valor = respuesta
                     };
                 if (respuestaAñadida != null)
                 {
-                    dbhelp.modelo.tblrespuestas.Attach(respuestaAñadida);
-                    dbhelp.modelo.tblrespuestas.Add(respuestaAñadida);    
+                    dbhelp.modelo.tblrespuesta.Attach(respuestaAñadida);
+                    dbhelp.modelo.tblrespuesta.Add(respuestaAñadida);    
                 }
                 return true;
             } 
@@ -107,12 +107,12 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {      
             try
             {
-                var calidadAModificar = dbhelp.modelo.tblcalidadservicios.SingleOrDefault(a => a.idCalidad_Servicio == idCalidad);
+                var calidadAModificar = dbhelp.modelo.tblcalidadservicio.SingleOrDefault(a => a.id == idCalidad);
                 if (calidadAModificar != null)
                 {
-                    calidadAModificar.observacionesServicio = observacion;
-                    calidadAModificar.statusCal_Servicio = true;
-                    calidadAModificar.promedioCalidad = promedio;
+                    calidadAModificar.observaciones = observacion;
+                    calidadAModificar.estatus = true;
+                    calidadAModificar.promedio = promedio;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -123,11 +123,23 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
+        public static tblcalidadservicio obtenerCalidadServicio(int idservicio)
+        {
+            try 
+            {
+               return dbhelp.modelo.tblcalidadservicio.SingleOrDefault(a => a.fk_idservicio == idservicio);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static vt_promedio_general obtenerPromedioCalidad(int usuario)
         {
             try
             {
-                return dbhelp.modelo.vt_promedio_general.SingleOrDefault(a => a.idUsuario == usuario);
+                return dbhelp.modelo.vt_promedio_general.SingleOrDefault(a => a.id == usuario);
             }
             catch
             {

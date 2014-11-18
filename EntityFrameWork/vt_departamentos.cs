@@ -14,9 +14,8 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_departamentos
     {
-        public int idDepto { get; set; }
-        public string nomDepto { get; set; }
-        public string nomCoordinacion { get; set; }
-        public int coordinacion { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string nom_coordinacion { get; set; }
     }
 }

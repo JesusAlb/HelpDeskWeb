@@ -18,7 +18,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblareas.Where(a => a.nomArea.Contains(area)).OrderBy(a => a.nomArea).ToList();
+                return dbhelp.modelo.tblarea.Where(a => a.nombre.Contains(area)).OrderBy(a => a.nombre).ToList();
             }
             catch 
             {              
@@ -30,11 +30,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var area = new tblarea { nomArea = nombre };
+                var area = new tblarea { nombre = nombre };
                 if (area != null)
                 {
-                    dbhelp.modelo.tblareas.Attach(area);
-                    dbhelp.modelo.tblareas.Add(area);
+                    dbhelp.modelo.tblarea.Attach(area);
+                    dbhelp.modelo.tblarea.Add(area);
                     dbhelp.modelo.SaveChanges();            
                 }
                 return true;
@@ -50,10 +50,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try
             {
 
-                var ItemAmodificar = dbhelp.modelo.tblareas.SingleOrDefault(x => x.idArea == id);
+                var ItemAmodificar = dbhelp.modelo.tblarea.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.nomArea = nombre;
+                    ItemAmodificar.nombre = nombre;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -68,7 +68,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblareas.SingleOrDefault(a => a.idArea == id);
+                return dbhelp.modelo.tblarea.SingleOrDefault(a => a.id == id);
             }
             catch
             {

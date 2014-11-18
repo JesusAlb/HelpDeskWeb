@@ -16,9 +16,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
            {
                try
                {
-                   return dbhelp.modelo.vt_requerimientos_asignados.Where(a => a.evento == idEvento).Select(x => new {
-                       idRequerimiento = x.idRequerimientos,
-                       nomRequerimiento = x.nomRequerimiento,
+                   return dbhelp.modelo.vt_recursos_asignados.Where(a => a.idevento == idEvento).Select(x => new {
+                       idRequerimiento = x.idrecurso,
+                       nomRequerimiento = x.nom_recurso,
                        cantidad = x.cantidad
                    }).ToList();
                }
@@ -32,29 +32,17 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
           {
               try
               {
-                  var asigReq = new tblrequerimientoaevento { };
-                  
-                  if (cantidad == null)
-                  {
-                      asigReq = new tblrequerimientoaevento
+                  var recursoAsignado = new tblrecursoasignado
                       {
-                          evento = id,
-                          requerimiento = requerimiento
-                      };
-                  }
-                  else
-                  {
-                      asigReq = new tblrequerimientoaevento
-                      {
-                          evento = id,
-                          requerimiento = requerimiento,
+                          fk_idevento = id,
+                          fk_idrequerimiento = requerimiento,
                           cantidad = cantidad
                       };                
-                  }           
-                  if (asigReq != null)
+                        
+                  if (recursoAsignado != null)
                   {
-                      dbhelp.modelo.tblrequerimientoaeventoes.Attach(asigReq);
-                      dbhelp.modelo.tblrequerimientoaeventoes.Add(asigReq);
+                      dbhelp.modelo.tblrecursoasignado.Attach(recursoAsignado);
+                      dbhelp.modelo.tblrecursoasignado.Add(recursoAsignado);
                       dbhelp.modelo.SaveChanges();
                   }
                   return true;
@@ -69,7 +57,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
           {
               try
               {
-                  var ItemAmodificar = dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == req);
+                  var ItemAmodificar = dbhelp.modelo.tblrecursoasignado.SingleOrDefault(x => x.fk_idevento == id && x.fk_idrequerimiento == req);
                   if (ItemAmodificar != null)
                   {
                       ItemAmodificar.cantidad = cantidad;
@@ -87,10 +75,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
           {
               try
               {
-                  var itemRemover = dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == id && x.requerimiento == idreq);
+                  var itemRemover = dbhelp.modelo.tblrecursoasignado.SingleOrDefault(x => x.fk_idevento == id && x.fk_idrequerimiento == idreq);
                   if (itemRemover != null)
                   {
-                      dbhelp.modelo.tblrequerimientoaeventoes.Remove(itemRemover);
+                      dbhelp.modelo.tblrecursoasignado.Remove(itemRemover);
                       dbhelp.modelo.SaveChanges();
                   }
                   return true;
@@ -101,11 +89,11 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
               }
           }
 
-          public static tblrequerimientoaevento obtenerRequerimientoAsignado(int requerimiento, int idEvento)
+          public static tblrecursoasignado obtenerRequerimientoAsignado(int requerimiento, int idEvento)
           {
               try
               {
-                  return dbhelp.modelo.tblrequerimientoaeventoes.SingleOrDefault(x => x.evento == idEvento && x.requerimiento == requerimiento);
+                  return dbhelp.modelo.tblrecursoasignado.SingleOrDefault(x => x.fk_idevento == idEvento && x.fk_idrequerimiento == requerimiento);
               }
               catch
               {

@@ -19,11 +19,11 @@ namespace HelpDeskWeb.ControlBD.Acceso
         public static int encontrarUsuario(String nombre, string password, Page pagina){
             try
             {
-                var UsuarioItem = dbhelp.modelo.vt_usuarios.Where(x => x.username == nombre && x.password == password).SingleOrDefault();
+                var UsuarioItem = dbhelp.modelo.vt_usuarios.Where(x => x.nombre_usuario == nombre && x.password == password).SingleOrDefault();
                 if (UsuarioItem != null)
                 {
                     pagina.Session["DatosUsuario"] = UsuarioItem;
-                    return UsuarioItem.tipoUsuario;
+                    return UsuarioItem.tipo;
                 }
                 else
                 {
@@ -32,7 +32,7 @@ namespace HelpDeskWeb.ControlBD.Acceso
             }
             catch 
            {
-               return -1;
+               return -2;
            }
 
         }

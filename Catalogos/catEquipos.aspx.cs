@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this,true, 0, 0);
-            lbelUsuario.Text =" " + controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text =" " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!Page.IsPostBack)
             {
                 this.cargarTablasTipos();
@@ -102,14 +102,14 @@ namespace HelpDeskWeb.Catalogos
                     if (gvTipoEquipos.SelectedIndex != -1)
                     {
                         tbltipoequipo tipoEquipo = controlTipoEquipo.obtenerEquipo(Convert.ToInt32(gvTipoEquipos.SelectedDataKey.Value));
-                        chDiscoD.Checked = tipoEquipo.siDiscoDuro;
-                        chRAM.Checked = tipoEquipo.siRAM;
-                        chRed.Checked = tipoEquipo.siRed;
-                        chTeclado.Checked = tipoEquipo.siTeclado;
-                        chProcesador.Checked = tipoEquipo.siProcesador;
-                        chMonitor.Checked = tipoEquipo.siMonitor;
-                        chMouse.Checked = tipoEquipo.siMouse;
-                        this.configurarModal("Editar tipo de equipo", tipoEquipo.nomTipoEquipo, true);
+                        chDiscoD.Checked = tipoEquipo.disco_duro;
+                        chRAM.Checked = tipoEquipo.ram;
+                        chRed.Checked = tipoEquipo.red;
+                        chTeclado.Checked = tipoEquipo.teclado;
+                        chProcesador.Checked = tipoEquipo.procesador;
+                        chMonitor.Checked = tipoEquipo.monitor;
+                        chMouse.Checked = tipoEquipo.mouse;
+                        this.configurarModal("Editar tipo de equipo", tipoEquipo.nombre, true);
                         seleccionado = true;
                     }
                     break;
@@ -117,7 +117,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarMarca":
                     if (gvMarca.SelectedIndex != -1)
                     {
-                        this.configurarModal("Editar marca", controlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value)).nomMarca, false);
+                        this.configurarModal("Editar marca", controlMarca.obtenerMarca(Convert.ToInt32(gvMarca.SelectedDataKey.Value)).nombre, false);
                         seleccionado = true;
                     }
                     break;

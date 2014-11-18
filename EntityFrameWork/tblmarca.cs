@@ -16,18 +16,18 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblmarca()
         {
-            this.tblresponsablequipoes = new HashSet<tblresponsablequipo>();
-            this.tblresponsablequipoes1 = new HashSet<tblresponsablequipo>();
-            this.tblresponsablequipoes2 = new HashSet<tblresponsablequipo>();
-            this.tblresponsablequipoes3 = new HashSet<tblresponsablequipo>();
+            this.tblequipoasignado = new HashSet<tblequipoasignado>();
+            this.tblequipoasignado1 = new HashSet<tblequipoasignado>();
+            this.tblequipoasignado2 = new HashSet<tblequipoasignado>();
+            this.tblequipoasignado3 = new HashSet<tblequipoasignado>();
         }
     
-        public int idMarca { get; set; }
-        public string nomMarca { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
     
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes { get; set; }
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes1 { get; set; }
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes2 { get; set; }
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes3 { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado1 { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado2 { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado3 { get; set; }
     }
 }

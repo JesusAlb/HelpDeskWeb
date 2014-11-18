@@ -96,7 +96,7 @@
                                     <asp:Panel runat="server" CssClass="col-lg-5">
                                         <div class="form-group">
                                         <asp:Panel runat="server" CssClass="input-group">
-                                            <span class="input-group-addon">Tipo</span> <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoFiltro" DataTextField="nomTipoIncidente" DataValueField="idTipoIncidente" OnSelectedIndexChanged="cbTipoFiltro_SelectedIndexChanged" AutoPostBack="true">
+                                            <span class="input-group-addon">Tipo</span> <asp:DropDownList runat="server" CssClass="form-control" ID="cbTipoFiltro" DataTextField="nombre" DataValueField="id" OnSelectedIndexChanged="cbTipoFiltro_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </asp:Panel>
                                         </div>
@@ -156,7 +156,7 @@
                                                         <div class="col-lg-1"></div>
                                                         <div class="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group" ID="panelSolcitante" Visible="false">
-                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" maxlenght="200" onkeyup="keyUP(event.keyCode)" onkeypress="if (this.value.length > 100) { return false; }" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
@@ -195,18 +195,26 @@
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <div class="form-group">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo" />
-                                                                        <asp:DropDownList runat="server" ID="cbTipoIncidente" DataValueField="idTipoIncidente" DataTextField="nomTipoIncidente" CssClass="form-control" />
+                                                                        <asp:DropDownList runat="server" ID="cbTipoIncidente" DataValueField="id" DataTextField="nombre" CssClass="form-control" />
                                                                         </div>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <div class="form-group">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
-                                                                        <asp:DropDownList runat="server" ID="cbPrioridad" CssClass="form-control">
-                                                                            <asp:ListItem Text="Alta"></asp:ListItem><asp:ListItem Text="Media"></asp:ListItem><asp:ListItem Text="Normal"></asp:ListItem></asp:DropDownList></div></asp:Panel></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                            <asp:DropDownList runat="server" ID="cbPrioridad" CssClass="form-control">
+                                                                                <asp:ListItem Text="Alta" Value="2"></asp:ListItem>
+                                                                                <asp:ListItem Text="Media" Value="1"></asp:ListItem>
+                                                                                <asp:ListItem Text="Normal" Value="0"></asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </asp:Panel>
+                                                                </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Font-Bold="true" Text="Seguimiento"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
+                                                            </asp:Panel>
+                                                            <asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Font-Bold="true" Text="Seguimiento"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                         </asp:Panel>
@@ -277,14 +285,14 @@
                                                                 <asp:Panel runat="server" ScrollBars="Auto" Height="220">
                                                                     <asp:UpdatePanel runat="server" ID="updateEncuestas" UpdateMode="Conditional">
                                                                         <ContentTemplate>
-                                                                            <asp:GridView runat="server" ID="gvEncuestas" AutoGenerateColumns="false" DataKeyNames="idPregunta" CssClass="table table-bordered">
+                                                                            <asp:GridView runat="server" ID="gvEncuestas" AutoGenerateColumns="false" DataKeyNames="id" CssClass="table table-bordered">
                                                                                 <Columns>
-                                                                                    <asp:BoundField HeaderText="#" DataField="numPregunta" />
-                                                                                    <asp:BoundField HeaderText="Aspecto" DataField="txtPregunta" />
+                                                                                    <asp:BoundField HeaderText="#" DataField="numero" />
+                                                                                    <asp:BoundField HeaderText="Aspecto" DataField="pregunta" />
                                                                                     <asp:TemplateField HeaderText="Respuestas">
                                                                                         <ItemTemplate>
                                                                                             <asp:DropDownList runat="server" ID="cbRespuesta" OnSelectedIndexChanged="cbRespuesta_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true">
-                                                                                                <asp:ListItem Text="1"></asp:ListItem><asp:ListItem Text="2"></asp:ListItem><asp:ListItem Text="3"></asp:ListItem><asp:ListItem Text="4"></asp:ListItem><asp:ListItem Text="5"></asp:ListItem><asp:ListItem Text="6"></asp:ListItem><asp:ListItem Text="7"></asp:ListItem><asp:ListItem Text="8"></asp:ListItem><asp:ListItem Text="9"></asp:ListItem><asp:ListItem Text="10"></asp:ListItem></asp:DropDownList></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="Respuestas" DataField="valorRespuesta" />
+                                                                                                <asp:ListItem Text="1"></asp:ListItem><asp:ListItem Text="2"></asp:ListItem><asp:ListItem Text="3"></asp:ListItem><asp:ListItem Text="4"></asp:ListItem><asp:ListItem Text="5"></asp:ListItem><asp:ListItem Text="6"></asp:ListItem><asp:ListItem Text="7"></asp:ListItem><asp:ListItem Text="8"></asp:ListItem><asp:ListItem Text="9"></asp:ListItem><asp:ListItem Text="10"></asp:ListItem></asp:DropDownList></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="Respuestas" DataField="valor" />
                                                                                 </Columns>
                                                                             </asp:GridView>
                                                                         </ContentTemplate>
@@ -329,7 +337,7 @@
                                                         <div class="col-lg-1"></div>
                                                         <div class="col-lg-10">
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
                                                                 <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></div><div class="form-group">
@@ -352,19 +360,25 @@
                                                                         <div class="form-group">
                                                                             <asp:Label runat="server" Font-Bold="true" Text="Prioridad" />
                                                                             <asp:DropDownList runat="server" ID="cbPrioridad2" CssClass="form-control">
-                                                                                <asp:ListItem Text="Alta"></asp:ListItem><asp:ListItem Text="Media"></asp:ListItem><asp:ListItem Text="Normal"></asp:ListItem></asp:DropDownList></div></div><div class="col-lg-6">
+                                                                                <asp:ListItem Text="Alta" Value="2"></asp:ListItem>
+                                                                                <asp:ListItem Text="Media" Value="1"></asp:ListItem>
+                                                                                <asp:ListItem Text="Normal" Value="0"></asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
                                                                         <div class="form-group">
                                                                             <asp:Label runat="server" Font-Bold="true" Text="Tipo" />
-                                                                            <asp:DropDownList runat="server" ID="cbTipoIncidente2" DataValueField="idTipoIncidente" DataTextField="nomTipoIncidente" CssClass="form-control" />
+                                                                            <asp:DropDownList runat="server" ID="cbTipoIncidente2" DataValueField="id" DataTextField="nombre" CssClass="form-control" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Soporte" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Soporte" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nomCompleto" DataValueField="idUsuario" CssClass="form-control"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
@@ -402,18 +416,18 @@
                                         <asp:UpdatePanel runat="server" ID="update1" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ToolTip="Asigne el soporte a los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Abiertos"  AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="numIncidente" CellPadding="4" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged" GridLines="Horizontal">
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" DataKeyNames="id" CellPadding="4" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged" GridLines="Horizontal">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="#" DataField="id" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="500">
                                                             <ItemTemplate>
                                                                 <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_solicitud" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora inicial" DataField="hora_inicial" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -436,10 +450,10 @@
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_EnProceso" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" OnRowDataBound="gvIncidentes_EnProceso_RowDataBound" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" OnRowDataBound="gvIncidentes_EnProceso_RowDataBound" DataKeyNames="id" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="#" DataField="id" ItemStyle-Wrap="false" />
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
                                                             <ItemTemplate>
@@ -453,9 +467,9 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Soporte" DataField="soporte" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Apoyo" DataField="seguimiento" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Seguimiento" DataField="apoyo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_solicitud" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora inicial" DataField="hora_inicial" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -465,10 +479,6 @@
                                                 <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="btnGrabarCerrar" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="txtFiltro" EventName="TextChanged" />
-                                                <asp:AsyncPostBackTrigger ControlID="tabAbierta" EventName="Click" />
-                                                <asp:AsyncPostBackTrigger ControlID="tabEnProceso" EventName="Click" />
-                                                <asp:AsyncPostBackTrigger ControlID="tabCerrada" EventName="Click" />
-                                                <asp:AsyncPostBackTrigger ControlID="tabCancelada" EventName="Click" />
                                                 <asp:AsyncPostBackTrigger ControlID="cbTipoFiltro" />
                                             </Triggers>
                                         </asp:UpdatePanel>
@@ -479,17 +489,17 @@
                                         <asp:UpdatePanel runat="server" ID="UpIncidentesCerrados" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cerrados" OnRowDataBound="gvIncidentes_Cerrados_RowDataBound" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2200" DataKeyNames="numIncidente" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" ShowHeaderWhenEmpty="true" Width="2200" DataKeyNames="id" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="#" DataField="id" ItemStyle-Wrap="false" />
                                                         <asp:TemplateField HeaderText="Encuesta" ItemStyle-CssClass="text-center">
                                                             <ItemTemplate>
                                                                 <asp:ImageButton runat="server" ID="btnEncuesta" OnClick="btnEncuesta_Click" />
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Tipo" DataField="tipo" ItemStyle-Wrap="false" />
-                                               <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
                                                             <ItemTemplate>
                                                                 <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
                                                             </ItemTemplate>
@@ -501,17 +511,17 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Soporte" DataField="soporte" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Apoyo" DataField="seguimiento" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Hora inicial" DataField="horaIn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Fecha cierre" DataField="fecha_Cierre" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
-                                                        <asp:BoundField HeaderText="Hora final" DataField="horaFn" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
-                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                        <asp:BoundField HeaderText="Seguimiento" DataField="apoyo" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha solicitud" DataField="fecha_solicitud" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora inicial" DataField="hora_inicial" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Fecha cierre" DataField="fecha_cierre" DataFormatString="{0:D}" ItemStyle-Wrap="false" />
+                                                        <asp:BoundField HeaderText="Hora final" DataField="hora_final" DataFormatString="{0:t}" ItemStyle-Wrap="false" />
+                                                        <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
                                                             <ItemTemplate>
                                                                 <%#((string)Eval("acciones")).Replace("\n", "<br/>") %>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
+                                                        <asp:TemplateField HeaderText="Solución" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="400">
                                                             <ItemTemplate>
                                                                 <%#((string)Eval("solucion")).Replace("\n", "<br/>") %>
                                                             </ItemTemplate>
@@ -538,18 +548,18 @@
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ToolTip="Solucione los incidentes" runat="server" OnRowCreated="gvIncidentes_RowCreated" ID="gvIncidentes_Cancelados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                    AlternatingRowStyle-BackColor="#e0e0e0" DataKeyNames="numIncidente" ShowHeaderWhenEmpty="true" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
+                                                    AlternatingRowStyle-BackColor="#e0e0e0" DataKeyNames="id" ShowHeaderWhenEmpty="true" CellPadding="4" GridLines="Horizontal" OnSelectedIndexChanged="gvIncidentes_SelectedIndexChanged">
                                                     <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
                                                     <Columns>
-                                                        <asp:BoundField HeaderText="#" DataField="numIncidente" />
+                                                        <asp:BoundField HeaderText="#" DataField="id" />
                                                         <asp:TemplateField HeaderText="Descripción" ItemStyle-CssClass="text-left" ItemStyle-Wrap="true" ItemStyle-Width="500">
                                                             <ItemTemplate>
                                                                 <%#((string)Eval("descripcion")).Replace("\n", "<br/>") %>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:BoundField HeaderText="Solicitante" DataField="solicitante" />
-                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_Sol" DataFormatString="{0:D}" />
-                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="horaIn" DataFormatString="{0:t}" />
+                                                        <asp:BoundField HeaderText="Fecha de solicitud" DataField="fecha_solicitud" DataFormatString="{0:D}" />
+                                                        <asp:BoundField HeaderText="Hora solicitud" DataField="hora_inicial" DataFormatString="{0:t}" />
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>

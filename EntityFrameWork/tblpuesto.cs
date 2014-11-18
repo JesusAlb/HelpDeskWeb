@@ -16,12 +16,12 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblpuesto()
         {
-            this.tblusuarios = new HashSet<tblusuario>();
+            this.tblusuario = new HashSet<tblusuario>();
         }
     
-        public int idPuesto { get; set; }
-        public string nomPuesto { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
     
-        public virtual ICollection<tblusuario> tblusuarios { get; set; }
+        public virtual ICollection<tblusuario> tblusuario { get; set; }
     }
 }

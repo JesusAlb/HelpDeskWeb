@@ -16,20 +16,20 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tbltipoequipo()
         {
-            this.tblresponsablequipoes = new HashSet<tblresponsablequipo>();
+            this.tblequipoasignado = new HashSet<tblequipoasignado>();
         }
     
-        public int idTipoEquipo { get; set; }
-        public string nomTipoEquipo { get; set; }
-        public bool siMonitor { get; set; }
-        public bool siEquipo { get; set; }
-        public bool siDiscoDuro { get; set; }
-        public bool siMouse { get; set; }
-        public bool siTeclado { get; set; }
-        public bool siRed { get; set; }
-        public bool siRAM { get; set; }
-        public bool siProcesador { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public bool monitor { get; set; }
+        public bool equipo { get; set; }
+        public bool disco_duro { get; set; }
+        public bool mouse { get; set; }
+        public bool teclado { get; set; }
+        public bool red { get; set; }
+        public bool ram { get; set; }
+        public bool procesador { get; set; }
     
-        public virtual ICollection<tblresponsablequipo> tblresponsablequipoes { get; set; }
+        public virtual ICollection<tblequipoasignado> tblequipoasignado { get; set; }
     }
 }

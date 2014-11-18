@@ -14,7 +14,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblinstitucions.Where(a => a.status == true).ToList();
+                return dbhelp.modelo.tblinstitucion.Where(a => a.estatus == true).ToList();
             }
             catch
             {
@@ -26,7 +26,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblinstitucions.SingleOrDefault(a => a.idInstitucion == id);
+                return dbhelp.modelo.tblinstitucion.SingleOrDefault(a => a.id == id);
             }
             catch
             {

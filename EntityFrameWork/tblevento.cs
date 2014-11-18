@@ -16,33 +16,21 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblevento()
         {
-            this.tblcalidadservicios = new HashSet<tblcalidadservicio>();
-            this.tblrequerimientoaeventoes = new HashSet<tblrequerimientoaevento>();
+            this.tblrecursoasignado = new HashSet<tblrecursoasignado>();
         }
     
-        public int idEvento { get; set; }
-        public string descripcion { get; set; }
-        public int solicitante { get; set; }
-        public int responsable { get; set; }
-        public int apoyo { get; set; }
-        public Nullable<System.DateTime> fecha_Sol { get; set; }
-        public Nullable<int> lugar { get; set; }
-        public Nullable<int> asistencia_aprox { get; set; }
-        public string tipo_evento { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public int tipo { get; set; }
+        public int fk_idlugar { get; set; }
+        public int asistencia { get; set; }
         public string acomodo { get; set; }
-        public Nullable<System.DateTime> horaIn { get; set; }
-        public Nullable<System.DateTime> horaFn { get; set; }
-        public Nullable<System.DateTime> fecha_cierre { get; set; }
-        public int status { get; set; }
-        public Nullable<System.DateTime> FechaInicio { get; set; }
-        public string observaciones { get; set; }
-        public string titulo { get; set; }
+        public System.DateTime fecha_realizacion { get; set; }
+        public string observacion { get; set; }
+        public int fk_idservicio { get; set; }
     
-        public virtual ICollection<tblcalidadservicio> tblcalidadservicios { get; set; }
-        public virtual tblusuario tblusuario { get; set; }
-        public virtual ICollection<tblrequerimientoaevento> tblrequerimientoaeventoes { get; set; }
+        public virtual ICollection<tblrecursoasignado> tblrecursoasignado { get; set; }
+        public virtual tblservicio tblservicio { get; set; }
         public virtual tbllugar tbllugar { get; set; }
-        public virtual tblusuario tblusuario1 { get; set; }
-        public virtual tblusuario tblusuario2 { get; set; }
     }
 }

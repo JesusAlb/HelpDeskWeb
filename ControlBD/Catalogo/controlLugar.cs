@@ -16,7 +16,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tbllugars.Where(a => a.nomLugar.Contains(filtro)).OrderBy(a=>a.nomLugar).ToList();
+                return dbhelp.modelo.tbllugar.Where(a => a.nombre.Contains(filtro)).OrderBy(a => a.nombre).ToList();
             }
             catch
             {
@@ -24,15 +24,15 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static bool insertar(string lugar)
+        public static bool insertar(string nombre)
         {
             try
             {
-                tbllugar Lugar = new tbllugar { nomLugar = lugar };
+                tbllugar Lugar = new tbllugar { nombre = nombre };
                 if (Lugar != null)
                 {
-                    dbhelp.modelo.tbllugars.Attach(Lugar);
-                    dbhelp.modelo.tbllugars.Add(Lugar);
+                    dbhelp.modelo.tbllugar.Attach(Lugar);
+                    dbhelp.modelo.tbllugar.Add(Lugar);
                     dbhelp.modelo.SaveChanges();                 
                 }
                 return true;
@@ -48,10 +48,10 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try
             {
 
-                var ItemAmodificar = dbhelp.modelo.tbllugars.SingleOrDefault(x => x.idLugar == id);
+                var ItemAmodificar = dbhelp.modelo.tbllugar.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.nomLugar = nombre;
+                    ItemAmodificar.nombre = nombre;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -66,7 +66,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tbllugars.SingleOrDefault(a => a.idLugar == id);
+                return dbhelp.modelo.tbllugar.SingleOrDefault(a => a.id == id);
             }
             catch
             {

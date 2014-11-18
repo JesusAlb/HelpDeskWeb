@@ -19,27 +19,102 @@ namespace HelpDeskWeb.Reportes
         {
             hdk_utilerias.checarSession(this,true, 2, 2);
             this.generarPrivilegios();
-            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             this.cargarEventos();
+            if (this.Page.IsPostBack)
+            {
+                if (Request["__EVENTTARGET"] == "txtFiltroAbierto")
+                {
+                    this.cargarEventos();
+                }
+            }
         }
 
         protected void cargarEventos()
         {
-            int tipo =  controlUsuario.obtenerUsuarioDeSession(this).tipoUsuario;
-            int idUsuario = controlUsuario.obtenerUsuarioDeSession(this).idUsuario;
-            gvEventos.DataSource = controlEventos.obtenerEventoConRequerimientos(tipo, idUsuario);
+            gvEventos.DataSource = controlReportes.dataSourceEventosConRequerimientos(txtFiltroAbierto.Text);
             gvEventos.DataBind();
         }
 
         protected void btnGenerarReporte_Click(object sender, EventArgs e)
         {
+
             vt_reporte.Reset();
-            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
-            ReportDataSource datasource = new ReportDataSource("DataSetEquipos", controlEquipos.dataSource(""));
-            vt_reporte.LocalReport.DataSources.Add(datasource);
+            // vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc";
+            this.elegirReporte();
             vt_reporte.LocalReport.Refresh();
             datosBusqueda.CssClass = "panel-collapse collapse";
             panelReporte.Visible = true;
+        }
+
+        protected void elegirReporte()
+        {
+            switch (cbObjeto.SelectedIndex)
+            {
+                case 0:
+                    {
+
+                    }break;
+                case 1:
+                    {
+                     /*   if (rbGrafico.Checked)
+                        {
+                            this.generarReporte("HelpDeskWeb.Reportes.Documentos.ReporteEstadisticoEventos.rdlc", "EventosEstadistica");
+                        }
+                        else if(rbTabular.Checked)
+                        {
+                            this.generarReporte("HelpDeskWeb.Reportes.Documentos.ReportEventos.rdlc", "EventosGeneral");
+                        }*/
+                    }break;
+                case 2:
+                    {
+                        this.generarReporte("HelpDeskWeb.Reportes.Documentos.ReporteRequerimientos.rdlc", "RecursosPorEvento");
+                    }break;
+                case 3:
+                    {
+                        this.generarReporte("HelpDeskWeb.Reportes.Documentos.ReportEquipos.rdlc", "Equipos");
+                    }break;
+                default:
+                    break;
+
+            }
+ 
+        }
+
+        protected void generarReporte(string direccion, string reporte)
+        {
+            vt_reporte.LocalReport.ReportEmbeddedResource = direccion;
+
+            switch (reporte)
+            {
+                case "Equipos":
+                    {
+
+
+                    }break;
+
+                case "EventosEstadistica":
+                    {
+                        ReportDataSource datasource = new ReportDataSource("DataSetEventosPorUsuario", controlReportes.dataSourceEventosPorUsuario());
+                        vt_reporte.LocalReport.DataSources.Add(datasource);
+                        ReportDataSource datasource2 = new ReportDataSource("DataSetEventosPorMes", controlReportes.dataSourceEventosPorMes());
+                        vt_reporte.LocalReport.DataSources.Add(datasource2);
+                        ReportDataSource datasource3 = new ReportDataSource("DataSetRecursosMasUsados", controlReportes.dataSourceRecursosMasUsados());
+                        vt_reporte.LocalReport.DataSources.Add(datasource3);
+                    }break;
+
+                case "RecursosPorEvento":
+                    {
+                        if (gvEventos.SelectedDataKey != null)
+                        {
+                            ReportDataSource datasource = new ReportDataSource("DataSetRecursosPorEvento", controlReportes.dataSourceRecursosPorEventos(Convert.ToInt32(gvEventos.SelectedDataKey.Value)));
+                            vt_reporte.LocalReport.DataSources.Add(datasource);
+
+                        }
+                    }break;
+                default:
+                    break;
+            }
         }
 
         protected void llenarCbObjeto(bool completo){
@@ -62,17 +137,21 @@ namespace HelpDeskWeb.Reportes
 
         protected void configurarFiltroIdStatus(int index)
         {
-            if (index == 0 || index == 1)
+            if (index == 2)
             {
-                cbEstatus.Visible = true;
+                gvEventos.Visible = true;
             }
             else
             {
-                cbEstatus.Visible = false;
-                if (index == 2)
+                if (index == 0 || index == 1)
                 {
-                    gvEventos.Visible = true;
+                    cbEstatus.Visible = true;
                 }
+                else
+                {
+                    cbEstatus.Visible = false;
+                }
+                gvEventos.Visible = false;
             }
         }
 
@@ -81,21 +160,8 @@ namespace HelpDeskWeb.Reportes
             this.configurarFiltroIdStatus((sender as DropDownList).SelectedIndex);
         }
 
-        protected void rbCalidad_CheckedChanged(object sender, EventArgs e)
-        {
-            rbGrafico.Enabled = true;
-            rbTabular.Enabled = false;
-            this.llenarCbObjeto(false);
-            if (rbTabular.Checked)
-            {
-                rbTabular.Checked = false;
-            }
-        }
-
         protected void rbRegistros_CheckedChanged(object sender, EventArgs e)
         {
-            rbGrafico.Enabled = true;
-            rbTabular.Enabled = true;
             this.llenarCbObjeto(true);
         }
 
@@ -111,7 +177,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;
@@ -122,5 +188,11 @@ namespace HelpDeskWeb.Reportes
         {
             hdk_utilerias.setRowCreated(sender, e, this);
         }
+
+        protected void rbCalidad_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

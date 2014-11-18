@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).username;
+            lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!Page.IsPostBack)
             {
                 this.cargarTablaTipoIncidente();
@@ -66,7 +66,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void cargarTablaRequerimientos()
         {
-            gvRequerimientos.DataSource = hdk_ControlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbFiltroTipo.SelectedItem.Text, null);
+            gvRequerimientos.DataSource = controlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbFiltroTipo.SelectedItem.Text, null);
              gvRequerimientos.DataBind();
         }
 
@@ -129,7 +129,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvTipoIncidentes.SelectedIndex != -1)
                     {
                         tbltipoincidencia tipoInSeleccionado = controlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
-                        this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nomTipoIncidente, 29, false);
+                        this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nombre, 29, false);
                         seleccionado = true;
                     }
                     break;
@@ -138,7 +138,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvLugares.SelectedDataKey != null)
                     {
                         tbllugar lugarSeleccionado = controlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
-                        this.configurarModal("Editar lugares", lugarSeleccionado.nomLugar,59, false);
+                        this.configurarModal("Editar lugares", lugarSeleccionado.nombre,59, false);
                         seleccionado = true;
                     }
                     break;
@@ -146,8 +146,8 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarRequerimiento":
                     if (gvRequerimientos.SelectedDataKey != null)
                     {
-                        tblrequerimiento ReqSeleccionado = hdk_ControlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
-                        this.configurarModal("Editar recursos", ReqSeleccionado.nomRequerimiento,29, true);
+                        tblrecurso ReqSeleccionado = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
+                        this.configurarModal("Editar recursos", ReqSeleccionado.nombre,29, true);
                         cbTipoRequerimiento.SelectedValue = ReqSeleccionado.cuantificable.ToString();
                         seleccionado = true;
                     }
@@ -209,7 +209,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (hdk_ControlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;
@@ -245,7 +245,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (hdk_ControlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;

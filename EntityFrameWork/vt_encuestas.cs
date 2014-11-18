@@ -14,16 +14,15 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_encuestas
     {
-        public Nullable<long> numPregunta { get; set; }
-        public int idPregunta { get; set; }
-        public string txtPregunta { get; set; }
-        public bool statusPregunta { get; set; }
+        public Nullable<long> numero { get; set; }
+        public int id { get; set; }
+        public string pregunta { get; set; }
+        public bool estatus_pregunta { get; set; }
         public int afinidad { get; set; }
-        public int valorRespuesta { get; set; }
-        public int idCalidad_Servicio { get; set; }
-        public string observacionesServicio { get; set; }
-        public bool statusCal_Servicio { get; set; }
-        public Nullable<int> incidente { get; set; }
-        public Nullable<int> evento { get; set; }
+        public int valor { get; set; }
+        public int idcalidad { get; set; }
+        public string observaciones { get; set; }
+        public bool estatus_calidad { get; set; }
+        public int idservicio { get; set; }
     }
 }

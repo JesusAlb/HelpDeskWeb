@@ -10,10 +10,15 @@
 namespace HelpDeskWeb.EntityFrameWork
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class numIncidentesPorTipo_Result
+    public partial class tblrecursoasignado
     {
-        public string Tipo { get; set; }
-        public Nullable<int> Número { get; set; }
+        public int fk_idevento { get; set; }
+        public int fk_idrequerimiento { get; set; }
+        public Nullable<int> cantidad { get; set; }
+    
+        public virtual tblevento tblevento { get; set; }
+        public virtual tblrecurso tblrecurso { get; set; }
     }
 }

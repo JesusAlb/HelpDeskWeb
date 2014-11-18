@@ -13,8 +13,8 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class sp_requerimientos_sin_asignar_Result
     {
-        public int idRequerimientos { get; set; }
-        public string nomRequerimiento { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
         public bool cuantificable { get; set; }
         public string tipo { get; set; }
     }

@@ -335,6 +335,7 @@
     <Compile Include="ControlBD\Catalogo\controlTipoEquipo.cs" />
     <Compile Include="ControlBD\Catalogo\controlTipoIncidencia.cs" />
     <Compile Include="ControlBD\Catalogo\controlUsuario.cs" />
+    <Compile Include="ControlBD\Solicitudes\controlServicios.cs" />
     <Compile Include="ControlBD\Solicitudes\Eventos\controlRecursosAsignados.cs" />
     <Compile Include="ControlBD\Solicitudes\Eventos\controlEventos.cs" />
     <Compile Include="ControlBD\Solicitudes\controlEncuestas.cs" />
@@ -354,21 +355,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloHD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\numEventosPorMes_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorMes_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorTipo_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\numIncidentesPorUsuario_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\ReqAsignados_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFrameWork\sp_requerimientos_sin_asignar_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -382,6 +368,9 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tbldepartamento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblequipoasignado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblevento.cs">
@@ -405,16 +394,16 @@
     <Compile Include="EntityFrameWork\tblpuesto.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\tblrequerimiento.cs">
+    <Compile Include="EntityFrameWork\tblrecurso.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\tblrequerimientoaevento.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\tblresponsablequipo.cs">
+    <Compile Include="EntityFrameWork\tblrecursoasignado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblrespuesta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblservicio.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tbltipoequipo.cs">
@@ -424,12 +413,6 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblusuario.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\topCincoRecursosMasUsados_Result.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\topCincoRecursosMenosUsados_Result.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_departamentos.cs">
@@ -444,13 +427,13 @@
     <Compile Include="EntityFrameWork\vt_eventos_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_eventos_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_evento_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_incidentes_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_incidentes_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_incidente_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_preguntas.cs">
@@ -465,13 +448,13 @@
     <Compile Include="EntityFrameWork\vt_promedio_incidentes.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\vt_recursos_asignados.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\vt_reporte_equipos.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_requerimientos_asignados.cs">
-      <DependentUpon>ModeloHD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFrameWork\vt_tipoincidentes.cs">
+    <Compile Include="EntityFrameWork\vt_servicios.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_usuarios.cs">
@@ -503,6 +486,12 @@
       <DependentUpon>principalMaestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\controlReportes.cs" />
+    <Compile Include="Reportes\controlReportesIncidentes.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_elemento_por_usuario.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_elemento_por_mes.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_incidentes.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_recursos_usados.cs" />
     <Compile Include="soporte.aspx.cs">
       <DependentUpon>soporte.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -552,16 +541,24 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Model\ReportEventos.rdlc" />
+    <EmbeddedResource Include="Model\ReportGraficoCalidadEventos.rdlc" />
+    <EmbeddedResource Include="Model\ReportGraficoEventos.rdlc" />
+    <EmbeddedResource Include="Model\ReportRequerimientos.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoEventos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteRequerimientos.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadEventos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReportEventos.rdlc" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

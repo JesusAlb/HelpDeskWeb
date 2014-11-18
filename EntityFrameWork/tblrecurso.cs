@@ -10,10 +10,19 @@
 namespace HelpDeskWeb.EntityFrameWork
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class topCincoRecursosMenosUsados_Result
+    public partial class tblrecurso
     {
-        public Nullable<int> Cantidad { get; set; }
-        public string Nombre { get; set; }
+        public tblrecurso()
+        {
+            this.tblrecursoasignado = new HashSet<tblrecursoasignado>();
+        }
+    
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public bool cuantificable { get; set; }
+    
+        public virtual ICollection<tblrecursoasignado> tblrecursoasignado { get; set; }
     }
 }

@@ -18,34 +18,34 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 2, 2);
-            usuarioActual = controlUsuario.obtenerUsuario(controlUsuario.obtenerUsuarioDeSession(this).idUsuario);
+            usuarioActual = controlUsuario.obtenerUsuario(controlUsuario.obtenerUsuarioDeSession(this).id);
             if (!IsPostBack)
             {
-                lbelUsuario.Text = usuarioActual.username;
+                lbelUsuario.Text = usuarioActual.nombre_usuario;
                 this.cargarCombos();
                 txtNombre.Text = usuarioActual.nombre;
                 txtApellidos.Text = usuarioActual.apellidos;
-                txtNombreUsuario.Text = usuarioActual.username;
+                txtNombreUsuario.Text = usuarioActual.nombre_usuario;
                 txtPassword.Attributes.Add("Value", usuarioActual.password);
-                txtTelefono.Text = usuarioActual.exTel;
-                cbTipoUsuario.SelectedValue = usuarioActual.tipoUsuario.ToString();
-                cbArea.SelectedValue = usuarioActual.area.ToString();
-                cbInstitucion.SelectedValue = usuarioActual.institucion.ToString();
-                this.cambiarCorreo(usuarioActual.institucion);
+                txtTelefono.Text = usuarioActual.extension_telefonica;
+                cbTipoUsuario.SelectedValue = usuarioActual.tipo.ToString();
+                cbArea.SelectedValue = usuarioActual.fk_idarea.ToString();
+                cbInstitucion.SelectedValue = usuarioActual.fk_idinstitucion.ToString();
+                this.cambiarCorreo(usuarioActual.fk_idinstitucion);
                 string[] correoDividio = usuarioActual.correo.Split('@');
                 txtCorreo.Text = correoDividio[0];
                 lbelInstitucion.Text = "@" + correoDividio[1];
-                cbPuesto.SelectedValue = usuarioActual.puesto.ToString();
-                int idCoordinacion = accionesCoordinacion.obtenerCoordinacion(usuarioActual.depto).idCoordinacion;
+                cbPuesto.SelectedValue = usuarioActual.fk_idpuesto.ToString();
+                int idCoordinacion = controlCoordinacion.obtenerCoordinacion(usuarioActual.fk_iddepto).id;
                 this.cargarComboDepto(idCoordinacion);
-                cbDepto.SelectedValue = usuarioActual.depto.ToString();
+                cbDepto.SelectedValue = usuarioActual.fk_iddepto.ToString();
                 cbCoordinacion.SelectedValue = idCoordinacion.ToString();
             }
         }
 
         protected void cargarCombos()
         {
-            cbCoordinacion.DataSource = accionesCoordinacion.obtenerDataSource(false, "");
+            cbCoordinacion.DataSource = controlCoordinacion.obtenerDataSource(false, "");
             cbArea.DataSource = controlArea.obtenerDataSource("");
             cbPuesto.DataSource = controlPuesto.obtenerDataSource("");
             cbInstitucion.DataSource = controlInstitucion.obtenerDataSource();
@@ -68,7 +68,7 @@ namespace HelpDeskWeb
 
         protected void cambiarCorreo(int institucion)
         {
-            lbelInstitucion.Text = "@" + controlInstitucion.obtenerInstitucion(institucion).correoInstitucion;
+            lbelInstitucion.Text = "@" + controlInstitucion.obtenerInstitucion(institucion).correo;
         }
 
         protected void cbInstitucion_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace HelpDeskWeb
         {
             if (txtVerificarPassword.Text.Equals(txtPassword.Text))
             {
-               if(controlUsuario.modificar(controlUsuario.obtenerUsuarioDeSession(this).idUsuario, txtNombreUsuario.Text, controlUsuario.obtenerUsuarioDeSession(this).username, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
+               if(controlUsuario.modificar(controlUsuario.obtenerUsuarioDeSession(this).id, txtNombreUsuario.Text, controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
                     ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
                }
                else

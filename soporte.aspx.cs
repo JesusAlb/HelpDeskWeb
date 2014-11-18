@@ -18,9 +18,9 @@ namespace HelpDeskWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelNomUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nomCompleto;
-            lbelCargo.Text = controlUsuario.obtenerUsuarioDeSession(this).nomPuesto;
-            lbelInstitucion.Text = controlUsuario.obtenerUsuarioDeSession(this).nomInstitucion;
+            lbelNomUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_completo;
+            lbelCargo.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_puesto;
+            lbelInstitucion.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_institucion;
             this.pintarCalificaciones();
             this.obtenerNumeroDeSucesos();
             
@@ -28,8 +28,8 @@ namespace HelpDeskWeb
 
         protected void pintarCalificaciones()
         {
-            vt_promedio_general promedioCalidad = controlEncuestas.obtenerPromedioCalidad(controlUsuario.obtenerUsuarioDeSession(this).idUsuario);
-            if (promedioCalidad.PromedioTotal == null)
+            vt_promedio_general promedioCalidad = controlEncuestas.obtenerPromedioCalidad(controlUsuario.obtenerUsuarioDeSession(this).id);
+            if (promedioCalidad == null)
             {
                 lbelCalificacionEventos.Text = "S/C";
                 lbelCalificacionIncidentes.Text = "S/C";
@@ -38,25 +38,25 @@ namespace HelpDeskWeb
             }
             else
             {
-                lbelPromedioGeneral.Text = Math.Round(promedioCalidad.PromedioTotal.Value, 2).ToString();
+                lbelPromedioGeneral.Text = Math.Round(promedioCalidad.promedioTotal.Value, 2).ToString();
                 this.pintarMedalla(promedioCalidad.posicion.Value.ToString());
 
-                if (promedioCalidad.promedioEventos == null)
+                if (promedioCalidad.promedio_evento == null)
                 {
                     lbelCalificacionEventos.Text = "S/C";
-                    lbelCalificacionIncidentes.Text = Math.Round(promedioCalidad.promedioIncidente.Value, 2).ToString();
+                    lbelCalificacionIncidentes.Text = Math.Round(promedioCalidad.promedio_incidente.Value, 2).ToString();
                 }
                 else
                 {
-                    lbelCalificacionEventos.Text = Math.Round(promedioCalidad.promedioEventos.Value, 2).ToString();
+                    lbelCalificacionEventos.Text = Math.Round(promedioCalidad.promedio_evento.Value, 2).ToString();
 
-                    if (promedioCalidad.promedioIncidente == null)
+                    if (promedioCalidad.promedio_incidente == null)
                     {
                         lbelCalificacionIncidentes.Text = "S/C";
                     }
                     else
                     {
-                        lbelCalificacionIncidentes.Text = Math.Round(promedioCalidad.promedioIncidente.Value, 2).ToString();
+                        lbelCalificacionIncidentes.Text = Math.Round(promedioCalidad.promedio_incidente.Value, 2).ToString();
                     }
                 }
 

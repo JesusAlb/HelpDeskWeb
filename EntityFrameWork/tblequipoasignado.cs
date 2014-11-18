@@ -12,30 +12,30 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class tblresponsablequipo
+    public partial class tblequipoasignado
     {
-        public int idResponEq { get; set; }
-        public int responsable { get; set; }
-        public int tipoEquipo { get; set; }
-        public int marcaEquipo { get; set; }
-        public string serieEquipo { get; set; }
-        public string memoriaRam { get; set; }
-        public string discoDuro { get; set; }
-        public int marcaMonitor { get; set; }
-        public string serieMonitor { get; set; }
+        public int id { get; set; }
+        public int fk_idusuario_responsable { get; set; }
+        public int fk_tipoequipo { get; set; }
+        public int fk_idmarca_equipo { get; set; }
+        public string serie_equipo { get; set; }
+        public string ram { get; set; }
+        public string disco_duro { get; set; }
+        public int fk_idmarca_monitor { get; set; }
+        public string serie_monitor { get; set; }
         public string ip { get; set; }
         public string mac { get; set; }
-        public int marcaMouse { get; set; }
-        public string serieMouse { get; set; }
-        public int marcaTeclado { get; set; }
-        public string serieTeclado { get; set; }
+        public int fk_idmarca_mouse { get; set; }
+        public string serie_mouse { get; set; }
+        public int fk_idmarca_teclado { get; set; }
+        public string serie_teclado { get; set; }
         public string procesador { get; set; }
     
         public virtual tblmarca tblmarca { get; set; }
         public virtual tblmarca tblmarca1 { get; set; }
         public virtual tblmarca tblmarca2 { get; set; }
         public virtual tblmarca tblmarca3 { get; set; }
-        public virtual tblusuario tblusuario { get; set; }
         public virtual tbltipoequipo tbltipoequipo { get; set; }
+        public virtual tblusuario tblusuario { get; set; }
     }
 }

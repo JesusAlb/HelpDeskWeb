@@ -13,16 +13,16 @@ namespace HelpDeskWeb.ControlBD.Catalogo
     class controlEquipos
     {
 
-        public static IList<vt_reporte_equipos> dataSource(string filtro)
+        public static IList<vt_reporte_equipos> obtenerDataSource(string filtro)
         {
             try
             {
-               return dbhelp.modelo.vt_reporte_equipos.Where(a => a.nomCompleto.Contains(filtro) || a.nomMarcaEquipo.Contains(filtro) ||
-                                                a.nomMarcaMonitor.Contains(filtro) || a.nomMarcaMouse.Contains(filtro) ||
-                                                a.nomMarcaTeclado.Contains(filtro) || a.nomTipoEquipo.Contains(filtro) ||
-                                                a.procesador.Contains(filtro) || a.serieEquipo.Contains(filtro) ||
-                                                a.serieMonitor.Contains(filtro) || a.serieMouse.Contains(filtro) ||
-                                                a.serieTeclado.Contains(filtro) || a.memoriaRam.Contains(filtro) ||
+               return dbhelp.modelo.vt_reporte_equipos.Where(a => a.nom_completo.Contains(filtro) || a.nom_marca_equipo.Contains(filtro) ||
+                                                a.nom_marca_monitor.Contains(filtro) || a.nom_marca_mouse.Contains(filtro) ||
+                                                a.nom_marca_teclado.Contains(filtro) || a.nom_tipo_equipo.Contains(filtro) ||
+                                                a.procesador.Contains(filtro) || a.serie_equipo.Contains(filtro) ||
+                                                a.serie_monitor.Contains(filtro) || a.serie_mouse.Contains(filtro) ||
+                                                a.serie_teclado.Contains(filtro) || a.memoria_ram.Contains(filtro) ||
                                                 a.ip.Contains(filtro) || a.mac.Contains(filtro)).ToList();
             }
             catch
@@ -35,15 +35,26 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var equipo = new tblresponsablequipo { discoDuro = discoDuro, ip = direccionIp, mac = direccionMac, marcaEquipo = idMarcaEquipo, marcaMonitor = marcaMonitor,
-                                                        marcaMouse = marcaMouse, marcaTeclado = marcaTeclado,
-                                                        memoriaRam = ram, procesador = procesador, responsable = idResponsable, serieEquipo = serieEquipo,
-                                                        serieMonitor = serieMonitor, serieMouse = serieMouse,  
-                                                        serieTeclado =serieTeclado, tipoEquipo = idTipoEquipo };
+                var equipo = new tblequipoasignado
+                {
+                    disco_duro = discoDuro,
+                    ip = direccionIp,
+                    mac = direccionMac,
+                    fk_idmarca_equipo = idMarcaEquipo,
+                    fk_idmarca_monitor = marcaMonitor,
+                    fk_idmarca_mouse = marcaMouse, 
+                    fk_idmarca_teclado = marcaTeclado,
+                    ram = ram, procesador = procesador, 
+                    fk_idusuario_responsable = idResponsable, 
+                    serie_equipo = serieEquipo,
+                    serie_monitor = serieMonitor, 
+                    serie_mouse = serieMouse,  
+                    serie_teclado =serieTeclado, 
+                    fk_tipoequipo = idTipoEquipo };
                 if (equipo != null)
                 {
-                    dbhelp.modelo.tblresponsablequipoes.Attach(equipo);
-                    dbhelp.modelo.tblresponsablequipoes.Add(equipo);
+                    dbhelp.modelo.tblequipoasignado.Attach(equipo);
+                    dbhelp.modelo.tblequipoasignado.Add(equipo);
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -58,24 +69,24 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.tblresponsablequipoes.SingleOrDefault(x => x.idResponEq == idEquipoAsignado);
+                var ItemAmodificar = dbhelp.modelo.tblequipoasignado.SingleOrDefault(x => x.id == idEquipoAsignado);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.discoDuro = discoDuro;
+                    ItemAmodificar.disco_duro = discoDuro;
                     ItemAmodificar.ip = direccionIp;
                     ItemAmodificar.mac = direccionMac;
-                    ItemAmodificar.marcaEquipo = idMarcaEquipo;
-                    ItemAmodificar.marcaMonitor = marcaMonitor;
-                    ItemAmodificar.marcaMouse = marcaMouse;
-                    ItemAmodificar.marcaTeclado = marcaTeclado;
-                    ItemAmodificar.memoriaRam = ram;
+                    ItemAmodificar.fk_idmarca_equipo = idMarcaEquipo;
+                    ItemAmodificar.fk_idmarca_monitor = marcaMonitor;
+                    ItemAmodificar.fk_idmarca_mouse = marcaMouse;
+                    ItemAmodificar.fk_idmarca_teclado = marcaTeclado;
+                    ItemAmodificar.ram = ram;
                     ItemAmodificar.procesador = procesador;
-                    ItemAmodificar.responsable = idResponsable;
-                    ItemAmodificar.serieEquipo = serieEquipo;
-                    ItemAmodificar.serieMonitor = serieMonitor;
-                    ItemAmodificar.serieMouse = serieMouse;
-                    ItemAmodificar.serieTeclado = serieTeclado;
-                    ItemAmodificar.tipoEquipo = idTipoEquipo;
+                    ItemAmodificar.fk_idusuario_responsable = idResponsable;
+                    ItemAmodificar.serie_equipo = serieEquipo;
+                    ItemAmodificar.serie_monitor = serieMonitor;
+                    ItemAmodificar.serie_mouse = serieMouse;
+                    ItemAmodificar.serie_teclado = serieTeclado;
+                    ItemAmodificar.fk_tipoequipo = idTipoEquipo;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -86,11 +97,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static tblresponsablequipo obtenerRegistro(int id)
+        public static tblequipoasignado obtenerRegistro(int id)
         {
             try
             {
-                return dbhelp.modelo.tblresponsablequipoes.SingleOrDefault(a => a.idResponEq == id);
+                return dbhelp.modelo.tblequipoasignado.SingleOrDefault(a => a.id == id);
             }
             catch
             {

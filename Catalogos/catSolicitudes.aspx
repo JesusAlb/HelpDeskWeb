@@ -215,9 +215,9 @@
                                                     <asp:UpdatePanel runat="server" ID="upGvTipoIncidentes" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvTipoIncidentes" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idTipoIncidente" CellPadding="4" GridLines="Horizontal">
+                                                                AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                 <Columns>
-                                                                    <asp:BoundField HeaderText="Tipo de incidencia" DataField="nomTipoIncidente" />
+                                                                    <asp:BoundField HeaderText="Tipo de incidencia" DataField="nombre" />
                                                                 </Columns>
                                                             </asp:GridView>
                                                         </ContentTemplate>
@@ -277,9 +277,9 @@
                                                 <asp:UpdatePanel runat="server" ID="upGvLugares" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvLugares" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idLugar" CellPadding="4" GridLines="Horizontal">
+                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                             <Columns>
-                                                                <asp:BoundField HeaderText="Lugares" DataField="nomLugar" />
+                                                                <asp:BoundField HeaderText="Lugares" DataField="nombre" />
                                                             </Columns>
                                                         </asp:GridView>
                                                     </ContentTemplate>
@@ -348,9 +348,9 @@
                                                     <asp:UpdatePanel runat="server" ID="upGvRequerimientos" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvRequerimientos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="idRequerimientos" CellPadding="4" GridLines="Horizontal">
+                                                                AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                 <Columns>
-                                                                    <asp:BoundField HeaderText="Requerimiento" DataField="nomRequerimiento" />
+                                                                    <asp:BoundField HeaderText="Requerimiento" DataField="nombre" />
                                                                 </Columns>
                                                             </asp:GridView>
                                                         </ContentTemplate>

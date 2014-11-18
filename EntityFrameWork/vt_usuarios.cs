@@ -14,18 +14,18 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_usuarios
     {
-        public int idUsuario { get; set; }
-        public string username { get; set; }
-        public string nomCompleto { get; set; }
+        public int id { get; set; }
+        public string nombre_usuario { get; set; }
+        public string nom_completo { get; set; }
         public string password { get; set; }
-        public string tipoUsuarioString { get; set; }
-        public string exTel { get; set; }
-        public string nomDepto { get; set; }
-        public string nomCoordinacion { get; set; }
-        public string nomArea { get; set; }
-        public string nomPuesto { get; set; }
-        public int tipoUsuario { get; set; }
+        public string tipo_usuario_string { get; set; }
+        public string extension_telefonica { get; set; }
+        public string nom_depto { get; set; }
+        public string nom_coordinacion { get; set; }
+        public string nom_area { get; set; }
+        public string nom_puesto { get; set; }
+        public int tipo { get; set; }
         public string correo { get; set; }
-        public string nomInstitucion { get; set; }
+        public string nom_institucion { get; set; }
     }
 }

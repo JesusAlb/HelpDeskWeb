@@ -17,7 +17,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tbltipoequipoes.Where(a => a.nomTipoEquipo.Contains(filtro)).OrderBy(a=>a.nomTipoEquipo).ToList();
+                return dbhelp.modelo.tbltipoequipo.Where(a => a.nombre.Contains(filtro)).OrderBy(a=>a.nombre).ToList();
             }
             catch
             {             
@@ -29,11 +29,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var tipoEquipos = new tbltipoequipo { nomTipoEquipo = nombre, siEquipo = cpu, siDiscoDuro = dd, siRed = red, siMonitor = monitor, siMouse = mouse, siTeclado = teclado, siRAM = ram, siProcesador = procesador };
+                var tipoEquipos = new tbltipoequipo { nombre = nombre, equipo = cpu, disco_duro = dd, red = red, monitor = monitor, mouse = mouse, teclado = teclado, ram = ram, procesador = procesador };
                 if (tipoEquipos != null)
                 {
-                    dbhelp.modelo.tbltipoequipoes.Attach(tipoEquipos);
-                    dbhelp.modelo.tbltipoequipoes.Add(tipoEquipos);
+                    dbhelp.modelo.tbltipoequipo.Attach(tipoEquipos);
+                    dbhelp.modelo.tbltipoequipo.Add(tipoEquipos);
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -48,18 +48,18 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.tbltipoequipoes.SingleOrDefault(x => x.idTipoEquipo == idTipoEq);
+                var ItemAmodificar = dbhelp.modelo.tbltipoequipo.SingleOrDefault(x => x.id == idTipoEq);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.nomTipoEquipo = nombre;
-                    ItemAmodificar.siEquipo = cpu;
-                    ItemAmodificar.siDiscoDuro = dd;
-                    ItemAmodificar.siMonitor = monitor;
-                    ItemAmodificar.siMouse = mouse;
-                    ItemAmodificar.siTeclado = teclado;
-                    ItemAmodificar.siRed = red;
-                    ItemAmodificar.siRAM = ram;
-                    ItemAmodificar.siProcesador = procesador;
+                    ItemAmodificar.nombre = nombre;
+                    ItemAmodificar.equipo = cpu;
+                    ItemAmodificar.disco_duro = dd;
+                    ItemAmodificar.monitor = monitor;
+                    ItemAmodificar.mouse = mouse;
+                    ItemAmodificar.teclado = teclado;
+                    ItemAmodificar.red = red;
+                    ItemAmodificar.ram = ram;
+                    ItemAmodificar.procesador = procesador;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;
@@ -74,7 +74,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tbltipoequipoes.SingleOrDefault(a => a.idTipoEquipo == index);
+                return dbhelp.modelo.tbltipoequipo.SingleOrDefault(a => a.id == index);
             }
             catch
             {

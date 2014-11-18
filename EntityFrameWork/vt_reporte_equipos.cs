@@ -14,25 +14,25 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class vt_reporte_equipos
     {
-        public int idResponEq { get; set; }
-        public string nomTipoEquipo { get; set; }
-        public string nomMarcaEquipo { get; set; }
-        public string serieEquipo { get; set; }
-        public string memoriaRam { get; set; }
-        public string discoDuro { get; set; }
-        public string nomMarcaMonitor { get; set; }
-        public string serieMonitor { get; set; }
+        public int id { get; set; }
+        public string nom_tipo_equipo { get; set; }
+        public string nom_marca_equipo { get; set; }
+        public string serie_equipo { get; set; }
+        public string memoria_ram { get; set; }
+        public string disco_duro { get; set; }
+        public string nom_marca_monitor { get; set; }
+        public string serie_monitor { get; set; }
         public string ip { get; set; }
         public string mac { get; set; }
-        public string nomMarcaMouse { get; set; }
-        public string serieMouse { get; set; }
-        public string nomMarcaTeclado { get; set; }
-        public string serieTeclado { get; set; }
+        public string nom_marca_mouse { get; set; }
+        public string serie_mouse { get; set; }
+        public string nom_marca_teclado { get; set; }
+        public string serie_teclado { get; set; }
         public string procesador { get; set; }
-        public string nomCompleto { get; set; }
-        public string nomDepto { get; set; }
-        public string nomCoordinacion { get; set; }
-        public string nomArea { get; set; }
-        public string nomPuesto { get; set; }
+        public string nom_completo { get; set; }
+        public string nom_area { get; set; }
+        public string nom_coordinacion { get; set; }
+        public string nom_depto { get; set; }
+        public string nom_puesto { get; set; }
     }
 }

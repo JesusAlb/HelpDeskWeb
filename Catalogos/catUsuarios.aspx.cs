@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Catalogos
         protected void Page_Load(object sender, EventArgs e)
         {
             hdk_utilerias.checarSession(this, true, 0, 0);
-            lbelUsuario.Text = " " + ((vt_usuarios)(Session["DatosUsuario"])).username;
+            lbelUsuario.Text = " " + ((vt_usuarios)(Session["DatosUsuario"])).nombre_usuario;
 
             if (!Page.IsPostBack)
             {
@@ -58,14 +58,14 @@ namespace HelpDeskWeb.Catalogos
         protected void cargarTablaCoordinacion()
         {
             this.cargarCombosCoordinacion();
-            this.gvCoordinaciones.DataSource = accionesCoordinacion.obtenerDataSource(false, txtFiltroCoord.Text);
+            this.gvCoordinaciones.DataSource = controlCoordinacion.obtenerDataSource(false, txtFiltroCoord.Text);
             this.gvCoordinaciones.DataBind();
         }
 
         protected void cargarCombosCoordinacion()
         {
-            this.cbFiltroCoord.DataSource = accionesCoordinacion.obtenerDataSource(true, "");
-            this.cbCoordinaciones.DataSource = accionesCoordinacion.obtenerDataSource(false, "");
+            this.cbFiltroCoord.DataSource = controlCoordinacion.obtenerDataSource(true, "");
+            this.cbCoordinaciones.DataSource = controlCoordinacion.obtenerDataSource(false, "");
             this.cbCoordinaciones.DataBind();
             this.cbFiltroCoord.DataBind();
         }
@@ -134,7 +134,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "coordinacion":
-                    if (accionesCoordinacion.insertar(txtNombre.Text))
+                    if (controlCoordinacion.insertar(txtNombre.Text))
                     {
                         this.cargarTablaCoordinacion();
                         return true;
@@ -179,7 +179,7 @@ namespace HelpDeskWeb.Catalogos
             switch (argumento)
             {
                 case "coordinacion":
-                    if (accionesCoordinacion.modificar(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value), txtNombre.Text))
+                    if (controlCoordinacion.modificar(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value), txtNombre.Text))
                     {
                         this.cargarTablaCoordinacion();
                         return true;
@@ -228,8 +228,8 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarCoord":
                     if (gvCoordinaciones.SelectedIndex != -1)
                     {
-                        tblcoordinacion coordSeleccionada = accionesCoordinacion.obtenerCoordinacion(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value));
-                        this.configurarModal("Editar coordinaciones", coordSeleccionada.nomCoordinacion, false);
+                        tblcoordinacion coordSeleccionada = controlCoordinacion.obtenerCoordinacion(Convert.ToInt32(gvCoordinaciones.SelectedDataKey.Value));
+                        this.configurarModal("Editar coordinaciones", coordSeleccionada.nombre, false);
                         seleccionado = true;
                     }
                     break;
@@ -238,8 +238,8 @@ namespace HelpDeskWeb.Catalogos
                     if (gvDeptos.SelectedIndex != -1)
                     {
                         tbldepartamento deptoSeleccionado = accionesDepto.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
-                        this.cbCoordinaciones.SelectedValue = deptoSeleccionado.coordinacion.ToString();
-                        this.configurarModal("Editar departamentos", deptoSeleccionado.nomDepto, true);
+                        this.cbCoordinaciones.SelectedValue = deptoSeleccionado.fk_idcoordinacion.ToString();
+                        this.configurarModal("Editar departamentos", deptoSeleccionado.nombre, true);
                         seleccionado = true;
                     }
                     break;
@@ -248,7 +248,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvAreas.SelectedIndex != -1)
                     {
                         tblarea areaSeleccionada = controlArea.obtenerArea(Convert.ToInt32(gvAreas.SelectedDataKey.Value));
-                        this.configurarModal("Editar áreas", areaSeleccionada.nomArea, false);
+                        this.configurarModal("Editar áreas", areaSeleccionada.nombre, false);
                         seleccionado = true;
                     }
                     break;
@@ -257,7 +257,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvPuestos.SelectedIndex != -1)
                     {
                         tblpuesto puestoSeleccionado = controlPuesto.obtenerPuesto(Convert.ToInt32(gvPuestos.SelectedDataKey.Value));
-                        this.configurarModal("Editar puestos", puestoSeleccionado.nomPuesto, false);
+                        this.configurarModal("Editar puestos", puestoSeleccionado.nombre, false);
                         seleccionado = true;
                     }
                     break;

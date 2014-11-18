@@ -14,7 +14,7 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 0)
             {
                 linkInicio.NavigateUrl = linkPrincipal.NavigateUrl = "~/soporte.aspx";
             }
@@ -22,13 +22,13 @@ namespace HelpDeskWeb
             {
                 linkInicio.NavigateUrl = linkPrincipal.NavigateUrl = "~/solicitante.aspx";
             }
-            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this.Page).username;
+            lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this.Page).nombre_usuario;
             generarPrivilegios();
         }
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipoUsuario == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

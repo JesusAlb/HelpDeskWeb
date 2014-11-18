@@ -16,20 +16,15 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblcalidadservicio()
         {
-            this.tblrespuestas = new HashSet<tblrespuesta>();
+            this.tblrespuesta = new HashSet<tblrespuesta>();
         }
     
-        public int idCalidad_Servicio { get; set; }
-        public string observacionesServicio { get; set; }
-        public Nullable<int> incidente { get; set; }
-        public bool statusCal_Servicio { get; set; }
-        public Nullable<int> evento { get; set; }
-        public Nullable<double> promedioCalidad { get; set; }
-        public int usuario_calificado { get; set; }
+        public int id { get; set; }
+        public string observaciones { get; set; }
+        public bool estatus { get; set; }
+        public double promedio { get; set; }
+        public int fk_idservicio { get; set; }
     
-        public virtual tblusuario tblusuario { get; set; }
-        public virtual tblevento tblevento { get; set; }
-        public virtual tblincidente tblincidente { get; set; }
-        public virtual ICollection<tblrespuesta> tblrespuestas { get; set; }
+        public virtual ICollection<tblrespuesta> tblrespuesta { get; set; }
     }
 }

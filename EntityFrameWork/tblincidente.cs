@@ -14,30 +14,14 @@ namespace HelpDeskWeb.EntityFrameWork
     
     public partial class tblincidente
     {
-        public tblincidente()
-        {
-            this.tblcalidadservicios = new HashSet<tblcalidadservicio>();
-        }
-    
-        public int numIncidente { get; set; }
+        public int id { get; set; }
         public int tipo { get; set; }
-        public string descripcion { get; set; }
-        public int solicitante { get; set; }
-        public string prioridad { get; set; }
-        public Nullable<System.DateTime> fecha_Sol { get; set; }
-        public int status { get; set; }
-        public Nullable<System.DateTime> horaIn { get; set; }
-        public Nullable<System.DateTime> horaFn { get; set; }
-        public Nullable<System.DateTime> fecha_Cierre { get; set; }
-        public int soporte { get; set; }
+        public int prioridad { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
-        public int seguimiento { get; set; }
+        public int fk_idservicio { get; set; }
     
-        public virtual ICollection<tblcalidadservicio> tblcalidadservicios { get; set; }
-        public virtual tblusuario tblusuario { get; set; }
-        public virtual tblusuario tblusuario1 { get; set; }
-        public virtual tblusuario tblusuario2 { get; set; }
+        public virtual tblservicio tblservicio { get; set; }
         public virtual tbltipoincidencia tbltipoincidencia { get; set; }
     }
 }
