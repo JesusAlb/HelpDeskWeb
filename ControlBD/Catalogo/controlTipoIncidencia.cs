@@ -108,6 +108,18 @@ namespace HelpDeskWeb.ControlAltas
            }
        }
 
+       public static int obtenerTipoIncidenciaGeneral()
+       {
+           try
+           {
+              return dbhelp.modelo.tbltipoincidencia.SingleOrDefault(a => a.nombre.Equals("General")).id;
+           }
+           catch
+           {
+               return 1;
+           }
+       }
+
     }
 
 }

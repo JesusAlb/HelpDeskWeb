@@ -23,6 +23,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public Nullable<System.DateTime> hora_final { get; set; }
         public int estatus_evento { get; set; }
         public string solicitante { get; set; }
+        public int idsolicitante { get; set; }
         public string soporte { get; set; }
         public string apoyo { get; set; }
         public string tipo { get; set; }
@@ -34,6 +35,5 @@ namespace HelpDeskWeb.EntityFrameWork
         public bool estatus_calidad { get; set; }
         public double promedio { get; set; }
         public string observaciones { get; set; }
-        public int idsolicitante { get; set; }
     }
 }

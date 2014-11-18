@@ -16,6 +16,8 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public int id { get; set; }
         public string descripcion { get; set; }
+        public string soporte { get; set; }
+        public string apoyo { get; set; }
         public string tipo { get; set; }
         public string prioridad { get; set; }
         public string acciones { get; set; }
@@ -27,7 +29,5 @@ namespace HelpDeskWeb.EntityFrameWork
         public int estatus_incidente { get; set; }
         public string solicitante { get; set; }
         public int fk_idusuario_solicitante { get; set; }
-        public string soporte { get; set; }
-        public string apoyo { get; set; }
     }
 }

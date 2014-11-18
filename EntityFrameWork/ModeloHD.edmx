@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="id" />
@@ -829,54 +829,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="numEventosPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="numEventosPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="numIncidentesPorDepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="numIncidentesPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="numIncidentesPorTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="numIncidentesPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorDepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorMesEv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorMesIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorTipoIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorUsuarioEv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="promedioCalidadPorUsuarioIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="sp_cerrar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idservicio" Type="int" Mode="In" />
         </Function>
@@ -884,6 +836,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Parameter Name="idIncidente" Type="int" Mode="In" />
           <Parameter Name="Acciones" Type="varchar" Mode="In" />
           <Parameter Name="Solucion" Type="varchar" Mode="In" />
+          <Parameter Name="idservicio" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_insertar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="titulo" Type="varchar" Mode="In" />
@@ -896,21 +849,18 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Parameter Name="tipoEvento" Type="int" Mode="In" />
           <Parameter Name="solicitante" Type="int" Mode="In" />
           <Parameter Name="FechaEvento" Type="datetime" Mode="In" />
+          <Parameter Name="idUserNA" Type="int" Mode="In" />
+          <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_insertar_incidente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="solicitante" Type="int" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="idUserNA" Type="int" Mode="In" />
+          <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
+          <Parameter Name="id_tipoIncidencia_genera" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_requerimientos_sin_asignar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEvento" Type="int" Mode="In" />
-        </Function>
-        <Function Name="topCincoRecursosMasUsados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="topCincoRecursosMenosUsados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="fechaFinal" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="dbhelpdeskModelStoreContainer">
           <EntitySet Name="tblarea" EntityType="Self.tblarea" Schema="dbo" store:Type="Tables" />
@@ -1255,7 +1205,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbhelpdeskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1567,10 +1518,10 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="idsolicitante" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
-            <PropertyRef Name="idsolicitante" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1581,6 +1532,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Name="hora_final" Type="DateTime" Precision="3" />
           <Property Name="estatus_evento" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
           <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
@@ -1588,7 +1540,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Name="asistencia" Type="Int32" Nullable="false" />
           <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_eventos_cerrados">
           <Key>
@@ -1598,13 +1549,13 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="idsolicitante" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
             <PropertyRef Name="idcalidad" />
             <PropertyRef Name="estatus_calidad" />
             <PropertyRef Name="promedio" />
-            <PropertyRef Name="idsolicitante" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1615,6 +1566,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Name="hora_final" Type="DateTime" Precision="3" />
           <Property Name="estatus_evento" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
           <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
@@ -1626,7 +1578,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Name="estatus_calidad" Type="Boolean" Nullable="false" />
           <Property Name="promedio" Type="Double" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_incidente_sin_cerrar">
           <Key>
@@ -1639,6 +1590,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -1650,8 +1603,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vt_incidentes_cerrados">
           <Key>
@@ -1721,6 +1672,32 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           </Key>
           <Property Name="soporte" Type="Int32" Nullable="false" />
           <Property Name="promedio_incidente" Type="Double" />
+        </EntityType>
+        <EntityType Name="vt_recursos_asignados">
+          <Key>
+            <PropertyRef Name="idevento" />
+            <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="asistencia" />
+            <PropertyRef Name="acomodo" />
+            <PropertyRef Name="fecha_realizacion" />
+            <PropertyRef Name="nom_evento" />
+            <PropertyRef Name="idrecurso" />
+          </Key>
+          <Property Name="idevento" Type="Int32" Nullable="false" />
+          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="asistencia" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hora_inicial" Type="DateTime" Precision="3" />
+          <Property Name="hora_final" Type="DateTime" Precision="3" />
+          <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="nom_evento" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="idrecurso" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_reporte_equipos">
           <Key>
@@ -2102,6 +2079,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
           <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
           <EntitySet Name="vt_promedio_incidentes" EntityType="Self.vt_promedio_incidentes" />
+          <EntitySet Name="vt_recursos_asignados" EntityType="Self.vt_recursos_asignados" />
           <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
           <EntitySet Name="vt_servicios" EntityType="Self.vt_servicios" />
           <EntitySet Name="vt_usuarios" EntityType="Self.vt_usuarios" />
@@ -2193,61 +2171,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
-          <FunctionImport Name="numEventosPorMes">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="numEventosPorUsuario">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="numIncidentesPorDepto">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="numIncidentesPorMes">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="numIncidentesPorTipo">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="numIncidentesPorUsuario">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorDepto">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorMesEv">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorMesIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorTipoIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorUsuarioEv">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="promedioCalidadPorUsuarioIn">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="sp_cerrar_evento">
-          <Parameter Name="idservicio" Mode="In" Type="Int32" />
+            <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_cerrar_incidente">
             <Parameter Name="idIncidente" Mode="In" Type="Int32" />
             <Parameter Name="Acciones" Mode="In" Type="String" />
             <Parameter Name="Solucion" Mode="In" Type="String" />
+            <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insertar_evento">
             <Parameter Name="titulo" Mode="In" Type="String" />
@@ -2260,23 +2191,19 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
             <Parameter Name="tipoEvento" Mode="In" Type="Int32" />
             <Parameter Name="solicitante" Mode="In" Type="Int32" />
             <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
+            <Parameter Name="idUserNA" Mode="In" Type="Int32" />
+            <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insertar_incidente">
             <Parameter Name="solicitante" Mode="In" Type="Int32" />
             <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="idUserNA" Mode="In" Type="Int32" />
+            <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
+            <Parameter Name="id_tipoIncidencia_genera" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskModel.sp_requerimientos_sin_asignar_Result)">
-          <Parameter Name="idEvento" Mode="In" Type="Int32" />
+            <Parameter Name="idEvento" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="topCincoRecursosMasUsados">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="topCincoRecursosMenosUsados">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="vt_recursos_asignados" EntityType="dbhelpdeskModel.vt_recursos_asignados" />
         </EntityContainer>
         <ComplexType Name="sp_requerimientos_sin_asignar_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -2284,32 +2211,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <Property Type="Boolean" Name="cuantificable" Nullable="false" />
           <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
         </ComplexType>
-        <EntityType Name="vt_recursos_asignados">
-          <Key>
-            <PropertyRef Name="idevento" />
-            <PropertyRef Name="idsolicitante" />
-            <PropertyRef Name="asistencia" />
-            <PropertyRef Name="acomodo" />
-            <PropertyRef Name="fecha_realizacion" />
-            <PropertyRef Name="nom_evento" />
-            <PropertyRef Name="idrecurso" />
-          </Key>
-          <Property Name="idevento" Type="Int32" Nullable="false" />
-          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" />
-          <Property Name="asistencia" Type="Int32" Nullable="false" />
-          <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="acomodo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="hora_inicial" Type="DateTime" Precision="3" />
-          <Property Name="hora_final" Type="DateTime" Precision="3" />
-          <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="nom_evento" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="idrecurso" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2581,7 +2482,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <EntitySetMapping Name="vt_evento_sin_cerrar">
             <EntityTypeMapping TypeName="dbhelpdeskModel.vt_evento_sin_cerrar">
               <MappingFragment StoreEntitySet="vt_evento_sin_cerrar">
-                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -2591,6 +2491,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
                 <ScalarProperty Name="hora_final" ColumnName="hora_final" />
                 <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
                 <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
                 <ScalarProperty Name="soporte" ColumnName="soporte" />
                 <ScalarProperty Name="apoyo" ColumnName="apoyo" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
@@ -2604,7 +2505,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
           <EntitySetMapping Name="vt_eventos_cerrados">
             <EntityTypeMapping TypeName="dbhelpdeskModel.vt_eventos_cerrados">
               <MappingFragment StoreEntitySet="vt_eventos_cerrados">
-                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -2614,6 +2514,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
                 <ScalarProperty Name="hora_final" ColumnName="hora_final" />
                 <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
                 <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
                 <ScalarProperty Name="soporte" ColumnName="soporte" />
                 <ScalarProperty Name="apoyo" ColumnName="apoyo" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
@@ -2633,6 +2534,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
               <MappingFragment StoreEntitySet="vt_incidente_sin_cerrar">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="soporte" ColumnName="soporte" />
+                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="prioridad" ColumnName="prioridad" />
                 <ScalarProperty Name="acciones" ColumnName="acciones" />
@@ -2644,8 +2547,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
                 <ScalarProperty Name="estatus_incidente" ColumnName="estatus_incidente" />
                 <ScalarProperty Name="solicitante" ColumnName="solicitante" />
                 <ScalarProperty Name="fk_idusuario_solicitante" ColumnName="fk_idusuario_solicitante" />
-                <ScalarProperty Name="soporte" ColumnName="soporte" />
-                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2712,6 +2613,27 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vt_recursos_asignados">
+            <EntityTypeMapping TypeName="dbhelpdeskModel.vt_recursos_asignados">
+              <MappingFragment StoreEntitySet="vt_recursos_asignados">
+                <ScalarProperty Name="idevento" ColumnName="idevento" />
+                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="asistencia" ColumnName="asistencia" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+                <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
+                <ScalarProperty Name="hora_final" ColumnName="hora_final" />
+                <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="nom_evento" ColumnName="nom_evento" />
+                <ScalarProperty Name="nom_lugar" ColumnName="nom_lugar" />
+                <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
+                <ScalarProperty Name="nom_recurso" ColumnName="nom_recurso" />
+                <ScalarProperty Name="idrecurso" ColumnName="idrecurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vt_reporte_equipos">
             <EntityTypeMapping TypeName="dbhelpdeskModel.vt_reporte_equipos">
               <MappingFragment StoreEntitySet="vt_reporte_equipos">
@@ -2774,18 +2696,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="numEventosPorMes" FunctionName="dbhelpdeskModel.Store.numEventosPorMes" />
-          <FunctionImportMapping FunctionImportName="numEventosPorUsuario" FunctionName="dbhelpdeskModel.Store.numEventosPorUsuario" />
-          <FunctionImportMapping FunctionImportName="numIncidentesPorDepto" FunctionName="dbhelpdeskModel.Store.numIncidentesPorDepto" />
-          <FunctionImportMapping FunctionImportName="numIncidentesPorMes" FunctionName="dbhelpdeskModel.Store.numIncidentesPorMes" />
-          <FunctionImportMapping FunctionImportName="numIncidentesPorTipo" FunctionName="dbhelpdeskModel.Store.numIncidentesPorTipo" />
-          <FunctionImportMapping FunctionImportName="numIncidentesPorUsuario" FunctionName="dbhelpdeskModel.Store.numIncidentesPorUsuario" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorDepto" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorDepto" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorMesEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesEv" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorMesIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorMesIn" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorTipoIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorTipoIn" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioEv" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioEv" />
-          <FunctionImportMapping FunctionImportName="promedioCalidadPorUsuarioIn" FunctionName="dbhelpdeskModel.Store.promedioCalidadPorUsuarioIn" />
           <FunctionImportMapping FunctionImportName="sp_cerrar_evento" FunctionName="dbhelpdeskModel.Store.sp_cerrar_evento" />
           <FunctionImportMapping FunctionImportName="sp_cerrar_incidente" FunctionName="dbhelpdeskModel.Store.sp_cerrar_incidente" />
           <FunctionImportMapping FunctionImportName="sp_insertar_evento" FunctionName="dbhelpdeskModel.Store.sp_insertar_evento" />
@@ -2800,29 +2710,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="topCincoRecursosMasUsados" FunctionName="dbhelpdeskModel.Store.topCincoRecursosMasUsados" />
-          <FunctionImportMapping FunctionImportName="topCincoRecursosMenosUsados" FunctionName="dbhelpdeskModel.Store.topCincoRecursosMenosUsados" />
-          <EntitySetMapping Name="vt_recursos_asignados">
-            <EntityTypeMapping TypeName="dbhelpdeskModel.vt_recursos_asignados">
-              <MappingFragment StoreEntitySet="vt_recursos_asignados">
-                <ScalarProperty Name="idrecurso" ColumnName="idrecurso" />
-                <ScalarProperty Name="nom_recurso" ColumnName="nom_recurso" />
-                <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
-                <ScalarProperty Name="nom_lugar" ColumnName="nom_lugar" />
-                <ScalarProperty Name="nom_evento" ColumnName="nom_evento" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-                <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
-                <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-                <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
-                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
-                <ScalarProperty Name="idevento" ColumnName="idevento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

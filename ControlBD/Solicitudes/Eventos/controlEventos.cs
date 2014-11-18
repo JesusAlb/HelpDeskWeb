@@ -1,4 +1,5 @@
 ﻿
+using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections;
@@ -310,7 +311,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {       
             try
             {
-                var evento = dbhelp.modelo.sp_insertar_evento(titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial);
+                int idservicio = controlServicios.obtenerUltimoServicio();
+                int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
+                var evento = dbhelp.modelo.sp_insertar_evento(titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
                    if (evento != 0)
                    {
                        dbhelp.modelo.SaveChanges();

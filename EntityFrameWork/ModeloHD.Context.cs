@@ -57,166 +57,10 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<vt_promedio_eventos> vt_promedio_eventos { get; set; }
         public virtual DbSet<vt_promedio_general> vt_promedio_general { get; set; }
         public virtual DbSet<vt_promedio_incidentes> vt_promedio_incidentes { get; set; }
+        public virtual DbSet<vt_recursos_asignados> vt_recursos_asignados { get; set; }
         public virtual DbSet<vt_reporte_equipos> vt_reporte_equipos { get; set; }
         public virtual DbSet<vt_servicios> vt_servicios { get; set; }
         public virtual DbSet<vt_usuarios> vt_usuarios { get; set; }
-        public virtual DbSet<vt_recursos_asignados> vt_recursos_asignados { get; set; }
-    
-        public virtual int numEventosPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numEventosPorMes", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int numEventosPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numEventosPorUsuario", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int numIncidentesPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorDepto", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int numIncidentesPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorMes", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int numIncidentesPorTipo(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorTipo", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int numIncidentesPorUsuario(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("numIncidentesPorUsuario", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorDepto(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorDepto", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorMesEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorMesEv", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorMesIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorMesIn", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorTipoIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorTipoIn", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorUsuarioEv(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorUsuarioEv", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int promedioCalidadPorUsuarioIn(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("promedioCalidadPorUsuarioIn", fechaInicioParameter, fechaFinalParameter);
-        }
     
         public virtual int sp_cerrar_evento(Nullable<int> idservicio)
         {
@@ -227,7 +71,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_evento", idservicioParameter);
         }
     
-        public virtual int sp_cerrar_incidente(Nullable<int> idIncidente, string acciones, string solucion)
+        public virtual int sp_cerrar_incidente(Nullable<int> idIncidente, string acciones, string solucion, Nullable<int> idservicio)
         {
             var idIncidenteParameter = idIncidente.HasValue ?
                 new ObjectParameter("idIncidente", idIncidente) :
@@ -241,10 +85,14 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("Solucion", solucion) :
                 new ObjectParameter("Solucion", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_incidente", idIncidenteParameter, accionesParameter, solucionParameter);
+            var idservicioParameter = idservicio.HasValue ?
+                new ObjectParameter("idservicio", idservicio) :
+                new ObjectParameter("idservicio", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_incidente", idIncidenteParameter, accionesParameter, solucionParameter, idservicioParameter);
         }
     
-        public virtual int sp_insertar_evento(string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, Nullable<int> tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento)
+        public virtual int sp_insertar_evento(string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, Nullable<int> tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento, Nullable<int> idUserNA, Nullable<int> idultimo_servicio)
         {
             var tituloParameter = titulo != null ?
                 new ObjectParameter("titulo", titulo) :
@@ -286,10 +134,18 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("FechaEvento", fechaEvento) :
                 new ObjectParameter("FechaEvento", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_evento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter);
+            var idUserNAParameter = idUserNA.HasValue ?
+                new ObjectParameter("idUserNA", idUserNA) :
+                new ObjectParameter("idUserNA", typeof(int));
+    
+            var idultimo_servicioParameter = idultimo_servicio.HasValue ?
+                new ObjectParameter("idultimo_servicio", idultimo_servicio) :
+                new ObjectParameter("idultimo_servicio", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_evento", tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter, idUserNAParameter, idultimo_servicioParameter);
         }
     
-        public virtual int sp_insertar_incidente(Nullable<int> solicitante, string descripcion)
+        public virtual int sp_insertar_incidente(Nullable<int> solicitante, string descripcion, Nullable<int> idUserNA, Nullable<int> idultimo_servicio, Nullable<int> id_tipoIncidencia_genera)
         {
             var solicitanteParameter = solicitante.HasValue ?
                 new ObjectParameter("solicitante", solicitante) :
@@ -299,7 +155,19 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_incidente", solicitanteParameter, descripcionParameter);
+            var idUserNAParameter = idUserNA.HasValue ?
+                new ObjectParameter("idUserNA", idUserNA) :
+                new ObjectParameter("idUserNA", typeof(int));
+    
+            var idultimo_servicioParameter = idultimo_servicio.HasValue ?
+                new ObjectParameter("idultimo_servicio", idultimo_servicio) :
+                new ObjectParameter("idultimo_servicio", typeof(int));
+    
+            var id_tipoIncidencia_generaParameter = id_tipoIncidencia_genera.HasValue ?
+                new ObjectParameter("id_tipoIncidencia_genera", id_tipoIncidencia_genera) :
+                new ObjectParameter("id_tipoIncidencia_genera", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_incidente", solicitanteParameter, descripcionParameter, idUserNAParameter, idultimo_servicioParameter, id_tipoIncidencia_generaParameter);
         }
     
         public virtual ObjectResult<sp_requerimientos_sin_asignar_Result> sp_requerimientos_sin_asignar(Nullable<int> idEvento)
@@ -309,32 +177,6 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("idEvento", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_requerimientos_sin_asignar_Result>("sp_requerimientos_sin_asignar", idEventoParameter);
-        }
-    
-        public virtual int topCincoRecursosMasUsados(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("topCincoRecursosMasUsados", fechaInicioParameter, fechaFinalParameter);
-        }
-    
-        public virtual int topCincoRecursosMenosUsados(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("fechaInicio", fechaInicio) :
-                new ObjectParameter("fechaInicio", typeof(System.DateTime));
-    
-            var fechaFinalParameter = fechaFinal.HasValue ?
-                new ObjectParameter("fechaFinal", fechaFinal) :
-                new ObjectParameter("fechaFinal", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("topCincoRecursosMenosUsados", fechaInicioParameter, fechaFinalParameter);
         }
     }
 }

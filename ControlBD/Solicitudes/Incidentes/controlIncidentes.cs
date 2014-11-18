@@ -1,4 +1,5 @@
 ﻿
+using HelpDeskWeb.ControlAltas;
 using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.EntityFrameWork;
@@ -322,7 +323,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-               var resultado = dbhelp.modelo.sp_insertar_incidente(idSolicitante, descripcion);
+                int idservicio = controlServicios.obtenerUltimoServicio();
+                int idtipo = controlTipoIncidencia.obtenerTipoIncidenciaGeneral();
+                int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
+               var resultado = dbhelp.modelo.sp_insertar_incidente(idSolicitante, descripcion, idusuario, idservicio, idtipo );
                if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
@@ -343,7 +347,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.sp_cerrar_incidente(id, acciones, solucion);
+                int idservicio = controlServicios.obtenerUltimoServicio();
+                var ItemAmodificar = dbhelp.modelo.sp_cerrar_incidente(id, acciones, solucion, idservicio);
                 if (ItemAmodificar != 0)
                 {
                     dbhelp.modelo.SaveChanges();
