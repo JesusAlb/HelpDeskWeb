@@ -57,10 +57,10 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<vt_promedio_eventos> vt_promedio_eventos { get; set; }
         public virtual DbSet<vt_promedio_general> vt_promedio_general { get; set; }
         public virtual DbSet<vt_promedio_incidentes> vt_promedio_incidentes { get; set; }
-        public virtual DbSet<vt_recursos_asignados> vt_recursos_asignados { get; set; }
         public virtual DbSet<vt_reporte_equipos> vt_reporte_equipos { get; set; }
         public virtual DbSet<vt_servicios> vt_servicios { get; set; }
         public virtual DbSet<vt_usuarios> vt_usuarios { get; set; }
+        public virtual DbSet<vt_recursos_asignados> vt_recursos_asignados { get; set; }
     
         public virtual int numEventosPorMes(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal)
         {

@@ -123,13 +123,22 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                                                 <asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de usuarios" />
                                             </asp:Panel>
-                                            <asp:Panel runat="server" ID="panelFormulario" CssClass="modal-body" DefaultButton="btnGrabar">
-                                                <asp:Panel runat="server" CssClass="row">
-                                                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-                                                    <asp:Panel runat="server" CssClass="col-lg-10">
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
+                                            <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                    <asp:Panel runat="server" ID="panelFormulario" CssClass="modal-body" DefaultButton="btnGrabar">
+                                        <asp:Panel runat="server" CssClass="row">
+                                            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+                                            <asp:Panel runat="server" CssClass="col-lg-10">
+                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Nombre de usuario" Font-Bold="true" />
-                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control"  />
+                                                            <asp:TextBox runat="server" ID="txtNomUsuario" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control" />
                                                             <asp:HiddenField runat="server" ID="username" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
@@ -143,15 +152,16 @@
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">Apellido</span>
-                                                                    <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control" ></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtApellido" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </asp:Panel>
+
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true" />
                                                             <asp:Panel runat="server" CssClass="row">
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                    <asp:TextBox runat="server" ID="txtPassword" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control"  />
+                                                                    <asp:TextBox runat="server" ID="txtPassword" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" CssClass="col-lg-6">
                                                                     <asp:TextBox runat="server" ID="txtPasswordVer" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" TextMode="Password" CssClass="form-control" placeholder="Repita contraseña" />
@@ -173,26 +183,44 @@
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                         </asp:Panel>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>
                                                         <asp:Panel runat="server" CssClass="form-group">
-                                                            <asp:Label runat="server" Text="Institución" Font-Bold="true"/>
-                                                            <asp:DropDownList runat="server" ID="cbInstitucion" AutoPostBack="true" OnSelectedIndexChanged="cbInstitucion_SelectedIndexChanged" CssClass="form-control" DataTextField ="nombre" DataValueField="id" />
+                                                            <asp:Label runat="server" Text="Institución" Font-Bold="true" />
+                                                            <asp:DropDownList runat="server" ID="cbInstitucion" AutoPostBack="true" OnSelectedIndexChanged="cbInstitucion_SelectedIndexChanged" CssClass="form-control" DataTextField="nombre" DataValueField="id" />
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Correo electronico" Font-Bold="true" />
                                                             <div class="input-group">
-                                                            <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);"  MaxLength="30"/>
-                                                            <span class="input-group-addon"><asp:Label runat="server" ID="lbelCorreo"  Text="@cie.org.mx"></asp:Label></span>
-                                                             </div>
+                                                                <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" />
+                                                                <span class="input-group-addon">
+                                                                    <asp:Label runat="server" ID="lbelCorreo" Text="@cie.org.mx"></asp:Label></span>
+                                                            </div>
                                                         </asp:Panel>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="cbInstitucion" EventName="SelectedIndexChanged" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Coordinación" Font-Bold="true" />
                                                             <asp:DropDownList runat="server" ID="cbCoordinaciones" AutoPostBack="true" CssClass="form-control"
-                                                                OnSelectedIndexChanged="cbCoordinaciones_SelectedIndexChanged" DataTextField="nombre" DataValueField="id" >
+                                                                OnSelectedIndexChanged="cbCoordinaciones_SelectedIndexChanged" DataTextField="nombre" DataValueField="id">
                                                             </asp:DropDownList>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Departamento" Font-Bold="true" />
-                                                            <asp:DropDownList runat="server" ID="cbDepto" CssClass="form-control"  DataTextField="nombre" DataValueField="id">
+                                                            <asp:DropDownList runat="server" ID="cbDepto" CssClass="form-control" DataTextField="nombre" DataValueField="id">
                                                             </asp:DropDownList>
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
@@ -202,24 +230,31 @@
                                                         </asp:Panel>
                                                         <asp:Panel runat="server" CssClass="form-group">
                                                             <asp:Label runat="server" Text="Puesto" Font-Bold="true" />
-                                                            <asp:DropDownList runat="server" ID="cbPuesto" CssClass="form-control"  DataTextField="nombre" DataValueField="id">
+                                                            <asp:DropDownList runat="server" ID="cbPuesto" CssClass="form-control" DataTextField="nombre" DataValueField="id">
                                                             </asp:DropDownList>
                                                         </asp:Panel>
-                                                    </asp:Panel>
-                                                </asp:Panel>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="cbCoordinaciones" EventName="SelectedIndexChanged" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
                                             </asp:Panel>
-                                            <asp:Panel runat="server" CssClass="modal-footer">
+                                        </asp:Panel>
+                                    </asp:Panel>
+                                    <asp:Panel runat="server" CssClass="modal-footer">
+                                        <asp:UpdatePanel runat="server" ID="UpdateBtnsModal" UpdateMode="Conditional">
+                                            <ContentTemplate>
                                                 <asp:Button runat="server" CssClass="btn btn-default" data-dismiss="modal" Text="Cerrar" />
                                                 <asp:Button runat="server" ID="btnGrabar" OnCommand="btnGrabar_Command" CssClass="btn btn-primary" Text="Grabar" />
-                                            </asp:Panel>
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
-                                            <asp:AsyncPostBackTrigger ControlID="cbCoordinaciones" EventName="SelectedIndexChanged" />
-                                            <asp:AsyncPostBackTrigger ControlID="cbInstitucion" EventName="SelectedIndexChanged" />
-                                            <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
-                                        </Triggers>
-                                    </asp:UpdatePanel>
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="btnEditar" EventName="Click" />
+                                                <asp:AsyncPostBackTrigger ControlID="btnNuevo" EventName="Click" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+                                    </asp:Panel>
                                 </asp:Panel>
                             </asp:Panel>
                         </asp:Panel>

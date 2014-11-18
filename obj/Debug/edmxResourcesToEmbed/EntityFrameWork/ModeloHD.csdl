@@ -463,31 +463,6 @@
     <Property Name="soporte" Type="Int32" Nullable="false" />
     <Property Name="promedio_incidente" Type="Double" />
   </EntityType>
-  <EntityType Name="vt_recursos_asignados">
-    <Key>
-      <PropertyRef Name="idevento" />
-      <PropertyRef Name="asistencia" />
-      <PropertyRef Name="acomodo" />
-      <PropertyRef Name="fecha_realizacion" />
-      <PropertyRef Name="nom_evento" />
-      <PropertyRef Name="idrecurso" />
-    </Key>
-    <Property Name="idevento" Type="Int32" Nullable="false" />
-    <Property Name="idsolicitante" Type="Int32" />
-    <Property Name="cantidad" Type="Int32" />
-    <Property Name="asistencia" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="hora_inicial" Type="DateTime" Precision="3" />
-    <Property Name="hora_final" Type="DateTime" Precision="3" />
-    <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="observacion_evento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="nom_evento" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="idrecurso" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="vt_reporte_equipos">
     <Key>
       <PropertyRef Name="id" />
@@ -868,7 +843,6 @@
     <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
     <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
     <EntitySet Name="vt_promedio_incidentes" EntityType="Self.vt_promedio_incidentes" />
-    <EntitySet Name="vt_recursos_asignados" EntityType="Self.vt_recursos_asignados" />
     <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
     <EntitySet Name="vt_servicios" EntityType="Self.vt_servicios" />
     <EntitySet Name="vt_usuarios" EntityType="Self.vt_usuarios" />
@@ -1043,6 +1017,7 @@
       <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <EntitySet Name="vt_recursos_asignados" EntityType="dbhelpdeskModel.vt_recursos_asignados" />
   </EntityContainer>
   <ComplexType Name="sp_requerimientos_sin_asignar_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -1050,4 +1025,30 @@
     <Property Type="Boolean" Name="cuantificable" Nullable="false" />
     <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
   </ComplexType>
+  <EntityType Name="vt_recursos_asignados">
+    <Key>
+      <PropertyRef Name="idevento" />
+      <PropertyRef Name="idsolicitante" />
+      <PropertyRef Name="asistencia" />
+      <PropertyRef Name="acomodo" />
+      <PropertyRef Name="fecha_realizacion" />
+      <PropertyRef Name="nom_evento" />
+      <PropertyRef Name="idrecurso" />
+    </Key>
+    <Property Name="idevento" Type="Int32" Nullable="false" />
+    <Property Name="idsolicitante" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="asistencia" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="acomodo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="hora_inicial" Type="DateTime" Precision="3" />
+    <Property Name="hora_final" Type="DateTime" Precision="3" />
+    <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="nom_evento" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nom_lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="idrecurso" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

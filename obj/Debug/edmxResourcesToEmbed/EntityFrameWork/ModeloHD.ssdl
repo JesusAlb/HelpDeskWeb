@@ -348,6 +348,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidente_sin_cerrar' no t
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="soporte" Type="varchar" MaxLength="40" />
+    <Property Name="apoyo" Type="varchar" MaxLength="40" />
     <Property Name="tipo" Type="varchar" MaxLength="40" />
     <Property Name="prioridad" Type="varchar" MaxLength="6" />
     <Property Name="acciones" Type="varchar" MaxLength="250" />
@@ -359,8 +361,6 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidente_sin_cerrar' no t
     <Property Name="estatus_incidente" Type="int" Nullable="false" />
     <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
     <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
-    <Property Name="soporte" Type="varchar" MaxLength="40" />
-    <Property Name="apoyo" Type="varchar" MaxLength="40" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidentes_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -446,6 +446,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_recursos_asignados' no tie
   <EntityType Name="vt_recursos_asignados">
     <Key>
       <PropertyRef Name="idevento" />
+      <PropertyRef Name="idsolicitante" />
       <PropertyRef Name="asistencia" />
       <PropertyRef Name="acomodo" />
       <PropertyRef Name="fecha_realizacion" />
@@ -453,7 +454,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_recursos_asignados' no tie
       <PropertyRef Name="idrecurso" />
     </Key>
     <Property Name="idevento" Type="int" Nullable="false" />
-    <Property Name="idsolicitante" Type="int" />
+    <Property Name="idsolicitante" Type="int" Nullable="false" />
     <Property Name="cantidad" Type="int" />
     <Property Name="asistencia" Type="int" Nullable="false" />
     <Property Name="tipo" Type="varchar" MaxLength="7" />
@@ -461,9 +462,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_recursos_asignados' no tie
     <Property Name="hora_inicial" Type="datetime" />
     <Property Name="hora_final" Type="datetime" />
     <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
-    <Property Name="observacion_evento" Type="varchar" MaxLength="250" />
+    <Property Name="observacion" Type="varchar" MaxLength="250" />
     <Property Name="nom_evento" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="lugar" Type="varchar" MaxLength="60" />
+    <Property Name="nom_lugar" Type="varchar" MaxLength="60" />
     <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
     <Property Name="nom_recurso" Type="varchar" MaxLength="60" />
     <Property Name="idrecurso" Type="int" Nullable="false" />
@@ -1017,6 +1018,8 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
       <DefiningQuery>SELECT 
     [vt_incidente_sin_cerrar].[id] AS [id], 
     [vt_incidente_sin_cerrar].[descripcion] AS [descripcion], 
+    [vt_incidente_sin_cerrar].[soporte] AS [soporte], 
+    [vt_incidente_sin_cerrar].[apoyo] AS [apoyo], 
     [vt_incidente_sin_cerrar].[tipo] AS [tipo], 
     [vt_incidente_sin_cerrar].[prioridad] AS [prioridad], 
     [vt_incidente_sin_cerrar].[acciones] AS [acciones], 
@@ -1027,9 +1030,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     [vt_incidente_sin_cerrar].[hora_final] AS [hora_final], 
     [vt_incidente_sin_cerrar].[estatus_incidente] AS [estatus_incidente], 
     [vt_incidente_sin_cerrar].[solicitante] AS [solicitante], 
-    [vt_incidente_sin_cerrar].[fk_idusuario_solicitante] AS [fk_idusuario_solicitante], 
-    [vt_incidente_sin_cerrar].[soporte] AS [soporte], 
-    [vt_incidente_sin_cerrar].[apoyo] AS [apoyo]
+    [vt_incidente_sin_cerrar].[fk_idusuario_solicitante] AS [fk_idusuario_solicitante]
     FROM [dbo].[vt_incidente_sin_cerrar] AS [vt_incidente_sin_cerrar]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" store:Type="Views" store:Schema="dbo">
@@ -1096,9 +1097,9 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     [vt_recursos_asignados].[hora_inicial] AS [hora_inicial], 
     [vt_recursos_asignados].[hora_final] AS [hora_final], 
     [vt_recursos_asignados].[fecha_realizacion] AS [fecha_realizacion], 
-    [vt_recursos_asignados].[observacion_evento] AS [observacion_evento], 
+    [vt_recursos_asignados].[observacion] AS [observacion], 
     [vt_recursos_asignados].[nom_evento] AS [nom_evento], 
-    [vt_recursos_asignados].[lugar] AS [lugar], 
+    [vt_recursos_asignados].[nom_lugar] AS [nom_lugar], 
     [vt_recursos_asignados].[nom_coordinacion] AS [nom_coordinacion], 
     [vt_recursos_asignados].[nom_recurso] AS [nom_recurso], 
     [vt_recursos_asignados].[idrecurso] AS [idrecurso]

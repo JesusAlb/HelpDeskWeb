@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace HelpDeskWeb.ControlAltas
 {
-    class hdk_ControlRequerimientos
+    class controlRequerimientos
     {
 
         public static IList<sp_requerimientos_sin_asignar_Result> obtenerDataSource(string filtro, string tipo, int? evento)

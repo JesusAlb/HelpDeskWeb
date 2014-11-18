@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HelpDeskWeb.Reportes.ModeloReportes
 {
-    public class vt_eventos_por_usuario
+    public class vt_elemento_por_usuario
     {
         public string nombre { get; set; }
         public int cantidad { get; set; }

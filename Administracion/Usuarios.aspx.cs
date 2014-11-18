@@ -144,26 +144,26 @@ namespace HelpDeskWeb.Administracion
                     if (resultado == 1)
                     {
                         this.cargarTabla();
-                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "cerrarModal", "$('#ModalNuevo').modal('hide');", true);
-                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.success('" + mensaje + "');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "cerrarModal", "$('#ModalNuevo').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.success('" + mensaje + "');", true);
                     }
                     else if (resultado == 0)
                     {
-                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Error de conexión');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Error de conexión');", true);
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Usuario en uso');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Usuario en uso');", true);
                     }
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Contraseña de verficiación incorrecta');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Contraseña de verficiación incorrecta');", true);
                 }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "noCompleto", "alertify.error('Llene todos los campos');", true);
+                ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Llene todos los campos');", true);
             }
         }
 

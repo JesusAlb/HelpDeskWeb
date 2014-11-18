@@ -14,6 +14,13 @@
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
+
+        $(function () {
+            $("#<%=txtFiltroAbierto.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltroAbierto", $("#<%=txtFiltroAbierto.ClientID%>").val());
+            })
+         });
+
     </script>
 </head>
 <body>
@@ -92,8 +99,8 @@
                                                 <ContentTemplate>
                                                     <div class="form-group">
                                                         <div class="row">
-                                                            <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Tema a mostrar</div>
-                                                            <div class="col-lg-8">
+                                                            <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">Tema a mostrar</div>
+                                                            <div class="col-lg-9">
                                                                 <div class="form-control">
                                                                     <div class="col-lg-2"></div>
                                                                     <div class="col-lg-4">
@@ -109,25 +116,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="row">
-                                                            <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Tipo de reporte</div>
-                                                            <div class="col-lg-8">
-                                                                <div class="form-control">
-
-                                                                    <div class="col-lg-2"></div>
-                                                                    <div class="col-lg-4">
-                                                                        <asp:RadioButton runat="server" ID="rbGrafico" OnCheckedChanged="rbGrafico_CheckedChanged" AutoPostBack="true" CssClass="radio-inline" GroupName="tipoReporte" Text="Gráfico" />
-                                                                    </div>
-                                                                    <div class="col-lg-4">
-                                                                        <asp:RadioButton runat="server" ID="rbTabular" OnCheckedChanged="rbTabular_CheckedChanged" AutoPostBack="true" CssClass="radio-inline" GroupName="tipoReporte" Text="Tabular" />
-                                                                    </div>
-                                                                    <div class="col-lg-2"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">
+                                                            <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">
                                                                 Objeto de interés
                                                             </div>
                                                             <div class="col-lg-5">
@@ -149,18 +138,16 @@
                                                 <Triggers>
                                                     <asp:AsyncPostBackTrigger ControlID="rbCalidad" EventName="CheckedChanged" />
                                                     <asp:AsyncPostBackTrigger ControlID="rbRegistros" EventName="CheckedChanged" />
-                                                    <asp:AsyncPostBackTrigger ControlID="rbGrafico" EventName="CheckedChanged" />
-                                                    <asp:AsyncPostBackTrigger ControlID="rbTabular" EventName="CheckedChanged" />
                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
                                                 </Triggers>
                                             </asp:UpdatePanel>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
+                                                    <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
                                                     <div class="col-lg-5">
                                                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                             <ContentTemplate>
-                                                                <asp:TextBox runat="server" ID="txtFiltroAbierto" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                <asp:TextBox runat="server" ID="txtFiltroAbierto" AutoPostBack="true" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="cbEstatus" EventName="SelectedIndexChanged" />
@@ -180,12 +167,12 @@
                                                 <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                            ShowHeaderWhenEmpty="true" Visible="false" DataKeyNames="evento" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                            ShowHeaderWhenEmpty="true" Visible="false" DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
                                                             <HeaderStyle Wrap="false" />
                                                             <Columns>
-                                                                <asp:BoundField HeaderText="ID" DataField="evento" />
-                                                                <asp:BoundField HeaderText="Nombre" DataField="titulo" />
-                                                                <asp:BoundField HeaderText="Fecha" DataField="FechaInicio" DataFormatString="{0:D}" />
+                                                                <asp:BoundField HeaderText="Id" DataField="id" />
+                                                                <asp:BoundField HeaderText="Evento" DataField="nombre" />
+                                                                <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
                                                             </Columns>
                                                         </asp:GridView>
                                                     </ContentTemplate>

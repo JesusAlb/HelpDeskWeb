@@ -15,7 +15,7 @@ namespace HelpDeskWeb.EntityFrameWork
     public partial class vt_recursos_asignados
     {
         public int idevento { get; set; }
-        public Nullable<int> idsolicitante { get; set; }
+        public int idsolicitante { get; set; }
         public Nullable<int> cantidad { get; set; }
         public int asistencia { get; set; }
         public string tipo { get; set; }
@@ -23,9 +23,9 @@ namespace HelpDeskWeb.EntityFrameWork
         public Nullable<System.DateTime> hora_inicial { get; set; }
         public Nullable<System.DateTime> hora_final { get; set; }
         public System.DateTime fecha_realizacion { get; set; }
-        public string observacion_evento { get; set; }
+        public string observacion { get; set; }
         public string nom_evento { get; set; }
-        public string lugar { get; set; }
+        public string nom_lugar { get; set; }
         public string nom_coordinacion { get; set; }
         public string nom_recurso { get; set; }
         public int idrecurso { get; set; }

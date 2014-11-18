@@ -66,7 +66,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void cargarTablaRequerimientos()
         {
-            gvRequerimientos.DataSource = hdk_ControlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbFiltroTipo.SelectedItem.Text, null);
+            gvRequerimientos.DataSource = controlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbFiltroTipo.SelectedItem.Text, null);
              gvRequerimientos.DataBind();
         }
 
@@ -146,7 +146,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarRequerimiento":
                     if (gvRequerimientos.SelectedDataKey != null)
                     {
-                        tblrecurso ReqSeleccionado = hdk_ControlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
+                        tblrecurso ReqSeleccionado = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
                         this.configurarModal("Editar recursos", ReqSeleccionado.nombre,29, true);
                         cbTipoRequerimiento.SelectedValue = ReqSeleccionado.cuantificable.ToString();
                         seleccionado = true;
@@ -209,7 +209,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (hdk_ControlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (controlRequerimientos.insertar(txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;
@@ -245,7 +245,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "requerimiento":
-                    if (hdk_ControlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
+                    if (controlRequerimientos.modificar(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), txtNombre.Text, Convert.ToBoolean(cbTipoRequerimiento.SelectedValue)))
                     {
                         this.cargarTablaRequerimientos();
                         return true;

@@ -88,7 +88,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void cargarTablasRequerimientos()
         {
-            gvRecursosNoAsignados.DataSource = hdk_ControlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(idEventoSeleccionado.Value));
+            gvRecursosNoAsignados.DataSource = controlRequerimientos.obtenerDataSource(txtFiltroReq.Text, cbCuantificable.Text, Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosNoAsignados.DataBind();
             gvRecursosAsignados.DataSource = controlRecursosAsignados.obtenerDataSource(Convert.ToInt32(idEventoSeleccionado.Value));
             gvRecursosAsignados.DataBind();
@@ -392,7 +392,7 @@ namespace HelpDeskWeb.Solicitudes
             if (gvRecursosNoAsignados.SelectedDataKey != null)
             {
                 int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-                tblrecurso requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+                tblrecurso requerimiento = controlRequerimientos.obtenerRequerimiento(idReq, null);
                 if (requerimiento.cuantificable)
                 {
                     try
@@ -469,7 +469,7 @@ namespace HelpDeskWeb.Solicitudes
         protected void gvRecursosNoAsignados_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idReq = Convert.ToInt32(gvRecursosNoAsignados.SelectedDataKey.Value.ToString());
-            tblrecurso requerimiento = hdk_ControlRequerimientos.obtenerRequerimiento(idReq, null);
+            tblrecurso requerimiento = controlRequerimientos.obtenerRequerimiento(idReq, null);
             txtCantidad.Text = "1";
             if (requerimiento.cuantificable)
             {

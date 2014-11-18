@@ -397,27 +397,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vt_recursos_asignados">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_recursos_asignados">
-        <MappingFragment StoreEntitySet="vt_recursos_asignados">
-          <ScalarProperty Name="idevento" ColumnName="idevento" />
-          <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
-          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-          <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-          <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
-          <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-          <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
-          <ScalarProperty Name="observacion_evento" ColumnName="observacion_evento" />
-          <ScalarProperty Name="nom_evento" ColumnName="nom_evento" />
-          <ScalarProperty Name="lugar" ColumnName="lugar" />
-          <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
-          <ScalarProperty Name="nom_recurso" ColumnName="nom_recurso" />
-          <ScalarProperty Name="idrecurso" ColumnName="idrecurso" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vt_reporte_equipos">
       <EntityTypeMapping TypeName="dbhelpdeskModel.vt_reporte_equipos">
         <MappingFragment StoreEntitySet="vt_reporte_equipos">
@@ -508,5 +487,26 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="topCincoRecursosMasUsados" FunctionName="dbhelpdeskModel.Store.topCincoRecursosMasUsados" />
     <FunctionImportMapping FunctionImportName="topCincoRecursosMenosUsados" FunctionName="dbhelpdeskModel.Store.topCincoRecursosMenosUsados" />
+    <EntitySetMapping Name="vt_recursos_asignados">
+      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_recursos_asignados">
+        <MappingFragment StoreEntitySet="vt_recursos_asignados">
+          <ScalarProperty Name="idrecurso" ColumnName="idrecurso" />
+          <ScalarProperty Name="nom_recurso" ColumnName="nom_recurso" />
+          <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
+          <ScalarProperty Name="nom_lugar" ColumnName="nom_lugar" />
+          <ScalarProperty Name="nom_evento" ColumnName="nom_evento" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+          <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
+          <ScalarProperty Name="hora_final" ColumnName="hora_final" />
+          <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
+          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="asistencia" ColumnName="asistencia" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
+          <ScalarProperty Name="idevento" ColumnName="idevento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

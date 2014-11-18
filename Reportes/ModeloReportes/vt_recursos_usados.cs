@@ -5,9 +5,10 @@ using System.Text;
 
 namespace HelpDeskWeb.Reportes
 {
-    class vt_recursos_mas_usados
+    public class vt_recursos_usados
     {
         public string recurso { get; set; }
         public int cantidad { get; set; }
     }
+
 }
