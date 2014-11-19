@@ -1138,21 +1138,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="idResponEq">
+                    <Textbox Name="id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!idResponEq.Value</Value>
+                              <Value>=Fields!id.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>idResponEq</rd:DefaultName>
+                      <rd:DefaultName>id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1187,21 +1187,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomCompleto">
+                    <Textbox Name="nom_completo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomCompleto.Value</Value>
+                              <Value>=Fields!nom_completo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomCompleto</rd:DefaultName>
+                      <rd:DefaultName>nom_completo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1236,21 +1236,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomPuesto">
+                    <Textbox Name="nom_puesto">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomPuesto.Value</Value>
+                              <Value>=Fields!nom_puesto.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomPuesto</rd:DefaultName>
+                      <rd:DefaultName>nom_puesto</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1285,21 +1285,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomArea">
+                    <Textbox Name="nom_area">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomArea.Value</Value>
+                              <Value>=Fields!nom_area.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomArea</rd:DefaultName>
+                      <rd:DefaultName>nom_area</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1334,21 +1334,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomCoordinacion">
+                    <Textbox Name="nom_coordinacion">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomCoordinacion.Value</Value>
+                              <Value>=Fields!nom_coordinacion.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomCoordinacion</rd:DefaultName>
+                      <rd:DefaultName>nom_coordinacion</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1383,21 +1383,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomTipoEquipo">
+                    <Textbox Name="nom_tipo_equipo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomTipoEquipo.Value</Value>
+                              <Value>=Fields!nom_tipo_equipo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomTipoEquipo</rd:DefaultName>
+                      <rd:DefaultName>nom_tipo_equipo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1432,21 +1432,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomMarcaEquipo">
+                    <Textbox Name="nom_marca_equipo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomMarcaEquipo.Value</Value>
+                              <Value>=Fields!nom_marca_equipo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomMarcaEquipo</rd:DefaultName>
+                      <rd:DefaultName>nom_marca_equipo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1481,21 +1481,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="serieEquipo">
+                    <Textbox Name="serie_equipo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!serieEquipo.Value</Value>
+                              <Value>=Fields!serie_equipo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>serieEquipo</rd:DefaultName>
+                      <rd:DefaultName>serie_equipo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1530,21 +1530,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="discoDuro">
+                    <Textbox Name="disco_duro">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!discoDuro.Value</Value>
+                              <Value>=Fields!disco_duro.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>discoDuro</rd:DefaultName>
+                      <rd:DefaultName>disco_duro</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1579,21 +1579,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="memoriaRam">
+                    <Textbox Name="memoria_ram">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!memoriaRam.Value</Value>
+                              <Value>=Fields!memoria_ram.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>memoriaRam</rd:DefaultName>
+                      <rd:DefaultName>memoria_ram</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1677,21 +1677,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomMarcaMonitor">
+                    <Textbox Name="nom_marca_monitor">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomMarcaMonitor.Value</Value>
+                              <Value>=Fields!nom_marca_monitor.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomMarcaMonitor</rd:DefaultName>
+                      <rd:DefaultName>nom_marca_monitor</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1726,21 +1726,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="serieMonitor">
+                    <Textbox Name="serie_monitor">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!serieMonitor.Value</Value>
+                              <Value>=Fields!serie_monitor.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>serieMonitor</rd:DefaultName>
+                      <rd:DefaultName>serie_monitor</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1775,21 +1775,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomMarcaTeclado">
+                    <Textbox Name="nom_marca_teclado">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomMarcaTeclado.Value</Value>
+                              <Value>=Fields!nom_marca_teclado.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomMarcaTeclado</rd:DefaultName>
+                      <rd:DefaultName>nom_marca_teclado</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1824,21 +1824,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="serieTeclado">
+                    <Textbox Name="serie_teclado">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!serieTeclado.Value</Value>
+                              <Value>=Fields!serie_teclado.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>serieTeclado</rd:DefaultName>
+                      <rd:DefaultName>serie_teclado</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1873,21 +1873,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="nomMarcaMouse">
+                    <Textbox Name="nom_marca_mouse">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!nomMarcaMouse.Value</Value>
+                              <Value>=Fields!nom_marca_mouse.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>nomMarcaMouse</rd:DefaultName>
+                      <rd:DefaultName>nom_marca_mouse</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1922,21 +1922,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="serieMouse">
+                    <Textbox Name="serie_mouse">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!serieMouse.Value</Value>
+                              <Value>=Fields!serie_mouse.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>serieMouse</rd:DefaultName>
+                      <rd:DefaultName>serie_mouse</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -2221,7 +2221,7 @@
     <Height>3.42708in</Height>
     <Style />
   </Body>
-  <Width>35.79837in</Width>
+  <Width>36.64721in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -2249,13 +2249,37 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="discoDuro">
-          <DataField>discoDuro</DataField>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="nom_tipo_equipo">
+          <DataField>nom_tipo_equipo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="idResponEq">
-          <DataField>idResponEq</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="nom_marca_equipo">
+          <DataField>nom_marca_equipo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="serie_equipo">
+          <DataField>serie_equipo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="memoria_ram">
+          <DataField>memoria_ram</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="disco_duro">
+          <DataField>disco_duro</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nom_marca_monitor">
+          <DataField>nom_marca_monitor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="serie_monitor">
+          <DataField>serie_monitor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ip">
           <DataField>ip</DataField>
@@ -2265,75 +2289,53 @@
           <DataField>mac</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="memoriaRam">
-          <DataField>memoriaRam</DataField>
+        <Field Name="nom_marca_mouse">
+          <DataField>nom_marca_mouse</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="nomArea">
-          <DataField>nomArea</DataField>
+        <Field Name="serie_mouse">
+          <DataField>serie_mouse</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="nomCompleto">
-          <DataField>nomCompleto</DataField>
+        <Field Name="nom_marca_teclado">
+          <DataField>nom_marca_teclado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="nomCoordinacion">
-          <DataField>nomCoordinacion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomDepto">
-          <DataField>nomDepto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomMarcaEquipo">
-          <DataField>nomMarcaEquipo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomMarcaMonitor">
-          <DataField>nomMarcaMonitor</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomMarcaMouse">
-          <DataField>nomMarcaMouse</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomMarcaTeclado">
-          <DataField>nomMarcaTeclado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomPuesto">
-          <DataField>nomPuesto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nomTipoEquipo">
-          <DataField>nomTipoEquipo</DataField>
+        <Field Name="serie_teclado">
+          <DataField>serie_teclado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="procesador">
           <DataField>procesador</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="serieEquipo">
-          <DataField>serieEquipo</DataField>
+        <Field Name="nom_completo">
+          <DataField>nom_completo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="serieMonitor">
-          <DataField>serieMonitor</DataField>
+        <Field Name="nom_area">
+          <DataField>nom_area</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="serieMouse">
-          <DataField>serieMouse</DataField>
+        <Field Name="nom_coordinacion">
+          <DataField>nom_coordinacion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="serieTeclado">
-          <DataField>serieTeclado</DataField>
+        <Field Name="nom_depto">
+          <DataField>nom_depto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nom_puesto">
+          <DataField>nom_puesto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>HelpDesk.Modelo</rd:DataSetName>
-        <rd:TableName>VistaEquipoReporte</rd:TableName>
-        <rd:ObjectDataSourceType>HelpDesk.Modelo.VistaEquipoReporte, HelpDesk, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>HelpDeskWeb.Reportes</rd:DataSetName>
+        <rd:TableName>controlReportesEquipos</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>dataSourceReporteEquipos</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Collections.Generic.IList`1[HelpDeskWeb.EntityFrameWork.vt_reporte_equipos] dataSourceReporteEquipos(System.String)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>HelpDeskWeb.Reportes.controlReportesEquipos, HelpDeskWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

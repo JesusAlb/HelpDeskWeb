@@ -90,104 +90,114 @@
                                 <asp:LinkButton CssClass="btn btn-primary btn-lg btn-block" runat="server" data-toggle="collapse" href="#datosBusqueda" Text="Datos del reporte" />
                                 <asp:Panel runat="server" ID="datosBusqueda" class="panel-collapse collapse in active">
                                     <div class="panel-body">
-                                        <div class="col-lg-2"></div>
-                                        <div class="col-lg-8">
-                                            <div class="form-group">
-                                                <h3 class="text-center">Busqueda avanzada</h3>
-                                            </div>
-                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                                <ContentTemplate>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">Tema a mostrar</div>
-                                                            <div class="col-lg-9">
-                                                                <div class="form-control">
-                                                                    <div class="col-lg-2"></div>
-                                                                    <div class="col-lg-4">
-                                                                        <asp:RadioButton runat="server" ID="rbCalidad" OnCheckedChanged="rbCalidad_CheckedChanged" AutoPostBack="true" CssClass="radio-inline" GroupName="Mostrar" Text="Calidad" />
-                                                                    </div>
-                                                                    <div class="col-lg-4">
-                                                                        <asp:RadioButton runat="server" ID="rbRegistros" OnCheckedChanged="rbRegistros_CheckedChanged" AutoPostBack="true" CssClass="radio-inline" GroupName="Mostrar" Text="Registros" />
-                                                                    </div>
-                                                                    <div class="col-lg-2"></div>
-                                                                </div>
-                                                            </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <h3 class="text-center">Busqueda avanzada</h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">
+                                                            Información a mostrar
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <asp:DropDownList runat="server" ID="cbObjeto" CssClass="form-control" OnSelectedIndexChanged="cbObjeto_SelectedIndexChanged" AutoPostBack="true">
+                                                            </asp:DropDownList>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control">
+                                                                        <asp:ListItem Text="Todos" Value=""></asp:ListItem>
+                                                                        <asp:ListItem Text="Abiertos"></asp:ListItem>
+                                                                        <asp:ListItem Text="En proceso"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cerrados"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cancelados"></asp:ListItem>
+                                                                    </asp:DropDownList>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">
-                                                                Objeto de interés
-                                                            </div>
-                                                            <div class="col-lg-5">
-                                                                <asp:DropDownList runat="server" ID="cbObjeto" CssClass="form-control" OnSelectedIndexChanged="cbObjeto_SelectedIndexChanged" AutoPostBack="true">
-                                                                </asp:DropDownList>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control" Visible="false">
-                                                                    <asp:ListItem Text="Usar filtro" Value=""></asp:ListItem>
-                                                                    <asp:ListItem Text="Abierto" Value="0"></asp:ListItem>
-                                                                    <asp:ListItem Text="En proceso" Value="1"></asp:ListItem>
-                                                                    <asp:ListItem Text="Cerrado" Value="2"></asp:ListItem>
-                                                                    <asp:ListItem Text="Cancelado" Value="3"></asp:ListItem>
-                                                                </asp:DropDownList>
-                                                            </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
+                                                        <div class="col-lg-8">
+                                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" AutoPostBack="true" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
                                                         </div>
                                                     </div>
-                                                </ContentTemplate>
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="rbCalidad" EventName="CheckedChanged" />
-                                                    <asp:AsyncPostBackTrigger ControlID="rbRegistros" EventName="CheckedChanged" />
-                                                    <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
-                                                </Triggers>
-                                            </asp:UpdatePanel>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-lg-3" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
-                                                    <div class="col-lg-5">
-                                                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Rango de fechas</div>
+                                                        <div class="col-lg-8">
+                                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:Panel runat="server" ID="panelRangoFechas" CssClass="input-group">
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicial" TextMode="Date"></asp:TextBox>
+                                                                        <span class="input-group-addon">a </span>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
+                                                                    </asp:Panel>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
                                                             <ContentTemplate>
-                                                                <asp:TextBox runat="server" ID="txtFiltroAbierto" AutoPostBack="true" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                <asp:Panel runat="server" ID="panelGrid" ScrollBars="auto" Height="150" Visible="false">
+                                                                    <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                                        ShowHeaderWhenEmpty="true"  DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                                        <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
+                                                                        <Columns>
+                                                                            <asp:BoundField HeaderText="Id" DataField="id" />
+                                                                            <asp:BoundField HeaderText="Evento" DataField="nombre" />
+                                                                            <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
+                                                                        </Columns>
+                                                                    </asp:GridView>
+                                                                </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
-                                                                <asp:AsyncPostBackTrigger ControlID="cbEstatus" EventName="SelectedIndexChanged" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
+                                                                <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </div>
-                                                    <div class="col-lg-3">
-                                                        <asp:LinkButton runat="server" CssClass="btn btn-block btn-primary" ID="btnGenerar" OnClick="btnGenerarReporte_Click">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <asp:LinkButton runat="server" CssClass="btn btn-block btn-default" ID="btnGenerar" OnClick="btnGenerarReporte_Click">
                                                                 <span class="glyphicon glyphicon-search"></span>
                                                                  Generar                                   
-                                                        </asp:LinkButton>
+                                                            </asp:LinkButton>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
-                                                    <ContentTemplate>
-                                                        <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                            ShowHeaderWhenEmpty="true" Visible="false" DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
-                                                            <HeaderStyle Wrap="false" />
-                                                            <Columns>
-                                                                <asp:BoundField HeaderText="Id" DataField="id" />
-                                                                <asp:BoundField HeaderText="Evento" DataField="nombre" />
-                                                                <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
-                                                            </Columns>
-                                                        </asp:GridView>
-                                                    </ContentTemplate>
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
-                                                        <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
-                                                    </Triggers>
-                                                </asp:UpdatePanel>
                                             </div>
-                                        </div>
                                         <div class="col-lg-2"></div>
                                     </div>
-                                </asp:Panel>
                             </div>
-                            <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default" Visible="false">
+                        </asp:Panel>
+                    </div>
+                    <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default" Visible="false">
                                 <div class="panel-heading text-center">
                                     <asp:Label runat="server" Text="Reporte" Font-Size="Larger" Font-Bold="true"></asp:Label>
                                 </div>

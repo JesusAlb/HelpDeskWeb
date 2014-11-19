@@ -21,5 +21,6 @@ namespace HelpDeskWeb.Reportes.ModeloReportes
         public DateTime hora_final { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
+        public int estatus { get; set; }
     }
 }

@@ -94,24 +94,6 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.WebControls.Panel datosBusqueda;
         
         /// <summary>
-        /// Control rbCalidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbCalidad;
-        
-        /// <summary>
-        /// Control rbRegistros.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbRegistros;
-        
-        /// <summary>
         /// Control cbObjeto.
         /// </summary>
         /// <remarks>
@@ -139,13 +121,31 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.WebControls.TextBox txtFiltroAbierto;
         
         /// <summary>
-        /// Control btnGenerar.
+        /// Control panelRangoFechas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGenerar;
+        protected global::System.Web.UI.WebControls.Panel panelRangoFechas;
+        
+        /// <summary>
+        /// Control txtFechaInicial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicial;
+        
+        /// <summary>
+        /// Control txtFechaFinal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFinal;
         
         /// <summary>
         /// Control updateGrid.
@@ -157,6 +157,15 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.UpdatePanel updateGrid;
         
         /// <summary>
+        /// Control panelGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelGrid;
+        
+        /// <summary>
         /// Control gvEventos.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace HelpDeskWeb.Reportes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEventos;
+        
+        /// <summary>
+        /// Control btnGenerar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGenerar;
         
         /// <summary>
         /// Control panelReporte.
