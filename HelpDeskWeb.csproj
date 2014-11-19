@@ -373,6 +373,9 @@
     <Compile Include="EntityFrameWork\tblequipoasignado.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\tblestatus.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\tblevento.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -389,6 +392,9 @@
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblpregunta.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblprioridad.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblpuesto.cs">

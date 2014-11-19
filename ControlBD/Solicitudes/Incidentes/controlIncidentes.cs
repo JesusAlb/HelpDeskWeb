@@ -265,31 +265,31 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             {
                 var servicio = controlServicios.insertar(descripcion, solicitante, soporte, seguimiento, 2, feIn, feFn, In, Fn);
 
-                if (servicio != null)
+                if (servicio)
                 {
                     var incidente = new tblincidente
                     {
+                        id = obtenerUltimoIncidente()+1,
                         acciones = acciones,
                         solucion = solucion,
                         tipo = tipo,
-                        prioridad = prioridad,
-                        fk_idservicio = servicio.id
+                        fk_idprioridad = prioridad,
+                        fk_idservicio = controlServicios.obtenerUltimoServicio()
                     };
                     if (incidente != null)
                     {
-                        tblcalidadservicio encuesta = controlEncuestas.insertar(servicio.id);
-                        if (encuesta != null)
-                        {
-                            dbhelp.modelo.tblservicio.Add(servicio);
-                            dbhelp.modelo.tblincidente.Add(incidente);
-                            dbhelp.modelo.tblcalidadservicio.Add(encuesta);
-                            dbhelp.modelo.SaveChanges();
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        dbhelp.modelo.tblincidente.Add(incidente);
+                        dbhelp.modelo.SaveChanges();
+
+                        var encuesta = controlEncuestas.insertar(controlServicios.obtenerUltimoServicio());
+                            if (encuesta)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                     }
                     else
                     {
@@ -326,7 +326,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 int idservicio = controlServicios.obtenerUltimoServicio();
                 int idtipo = controlTipoIncidencia.obtenerTipoIncidenciaGeneral();
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-               var resultado = dbhelp.modelo.sp_insertar_incidente(idSolicitante, descripcion, idusuario, idservicio, idtipo );
+               var resultado = dbhelp.modelo.sp_insertar_incidente(obtenerUltimoIncidente(),idSolicitante, descripcion, idusuario, idservicio, idtipo );
                if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
@@ -373,9 +373,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 var ItemAmodificar = dbhelp.modelo.tblincidente.SingleOrDefault(x => x.id == id);
                 if (ItemAmodificar != null)
                 {
-                    ItemAmodificar.tblservicio.estatus = 1;
+                    ItemAmodificar.tblservicio.fk_idestatus = 1;
                     ItemAmodificar.tipo = tipo;
-                    ItemAmodificar.prioridad = prioridad;
+                    ItemAmodificar.fk_idprioridad = prioridad;
                     ItemAmodificar.tblservicio.fk_idusuario_soporte = soporte;
                     ItemAmodificar.tblservicio.fk_idusuario_apoyo = seguimiento;
                     dbhelp.modelo.SaveChanges();

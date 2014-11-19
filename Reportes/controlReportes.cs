@@ -18,7 +18,7 @@ namespace HelpDeskWeb.Reportes
 
                 var query = from c in dbhelp.modelo.tblevento
                             join o in dbhelp.modelo.vt_servicios on c.fk_idservicio equals o.id
-                            where o.estatus == 2
+                            where o.fk_idestatus == 2
                             group c by c.tblservicio.tblusuario2.nombre into g
                             select new vt_elemento_por_usuario
                             {
@@ -40,7 +40,7 @@ namespace HelpDeskWeb.Reportes
                 var result = (
                                 from device in dbhelp.modelo.tblevento
                                 join o in dbhelp.modelo.tblservicio on device.fk_idservicio equals o.id
-                                where o.estatus == 2
+                                where o.fk_idestatus == 2
                                 group device by new { Date = System.Data.Entity.DbFunctions.TruncateTime(device.fecha_realizacion) } into g
                                 select new vt_eventos_por_mes
                                 {

@@ -8,7 +8,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
     public class controlServicios
     {
-        public static tblservicio insertar(string descripcion, int idsolicitante, int idsoporte, int idapoyo, int estatus, DateTime fecha_solicitud, DateTime? fecha_cierre, DateTime hora_inicial, DateTime? hora_final)
+        public static bool insertar(string descripcion, int idsolicitante, int idsoporte, int idapoyo, int estatus, DateTime fecha_solicitud, DateTime? fecha_cierre, DateTime hora_inicial, DateTime? hora_final)
         {
             try
             {
@@ -18,24 +18,27 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     fk_idusuario_solicitante = idsolicitante,
                     fk_idusuario_soporte = idsoporte,
                     fk_idusuario_apoyo = idapoyo,
-                    estatus = estatus,
+                    fk_idestatus = estatus,
                     fecha_solicitud = fecha_solicitud,
                     fecha_cierre = fecha_cierre,
                     hora_inicial = hora_inicial,
                     hora_final = hora_final
+                    
                 };
                 if (servicio != null)
                 {
-                    return servicio;
+                    dbhelp.modelo.tblservicio.Add(servicio);
+                    dbhelp.modelo.SaveChanges();
+                    return true;
                 }
                 else
                 {
-                    return null;
+                    return false;
                 }
             }
             catch
             {
-                return null;
+                return false;
             }
         }
 
@@ -47,7 +50,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
 
@@ -59,7 +62,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 
                 if (servicio != null)
                 {
-                    servicio.estatus = estatus;
+                    servicio.fk_idestatus = estatus;
                     dbhelp.modelo.SaveChanges();
                     return true;
                 }

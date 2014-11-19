@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="dbhelpdeskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="dbhelpdeskV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="tblarea">
     <Key>
       <PropertyRef Name="id" />
@@ -64,11 +64,19 @@
     <NavigationProperty Name="tbltipoequipo" Relationship="Self.fk_tipo_equipo" FromRole="tblequipoasignado" ToRole="tbltipoequipo" />
     <NavigationProperty Name="tblusuario" Relationship="Self.fk_usuario_responsable" FromRole="tblequipoasignado" ToRole="tblusuario" />
   </EntityType>
+  <EntityType Name="tblestatus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblservicio" Relationship="Self.fk_idestatus" FromRole="tblestatus" ToRole="tblservicio" />
+  </EntityType>
   <EntityType Name="tblevento">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="tipo" Type="Int32" Nullable="false" />
     <Property Name="fk_idlugar" Type="Int32" Nullable="false" />
@@ -85,12 +93,13 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="tipo" Type="Int32" Nullable="false" />
-    <Property Name="prioridad" Type="Int32" Nullable="false" />
+    <Property Name="fk_idprioridad" Type="Int32" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblprioridad" Relationship="Self.fk_idprioridad" FromRole="tblincidente" ToRole="tblprioridad" />
     <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio_incidente" FromRole="tblincidente" ToRole="tblservicio" />
     <NavigationProperty Name="tbltipoincidencia" Relationship="Self.fk_tipo" FromRole="tblincidente" ToRole="tbltipoincidencia" />
   </EntityType>
@@ -132,6 +141,14 @@
     <Property Name="estatus" Type="Boolean" Nullable="false" />
     <Property Name="afinidad" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblrespuesta" Relationship="Self.fk_pregunta" FromRole="tblpregunta" ToRole="tblrespuesta" />
+  </EntityType>
+  <EntityType Name="tblprioridad">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblincidente" Relationship="Self.fk_idprioridad" FromRole="tblprioridad" ToRole="tblincidente" />
   </EntityType>
   <EntityType Name="tblpuesto">
     <Key>
@@ -185,7 +202,8 @@
     <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
     <Property Name="hora_inicial" Type="DateTime" Precision="3" />
     <Property Name="hora_final" Type="DateTime" Precision="3" />
-    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="fk_idestatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblestatus" Relationship="Self.fk_idestatus" FromRole="tblservicio" ToRole="tblestatus" />
     <NavigationProperty Name="tblevento" Relationship="Self.fk_idservicio" FromRole="tblservicio" ToRole="tblevento" />
     <NavigationProperty Name="tblincidente" Relationship="Self.fk_idservicio_incidente" FromRole="tblservicio" ToRole="tblincidente" />
     <NavigationProperty Name="tblusuario" Relationship="Self.fk_idapoyo" FromRole="tblservicio" ToRole="tblusuario" />
@@ -527,7 +545,7 @@
       <PropertyRef Name="idsolicitante" />
       <PropertyRef Name="descripcion" />
       <PropertyRef Name="fecha_solicitud" />
-      <PropertyRef Name="estatus" />
+      <PropertyRef Name="fk_idestatus" />
       <PropertyRef Name="id" />
       <PropertyRef Name="solicitante" />
     </Key>
@@ -537,7 +555,7 @@
     <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
     <Property Name="hora_inicial" Type="DateTime" Precision="3" />
     <Property Name="hora_final" Type="DateTime" Precision="3" />
-    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="fk_idestatus" Type="Int32" Nullable="false" />
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -690,6 +708,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_idestatus">
+    <End Role="tblestatus" Type="Self.tblestatus" Multiplicity="1" />
+    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblestatus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblservicio">
+        <PropertyRef Name="fk_idestatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_evento_en_uso">
     <End Role="tblevento" Type="Self.tblevento" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -725,6 +755,18 @@
       </Principal>
       <Dependent Role="tblevento">
         <PropertyRef Name="fk_idlugar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_idprioridad">
+    <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
+    <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblprioridad">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblincidente">
+        <PropertyRef Name="fk_idprioridad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -838,18 +880,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="dbhelpdeskEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="dbhelpdeskV2Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblarea" EntityType="Self.tblarea" />
     <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" />
     <EntitySet Name="tblcoordinacion" EntityType="Self.tblcoordinacion" />
     <EntitySet Name="tbldepartamento" EntityType="Self.tbldepartamento" />
     <EntitySet Name="tblequipoasignado" EntityType="Self.tblequipoasignado" />
+    <EntitySet Name="tblestatus" EntityType="Self.tblestatus" />
     <EntitySet Name="tblevento" EntityType="Self.tblevento" />
     <EntitySet Name="tblincidente" EntityType="Self.tblincidente" />
     <EntitySet Name="tblinstitucion" EntityType="Self.tblinstitucion" />
     <EntitySet Name="tbllugar" EntityType="Self.tbllugar" />
     <EntitySet Name="tblmarca" EntityType="Self.tblmarca" />
     <EntitySet Name="tblpregunta" EntityType="Self.tblpregunta" />
+    <EntitySet Name="tblprioridad" EntityType="Self.tblprioridad" />
     <EntitySet Name="tblpuesto" EntityType="Self.tblpuesto" />
     <EntitySet Name="tblrecurso" EntityType="Self.tblrecurso" />
     <EntitySet Name="tblrecursoasignado" EntityType="Self.tblrecursoasignado" />
@@ -913,6 +957,10 @@
       <End Role="tblusuario" EntitySet="tblusuario" />
       <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
     </AssociationSet>
+    <AssociationSet Name="fk_idestatus" Association="Self.fk_idestatus">
+      <End Role="tblestatus" EntitySet="tblestatus" />
+      <End Role="tblservicio" EntitySet="tblservicio" />
+    </AssociationSet>
     <AssociationSet Name="fk_evento_en_uso" Association="Self.fk_evento_en_uso">
       <End Role="tblevento" EntitySet="tblevento" />
       <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
@@ -924,6 +972,10 @@
     <AssociationSet Name="fk_lugar" Association="Self.fk_lugar">
       <End Role="tbllugar" EntitySet="tbllugar" />
       <End Role="tblevento" EntitySet="tblevento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_idprioridad" Association="Self.fk_idprioridad">
+      <End Role="tblprioridad" EntitySet="tblprioridad" />
+      <End Role="tblincidente" EntitySet="tblincidente" />
     </AssociationSet>
     <AssociationSet Name="fk_idservicio_incidente" Association="Self.fk_idservicio_incidente">
       <End Role="tblservicio" EntitySet="tblservicio" />
@@ -971,6 +1023,7 @@
       <Parameter Name="idservicio" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_insertar_evento">
+      <Parameter Name="idevento" Mode="In" Type="Int32" />
       <Parameter Name="titulo" Mode="In" Type="String" />
       <Parameter Name="lugar" Mode="In" Type="Int32" />
       <Parameter Name="acomodo" Mode="In" Type="String" />
@@ -985,13 +1038,14 @@
       <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_insertar_incidente">
+      <Parameter Name="idincidente" Mode="In" Type="Int32" />
       <Parameter Name="solicitante" Mode="In" Type="Int32" />
       <Parameter Name="descripcion" Mode="In" Type="String" />
       <Parameter Name="idUserNA" Mode="In" Type="Int32" />
       <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
       <Parameter Name="id_tipoIncidencia_genera" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskModel.sp_requerimientos_sin_asignar_Result)">
+    <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
       <Parameter Name="idEvento" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>

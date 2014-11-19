@@ -31,15 +31,15 @@ namespace HelpDeskWeb.Reportes
                     incidentes = dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) ||
                                 a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbltipoincidencia.nombre.Contains(filtro) ||
                                 a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.id == numero || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                                a.solucion.Contains(filtro)) && (a.tblservicio.estatus == status && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
+                                a.solucion.Contains(filtro)) && (a.tblservicio.fk_idestatus == status && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
                                         x => new vt_incidentes
                                         {
                                             id = x.id,
                                             descripcion = x.tblservicio.descripcion,
                                             tipo = x.tbltipoincidencia.nombre,
                                             solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
-                                            estatus = x.tblservicio.estatus,                                           
-                                            prioridad = x.prioridad.ToString(),
+                                            estatus = x.tblservicio.fk_idestatus,                                           
+                                            prioridad = x.fk_idprioridad.ToString(),
                                             soporte = x.tblservicio.tblusuario2.nombre_usuario,
                                             apoyo = x.tblservicio.tblusuario.nombre_usuario,
                                             fecha_solicitud = x.tblservicio.fecha_solicitud,
@@ -56,15 +56,15 @@ namespace HelpDeskWeb.Reportes
                             a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) ||
                             a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.id == numero ||
                             a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.tblservicio.estatus == status)).Select(
+                            a.solucion.Contains(filtro)) && (a.tblservicio.fk_idestatus == status)).Select(
                                         x => new vt_incidentes
                                         {
                                             id = x.id,
                                             descripcion = x.tblservicio.descripcion,
                                             tipo = x.tbltipoincidencia.nombre,
                                             solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
-                                            estatus = x.tblservicio.estatus,
-                                            prioridad = x.prioridad.ToString(),
+                                            estatus = x.tblservicio.fk_idestatus,
+                                            prioridad = x.fk_idprioridad.ToString(),
                                             soporte = x.tblservicio.tblusuario2.nombre_usuario,
                                             apoyo = x.tblservicio.tblusuario.nombre_usuario,
                                             fecha_solicitud = x.tblservicio.fecha_solicitud,

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="dbhelpdeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="tblarea">
     <Key>
       <PropertyRef Name="id" />
@@ -53,11 +53,18 @@
     <Property Name="serie_teclado" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblestatus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
   <EntityType Name="tblevento">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="tipo" Type="int" Nullable="false" />
     <Property Name="fk_idlugar" Type="int" Nullable="false" />
@@ -71,9 +78,9 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
     <Property Name="tipo" Type="int" Nullable="false" />
-    <Property Name="prioridad" Type="int" Nullable="false" />
+    <Property Name="fk_idprioridad" Type="int" Nullable="false" />
     <Property Name="acciones" Type="varchar" MaxLength="250" />
     <Property Name="solucion" Type="varchar" MaxLength="250" />
     <Property Name="fk_idservicio" Type="int" Nullable="false" />
@@ -109,6 +116,13 @@
     <Property Name="pregunta" Type="varchar" MaxLength="70" Nullable="false" />
     <Property Name="estatus" Type="bit" Nullable="false" />
     <Property Name="afinidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblprioridad">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="tblpuesto">
     <Key>
@@ -156,7 +170,7 @@
     <Property Name="fecha_cierre" Type="datetime" />
     <Property Name="hora_inicial" Type="datetime" />
     <Property Name="hora_final" Type="datetime" />
-    <Property Name="estatus" Type="int" Nullable="false" />
+    <Property Name="fk_idestatus" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tbltipoequipo">
     <Key>
@@ -198,7 +212,7 @@
     <Property Name="apellidos" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_departamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_departamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_departamentos">
     <Key>
       <PropertyRef Name="id" />
@@ -208,7 +222,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_departamentos' no tiene de
     <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_encuestas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_encuestas">
     <Key>
       <PropertyRef Name="id" />
@@ -232,7 +246,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_encuestas' no tiene defini
     <Property Name="idservicio" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_equipos">
     <Key>
       <PropertyRef Name="id" />
@@ -263,7 +277,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_equipos' no tiene definida
     <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_evento_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_evento_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_evento_sin_cerrar">
     <Key>
       <PropertyRef Name="id" />
@@ -296,7 +310,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_evento_sin_cerrar' no tien
     <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_eventos_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_eventos_cerrados">
     <Key>
       <PropertyRef Name="id" />
@@ -336,7 +350,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_eventos_cerrados' no tiene
     <Property Name="observaciones" Type="varchar" MaxLength="250" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidente_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidente_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_incidente_sin_cerrar">
     <Key>
       <PropertyRef Name="id" />
@@ -363,7 +377,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidente_sin_cerrar' no t
     <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidentes_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_incidentes_cerrados">
     <Key>
       <PropertyRef Name="id" />
@@ -397,7 +411,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_incidentes_cerrados' no ti
     <Property Name="observaciones" Type="varchar" MaxLength="250" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_preguntas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_preguntas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_preguntas">
     <Key>
       <PropertyRef Name="id" />
@@ -412,7 +426,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_preguntas' no tiene defini
     <Property Name="afinidad" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_eventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_eventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_promedio_eventos">
     <Key>
       <PropertyRef Name="soporte" />
@@ -421,7 +435,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_eventos' no tiene
     <Property Name="promedio_evento" Type="float" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_general' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_general' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_promedio_general">
     <Key>
       <PropertyRef Name="id" />
@@ -433,7 +447,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_general' no tiene
     <Property Name="promedioTotal" Type="float" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_incidentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_incidentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_promedio_incidentes">
     <Key>
       <PropertyRef Name="soporte" />
@@ -442,7 +456,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_promedio_incidentes' no ti
     <Property Name="promedio_incidente" Type="float" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_recursos_asignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_recursos_asignados">
     <Key>
       <PropertyRef Name="idevento" />
@@ -470,7 +484,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_recursos_asignados' no tie
     <Property Name="idrecurso" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_reporte_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_reporte_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_reporte_equipos">
     <Key>
       <PropertyRef Name="id" />
@@ -505,13 +519,13 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_reporte_equipos' no tiene 
     <Property Name="nom_puesto" Type="varchar" MaxLength="60" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_servicios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_servicios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_servicios">
     <Key>
       <PropertyRef Name="idsolicitante" />
       <PropertyRef Name="descripcion" />
       <PropertyRef Name="fecha_solicitud" />
-      <PropertyRef Name="estatus" />
+      <PropertyRef Name="fk_idestatus" />
       <PropertyRef Name="id" />
       <PropertyRef Name="solicitante" />
     </Key>
@@ -521,14 +535,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_servicios' no tiene defini
     <Property Name="fecha_cierre" Type="datetime" />
     <Property Name="hora_inicial" Type="datetime" />
     <Property Name="hora_final" Type="datetime" />
-    <Property Name="estatus" Type="int" Nullable="false" />
+    <Property Name="fk_idestatus" Type="int" Nullable="false" />
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
     <Property Name="soporte" Type="varchar" MaxLength="40" />
     <Property Name="apoyo" Type="varchar" MaxLength="40" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="vt_usuarios">
     <Key>
       <PropertyRef Name="id" />
@@ -627,6 +641,30 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
       </Principal>
       <Dependent Role="tblservicio">
         <PropertyRef Name="fk_idusuario_apoyo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_idestatus">
+    <End Role="tblestatus" Type="Self.tblestatus" Multiplicity="1" />
+    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblestatus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblservicio">
+        <PropertyRef Name="fk_idestatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_idprioridad">
+    <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
+    <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblprioridad">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblincidente">
+        <PropertyRef Name="fk_idprioridad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -834,6 +872,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     <Parameter Name="idservicio" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_insertar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idevento" Type="int" Mode="In" />
     <Parameter Name="titulo" Type="varchar" Mode="In" />
     <Parameter Name="lugar" Type="int" Mode="In" />
     <Parameter Name="acomodo" Type="varchar" Mode="In" />
@@ -848,6 +887,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_insertar_incidente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idincidente" Type="int" Mode="In" />
     <Parameter Name="solicitante" Type="int" Mode="In" />
     <Parameter Name="descripcion" Type="varchar" Mode="In" />
     <Parameter Name="idUserNA" Type="int" Mode="In" />
@@ -857,18 +897,20 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
   <Function Name="sp_requerimientos_sin_asignar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idEvento" Type="int" Mode="In" />
   </Function>
-  <EntityContainer Name="dbhelpdeskModelStoreContainer">
+  <EntityContainer Name="dbhelpdeskV2ModelStoreContainer">
     <EntitySet Name="tblarea" EntityType="Self.tblarea" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblcoordinacion" EntityType="Self.tblcoordinacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbldepartamento" EntityType="Self.tbldepartamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblequipoasignado" EntityType="Self.tblequipoasignado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblestatus" EntityType="Self.tblestatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblevento" EntityType="Self.tblevento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblincidente" EntityType="Self.tblincidente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblinstitucion" EntityType="Self.tblinstitucion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbllugar" EntityType="Self.tbllugar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblmarca" EntityType="Self.tblmarca" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblpregunta" EntityType="Self.tblpregunta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblprioridad" EntityType="Self.tblprioridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblpuesto" EntityType="Self.tblpuesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblrecurso" EntityType="Self.tblrecurso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblrecursoasignado" EntityType="Self.tblrecursoasignado" Schema="dbo" store:Type="Tables" />
@@ -1087,7 +1129,7 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     [vt_servicios].[fecha_cierre] AS [fecha_cierre], 
     [vt_servicios].[hora_inicial] AS [hora_inicial], 
     [vt_servicios].[hora_final] AS [hora_final], 
-    [vt_servicios].[estatus] AS [estatus], 
+    [vt_servicios].[fk_idestatus] AS [fk_idestatus], 
     [vt_servicios].[id] AS [id], 
     [vt_servicios].[solicitante] AS [solicitante], 
     [vt_servicios].[soporte] AS [soporte], 
@@ -1134,6 +1176,14 @@ advertencia 6002: La tabla o vista 'dbhelpdesk.dbo.vt_usuarios' no tiene definid
     <AssociationSet Name="fk_idapoyo" Association="Self.fk_idapoyo">
       <End Role="tblusuario" EntitySet="tblusuario" />
       <End Role="tblservicio" EntitySet="tblservicio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_idestatus" Association="Self.fk_idestatus">
+      <End Role="tblestatus" EntitySet="tblestatus" />
+      <End Role="tblservicio" EntitySet="tblservicio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_idprioridad" Association="Self.fk_idprioridad">
+      <End Role="tblprioridad" EntitySet="tblprioridad" />
+      <End Role="tblincidente" EntitySet="tblincidente" />
     </AssociationSet>
     <AssociationSet Name="fk_idservicio" Association="Self.fk_idservicio">
       <End Role="tblservicio" EntitySet="tblservicio" />

@@ -8,6 +8,6 @@ namespace HelpDeskWeb
 {
     public class dbhelp
     {
-        public static dbhelpdeskEntities modelo = new dbhelpdeskEntities();
+        public static dbhelpdeskV2Entities modelo = new dbhelpdeskV2Entities();
     }
 }

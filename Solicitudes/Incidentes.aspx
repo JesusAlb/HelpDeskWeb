@@ -340,21 +340,47 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></div><div class="form-group">
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora inicial del incidente" Font-Bold="true">
                                                                 </asp:Label><div class="row">
                                                                     <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon">Fecha</span>
+                                                                                <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicio" TextMode="Date"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Fecha</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicio" TextMode="Date"></asp:TextBox></div></div><div class="col-lg-6">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">Hora</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraInicio" TextMode="Time"></asp:TextBox></div></div></div></div><div class="form-group">
+                                                                            <span class="input-group-addon">Hora</span>
+                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraInicio" TextMode="Time"></asp:TextBox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora final del incidente" Font-Bold="true">
                                                                 </asp:Label><div class="row">
                                                                     <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon">Fecha</span>
+                                                                                <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">Fecha</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox></div></div><div class="col-lg-6">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">Hora</span> <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraFinal" TextMode="Time"></asp:TextBox></div></div></div></div><div class="form*group">
+                                                                            <span class="input-group-addon">Hora</span>
+                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraFinal" TextMode="Time"></asp:TextBox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form*group">
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="dbhelpdeskModelStoreContainer" CdmEntityContainer="dbhelpdeskEntities">
+  <EntityContainerMapping StorageEntityContainer="dbhelpdeskV2ModelStoreContainer" CdmEntityContainer="dbhelpdeskV2Entities">
     <EntitySetMapping Name="tblarea">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblarea">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblarea">
         <MappingFragment StoreEntitySet="tblarea">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblcalidadservicio">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblcalidadservicio">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblcalidadservicio">
         <MappingFragment StoreEntitySet="tblcalidadservicio">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
@@ -21,7 +21,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblcoordinacion">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblcoordinacion">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblcoordinacion">
         <MappingFragment StoreEntitySet="tblcoordinacion">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbldepartamento">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tbldepartamento">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbldepartamento">
         <MappingFragment StoreEntitySet="tbldepartamento">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -38,7 +38,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblequipoasignado">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblequipoasignado">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblequipoasignado">
         <MappingFragment StoreEntitySet="tblequipoasignado">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fk_idusuario_responsable" ColumnName="fk_idusuario_responsable" />
@@ -59,8 +59,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblestatus">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblestatus">
+        <MappingFragment StoreEntitySet="tblestatus">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblevento">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblevento">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblevento">
         <MappingFragment StoreEntitySet="tblevento">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -75,11 +83,11 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblincidente">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblincidente">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblincidente">
         <MappingFragment StoreEntitySet="tblincidente">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+          <ScalarProperty Name="fk_idprioridad" ColumnName="fk_idprioridad" />
           <ScalarProperty Name="acciones" ColumnName="acciones" />
           <ScalarProperty Name="solucion" ColumnName="solucion" />
           <ScalarProperty Name="fk_idservicio" ColumnName="fk_idservicio" />
@@ -87,7 +95,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblinstitucion">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblinstitucion">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblinstitucion">
         <MappingFragment StoreEntitySet="tblinstitucion">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -97,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbllugar">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tbllugar">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbllugar">
         <MappingFragment StoreEntitySet="tbllugar">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -105,7 +113,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblmarca">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblmarca">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblmarca">
         <MappingFragment StoreEntitySet="tblmarca">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -113,7 +121,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblpregunta">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblpregunta">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblpregunta">
         <MappingFragment StoreEntitySet="tblpregunta">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="pregunta" ColumnName="pregunta" />
@@ -122,8 +130,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblprioridad">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblprioridad">
+        <MappingFragment StoreEntitySet="tblprioridad">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblpuesto">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblpuesto">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblpuesto">
         <MappingFragment StoreEntitySet="tblpuesto">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -131,7 +147,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblrecurso">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblrecurso">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrecurso">
         <MappingFragment StoreEntitySet="tblrecurso">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -140,7 +156,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblrecursoasignado">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblrecursoasignado">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrecursoasignado">
         <MappingFragment StoreEntitySet="tblrecursoasignado">
           <ScalarProperty Name="fk_idevento" ColumnName="fk_idevento" />
           <ScalarProperty Name="fk_idrequerimiento" ColumnName="fk_idrequerimiento" />
@@ -149,7 +165,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblrespuesta">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblrespuesta">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrespuesta">
         <MappingFragment StoreEntitySet="tblrespuesta">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="valor" ColumnName="valor" />
@@ -159,7 +175,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblservicio">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblservicio">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblservicio">
         <MappingFragment StoreEntitySet="tblservicio">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -170,12 +186,12 @@
           <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
           <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
           <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="fk_idestatus" ColumnName="fk_idestatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbltipoequipo">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tbltipoequipo">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoequipo">
         <MappingFragment StoreEntitySet="tbltipoequipo">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -191,7 +207,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbltipoincidencia">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tbltipoincidencia">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoincidencia">
         <MappingFragment StoreEntitySet="tbltipoincidencia">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -199,7 +215,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblusuario">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.tblusuario">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblusuario">
         <MappingFragment StoreEntitySet="tblusuario">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -217,7 +233,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_departamentos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_departamentos">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_departamentos">
         <MappingFragment StoreEntitySet="vt_departamentos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -226,7 +242,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_encuestas">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_encuestas">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_encuestas">
         <MappingFragment StoreEntitySet="vt_encuestas">
           <ScalarProperty Name="numero" ColumnName="numero" />
           <ScalarProperty Name="id" ColumnName="id" />
@@ -242,7 +258,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_equipos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_equipos">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_equipos">
         <MappingFragment StoreEntitySet="vt_equipos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
@@ -264,7 +280,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_evento_sin_cerrar">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_evento_sin_cerrar">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_evento_sin_cerrar">
         <MappingFragment StoreEntitySet="vt_evento_sin_cerrar">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -287,7 +303,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_eventos_cerrados">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_eventos_cerrados">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_cerrados">
         <MappingFragment StoreEntitySet="vt_eventos_cerrados">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -314,7 +330,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_incidente_sin_cerrar">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_incidente_sin_cerrar">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidente_sin_cerrar">
         <MappingFragment StoreEntitySet="vt_incidente_sin_cerrar">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -335,7 +351,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_incidentes_cerrados">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_incidentes_cerrados">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidentes_cerrados">
         <MappingFragment StoreEntitySet="vt_incidentes_cerrados">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -360,7 +376,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_preguntas">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_preguntas">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_preguntas">
         <MappingFragment StoreEntitySet="vt_preguntas">
           <ScalarProperty Name="numero" ColumnName="numero" />
           <ScalarProperty Name="id" ColumnName="id" />
@@ -371,7 +387,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_promedio_eventos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_promedio_eventos">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_eventos">
         <MappingFragment StoreEntitySet="vt_promedio_eventos">
           <ScalarProperty Name="soporte" ColumnName="soporte" />
           <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
@@ -379,7 +395,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_promedio_general">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_promedio_general">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
         <MappingFragment StoreEntitySet="vt_promedio_general">
           <ScalarProperty Name="posicion" ColumnName="posicion" />
           <ScalarProperty Name="id" ColumnName="id" />
@@ -390,7 +406,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_promedio_incidentes">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_promedio_incidentes">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_incidentes">
         <MappingFragment StoreEntitySet="vt_promedio_incidentes">
           <ScalarProperty Name="soporte" ColumnName="soporte" />
           <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
@@ -398,7 +414,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_recursos_asignados">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_recursos_asignados">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_recursos_asignados">
         <MappingFragment StoreEntitySet="vt_recursos_asignados">
           <ScalarProperty Name="idevento" ColumnName="idevento" />
           <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
@@ -419,7 +435,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_reporte_equipos">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_reporte_equipos">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_reporte_equipos">
         <MappingFragment StoreEntitySet="vt_reporte_equipos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nom_tipo_equipo" ColumnName="nom_tipo_equipo" />
@@ -445,7 +461,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_servicios">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_servicios">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_servicios">
         <MappingFragment StoreEntitySet="vt_servicios">
           <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -453,7 +469,7 @@
           <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
           <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
           <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="fk_idestatus" ColumnName="fk_idestatus" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="solicitante" ColumnName="solicitante" />
           <ScalarProperty Name="soporte" ColumnName="soporte" />
@@ -462,7 +478,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vt_usuarios">
-      <EntityTypeMapping TypeName="dbhelpdeskModel.vt_usuarios">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_usuarios">
         <MappingFragment StoreEntitySet="vt_usuarios">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
@@ -480,13 +496,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_cerrar_evento" FunctionName="dbhelpdeskModel.Store.sp_cerrar_evento" />
-    <FunctionImportMapping FunctionImportName="sp_cerrar_incidente" FunctionName="dbhelpdeskModel.Store.sp_cerrar_incidente" />
-    <FunctionImportMapping FunctionImportName="sp_insertar_evento" FunctionName="dbhelpdeskModel.Store.sp_insertar_evento" />
-    <FunctionImportMapping FunctionImportName="sp_insertar_incidente" FunctionName="dbhelpdeskModel.Store.sp_insertar_incidente" />
-    <FunctionImportMapping FunctionImportName="sp_requerimientos_sin_asignar" FunctionName="dbhelpdeskModel.Store.sp_requerimientos_sin_asignar">
+    <FunctionImportMapping FunctionImportName="sp_cerrar_evento" FunctionName="dbhelpdeskV2Model.Store.sp_cerrar_evento" />
+    <FunctionImportMapping FunctionImportName="sp_cerrar_incidente" FunctionName="dbhelpdeskV2Model.Store.sp_cerrar_incidente" />
+    <FunctionImportMapping FunctionImportName="sp_insertar_evento" FunctionName="dbhelpdeskV2Model.Store.sp_insertar_evento" />
+    <FunctionImportMapping FunctionImportName="sp_insertar_incidente" FunctionName="dbhelpdeskV2Model.Store.sp_insertar_incidente" />
+    <FunctionImportMapping FunctionImportName="sp_requerimientos_sin_asignar" FunctionName="dbhelpdeskV2Model.Store.sp_requerimientos_sin_asignar">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="dbhelpdeskModel.sp_requerimientos_sin_asignar_Result">
+        <ComplexTypeMapping TypeName="dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />

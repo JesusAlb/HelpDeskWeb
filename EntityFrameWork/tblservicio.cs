@@ -29,8 +29,9 @@ namespace HelpDeskWeb.EntityFrameWork
         public Nullable<System.DateTime> fecha_cierre { get; set; }
         public Nullable<System.DateTime> hora_inicial { get; set; }
         public Nullable<System.DateTime> hora_final { get; set; }
-        public int estatus { get; set; }
+        public int fk_idestatus { get; set; }
     
+        public virtual tblestatus tblestatus { get; set; }
         public virtual ICollection<tblevento> tblevento { get; set; }
         public virtual ICollection<tblincidente> tblincidente { get; set; }
         public virtual tblusuario tblusuario { get; set; }

@@ -153,7 +153,7 @@ namespace HelpDeskWeb.Solicitudes
 
                     tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
                     cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
-                    cbPrioridad.SelectedValue = itemIncidente.prioridad.ToString();
+                    cbPrioridad.SelectedValue = itemIncidente.fk_idprioridad.ToString();
                     cbSoporte.SelectedValue = itemIncidente.tblservicio.fk_idusuario_soporte.ToString();
                     cbSeguimiento.SelectedValue = itemIncidente.tblservicio.fk_idusuario_apoyo.ToString();
                     ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnAsginarActivado", "$('#ModalAsignar').modal('show');", true);

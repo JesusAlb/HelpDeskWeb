@@ -13,22 +13,24 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
 {
     class controlEncuestas
     {
-        public static tblcalidadservicio insertar(int idservicio){
+        public static bool insertar(int idservicio){
             try
             {
                 var encuesta = new tblcalidadservicio { fk_idservicio = idservicio, observaciones = "Sin observaciones", promedio = 0, estatus = false };
                 if (encuesta != null)
-                {                  
-                    return encuesta;
+                {
+                    dbhelp.modelo.tblcalidadservicio.Add(encuesta);
+                    dbhelp.modelo.SaveChanges();
+                    return true;
                 }
                 else
                 {
-                    return null;
+                    return false;
                 }
             }
             catch
             {
-                return null;
+                return false;
             }
         }
 

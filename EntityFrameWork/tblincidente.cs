@@ -16,11 +16,12 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public int id { get; set; }
         public int tipo { get; set; }
-        public int prioridad { get; set; }
+        public int fk_idprioridad { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
         public int fk_idservicio { get; set; }
     
+        public virtual tblprioridad tblprioridad { get; set; }
         public virtual tblservicio tblservicio { get; set; }
         public virtual tbltipoincidencia tbltipoincidencia { get; set; }
     }
