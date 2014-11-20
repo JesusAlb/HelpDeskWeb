@@ -16,7 +16,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 0, 0);
+            Utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!Page.IsPostBack)
             {
@@ -69,7 +69,7 @@ namespace HelpDeskWeb.Administracion
             {
 
                 case "nuevo":
-                    hdk_utilerias.limpiarControles(this.ModalContenido.Controls);
+                    Utilerias.limpiarControles(this.ModalContenido.Controls);
                     this.cargarControles();
                     ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
                     break;
@@ -134,7 +134,7 @@ namespace HelpDeskWeb.Administracion
             }
             else
             {
-                if (hdk_utilerias.verificarCamposVacios(new string[] { txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text, txtMAC1.Text, txtMAC2.Text, txtMAC3.Text, txtMAC4.Text, txtMAC5.Text, txtMAC6.Text }))
+                if (Utilerias.verificarCamposVacios(new string[] { txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text, txtMAC1.Text, txtMAC2.Text, txtMAC3.Text, txtMAC4.Text, txtMAC5.Text, txtMAC6.Text }))
                 {
                     if (validarIP(new string[] { txtIP1.Text, txtIP2.Text, txtIP3.Text, txtIP4.Text }))
                     {
@@ -153,7 +153,7 @@ namespace HelpDeskWeb.Administracion
                 }
             }
 
-            if (hdk_utilerias.verificarCamposVacios(new string[] { txtDD.Text, txtRAM.Text, txtProcesador.Text, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text }))
+            if (Utilerias.verificarCamposVacios(new string[] { txtDD.Text, txtRAM.Text, txtProcesador.Text, txtSerieEquipo.Text, txtSerieMonitor.Text, txtSerieMouse.Text, txtSerieTeclado.Text }))
             {
                 if (mensajeError == null)
                 {
@@ -203,7 +203,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void gvEquipo_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias.setRowCreated(sender, e, this.Page);
+            Utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void cbTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)

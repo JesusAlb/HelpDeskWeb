@@ -18,6 +18,7 @@
     <Property Name="promedio" Type="Double" Nullable="false" />
     <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblrespuesta" Relationship="Self.fk_calidad" FromRole="tblcalidadservicio" ToRole="tblrespuesta" />
+    <NavigationProperty Name="tblservicio" Relationship="Self.fk_servicio" FromRole="tblcalidadservicio" ToRole="tblservicio" />
   </EntityType>
   <EntityType Name="tblcoordinacion">
     <Key>
@@ -78,7 +79,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipo" Type="Int32" Nullable="false" />
+    <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
     <Property Name="fk_idlugar" Type="Int32" Nullable="false" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
     <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -88,6 +89,7 @@
     <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_evento_en_uso" FromRole="tblevento" ToRole="tblrecursoasignado" />
     <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio" FromRole="tblevento" ToRole="tblservicio" />
     <NavigationProperty Name="tbllugar" Relationship="Self.fk_lugar" FromRole="tblevento" ToRole="tbllugar" />
+    <NavigationProperty Name="tbltipoevento" Relationship="Self.fk_tipoevento" FromRole="tblevento" ToRole="tbltipoevento" />
   </EntityType>
   <EntityType Name="tblincidente">
     <Key>
@@ -203,6 +205,7 @@
     <Property Name="hora_inicial" Type="DateTime" Precision="3" />
     <Property Name="hora_final" Type="DateTime" Precision="3" />
     <Property Name="fk_idestatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblcalidadservicio" Relationship="Self.fk_servicio" FromRole="tblservicio" ToRole="tblcalidadservicio" />
     <NavigationProperty Name="tblestatus" Relationship="Self.fk_idestatus" FromRole="tblservicio" ToRole="tblestatus" />
     <NavigationProperty Name="tblevento" Relationship="Self.fk_idservicio" FromRole="tblservicio" ToRole="tblevento" />
     <NavigationProperty Name="tblincidente" Relationship="Self.fk_idservicio_incidente" FromRole="tblservicio" ToRole="tblincidente" />
@@ -225,6 +228,14 @@
     <Property Name="ram" Type="Boolean" Nullable="false" />
     <Property Name="procesador" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tblequipoasignado" Relationship="Self.fk_tipo_equipo" FromRole="tbltipoequipo" ToRole="tblequipoasignado" />
+  </EntityType>
+  <EntityType Name="tbltipoevento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblevento" Relationship="Self.fk_tipoevento" FromRole="tbltipoevento" ToRole="tblevento" />
   </EntityType>
   <EntityType Name="tbltipoincidencia">
     <Key>
@@ -327,6 +338,7 @@
       <PropertyRef Name="estatus_evento" />
       <PropertyRef Name="solicitante" />
       <PropertyRef Name="idsolicitante" />
+      <PropertyRef Name="tipo" />
       <PropertyRef Name="asistencia" />
       <PropertyRef Name="acomodo" />
       <PropertyRef Name="fecha_realizacion" />
@@ -343,7 +355,7 @@
     <Property Name="idsolicitante" Type="Int32" Nullable="false" />
     <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
     <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -358,6 +370,7 @@
       <PropertyRef Name="estatus_evento" />
       <PropertyRef Name="solicitante" />
       <PropertyRef Name="idsolicitante" />
+      <PropertyRef Name="tipo" />
       <PropertyRef Name="asistencia" />
       <PropertyRef Name="acomodo" />
       <PropertyRef Name="fecha_realizacion" />
@@ -377,7 +390,7 @@
     <Property Name="idsolicitante" Type="Int32" Nullable="false" />
     <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
     <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -391,6 +404,7 @@
     <Key>
       <PropertyRef Name="id" />
       <PropertyRef Name="descripcion" />
+      <PropertyRef Name="prioridad" />
       <PropertyRef Name="fecha_solicitud" />
       <PropertyRef Name="estatus_incidente" />
       <PropertyRef Name="solicitante" />
@@ -401,7 +415,7 @@
     <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
@@ -416,6 +430,7 @@
     <Key>
       <PropertyRef Name="id" />
       <PropertyRef Name="descripcion" />
+      <PropertyRef Name="prioridad" />
       <PropertyRef Name="fecha_solicitud" />
       <PropertyRef Name="estatus_incidente" />
       <PropertyRef Name="solicitante" />
@@ -427,7 +442,7 @@
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="prioridad" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
@@ -610,6 +625,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_servicio">
+    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblcalidadservicio" Type="Self.tblcalidadservicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblservicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblcalidadservicio">
+        <PropertyRef Name="fk_idservicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_coordinacion">
     <End Role="tblcoordinacion" Type="Self.tblcoordinacion" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -758,6 +787,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tipoevento">
+    <End Role="tbltipoevento" Type="Self.tbltipoevento" Multiplicity="1" />
+    <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbltipoevento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblevento">
+        <PropertyRef Name="fk_idtipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_idprioridad">
     <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
     <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
@@ -771,7 +812,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_idservicio_incidente">
-    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1" />
+    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblservicio">
@@ -900,6 +943,7 @@
     <EntitySet Name="tblrespuesta" EntityType="Self.tblrespuesta" />
     <EntitySet Name="tblservicio" EntityType="Self.tblservicio" />
     <EntitySet Name="tbltipoequipo" EntityType="Self.tbltipoequipo" />
+    <EntitySet Name="tbltipoevento" EntityType="Self.tbltipoevento" />
     <EntitySet Name="tbltipoincidencia" EntityType="Self.tbltipoincidencia" />
     <EntitySet Name="tblusuario" EntityType="Self.tblusuario" />
     <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" />
@@ -924,6 +968,10 @@
     <AssociationSet Name="fk_calidad" Association="Self.fk_calidad">
       <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
       <End Role="tblrespuesta" EntitySet="tblrespuesta" />
+    </AssociationSet>
+    <AssociationSet Name="fk_servicio" Association="Self.fk_servicio">
+      <End Role="tblservicio" EntitySet="tblservicio" />
+      <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
     </AssociationSet>
     <AssociationSet Name="fk_coordinacion" Association="Self.fk_coordinacion">
       <End Role="tblcoordinacion" EntitySet="tblcoordinacion" />
@@ -971,6 +1019,10 @@
     </AssociationSet>
     <AssociationSet Name="fk_lugar" Association="Self.fk_lugar">
       <End Role="tbllugar" EntitySet="tbllugar" />
+      <End Role="tblevento" EntitySet="tblevento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tipoevento" Association="Self.fk_tipoevento">
+      <End Role="tbltipoevento" EntitySet="tbltipoevento" />
       <End Role="tblevento" EntitySet="tblevento" />
     </AssociationSet>
     <AssociationSet Name="fk_idprioridad" Association="Self.fk_idprioridad">

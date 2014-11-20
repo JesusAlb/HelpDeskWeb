@@ -1,6 +1,7 @@
 ﻿using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.ControlBD.Solicitudes;
+using HelpDeskWeb.ControlBD.Solicitudes.Incidentes;
 using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections;
@@ -17,11 +18,12 @@ namespace HelpDeskWeb.Reportes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this,true, 2, 2);
+            Utilerias.checarSession(this,true, 2, 2);
             this.generarPrivilegios();
             lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
-            this.cargarEventos();
-            if (this.Page.IsPostBack)
+            this.cargarEventos();    
+
+            if (Page.IsPostBack)
             {
                 if (Request["__EVENTTARGET"] == "txtFiltroAbierto")
                 {
@@ -32,7 +34,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void cargarEventos()
         {
-            gvEventos.DataSource = controlReportes.dataSourceEventosConRequerimientos(txtFiltroAbierto.Text);
+            gvEventos.DataSource = controlReportesEventos.dataSourceEventosConRequerimientos(txtFiltroAbierto.Text);
             gvEventos.DataBind();
         }
 
@@ -48,19 +50,33 @@ namespace HelpDeskWeb.Reportes
 
         protected void generarReporte(int reporte)
         {
+            bool generar = true;
+            dbhelp.modelo.tblservicio.ToList();
 
             switch (reporte)
             {
                 case 0: { 
                 //incidentes completos
-                            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteIncidentes.rdlc";
-                            //ReportDataSource datasource = new ReportDataSource("DataSetIncidentes", controlReportesIncidentes.)
+                            int? idsolicitante = null;
+                            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportIncidentes.rdlc";    
+                            if(controlUsuario.obtenerUsuarioDeSession(this).tipo == 1){
+                                idsolicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
+                            }
+                            ReportDataSource datasource = new ReportDataSource("DataSetIncidentes", controlReportesIncidentes.dataSourceIncidentes(idsolicitante, "", cbEstatus.SelectedItem.Text, txtFiltroAbierto.Text, Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                            vt_reporte.LocalReport.DataSources.Add(datasource);
                         }
                     break;
 
                 case 1:
                     { //eventos completos
-
+                        int? idsolicitante = null;
+                        vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEventos.rdlc";
+                        if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+                        {
+                            idsolicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
+                        }
+                        ReportDataSource datasource = new ReportDataSource("DataSetEventos", controlReportesEventos.dataSourceEventos(idsolicitante, "", cbEstatus.SelectedItem.Text, txtFiltroAbierto.Text, Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource);
                     }
                     break;
 
@@ -69,7 +85,7 @@ namespace HelpDeskWeb.Reportes
                         if (gvEventos.SelectedDataKey != null)
                         {
                             vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteRequerimientos.rdlc";
-                            ReportDataSource datasource = new ReportDataSource("DataSetRecursosPorEvento", controlReportes.dataSourceRecursosPorEventos(Convert.ToInt32(gvEventos.SelectedDataKey.Value)));
+                            ReportDataSource datasource = new ReportDataSource("DataSetRecursosPorEvento", controlReportesEventos.dataSourceRecursosPorEventos(Convert.ToInt32(gvEventos.SelectedDataKey.Value)));
                             vt_reporte.LocalReport.DataSources.Add(datasource);
 
                         }
@@ -85,23 +101,35 @@ namespace HelpDeskWeb.Reportes
                 case 4:
                     {//Estadisticas de eventos
                         vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteEstadisticoEventos.rdlc";
-                        ReportDataSource datasource = new ReportDataSource("DataSetEventosPorUsuario", controlReportes.dataSourceEventosPorUsuario());
+                        ReportDataSource datasource = new ReportDataSource("DataSetEventosPorUsuario", controlReportesEventos.dataSourceEventosPorUsuario(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
                         vt_reporte.LocalReport.DataSources.Add(datasource);
-                        ReportDataSource datasource2 = new ReportDataSource("DataSetEventosPorMes", controlReportes.dataSourceEventosPorMes());
+                        ReportDataSource datasource2 = new ReportDataSource("DataSetEventosPorMes", controlReportesEventos.dataSourceEventosPorTiempo(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
                         vt_reporte.LocalReport.DataSources.Add(datasource2);
-                        ReportDataSource datasource3 = new ReportDataSource("DataSetRecursosMasUsados", controlReportes.dataSourceRecursosMasUsados());
+                        ReportDataSource datasource3 = new ReportDataSource("DataSetRecursosMasUsados", controlReportesEventos.dataSourceRecursosMasUsados(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
                         vt_reporte.LocalReport.DataSources.Add(datasource3);
                     }break;
 
 
                 case 5:
                     {//calidad de eventos
-
+                        vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteCalidadEventos.rdlc";
+                        ReportDataSource datasource = new ReportDataSource("promedioCalidadUsuario", controlReportesEventos.dataSourceCalidadPorUsuario(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource);
+                        ReportDataSource datasource2 = new ReportDataSource("promedioCalidadMes", controlReportesEventos.dataSourceCalidadPorTiempo(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource2);
                     }break;
 
                 case 6:
                     {//estadisticas de incidentes
-
+                        vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteEstadisticoIncidentes.rdlc";
+                        ReportDataSource datasource = new ReportDataSource("DataSetNumInTipo", controlReportesIncidentes.dataSourceIncidentesPorTipo(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource);
+                        ReportDataSource datasource2 = new ReportDataSource("DataSetNumInUsuario", controlReportesIncidentes.dataSourceIncidentesPorUsuario(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource2);
+                        ReportDataSource datasource3 = new ReportDataSource("DataSetNumInMes", controlReportesIncidentes.dataSourceIncidentesPorMes(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource3);
+                        ReportDataSource datasource4 = new ReportDataSource("DataSetNumInDepto", controlReportesIncidentes.dataSourceIncidentesPorDepartamento(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource4);
                     }break;
 
                 case 7:
@@ -112,19 +140,29 @@ namespace HelpDeskWeb.Reportes
                 default:
                     break;
             }
+
+            if (generar)
+            {
+                vt_reporte.LocalReport.Refresh();
+                datosBusqueda.CssClass = "panel-collapse collapse";
+                panelReporte.Visible = true;
+            }
         }
 
         protected void cargarComboBoxObjeto(int tipo){
-            cbObjeto.Items.Add("Incidentes completos");
-            cbObjeto.Items.Add("Eventos completos");
-            cbObjeto.Items.Add("Requerimientos para evento");
-            if (tipo == 0)
+            if (cbObjeto.Items.Count == 0)
             {
-                cbObjeto.Items.Add("Responsables de equipos");
-                cbObjeto.Items.Add("Estadisticas de eventos");
-                cbObjeto.Items.Add("Calidad en eventos");
-                cbObjeto.Items.Add("Estadísticas de incidentes");
-                cbObjeto.Items.Add("Calidad en incidentes");
+                cbObjeto.Items.Add("Incidentes");
+                cbObjeto.Items.Add("Eventos");
+                cbObjeto.Items.Add("Requerimientos para evento");
+                if (tipo == 0)
+                {
+                    cbObjeto.Items.Add("Responsables de equipos");
+                    cbObjeto.Items.Add("Estadisticas de eventos");
+                    cbObjeto.Items.Add("Calidad en eventos");
+                    cbObjeto.Items.Add("Estadísticas de incidentes");
+                    cbObjeto.Items.Add("Calidad en incidentes");
+                }
             }
         }
 
@@ -147,7 +185,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias.setRowCreated(sender, e, this);
+            Utilerias.setRowCreated(sender, e, this);
         }
 
         protected void manipulaciónDeControles(int index)
@@ -178,11 +216,16 @@ namespace HelpDeskWeb.Reportes
 
         }
 
-        protected void inhabilitarControles(bool Estatus, bool FiltroAbierto, bool rengoFechas)
+        protected void inhabilitarControles(bool Estatus, bool FiltroAbierto, bool rangoFechas)
         {
             cbEstatus.Enabled = Estatus;
             txtFiltroAbierto.Enabled = FiltroAbierto;
-            panelRangoFechas.Enabled = rengoFechas;
+            if (rangoFechas)
+            {
+                panelRangoFechas.Enabled = rangoFechas;
+                txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
+                txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");      
+            }
         }
         
     }

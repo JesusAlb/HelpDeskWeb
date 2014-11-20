@@ -10,9 +10,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <!--Inicio de Alertify -->
-    <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
-    <script src="../js/alertify.js"></script>
+    <link href="css/alertify.css" rel="stylesheet" />
+    <link href="css/alertify-bootstrap3.css" rel="stylesheet" />
+    <script src="js/alertify.js"></script>
     <!--Fin de Alertify-->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/validador.js"></script>

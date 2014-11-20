@@ -16,6 +16,7 @@ namespace HelpDeskWeb.EntityFrameWork
     {
         public tblservicio()
         {
+            this.tblcalidadservicio = new HashSet<tblcalidadservicio>();
             this.tblevento = new HashSet<tblevento>();
             this.tblincidente = new HashSet<tblincidente>();
         }
@@ -31,6 +32,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public Nullable<System.DateTime> hora_final { get; set; }
         public int fk_idestatus { get; set; }
     
+        public virtual ICollection<tblcalidadservicio> tblcalidadservicio { get; set; }
         public virtual tblestatus tblestatus { get; set; }
         public virtual ICollection<tblevento> tblevento { get; set; }
         public virtual ICollection<tblincidente> tblincidente { get; set; }

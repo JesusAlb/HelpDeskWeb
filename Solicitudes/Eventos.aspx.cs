@@ -22,7 +22,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 2, 2);
+            Utilerias.checarSession(this, true, 2, 2);
             lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!IsPostBack)
             {
@@ -125,7 +125,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void gvEventos_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias.setRowCreated(sender, e, this.Page);
+            Utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void btnRecursos_Click(object sender, EventArgs e)
@@ -158,7 +158,7 @@ namespace HelpDeskWeb.Solicitudes
             if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
             {
                 lbelTituloModal.Text = "Alta de eventos";
-                hdk_utilerias.limpiarControles(this.panelModalNuevo.Controls);
+                Utilerias.limpiarControles(this.panelModalNuevo.Controls);
                 accion.Value = "nuevo";
                 ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
             }
@@ -201,11 +201,11 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (hdk_utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, txtAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text }))
+            if (Utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, txtAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text }))
             {
-                if (hdk_utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraInicial, txtHoraFinal }))
+                if (Utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraInicial, txtHoraFinal }))
                 {
-                    if (hdk_utilerias.convertirFecha(txtHoraInicial.Text) < hdk_utilerias.convertirFecha(txtHoraFinal.Text))
+                    if (Utilerias.convertirFecha(txtHoraInicial.Text) < Utilerias.convertirFecha(txtHoraFinal.Text))
                     {
                         if (accion.Value.Equals("nuevo"))
                         {

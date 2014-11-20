@@ -17,7 +17,7 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 2, 2);
+            Utilerias.checarSession(this, true, 2, 2);
             usuarioActual = controlUsuario.obtenerUsuario(controlUsuario.obtenerUsuarioDeSession(this).id);
             if (!IsPostBack)
             {

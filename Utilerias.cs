@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace HelpDeskWeb
 {
-    public class hdk_utilerias : System.Web.UI.Page
+    public class Utilerias : System.Web.UI.Page
     {
         public static void setRowCreated(object sender, GridViewRowEventArgs e, Page pagina)
         {
@@ -123,6 +123,26 @@ namespace HelpDeskWeb
             {
                 return null;
             }
+        }
+
+        public static DateTime[] convertirRango(DateTime? inferior, DateTime? superior){
+            DateTime[] rango = new DateTime[2];
+            if(inferior == null){
+                rango[0] = new DateTime(1753, 1, 1);
+            }
+            else
+            {
+                rango[0] = inferior.Value;
+            }
+            if (superior == null)
+            {
+                rango[1] = new DateTime(DateTime.Today.Year + 3, DateTime.Today.Month, DateTime.Today.Day);
+            }
+            else
+            {
+                rango[1] = inferior.Value;
+            }
+            return rango;
         }
     }
 

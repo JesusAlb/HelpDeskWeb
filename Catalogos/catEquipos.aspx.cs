@@ -17,7 +17,7 @@ namespace HelpDeskWeb.Catalogos
          
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this,true, 0, 0);
+            Utilerias.checarSession(this,true, 0, 0);
             lbelUsuario.Text =" " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!Page.IsPostBack)
             {
@@ -63,7 +63,7 @@ namespace HelpDeskWeb.Catalogos
 
         protected void gv_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias.setRowCreated(sender, e, this.Page);
+            Utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void configurarModal(string titulo, string nomElemento, bool panelVisible)

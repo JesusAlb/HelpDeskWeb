@@ -12,20 +12,16 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class tblcalidadservicio
+    public partial class tbltipoevento
     {
-        public tblcalidadservicio()
+        public tbltipoevento()
         {
-            this.tblrespuesta = new HashSet<tblrespuesta>();
+            this.tblevento = new HashSet<tblevento>();
         }
     
         public int id { get; set; }
-        public string observaciones { get; set; }
-        public bool estatus { get; set; }
-        public double promedio { get; set; }
-        public int fk_idservicio { get; set; }
+        public string nombre { get; set; }
     
-        public virtual ICollection<tblrespuesta> tblrespuesta { get; set; }
-        public virtual tblservicio tblservicio { get; set; }
+        public virtual ICollection<tblevento> tblevento { get; set; }
     }
 }

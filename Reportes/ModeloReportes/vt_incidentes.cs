@@ -16,11 +16,11 @@ namespace HelpDeskWeb.Reportes.ModeloReportes
         public string apoyo { get; set; }
         public string prioridad { get; set; }
         public DateTime fecha_solicitud { get; set; }
-        public DateTime fecha_cierre { get; set; }
+        public DateTime? fecha_cierre { get; set; }
         public DateTime hora_inicial { get; set; }
-        public DateTime hora_final { get; set; }
+        public DateTime? hora_final { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
-        public int estatus { get; set; }
+        public string estatus { get; set; }
     }
 }

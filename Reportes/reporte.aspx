@@ -109,11 +109,11 @@
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control">
-                                                                        <asp:ListItem Text="Todos" Value=""></asp:ListItem>
-                                                                        <asp:ListItem Text="Abiertos"></asp:ListItem>
-                                                                        <asp:ListItem Text="En proceso"></asp:ListItem>
-                                                                        <asp:ListItem Text="Cerrados"></asp:ListItem>
-                                                                        <asp:ListItem Text="Cancelados"></asp:ListItem>
+                                                                        <asp:ListItem Text="" Value=""></asp:ListItem>
+                                                                        <asp:ListItem Text="Abierto" Value="0"></asp:ListItem>
+                                                                        <asp:ListItem Text="En proceso" Value="1"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cerrado" Value="2"></asp:ListItem>
+                                                                        <asp:ListItem Text="Cancelado" Value="3"></asp:ListItem>
                                                                     </asp:DropDownList>
                                                                 </ContentTemplate>
                                                                 <Triggers>
@@ -129,7 +129,7 @@
                                                         <div class="col-lg-8">
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
-                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" AutoPostBack="true" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                                                 </ContentTemplate>
                                                                 <Triggers>
                                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
@@ -145,9 +145,9 @@
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:Panel runat="server" ID="panelRangoFechas" CssClass="input-group">
-                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicial" TextMode="Date"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicial" Text="2013-01-01" TextMode="Date"></asp:TextBox>
                                                                         <span class="input-group-addon">a </span>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" Text="2020-01-01" TextMode="Date"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </ContentTemplate>
                                                                 <Triggers>
@@ -174,8 +174,8 @@
                                                                 </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
-                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
                                                                 <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
+                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </div>

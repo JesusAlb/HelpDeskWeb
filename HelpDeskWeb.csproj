@@ -415,6 +415,9 @@
     <Compile Include="EntityFrameWork\tbltipoequipo.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\tbltipoevento.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\tbltipoincidencia.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
@@ -466,7 +469,10 @@
     <Compile Include="EntityFrameWork\vt_usuarios.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="hdk_utilerias.cs">
+    <Compile Include="Reportes\ModeloReportes\vt_calidad_por_objeto.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_calidad_por_tiempo.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_eventos.cs" />
+    <Compile Include="Utilerias.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="index.aspx.cs">
@@ -492,11 +498,11 @@
       <DependentUpon>principalMaestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\controlReportes.cs" />
+    <Compile Include="Reportes\controlReportesEventos.cs" />
     <Compile Include="Reportes\controlReportesEquipos.cs" />
     <Compile Include="Reportes\controlReportesIncidentes.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_elemento_por_usuario.cs" />
-    <Compile Include="Reportes\ModeloReportes\vt_elemento_por_mes.cs" />
+    <Compile Include="Reportes\ModeloReportes\vt_elemento_por_tiempo.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_incidentes.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_recursos_usados.cs" />
     <Compile Include="soporte.aspx.cs">
@@ -548,25 +554,21 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\ReportEventos.rdlc" />
-    <EmbeddedResource Include="Model\ReportGraficoCalidadEventos.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReportEventos.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadEventos.rdlc" />
     <EmbeddedResource Include="Model\ReportGraficoEventos.rdlc" />
     <EmbeddedResource Include="Model\ReportRequerimientos.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoEventos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
-    <EmbeddedResource Include="Reportes\Documentos\ReporteIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteRequerimientos.rdlc" />
-    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadEventos.rdlc" />
-    <EmbeddedResource Include="Reportes\Documentos\ReportEventos.rdlc" />
     <EmbeddedResource Include="Model\ReportGraficoCalidadIncidentes.rdlc" />
-    <EmbeddedResource Include="Model\ReportGraficoIncidentes.rdlc" />
-    <EmbeddedResource Include="Model\ReportIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReportIncidentes.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HelpDeskWeb.Reportes
 {
-    public class vt_eventos_por_mes
+    public class vt_elemento_por_tiempo
     {
         public DateTime tiempo { get; set; }
         public int cantidad { get; set; }

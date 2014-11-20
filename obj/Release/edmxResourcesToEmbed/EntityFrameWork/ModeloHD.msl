@@ -72,7 +72,7 @@
         <MappingFragment StoreEntitySet="tblevento">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
           <ScalarProperty Name="fk_idlugar" ColumnName="fk_idlugar" />
           <ScalarProperty Name="asistencia" ColumnName="asistencia" />
           <ScalarProperty Name="acomodo" ColumnName="acomodo" />
@@ -203,6 +203,14 @@
           <ScalarProperty Name="red" ColumnName="red" />
           <ScalarProperty Name="ram" ColumnName="ram" />
           <ScalarProperty Name="procesador" ColumnName="procesador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbltipoevento">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoevento">
+        <MappingFragment StoreEntitySet="tbltipoevento">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

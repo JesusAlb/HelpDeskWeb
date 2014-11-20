@@ -311,9 +311,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {       
             try
             {
-                int idservicio = controlServicios.obtenerUltimoServicio();
+                int idservicio = controlServicios.obtenerUltimoServicio()+1;
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-                var evento = dbhelp.modelo.sp_insertar_evento(obtenerUltimoEvento(), titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
+                var evento = dbhelp.modelo.sp_insertar_evento(obtenerUltimoEvento()+1, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
                    if (evento != 0)
                    {
                        dbhelp.modelo.SaveChanges();
@@ -360,7 +360,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     ItemAmodificar.nombre = titulo;
                     ItemAmodificar.fk_idlugar = lugar;
                     ItemAmodificar.acomodo = acomodo;
-                    ItemAmodificar.tipo = tipo;
+                    ItemAmodificar.fk_idtipo = tipo;
                     ItemAmodificar.asistencia = asistencia;
                     ItemAmodificar.fecha_realizacion = fecha_realizacion;
                     if (controlServicios.modificar(idservicio, descripcion, horaInicio, horaFinal))
@@ -403,15 +403,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                var evento = dbhelp.modelo.tblevento.Max(a => a.id);
-                if (evento != -1)
-                {
-                    return evento;
-                }
-                else
-                {
-                    return 0;
-                }
+                return dbhelp.modelo.tblevento.Max(a => a.id);
             }
             catch
             {

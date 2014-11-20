@@ -17,7 +17,7 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 0, 0);
+            Utilerias.checarSession(this, true, 0, 0);
             lbelNomUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_completo;
             lbelCargo.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_puesto;
             lbelInstitucion.Text = controlUsuario.obtenerUsuarioDeSession(this).nom_institucion;

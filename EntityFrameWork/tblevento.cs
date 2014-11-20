@@ -21,7 +21,7 @@ namespace HelpDeskWeb.EntityFrameWork
     
         public int id { get; set; }
         public string nombre { get; set; }
-        public int tipo { get; set; }
+        public int fk_idtipo { get; set; }
         public int fk_idlugar { get; set; }
         public int asistencia { get; set; }
         public string acomodo { get; set; }
@@ -32,5 +32,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual ICollection<tblrecursoasignado> tblrecursoasignado { get; set; }
         public virtual tblservicio tblservicio { get; set; }
         public virtual tbllugar tbllugar { get; set; }
+        public virtual tbltipoevento tbltipoevento { get; set; }
     }
 }

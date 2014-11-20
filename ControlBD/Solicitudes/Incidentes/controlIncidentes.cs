@@ -408,7 +408,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
-                return 1;
+                return 0;
             }
         }
 

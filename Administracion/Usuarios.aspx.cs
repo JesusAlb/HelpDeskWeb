@@ -16,7 +16,7 @@ namespace HelpDeskWeb.Administracion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            hdk_utilerias.checarSession(this, true, 0, 0);
+            Utilerias.checarSession(this, true, 0, 0);
             lbelUsuario.Text = " " + controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             if (!IsPostBack)
             {
@@ -56,7 +56,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void gvUsuarios_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            hdk_utilerias.setRowCreated(sender, e, this.Page);
+            Utilerias.setRowCreated(sender, e, this.Page);
         }
 
         protected void cbCoordinaciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace HelpDeskWeb.Administracion
 
                 case "nuevo":
                     lbelTituloModal.Text = "Alta de usuarios";
-                    hdk_utilerias.limpiarControles(this.panelFormulario.Controls);
+                    Utilerias.limpiarControles(this.panelFormulario.Controls);
                     txtPassword.Attributes.Remove("Value");
                     this.cargarDeptos(1);
                     ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
@@ -121,7 +121,7 @@ namespace HelpDeskWeb.Administracion
         }
 
         protected void btnGrabar_Command(object sender, CommandEventArgs e){
-            if (hdk_utilerias.verificarCamposVacios(new string[] { txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, cbTipoUs.Text, cbDepto.Text, txtExtension.Text, txtCorreo.Text, txtPassword.Text, cbArea.Text, cbPuesto.Text, cbInstitucion.Text }) && cbDepto.SelectedIndex != -1)
+            if (Utilerias.verificarCamposVacios(new string[] { txtNomUsuario.Text, txtNombre.Text, txtApellido.Text, cbTipoUs.Text, cbDepto.Text, txtExtension.Text, txtCorreo.Text, txtPassword.Text, cbArea.Text, cbPuesto.Text, cbInstitucion.Text }) && cbDepto.SelectedIndex != -1)
             {
                 int resultado = 0;
                 string mensaje = null;

@@ -46,6 +46,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tblrespuesta> tblrespuesta { get; set; }
         public virtual DbSet<tblservicio> tblservicio { get; set; }
         public virtual DbSet<tbltipoequipo> tbltipoequipo { get; set; }
+        public virtual DbSet<tbltipoevento> tbltipoevento { get; set; }
         public virtual DbSet<tbltipoincidencia> tbltipoincidencia { get; set; }
         public virtual DbSet<tblusuario> tblusuario { get; set; }
         public virtual DbSet<vt_departamentos> vt_departamentos { get; set; }
