@@ -126,7 +126,14 @@
             <ChartCategoryHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Group Name="Chart1_CategoryGroup">
+                  <Label />
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_SeriesGroup">
                     <GroupExpressions>
                       <GroupExpression>=Fields!elemento.Value</GroupExpression>
                     </GroupExpressions>
@@ -137,13 +144,6 @@
                     </SortExpression>
                   </SortExpressions>
                   <Label>=Fields!elemento.Value</Label>
-                </ChartMember>
-              </ChartMembers>
-            </ChartCategoryHierarchy>
-            <ChartSeriesHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Label>promedio</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
@@ -340,6 +340,24 @@
                 </Style>
               </ChartArea>
             </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
             <Palette>BrightPastel</Palette>
             <ChartBorderSkin>
               <Style>
@@ -734,6 +752,7 @@
                   <ChartAxis Name="Primary">
                     <Style>
                       <FontSize>8pt</FontSize>
+                      <Format>dd/MM/yy</Format>
                     </Style>
                     <ChartAxisTitle>
                       <Caption>Fecha</Caption>
@@ -1050,7 +1069,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!tiempo.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>dd/MM/yy</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -1061,26 +1082,6 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>

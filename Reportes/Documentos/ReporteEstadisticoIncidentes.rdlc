@@ -661,24 +661,24 @@
             <ChartCategoryHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Group Name="Chart4_CategoryGroup">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!cantidad.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!cantidad.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
-                  <Label>=Fields!cantidad.Value</Label>
+                  <Label />
                 </ChartMember>
               </ChartMembers>
             </ChartCategoryHierarchy>
             <ChartSeriesHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Label>cantidad</Label>
+                  <Group Name="Chart4_SeriesGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!nombre.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!nombre.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!nombre.Value</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
@@ -874,6 +874,24 @@
                 </Style>
               </ChartArea>
             </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
             <Palette>BrightPastel</Palette>
             <ChartBorderSkin>
               <Style>

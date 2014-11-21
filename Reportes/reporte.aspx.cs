@@ -134,7 +134,15 @@ namespace HelpDeskWeb.Reportes
 
                 case 7:
                     {//calidad en incidentes
-
+                        vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReporteCalidadIncidentes.rdlc";
+                        ReportDataSource datasource = new ReportDataSource("promedioCalidadUsuario", controlReportesIncidentes.dataSourceCalidadPorUsuario(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource);
+                        ReportDataSource datasource2 = new ReportDataSource("promedioCalidadTipo", controlReportesIncidentes.dataSourceCalidadPorTipo(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource2);
+                        ReportDataSource datasource3 = new ReportDataSource("promedioCalidadMes", controlReportesIncidentes.dataSourceCalidadPorTiempo(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource3);
+                        ReportDataSource datasource4 = new ReportDataSource("promedioCalidadDepto", controlReportesIncidentes.dataSourceCalidadPorDepto(Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
+                        vt_reporte.LocalReport.DataSources.Add(datasource4);
                     }break;
 
                 default:

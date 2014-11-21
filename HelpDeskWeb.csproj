@@ -562,11 +562,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoEventos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReportEquipos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteRequerimientos.rdlc" />
-    <EmbeddedResource Include="Model\ReportGraficoCalidadIncidentes.rdlc" />
+    <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteEstadisticoIncidentes.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReportIncidentes.rdlc" />
   </ItemGroup>

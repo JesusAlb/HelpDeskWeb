@@ -176,7 +176,7 @@ namespace HelpDeskWeb.Reportes
             try
             {
                 var query = from o in dbhelp.modelo.vt_eventos_cerrados
-                            where o.estatus_evento == 2  && o.estatus_calidad == true && (o.fecha_solicitud >= fechaInicial && o.fecha_solicitud <= fechaFinal)
+                            where o.estatus_evento == 2  && o.estatus_calidad == true && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
                             group o by o.soporte into g
                             select new vt_calidad_por_objeto
                             {
@@ -197,7 +197,7 @@ namespace HelpDeskWeb.Reportes
             {
                 var result = (
                                from o in dbhelp.modelo.vt_eventos_cerrados
-                               where o.estatus_evento == 2 && o.estatus_calidad == true && (o.fecha_solicitud >= fechaInicial && o.fecha_solicitud <= fechaFinal)
+                               where o.estatus_evento == 2 && o.estatus_calidad == true && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
                                group o by new { Date = System.Data.Entity.DbFunctions.TruncateTime(o.fecha_realizacion) } into g
                                select new vt_calidad_por_tiempo
                                {

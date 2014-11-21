@@ -170,5 +170,90 @@ namespace HelpDeskWeb.Reportes
             }
         }
 
+        public static IList<vt_calidad_por_objeto> dataSourceCalidadPorUsuario(DateTime? fechaInicial, DateTime? fechaFinal)
+        {
+            try
+            {
+                var query = from o in dbhelp.modelo.vt_incidentes_cerrados
+                            where o.estatus_calidad == true && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
+                            group o by o.soporte into g
+                            select new vt_calidad_por_objeto
+                            {
+                                elemento = g.Key,
+                                promedio = g.Average(o => o.promedio),
+                            };
+                return query.OrderByDescending(a => a.promedio).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static IList<vt_calidad_por_objeto> dataSourceCalidadPorTipo(DateTime? fechaInicial, DateTime? fechaFinal)
+        {
+            try
+            {
+                var query = from o in dbhelp.modelo.vt_incidentes_cerrados
+                            where o.estatus_calidad == true && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
+                            group o by o.tipo into g
+                            select new vt_calidad_por_objeto
+                            {
+                                elemento = g.Key,
+                                promedio = g.Average(o => o.promedio),
+                            };
+                return query.OrderByDescending(a => a.promedio).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static IList<vt_calidad_por_tiempo> dataSourceCalidadPorTiempo(DateTime? fechaInicial, DateTime? fechaFinal)
+        {
+            try
+            {
+                var result = (
+                               from o in dbhelp.modelo.vt_incidentes_cerrados
+                               where o.estatus_calidad == true && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
+                               group o by new { Date = System.Data.Entity.DbFunctions.TruncateTime(o.fecha_cierre) } into g
+                               select new vt_calidad_por_tiempo
+                               {
+                                   tiempo = g.Key.Date.Value,
+                                   promedio = g.Average(m => m.promedio)
+                               }
+                               ).OrderBy(nda => nda.tiempo);
+
+                return result.OrderByDescending(a => a.tiempo).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static IList<vt_calidad_por_objeto> dataSourceCalidadPorDepto(DateTime? fechaInicial, DateTime? fechaFinal)
+        {
+            try
+            {
+                var query = from c in dbhelp.modelo.tblincidente
+                            join o in dbhelp.modelo.vt_servicios on c.fk_idservicio equals o.id
+                            join v in dbhelp.modelo.tblcalidadservicio on c.fk_idservicio equals v.fk_idservicio
+                            where o.fk_idestatus == 2 && (o.fecha_cierre >= fechaInicial && o.fecha_cierre <= fechaFinal)
+                            group v by v.tblservicio.tblusuario1.tbldepartamento.nombre into g
+                            select new vt_calidad_por_objeto
+                            {
+                                elemento = g.Key,
+                                promedio = g.Average(o => o.promedio),
+                            };
+                return query.OrderByDescending(a => a.promedio).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

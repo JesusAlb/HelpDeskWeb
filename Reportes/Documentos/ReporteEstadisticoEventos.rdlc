@@ -690,7 +690,14 @@
         <ChartCategoryHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Group Name="Chart2_CategoryGroup">
+              <Label />
+            </ChartMember>
+          </ChartMembers>
+        </ChartCategoryHierarchy>
+        <ChartSeriesHierarchy>
+          <ChartMembers>
+            <ChartMember>
+              <Group Name="Chart2_SeriesGroup">
                 <GroupExpressions>
                   <GroupExpression>=Fields!nombre.Value</GroupExpression>
                 </GroupExpressions>
@@ -701,13 +708,6 @@
                 </SortExpression>
               </SortExpressions>
               <Label>=Fields!nombre.Value</Label>
-            </ChartMember>
-          </ChartMembers>
-        </ChartCategoryHierarchy>
-        <ChartSeriesHierarchy>
-          <ChartMembers>
-            <ChartMember>
-              <Label>cantidad</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
