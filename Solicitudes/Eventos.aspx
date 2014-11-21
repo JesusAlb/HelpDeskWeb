@@ -23,7 +23,7 @@
     <script src="../js/validador.js" type="text/javascript"></script>
     <script type="text/javascript" lang="js">
         $(function () {
-            $("#<%=txtFiltro.ClientID%>").keyup(function () {               
+            $("#<%=txtFiltro.ClientID%>").keyup(function () {           
                 __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
             })
         });
@@ -183,17 +183,17 @@
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Título" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" Style="resize: none"  CssClass="form-control NumerosLetras">
+                                                                <asp:TextBox runat="server" onpaste="return false;" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" Style="resize: none"  CssClass="form-control NumerosLetras">
                                                                 </asp:TextBox>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Lugar" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" CssClass="form-control" ID="cbLugares" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                                                                <asp:Label runat="server" Text="Lugar" Font-Bold="true"></asp:Label><asp:DropDownList runat="server"  CssClass="form-control" ID="cbLugares" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Acomodo"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control"  ID="txtAcomodo" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlpha(event.keyCode);" MaxLength="30"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;"  ID="txtAcomodo" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlpha(event.keyCode);" MaxLength="30"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo">
@@ -207,27 +207,27 @@
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Asistencia aproximada"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="5"  ID="txtAsistencia"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="5"  ID="txtAsistencia" ></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Fecha de realización"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" MaxLength="10" TextMode="Date" ID="txtFecha"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" MaxLength="10" TextMode="Date" ID="txtFecha"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" MaxLength="15" ID="txtHoraInicial"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" MaxLength="15" ID="txtHoraInicial" onpaste="return false;"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" MaxLength="15" ID="txtHoraFinal"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" MaxLength="15" ID="txtHoraFinal" onpaste="return false;"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
-                                                                <asp:TextBox runat="server" CssClass="form-control" placeholder="Describa el evento" ID="txtDescripcion" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                                <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" placeholder="Describa el evento" ID="txtDescripcion" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                     </asp:Panel>
@@ -301,7 +301,7 @@
                                                             <asp:Label runat="server" CssClass="input-group-addon">Título</asp:Label>
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
-                                                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtTitulo" ReadOnly="true" Style="resize: none" TextMode="MultiLine">
+                                                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtTitulo" onpaste="return false;" ReadOnly="true" Style="resize: none" TextMode="MultiLine">
                                                                     </asp:TextBox>
                                                                 </ContentTemplate>
                                                                 <Triggers>
@@ -369,7 +369,7 @@
                                                             <ContentTemplate>
                                                                 <asp:Panel runat="server"  CssClass="input-group" DefaultButton="btnQuitar">
                                                                     <span class="input-group-addon">Cantidad</span>
-                                                                    <asp:TextBox runat="server" ID="txtCantidadAs" MaxLength="5" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtCantidadAs" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);" MaxLength="5" CssClass="form-control" ></asp:TextBox>
                                                                     <div class="input-group-btn">
                                                                         <asp:LinkButton ID="btnQuitar" runat="server" CssClass="btn btn-primary" OnClick="btnQuitar_Click">
                                                             <span class="glyphicon glyphicon-minus-sign"></span>
@@ -418,7 +418,7 @@
                                                             <ContentTemplate>
                                                                 <asp:Panel runat="server" class="input-group" DefaultButton="btnAñadir">
                                                                     <span class="input-group-addon">Cantidad</span>
-                                                                    <asp:TextBox runat="server" ID="txtCantidad" MaxLength="5" Text="1" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtCantidad" onpaste="return false;" MaxLength="5" Text="1" CssClass="form-control"  onkeyup="keyUP(event.keyCode)" onkeydown="return isNumeric(event.keyCode);"></asp:TextBox>
                                                                     <div class="input-group-btn">
                                                                         <asp:LinkButton ID="btnAñadir" runat="server" OnClick="btnAñadir_Click" CssClass="btn btn-primary">
                                                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -438,7 +438,7 @@
                                                 <asp:Panel runat="server" CssClass="col-lg-12">
                                                     <asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Font-Bold="true" Text="Comentarios"></asp:Label>
-                                                        <asp:TextBox runat="server" ID="txtObservaciones" Height="100"  placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtObservaciones" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onpaste="return false;" Height="100"  placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
                                                     </asp:Panel>
                                                 </asp:Panel>
                                             </asp:Panel>
@@ -526,7 +526,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label>
-                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" CssClass="form-control"  placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtObEncuestas" CssClass="form-control" onpaste="return false;" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }"  placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" TextMode="MultiLine" Style="height: 95%; resize: none"></asp:TextBox>
                                                                     </td>
                                                                 </table>
                                                             </asp:Panel>

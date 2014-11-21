@@ -79,7 +79,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="tipo" Type="int" Nullable="false" />
+    <Property Name="fk_idtipo" Type="int" Nullable="false" />
     <Property Name="fk_idprioridad" Type="int" Nullable="false" />
     <Property Name="acciones" Type="varchar" MaxLength="250" />
     <Property Name="solucion" Type="varchar" MaxLength="250" />
@@ -473,6 +473,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no t
       <PropertyRef Name="idevento" />
       <PropertyRef Name="idsolicitante" />
       <PropertyRef Name="asistencia" />
+      <PropertyRef Name="tipo" />
       <PropertyRef Name="acomodo" />
       <PropertyRef Name="fecha_realizacion" />
       <PropertyRef Name="nom_evento" />
@@ -482,7 +483,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no t
     <Property Name="idsolicitante" Type="int" Nullable="false" />
     <Property Name="cantidad" Type="int" />
     <Property Name="asistencia" Type="int" Nullable="false" />
-    <Property Name="tipo" Type="varchar" MaxLength="7" />
+    <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="acomodo" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="hora_inicial" Type="datetime" />
     <Property Name="hora_final" Type="datetime" />
@@ -861,7 +862,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="tblincidente">
-        <PropertyRef Name="tipo" />
+        <PropertyRef Name="fk_idtipo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

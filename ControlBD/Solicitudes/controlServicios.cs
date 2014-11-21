@@ -38,6 +38,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -50,7 +51,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                return 1;
+                return 0;
             }
         }
 
@@ -74,6 +75,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -99,6 +101,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }

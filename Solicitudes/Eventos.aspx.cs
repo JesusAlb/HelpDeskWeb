@@ -182,8 +182,8 @@ namespace HelpDeskWeb.Solicitudes
                     txtDescripcion.Text = registroEvento.tblservicio.descripcion;
                     cbLugares.SelectedValue = registroEvento.fk_idlugar.ToString();
                     txtFecha.Text = registroEvento.fecha_realizacion.Date.ToString("yyyy-MM-dd");
-                    txtHoraFinal.Text = registroEvento.tblservicio.hora_inicial.Value.TimeOfDay.ToString();
-                    txtHoraInicial.Text = registroEvento.tblservicio.hora_final.Value.TimeOfDay.ToString();
+                    txtHoraFinal.Text = registroEvento.tblservicio.hora_final.Value.TimeOfDay.ToString();
+                    txtHoraInicial.Text = registroEvento.tblservicio.hora_inicial.Value.TimeOfDay.ToString();
                     accion.Value = "editar";
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnEditarActivado", "$('#ModalNuevo').modal('show');", true);
                 }

@@ -129,7 +129,7 @@
                                                         <div class="col-lg-8">
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
-                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" onpaste="return false;" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
                                                                 </ContentTemplate>
                                                                 <Triggers>
                                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
@@ -145,9 +145,9 @@
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:Panel runat="server" ID="panelRangoFechas" CssClass="input-group">
-                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicial" Text="2013-01-01" TextMode="Date"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicial" onpaste="return false;" Text="2013-01-01" TextMode="Date"></asp:TextBox>
                                                                         <span class="input-group-addon">a </span>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" Text="2020-01-01" TextMode="Date"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" onpaste="return false;" Text="2020-01-01" TextMode="Date"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </ContentTemplate>
                                                                 <Triggers>

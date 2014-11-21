@@ -86,7 +86,7 @@
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblincidente">
         <MappingFragment StoreEntitySet="tblincidente">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
           <ScalarProperty Name="fk_idprioridad" ColumnName="fk_idprioridad" />
           <ScalarProperty Name="acciones" ColumnName="acciones" />
           <ScalarProperty Name="solucion" ColumnName="solucion" />
@@ -402,17 +402,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vt_promedio_general">
-      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
-        <MappingFragment StoreEntitySet="vt_promedio_general">
-          <ScalarProperty Name="posicion" ColumnName="posicion" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
-          <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
-          <ScalarProperty Name="promedioTotal" ColumnName="promedioTotal" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vt_promedio_incidentes">
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_incidentes">
         <MappingFragment StoreEntitySet="vt_promedio_incidentes">
@@ -518,5 +507,16 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="vt_promedio_general">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
+        <MappingFragment StoreEntitySet="vt_promedio_general">
+          <ScalarProperty Name="promedioTotal" ColumnName="promedioTotal" />
+          <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
+          <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="posicion" ColumnName="posicion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

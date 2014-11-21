@@ -154,7 +154,7 @@ namespace HelpDeskWeb.Solicitudes
                 {
 
                     tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
-                    cbTipoIncidente.SelectedValue = itemIncidente.tipo.ToString();
+                    cbTipoIncidente.SelectedValue = itemIncidente.fk_idtipo.ToString();
                     cbPrioridad.SelectedValue = itemIncidente.fk_idprioridad.ToString();
                     cbSoporte.SelectedValue = itemIncidente.tblservicio.fk_idusuario_soporte.ToString();
                     cbSeguimiento.SelectedValue = itemIncidente.tblservicio.fk_idusuario_apoyo.ToString();
@@ -259,7 +259,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtAcciones.Text) || !String.IsNullOrWhiteSpace(txtSolucion.Text))
             {
-                if (controlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text))
+                if (controlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text, controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value)).fk_idservicio))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "SalirVentanaCerrar", "$('#ModalCerrar').modal('hide');", true);

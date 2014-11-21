@@ -63,7 +63,8 @@ namespace HelpDeskWeb.Datos
                 return true;
             }
             catch
-            {            
+            {
+                dbhelp.modelo.Dispose();
                 return false;
             }   
         }
@@ -81,7 +82,8 @@ namespace HelpDeskWeb.Datos
                 return true;
             }
             catch
-            {            
+            {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }

@@ -18,7 +18,6 @@
     <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/jquery.mask.min.js" type="text/javascript"></script>
-    <script src="../js/validador.js" type="text/javascript"></script>
      <script type="text/javascript" lang="js">
          $(function () {
              $("#<%=txtFiltro.ClientID%>").keyup(function () {
@@ -26,6 +25,7 @@
             })
          });
     </script>
+    <script src="../js/validador.js" type="text/javascript"></script>
 </head>
 <body>
     <asp:Panel runat="server" CssClass="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -159,7 +159,7 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" maxlenght="200" onkeyup="keyUP(event.keyCode)" onkeypress="if (this.value.length > 100) { return false; }" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control "></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
@@ -247,9 +247,9 @@
                                                 <div class="col-lg-1"></div>
                                                 <div class="col-lg-10">
                                                     <asp:Panel runat="server" CssClass="form-group">
-                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones"  MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                        <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onkeydown="return isDescription(event.keyCode);"  MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Text="Solución" Font-Bold="true" />
-                                                        <asp:TextBox runat="server" ID="txtSolucion" MaxLength="200" placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                        <asp:TextBox runat="server" ID="txtSolucion" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onpaste="return false;" placeholder="Describa lo que realizó para solucionar el incidente" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                             </div>
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-footer">
@@ -301,7 +301,7 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <table class="table table-bordered">
-                                                                    <tr><td style="width: 35%; height: 163px"><asp:UpdatePanel ID="upResultado" runat="server" UpdateMode="Conditional"><ContentTemplate><asp:Image ID="imgSatisfaccion" runat="server" ImageUrl="~/Imagenes/iconos/nivel0.png" /><div class="input-group"><span class="input-group-addon">Promedio</span> <asp:TextBox ID="txtPromedio" runat="server" CssClass="form-control" Enabled="false" MaxLength="3" Text="1"></asp:TextBox></div></ContentTemplate><Triggers><asp:AsyncPostBackTrigger ControlID="gvEncuestas" /></Triggers></asp:UpdatePanel></td><td><asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label><asp:TextBox ID="txtObEncuestas" runat="server" CssClass="form-control" MaxLength="200" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" Style="height: 95%; resize: none" TextMode="MultiLine"></asp:TextBox></td></tr></table></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-1">
+                                                                    <tr><td style="width: 35%; height: 163px"><asp:UpdatePanel ID="upResultado" runat="server" UpdateMode="Conditional"><ContentTemplate><asp:Image ID="imgSatisfaccion" runat="server" ImageUrl="~/Imagenes/iconos/nivel0.png" /><div class="input-group"><span class="input-group-addon">Promedio</span> <asp:TextBox ID="txtPromedio" runat="server" CssClass="form-control" Enabled="false" MaxLength="3" Text="1"></asp:TextBox></div></ContentTemplate><Triggers><asp:AsyncPostBackTrigger ControlID="gvEncuestas" /></Triggers></asp:UpdatePanel></td><td><asp:Label runat="server" Font-Bold="true" Text="Observaciones"></asp:Label><asp:TextBox ID="txtObEncuestas" runat="server" onpaste="return false;" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" CssClass="form-control" MaxLength="200" placeholder="Por favor escriba una sugerencia o comentario sobre el servicio otorgado" Style="height: 95%; resize: none" TextMode="MultiLine"></asp:TextBox></td></tr></table></asp:Panel></asp:Panel><asp:Panel runat="server" CssClass="col-lg-1">
                                                         </asp:Panel>
                                                     </asp:Panel>
                                                 </ContentTemplate>
@@ -340,7 +340,7 @@
                                                                 <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSolicitante2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <div class="form-group">
-                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                                                <asp:Label runat="server" Text="Descripción" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtDescripcion2" onkeyup="keyUP(event.keyCode)" onpaste="return false;" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa su incidente de tal forma que podamos ayudarle." Style="resize: none" Height="125" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                                             </div>
                                                             <div class="form-group">
                                                                 <asp:Label runat="server" Text="Fecha y hora inicial del incidente" Font-Bold="true">
@@ -349,14 +349,14 @@
                                                                         <div class="form-group">
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon">Fecha</span>
-                                                                                <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaInicio" TextMode="Date"></asp:TextBox>
+                                                                                <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" ID="txtFechaInicio" TextMode="Date"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon">Hora</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraInicio" TextMode="Time"></asp:TextBox>
+                                                                            <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" ID="txtHoraInicio" TextMode="Time"></asp:TextBox>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -368,14 +368,14 @@
                                                                         <div class="form-group">
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon">Fecha</span>
-                                                                                <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
+                                                                                <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" ID="txtFechaFinal" TextMode="Date"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon">Hora</span>
-                                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtHoraFinal" TextMode="Time"></asp:TextBox>
+                                                                            <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" ID="txtHoraFinal" TextMode="Time"></asp:TextBox>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -407,9 +407,9 @@
                                                                 <asp:Label runat="server" Text="Seguimiento" Font-Bold="true"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
                                                             </div>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" MaxLength="200" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
+                                                                <asp:Label runat="server" Text="Acciones" Font-Bold="true"></asp:Label><asp:TextBox runat="server" ID="txtAcciones2" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" placeholder="Describa las acciones que realizó para intentar solucionar el incidente." Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel><asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Solución" Font-Bold="true" />
-                                                                <asp:TextBox runat="server" ID="txtSolucion2" maxlenght="200"  placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
+                                                                <asp:TextBox runat="server" ID="txtSolucion2" maxlenght="200" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }"  placeholder="Describa lo que realizó para solucionar el incidente" Height="100" Style="resize: none" TextMode="MultiLine" CssClass="form-control"></asp:TextBox></asp:Panel></div><div class="col-lg-1"></div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>

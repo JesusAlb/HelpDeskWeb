@@ -60,6 +60,7 @@ namespace HelpDeskWeb.ControlAltas
            }
            catch
            {
+               dbhelp.modelo.Dispose();
                return false;
            }
 
@@ -80,6 +81,7 @@ namespace HelpDeskWeb.ControlAltas
            }
            catch 
            {
+               dbhelp.modelo.Dispose();
                return false;
            }
        }

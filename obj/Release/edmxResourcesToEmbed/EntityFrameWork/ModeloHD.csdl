@@ -96,7 +96,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="Int32" Nullable="false" />
+    <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
     <Property Name="fk_idprioridad" Type="Int32" Nullable="false" />
     <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -479,16 +479,6 @@
     <Property Name="soporte" Type="Int32" Nullable="false" />
     <Property Name="promedio_evento" Type="Double" />
   </EntityType>
-  <EntityType Name="vt_promedio_general">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="posicion" Type="Int64" />
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="promedio_evento" Type="Double" />
-    <Property Name="promedio_incidente" Type="Double" />
-    <Property Name="promedioTotal" Type="Double" />
-  </EntityType>
   <EntityType Name="vt_promedio_incidentes">
     <Key>
       <PropertyRef Name="soporte" />
@@ -501,6 +491,7 @@
       <PropertyRef Name="idevento" />
       <PropertyRef Name="idsolicitante" />
       <PropertyRef Name="asistencia" />
+      <PropertyRef Name="tipo" />
       <PropertyRef Name="acomodo" />
       <PropertyRef Name="fecha_realizacion" />
       <PropertyRef Name="nom_evento" />
@@ -510,7 +501,7 @@
     <Property Name="idsolicitante" Type="Int32" Nullable="false" />
     <Property Name="cantidad" Type="Int32" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="hora_inicial" Type="DateTime" Precision="3" />
     <Property Name="hora_final" Type="DateTime" Precision="3" />
@@ -833,7 +824,7 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="tblincidente">
-        <PropertyRef Name="tipo" />
+        <PropertyRef Name="fk_idtipo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -955,7 +946,6 @@
     <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" />
     <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" />
     <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
-    <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
     <EntitySet Name="vt_promedio_incidentes" EntityType="Self.vt_promedio_incidentes" />
     <EntitySet Name="vt_recursos_asignados" EntityType="Self.vt_recursos_asignados" />
     <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
@@ -1100,6 +1090,7 @@
     <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
       <Parameter Name="idEvento" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="vt_promedio_general" EntityType="dbhelpdeskV2Model.vt_promedio_general" />
   </EntityContainer>
   <ComplexType Name="sp_requerimientos_sin_asignar_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -1107,4 +1098,14 @@
     <Property Type="Boolean" Name="cuantificable" Nullable="false" />
     <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
   </ComplexType>
+  <EntityType Name="vt_promedio_general">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="posicion" Type="Int64" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="promedio_evento" Type="Double" />
+    <Property Name="promedio_incidente" Type="Double" />
+    <Property Name="promedioTotal" Type="Double" />
+  </EntityType>
 </Schema>

@@ -272,7 +272,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                         id = obtenerUltimoIncidente()+1,
                         acciones = acciones,
                         solucion = solucion,
-                        tipo = tipo,
+                        fk_idtipo = tipo,
                         fk_idprioridad = prioridad,
                         fk_idservicio = controlServicios.obtenerUltimoServicio()
                     };
@@ -303,6 +303,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 try
                 {
                     using (StreamWriter w = File.AppendText("../../altaIncidentes.txt"))
@@ -323,10 +324,10 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                int idservicio = controlServicios.obtenerUltimoServicio();
+                int idservicio = controlServicios.obtenerUltimoServicio() + 1;
                 int idtipo = controlTipoIncidencia.obtenerTipoIncidenciaGeneral();
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-               var resultado = dbhelp.modelo.sp_insertar_incidente(obtenerUltimoIncidente(),idSolicitante, descripcion, idusuario, idservicio, idtipo );
+               var resultado = dbhelp.modelo.sp_insertar_incidente(obtenerUltimoIncidente()+1,idSolicitante, descripcion, idusuario, idservicio, idtipo );
                if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
@@ -339,15 +340,15 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
 
-        public static bool cerrarIncidente(int id, string acciones, string solucion)
+        public static bool cerrarIncidente(int id, string acciones, string solucion, int idservicio)
         {
             try
             {
-                int idservicio = controlServicios.obtenerUltimoServicio();
                 var ItemAmodificar = dbhelp.modelo.sp_cerrar_incidente(id, acciones, solucion, idservicio);
                 if (ItemAmodificar != 0)
                 {
@@ -362,6 +363,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -374,7 +376,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 if (ItemAmodificar != null)
                 {
                     ItemAmodificar.tblservicio.fk_idestatus = 1;
-                    ItemAmodificar.tipo = tipo;
+                    ItemAmodificar.fk_idtipo = tipo;
                     ItemAmodificar.fk_idprioridad = prioridad;
                     ItemAmodificar.tblservicio.fk_idusuario_soporte = soporte;
                     ItemAmodificar.tblservicio.fk_idusuario_apoyo = seguimiento;
@@ -384,6 +386,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch 
             {
+                dbhelp.modelo.Dispose();
                return false;
             }
         }

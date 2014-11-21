@@ -313,7 +313,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             {
                 int idservicio = controlServicios.obtenerUltimoServicio()+1;
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-                var evento = dbhelp.modelo.sp_insertar_evento(obtenerUltimoEvento()+1, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
+                int idevento = obtenerUltimoEvento()+1;
+                var evento = dbhelp.modelo.sp_insertar_evento(idevento, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
                    if (evento != 0)
                    {
                        dbhelp.modelo.SaveChanges();
@@ -321,7 +322,8 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                    return true; 
             }
             catch
-            {    
+            {
+                dbhelp.modelo.Dispose();
                 return false;
             }
             
@@ -345,6 +347,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -377,6 +380,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch 
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -395,6 +399,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }
@@ -475,6 +480,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
+                dbhelp.modelo.Dispose();
                 return false;
             }
         }

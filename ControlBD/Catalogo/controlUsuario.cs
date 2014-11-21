@@ -145,6 +145,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 }
                 catch
                 {
+                    dbhelp.modelo.Dispose();
                     return 0;
                 }
             }
@@ -184,6 +185,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 }
                 catch
                 {
+                    dbhelp.modelo.Dispose();
                     return 0;
                 }
             }

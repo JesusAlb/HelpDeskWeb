@@ -556,8 +556,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Reportes\Documentos\ReportEventos.rdlc" />
     <EmbeddedResource Include="Reportes\Documentos\ReporteCalidadEventos.rdlc" />
-    <EmbeddedResource Include="Model\ReportGraficoEventos.rdlc" />
-    <EmbeddedResource Include="Model\ReportRequerimientos.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

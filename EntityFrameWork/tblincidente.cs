@@ -15,7 +15,7 @@ namespace HelpDeskWeb.EntityFrameWork
     public partial class tblincidente
     {
         public int id { get; set; }
-        public int tipo { get; set; }
+        public int fk_idtipo { get; set; }
         public int fk_idprioridad { get; set; }
         public string acciones { get; set; }
         public string solucion { get; set; }
