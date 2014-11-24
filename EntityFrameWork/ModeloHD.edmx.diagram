@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="029349e311cb442cb34ad5c5aaa68f95" Name="Diagram1">
+      <Diagram DiagramId="3fc271c0ec3649eaa0d1903ce14f5986" Name="Diagram1">
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblarea" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblcalidadservicio" Width="1.5" PointX="12.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblcoordinacion" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
@@ -36,7 +36,8 @@
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_incidentes_cerrados" Width="1.5" PointX="2.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_preguntas" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_promedio_eventos" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_promedio_incidentes" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_promedio_general" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_promedio_incidentes" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_recursos_asignados" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_reporte_equipos" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_servicios" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
@@ -67,7 +68,6 @@
         <AssociationConnector Association="dbhelpdeskV2Model.fk_idapoyo" ManuallyRouted="false" />
         <AssociationConnector Association="dbhelpdeskV2Model.fk_idsolicitante" ManuallyRouted="false" />
         <AssociationConnector Association="dbhelpdeskV2Model.fk_idsoporte" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbhelpdeskV2Model.vt_promedio_general" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

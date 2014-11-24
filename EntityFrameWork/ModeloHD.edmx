@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="id" />
@@ -1304,7 +1304,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbhelpdeskV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1787,6 +1788,16 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="soporte" Type="Int32" Nullable="false" />
           <Property Name="promedio_evento" Type="Double" />
         </EntityType>
+        <EntityType Name="vt_promedio_general">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="posicion" Type="Int64" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="promedio_evento" Type="Double" />
+          <Property Name="promedio_incidente" Type="Double" />
+          <Property Name="promedioTotal" Type="Double" />
+        </EntityType>
         <EntityType Name="vt_promedio_incidentes">
           <Key>
             <PropertyRef Name="soporte" />
@@ -2254,6 +2265,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" />
           <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" />
           <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
+          <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
           <EntitySet Name="vt_promedio_incidentes" EntityType="Self.vt_promedio_incidentes" />
           <EntitySet Name="vt_recursos_asignados" EntityType="Self.vt_recursos_asignados" />
           <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
@@ -2364,7 +2376,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
           <FunctionImport Name="sp_cerrar_evento">
-          <Parameter Name="idservicio" Mode="In" Type="Int32" />
+            <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_cerrar_incidente">
             <Parameter Name="idIncidente" Mode="In" Type="Int32" />
@@ -2396,9 +2408,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <Parameter Name="id_tipoIncidencia_genera" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
-          <Parameter Name="idEvento" Mode="In" Type="Int32" />
+            <Parameter Name="idEvento" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="vt_promedio_general" EntityType="dbhelpdeskV2Model.vt_promedio_general" />
         </EntityContainer>
         <ComplexType Name="sp_requerimientos_sin_asignar_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -2406,16 +2417,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Type="Boolean" Name="cuantificable" Nullable="false" />
           <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
         </ComplexType>
-        <EntityType Name="vt_promedio_general">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="posicion" Type="Int64" />
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="promedio_evento" Type="Double" />
-          <Property Name="promedio_incidente" Type="Double" />
-          <Property Name="promedioTotal" Type="Double" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2823,6 +2824,17 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vt_promedio_general">
+            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
+              <MappingFragment StoreEntitySet="vt_promedio_general">
+                <ScalarProperty Name="posicion" ColumnName="posicion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
+                <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
+                <ScalarProperty Name="promedioTotal" ColumnName="promedioTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vt_promedio_incidentes">
             <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_incidentes">
               <MappingFragment StoreEntitySet="vt_promedio_incidentes">
@@ -2928,17 +2940,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vt_promedio_general">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
-              <MappingFragment StoreEntitySet="vt_promedio_general">
-                <ScalarProperty Name="promedioTotal" ColumnName="promedioTotal" />
-                <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
-                <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="posicion" ColumnName="posicion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -479,6 +479,16 @@
     <Property Name="soporte" Type="Int32" Nullable="false" />
     <Property Name="promedio_evento" Type="Double" />
   </EntityType>
+  <EntityType Name="vt_promedio_general">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="posicion" Type="Int64" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="promedio_evento" Type="Double" />
+    <Property Name="promedio_incidente" Type="Double" />
+    <Property Name="promedioTotal" Type="Double" />
+  </EntityType>
   <EntityType Name="vt_promedio_incidentes">
     <Key>
       <PropertyRef Name="soporte" />
@@ -946,6 +956,7 @@
     <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" />
     <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" />
     <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
+    <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
     <EntitySet Name="vt_promedio_incidentes" EntityType="Self.vt_promedio_incidentes" />
     <EntitySet Name="vt_recursos_asignados" EntityType="Self.vt_recursos_asignados" />
     <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
@@ -1090,7 +1101,6 @@
     <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
       <Parameter Name="idEvento" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="vt_promedio_general" EntityType="dbhelpdeskV2Model.vt_promedio_general" />
   </EntityContainer>
   <ComplexType Name="sp_requerimientos_sin_asignar_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -1098,14 +1108,4 @@
     <Property Type="Boolean" Name="cuantificable" Nullable="false" />
     <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
   </ComplexType>
-  <EntityType Name="vt_promedio_general">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="posicion" Type="Int64" />
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="promedio_evento" Type="Double" />
-    <Property Name="promedio_incidente" Type="Double" />
-    <Property Name="promedioTotal" Type="Double" />
-  </EntityType>
 </Schema>

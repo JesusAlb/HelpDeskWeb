@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/principalMaestra.Master" CodeBehind="soporte.aspx.cs" Inherits="HelpDeskWeb.principal" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <title>Centro de servicios</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <style type="text/css">
@@ -25,7 +26,7 @@
             <div class="row">
                     <asp:ScriptManager runat="server" EnablePartialRendering="true" ID="script"></asp:ScriptManager>
                     <asp:Timer runat="server" ID="timerIncidentes" Interval="3000" OnTick="timerIncidentes_Tick"></asp:Timer>
-                    <div class="row" style="margin-top:1%">
+                    <div class="row" style="margin-top:5%">
                         <div class="col-lg-7">
                             <div class="row" style="margin-top:8%">
                                 <div class="form-group">

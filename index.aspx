@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Centro de servicios</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
@@ -46,10 +47,10 @@
                                     <div class="form-group text-center"><img src="Imagenes/usuario.png" class="text-center"/></div>
                                     <h3 class="text-center">Control de acceso</h3>
                                     <div class="form-group">
-                                         <asp:TextBox runat="server" ID="txtUsuario" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" type="text" class="form-control" placeholder="Usuario" required autofocus />
+                                         <asp:TextBox runat="server" ID="txtUsuario" type="text" class="form-control" placeholder="Usuario" required autofocus />
                                     </div>
                                     <div class="form-group">
-                                        <asp:TextBox runat="server" ID="txtPassword" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);"  type="password" class="form-control" placeholder="Contraseña" required />
+                                        <asp:TextBox runat="server" ID="txtPassword"   type="password" class="form-control" placeholder="Contraseña" required />
                                     </div>
                                     <asp:UpdatePanel runat="server" ID="Update" UpdateMode="Conditional">
                                         <ContentTemplate>
