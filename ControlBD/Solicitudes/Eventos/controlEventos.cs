@@ -323,7 +323,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
             
@@ -347,7 +347,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -380,7 +380,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch 
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -399,7 +399,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -480,7 +480,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }

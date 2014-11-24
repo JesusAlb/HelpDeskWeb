@@ -51,7 +51,7 @@ namespace HelpDeskWeb.Catalogos
 
        protected void cargarTablaDeptos()
         {
-            this.gvDeptos.DataSource = accionesDepto.obtenerDataSource(txtFiltroDepto.Text, cbFiltroCoord.SelectedItem.Text);
+            this.gvDeptos.DataSource = controlDepto.obtenerDataSource(txtFiltroDepto.Text, cbFiltroCoord.SelectedItem.Text);
             this.gvDeptos.DataBind();
         }
 
@@ -143,7 +143,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "depto":
-                    if (accionesDepto.insertar(txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
+                    if (controlDepto.insertar(txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
                     {
                         this.cargarTablaDeptos();
                         return true;
@@ -188,7 +188,7 @@ namespace HelpDeskWeb.Catalogos
                         return false;
 
                 case "depto":
-                    if (accionesDepto.modificar(Convert.ToInt32(gvDeptos.SelectedDataKey.Value), txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
+                    if (controlDepto.modificar(Convert.ToInt32(gvDeptos.SelectedDataKey.Value), txtNombre.Text, Convert.ToInt32(cbCoordinaciones.SelectedValue)))
                     {
                         this.cargarTablaDeptos();
                         return true;
@@ -237,7 +237,7 @@ namespace HelpDeskWeb.Catalogos
                 case "abrirEditarDepto":
                     if (gvDeptos.SelectedIndex != -1)
                     {
-                        tbldepartamento deptoSeleccionado = accionesDepto.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
+                        tbldepartamento deptoSeleccionado = controlDepto.obtenerDepto(Convert.ToInt32(gvDeptos.SelectedDataKey.Value));
                         this.cbCoordinaciones.SelectedValue = deptoSeleccionado.fk_idcoordinacion.ToString();
                         this.configurarModal("Editar departamentos", deptoSeleccionado.nombre, true);
                         seleccionado = true;
@@ -292,6 +292,7 @@ namespace HelpDeskWeb.Catalogos
                     break;
             }
             btnGrabar.CommandName = "insertar";
+            btnGrabar.CommandArgument = e.CommandArgument.ToString();
             ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "AbrirModal", "$('#ModalNuevo').modal('show');", true);
         }
 

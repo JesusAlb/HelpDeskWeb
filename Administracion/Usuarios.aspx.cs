@@ -44,7 +44,7 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarDeptos(int idCoord)
         {
-            cbDepto.DataSource = accionesDepto.obtenerDataSourceComboBox(idCoord);
+            cbDepto.DataSource = controlDepto.obtenerDataSourceComboBox(idCoord);
             cbDepto.DataBind();
         }
 
@@ -106,8 +106,8 @@ namespace HelpDeskWeb.Administracion
                         cbInstitucion.SelectedValue = usuario.fk_idinstitucion.ToString();
                         cbArea.SelectedValue = usuario.fk_idarea.ToString();
                         cbPuesto.SelectedValue = usuario.fk_idpuesto.ToString();
-                        cbCoordinaciones.SelectedValue = ((tbldepartamento)accionesDepto.obtenerDepto(usuario.fk_iddepto)).fk_idcoordinacion.ToString();
-                        cbDepto.DataSource = accionesDepto.obtenerDataSourceComboBox(Convert.ToInt32(cbCoordinaciones.SelectedValue));
+                        cbCoordinaciones.SelectedValue = ((tbldepartamento)controlDepto.obtenerDepto(usuario.fk_iddepto)).fk_idcoordinacion.ToString();
+                        cbDepto.DataSource = controlDepto.obtenerDataSourceComboBox(Convert.ToInt32(cbCoordinaciones.SelectedValue));
                         cbDepto.DataBind();
                         cbDepto.SelectedValue = usuario.fk_iddepto.ToString();
                         ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);

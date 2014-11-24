@@ -8,15 +8,14 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Atención a eventos</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js" type="text/javascript"></script>
     <!--Fin de Alertify-->
-    <link rel="stylesheet" href="../css/themes/bootstrap.css"/>  
-    <script src="../js/bootstrap.js" type="text/javascript"></script>
     <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/jquery.mask.min.js" type="text/javascript"></script>
@@ -81,7 +80,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -106,7 +105,7 @@
                             <asp:Panel runat="server" CssClass="col-lg-11">
                                 <asp:Panel runat="server" CssClass="row">
                                     <asp:Panel runat="server" CssClass="form-group">
-                                        <asp:TextBox runat="server" ID="txtFiltro" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30"  placeholder="Buscar" CssClass="form-control prueba" />
+                                        <asp:TextBox runat="server" ID="txtFiltro" MaxLength="30"  placeholder="Buscar" CssClass="form-control prueba" />
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" CssClass="row">
@@ -571,7 +570,7 @@
                         </ul>
                         <asp:Panel runat="server" ID="myTabContent" CssClass="tab-content">
                                 <asp:Panel runat="server" ID="abierta" CssClass="tab-pane fade in active">
-                                    <asp:Panel runat="server" ID="contenedorTabla1" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="contenedorTabla1" CssClass="contenedorTablaSolicitudes" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ToolTip="Asigne el soporte a los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Abiertos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -611,7 +610,7 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="enProceso" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel1" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel1" CssClass="contenedorTablaSolicitudes" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ToolTip="Cierre los eventos" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_EnProceso" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -654,7 +653,7 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cerrada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel2" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel2" CssClass="contenedorTablaSolicitudes" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpGvEventosCerrados" UpdateMode="Conditional" >
                                             <ContentTemplate>
                                                 <asp:GridView runat="server" OnRowDataBound="gvEventos_Cerrados_RowDataBound" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cerrados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -701,7 +700,7 @@
                                     </asp:Panel>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="cancelada" CssClass="tab-pane fade">
-                                    <asp:Panel runat="server" ID="Panel3" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
+                                    <asp:Panel runat="server" ID="Panel3" CssClass="contenedorTablaSolicitudes" ScrollBars="Auto" Height="340" Style="margin-top: 1%">
                                         <asp:UpdatePanel runat="server" ID="UpdatePanel4" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos_Cancelados" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"

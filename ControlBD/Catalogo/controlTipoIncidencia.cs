@@ -73,7 +73,7 @@ namespace HelpDeskWeb.ControlAltas
            }
            catch
            {
-               dbhelp.modelo.Dispose();
+               dbhelp.UndoAll(dbhelp.modelo);
                return false;
            }
 
@@ -93,7 +93,7 @@ namespace HelpDeskWeb.ControlAltas
            }
            catch
            {
-               dbhelp.modelo.Dispose();
+               dbhelp.UndoAll(dbhelp.modelo);
                return false;
            }
        }

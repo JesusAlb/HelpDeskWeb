@@ -5,13 +5,14 @@
 
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de servicio</title>
+    <title>Control de usuario</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-    <script src="../js/bootstrap.js"></script>
+   <!-- <script src="../js/bootstrap.js"></script>-->
     <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
     <script src="../js/jquery-2.1.1.js" type="text/javascript"></script>
@@ -261,7 +262,7 @@
 
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
-                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="450">
+                            <asp:Panel runat="server" CssClass="contenedorTablaControl" ScrollBars="Auto" >
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvUsuarios_RowCreated" runat="server" ID="gvUsuarios" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"

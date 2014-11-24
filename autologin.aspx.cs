@@ -25,5 +25,20 @@ namespace HelpDeskWeb
                 }
             }
         }
+
+        protected String GetIP()
+        {
+            string ipString;
+            if (string.IsNullOrEmpty(Request.ServerVariables["HTTP_X_FORWARDED_FOR"]))
+            {
+                ipString = Request.ServerVariables["REMOTE_ADDR"];
+            }
+            else
+            {
+                ipString = Request.ServerVariables["HTTP_X_FORWARDED_FOR"].Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            }
+            return ipString;
+        }
+
     }
 }

@@ -39,7 +39,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -59,7 +59,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }

@@ -6,20 +6,18 @@
 
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Centro de servicio</title>
+    <title>Catálogos para solicitudes</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/helpdesk-template.css" rel="stylesheet"/>
-    <script src="../js/ie-emulation-modes-warning.js"></script>
-    <script src="../js/ie10-viewport-bug-workaround.js"></script>
-    <script src="../js/jquery.min.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
-    <script src="../js/validador.js"></script>
     <!--Fin de Alertify-->
+    <script src="../js/validador.js"></script>
      <script type="text/javascript" lang="js">
             $(function () {
                     $("#<%=txtFiltroLugares.ClientID%>").keyup(function () {
@@ -87,7 +85,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -102,8 +100,8 @@
     <div class="container">
         <div class="box">
             <div  class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
                     <asp:Panel runat="server" class="panel panel-default" BorderColor="Gray">
                         <asp:Panel runat="server" CssClass="panel-heading" Font-Size="Large" HorizontalAlign="Center" BackColor="#E6E6E6">
                             Catálogos de solicitudes
@@ -211,7 +209,7 @@
                                                         <asp:TableCell>Tipos de incidentes</asp:TableCell>
                                                     </asp:TableRow>
                                                 </asp:Table>
-                                                <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                     <asp:UpdatePanel runat="server" ID="upGvTipoIncidentes" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvTipoIncidentes" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -273,7 +271,7 @@
                                                     <asp:TableCell>Lugares</asp:TableCell>
                                                 </asp:TableRow>
                                             </asp:Table>
-                                            <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                            <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                 <asp:UpdatePanel runat="server" ID="upGvLugares" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvLugares" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -297,12 +295,13 @@
                                 <asp:Panel runat="server" ID="requerimientos" CssClass="tab-pane fade">
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-lg-5">
+                                           <div class="col-lg-1"></div>
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroReq" placeholder="Buscar" />
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Tipo</span>
@@ -334,17 +333,19 @@
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </div>
+                                           <div class="col-lg-1"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-10">
                                                 <asp:Table runat="server" ID="Table2" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                     <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
                                                         <asp:TableCell>Requerimiento</asp:TableCell>
                                                     </asp:TableRow>
                                                 </asp:Table>
-                                                <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                     <asp:UpdatePanel runat="server" ID="upGvRequerimientos" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvRequerimientos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -362,6 +363,7 @@
                                                     </asp:UpdatePanel>
                                                 </asp:Panel>
                                             </div>
+                                            <div class="col-lg-1"></div>
                                         </div>
                                     </div>
                                 </asp:Panel>
@@ -370,7 +372,7 @@
                         </div>
                     </asp:Panel>
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
             </div>             
         </div>
      </div>

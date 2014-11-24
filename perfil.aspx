@@ -5,17 +5,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Help desk - Perfil</title>
+    <title>Perfil de usuario</title>
+    <link rel="icon" type="image/icon" href="Imagenes/imca.ico" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+     <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <link href="css/helpdesk-template.css" rel="stylesheet" />
-    <script src="js/bootstrap.js"></script>
     <!--Inicio de Alertify -->
     <link href="css/alertify.css" rel="stylesheet" />
-    <link href="css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="js/alertify.js"></script>
     <!--Fin de Alertify-->
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/validador.js"></script>
 </head>
 <body>
     <asp:Panel ID="Menu" runat="server" CssClass="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -64,7 +65,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -87,20 +88,20 @@
                                 <div class="panel-heading" style="font-size: 18px">
                                     Perfil de usuario
                                 </div>
-                                <div class="panel-body">
+                                <asp:Panel runat="server" DefaultButton="btnGrabar" class="panel-body">
    
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Nombre(s)" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtNombre" onpaste="return false;" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Apellidos" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" ID="txtApellidos" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtApellidos" onpaste="return false;" onkeydown="return isAlpha(event.keyCode);" MaxLength="40" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,13 +122,13 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Contraseña" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" onpaste="return false;" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Repita contraseña" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" ID="txtVerificarPassword" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="txtVerificarPassword" TextMode="Password" onpaste="return false;" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="24" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -143,7 +144,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group text-left">
                                                             <asp:Label runat="server" Text="Extensión telefónica" Font-Bold="true"></asp:Label>
-                                                            <asp:TextBox runat="server" TextMode="Number" ID="txtTelefono" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox runat="server" TextMode="Number" ID="txtTelefono" MaxLength="3" onkeyup="keyUP(event.keyCode)" onpaste="return false;" onkeydown="return isNumeric(event.keyCode);" CssClass="form-control"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,7 +158,7 @@
                                                             <asp:UpdatePanel runat="server" ID="updateInsitucion" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <div class="input-group">
-                                                                        <asp:TextBox runat="server" ID="txtCorreo" CssClass="form-control text-right"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtCorreo" onpaste="return false;" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" MaxLength="30" CssClass="form-control text-right"></asp:TextBox>
                                                                         <span class="input-group-addon">
                                                                             <asp:Label runat="server" ID="lbelInstitucion"></asp:Label></span>
                                                                     </div>
@@ -242,7 +243,7 @@
                                                 </div>
                                             </div>
 
-                                </div>
+                                </asp:Panel>
                             </div>
                         </div>
                     </form>

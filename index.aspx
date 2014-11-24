@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de servicio</title>
+    <title>Centro de servicios</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />
     <!--Inicio de Alertify -->
     <link href="css/alertify.css" rel="stylesheet" />
-    <link href="css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="js/alertify.js"></script>
     <!--Fin de Alertify-->
     <script src="js/jquery-2.1.1.js"></script>
@@ -29,8 +29,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="row">
-                            <h1 class="text-center" style="font-family: 'Comic Sans MS'; color: #d43f3a">HelpDesk IMCA</h1>
+                        <div class="row text-center">
+                            <asp:Label runat="server"  style="font-family: Arial; font-weight:bold; color:#357ebd; font-size:40px" Text="Centro de servicios"></asp:Label>
+                        </div>
+                        <div class="row text-center">
+                                                        <asp:Label runat="server" Font-Size="Large" style="font-family: Arial; font-weight:bold; color:#DF3A01; font-size:30px" Text="Help desk" ></asp:Label>
                         </div>
                     </div>
                 </div>

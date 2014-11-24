@@ -303,7 +303,6 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
                 try
                 {
                     using (StreamWriter w = File.AppendText("../../altaIncidentes.txt"))
@@ -316,6 +315,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 {
                     
                 }
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
            }
         }
@@ -340,7 +340,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -363,7 +363,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
@@ -386,7 +386,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
             }
             catch 
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                return false;
             }
         }

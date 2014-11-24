@@ -5,17 +5,15 @@
 
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de servicio</title>
+    <title>Catálogos para usuarios</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <script src="../js/jquery-2.1.1.js"></script>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-    <script src="../js/ie-emulation-modes-warning.js"></script>
-    <script src="../js/ie10-viewport-bug-workaround.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
 
@@ -93,7 +91,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -108,8 +106,8 @@
     <asp:Panel runat="server" CssClass="container">
         <div class="box">
             <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
                     <asp:Panel runat="server" CssClass="panel panel-default" BorderColor="Gray">
                         <asp:Panel runat="server" CssClass="panel-heading" Font-Size="Large" HorizontalAlign="Center" BackColor="#E6E6E6">
                             Catálogos para usuarios
@@ -211,7 +209,7 @@
                                                             <asp:TableCell>Coordinaciones</asp:TableCell>
                                                         </asp:TableRow>
                                                     </asp:Table>
-                                                    <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                    <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                         <asp:UpdatePanel runat="server" ID="upGvCoordinaciones" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvCoordinaciones" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -295,7 +293,7 @@
                                                             <asp:TableCell Width="250">Coordinación</asp:TableCell>
                                                         </asp:TableRow>
                                                     </asp:Table>
-                                                    <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                    <asp:Panel runat="server" CssClass="contenedorTablaDepto" ScrollBars="Auto">
                                                         <asp:UpdatePanel runat="server" ID="upGvDeptos" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvDeptos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -359,7 +357,7 @@
                                                             <asp:TableCell>Área</asp:TableCell>
                                                         </asp:TableRow>
                                                     </asp:Table>
-                                                    <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                    <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                         <asp:UpdatePanel runat="server" ID="upGvArea" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvAreas" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -421,7 +419,7 @@
                                                             <asp:TableCell>Puestos</asp:TableCell>
                                                         </asp:TableRow>
                                                     </asp:Table>
-                                                    <asp:Panel runat="server" Height="290px" ScrollBars="Auto">
+                                                    <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                         <asp:UpdatePanel runat="server" ID="upGvPuestos" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvPuestos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -447,7 +445,7 @@
                         </div>
                     </asp:Panel>
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
             </div>
         </div>
     </asp:Panel>

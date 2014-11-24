@@ -7,10 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de reportes</title>
+    <title>Reportes</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
-     <script src="../js/bootstrap.js"></script>
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -68,7 +68,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -96,16 +96,18 @@
                                                 <div class="form-group">
                                                     <h3 class="text-center">Busqueda avanzada</h3>
                                                 </div>
-                                                <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">
                                                             Información a mostrar
                                                         </div>
                                                         <div class="col-lg-5">
+                                                            <div class="form-group">
                                                             <asp:DropDownList runat="server" ID="cbObjeto" CssClass="form-control" OnSelectedIndexChanged="cbObjeto_SelectedIndexChanged" AutoPostBack="true">
                                                             </asp:DropDownList>
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-3">
+                                                            <div class="form-group">
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control">
@@ -120,9 +122,9 @@
                                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
+                                                                </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
@@ -197,7 +199,7 @@
                             </div>
                         </asp:Panel>
                     </div>
-                    <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default" Visible="false">
+                    <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default contenedorTablaControl" Visible="false">
                                 <div class="panel-heading text-center">
                                     <asp:Label runat="server" Text="Reporte" Font-Size="Larger" Font-Bold="true"></asp:Label>
                                 </div>
@@ -212,9 +214,5 @@
                 </div>
             </div>
         </asp:Panel>
-
-    <script src="js/bootstrap.js"></script>
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

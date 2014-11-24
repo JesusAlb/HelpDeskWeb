@@ -32,7 +32,7 @@
                                     <asp:Image runat="server" ID="imca" ImageUrl="~/Imagenes/IMCA IAP.png" Height="230" Width="550" />
                                 </div>
                                 <div class="form-group" style="margin-top:5%">
-                                    <asp:Label runat="server" Text="Help Desk" Font-Bold="true"  style="font-family:'Comic Sans MS'; font-size:40px" /><br />
+                                    <asp:Label runat="server" Text="Help Desk" style="font-family: Arial; font-weight:bold; color:#6E6E6E; font-size:40px" /><br />
                                 </div>
                             </div>
                             <div class="row">
@@ -159,7 +159,6 @@
             </div>
         </div>
     </div>
-    <script src="js/bootstrap.js"></script>
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </asp:Content>

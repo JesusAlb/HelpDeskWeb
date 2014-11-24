@@ -5,28 +5,29 @@
 
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de servicio</title>
+    <title>Control de equipos</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
     <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
-    <script src="../js/bootstrap.js"></script>
+   <!-- <script src="../js/bootstrap.js"></script>-->
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/validador.js"></script>
     <script type="text/javascript" lang="js">
         $(function () {
-            $("#<%=txtFiltro.ClientID%>").keyup(function () {
-                    __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
-                })
-        });
 
+            $("#<%=txtFiltro.ClientID%>").keyup(function () {
+                __doPostBack("txtFiltro", $("#<%=txtFiltro.ClientID%>").val());
+            });
+        });
     </script>
 </head>
-<body>
+<body onload="redimensiona();" onresize="redimensiona();">
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -246,7 +247,7 @@
                         <div class="col-lg-1"></div>
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row">
-                            <asp:Panel runat="server" ID="ContenedorTabla" ScrollBars="Auto" Height="450">
+                            <asp:Panel runat="server"  CssClass="contenedorTablaControl" ScrollBars="Auto" >
                                 <asp:UpdatePanel runat="server" ID="update2" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:GridView ToolTip="Seleccione el registro a modificar" OnRowCreated="gvEquipo_RowCreated" runat="server" ID="gvEquipo" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"

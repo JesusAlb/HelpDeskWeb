@@ -36,9 +36,10 @@ namespace HelpDeskWeb
                 txtCorreo.Text = correoDividio[0];
                 lbelInstitucion.Text = "@" + correoDividio[1];
                 cbPuesto.SelectedValue = usuarioActual.fk_idpuesto.ToString();
-                int idCoordinacion = controlCoordinacion.obtenerCoordinacion(usuarioActual.fk_iddepto).id;
+                int idDepartamento = usuarioActual.fk_iddepto;
+                int idCoordinacion = controlDepto.obtenerDepto(idDepartamento).fk_idcoordinacion;
                 this.cargarComboDepto(idCoordinacion);
-                cbDepto.SelectedValue = usuarioActual.fk_iddepto.ToString();
+                cbDepto.SelectedValue = idDepartamento.ToString();
                 cbCoordinacion.SelectedValue = idCoordinacion.ToString();
             }
         }
@@ -57,7 +58,7 @@ namespace HelpDeskWeb
 
         protected void cargarComboDepto(int idCoordinacion)
         {
-            cbDepto.DataSource = accionesDepto.obtenerDataSourceComboBox(idCoordinacion);
+            cbDepto.DataSource = controlDepto.obtenerDataSourceComboBox(idCoordinacion);
             cbDepto.DataBind();
         }
 

@@ -46,7 +46,7 @@ function validateDecimal(txt) {
             (keyCode >= 96 && keyCode <= 105) || (keyCode == 192 || keyCode == 188));
         return res;
  }
-
+/*
  $(function () {
      $(".form-control").on("paste", function () {
          return false;
@@ -56,6 +56,23 @@ function validateDecimal(txt) {
  $(function () {
      $("textarea").on("keypress", function () {
          if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }
+     });
+ });*/
+
+ $(function () {
+
+     $(document).ready(function () {
+         $('.contenedorTablaControl').css({ 'height': (($(window).height()) * 0.65) + 'px' });
+         $('.contenedorTablaCatalogos').css({ 'height': (($(window).height()) * 0.43) + 'px' });
+         $('.contenedorTablaDepto').css({ 'height': (($(window).height()) * 0.37) + 'px' });
+         $('.contenedorTablaSolicitudes').css({ 'height': (($(window).height()) * 0.52) + 'px' });
+     });
+
+     $(window).resize(function () {
+         $('.contenedorTablaControl').css({ 'height': (($(window).height()) * 0.65) + 'px' });
+         $('.contenedorTablaCatalogos').css({ 'height': (($(window).height()) * 0.43) + 'px' });
+         $('.contenedorTablaDepto').css({ 'height': (($(window).height()) * 0.37) + 'px' });
+         $('.contenedorTablaSolicitudes').css({ 'height': (($(window).height()) * 0.52) + 'px' });
      });
  });
 

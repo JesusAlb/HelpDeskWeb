@@ -5,15 +5,16 @@
 
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Centro de servicio</title>
+    <title>Catálogos para equipos</title>
+    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/helpdesk-template.css" rel="stylesheet"/>
      <!--Inicio de Alertify -->
     <link href="../css/alertify.css" rel="stylesheet" />
-    <link href="../css/alertify-bootstrap3.css" rel="stylesheet" />
+    <link href="../css/alertify-bootstrap-3.css" rel="stylesheet" />
     <script src="../js/alertify.js"></script>
     <!--Fin de Alertify-->
-    <script src="../js/bootstrap.js"></script>
+   <!-- <script src="../js/bootstrap.js"></script>-->
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/validador.js"></script>
@@ -76,7 +77,7 @@
                             <asp:Label runat="server" ID="lbelUsuario" />
                         </asp:HyperLink><ul class="dropdown-menu" role="menu">
                             <li>
-                                <asp:HyperLink runat="server" href="#">Perfil</asp:HyperLink></li>
+                                <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li>
                             <li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li>
@@ -90,13 +91,12 @@
     </div>
     <asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">
-            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-            <asp:Panel runat="server" CssClass="col-lg-10">
+            <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
                 <form runat="server" role="form">
                     <asp:ScriptManager runat="server" ID="ScriptManager" EnablePartialRendering="true">
                     </asp:ScriptManager>
-                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
-                    <asp:Panel runat="server" CssClass="col-lg-10">
                     <asp:Panel runat="server" CssClass="panel panel-default" BorderColor="Gray" >
                         <asp:Panel runat="server" CssClass="panel-heading" Font-Size="Large" HorizontalAlign="Center" BackColor="#E6E6E6">
                             Catálogos de equipos
@@ -226,7 +226,7 @@
                                                     <asp:TableCell>Tipos de equipos</asp:TableCell>
                                                 </asp:TableRow>
                                             </asp:Table>
-                                            <asp:Panel runat="server" Height="300px" ScrollBars="Auto">
+                                            <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                 <asp:UpdatePanel runat="server" ID="UpdatePanel5" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:GridView OnRowCreated="gv_RowCreated"  runat="server" ID="gvTipoEquipos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -288,7 +288,7 @@
                                                        <asp:TableCell>Marcas</asp:TableCell>
                                                    </asp:TableRow>
                                                </asp:Table>
-                                               <asp:Panel runat="server" Height="300px" ScrollBars="Auto">
+                                               <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
                                                    <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
                                                        <ContentTemplate>
                                                            <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvMarca" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
@@ -312,11 +312,10 @@
                         </asp:Panel>
                         </asp:Panel>
                     </asp:Panel>
-                    </asp:Panel>
-                    <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                 </form>
-            </asp:Panel>
-            <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
+            </div>
+            <div class="col-lg-1"></div>
+           </div>
         </asp:Panel>
     </asp:Panel>
     <script type="text/javascript">

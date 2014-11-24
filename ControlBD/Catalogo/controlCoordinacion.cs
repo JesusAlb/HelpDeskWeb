@@ -64,7 +64,7 @@ namespace HelpDeskWeb.Datos
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }   
         }
@@ -83,7 +83,7 @@ namespace HelpDeskWeb.Datos
             }
             catch
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }

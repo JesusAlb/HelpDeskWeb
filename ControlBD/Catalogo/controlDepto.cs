@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace HelpDeskWeb.ControlAltas
 {
-    public class accionesDepto
+    public class controlDepto
     {
 
        public static IList<vt_departamentos> obtenerDataSource(string filtro, string coordinacion)
@@ -68,7 +68,7 @@ namespace HelpDeskWeb.ControlAltas
             }
             catch 
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
 
@@ -93,7 +93,7 @@ namespace HelpDeskWeb.ControlAltas
             }
             catch 
             {
-                dbhelp.modelo.Dispose();
+                dbhelp.UndoAll(dbhelp.modelo);
                 return false;
             }
         }
