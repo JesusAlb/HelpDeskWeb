@@ -26,7 +26,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public string nombre { get; set; }
         public string nombre_usuario { get; set; }
         public string password { get; set; }
-        public int tipo { get; set; }
+        public int fk_idtipo { get; set; }
         public int fk_iddepto { get; set; }
         public string extension_telefonica { get; set; }
         public int fk_idarea { get; set; }
@@ -43,5 +43,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual ICollection<tblservicio> tblservicio { get; set; }
         public virtual ICollection<tblservicio> tblservicio1 { get; set; }
         public virtual ICollection<tblservicio> tblservicio2 { get; set; }
+        public virtual tbltipousuario tbltipousuario { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="id" />
@@ -206,6 +206,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="40" />
         </EntityType>
+        <EntityType Name="tbltipousuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblusuario">
           <Key>
             <PropertyRef Name="id" />
@@ -214,7 +221,7 @@
           <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="nombre_usuario" Type="varchar" MaxLength="40" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="fk_iddepto" Type="int" Nullable="false" />
           <Property Name="extension_telefonica" Type="varchar" MaxLength="5" />
           <Property Name="fk_idarea" Type="int" Nullable="false" />
@@ -565,21 +572,21 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
             <PropertyRef Name="nom_completo" />
             <PropertyRef Name="password" />
-            <PropertyRef Name="tipo_usuario_string" />
-            <PropertyRef Name="tipo" />
+            <PropertyRef Name="nom_tipo" />
+            <PropertyRef Name="fk_idtipo" />
             <PropertyRef Name="correo" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="nombre_usuario" Type="varchar" MaxLength="40" />
           <Property Name="nom_completo" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="tipo_usuario_string" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="nom_tipo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="extension_telefonica" Type="varchar" MaxLength="5" />
           <Property Name="nom_depto" Type="varchar" MaxLength="60" />
           <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
           <Property Name="nom_area" Type="varchar" MaxLength="60" />
           <Property Name="nom_puesto" Type="varchar" MaxLength="60" />
-          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nom_institucion" Type="varchar" MaxLength="60" />
         </EntityType>
@@ -895,6 +902,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tipousuario">
+          <End Role="tbltipousuario" Type="Self.tbltipousuario" Multiplicity="1" />
+          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltipousuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblusuario">
+              <PropertyRef Name="fk_idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_usuario_responsable">
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
           <End Role="tblequipoasignado" Type="Self.tblequipoasignado" Multiplicity="*" />
@@ -937,7 +956,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idUserNA" Type="int" Mode="In" />
           <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
-          <Parameter Name="id_tipoIncidencia_genera" Type="int" Mode="In" />
+          <Parameter Name="id_tipoIncidencia_general" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_requerimientos_sin_asignar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEvento" Type="int" Mode="In" />
@@ -964,6 +983,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <EntitySet Name="tbltipoequipo" EntityType="Self.tbltipoequipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbltipoevento" EntityType="Self.tbltipoevento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbltipoincidencia" EntityType="Self.tbltipoincidencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbltipousuario" EntityType="Self.tbltipousuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblusuario" EntityType="Self.tblusuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1188,13 +1208,13 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_usuarios].[nombre_usuario] AS [nombre_usuario], 
     [vt_usuarios].[nom_completo] AS [nom_completo], 
     [vt_usuarios].[password] AS [password], 
-    [vt_usuarios].[tipo_usuario_string] AS [tipo_usuario_string], 
+    [vt_usuarios].[nom_tipo] AS [nom_tipo], 
     [vt_usuarios].[extension_telefonica] AS [extension_telefonica], 
     [vt_usuarios].[nom_depto] AS [nom_depto], 
     [vt_usuarios].[nom_coordinacion] AS [nom_coordinacion], 
     [vt_usuarios].[nom_area] AS [nom_area], 
     [vt_usuarios].[nom_puesto] AS [nom_puesto], 
-    [vt_usuarios].[tipo] AS [tipo], 
+    [vt_usuarios].[fk_idtipo] AS [fk_idtipo], 
     [vt_usuarios].[correo] AS [correo], 
     [vt_usuarios].[nom_institucion] AS [nom_institucion]
     FROM [dbo].[vt_usuarios] AS [vt_usuarios]</DefiningQuery>
@@ -1298,6 +1318,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <AssociationSet Name="fk_tipoevento" Association="Self.fk_tipoevento">
             <End Role="tbltipoevento" EntitySet="tbltipoevento" />
             <End Role="tblevento" EntitySet="tblevento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipousuario" Association="Self.fk_tipousuario">
+            <End Role="tbltipousuario" EntitySet="tbltipousuario" />
+            <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
           <AssociationSet Name="fk_usuario_responsable" Association="Self.fk_usuario_responsable">
             <End Role="tblusuario" EntitySet="tblusuario" />
@@ -1554,6 +1578,14 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblincidente" Relationship="Self.fk_tipo" FromRole="tbltipoincidencia" ToRole="tblincidente" />
         </EntityType>
+        <EntityType Name="tbltipousuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblusuario" Relationship="Self.fk_tipousuario" FromRole="tbltipousuario" ToRole="tblusuario" />
+        </EntityType>
         <EntityType Name="tblusuario">
           <Key>
             <PropertyRef Name="id" />
@@ -1562,7 +1594,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="fk_iddepto" Type="Int32" Nullable="false" />
           <Property Name="extension_telefonica" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="fk_idarea" Type="Int32" Nullable="false" />
@@ -1578,6 +1610,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <NavigationProperty Name="tblservicio" Relationship="Self.fk_idapoyo" FromRole="tblusuario" ToRole="tblservicio" />
           <NavigationProperty Name="tblservicio1" Relationship="Self.fk_idsolicitante" FromRole="tblusuario" ToRole="tblservicio" />
           <NavigationProperty Name="tblservicio2" Relationship="Self.fk_idsoporte" FromRole="tblusuario" ToRole="tblservicio" />
+          <NavigationProperty Name="tbltipousuario" Relationship="Self.fk_tipousuario" FromRole="tblusuario" ToRole="tbltipousuario" />
         </EntityType>
         <EntityType Name="vt_departamentos">
           <Key>
@@ -1891,21 +1924,21 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
             <PropertyRef Name="nom_completo" />
             <PropertyRef Name="password" />
-            <PropertyRef Name="tipo_usuario_string" />
-            <PropertyRef Name="tipo" />
+            <PropertyRef Name="nom_tipo" />
+            <PropertyRef Name="fk_idtipo" />
             <PropertyRef Name="correo" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="nom_completo" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipo_usuario_string" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="extension_telefonica" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -2233,6 +2266,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tipousuario">
+          <End Role="tbltipousuario" Type="Self.tbltipousuario" Multiplicity="1" />
+          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltipousuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblusuario">
+              <PropertyRef Name="fk_idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbhelpdeskV2Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblarea" EntityType="Self.tblarea" />
           <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" />
@@ -2255,6 +2300,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <EntitySet Name="tbltipoequipo" EntityType="Self.tbltipoequipo" />
           <EntitySet Name="tbltipoevento" EntityType="Self.tbltipoevento" />
           <EntitySet Name="tbltipoincidencia" EntityType="Self.tbltipoincidencia" />
+          <EntitySet Name="tbltipousuario" EntityType="Self.tbltipousuario" />
           <EntitySet Name="tblusuario" EntityType="Self.tblusuario" />
           <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" />
           <EntitySet Name="vt_encuestas" EntityType="Self.vt_encuestas" />
@@ -2375,6 +2421,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
+          <AssociationSet Name="fk_tipousuario" Association="Self.fk_tipousuario">
+            <End Role="tbltipousuario" EntitySet="tbltipousuario" />
+            <End Role="tblusuario" EntitySet="tblusuario" />
+          </AssociationSet>
           <FunctionImport Name="sp_cerrar_evento">
             <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2405,7 +2455,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <Parameter Name="descripcion" Mode="In" Type="String" />
             <Parameter Name="idUserNA" Mode="In" Type="Int32" />
             <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
-            <Parameter Name="id_tipoIncidencia_genera" Mode="In" Type="Int32" />
+            <Parameter Name="id_tipoIncidencia_general" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
             <Parameter Name="idEvento" Mode="In" Type="Int32" />
@@ -2644,6 +2694,14 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbltipousuario">
+            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipousuario">
+              <MappingFragment StoreEntitySet="tbltipousuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblusuario">
             <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblusuario">
               <MappingFragment StoreEntitySet="tblusuario">
@@ -2651,7 +2709,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
                 <ScalarProperty Name="fk_iddepto" ColumnName="fk_iddepto" />
                 <ScalarProperty Name="extension_telefonica" ColumnName="extension_telefonica" />
                 <ScalarProperty Name="fk_idarea" ColumnName="fk_idarea" />
@@ -2914,13 +2972,13 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
                 <ScalarProperty Name="nom_completo" ColumnName="nom_completo" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="tipo_usuario_string" ColumnName="tipo_usuario_string" />
+                <ScalarProperty Name="nom_tipo" ColumnName="nom_tipo" />
                 <ScalarProperty Name="extension_telefonica" ColumnName="extension_telefonica" />
                 <ScalarProperty Name="nom_depto" ColumnName="nom_depto" />
                 <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
                 <ScalarProperty Name="nom_area" ColumnName="nom_area" />
                 <ScalarProperty Name="nom_puesto" ColumnName="nom_puesto" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="nom_institucion" ColumnName="nom_institucion" />
               </MappingFragment>

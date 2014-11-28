@@ -102,7 +102,7 @@ namespace HelpDeskWeb.Administracion
                         txtCorreo.Text = parteCorreo[0];
                         txtExtension.Text = usuario.extension_telefonica;
                         txtPassword.Attributes.Add("Value", usuario.password);
-                        cbTipoUs.SelectedValue = usuario.tipo.ToString();
+                        cbTipoUs.SelectedValue = usuario.fk_idtipo.ToString();
                         cbInstitucion.SelectedValue = usuario.fk_idinstitucion.ToString();
                         cbArea.SelectedValue = usuario.fk_idarea.ToString();
                         cbPuesto.SelectedValue = usuario.fk_idpuesto.ToString();

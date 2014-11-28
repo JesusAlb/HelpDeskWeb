@@ -74,7 +74,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
                 {
                     (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
                 }
@@ -130,7 +130,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnRecursos_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
@@ -155,7 +155,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 lbelTituloModal.Text = "Alta de eventos";
                 Utilerias.limpiarControles(this.panelModalNuevo.Controls);
@@ -170,7 +170,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -253,7 +253,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -294,7 +294,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value) && Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
@@ -321,7 +321,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
@@ -525,7 +525,7 @@ namespace HelpDeskWeb.Solicitudes
                 btnGrabarEncuesta.Text = "Aceptar";
                 ScriptManager.RegisterStartupScript(this.UpGvEventosCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
             }
-            else if(calidad.estatus == false && controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            else if (calidad.estatus == false && controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 this.cargarTablaEncuesta(null);
                 txtObEncuestas.Enabled = true;
@@ -636,7 +636,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

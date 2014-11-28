@@ -63,11 +63,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try{
                 if (tipo == 0)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipo == 0).ToList();
+                    return dbhelp.modelo.vt_usuarios.Where(a => a.fk_idtipo == 0).OrderBy(a=>a.nom_completo).ToList();
                 }
                 else if (tipo == 1)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.tipo == 1 && !a.nombre_usuario.Equals("S/A")).ToList();
+                    return dbhelp.modelo.vt_usuarios.Where(a => a.fk_idtipo == 1 && !a.nombre_usuario.Equals("S/A")).OrderBy(a=>a.nom_completo).ToList();
                 }
                 else 
                 {
@@ -88,7 +88,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                 var query = dbhelp.modelo.vt_usuarios.Where(a => ((a.nom_completo.Contains(filtro) || a.nombre_usuario.Contains(filtro) ||
                                                                a.nom_coordinacion.Contains(filtro) || a.nom_depto.Contains(filtro) ||
                                                                a.nom_puesto.Contains(filtro) || a.nom_area.Contains(filtro) || a.nom_institucion.Contains(filtro)
-                                                               || a.tipo_usuario_string.Contains(filtro) || a.correo.Contains(filtro)) && !a.nombre_usuario.Equals("S/A")));
+                                                               || a.nom_tipo.Contains(filtro) || a.correo.Contains(filtro)) && !a.nombre_usuario.Equals("S/A"))).OrderBy(a=>a.nom_completo);
                 return query.ToList();
             }
             catch
@@ -128,7 +128,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                         ItemAmodificar.nombre = nombre;
                         ItemAmodificar.apellidos = apellido;
                         ItemAmodificar.password = password;
-                        ItemAmodificar.tipo = tipo;
+                        ItemAmodificar.fk_idtipo = tipo;
                         ItemAmodificar.extension_telefonica = extel;
                         ItemAmodificar.correo = email;
                         ItemAmodificar.fk_iddepto = depto;
@@ -166,7 +166,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                         nombre_usuario = usuarioNuevo,
                         nombre = nombre,
                         apellidos = apellido,
-                        tipo = tipo,
+                        fk_idtipo = tipo,
                         fk_iddepto = depto,
                         extension_telefonica = extel,
                         correo = email,

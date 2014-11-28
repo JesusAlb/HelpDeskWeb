@@ -222,6 +222,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbltipousuario">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipousuario">
+        <MappingFragment StoreEntitySet="tbltipousuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblusuario">
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblusuario">
         <MappingFragment StoreEntitySet="tblusuario">
@@ -229,7 +237,7 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
           <ScalarProperty Name="fk_iddepto" ColumnName="fk_iddepto" />
           <ScalarProperty Name="extension_telefonica" ColumnName="extension_telefonica" />
           <ScalarProperty Name="fk_idarea" ColumnName="fk_idarea" />
@@ -492,13 +500,13 @@
           <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
           <ScalarProperty Name="nom_completo" ColumnName="nom_completo" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="tipo_usuario_string" ColumnName="tipo_usuario_string" />
+          <ScalarProperty Name="nom_tipo" ColumnName="nom_tipo" />
           <ScalarProperty Name="extension_telefonica" ColumnName="extension_telefonica" />
           <ScalarProperty Name="nom_depto" ColumnName="nom_depto" />
           <ScalarProperty Name="nom_coordinacion" ColumnName="nom_coordinacion" />
           <ScalarProperty Name="nom_area" ColumnName="nom_area" />
           <ScalarProperty Name="nom_puesto" ColumnName="nom_puesto" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="nom_institucion" ColumnName="nom_institucion" />
         </MappingFragment>

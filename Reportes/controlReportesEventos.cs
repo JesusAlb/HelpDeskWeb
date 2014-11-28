@@ -41,8 +41,8 @@ namespace HelpDeskWeb.Reportes
                                              fecha_solicitud = x.tblservicio.fecha_solicitud,
                                              hora_inicial = x.tblservicio.hora_inicial,
                                              hora_final = x.tblservicio.hora_final,
-                                             fecha_cierre = x.tblservicio.fecha_cierre    
-
+                                             fecha_cierre = x.tblservicio.fecha_cierre,
+                                             estatus = x.tblservicio.tblestatus.nombre
                                          }).ToList();
                  }
                  else
@@ -63,7 +63,8 @@ namespace HelpDeskWeb.Reportes
                                              fecha_solicitud = x.tblservicio.fecha_solicitud,
                                              hora_inicial = x.tblservicio.hora_inicial,
                                              hora_final = x.tblservicio.hora_final,
-                                             fecha_cierre = x.tblservicio.fecha_cierre    
+                                             fecha_cierre = x.tblservicio.fecha_cierre,
+                                             estatus = x.tblservicio.tblestatus.nombre
                                          }).ToList();
                  }
             }

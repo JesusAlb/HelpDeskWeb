@@ -23,7 +23,7 @@ namespace HelpDeskWeb.ControlBD.Acceso
                 if (UsuarioItem != null)
                 {
                     pagina.Session["DatosUsuario"] = UsuarioItem;
-                    return UsuarioItem.tipo;
+                    return UsuarioItem.fk_idtipo;
                 }
                 else
                 {

@@ -28,7 +28,7 @@ namespace HelpDeskWeb
                 txtNombreUsuario.Text = usuarioActual.nombre_usuario;
                 txtPassword.Attributes.Add("Value", usuarioActual.password);
                 txtTelefono.Text = usuarioActual.extension_telefonica;
-                cbTipoUsuario.SelectedValue = usuarioActual.tipo.ToString();
+                cbTipoUsuario.SelectedValue = usuarioActual.fk_idtipo.ToString();
                 cbArea.SelectedValue = usuarioActual.fk_idarea.ToString();
                 cbInstitucion.SelectedValue = usuarioActual.fk_idinstitucion.ToString();
                 this.cambiarCorreo(usuarioActual.fk_idinstitucion);

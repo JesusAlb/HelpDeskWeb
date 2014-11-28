@@ -245,6 +245,14 @@
     <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblincidente" Relationship="Self.fk_tipo" FromRole="tbltipoincidencia" ToRole="tblincidente" />
   </EntityType>
+  <EntityType Name="tbltipousuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblusuario" Relationship="Self.fk_tipousuario" FromRole="tbltipousuario" ToRole="tblusuario" />
+  </EntityType>
   <EntityType Name="tblusuario">
     <Key>
       <PropertyRef Name="id" />
@@ -253,7 +261,7 @@
     <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipo" Type="Int32" Nullable="false" />
+    <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
     <Property Name="fk_iddepto" Type="Int32" Nullable="false" />
     <Property Name="extension_telefonica" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="fk_idarea" Type="Int32" Nullable="false" />
@@ -269,6 +277,7 @@
     <NavigationProperty Name="tblservicio" Relationship="Self.fk_idapoyo" FromRole="tblusuario" ToRole="tblservicio" />
     <NavigationProperty Name="tblservicio1" Relationship="Self.fk_idsolicitante" FromRole="tblusuario" ToRole="tblservicio" />
     <NavigationProperty Name="tblservicio2" Relationship="Self.fk_idsoporte" FromRole="tblusuario" ToRole="tblservicio" />
+    <NavigationProperty Name="tbltipousuario" Relationship="Self.fk_tipousuario" FromRole="tblusuario" ToRole="tbltipousuario" />
   </EntityType>
   <EntityType Name="vt_departamentos">
     <Key>
@@ -582,21 +591,21 @@
       <PropertyRef Name="id" />
       <PropertyRef Name="nom_completo" />
       <PropertyRef Name="password" />
-      <PropertyRef Name="tipo_usuario_string" />
-      <PropertyRef Name="tipo" />
+      <PropertyRef Name="nom_tipo" />
+      <PropertyRef Name="fk_idtipo" />
       <PropertyRef Name="correo" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="nom_completo" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tipo_usuario_string" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nom_tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="extension_telefonica" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="Int32" Nullable="false" />
+    <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
@@ -924,6 +933,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tipousuario">
+    <End Role="tbltipousuario" Type="Self.tbltipousuario" Multiplicity="1" />
+    <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbltipousuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblusuario">
+        <PropertyRef Name="fk_idtipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="dbhelpdeskV2Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblarea" EntityType="Self.tblarea" />
     <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" />
@@ -946,6 +967,7 @@
     <EntitySet Name="tbltipoequipo" EntityType="Self.tbltipoequipo" />
     <EntitySet Name="tbltipoevento" EntityType="Self.tbltipoevento" />
     <EntitySet Name="tbltipoincidencia" EntityType="Self.tbltipoincidencia" />
+    <EntitySet Name="tbltipousuario" EntityType="Self.tbltipousuario" />
     <EntitySet Name="tblusuario" EntityType="Self.tblusuario" />
     <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" />
     <EntitySet Name="vt_encuestas" EntityType="Self.vt_encuestas" />
@@ -1066,6 +1088,10 @@
       <End Role="tblusuario" EntitySet="tblusuario" />
       <End Role="tblservicio" EntitySet="tblservicio" />
     </AssociationSet>
+    <AssociationSet Name="fk_tipousuario" Association="Self.fk_tipousuario">
+      <End Role="tbltipousuario" EntitySet="tbltipousuario" />
+      <End Role="tblusuario" EntitySet="tblusuario" />
+    </AssociationSet>
     <FunctionImport Name="sp_cerrar_evento">
       <Parameter Name="idservicio" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -1096,7 +1122,7 @@
       <Parameter Name="descripcion" Mode="In" Type="String" />
       <Parameter Name="idUserNA" Mode="In" Type="Int32" />
       <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
-      <Parameter Name="id_tipoIncidencia_genera" Mode="In" Type="Int32" />
+      <Parameter Name="id_tipoIncidencia_general" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
       <Parameter Name="idEvento" Mode="In" Type="Int32" />

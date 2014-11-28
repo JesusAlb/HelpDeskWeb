@@ -14,7 +14,7 @@ namespace HelpDeskWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).fk_idtipo == 0)
             {
                 linkInicio.NavigateUrl = linkPrincipal.NavigateUrl = "~/soporte.aspx";
             }
@@ -28,7 +28,7 @@ namespace HelpDeskWeb
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this.Page).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this.Page).fk_idtipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

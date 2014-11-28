@@ -99,7 +99,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static tblequipoasignado obtenerRegistro(int id)
+        public static tblequipoasignado obtenerEquipo(int id)
         {
             try
             {
@@ -108,6 +108,26 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             catch
             {
                 return null;
+            }
+        }
+
+        public static bool obtenerResponsablePorIP(string ip)
+        {
+            try
+            {
+                var equipo = dbhelp.modelo.tblequipoasignado.SingleOrDefault(a => a.ip.Equals(ip));
+                if (equipo != null)
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
     }

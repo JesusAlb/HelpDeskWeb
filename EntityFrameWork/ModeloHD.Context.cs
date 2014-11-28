@@ -48,6 +48,7 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<tbltipoequipo> tbltipoequipo { get; set; }
         public virtual DbSet<tbltipoevento> tbltipoevento { get; set; }
         public virtual DbSet<tbltipoincidencia> tbltipoincidencia { get; set; }
+        public virtual DbSet<tbltipousuario> tbltipousuario { get; set; }
         public virtual DbSet<tblusuario> tblusuario { get; set; }
         public virtual DbSet<vt_departamentos> vt_departamentos { get; set; }
         public virtual DbSet<vt_encuestas> vt_encuestas { get; set; }
@@ -152,7 +153,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_evento", ideventoParameter, tituloParameter, lugarParameter, acomodoParameter, asistenciaParameter, horaInParameter, horaFnParameter, descripcionParameter, tipoEventoParameter, solicitanteParameter, fechaEventoParameter, idUserNAParameter, idultimo_servicioParameter);
         }
     
-        public virtual int sp_insertar_incidente(Nullable<int> idincidente, Nullable<int> solicitante, string descripcion, Nullable<int> idUserNA, Nullable<int> idultimo_servicio, Nullable<int> id_tipoIncidencia_genera)
+        public virtual int sp_insertar_incidente(Nullable<int> idincidente, Nullable<int> solicitante, string descripcion, Nullable<int> idUserNA, Nullable<int> idultimo_servicio, Nullable<int> id_tipoIncidencia_general)
         {
             var idincidenteParameter = idincidente.HasValue ?
                 new ObjectParameter("idincidente", idincidente) :
@@ -174,11 +175,11 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("idultimo_servicio", idultimo_servicio) :
                 new ObjectParameter("idultimo_servicio", typeof(int));
     
-            var id_tipoIncidencia_generaParameter = id_tipoIncidencia_genera.HasValue ?
-                new ObjectParameter("id_tipoIncidencia_genera", id_tipoIncidencia_genera) :
-                new ObjectParameter("id_tipoIncidencia_genera", typeof(int));
+            var id_tipoIncidencia_generalParameter = id_tipoIncidencia_general.HasValue ?
+                new ObjectParameter("id_tipoIncidencia_general", id_tipoIncidencia_general) :
+                new ObjectParameter("id_tipoIncidencia_general", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_incidente", idincidenteParameter, solicitanteParameter, descripcionParameter, idUserNAParameter, idultimo_servicioParameter, id_tipoIncidencia_generaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertar_incidente", idincidenteParameter, solicitanteParameter, descripcionParameter, idUserNAParameter, idultimo_servicioParameter, id_tipoIncidencia_generalParameter);
         }
     
         public virtual ObjectResult<sp_requerimientos_sin_asignar_Result> sp_requerimientos_sin_asignar(Nullable<int> idEvento)

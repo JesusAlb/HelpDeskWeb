@@ -58,8 +58,9 @@ namespace HelpDeskWeb.Reportes
                 case 0: { 
                 //incidentes completos
                             int? idsolicitante = null;
-                            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportIncidentes.rdlc";    
-                            if(controlUsuario.obtenerUsuarioDeSession(this).tipo == 1){
+                            vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportIncidentes.rdlc";
+                            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
+                            {
                                 idsolicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
                             }
                             ReportDataSource datasource = new ReportDataSource("DataSetIncidentes", controlReportesIncidentes.dataSourceIncidentes(idsolicitante, "", cbEstatus.SelectedItem.Text, txtFiltroAbierto.Text, Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text)));
@@ -71,7 +72,7 @@ namespace HelpDeskWeb.Reportes
                     { //eventos completos
                         int? idsolicitante = null;
                         vt_reporte.LocalReport.ReportEmbeddedResource = "HelpDeskWeb.Reportes.Documentos.ReportEventos.rdlc";
-                        if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+                        if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
                         {
                             idsolicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
                         }
@@ -181,7 +182,7 @@ namespace HelpDeskWeb.Reportes
 
         protected void generarPrivilegios()
         {
-            int tipo = controlUsuario.obtenerUsuarioDeSession(this.Page).tipo;
+            int tipo = controlUsuario.obtenerUsuarioDeSession(this.Page).fk_idtipo;
             cargarComboBoxObjeto(tipo);
             if (tipo == 1)
             {

@@ -78,7 +78,7 @@ namespace HelpDeskWeb.Administracion
                     if (gvEquipo.SelectedIndex != -1)
                     {
                         lbelTituloModal.Text = "Modificar usuario";
-                        tblequipoasignado equipos = controlEquipos.obtenerRegistro(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
+                        tblequipoasignado equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
                         cbResponsable.SelectedValue = equipos.fk_idusuario_responsable.ToString();
                         cbTipoEquipo.SelectedValue = equipos.fk_tipoequipo.ToString();
                         this.cargarControles();

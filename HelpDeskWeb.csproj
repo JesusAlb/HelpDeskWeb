@@ -421,6 +421,9 @@
     <Compile Include="EntityFrameWork\tbltipoincidencia.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFrameWork\tbltipousuario.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFrameWork\tblusuario.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>

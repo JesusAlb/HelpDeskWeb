@@ -54,7 +54,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             for (int x = 0; x < objeto.Length; x++)
             {
-                if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
                 {
                     (objeto[x] as GridView).DataSource = controlIncidentes.obtenerDataSourceSoporte(x, cbTipoFiltro.SelectedItem.Text, txtFiltro.Text, this.obtenerDateTimeDeString(filtroFechaInicial.Text), this.obtenerDateTimeDeString(filtroFechaFinal.Text));
                 }
@@ -70,7 +70,7 @@ namespace HelpDeskWeb.Solicitudes
         {
             cbTipoIncidente2.DataSource = cbTipoIncidente.DataSource = controlTipoIncidencia.obtenerDataSourceCombBoxTipo();
             cbSoporte2.DataSource = cbSeguimiento2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource =  controlUsuario.dataSourceComboBox(0);
-            cbSolicitante.DataSource = cbSolicitante2.DataSource = controlUsuario.dataSourceComboBox(2);
+            cbSolicitante.DataSource = cbSolicitante2.DataSource = controlUsuario.dataSourceComboBox(1);
             cbTipoIncidente.DataBind();
             cbTipoIncidente2.DataBind();
             cbSoporte.DataBind();
@@ -128,7 +128,7 @@ namespace HelpDeskWeb.Solicitudes
             {
                 int solicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
 
-                if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+                if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
                 {
                     solicitante = Convert.ToInt32(cbSolicitante.SelectedValue);
                 }
@@ -148,7 +148,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
@@ -173,7 +173,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
                 if (!tabItemSeleccionado.Value.Equals("2"))
                 {
@@ -219,7 +219,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 0)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) == 1 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
@@ -371,7 +371,7 @@ namespace HelpDeskWeb.Solicitudes
                 btnGrabarEncuesta.Text = "Aceptar";
                 ScriptManager.RegisterStartupScript(this.UpIncidentesCerrados, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('show');", true);
             }
-            else if(calidad.estatus == false && controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            else if (calidad.estatus == false && controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 this.cargarTablaEncuesta(null);
                 txtObEncuestas.Enabled = true;
@@ -443,7 +443,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void generarPrivilegios()
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).tipo == 1)
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
             {
                 menuCatalogos.Visible = false;
                 menuControl.Visible = false;

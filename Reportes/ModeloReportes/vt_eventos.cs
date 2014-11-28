@@ -18,5 +18,6 @@ namespace HelpDeskWeb.Reportes.ModeloReportes
         public DateTime? fecha_cierre { get; set; }
         public string soporte { get; set; }
         public string apoyo { get; set; }
+        public string estatus { get; set; }
     }
 }

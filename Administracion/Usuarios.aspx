@@ -272,7 +272,7 @@
                                                 <asp:BoundField HeaderText="Usuario" DataField="nombre_usuario" />
                                                 <asp:BoundField HeaderText="Nombre" DataField="nom_completo" />
                                                 <asp:BoundField HeaderText="Password" DataField="password" />
-                                                <asp:BoundField HeaderText="Tipo de usuario" DataField="tipo_usuario_string" />
+                                                <asp:BoundField HeaderText="Tipo de usuario" DataField="nom_tipo" />
                                                 <asp:BoundField HeaderText="Extensión" DataField="extension_telefonica" />
                                                 <asp:BoundField HeaderText="Correo" DataField="correo" />
                                                 <asp:BoundField HeaderText="Institución" DataField="nom_institucion" />

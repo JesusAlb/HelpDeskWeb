@@ -1,4 +1,6 @@
 ﻿using HelpDeskWeb.ControlBD.Acceso;
+using HelpDeskWeb.ControlBD.Catalogo;
+using HelpDeskWeb.EntityFrameWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,44 @@ namespace HelpDeskWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["usuario"] != null && Request.QueryString["password"] != null)
+            if (Request.QueryString["id"] != null && Request.QueryString["peticion"] != null)
             {
+                int id = Convert.ToInt32(Request.QueryString["id"]);
                 string peticion = Request.QueryString["peticion"];
-                int resultado = controlAcceso.encontrarUsuario(Request.QueryString["usuario"], Request.QueryString["password"], this.Page);
-                if (resultado == 0)
+                tblusuario usuario = controlUsuario.obtenerUsuario(id);
+                if (usuario != null)
                 {
-                    if (peticion.Equals("0"))
-                        Response.Redirect("Solicitudes/Incidentes.aspx");
+                    if (usuario.fk_idtipo == 0)
+                    {
+                        if (controlEquipos.obtenerResponsablePorIP(this.GetIP()) || this.GetIP().Equals("::1"))
+                        {
+                            int resultado = controlAcceso.encontrarUsuario(usuario.nombre_usuario, usuario.password, this.Page);
+                            if (resultado == 0)
+                            {
+                                if (peticion.Equals("0"))
+                                    Response.Redirect("Solicitudes/Incidentes.aspx");
+                                else
+                                    Response.Redirect("Solicitudes/Eventos.aspx");
+                            }
+                        }
+                        else
+                        {
+                            Response.Redirect("index.aspx");
+                        }
+                    }
                     else
-                        Response.Redirect("Solicitudes/Eventos.aspx");
+                    {
+                        Response.Redirect("index.aspx");
+                    }
                 }
+                else
+                {
+                    Response.Redirect("index.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("index.aspx");
             }
         }
 

@@ -75,7 +75,7 @@ namespace HelpDeskWeb
                       {
                           if (tipoActual != 2)
                           {
-                              tipoActual = controlUsuario.obtenerUsuarioDeSession(pagina).tipo;
+                              tipoActual = controlUsuario.obtenerUsuarioDeSession(pagina).fk_idtipo;
                           }
 
                           if (tipoObligatorio != tipoActual)
