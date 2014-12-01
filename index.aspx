@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Centro de servicios</title>
-    <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
+    <link rel="icon" type="image/icon" href="Imagenes/imca.ico" />
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />

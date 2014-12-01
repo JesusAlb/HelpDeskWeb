@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98b3816d1b0d4c03a698e1c9b580aecd" Name="Diagram1">
+      <Diagram DiagramId="0f0f14ab50244a9c871d57917cbebe87" Name="Diagram1">
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblarea" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblcalidadservicio" Width="1.5" PointX="12.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbhelpdeskV2Model.tblcoordinacion" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
