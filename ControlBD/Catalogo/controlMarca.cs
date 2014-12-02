@@ -29,11 +29,11 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-                return dbhelp.modelo.tblmarca.Where(a => a.nombre.Equals("N/A")).SingleOrDefault().id;
+                return dbhelp.modelo.tblmarca.SingleOrDefault(a => a.nombre.Equals("N/A")).id;
             }
             catch
             {
-                return -1;
+                return 1;
             }
         }
 

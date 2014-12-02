@@ -111,23 +111,23 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static bool obtenerResponsablePorIP(string ip)
+        public static string obtenerIPorResponsable(int idusuario)
         {
             try
             {
-                var equipo = dbhelp.modelo.tblequipoasignado.SingleOrDefault(a => a.ip.Equals(ip));
+                var equipo = dbhelp.modelo.tblequipoasignado.SingleOrDefault(a => a.fk_idusuario_responsable == idusuario).ip;
                 if (equipo != null)
                 {
-                    return true;
+                    return equipo;
                 }
                 else 
                 {
-                    return false;
+                    return null;
                 }
             }
             catch
             {
-                return false;
+                return null;
             }
         }
     }

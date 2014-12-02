@@ -232,7 +232,7 @@ namespace HelpDeskWeb.Administracion
                 {
                     cb[x].DataSource = controlMarca.obtenerDataSourceComboBox(0);
                     cb[x].DataBind();
-                    cb[x].SelectedItem.Text = "N/A";
+                    cb[x].SelectedValue = controlMarca.obtenerMarcaNoAplica().ToString();
                 }
                 cb[x].Enabled = vbol[x];
             }            
