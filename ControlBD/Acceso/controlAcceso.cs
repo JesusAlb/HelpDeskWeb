@@ -37,5 +37,16 @@ namespace HelpDeskWeb.ControlBD.Acceso
 
         }
 
+        public static void actualizarUsuario_de_Session(Page pagina, vt_usuarios usuario)
+        {
+            try
+            {
+                pagina.Session["DatosUsuario"] = dbhelp.modelo.vt_usuarios.AsNoTracking().SingleOrDefault(a=>a.id == usuario.id);
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

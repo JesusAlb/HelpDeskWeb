@@ -472,6 +472,7 @@
     <Compile Include="EntityFrameWork\vt_usuarios.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ModeloReportes\vt_usuario.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_calidad_por_objeto.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_calidad_por_tiempo.cs" />
     <Compile Include="Reportes\ModeloReportes\vt_eventos.cs" />

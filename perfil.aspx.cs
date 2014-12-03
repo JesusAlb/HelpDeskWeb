@@ -1,4 +1,5 @@
 ﻿using HelpDeskWeb.ControlAltas;
+using HelpDeskWeb.ControlBD.Acceso;
 using HelpDeskWeb.ControlBD.Catalogo;
 using HelpDeskWeb.Datos;
 using HelpDeskWeb.EntityFrameWork;
@@ -87,7 +88,8 @@ namespace HelpDeskWeb
             if (txtVerificarPassword.Text.Equals(txtPassword.Text))
             {
                if(controlUsuario.modificar(controlUsuario.obtenerUsuarioDeSession(this).id, txtNombreUsuario.Text, controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario, txtNombre.Text, txtApellidos.Text, Convert.ToInt32(cbTipoUsuario.SelectedValue), Convert.ToInt32(cbDepto.SelectedValue), txtTelefono.Text, txtCorreo.Text + lbelInstitucion.Text, txtPassword.Text, Convert.ToInt32(cbArea.SelectedValue), Convert.ToInt32(cbPuesto.SelectedValue), Convert.ToInt32(cbInstitucion.SelectedValue)) == 1){
-                    ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
+                   controlAcceso.actualizarUsuario_de_Session(this, controlUsuario.obtenerUsuarioDeSession(this));
+                   ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "Mensaje", "alertify.success('Perfil correctamente modificado');", true);
                }
                else
                {

@@ -17,7 +17,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
         {
             try
             {
-               return dbhelp.modelo.vt_reporte_equipos.Where(a => a.nom_completo.Contains(filtro) || a.nom_marca_equipo.Contains(filtro) ||
+               return dbhelp.modelo.vt_reporte_equipos.AsNoTracking().Where(a => a.nom_completo.Contains(filtro) || a.nom_marca_equipo.Contains(filtro) ||
                                                 a.nom_marca_monitor.Contains(filtro) || a.nom_marca_mouse.Contains(filtro) ||
                                                 a.nom_marca_teclado.Contains(filtro) || a.nom_tipo_equipo.Contains(filtro) ||
                                                 a.procesador.Contains(filtro) || a.serie_equipo.Contains(filtro) ||

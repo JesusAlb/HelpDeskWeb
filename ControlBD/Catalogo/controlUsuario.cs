@@ -58,7 +58,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static IList<vt_usuarios> dataSourceComboBox(int tipo)
+        public static IList dataSourceComboBox(int tipo)
         {
             try{
                 if (tipo == 0)
@@ -81,14 +81,15 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             }
         }
 
-        public static IList<vt_usuarios> obtenerDataSource(string filtro)
+        public static IList obtenerDataSource(string filtro)
         {
             try
             {
-                var query = dbhelp.modelo.vt_usuarios.Where(a => ((a.nom_completo.Contains(filtro) || a.nombre_usuario.Contains(filtro) ||
+                var query = dbhelp.modelo.vt_usuarios.AsNoTracking().Where(a => ((a.nom_completo.Contains(filtro) || a.nombre_usuario.Contains(filtro) ||
                                                                a.nom_coordinacion.Contains(filtro) || a.nom_depto.Contains(filtro) ||
                                                                a.nom_puesto.Contains(filtro) || a.nom_area.Contains(filtro) || a.nom_institucion.Contains(filtro)
-                                                               || a.nom_tipo.Contains(filtro) || a.correo.Contains(filtro)) && !a.nombre_usuario.Equals("S/A"))).OrderBy(a=>a.nom_completo);
+                                                               || a.nom_tipo.Contains(filtro) || a.correo.Contains(filtro)) && !a.nombre_usuario.Equals("S/A"))
+                                                               ).OrderBy(a => a.nom_completo);
                 return query.ToList();
             }
             catch

@@ -17,7 +17,7 @@ namespace HelpDeskWeb.ControlAltas
         {
             try
             {
-                return dbhelp.modelo.vt_departamentos.Where(x => x.nombre.Contains(filtro) && x.nom_coordinacion.Contains(coordinacion)).OrderBy(a=>a.nombre).ToList();
+                return dbhelp.modelo.vt_departamentos.AsNoTracking().Where(x => x.nombre.Contains(filtro) && x.nom_coordinacion.Contains(coordinacion)).OrderBy(a=>a.nombre).ToList();
             }
             catch
             {                
