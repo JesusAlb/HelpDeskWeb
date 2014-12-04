@@ -420,7 +420,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.tblevento.Where(a => a.tblservicio.fk_idestatus == 0).Count();
+                return dbhelp.modelo.tblevento.AsNoTracking().Where(a => a.tblservicio.fk_idestatus == 0).Count();
             }
             catch
             {

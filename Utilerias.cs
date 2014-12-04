@@ -31,7 +31,7 @@ namespace HelpDeskWeb
                 }
                 else if (control is DropDownList)
                 {
-                    (control as DropDownList).SelectedIndex = -1;
+                    (control as DropDownList).SelectedIndex = 0;
                 }
 
                 limpiarControles(control.Controls);

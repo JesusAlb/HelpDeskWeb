@@ -39,7 +39,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_incidentes_cerrados.Where(a => a.fk_idusuario_solicitante == usuario && a.estatus_calidad == false && a.estatus_incidente == 2).Count();
+                return dbhelp.modelo.vt_incidentes_cerrados.AsNoTracking().Where(a => a.fk_idusuario_solicitante == usuario && a.estatus_calidad == false && a.estatus_incidente == 2).Count();
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_eventos_cerrados.Where(a => a.idsolicitante == usuario && a.estatus_calidad == false && a.estatus_evento == 2).Count();
+                return dbhelp.modelo.vt_eventos_cerrados.AsNoTracking().Where(a => a.idsolicitante == usuario && a.estatus_calidad == false && a.estatus_evento == 2).Count();
             }
             catch
             {
@@ -144,7 +144,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_promedio_general.SingleOrDefault(a => a.id == usuario);
+                return dbhelp.modelo.vt_promedio_general.AsNoTracking().SingleOrDefault(a => a.id == usuario);
             }
             catch
             {

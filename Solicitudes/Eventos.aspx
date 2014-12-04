@@ -457,7 +457,7 @@
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
                                     <asp:Panel runat="server" CssClass="modal-content">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label3" Text="Asignar recursos a eventos" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label3" Text="Evaluación del servicio" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">

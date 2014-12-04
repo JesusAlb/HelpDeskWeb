@@ -236,7 +236,7 @@ namespace HelpDeskWeb.Solicitudes
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('Hora inicial mayor a la hora de finalización');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('Hora inicial mayor a la hora final');", true);
                     }
                 }
                 else
@@ -362,7 +362,7 @@ namespace HelpDeskWeb.Solicitudes
                 else
                 {
                     if (controlRecursosAsignados.editar(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value.ToString()), cantidadResultante))
-                        mensaje = "Se actualizo el recurso del evento";
+                        mensaje = "Se actualizó el recurso del evento";
                     else
                         mensaje = "Error al actualizar el recurso";
                 }
@@ -608,7 +608,7 @@ namespace HelpDeskWeb.Solicitudes
                     {
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
                         this.cargarTablasEventos();
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registro la encuesta');", true);  
+                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registró la encuesta');", true);  
                     }else{
                         ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('No se pudo registrar la encuesta');", true);
                     }

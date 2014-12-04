@@ -152,13 +152,19 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idIncidenteSeleccionado.Value))
                 {
-
-                    tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
-                    cbTipoIncidente.SelectedValue = itemIncidente.fk_idtipo.ToString();
-                    cbPrioridad.SelectedValue = itemIncidente.fk_idprioridad.ToString();
-                    cbSoporte.SelectedValue = itemIncidente.tblservicio.fk_idusuario_soporte.ToString();
-                    cbSeguimiento.SelectedValue = itemIncidente.tblservicio.fk_idusuario_apoyo.ToString();
-                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnAsginarActivado", "$('#ModalAsignar').modal('show');", true);
+                    if (Utilerias.verificarCombosUsuarios(new string[] { cbSeguimiento.Text, cbSoporte.Text }))
+                    {
+                        tblincidente itemIncidente = controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value));
+                        cbTipoIncidente.SelectedValue = itemIncidente.fk_idtipo.ToString();
+                        cbPrioridad.SelectedValue = itemIncidente.fk_idprioridad.ToString();
+                        cbSoporte.SelectedValue = itemIncidente.tblservicio.fk_idusuario_soporte.ToString();
+                        cbSeguimiento.SelectedValue = itemIncidente.tblservicio.fk_idusuario_apoyo.ToString();
+                        ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnAsginarActivado", "$('#ModalAsignar').modal('show');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateAcciones, this.GetType(), "AsignarSoporte", "alertify.error('Asigne los usuarios de soporte');", true);
+                    }
                 }
                 else
                 {
@@ -257,7 +263,7 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGrabarCerrar_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(txtAcciones.Text) || !String.IsNullOrWhiteSpace(txtSolucion.Text))
+            if (Utilerias.verificarCamposVacios(new string[]{txtAcciones.Text, txtSolucion.Text}))
             {
                 if (controlIncidentes.cerrarIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value), txtAcciones.Text, txtSolucion.Text, controlIncidentes.obtenerIncidente(Convert.ToInt32(idIncidenteSeleccionado.Value)).fk_idservicio))
                 {
@@ -267,8 +273,12 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "CerrarCorrecta", "alertify.error('Error al cerrar el incidente');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "CerrarCorrecta", "alertify.error('Error al cerrar el incidente');", true);
                 }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.UpdateGrabarCerrar, this.GetType(), "CerrarCorrecta", "alertify.error('Llene todos los campos');", true);
             }
         }
 
@@ -453,20 +463,34 @@ namespace HelpDeskWeb.Solicitudes
         protected void btnGrabarCompleto_Click(object sender, EventArgs e)
         {
             if(Utilerias.verificarCamposVacios(new string[]{
-                txtAcciones2.Text, txtDescripcion2.Text, txtFechaInicio.Text, txtFechaFinal.Text, txtHoraInicio.Text, txtHoraFinal.Text, txtAcciones2.Text, txtSolucion2.Text, cbPrioridad2.Text, cbTipoIncidente2.Text
+                txtAcciones2.Text, txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, cbPrioridad2.Text, cbTipoIncidente2.Text
             }) && Utilerias.verificarCombosUsuarios(new string[]{
                 cbSeguimiento2.Text, cbSoporte2.Text
             }))
             {
-                if (controlIncidentes.insertarIncidenteCompleto(Convert.ToInt32(cbSolicitante2.SelectedValue), Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, Convert.ToInt32(cbTipoIncidente2.SelectedValue), Convert.ToDateTime(txtFechaInicio.Text), Convert.ToDateTime(txtFechaFinal.Text), Convert.ToInt16(cbPrioridad2.SelectedItem.Value), Convert.ToDateTime(txtHoraInicio.Text), Convert.ToDateTime(txtHoraFinal.Text)))
+                if (Utilerias.validarFechas(new TextBox[] { txtFechaInicio, txtFechaFinal, txtHoraInicio, txtHoraFinal }))
                 {
-                    this.cargarTablasIncidentes();
-                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "cerrar", "$('#ModalNuevoCompleto').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.success('Incidente registrado correctamente')", true);
+                    if (Utilerias.convertirFecha(txtFechaInicio.Text +" "+ txtHoraInicio.Text) <= Utilerias.convertirFecha(txtFechaFinal.Text + " " + txtHoraFinal.Text))
+                    {
+                        if (controlIncidentes.insertarIncidenteCompleto(Convert.ToInt32(cbSolicitante2.SelectedValue), Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, Convert.ToInt32(cbTipoIncidente2.SelectedValue), Convert.ToDateTime(txtFechaInicio.Text), Convert.ToDateTime(txtFechaFinal.Text), Convert.ToInt16(cbPrioridad2.SelectedItem.Value), Convert.ToDateTime(txtHoraInicio.Text), Convert.ToDateTime(txtHoraFinal.Text)))
+                        {
+                            this.cargarTablasIncidentes();
+                            ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "cerrar", "$('#ModalNuevoCompleto').modal('hide');", true);
+                            ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.success('Incidente registrado correctamente')", true);
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Error al registrar el incidente')", true);
+                        }
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Fecha de inicio mayor a la fecha final')", true);
+                    }
                 }
                 else{
-                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Error al registrar el incidente')", true);
-                }               
+                    ScriptManager.RegisterStartupScript(this.updateGrabarCompleto, GetType(), "mensaje", "alertify.error('Fecha y/o tiempos inválidos')", true);
+                }                
             }
             else
             {

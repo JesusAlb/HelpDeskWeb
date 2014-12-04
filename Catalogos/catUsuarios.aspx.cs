@@ -110,7 +110,7 @@ namespace HelpDeskWeb.Catalogos
 
                      case "actualizar":
                          if (this.actualizar_CommandArgument(e.CommandArgument.ToString()))
-                             mensaje = "Se actualizó el registro satiscartoriamente";
+                             mensaje = "Se actualizó el registro satisfactoriamente";
                          else
                              ScriptManager.RegisterStartupScript(this.updateModalNuevo, GetType(), "accionElemento", "alertify.error('Error al actualizar');", true);
                          break;

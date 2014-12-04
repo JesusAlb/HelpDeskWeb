@@ -99,7 +99,7 @@
                             <span class="glyphicon glyphicon-pencil"></span> Editar
                                 </asp:LinkButton></div></div><asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-lg">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabar">
                                         <asp:UpdatePanel runat="server" ID="updateModal" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">

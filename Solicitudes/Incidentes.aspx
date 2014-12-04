@@ -145,7 +145,7 @@
                             </asp:UpdatePanel>
                             <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGuardar">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="lbelTituloModal" Text="Alta de incidente" />
                                         </asp:Panel>
@@ -180,7 +180,7 @@
                             </asp:Panel>
                             <asp:Panel runat="server" CssClass="modal fade" ID="ModalAsignar" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="BtnGrabarAsignacion">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label1" Text="Asignar soporte a incidente" />
                                         </asp:Panel>
@@ -238,9 +238,9 @@
                             </asp:Panel>
                             <asp:Panel runat="server" CssClass="modal fade" ID="ModalCerrar" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarCerrar">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label2" Text="Alta de incidente" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label2" Text="Cerrar incidente" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <div class="row">
@@ -265,9 +265,9 @@
                             </asp:Panel>
                             <asp:Panel runat="server" ID="ModalEncuesta" CssClass="modal fade" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarEncuesta">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label3" Text="Asignar recursos a eventos" />
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label3" Text="Evaluación del servicio" />
                                         </asp:Panel>
                                         <asp:Panel runat="server" CssClass="modal-body">
                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
@@ -326,7 +326,7 @@
                             </asp:Panel>
                             <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevoCompleto" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <asp:Panel runat="server" CssClass="modal-dialog modal-md">
-                                    <asp:Panel runat="server" CssClass="modal-content">
+                                    <asp:Panel runat="server" CssClass="modal-content" DefaultButton="btnGrabarCompleto">
                                         <asp:Panel runat="server" CssClass="modal-header" HorizontalAlign="Center">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button><asp:Label runat="server" CssClass="modal-title" Font-Size="Large" ID="Label4" Text="Registrar incidente completo" />
                                         </asp:Panel>

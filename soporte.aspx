@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/principalMaestra.Master" CodeBehind="soporte.aspx.cs" Inherits="HelpDeskWeb.principal" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
-    <title>Centro de servicios</title>
     <link rel="icon" type="image/icon" href="../Imagenes/imca.ico" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/helpdesk-template.css" rel="stylesheet" />

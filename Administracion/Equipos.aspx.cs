@@ -70,6 +70,7 @@ namespace HelpDeskWeb.Administracion
 
                 case "nuevo":
                     Utilerias.limpiarControles(this.ModalContenido.Controls);
+                    lbelTituloModal.Text = "Alta de equipos asignados";
                     this.cargarControles();
                     ScriptManager.RegisterStartupScript(this.updateModal, GetType(), "abrirModal", "$('#ModalNuevo').modal('show');", true);
                     break;
@@ -77,7 +78,7 @@ namespace HelpDeskWeb.Administracion
                 case "editar":
                     if (gvEquipo.SelectedIndex != -1)
                     {
-                        lbelTituloModal.Text = "Modificar usuario";
+                        lbelTituloModal.Text = "Modificar equipo asignado";
                         tblequipoasignado equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
                         cbResponsable.SelectedValue = equipos.fk_idusuario_responsable.ToString();
                         cbTipoEquipo.SelectedValue = equipos.fk_tipoequipo.ToString();
@@ -174,7 +175,7 @@ namespace HelpDeskWeb.Administracion
                             }
                             else
                             {
-                                ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Error al asignar un responsable a un equipo');", true);
+                                ScriptManager.RegisterStartupScript(this.updateModal, this.GetType(), "mensaje", "alertify.error('Error al asignar el responsable al equipo');", true);
                             }
                             break;
 
@@ -221,10 +222,15 @@ namespace HelpDeskWeb.Administracion
 
         protected void cargarCombosMarcas(DropDownList []cb, bool []vbol)
         {
+            string p_marca = controlMarca.obtenerDataSource("").FirstOrDefault().id.ToString();
+            string marca_na = controlMarca.obtenerMarcaNoAplica().ToString();
+
             for(int x = 0; x < cb.Length; x++)
             {
                 if (vbol[x])
                 {
+
+                    cb[x].SelectedValue = p_marca;
                     cb[x].DataSource = controlMarca.obtenerDataSourceComboBox(1);
                     cb[x].DataBind();
                 }
@@ -232,7 +238,7 @@ namespace HelpDeskWeb.Administracion
                 {
                     cb[x].DataSource = controlMarca.obtenerDataSourceComboBox(0);
                     cb[x].DataBind();
-                    cb[x].SelectedValue = controlMarca.obtenerMarcaNoAplica().ToString();
+                    cb[x].SelectedValue = marca_na;
                 }
                 cb[x].Enabled = vbol[x];
             }            
@@ -260,7 +266,7 @@ namespace HelpDeskWeb.Administracion
             foreach (string txt in txtIP)
             {
                 int valor = Convert.ToInt16(txt);
-                if (valor <= 0 || valor >= 255)
+                if (valor < 0 || valor >= 255)
                 {
                     return false;
                 }

@@ -158,7 +158,7 @@ namespace HelpDeskWeb.Administracion
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Contraseña de verficiación incorrecta');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateBtnsModal, GetType(), "noCompleto", "alertify.error('Contraseña de verificación incorrecta');", true);
                 }
             }
             else

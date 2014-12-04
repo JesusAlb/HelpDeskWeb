@@ -395,7 +395,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => a.estatus_incidente == 0).Count();
+                return dbhelp.modelo.vt_incidente_sin_cerrar.AsNoTracking().Where(a => a.estatus_incidente == 0).Count();
             }
             catch
             {

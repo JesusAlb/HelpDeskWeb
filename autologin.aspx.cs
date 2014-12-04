@@ -23,7 +23,7 @@ namespace HelpDeskWeb
                 {
                     if (usuario.fk_idtipo == 0)
                     {
-                        if (controlEquipos.obtenerIPorResponsable(usuario.id).Equals(this.GetIP()) || this.GetIP().Equals("::1"))
+                        if (controlEquipos.obtenerIPorResponsable(usuario.id) == this.GetIP() || this.GetIP() == "::1")
                         {
                             int resultado = controlAcceso.encontrarUsuario(usuario.nombre_usuario, usuario.password, this.Page);
                             if (resultado == 0)

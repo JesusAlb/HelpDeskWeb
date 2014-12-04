@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Centro de desarrollo</title>
+    <title>Centro de servicios</title>
     <asp:ContentPlaceHolder ID="head" runat="server" ClientIDMode="static">
     </asp:ContentPlaceHolder>
 </head>
