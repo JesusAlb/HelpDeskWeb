@@ -100,9 +100,10 @@ namespace HelpDeskWeb.Catalogos
             Utilerias.setRowCreated(sender, e, this.Page);
         }
 
-        protected void configurarModal(string titulo, string nomElemento, int maxlength, bool panelVisible)
+        protected void configurarModal(string titulo, string label, string nomElemento, int maxlength, bool panelVisible)
         {
             lbelModal.Text = titulo;
+            lbelNombre.Text = label;
             txtNombre.Text = nomElemento;
             txtNombre.MaxLength = maxlength;
             panelTipoRequerimiento.Visible = panelVisible;
@@ -154,7 +155,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvTipoIncidentes.SelectedIndex != -1)
                     {
                         tbltipoincidencia tipoInSeleccionado = controlTipoIncidencia.obtenerTipoIncidencia(Convert.ToInt32(gvTipoIncidentes.SelectedDataKey.Value));
-                        this.configurarModal("Editar tipos de incidentes", tipoInSeleccionado.nombre, 40, false);
+                        this.configurarModal("Editar tipos de incidentes", "Nombre", tipoInSeleccionado.nombre, 40, false);
                         seleccionado = true;
                     }
                     break;
@@ -163,7 +164,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvLugares.SelectedDataKey != null)
                     {
                         tbllugar lugarSeleccionado = controlLugar.obtenerLugar(Convert.ToInt32(gvLugares.SelectedDataKey.Value));
-                        this.configurarModal("Editar lugares", lugarSeleccionado.nombre,60, false);
+                        this.configurarModal("Editar lugares", "Nombre", lugarSeleccionado.nombre, 60, false);
                         seleccionado = true;
                     }
                     break;
@@ -172,7 +173,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvRequerimientos.SelectedDataKey != null)
                     {
                         tblrecurso reqSeleccionado = controlRequerimientos.obtenerRequerimiento(Convert.ToInt32(gvRequerimientos.SelectedDataKey.Value), null);
-                        this.configurarModal("Editar recursos", reqSeleccionado.nombre,60, true);
+                        this.configurarModal("Editar recursos", "Nombre", reqSeleccionado.nombre, 60, true);
                         cbTipoRequerimiento.SelectedValue = reqSeleccionado.cuantificable.ToString();
                         seleccionado = true;
                     }
@@ -182,7 +183,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvAcomodos.SelectedDataKey != null)
                     {
                         tblacomodo acomodoSeleccionado = controlAcomodo.obtenerAcomodo(Convert.ToInt32(gvAcomodos.SelectedDataKey.Value));
-                        this.configurarModal("Editar acomodos", acomodoSeleccionado.nombre, 35, false);
+                        this.configurarModal("Editar acomodos", "Nombre", acomodoSeleccionado.nombre, 35, false);
                         seleccionado = true;
                     }
                     break;
@@ -191,7 +192,7 @@ namespace HelpDeskWeb.Catalogos
                     if (gvPreguntas.SelectedDataKey != null)
                     {
                         tblpregunta preguntaSeleccionada = controlPregunta.obtenerPregunta(Convert.ToInt32(gvPreguntas.SelectedDataKey.Value));
-                        this.configurarModal("Editar preguntas", preguntaSeleccionada.pregunta, 70, false);
+                        this.configurarModal("Editar preguntas", "Contenido", preguntaSeleccionada.pregunta, 70, false);
                         seleccionado = true;
                     }
                     break;
@@ -212,24 +213,24 @@ namespace HelpDeskWeb.Catalogos
             switch (e.CommandName)
             {
                 case "abrirNuevoTipoIncidente":
-                    this.configurarModal("Alta de tipo de incidente", "",40, false);
+                    this.configurarModal("Alta de tipo de incidente", "Nombre", "", 40, false);
                     break;
 
                 case "abrirNuevoLugar":
-                    this.configurarModal("Alta de lugares", "",60, false);
+                    this.configurarModal("Alta de lugares", "Nombre", "", 60, false);
                     break;
 
                 case "abrirNuevoRequerimiento":
                     cbTipoRequerimiento.SelectedIndex = -1;
-                    this.configurarModal("Alta de recursos", "",60, true);
+                    this.configurarModal("Alta de recursos", "Nombre", "", 60, true);
                     break;
 
                 case "abrirNuevoAcomodo":
-                    this.configurarModal("Alta de acomodos", "", 35, false);
+                    this.configurarModal("Alta de acomodos", "Nombre", "", 35, false);
                     break;
 
                 case "abrirNuevaPregunta":
-                    this.configurarModal("Alta de preguntas", "", 70, false);
+                    this.configurarModal("Alta de preguntas", "Contenido", "", 70, false);
                     break;
             }
             btnGrabar.CommandName = "insertar";

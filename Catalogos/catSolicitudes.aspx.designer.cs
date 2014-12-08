@@ -175,6 +175,15 @@ namespace HelpDeskWeb.Catalogos {
         protected global::System.Web.UI.WebControls.Panel panel2;
         
         /// <summary>
+        /// Control lbelNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbelNombre;
+        
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>

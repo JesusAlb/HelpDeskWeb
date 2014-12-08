@@ -137,7 +137,7 @@
                                                             <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                             <asp:Panel runat="server" CssClass="col-lg-10">
                                                                 <asp:Panel runat="server" ID="panel2" CssClass="form-group">
-                                                                    <asp:Label runat="server" Text="Nombre" Font-Bold="true"></asp:Label>
+                                                                    <asp:Label runat="server" ID="lbelNombre" Text="Nombre" Font-Bold="true"></asp:Label>
                                                                     <asp:TextBox runat="server" ID="txtNombre" onpaste="return false;" onkeydown="return isAlpha(event.keyCode);" CssClass="form-control" placeholder="Nombre" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" ID="panelTipoRequerimiento" CssClass="form-group" Visible="false">
