@@ -18,7 +18,6 @@ namespace HelpDeskWeb.EntityFrameWork
         public int id { get; set; }
         public string pregunta { get; set; }
         public bool estatus_pregunta { get; set; }
-        public int afinidad { get; set; }
         public int valor { get; set; }
         public int idcalidad { get; set; }
         public string observaciones { get; set; }

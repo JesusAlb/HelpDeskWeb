@@ -126,22 +126,17 @@ namespace HelpDeskWeb.Solicitudes
         {
             if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
-                int solicitante = controlUsuario.obtenerUsuarioDeSession(this).id;
-
-                if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
-                {
-                    solicitante = Convert.ToInt32(cbSolicitante.SelectedValue);
-                }
-
+                int solicitante = (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0) ? Convert.ToInt32(cbSolicitante.SelectedValue) : controlUsuario.obtenerUsuarioDeSession(this).id;
                 if (controlIncidentes.insertarIncidente(solicitante, txtDescripcion.Text))
                 {
                     this.cargarTablasIncidentes();
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.success('Incidente registrado satisfactoriamente');", true);                   
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidente", "alertify.success('Incidente registrado satisfactoriamente');", true);
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarNuevo, this.GetType(), "nuevoIncidenteIncorrecto", "alertify.error('Error al registrar el incidente');", true);
+
                 }
             }
         }
@@ -186,6 +181,7 @@ namespace HelpDeskWeb.Solicitudes
                     Utilerias.limpiarControles(upModalNuevo.Controls);
                     panelSolcitante.Visible = true;
                     ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+
                 }
                 else
                 {
@@ -196,11 +192,18 @@ namespace HelpDeskWeb.Solicitudes
             }
             else
             {
-                txtDescripcion.Text = "";
-                panelSolcitante.Visible = false;
-                ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
-            }
+                if (controlEncuestas.obtenerNumeroDeEncuestasSinResponderEnIncidentes(controlUsuario.obtenerUsuarioDeSession(this).id) == 0)
+                {
+                    txtDescripcion.Text = "";
+                    panelSolcitante.Visible = false;
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "mensajeNoEncuesta", "alertify.alert('Para dar de alta un incidente, debes contestar la encuesta')", true);
+                }
 
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -404,34 +407,41 @@ namespace HelpDeskWeb.Solicitudes
             }
             else
             {
-                bool correcto = true;
-                foreach (GridViewRow row in gvEncuestas.Rows)
+                if (!String.IsNullOrWhiteSpace(txtObEncuestas.Text))
                 {
-                    if (row.RowType == DataControlRowType.DataRow)
+                    bool correcto = true;
+                    foreach (GridViewRow row in gvEncuestas.Rows)
                     {
-                        DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
-                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        if (row.RowType == DataControlRowType.DataRow)
                         {
-                            correcto = true;
+                            DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
+                            if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                            {
+                                correcto = true;
+                            }
+                            else
+                            {
+                                correcto = false;
+                            }
+                        }
+                    }
+                    if (correcto)
+                    {
+                        if (controlEncuestas.SaveChangesEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
+                        {
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
+                            this.cargarTablasIncidentes();
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Encuesta registrada correctamente');", true);
                         }
                         else
                         {
-                            correcto = false;
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('Error al registrar la encuesta');", true);
                         }
                     }
                 }
-                if (correcto)
+                else
                 {
-                    if (controlEncuestas.SaveChangesEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
-                    {
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
-                        this.cargarTablasIncidentes();
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Encuesta registrada correctamente');", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('Error al registrar la encuesta');", true);
-                    }
+                    ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('Agregue la observación del servicio');", true);
                 }
             }
         }
@@ -468,7 +478,7 @@ namespace HelpDeskWeb.Solicitudes
                 cbSeguimiento2.Text, cbSoporte2.Text
             }))
             {
-                if (Utilerias.validarFechas(new TextBox[] { txtFechaInicio, txtFechaFinal, txtHoraInicio, txtHoraFinal }))
+                if (Utilerias.validarFechas(new TextBox[] { txtFechaInicio, txtFechaFinal, txtHoraInicio, txtHoraFinal }) && Utilerias.fechaReal(txtFechaFinal.Text, true))
                 {
                     if (Utilerias.convertirFecha(txtFechaInicio.Text +" "+ txtHoraInicio.Text) <= Utilerias.convertirFecha(txtFechaFinal.Text + " " + txtHoraFinal.Text))
                     {

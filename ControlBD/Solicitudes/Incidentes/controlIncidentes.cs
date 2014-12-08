@@ -86,7 +86,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
                             a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
                             a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
                             a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
@@ -109,7 +109,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
                             a.apoyo.Contains(filtro) || a.tipo.Contains(filtro) ||
                             a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
                             a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
@@ -207,7 +207,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 {
                     if (limiteIn == null || limiteSp == null)
                     {
-                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
                             a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
                             a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
                             a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
@@ -230,7 +230,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_incidente_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
+                        return dbhelp.modelo.vt_incidentes_sin_cerrar.Where(a => (a.acciones.Contains(filtro) || a.descripcion.Contains(filtro) ||
                             a.apoyo.Contains(filtro) || a.solicitante.Contains(filtro) ||
                             a.soporte.Contains(filtro) || a.id == numero || a.prioridad.Contains(filtro) ||
                             a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_solicitud.Equals(busquedaFecha) ||
@@ -395,7 +395,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                return dbhelp.modelo.vt_incidente_sin_cerrar.AsNoTracking().Where(a => a.estatus_incidente == 0).Count();
+                return dbhelp.modelo.vt_incidentes_sin_cerrar.AsNoTracking().Where(a => a.estatus_incidente == 0).Count();
             }
             catch
             {

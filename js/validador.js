@@ -37,6 +37,16 @@ function validateDecimal(txt) {
     }
 }
 
+function isTitulo(keyCode) {
+    if (keyCode == 16)
+        isShift = true;
+    var res = (((keyCode >= 48 && keyCode <= 57) && isShift == false) ||
+        ((keyCode >= 65 && keyCode <= 90) || (keyCode == 8 || keyCode == 9 || keyCode == 32) || 
+        (keyCode == 13 || keyCode == 192) || (keyCode >= 96 && keyCode <= 105))
+        || (keyCode >= 37 && keyCode <= 46));
+    return res;
+}
+
  function isDescription(keyCode) {
         if (keyCode == 16)
             isShift = true;

@@ -31,9 +31,8 @@ namespace HelpDeskWeb
                 }
                 else if (control is DropDownList)
                 {
-                    (control as DropDownList).SelectedIndex = 0;
+                    (control as DropDownList).SelectedIndex = -1;
                 }
-
                 limpiarControles(control.Controls);
             }
         }
@@ -143,6 +142,33 @@ namespace HelpDeskWeb
                 rango[1] = inferior.Value;
             }
             return rango;
+        }
+
+        public static bool fechaReal(string fecha, bool inferior)
+        {
+            DateTime valorFecha = Convert.ToDateTime(fecha);
+            if (inferior)
+            {
+                if (valorFecha <= DateTime.Now)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (valorFecha >= DateTime.Now)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 

@@ -20,21 +20,21 @@
     <script src="../js/validador.js"></script>
      <script type="text/javascript" lang="js">
             $(function () {
-                    $("#<%=txtFiltroLugares.ClientID%>").keyup(function () {
-                        __doPostBack("txtFiltroLugares", $("#<%=txtFiltroLugares.ClientID%>").val());
-                })
-            });
-
-            $(function () {
+                $("#<%=txtFiltroLugares.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltroLugares", $("#<%=txtFiltroLugares.ClientID%>").val());
+                });
                 $("#<%=txtFiltroTipoIncidentes.ClientID%>").keyup(function () {
                     __doPostBack("txtFiltroTipoIncidentes", $("#<%=txtFiltroTipoIncidentes.ClientID%>").val());
-                })
-            });
-
-            $(function () {
-             $("#<%=txtFiltroReq.ClientID%>").keyup(function () {
-                 __doPostBack("txtFiltroReq", $("#<%=txtFiltroReq.ClientID%>").val());
-                })
+                });
+                $("#<%=txtFiltroReq.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltroReq", $("#<%=txtFiltroReq.ClientID%>").val());
+                });
+                $("#<%=txtFiltroAcomodo.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltroAcomodo", $("#<%=txtFiltroAcomodo.ClientID%>").val());
+                });
+                $("#<%=txtFiltroPregunta.ClientID%>").keyup(function () {
+                    __doPostBack("txtFiltroPregunta", $("#<%=txtFiltroPregunta.ClientID%>").val());
+                });
              });
     </script>
 </head>
@@ -117,7 +117,11 @@
                                     <li>
                                         <asp:LinkButton runat="server" ID="tabLugares" OnClientClick="activaTab('1')" href="#lugares" role="tab">Lugares</asp:LinkButton></li>
                                     <li>
-                                        <asp:LinkButton runat="server" ID="tabRequerimientos" OnClientClick="activaTab('2')" href="#requerimientos" role="tab">Requerimientos</asp:LinkButton></li>
+                                        <asp:LinkButton runat="server" ID="tabRequerimientos" OnClientClick="activaTab('2')" href="#recursos" role="tab">Recursos</asp:LinkButton></li>
+                                    <li>
+                                        <asp:LinkButton runat="server" ID="tabAcomodos" OnClientClick="activaTab('3')" href="#acomodos" role="tab">Acomodos</asp:LinkButton></li>
+                                    <li>
+                                        <asp:LinkButton runat="server" ID="tabPreguntas" OnClientClick="activaTab('4')" href="#preguntas" role="tab">Preguntas</asp:LinkButton></li>
                                 </ul>
                                 <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <asp:Panel runat="server" CssClass="modal-dialog modal-md">
@@ -137,7 +141,7 @@
                                                                     <asp:TextBox runat="server" ID="txtNombre" onpaste="return false;" onkeydown="return isAlpha(event.keyCode);" CssClass="form-control" placeholder="Nombre" />
                                                                 </asp:Panel>
                                                                 <asp:Panel runat="server" ID="panelTipoRequerimiento" CssClass="form-group" Visible="false">
-                                                                    <asp:Label runat="server" Text="Tipo de requerimiento" Font-Bold="true"></asp:Label>
+                                                                    <asp:Label runat="server" Text="Tipo de recurso" Font-Bold="true"></asp:Label>
                                                                     <asp:DropDownList runat="server" ID="cbTipoRequerimiento" CssClass="form-control">
                                                                         <asp:ListItem Text="Cuantificable" Value="True"></asp:ListItem>
                                                                         <asp:ListItem Text="No cuantificable" Value="False"></asp:ListItem>
@@ -156,11 +160,12 @@
                                                     <asp:AsyncPostBackTrigger ControlID="btnEditarTipo" EventName="Click" />
                                                     <asp:AsyncPostBackTrigger ControlID="btnNuevoLugar" EventName="Click" />
                                                     <asp:AsyncPostBackTrigger ControlID="btnEditarLugar" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnNuevoAcomodo" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnEditarAcomodo" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnNuevaPregunta" EventName="Click" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnEditarPregunta" EventName="Click" />
                                                     <asp:AsyncPostBackTrigger ControlID="btnNuevoRequerimiento" EventName="Click" />
                                                     <asp:AsyncPostBackTrigger ControlID="btnEditarRequerimiento" EventName="Click" />
-                                                    <asp:AsyncPostBackTrigger ControlID="tabTipoIncidentes" EventName="Click" />
-                                                    <asp:AsyncPostBackTrigger ControlID="tabLugares" EventName="Click" />
-                                                    <asp:AsyncPostBackTrigger ControlID="tabRequerimientos" EventName="Click" />
                                                 </Triggers>
                                             </asp:UpdatePanel>
                                         </asp:Panel>
@@ -206,7 +211,7 @@
                                             <div class="col-lg-10">
                                                 <asp:Table runat="server" ID="TablaTipoIncidentes" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                     <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
-                                                        <asp:TableCell>Tipos de incidentes</asp:TableCell>
+                                                        <asp:TableCell>Nombre</asp:TableCell>
                                                     </asp:TableRow>
                                                 </asp:Table>
                                                 <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
@@ -268,7 +273,7 @@
                                         <div class="col-lg-10">
                                             <asp:Table runat="server" ID="Table1" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                 <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
-                                                    <asp:TableCell>Lugares</asp:TableCell>
+                                                    <asp:TableCell>Nombre</asp:TableCell>
                                                 </asp:TableRow>
                                             </asp:Table>
                                             <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
@@ -292,7 +297,7 @@
                                         </div>
                                     </div>
                                 </asp:Panel>
-                                <asp:Panel runat="server" ID="requerimientos" CssClass="tab-pane fade">
+                                <asp:Panel runat="server" ID="recursos" CssClass="tab-pane fade">
                                     <div class="form-group">
                                         <div class="row">
                                            <div class="col-lg-1"></div>
@@ -342,7 +347,7 @@
                                             <div class="col-lg-10">
                                                 <asp:Table runat="server" ID="Table2" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                     <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
-                                                        <asp:TableCell>Requerimiento</asp:TableCell>
+                                                        <asp:TableCell>Nombre</asp:TableCell>
                                                     </asp:TableRow>
                                                 </asp:Table>
                                                 <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
@@ -351,7 +356,7 @@
                                                             <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvRequerimientos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
                                                                 AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
                                                                 <Columns>
-                                                                    <asp:BoundField HeaderText="Requerimiento" DataField="nombre" />
+                                                                    <asp:BoundField HeaderText="Nombre" DataField="nombre" />
                                                                 </Columns>
                                                             </asp:GridView>
                                                         </ContentTemplate>
@@ -364,6 +369,130 @@
                                                 </asp:Panel>
                                             </div>
                                             <div class="col-lg-1"></div>
+                                        </div>
+                                    </div>
+                                </asp:Panel>
+                                <asp:Panel  runat="server" ID="acomodos" CssClass="tab-pane fade">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroAcomodo" placeholder="Buscar" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <asp:UpdatePanel runat="server" ID="upAccionesAcomodo" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
+                                                            <asp:LinkButton ID="btnNuevoAcomodo" OnCommand="btnNuevo_Command" CommandName="abrirNuevoAcomodo" CommandArgument="acomodo" runat="server" CssClass="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                             Nuevo
+                                                            </asp:LinkButton>
+                                                            <asp:LinkButton ID="btnEditarAcomodo" OnCommand="btnEditar_Command" CommandName="abrirEditarAcomodo" CommandArgument="acomodo" runat="server" CssClass="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Editar
+                                                            </asp:LinkButton>
+                                                        </asp:Panel>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevoAcomodo" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnEditarAcomodo" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                        <div class="col-lg-1"></div>
+                                        <div class="col-lg-10">
+                                            <asp:Table runat="server" ID="Table3" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
+                                                <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
+                                                    <asp:TableCell>Nombre</asp:TableCell>
+                                                </asp:TableRow>
+                                            </asp:Table>
+                                            <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
+                                                <asp:UpdatePanel runat="server" ID="upGvAcomodos" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvAcomodos" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="Acomodo" DataField="nombre" />
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="txtFiltroAcomodo" EventName="TextChanged" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </asp:Panel>
+                                        </div>
+                                        <div class="col-lg-1"></div>
+                                        </div>
+                                    </div>
+                                </asp:Panel>
+                                <asp:Panel  runat="server" ID="preguntas" CssClass="tab-pane fade">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroPregunta" placeholder="Buscar" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <asp:UpdatePanel runat="server" ID="upAccionesPreguntas" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:Panel runat="server" CssClass="btn-group btn-group-justified">
+                                                            <asp:LinkButton ID="btnNuevaPregunta" OnCommand="btnNuevo_Command" CommandName="abrirNuevaPregunta" CommandArgument="pregunta" runat="server" CssClass="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                             Nuevo
+                                                            </asp:LinkButton>
+                                                            <asp:LinkButton ID="btnEditarPregunta" OnCommand="btnEditar_Command" CommandName="abrirEditarPregunta" CommandArgument="pregunta" runat="server" CssClass="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Editar
+                                                            </asp:LinkButton>
+                                                        </asp:Panel>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnNuevaPregunta" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="btnEditarPregunta" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                        <div class="col-lg-1"></div>
+                                        <div class="col-lg-10">
+                                            <asp:Table runat="server" ID="Table4" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
+                                                <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
+                                                    <asp:TableCell>Aspecto a calificar</asp:TableCell>
+                                                </asp:TableRow>
+                                            </asp:Table>
+                                            <asp:Panel runat="server" CssClass="contenedorTablaCatalogos" ScrollBars="Auto">
+                                                <asp:UpdatePanel runat="server" ID="upGvPreguntas" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:GridView OnRowCreated="gv_RowCreated" runat="server" ID="gvPreguntas" AutoGenerateColumns="False" CssClass="table table-bordered" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                            AlternatingRowStyle-BackColor="#e0e0e0" ShowHeader="false" DataKeyNames="id" CellPadding="4" GridLines="Horizontal">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="Nombre" DataField="pregunta" />
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnGrabar" EventName="Click" />
+                                                        <asp:AsyncPostBackTrigger ControlID="txtFiltroPregunta" EventName="TextChanged" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </asp:Panel>
+                                        </div>
+                                        <div class="col-lg-1"></div>
                                         </div>
                                     </div>
                                 </asp:Panel>

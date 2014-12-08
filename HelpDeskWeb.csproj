@@ -323,6 +323,8 @@
     <Compile Include="ControlBD\Acceso\controlAcceso.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ControlBD\Catalogo\controlAcomodo.cs" />
+    <Compile Include="ControlBD\Catalogo\controlPregunta.cs" />
     <Compile Include="ControlBD\Catalogo\controlArea.cs" />
     <Compile Include="ControlBD\Catalogo\controlCoordinacion.cs" />
     <Compile Include="ControlBD\Catalogo\controlDepto.cs" />
@@ -356,6 +358,9 @@
       <DependentUpon>ModeloHD.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\sp_requerimientos_sin_asignar_Result.cs">
+      <DependentUpon>ModeloHD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFrameWork\tblacomodo.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\tblarea.cs">
@@ -439,13 +444,13 @@
     <Compile Include="EntityFrameWork\vt_eventos_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_evento_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_eventos_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_incidentes_cerrados.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFrameWork\vt_incidente_sin_cerrar.cs">
+    <Compile Include="EntityFrameWork\vt_incidentes_sin_cerrar.cs">
       <DependentUpon>ModeloHD.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFrameWork\vt_preguntas.cs">

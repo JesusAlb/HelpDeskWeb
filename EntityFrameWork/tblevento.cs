@@ -24,11 +24,12 @@ namespace HelpDeskWeb.EntityFrameWork
         public int fk_idtipo { get; set; }
         public int fk_idlugar { get; set; }
         public int asistencia { get; set; }
-        public string acomodo { get; set; }
+        public Nullable<int> fk_idacomodo { get; set; }
         public System.DateTime fecha_realizacion { get; set; }
         public string observacion { get; set; }
         public int fk_idservicio { get; set; }
     
+        public virtual tblacomodo tblacomodo { get; set; }
         public virtual ICollection<tblrecursoasignado> tblrecursoasignado { get; set; }
         public virtual tblservicio tblservicio { get; set; }
         public virtual tbllugar tbllugar { get; set; }

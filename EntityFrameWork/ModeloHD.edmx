@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblacomodo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="id" />
@@ -74,9 +81,9 @@
           <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="fk_idlugar" Type="int" Nullable="false" />
           <Property Name="asistencia" Type="int" Nullable="false" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fk_idacomodo" Type="int" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
-          <Property Name="observacion" Type="varchar" MaxLength="250" />
+          <Property Name="observacion" Type="varchar" MaxLength="600" />
           <Property Name="fk_idservicio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblincidente">
@@ -117,10 +124,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pregunta" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="estatus" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblprioridad">
           <Key>
@@ -247,7 +253,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene defi
             <PropertyRef Name="id" />
             <PropertyRef Name="pregunta" />
             <PropertyRef Name="estatus_pregunta" />
-            <PropertyRef Name="afinidad" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="idcalidad" />
             <PropertyRef Name="estatus_calidad" />
@@ -257,7 +262,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene defi
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="pregunta" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="estatus_pregunta" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
           <Property Name="valor" Type="int" Nullable="false" />
           <Property Name="idcalidad" Type="int" Nullable="false" />
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
@@ -296,40 +300,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_equipos' no tiene defini
           <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_evento_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vt_evento_sin_cerrar">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="descripcion" />
-            <PropertyRef Name="fecha_solicitud" />
-            <PropertyRef Name="estatus_evento" />
-            <PropertyRef Name="solicitante" />
-            <PropertyRef Name="idsolicitante" />
-            <PropertyRef Name="tipo" />
-            <PropertyRef Name="asistencia" />
-            <PropertyRef Name="acomodo" />
-            <PropertyRef Name="fecha_realizacion" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="fecha_solicitud" Type="datetime" Nullable="false" />
-          <Property Name="fecha_cierre" Type="datetime" />
-          <Property Name="hora_inicial" Type="datetime" />
-          <Property Name="hora_final" Type="datetime" />
-          <Property Name="estatus_evento" Type="int" Nullable="false" />
-          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="idsolicitante" Type="int" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
-          <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="lugar" Type="varchar" MaxLength="60" />
-          <Property Name="asistencia" Type="int" Nullable="false" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vt_eventos_cerrados">
           <Key>
@@ -363,7 +333,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tie
           <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="lugar" Type="varchar" MaxLength="60" />
           <Property Name="asistencia" Type="int" Nullable="false" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="acomodo" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
           <Property Name="idcalidad" Type="int" Nullable="false" />
           <Property Name="estatus_calidad" Type="bit" Nullable="false" />
@@ -371,32 +341,38 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tie
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidente_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vt_incidente_sin_cerrar">
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vt_eventos_sin_cerrar">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
             <PropertyRef Name="descripcion" />
-            <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
-            <PropertyRef Name="estatus_incidente" />
+            <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
-            <PropertyRef Name="fk_idusuario_solicitante" />
+            <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="asistencia" />
+            <PropertyRef Name="acomodo" />
+            <PropertyRef Name="fecha_realizacion" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
-          <Property Name="tipo" Type="varchar" MaxLength="40" />
-          <Property Name="prioridad" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="acciones" Type="varchar" MaxLength="250" />
-          <Property Name="solucion" Type="varchar" MaxLength="250" />
           <Property Name="fecha_solicitud" Type="datetime" Nullable="false" />
           <Property Name="fecha_cierre" Type="datetime" />
           <Property Name="hora_inicial" Type="datetime" />
           <Property Name="hora_final" Type="datetime" />
-          <Property Name="estatus_incidente" Type="int" Nullable="false" />
+          <Property Name="estatus_evento" Type="int" Nullable="false" />
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
+          <Property Name="idsolicitante" Type="int" Nullable="false" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="lugar" Type="varchar" MaxLength="60" />
+          <Property Name="asistencia" Type="int" Nullable="false" />
+          <Property Name="acomodo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -434,19 +410,45 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_cerrados' no 
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vt_incidentes_sin_cerrar">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="prioridad" />
+            <PropertyRef Name="fecha_solicitud" />
+            <PropertyRef Name="estatus_incidente" />
+            <PropertyRef Name="solicitante" />
+            <PropertyRef Name="fk_idusuario_solicitante" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="tipo" Type="varchar" MaxLength="40" />
+          <Property Name="prioridad" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="acciones" Type="varchar" MaxLength="250" />
+          <Property Name="solucion" Type="varchar" MaxLength="250" />
+          <Property Name="fecha_solicitud" Type="datetime" Nullable="false" />
+          <Property Name="fecha_cierre" Type="datetime" />
+          <Property Name="hora_inicial" Type="datetime" />
+          <Property Name="hora_final" Type="datetime" />
+          <Property Name="estatus_incidente" Type="int" Nullable="false" />
+          <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
+          <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_preguntas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vt_preguntas">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="pregunta" />
             <PropertyRef Name="estatus" />
-            <PropertyRef Name="afinidad" />
           </Key>
           <Property Name="numero" Type="bigint" />
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pregunta" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="estatus" Type="bit" Nullable="false" />
-          <Property Name="afinidad" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_eventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -590,6 +592,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nom_institucion" Type="varchar" MaxLength="60" />
         </EntityType>
+        <Association Name="fk_acomodo">
+          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="0..1" />
+          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblacomodo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblevento">
+              <PropertyRef Name="fk_idacomodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_area">
           <End Role="tblarea" Type="Self.tblarea" Multiplicity="1" />
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
@@ -693,7 +707,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_idservicio">
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1" />
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblservicio">
@@ -939,7 +955,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Parameter Name="idevento" Type="int" Mode="In" />
           <Parameter Name="titulo" Type="varchar" Mode="In" />
           <Parameter Name="lugar" Type="int" Mode="In" />
-          <Parameter Name="acomodo" Type="varchar" Mode="In" />
+          <Parameter Name="acomodo" Type="int" Mode="In" />
           <Parameter Name="asistencia" Type="int" Mode="In" />
           <Parameter Name="horaIn" Type="datetime" Mode="In" />
           <Parameter Name="HoraFn" Type="datetime" Mode="In" />
@@ -962,6 +978,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Parameter Name="idEvento" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="dbhelpdeskV2ModelStoreContainer">
+          <EntitySet Name="tblacomodo" EntityType="Self.tblacomodo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblarea" EntityType="Self.tblarea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblcoordinacion" EntityType="Self.tblcoordinacion" Schema="dbo" store:Type="Tables" />
@@ -998,7 +1015,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_encuestas].[id] AS [id], 
     [vt_encuestas].[pregunta] AS [pregunta], 
     [vt_encuestas].[estatus_pregunta] AS [estatus_pregunta], 
-    [vt_encuestas].[afinidad] AS [afinidad], 
     [vt_encuestas].[valor] AS [valor], 
     [vt_encuestas].[idcalidad] AS [idcalidad], 
     [vt_encuestas].[observaciones] AS [observaciones], 
@@ -1026,27 +1042,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_equipos].[procesador] AS [procesador]
     FROM [dbo].[vt_equipos] AS [vt_equipos]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vt_evento_sin_cerrar" EntityType="Self.vt_evento_sin_cerrar" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vt_evento_sin_cerrar].[id] AS [id], 
-    [vt_evento_sin_cerrar].[nombre] AS [nombre], 
-    [vt_evento_sin_cerrar].[descripcion] AS [descripcion], 
-    [vt_evento_sin_cerrar].[fecha_solicitud] AS [fecha_solicitud], 
-    [vt_evento_sin_cerrar].[fecha_cierre] AS [fecha_cierre], 
-    [vt_evento_sin_cerrar].[hora_inicial] AS [hora_inicial], 
-    [vt_evento_sin_cerrar].[hora_final] AS [hora_final], 
-    [vt_evento_sin_cerrar].[estatus_evento] AS [estatus_evento], 
-    [vt_evento_sin_cerrar].[solicitante] AS [solicitante], 
-    [vt_evento_sin_cerrar].[idsolicitante] AS [idsolicitante], 
-    [vt_evento_sin_cerrar].[soporte] AS [soporte], 
-    [vt_evento_sin_cerrar].[apoyo] AS [apoyo], 
-    [vt_evento_sin_cerrar].[tipo] AS [tipo], 
-    [vt_evento_sin_cerrar].[lugar] AS [lugar], 
-    [vt_evento_sin_cerrar].[asistencia] AS [asistencia], 
-    [vt_evento_sin_cerrar].[acomodo] AS [acomodo], 
-    [vt_evento_sin_cerrar].[fecha_realizacion] AS [fecha_realizacion]
-    FROM [dbo].[vt_evento_sin_cerrar] AS [vt_evento_sin_cerrar]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vt_eventos_cerrados" EntityType="Self.vt_eventos_cerrados" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vt_eventos_cerrados].[id] AS [id], 
@@ -1072,24 +1067,26 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_eventos_cerrados].[observaciones] AS [observaciones]
     FROM [dbo].[vt_eventos_cerrados] AS [vt_eventos_cerrados]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vt_incidente_sin_cerrar" EntityType="Self.vt_incidente_sin_cerrar" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="vt_eventos_sin_cerrar" EntityType="Self.vt_eventos_sin_cerrar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vt_incidente_sin_cerrar].[id] AS [id], 
-    [vt_incidente_sin_cerrar].[descripcion] AS [descripcion], 
-    [vt_incidente_sin_cerrar].[soporte] AS [soporte], 
-    [vt_incidente_sin_cerrar].[apoyo] AS [apoyo], 
-    [vt_incidente_sin_cerrar].[tipo] AS [tipo], 
-    [vt_incidente_sin_cerrar].[prioridad] AS [prioridad], 
-    [vt_incidente_sin_cerrar].[acciones] AS [acciones], 
-    [vt_incidente_sin_cerrar].[solucion] AS [solucion], 
-    [vt_incidente_sin_cerrar].[fecha_solicitud] AS [fecha_solicitud], 
-    [vt_incidente_sin_cerrar].[fecha_cierre] AS [fecha_cierre], 
-    [vt_incidente_sin_cerrar].[hora_inicial] AS [hora_inicial], 
-    [vt_incidente_sin_cerrar].[hora_final] AS [hora_final], 
-    [vt_incidente_sin_cerrar].[estatus_incidente] AS [estatus_incidente], 
-    [vt_incidente_sin_cerrar].[solicitante] AS [solicitante], 
-    [vt_incidente_sin_cerrar].[fk_idusuario_solicitante] AS [fk_idusuario_solicitante]
-    FROM [dbo].[vt_incidente_sin_cerrar] AS [vt_incidente_sin_cerrar]</DefiningQuery>
+    [vt_eventos_sin_cerrar].[id] AS [id], 
+    [vt_eventos_sin_cerrar].[nombre] AS [nombre], 
+    [vt_eventos_sin_cerrar].[descripcion] AS [descripcion], 
+    [vt_eventos_sin_cerrar].[fecha_solicitud] AS [fecha_solicitud], 
+    [vt_eventos_sin_cerrar].[fecha_cierre] AS [fecha_cierre], 
+    [vt_eventos_sin_cerrar].[hora_inicial] AS [hora_inicial], 
+    [vt_eventos_sin_cerrar].[hora_final] AS [hora_final], 
+    [vt_eventos_sin_cerrar].[estatus_evento] AS [estatus_evento], 
+    [vt_eventos_sin_cerrar].[solicitante] AS [solicitante], 
+    [vt_eventos_sin_cerrar].[idsolicitante] AS [idsolicitante], 
+    [vt_eventos_sin_cerrar].[soporte] AS [soporte], 
+    [vt_eventos_sin_cerrar].[apoyo] AS [apoyo], 
+    [vt_eventos_sin_cerrar].[tipo] AS [tipo], 
+    [vt_eventos_sin_cerrar].[lugar] AS [lugar], 
+    [vt_eventos_sin_cerrar].[asistencia] AS [asistencia], 
+    [vt_eventos_sin_cerrar].[acomodo] AS [acomodo], 
+    [vt_eventos_sin_cerrar].[fecha_realizacion] AS [fecha_realizacion]
+    FROM [dbo].[vt_eventos_sin_cerrar] AS [vt_eventos_sin_cerrar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1114,13 +1111,31 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_incidentes_cerrados].[observaciones] AS [observaciones]
     FROM [dbo].[vt_incidentes_cerrados] AS [vt_incidentes_cerrados]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vt_incidentes_sin_cerrar" EntityType="Self.vt_incidentes_sin_cerrar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vt_incidentes_sin_cerrar].[id] AS [id], 
+    [vt_incidentes_sin_cerrar].[descripcion] AS [descripcion], 
+    [vt_incidentes_sin_cerrar].[soporte] AS [soporte], 
+    [vt_incidentes_sin_cerrar].[apoyo] AS [apoyo], 
+    [vt_incidentes_sin_cerrar].[tipo] AS [tipo], 
+    [vt_incidentes_sin_cerrar].[prioridad] AS [prioridad], 
+    [vt_incidentes_sin_cerrar].[acciones] AS [acciones], 
+    [vt_incidentes_sin_cerrar].[solucion] AS [solucion], 
+    [vt_incidentes_sin_cerrar].[fecha_solicitud] AS [fecha_solicitud], 
+    [vt_incidentes_sin_cerrar].[fecha_cierre] AS [fecha_cierre], 
+    [vt_incidentes_sin_cerrar].[hora_inicial] AS [hora_inicial], 
+    [vt_incidentes_sin_cerrar].[hora_final] AS [hora_final], 
+    [vt_incidentes_sin_cerrar].[estatus_incidente] AS [estatus_incidente], 
+    [vt_incidentes_sin_cerrar].[solicitante] AS [solicitante], 
+    [vt_incidentes_sin_cerrar].[fk_idusuario_solicitante] AS [fk_idusuario_solicitante]
+    FROM [dbo].[vt_incidentes_sin_cerrar] AS [vt_incidentes_sin_cerrar]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vt_preguntas].[numero] AS [numero], 
     [vt_preguntas].[id] AS [id], 
     [vt_preguntas].[pregunta] AS [pregunta], 
-    [vt_preguntas].[estatus] AS [estatus], 
-    [vt_preguntas].[afinidad] AS [afinidad]
+    [vt_preguntas].[estatus] AS [estatus]
     FROM [dbo].[vt_preguntas] AS [vt_preguntas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" store:Type="Views" store:Schema="dbo">
@@ -1219,6 +1234,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_usuarios].[nom_institucion] AS [nom_institucion]
     FROM [dbo].[vt_usuarios] AS [vt_usuarios]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="fk_acomodo" Association="Self.fk_acomodo">
+            <End Role="tblacomodo" EntitySet="tblacomodo" />
+            <End Role="tblevento" EntitySet="tblevento" />
+          </AssociationSet>
           <AssociationSet Name="fk_area" Association="Self.fk_area">
             <End Role="tblarea" EntitySet="tblarea" />
             <End Role="tblusuario" EntitySet="tblusuario" />
@@ -1328,11 +1347,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbhelpdeskV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblacomodo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblevento" Relationship="Self.fk_acomodo" FromRole="tblacomodo" ToRole="tblevento" />
+        </EntityType>
         <EntityType Name="tblarea">
           <Key>
             <PropertyRef Name="id" />
@@ -1415,10 +1441,11 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="fk_idlugar" Type="Int32" Nullable="false" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
-          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_idacomodo" Type="Int32" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
           <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblacomodo" Relationship="Self.fk_acomodo" FromRole="tblevento" ToRole="tblacomodo" />
           <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_evento_en_uso" FromRole="tblevento" ToRole="tblrecursoasignado" />
           <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio" FromRole="tblevento" ToRole="tblservicio" />
           <NavigationProperty Name="tbllugar" Relationship="Self.fk_lugar" FromRole="tblevento" ToRole="tbllugar" />
@@ -1471,10 +1498,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estatus" Type="Boolean" Nullable="false" />
-          <Property Name="afinidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblrespuesta" Relationship="Self.fk_pregunta" FromRole="tblpregunta" ToRole="tblrespuesta" />
         </EntityType>
         <EntityType Name="tblprioridad">
@@ -1625,7 +1651,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
             <PropertyRef Name="pregunta" />
             <PropertyRef Name="estatus_pregunta" />
-            <PropertyRef Name="afinidad" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="idcalidad" />
             <PropertyRef Name="estatus_calidad" />
@@ -1635,7 +1660,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estatus_pregunta" Type="Boolean" Nullable="false" />
-          <Property Name="afinidad" Type="Int32" Nullable="false" />
           <Property Name="valor" Type="Int32" Nullable="false" />
           <Property Name="idcalidad" Type="Int32" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -1671,38 +1695,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="serie_teclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="vt_evento_sin_cerrar">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="descripcion" />
-            <PropertyRef Name="fecha_solicitud" />
-            <PropertyRef Name="estatus_evento" />
-            <PropertyRef Name="solicitante" />
-            <PropertyRef Name="idsolicitante" />
-            <PropertyRef Name="tipo" />
-            <PropertyRef Name="asistencia" />
-            <PropertyRef Name="acomodo" />
-            <PropertyRef Name="fecha_realizacion" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
-          <Property Name="hora_inicial" Type="DateTime" Precision="3" />
-          <Property Name="hora_final" Type="DateTime" Precision="3" />
-          <Property Name="estatus_evento" Type="Int32" Nullable="false" />
-          <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="asistencia" Type="Int32" Nullable="false" />
-          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="vt_eventos_cerrados">
           <Key>
             <PropertyRef Name="id" />
@@ -1735,38 +1727,44 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
-          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="idcalidad" Type="Int32" Nullable="false" />
           <Property Name="estatus_calidad" Type="Boolean" Nullable="false" />
           <Property Name="promedio" Type="Double" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vt_incidente_sin_cerrar">
+        <EntityType Name="vt_eventos_sin_cerrar">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
             <PropertyRef Name="descripcion" />
-            <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
-            <PropertyRef Name="estatus_incidente" />
+            <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
-            <PropertyRef Name="fk_idusuario_solicitante" />
+            <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="asistencia" />
+            <PropertyRef Name="acomodo" />
+            <PropertyRef Name="fecha_realizacion" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
           <Property Name="hora_inicial" Type="DateTime" Precision="3" />
           <Property Name="hora_final" Type="DateTime" Precision="3" />
-          <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
+          <Property Name="estatus_evento" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
+          <Property Name="idsolicitante" Type="Int32" Nullable="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="asistencia" Type="Int32" Nullable="false" />
+          <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="vt_incidentes_cerrados">
           <Key>
@@ -1801,18 +1799,42 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="promedio" Type="Double" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vt_incidentes_sin_cerrar">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="prioridad" />
+            <PropertyRef Name="fecha_solicitud" />
+            <PropertyRef Name="estatus_incidente" />
+            <PropertyRef Name="solicitante" />
+            <PropertyRef Name="fk_idusuario_solicitante" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
+          <Property Name="hora_inicial" Type="DateTime" Precision="3" />
+          <Property Name="hora_final" Type="DateTime" Precision="3" />
+          <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
+          <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="vt_preguntas">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="pregunta" />
             <PropertyRef Name="estatus" />
-            <PropertyRef Name="afinidad" />
           </Key>
           <Property Name="numero" Type="Int64" />
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estatus" Type="Boolean" Nullable="false" />
-          <Property Name="afinidad" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_promedio_eventos">
           <Key>
@@ -1942,6 +1964,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="fk_acomodo">
+          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="0..1" />
+          <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblacomodo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblevento">
+              <PropertyRef Name="fk_idacomodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_area">
           <End Role="tblarea" Type="Self.tblarea" Multiplicity="1" />
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
@@ -2107,7 +2141,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_idservicio">
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1" />
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblservicio">
@@ -2279,6 +2315,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbhelpdeskV2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblacomodo" EntityType="Self.tblacomodo" />
           <EntitySet Name="tblarea" EntityType="Self.tblarea" />
           <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" />
           <EntitySet Name="tblcoordinacion" EntityType="Self.tblcoordinacion" />
@@ -2305,10 +2342,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" />
           <EntitySet Name="vt_encuestas" EntityType="Self.vt_encuestas" />
           <EntitySet Name="vt_equipos" EntityType="Self.vt_equipos" />
-          <EntitySet Name="vt_evento_sin_cerrar" EntityType="Self.vt_evento_sin_cerrar" />
           <EntitySet Name="vt_eventos_cerrados" EntityType="Self.vt_eventos_cerrados" />
-          <EntitySet Name="vt_incidente_sin_cerrar" EntityType="Self.vt_incidente_sin_cerrar" />
+          <EntitySet Name="vt_eventos_sin_cerrar" EntityType="Self.vt_eventos_sin_cerrar" />
           <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" />
+          <EntitySet Name="vt_incidentes_sin_cerrar" EntityType="Self.vt_incidentes_sin_cerrar" />
           <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" />
           <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
           <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
@@ -2317,6 +2354,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
           <EntitySet Name="vt_servicios" EntityType="Self.vt_servicios" />
           <EntitySet Name="vt_usuarios" EntityType="Self.vt_usuarios" />
+          <AssociationSet Name="fk_acomodo" Association="Self.fk_acomodo">
+            <End Role="tblacomodo" EntitySet="tblacomodo" />
+            <End Role="tblevento" EntitySet="tblevento" />
+          </AssociationSet>
           <AssociationSet Name="fk_area" Association="Self.fk_area">
             <End Role="tblarea" EntitySet="tblarea" />
             <End Role="tblusuario" EntitySet="tblusuario" />
@@ -2426,7 +2467,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
           <FunctionImport Name="sp_cerrar_evento">
-            <Parameter Name="idservicio" Mode="In" Type="Int32" />
+          <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_cerrar_incidente">
             <Parameter Name="idIncidente" Mode="In" Type="Int32" />
@@ -2438,7 +2479,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <Parameter Name="idevento" Mode="In" Type="Int32" />
             <Parameter Name="titulo" Mode="In" Type="String" />
             <Parameter Name="lugar" Mode="In" Type="Int32" />
-            <Parameter Name="acomodo" Mode="In" Type="String" />
+            <Parameter Name="acomodo" Mode="In" Type="Int32" />
             <Parameter Name="asistencia" Mode="In" Type="Int32" />
             <Parameter Name="horaIn" Mode="In" Type="DateTime" />
             <Parameter Name="HoraFn" Mode="In" Type="DateTime" />
@@ -2458,7 +2499,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <Parameter Name="id_tipoIncidencia_general" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
-            <Parameter Name="idEvento" Mode="In" Type="Int32" />
+          <Parameter Name="idEvento" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_requerimientos_sin_asignar_Result">
@@ -2473,6 +2514,14 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbhelpdeskV2ModelStoreContainer" CdmEntityContainer="dbhelpdeskV2Entities">
+          <EntitySetMapping Name="tblacomodo">
+            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblacomodo">
+              <MappingFragment StoreEntitySet="tblacomodo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblarea">
             <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblarea">
               <MappingFragment StoreEntitySet="tblarea">
@@ -2547,7 +2596,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
                 <ScalarProperty Name="fk_idlugar" ColumnName="fk_idlugar" />
                 <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+                <ScalarProperty Name="fk_idacomodo" ColumnName="fk_idacomodo" />
                 <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
                 <ScalarProperty Name="fk_idservicio" ColumnName="fk_idservicio" />
@@ -2598,7 +2647,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="pregunta" ColumnName="pregunta" />
                 <ScalarProperty Name="estatus" ColumnName="estatus" />
-                <ScalarProperty Name="afinidad" ColumnName="afinidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2736,7 +2784,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="pregunta" ColumnName="pregunta" />
                 <ScalarProperty Name="estatus_pregunta" ColumnName="estatus_pregunta" />
-                <ScalarProperty Name="afinidad" ColumnName="afinidad" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="idcalidad" ColumnName="idcalidad" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
@@ -2767,29 +2814,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vt_evento_sin_cerrar">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_evento_sin_cerrar">
-              <MappingFragment StoreEntitySet="vt_evento_sin_cerrar">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
-                <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
-                <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
-                <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-                <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
-                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
-                <ScalarProperty Name="soporte" ColumnName="soporte" />
-                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="lugar" ColumnName="lugar" />
-                <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-                <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vt_eventos_cerrados">
             <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_cerrados">
               <MappingFragment StoreEntitySet="vt_eventos_cerrados">
@@ -2817,24 +2841,26 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vt_incidente_sin_cerrar">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidente_sin_cerrar">
-              <MappingFragment StoreEntitySet="vt_incidente_sin_cerrar">
+          <EntitySetMapping Name="vt_eventos_sin_cerrar">
+            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_sin_cerrar">
+              <MappingFragment StoreEntitySet="vt_eventos_sin_cerrar">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="soporte" ColumnName="soporte" />
-                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-                <ScalarProperty Name="acciones" ColumnName="acciones" />
-                <ScalarProperty Name="solucion" ColumnName="solucion" />
                 <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
                 <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
                 <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
                 <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-                <ScalarProperty Name="estatus_incidente" ColumnName="estatus_incidente" />
+                <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
                 <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-                <ScalarProperty Name="fk_idusuario_solicitante" ColumnName="fk_idusuario_solicitante" />
+                <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
+                <ScalarProperty Name="soporte" ColumnName="soporte" />
+                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="asistencia" ColumnName="asistencia" />
+                <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+                <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2863,6 +2889,27 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vt_incidentes_sin_cerrar">
+            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidentes_sin_cerrar">
+              <MappingFragment StoreEntitySet="vt_incidentes_sin_cerrar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="soporte" ColumnName="soporte" />
+                <ScalarProperty Name="apoyo" ColumnName="apoyo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+                <ScalarProperty Name="acciones" ColumnName="acciones" />
+                <ScalarProperty Name="solucion" ColumnName="solucion" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+                <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
+                <ScalarProperty Name="hora_final" ColumnName="hora_final" />
+                <ScalarProperty Name="estatus_incidente" ColumnName="estatus_incidente" />
+                <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+                <ScalarProperty Name="fk_idusuario_solicitante" ColumnName="fk_idusuario_solicitante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vt_preguntas">
             <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_preguntas">
               <MappingFragment StoreEntitySet="vt_preguntas">
@@ -2870,7 +2917,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="pregunta" ColumnName="pregunta" />
                 <ScalarProperty Name="estatus" ColumnName="estatus" />
-                <ScalarProperty Name="afinidad" ColumnName="afinidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

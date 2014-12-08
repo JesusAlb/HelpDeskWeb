@@ -238,6 +238,24 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.Panel panelModalNuevo;
         
         /// <summary>
+        /// Control panelSolicitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSolicitante;
+        
+        /// <summary>
+        /// Control cbSolicitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbSolicitante;
+        
+        /// <summary>
         /// Control txtTituloNuevo.
         /// </summary>
         /// <remarks>
@@ -256,13 +274,13 @@ namespace HelpDeskWeb.Solicitudes {
         protected global::System.Web.UI.WebControls.DropDownList cbLugares;
         
         /// <summary>
-        /// Control txtAcomodo.
+        /// Control cbAcomodo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAcomodo;
+        protected global::System.Web.UI.WebControls.DropDownList cbAcomodo;
         
         /// <summary>
         /// Control cbTipo.
@@ -317,6 +335,60 @@ namespace HelpDeskWeb.Solicitudes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        
+        /// <summary>
+        /// Control panelFechas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFechas;
+        
+        /// <summary>
+        /// Control txtFechaSolicitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaSolicitud;
+        
+        /// <summary>
+        /// Control txtFechaCierre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaCierre;
+        
+        /// <summary>
+        /// Control panelAsignarSoporte.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelAsignarSoporte;
+        
+        /// <summary>
+        /// Control cbSoporte2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbSoporte2;
+        
+        /// <summary>
+        /// Control cbSeguimiento2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbSeguimiento2;
         
         /// <summary>
         /// Control UpdateGrabar.

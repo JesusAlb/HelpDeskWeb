@@ -165,6 +165,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="gvEventos_EnProceso" EventName="SelectedIndexChanged" />
                                     <asp:AsyncPostBackTrigger ControlID="gvEventos_Cerrados" EventName="SelectedIndexChanged" />
                                     <asp:AsyncPostBackTrigger ControlID="gvEventos_Cancelados" EventName="SelectedIndexChanged" />
+                                    <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
                                 </Triggers>
                             </asp:UpdatePanel>
                             <asp:Panel runat="server" CssClass="modal fade" ID="ModalNuevo" TabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -180,9 +181,13 @@
                                                     <asp:Panel runat="server" CssClass="row">
                                                         <asp:Panel runat="server" CssClass="col-lg-1"></asp:Panel>
                                                         <asp:Panel runat="server" CssClass="col-lg-10">
+                                                            <asp:Panel runat="server" CssClass="form-group" Visible="true" ID="panelSolicitante">
+                                                                <asp:Label runat="server" Text="Solicitante" Font-Bold="true"></asp:Label>
+                                                                <asp:DropDownList runat="server" ID="cbSolicitante" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
+                                                            </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Text="Título" Font-Bold="true"></asp:Label>
-                                                                <asp:TextBox runat="server" onpaste="return false;" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlphaNumeric(event.keyCode);" Style="resize: none"  CssClass="form-control NumerosLetras">
+                                                                <asp:TextBox runat="server" onpaste="return false;" placeholder="Escriba el nombre del evento" ID="txtTituloNuevo" MaxLength="50" onkeyup="keyUP(event.keyCode)" onkeydown="return isTitulo(event.keyCode);" Style="resize: none"  CssClass="form-control NumerosLetras">
                                                                 </asp:TextBox>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
@@ -192,7 +197,7 @@
                                                                 <asp:Panel runat="server" CssClass="row">
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Acomodo"></asp:Label>
-                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;"  ID="txtAcomodo" onkeyup="keyUP(event.keyCode)" onkeydown="return isAlpha(event.keyCode);" MaxLength="30"></asp:TextBox>
+                                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="cbAcomodo" DataTextField="nombre" DataValueField="id" ></asp:DropDownList>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo">
@@ -226,7 +231,27 @@
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
                                                                 <asp:Label runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
-                                                                <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" placeholder="Describa el evento" ID="txtDescripcion" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onkeyup="keyUP(event.keyCode)" onkeydown="return isDescription(event.keyCode);"  Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                                <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" placeholder="Describa el evento" ID="txtDescripcion" onkeypress="if (this.value.length > 249) { alertify.error('Máximo de 250 caractéres');  return false; }" Height="100" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                            </asp:Panel>
+                                                            <asp:Panel runat="server" CssClass="form-group" Visible="false" ID="panelFechas">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <asp:Label runat="server" Text="Fecha de solicitud" Font-Bold="true"></asp:Label>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" MaxLength="10" TextMode="Date" ID="txtFechaSolicitud"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <asp:Label runat="server" Text="Fecha de cierre" Font-Bold="true"></asp:Label>
+                                                                        <asp:TextBox runat="server" CssClass="form-control" onpaste="return false;" MaxLength="10" TextMode="Date" ID="txtFechaCierre"></asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                            </asp:Panel>
+                                                            <asp:Panel runat="server" ID="panelAsignarSoporte">
+                                                                <div class="form-group">
+                                                                    <asp:Label runat="server" Font-Bold="true" Text="Soporte"></asp:Label><asp:DropDownList runat="server" ID="cbSoporte2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <asp:Label runat="server" Font-Bold="true" Text="Seguimiento"></asp:Label><asp:DropDownList runat="server" ID="cbSeguimiento2" DataTextField="nom_completo" DataValueField="id" CssClass="form-control"></asp:DropDownList>
+                                                                </div>
                                                             </asp:Panel>
                                                         </asp:Panel>
                                                     </asp:Panel>
@@ -305,6 +330,7 @@
                                                                 </ContentTemplate>
                                                                 <Triggers>
                                                                     <asp:AsyncPostBackTrigger ControlID="btnRecursos" EventName="Click" />
+                                                                    <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click"/>
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
                                                         </asp:Panel>
@@ -340,6 +366,7 @@
                                                             </ContentTemplate>
                                                             <Triggers>
                                                                 <asp:AsyncPostBackTrigger ControlID="btnRecursos" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click" />
                                                                 <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
                                                                 <asp:AsyncPostBackTrigger ControlID="btnAñadir" EventName="Click" />
                                                             </Triggers>
@@ -359,6 +386,7 @@
                                                                     <asp:AsyncPostBackTrigger ControlID="btnRecursos" EventName="Click" />
                                                                     <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
                                                                     <asp:AsyncPostBackTrigger ControlID="btnAñadir" EventName="Click" />
+                                                                    <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click"/>
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
                                                         </asp:Panel>
@@ -408,6 +436,7 @@
                                                                     <asp:AsyncPostBackTrigger ControlID="btnQuitar" EventName="Click" />
                                                                     <asp:AsyncPostBackTrigger ControlID="txtFiltroReq" EventName="TextChanged" />
                                                                     <asp:AsyncPostBackTrigger ControlID="cbCuantificable" EventName="SelectedIndexChanged" />
+                                                                    <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click"/>
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
                                                         </asp:Panel>
@@ -437,7 +466,16 @@
                                                 <asp:Panel runat="server" CssClass="col-lg-12">
                                                     <asp:Panel runat="server" CssClass="form-group">
                                                         <asp:Label runat="server" Font-Bold="true" Text="Comentarios"></asp:Label>
-                                                        <asp:TextBox runat="server" ID="txtObservaciones" onkeypress="if (this.value.length > 250) { alertify.error('Máximo de 250 caractéres');  return false; }" onpaste="return false;" Height="100"  placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                            <ContentTemplate>
+                                                                <asp:TextBox runat="server" ID="txtObservaciones" onkeypress="if (this.value.length > 599) { alertify.error('Máximo de 600 caractéres');  return false; }" onpaste="return false;" Height="100"  placeholder="Describa instrucciones, sugerencias u observaciones sobre el evento" CssClass="form-control" TextMode="MultiLine" Style="resize: none"></asp:TextBox>
+                                                            </ContentTemplate>
+                                                            <Triggers>
+                                                                <asp:AsyncPostBackTrigger ControlID="btnRecursos" EventName="Click" />
+                                                                <asp:AsyncPostBackTrigger ControlID="btnGuardar" EventName="Click"/>
+                                                            </Triggers>
+                                                        </asp:UpdatePanel>
+                                                        
                                                     </asp:Panel>
                                                 </asp:Panel>
                                             </asp:Panel>
@@ -473,7 +511,7 @@
                                                                 </asp:Panel>
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">
-                                                               <asp:Label runat="server" Text="Califique el servicio otorgado a traves de las siguientes preguntas"></asp:Label>
+                                                               <asp:Label runat="server" Text="Califique el servicio otorgado a través de las siguientes preguntas"></asp:Label>
                                                                <asp:HiddenField runat="server" ID="idCalidad" />
                                                             </asp:Panel>
                                                             <asp:Panel runat="server" CssClass="form-group">

@@ -27,6 +27,7 @@ namespace HelpDeskWeb.EntityFrameWork
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tblacomodo> tblacomodo { get; set; }
         public virtual DbSet<tblarea> tblarea { get; set; }
         public virtual DbSet<tblcalidadservicio> tblcalidadservicio { get; set; }
         public virtual DbSet<tblcoordinacion> tblcoordinacion { get; set; }
@@ -53,10 +54,10 @@ namespace HelpDeskWeb.EntityFrameWork
         public virtual DbSet<vt_departamentos> vt_departamentos { get; set; }
         public virtual DbSet<vt_encuestas> vt_encuestas { get; set; }
         public virtual DbSet<vt_equipos> vt_equipos { get; set; }
-        public virtual DbSet<vt_evento_sin_cerrar> vt_evento_sin_cerrar { get; set; }
         public virtual DbSet<vt_eventos_cerrados> vt_eventos_cerrados { get; set; }
-        public virtual DbSet<vt_incidente_sin_cerrar> vt_incidente_sin_cerrar { get; set; }
+        public virtual DbSet<vt_eventos_sin_cerrar> vt_eventos_sin_cerrar { get; set; }
         public virtual DbSet<vt_incidentes_cerrados> vt_incidentes_cerrados { get; set; }
+        public virtual DbSet<vt_incidentes_sin_cerrar> vt_incidentes_sin_cerrar { get; set; }
         public virtual DbSet<vt_preguntas> vt_preguntas { get; set; }
         public virtual DbSet<vt_promedio_eventos> vt_promedio_eventos { get; set; }
         public virtual DbSet<vt_promedio_general> vt_promedio_general { get; set; }
@@ -96,7 +97,7 @@ namespace HelpDeskWeb.EntityFrameWork
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cerrar_incidente", idIncidenteParameter, accionesParameter, solucionParameter, idservicioParameter);
         }
     
-        public virtual int sp_insertar_evento(Nullable<int> idevento, string titulo, Nullable<int> lugar, string acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, Nullable<int> tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento, Nullable<int> idUserNA, Nullable<int> idultimo_servicio)
+        public virtual int sp_insertar_evento(Nullable<int> idevento, string titulo, Nullable<int> lugar, Nullable<int> acomodo, Nullable<int> asistencia, Nullable<System.DateTime> horaIn, Nullable<System.DateTime> horaFn, string descripcion, Nullable<int> tipoEvento, Nullable<int> solicitante, Nullable<System.DateTime> fechaEvento, Nullable<int> idUserNA, Nullable<int> idultimo_servicio)
         {
             var ideventoParameter = idevento.HasValue ?
                 new ObjectParameter("idevento", idevento) :
@@ -110,9 +111,9 @@ namespace HelpDeskWeb.EntityFrameWork
                 new ObjectParameter("lugar", lugar) :
                 new ObjectParameter("lugar", typeof(int));
     
-            var acomodoParameter = acomodo != null ?
+            var acomodoParameter = acomodo.HasValue ?
                 new ObjectParameter("acomodo", acomodo) :
-                new ObjectParameter("acomodo", typeof(string));
+                new ObjectParameter("acomodo", typeof(int));
     
             var asistenciaParameter = asistencia.HasValue ?
                 new ObjectParameter("asistencia", asistencia) :

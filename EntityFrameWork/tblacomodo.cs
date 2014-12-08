@@ -12,17 +12,16 @@ namespace HelpDeskWeb.EntityFrameWork
     using System;
     using System.Collections.Generic;
     
-    public partial class tblpregunta
+    public partial class tblacomodo
     {
-        public tblpregunta()
+        public tblacomodo()
         {
-            this.tblrespuesta = new HashSet<tblrespuesta>();
+            this.tblevento = new HashSet<tblevento>();
         }
     
         public int id { get; set; }
-        public string pregunta { get; set; }
-        public bool estatus { get; set; }
+        public string nombre { get; set; }
     
-        public virtual ICollection<tblrespuesta> tblrespuesta { get; set; }
+        public virtual ICollection<tblevento> tblevento { get; set; }
     }
 }

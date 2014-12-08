@@ -85,7 +85,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbhelp.modelo.vt_evento_sin_cerrar.Where(a => (a.estatus_evento == status && a.idsolicitante == idSolicitante) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.vt_eventos_sin_cerrar.Where(a => (a.estatus_evento == status && a.idsolicitante == idSolicitante) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                                          a.fecha_solicitud.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_realizacion.Equals(busquedaFecha) ||
                                                          a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.soporte.Contains(filtro) ||
                                                          a.tipo.Contains(filtro))).Select(x => new
@@ -109,7 +109,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_evento_sin_cerrar.Where(a => (a.estatus_evento == status && a.idsolicitante == idSolicitante && (a.fecha_realizacion >= FechaInicio && a.fecha_realizacion <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
+                        return dbhelp.modelo.vt_eventos_sin_cerrar.Where(a => (a.estatus_evento == status && a.idsolicitante == idSolicitante && (a.fecha_realizacion >= FechaInicio && a.fecha_realizacion <= FechaFinal)) && (a.acomodo.Contains(filtro) || a.apoyo.Contains(filtro) ||
                                            a.fecha_solicitud.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) || a.fecha_realizacion.Equals(busquedaFecha) ||
                                            a.descripcion.Contains(filtro) || a.lugar.Contains(filtro) || a.soporte.Contains(filtro) || a.tipo.Contains(filtro))).Select(x => new
                                            {
@@ -243,7 +243,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                 {
                     if (FechaInicio == null || FechaFinal == null)
                     {
-                        return dbhelp.modelo.vt_evento_sin_cerrar.Where(a => (a.descripcion.Contains(filtro) || a.nombre.Contains(filtro) ||
+                        return dbhelp.modelo.vt_eventos_sin_cerrar.Where(a => (a.descripcion.Contains(filtro) || a.nombre.Contains(filtro) ||
                                                          a.fecha_solicitud.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.fecha_realizacion.Equals(busquedaFecha) ||
                                                          a.nombre.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -271,7 +271,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     }
                     else
                     {
-                        return dbhelp.modelo.vt_evento_sin_cerrar.Where(a => (a.descripcion.Contains(filtro) || a.nombre.Contains(filtro) ||
+                        return dbhelp.modelo.vt_eventos_sin_cerrar.Where(a => (a.descripcion.Contains(filtro) || a.nombre.Contains(filtro) ||
                                                          a.fecha_solicitud.Equals(busquedaFecha) || a.fecha_cierre.Value.Equals(busquedaFecha) ||
                                                          a.fecha_realizacion.Equals(busquedaFecha) ||
                                                          a.nombre.Contains(filtro) || a.solicitante.Contains(filtro) ||
@@ -307,14 +307,14 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static bool insertar(int? idSolicitante, string titulo, int? lugar, string acomodo, int? tipo, DateTime? fechaInicial, int? asistencia, DateTime? horaInicial, DateTime? horafinal, string descripcion)
+        public static bool insertar(int idSolicitante, string titulo, int lugar, int acomodo, int tipo, DateTime fecha, int asistencia, DateTime horaInicial, DateTime horafinal, string descripcion)
         {       
             try
             {
                 int idservicio = controlServicios.obtenerUltimoServicio()+1;
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
                 int idevento = obtenerUltimoEvento()+1;
-                var evento = dbhelp.modelo.sp_insertar_evento(idevento, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fechaInicial, idusuario, idservicio);
+                var evento = dbhelp.modelo.sp_insertar_evento(idevento, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fecha, idusuario, idservicio);
                    if (evento != 0)
                    {
                        dbhelp.modelo.SaveChanges();
@@ -328,6 +328,58 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
             
         }
+
+        public static bool insertarCompleto(int idSolicitante, int soporte, int seguimiento, string titulo, int lugar, int acomodo, int tipo, DateTime fecha, int asistencia, DateTime horaInicial, DateTime? horafinal, string descripcion, DateTime FechaSolicitud, DateTime? FechaCierre)
+        {
+            try
+            {
+                var servicio = controlServicios.insertar(descripcion, idSolicitante, soporte, seguimiento, 2, FechaSolicitud, FechaCierre, horaInicial, horafinal);
+
+                if (servicio)
+                {
+                    var evento = new tblevento
+                    {
+                        id = obtenerUltimoEvento() + 1,
+                        fk_idacomodo = acomodo,
+                        asistencia = asistencia,
+                        fecha_realizacion = fecha,
+                        fk_idtipo = tipo,
+                        fk_idlugar = lugar,
+                        nombre = titulo,
+                        observacion = "Sin observaciones",
+                        fk_idservicio = controlServicios.obtenerUltimoServicio()
+                    };
+                    if (evento != null)
+                    {
+                        dbhelp.modelo.tblevento.Add(evento);
+                        dbhelp.modelo.SaveChanges();
+
+                        var encuesta = controlEncuestas.insertar(controlServicios.obtenerUltimoServicio());
+                        if (encuesta)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                dbhelp.UndoAll(dbhelp.modelo);
+                return false;
+            }
+        }      
 
         public static bool cerrarEvento(int id)
         {
@@ -352,7 +404,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static bool modificar(int id, string titulo, int lugar, string acomodo, int tipo, DateTime fecha_realizacion, int asistencia, DateTime horaInicio, DateTime horaFinal, string descripcion)
+        public static bool modificar(int id, string titulo, int lugar, int acomodo, int tipo, DateTime fecha_realizacion, int asistencia, DateTime horaInicio, DateTime horaFinal, string descripcion)
         {
             try
             {
@@ -362,7 +414,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                     int idservicio = obtenerEvento(id).fk_idservicio;
                     ItemAmodificar.nombre = titulo;
                     ItemAmodificar.fk_idlugar = lugar;
-                    ItemAmodificar.acomodo = acomodo;
+                    ItemAmodificar.fk_idacomodo = acomodo;
                     ItemAmodificar.fk_idtipo = tipo;
                     ItemAmodificar.asistencia = asistencia;
                     ItemAmodificar.fecha_realizacion = fecha_realizacion;

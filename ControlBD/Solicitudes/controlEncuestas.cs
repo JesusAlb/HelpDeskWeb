@@ -64,7 +64,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {
             try
             {
-                return dbhelp.modelo.vt_preguntas.Where(a => a.afinidad == tema || a.afinidad == 2).ToList();
+                return dbhelp.modelo.vt_preguntas.Where(a=>a.estatus == true).ToList();
             }
             catch 
             {

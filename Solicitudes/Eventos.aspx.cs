@@ -28,8 +28,7 @@ namespace HelpDeskWeb.Solicitudes
             {
                 this.generarPrivilegios();
                 this.cargarTablasEventos();
-                this.cargarCombosSoporte();
-                this.cargarComboLugares();
+                this.cargarCombos();
             }
 
             if (Page.IsPostBack)
@@ -52,13 +51,6 @@ namespace HelpDeskWeb.Solicitudes
             this.tblReqAsH1.Width = Unit.Percentage(gvRecursosAsignados.Columns[0].ItemStyle.Width.Value * 0.95);
         }
 
-        protected void cargarCombosSoporte()
-        {
-            cbSeguimiento.DataSource = cbSoporte.DataSource = controlUsuario.dataSourceComboBox(0);
-            cbSoporte.DataBind();
-            cbSeguimiento.DataBind();
-        }
-
         protected void limpiarSeleccion()
         {
             idEventoSeleccionado.Value = null;
@@ -76,11 +68,11 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSoporte(x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSoporte(x, txtFiltro.Text, Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text));
                 }
                 else
                 {
-                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSolicitante(controlUsuario.obtenerUsuarioDeSession(this).id, x, txtFiltro.Text, this.obtenerDateTimeDeString(txtFechaInicial.Text), this.obtenerDateTimeDeString(txtFechaFinal.Text));
+                    (objeto[x] as GridView).DataSource = controlEventos.obtenerDataSourceSolicitante(controlUsuario.obtenerUsuarioDeSession(this).id, x, txtFiltro.Text, Utilerias.convertirFecha(txtFechaInicial.Text), Utilerias.convertirFecha(txtFechaFinal.Text));
                 }
                 (objeto[x] as GridView).DataBind();
             }
@@ -112,10 +104,19 @@ namespace HelpDeskWeb.Solicitudes
             gvEncuestas.DataBind();
         }
 
-        protected void cargarComboLugares()
+        protected void cargarCombos()
         {
+            cbSeguimiento2.DataSource = cbSoporte2.DataSource = cbSeguimiento.DataSource = cbSoporte.DataSource = controlUsuario.dataSourceComboBox(0);
+            cbSoporte.DataBind();
+            cbSeguimiento.DataBind();
+            cbSeguimiento2.DataBind();
+            cbSoporte2.DataBind();
+            cbSolicitante.DataSource = controlUsuario.dataSourceComboBox(1);
+            cbSolicitante.DataBind();
             cbLugares.DataSource = controlLugar.obtenerDataSource("");
             cbLugares.DataBind();
+            cbAcomodo.DataSource = controlAcomodo.obtenerDataSource("");
+            cbAcomodo.DataBind();
         }
 
         protected void gvEventos_SelectedIndexChanged(object sender, EventArgs e)
@@ -130,54 +131,63 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnRecursos_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
-            {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2)
                 {
                     if (!String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                     {
-                        registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
-                        txtTitulo.Text = registroEvento.nombre;
-                        this.cargarTablasRequerimientos();
-                        ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnRecursosActivado", "$('#ModalRecursos').modal('show');", true);
+                        this.prepararModalRecursos(Convert.ToInt32(idEventoSeleccionado.Value),this.UpdateBtns);
                     }
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "restriccion", "alertify.error('Seleccione un evento abierto o en proceso')", true);
                 }
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "restriccion", "alertify.error('Acción solamente para usuarios solicitantes')", true);
-            }
+        }
+
+        protected void prepararModalRecursos(int idEvento, UpdatePanel iniciador)
+        {
+            registroEvento = controlEventos.obtenerEvento(idEvento);
+            idEventoSeleccionado.Value = idEvento.ToString();
+            txtTitulo.Text = registroEvento.nombre;
+            txtObservaciones.Text = registroEvento.observacion;
+            this.cargarTablasRequerimientos();
+            ScriptManager.RegisterStartupScript(iniciador, GetType(), "btnRecursosActivado", "$('#ModalRecursos').modal('show');", true);
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
+            lbelTituloModal.Text = "Alta de eventos";
+            Utilerias.limpiarControles(this.panelModalNuevo.Controls);
+            accion.Value = "nuevo";
+
+            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0)
             {
-                lbelTituloModal.Text = "Alta de eventos";
-                Utilerias.limpiarControles(this.panelModalNuevo.Controls);
-                accion.Value = "nuevo";
-                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+                if (tabItemSeleccionado.Value.Equals("2"))
+                {
+                    this.configurarModal("Alta de eventos cerrados", true, true);
+                }
+                else
+                {
+                    this.configurarModal("Alta de eventos", true, false);
+                }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "restriccion", "alertify.error('Acción solamente para solicitantes')", true);
+                this.configurarModal("Alta de eventos", false, false);
             }
+
+            ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1)
-            {
                 if (Convert.ToInt32(tabItemSeleccionado.Value) < 2 && !String.IsNullOrWhiteSpace(idEventoSeleccionado.Value))
                 {
-                    lbelTituloModal.Text = "Modificar eventos";
+
+                    this.configurarModal("Modificar eventos", false, false);
                     registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTituloNuevo.Text = registroEvento.nombre;
-                    txtAcomodo.Text = registroEvento.acomodo;
+                    cbAcomodo.SelectedValue = registroEvento.fk_idacomodo.ToString();
                     txtAsistencia.Text = registroEvento.asistencia.ToString();
                     txtDescripcion.Text = registroEvento.tblservicio.descripcion;
                     cbLugares.SelectedValue = registroEvento.fk_idlugar.ToString();
@@ -190,53 +200,123 @@ namespace HelpDeskWeb.Solicitudes
                 else
                 {
                     ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "restriccion", "alertify.error('Seleccione un evento abierto o en proceso')", true);
-                }
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "restriccion", "alertify.error('Acción solamente para solicitantes')", true);
-            }
-            
+                }                        
+        }
+
+        protected void configurarModal(string titulo, bool panelSol, bool panelcierre)
+        {
+            lbelTituloModal.Text = titulo;
+            panelSolicitante.Visible = panelSol;
+            panelFechas.Visible = panelcierre;
+            panelAsignarSoporte.Visible = panelcierre;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, txtAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text }))
+
+            bool camposNoVacios = Utilerias.verificarCamposVacios(new string[] { txtTituloNuevo.Text, cbAcomodo.Text, txtAsistencia.Text, txtDescripcion.Text, txtFecha.Text, txtHoraInicial.Text, txtHoraFinal.Text });
+            bool usuariosValidos = true;
+            bool FechasValidas;
+            bool horasValidas = ((Utilerias.convertirFecha(txtHoraInicial.Text).Value.AddMinutes(9)) < Utilerias.convertirFecha(txtHoraFinal.Text));
+            bool FechaPeticion = true;
+            int solicitante = (controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 0) ? Convert.ToInt32(cbSolicitante.SelectedValue) : controlUsuario.obtenerUsuarioDeSession(this).id;
+
+            if (panelFechas.Visible)
             {
-                if (Utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraInicial, txtHoraFinal }))
+                 usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.Text, cbSoporte2.Text, cbSeguimiento2.Text });
+                 FechasValidas = Utilerias.validarFechas(new TextBox[] { txtFecha, txtFechaCierre, txtFechaSolicitud, txtHoraFinal, txtHoraInicial });
+                 if (FechasValidas)
+                 {
+                     FechasValidas = (Utilerias.fechaReal(txtFechaCierre.Text, true) && Utilerias.fechaReal(txtFecha.Text + " "+  txtHoraInicial.Text, true));
+                     FechasValidas = ((Convert.ToDateTime(txtFechaSolicitud.Text) <= Convert.ToDateTime(txtFecha.Text)) && (Convert.ToDateTime(txtFechaCierre.Text) >= Convert.ToDateTime(txtFecha.Text)));
+                 }
+                 FechaPeticion = (Utilerias.convertirFecha(txtFechaSolicitud.Text) <= Utilerias.convertirFecha(txtFechaCierre.Text));
+            }
+            else if (panelSolicitante.Visible && !panelFechas.Visible)
+            {
+                usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.Text});
+                FechasValidas = Utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraFinal, txtHoraInicial });
+                if (FechasValidas)
                 {
-                    if (Utilerias.convertirFecha(txtHoraInicial.Text) < Utilerias.convertirFecha(txtHoraFinal.Text))
+                    FechasValidas = Utilerias.fechaReal(txtFecha.Text +" "+ txtHoraInicial.Text, false);
+                }
+            }
+            else
+            {
+                FechasValidas = Utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraFinal, txtHoraInicial });
+                if (FechasValidas)
+                {
+                    FechasValidas = Utilerias.fechaReal(txtFecha.Text +" "+ txtHoraInicial.Text, false);
+                }
+            }
+
+
+            if (camposNoVacios)
+            {
+                if (FechasValidas)
+                {
+                    if (horasValidas)
                     {
                         if (accion.Value.Equals("nuevo"))
                         {
-                            if (controlEventos.insertar(controlUsuario.obtenerUsuarioDeSession(this).id, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
-                            {
-                                this.cargarTablasEventos();
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.success('Evento creado correctamente');", true);
+                            if(!tabItemSeleccionado.Value.Equals("2") || controlUsuario.obtenerUsuarioDeSession(this).fk_idtipo == 1){
+                                if (controlEventos.insertar(solicitante, txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), Convert.ToInt32(cbAcomodo.SelectedValue), Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                                {
+                                    this.cargarTablasEventos();
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.success('Evento creado correctamente');", true);
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
+                                }
                             }
                             else
                             {
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
+                                if (usuariosValidos)
+                                {
+                                    if (FechaPeticion)
+                                    {
+                                        if (controlEventos.insertarCompleto(solicitante, Convert.ToInt32(cbSoporte2.SelectedValue), Convert.ToInt32(cbSeguimiento2.SelectedValue), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), Convert.ToInt32(cbAcomodo.SelectedValue), Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text, Convert.ToDateTime(txtFechaSolicitud.Text), Convert.ToDateTime(txtFechaCierre.Text)))
+                                        {
+                                            this.cargarTablasEventos();
+                                            ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
+                                            ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEvento", "alertify.success('Evento creado correctamente');", true);
+                                            this.prepararModalRecursos(controlEventos.obtenerUltimoEvento(), UpdateGrabar);
+                                        }
+                                        else
+                                        {
+                                            ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "nuevoEventoIncorrecto", "alertify.error('Error al crear el evento');", true);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Fecha de solicitud mayor a la de cierre');", true);
+                                    }
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Usuarios de soporte no asignados');", true);
+                                }
                             }
                         }
                         else
                         {
-                            if (controlEventos.modificar(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), txtAcomodo.Text, Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
-                            {
-                                this.cargarTablasEventos();
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionCorrecta", "alertify.success('Evento editado exitosamente');", true);
-                            }
-                            else
-                            {
-                                ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Error al editar el evento');", true);
-                            }
+                                if (controlEventos.modificar(Convert.ToInt32(idEventoSeleccionado.Value), txtTituloNuevo.Text, Convert.ToInt32(cbLugares.SelectedValue), Convert.ToInt32(cbAcomodo.SelectedValue), Convert.ToInt16(cbTipo.SelectedValue), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtAsistencia.Text), Convert.ToDateTime(txtHoraInicial.Text), Convert.ToDateTime(txtHoraFinal.Text), txtDescripcion.Text))
+                                {
+                                    this.cargarTablasEventos();
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "SalirVentana", "$('#ModalNuevo').modal('hide');", true);
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionCorrecta", "alertify.success('Evento editado exitosamente');", true);
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "EdicionIncorrecta", "alertify.error('Error al editar el evento');", true);
+                                }
                         }
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('Hora inicial mayor a la hora final');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateGrabar, this.GetType(), "CamposVacios", "alertify.error('La hora final debe ser mínimo 10 minutos mayor a la hora inicial');", true);
                     }
                 }
                 else
@@ -379,7 +459,6 @@ namespace HelpDeskWeb.Solicitudes
             }
         }
 
-        //método para cantidad resultante
         protected int restarRequerimientoAsignado()
         {
             int idRequerimiento = Convert.ToInt32(gvRecursosAsignados.SelectedDataKey.Value);
@@ -444,7 +523,7 @@ namespace HelpDeskWeb.Solicitudes
             {
                 if (controlEventos.modificarObservacion(Convert.ToInt32(idEventoSeleccionado.Value), txtObservaciones.Text))
                 {
-                    ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "SalirVentana", "mostrarModal('ModalRecursos','hide');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "SalirVentana", "$('#ModalRecursos').modal('hide');", true);
                     ScriptManager.RegisterStartupScript(this.UpdateGrabarRecursos, GetType(), "GrabarObservaciones", "alertify.success('Evento guardado correctamente');", true);
                 }
                 else
@@ -615,18 +694,6 @@ namespace HelpDeskWeb.Solicitudes
                 }
             }
 
-        }
-
-        protected DateTime? obtenerDateTimeDeString(string cadena)
-        {
-            try
-            {
-                return Convert.ToDateTime(cadena);
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         protected void cbCuantificable_SelectedIndexChanged(object sender, EventArgs e)

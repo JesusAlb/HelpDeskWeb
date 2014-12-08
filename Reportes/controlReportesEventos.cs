@@ -25,7 +25,7 @@ namespace HelpDeskWeb.Reportes
                  if (idSolicitante != null)
                  {
 
-                     return dbhelp.modelo.tblevento.Where(a => (a.acomodo.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
+                     return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
                                  a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbllugar.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
                                  a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
                                  a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
@@ -47,7 +47,7 @@ namespace HelpDeskWeb.Reportes
                  }
                  else
                  {
-                     return dbhelp.modelo.tblevento.Where(a => (a.acomodo.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                     return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
                              a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
                              a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
                              a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status))).Select(

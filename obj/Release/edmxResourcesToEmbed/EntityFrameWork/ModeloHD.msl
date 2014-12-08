@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="dbhelpdeskV2ModelStoreContainer" CdmEntityContainer="dbhelpdeskV2Entities">
+    <EntitySetMapping Name="tblacomodo">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblacomodo">
+        <MappingFragment StoreEntitySet="tblacomodo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblarea">
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblarea">
         <MappingFragment StoreEntitySet="tblarea">
@@ -75,7 +83,7 @@
           <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
           <ScalarProperty Name="fk_idlugar" ColumnName="fk_idlugar" />
           <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+          <ScalarProperty Name="fk_idacomodo" ColumnName="fk_idacomodo" />
           <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
           <ScalarProperty Name="observacion" ColumnName="observacion" />
           <ScalarProperty Name="fk_idservicio" ColumnName="fk_idservicio" />
@@ -126,7 +134,6 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="pregunta" ColumnName="pregunta" />
           <ScalarProperty Name="estatus" ColumnName="estatus" />
-          <ScalarProperty Name="afinidad" ColumnName="afinidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -264,7 +271,6 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="pregunta" ColumnName="pregunta" />
           <ScalarProperty Name="estatus_pregunta" ColumnName="estatus_pregunta" />
-          <ScalarProperty Name="afinidad" ColumnName="afinidad" />
           <ScalarProperty Name="valor" ColumnName="valor" />
           <ScalarProperty Name="idcalidad" ColumnName="idcalidad" />
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
@@ -295,29 +301,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vt_evento_sin_cerrar">
-      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_evento_sin_cerrar">
-        <MappingFragment StoreEntitySet="vt_evento_sin_cerrar">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
-          <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
-          <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
-          <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-          <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
-          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-          <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
-          <ScalarProperty Name="soporte" ColumnName="soporte" />
-          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="lugar" ColumnName="lugar" />
-          <ScalarProperty Name="asistencia" ColumnName="asistencia" />
-          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
-          <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vt_eventos_cerrados">
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_cerrados">
         <MappingFragment StoreEntitySet="vt_eventos_cerrados">
@@ -345,24 +328,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vt_incidente_sin_cerrar">
-      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidente_sin_cerrar">
-        <MappingFragment StoreEntitySet="vt_incidente_sin_cerrar">
+    <EntitySetMapping Name="vt_eventos_sin_cerrar">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_sin_cerrar">
+        <MappingFragment StoreEntitySet="vt_eventos_sin_cerrar">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="soporte" ColumnName="soporte" />
-          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
-          <ScalarProperty Name="acciones" ColumnName="acciones" />
-          <ScalarProperty Name="solucion" ColumnName="solucion" />
           <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
           <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
           <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
           <ScalarProperty Name="hora_final" ColumnName="hora_final" />
-          <ScalarProperty Name="estatus_incidente" ColumnName="estatus_incidente" />
+          <ScalarProperty Name="estatus_evento" ColumnName="estatus_evento" />
           <ScalarProperty Name="solicitante" ColumnName="solicitante" />
-          <ScalarProperty Name="fk_idusuario_solicitante" ColumnName="fk_idusuario_solicitante" />
+          <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
+          <ScalarProperty Name="soporte" ColumnName="soporte" />
+          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="lugar" ColumnName="lugar" />
+          <ScalarProperty Name="asistencia" ColumnName="asistencia" />
+          <ScalarProperty Name="acomodo" ColumnName="acomodo" />
+          <ScalarProperty Name="fecha_realizacion" ColumnName="fecha_realizacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -391,6 +376,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vt_incidentes_sin_cerrar">
+      <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidentes_sin_cerrar">
+        <MappingFragment StoreEntitySet="vt_incidentes_sin_cerrar">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="soporte" ColumnName="soporte" />
+          <ScalarProperty Name="apoyo" ColumnName="apoyo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+          <ScalarProperty Name="acciones" ColumnName="acciones" />
+          <ScalarProperty Name="solucion" ColumnName="solucion" />
+          <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+          <ScalarProperty Name="fecha_cierre" ColumnName="fecha_cierre" />
+          <ScalarProperty Name="hora_inicial" ColumnName="hora_inicial" />
+          <ScalarProperty Name="hora_final" ColumnName="hora_final" />
+          <ScalarProperty Name="estatus_incidente" ColumnName="estatus_incidente" />
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+          <ScalarProperty Name="fk_idusuario_solicitante" ColumnName="fk_idusuario_solicitante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="vt_preguntas">
       <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_preguntas">
         <MappingFragment StoreEntitySet="vt_preguntas">
@@ -398,7 +404,6 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="pregunta" ColumnName="pregunta" />
           <ScalarProperty Name="estatus" ColumnName="estatus" />
-          <ScalarProperty Name="afinidad" ColumnName="afinidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

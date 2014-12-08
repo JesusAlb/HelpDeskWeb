@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="dbhelpdeskV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblacomodo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblevento" Relationship="Self.fk_acomodo" FromRole="tblacomodo" ToRole="tblevento" />
+  </EntityType>
   <EntityType Name="tblarea">
     <Key>
       <PropertyRef Name="id" />
@@ -82,10 +90,11 @@
     <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
     <Property Name="fk_idlugar" Type="Int32" Nullable="false" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
-    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fk_idacomodo" Type="Int32" />
     <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="observacion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
     <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblacomodo" Relationship="Self.fk_acomodo" FromRole="tblevento" ToRole="tblacomodo" />
     <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_evento_en_uso" FromRole="tblevento" ToRole="tblrecursoasignado" />
     <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio" FromRole="tblevento" ToRole="tblservicio" />
     <NavigationProperty Name="tbllugar" Relationship="Self.fk_lugar" FromRole="tblevento" ToRole="tbllugar" />
@@ -138,10 +147,9 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estatus" Type="Boolean" Nullable="false" />
-    <Property Name="afinidad" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblrespuesta" Relationship="Self.fk_pregunta" FromRole="tblpregunta" ToRole="tblrespuesta" />
   </EntityType>
   <EntityType Name="tblprioridad">
@@ -292,7 +300,6 @@
       <PropertyRef Name="id" />
       <PropertyRef Name="pregunta" />
       <PropertyRef Name="estatus_pregunta" />
-      <PropertyRef Name="afinidad" />
       <PropertyRef Name="valor" />
       <PropertyRef Name="idcalidad" />
       <PropertyRef Name="estatus_calidad" />
@@ -302,7 +309,6 @@
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estatus_pregunta" Type="Boolean" Nullable="false" />
-    <Property Name="afinidad" Type="Int32" Nullable="false" />
     <Property Name="valor" Type="Int32" Nullable="false" />
     <Property Name="idcalidad" Type="Int32" Nullable="false" />
     <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -338,38 +344,6 @@
     <Property Name="serie_teclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityType Name="vt_evento_sin_cerrar">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="nombre" />
-      <PropertyRef Name="descripcion" />
-      <PropertyRef Name="fecha_solicitud" />
-      <PropertyRef Name="estatus_evento" />
-      <PropertyRef Name="solicitante" />
-      <PropertyRef Name="idsolicitante" />
-      <PropertyRef Name="tipo" />
-      <PropertyRef Name="asistencia" />
-      <PropertyRef Name="acomodo" />
-      <PropertyRef Name="fecha_realizacion" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
-    <Property Name="hora_inicial" Type="DateTime" Precision="3" />
-    <Property Name="hora_final" Type="DateTime" Precision="3" />
-    <Property Name="estatus_evento" Type="Int32" Nullable="false" />
-    <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="idsolicitante" Type="Int32" Nullable="false" />
-    <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="asistencia" Type="Int32" Nullable="false" />
-    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-  </EntityType>
   <EntityType Name="vt_eventos_cerrados">
     <Key>
       <PropertyRef Name="id" />
@@ -402,38 +376,44 @@
     <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="asistencia" Type="Int32" Nullable="false" />
-    <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="idcalidad" Type="Int32" Nullable="false" />
     <Property Name="estatus_calidad" Type="Boolean" Nullable="false" />
     <Property Name="promedio" Type="Double" Nullable="false" />
     <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="vt_incidente_sin_cerrar">
+  <EntityType Name="vt_eventos_sin_cerrar">
     <Key>
       <PropertyRef Name="id" />
+      <PropertyRef Name="nombre" />
       <PropertyRef Name="descripcion" />
-      <PropertyRef Name="prioridad" />
       <PropertyRef Name="fecha_solicitud" />
-      <PropertyRef Name="estatus_incidente" />
+      <PropertyRef Name="estatus_evento" />
       <PropertyRef Name="solicitante" />
-      <PropertyRef Name="fk_idusuario_solicitante" />
+      <PropertyRef Name="idsolicitante" />
+      <PropertyRef Name="tipo" />
+      <PropertyRef Name="asistencia" />
+      <PropertyRef Name="acomodo" />
+      <PropertyRef Name="fecha_realizacion" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
     <Property Name="hora_inicial" Type="DateTime" Precision="3" />
     <Property Name="hora_final" Type="DateTime" Precision="3" />
-    <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
+    <Property Name="estatus_evento" Type="Int32" Nullable="false" />
     <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
+    <Property Name="idsolicitante" Type="Int32" Nullable="false" />
+    <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="asistencia" Type="Int32" Nullable="false" />
+    <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="vt_incidentes_cerrados">
     <Key>
@@ -468,18 +448,42 @@
     <Property Name="promedio" Type="Double" Nullable="false" />
     <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="vt_incidentes_sin_cerrar">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="prioridad" />
+      <PropertyRef Name="fecha_solicitud" />
+      <PropertyRef Name="estatus_incidente" />
+      <PropertyRef Name="solicitante" />
+      <PropertyRef Name="fk_idusuario_solicitante" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_cierre" Type="DateTime" Precision="3" />
+    <Property Name="hora_inicial" Type="DateTime" Precision="3" />
+    <Property Name="hora_final" Type="DateTime" Precision="3" />
+    <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
+    <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="vt_preguntas">
     <Key>
       <PropertyRef Name="id" />
       <PropertyRef Name="pregunta" />
       <PropertyRef Name="estatus" />
-      <PropertyRef Name="afinidad" />
     </Key>
     <Property Name="numero" Type="Int64" />
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="pregunta" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estatus" Type="Boolean" Nullable="false" />
-    <Property Name="afinidad" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="vt_promedio_eventos">
     <Key>
@@ -609,6 +613,18 @@
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
+  <Association Name="fk_acomodo">
+    <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="0..1" />
+    <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblacomodo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblevento">
+        <PropertyRef Name="fk_idacomodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_area">
     <End Role="tblarea" Type="Self.tblarea" Multiplicity="1" />
     <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
@@ -774,7 +790,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_idservicio">
-    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1" />
+    <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblservicio">
@@ -946,6 +964,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="dbhelpdeskV2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblacomodo" EntityType="Self.tblacomodo" />
     <EntitySet Name="tblarea" EntityType="Self.tblarea" />
     <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" />
     <EntitySet Name="tblcoordinacion" EntityType="Self.tblcoordinacion" />
@@ -972,10 +991,10 @@
     <EntitySet Name="vt_departamentos" EntityType="Self.vt_departamentos" />
     <EntitySet Name="vt_encuestas" EntityType="Self.vt_encuestas" />
     <EntitySet Name="vt_equipos" EntityType="Self.vt_equipos" />
-    <EntitySet Name="vt_evento_sin_cerrar" EntityType="Self.vt_evento_sin_cerrar" />
     <EntitySet Name="vt_eventos_cerrados" EntityType="Self.vt_eventos_cerrados" />
-    <EntitySet Name="vt_incidente_sin_cerrar" EntityType="Self.vt_incidente_sin_cerrar" />
+    <EntitySet Name="vt_eventos_sin_cerrar" EntityType="Self.vt_eventos_sin_cerrar" />
     <EntitySet Name="vt_incidentes_cerrados" EntityType="Self.vt_incidentes_cerrados" />
+    <EntitySet Name="vt_incidentes_sin_cerrar" EntityType="Self.vt_incidentes_sin_cerrar" />
     <EntitySet Name="vt_preguntas" EntityType="Self.vt_preguntas" />
     <EntitySet Name="vt_promedio_eventos" EntityType="Self.vt_promedio_eventos" />
     <EntitySet Name="vt_promedio_general" EntityType="Self.vt_promedio_general" />
@@ -984,6 +1003,10 @@
     <EntitySet Name="vt_reporte_equipos" EntityType="Self.vt_reporte_equipos" />
     <EntitySet Name="vt_servicios" EntityType="Self.vt_servicios" />
     <EntitySet Name="vt_usuarios" EntityType="Self.vt_usuarios" />
+    <AssociationSet Name="fk_acomodo" Association="Self.fk_acomodo">
+      <End Role="tblacomodo" EntitySet="tblacomodo" />
+      <End Role="tblevento" EntitySet="tblevento" />
+    </AssociationSet>
     <AssociationSet Name="fk_area" Association="Self.fk_area">
       <End Role="tblarea" EntitySet="tblarea" />
       <End Role="tblusuario" EntitySet="tblusuario" />
@@ -1105,7 +1128,7 @@
       <Parameter Name="idevento" Mode="In" Type="Int32" />
       <Parameter Name="titulo" Mode="In" Type="String" />
       <Parameter Name="lugar" Mode="In" Type="Int32" />
-      <Parameter Name="acomodo" Mode="In" Type="String" />
+      <Parameter Name="acomodo" Mode="In" Type="Int32" />
       <Parameter Name="asistencia" Mode="In" Type="Int32" />
       <Parameter Name="horaIn" Mode="In" Type="DateTime" />
       <Parameter Name="HoraFn" Mode="In" Type="DateTime" />
