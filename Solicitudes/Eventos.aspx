@@ -200,9 +200,7 @@
                                                                         <asp:DropDownList runat="server" CssClass="form-control" ID="cbAcomodo" DataTextField="nombre" DataValueField="id" ></asp:DropDownList>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo">
-                                                                            <asp:ListItem Text="Público" Value="0"></asp:ListItem>
-                                                                            <asp:ListItem Text="Privado" Value="1"></asp:ListItem>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Tipo"></asp:Label><asp:DropDownList runat="server" CssClass="form-control"  ID="cbTipo" DataTextField="nombre" DataValueField="id">
                                                                         </asp:DropDownList>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
@@ -225,7 +223,7 @@
                                                                         <asp:Label runat="server" Font-Bold="true" Text="Hora de inicio"></asp:Label><asp:TextBox runat="server" CssClass="form-control dateValido" TextMode="Time" MaxLength="15" ID="txtHoraInicial" onpaste="return false;"></asp:TextBox>
                                                                     </asp:Panel>
                                                                     <asp:Panel runat="server" CssClass="col-lg-6">
-                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de termino"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" MaxLength="15" ID="txtHoraFinal" onpaste="return false;"></asp:TextBox>
+                                                                        <asp:Label runat="server" Font-Bold="true" Text="Hora de término"></asp:Label><asp:TextBox runat="server" CssClass="form-control" TextMode="Time" MaxLength="15" ID="txtHoraFinal" onpaste="return false;"></asp:TextBox>
                                                                     </asp:Panel>
                                                                 </asp:Panel>
                                                             </asp:Panel>
@@ -415,7 +413,7 @@
                                                     <asp:Panel runat="server" CssClass="form-group" BackColor="White" BorderColor="LightGray" BorderStyle="Solid" BorderWidth="1">
                                                         <asp:Table runat="server" ID="Table1" class="table" Style="margin-bottom: 0%; background-color: #F2F2F2">
                                                             <asp:TableRow runat="server" Font-Bold="true" class="text-center" BackColor="#006699" ForeColor="White" Font-Size="Larger" Style="border-bottom: LightGray 1px solid">
-                                                                <asp:TableCell >Recursos asignados</asp:TableCell>
+                                                                <asp:TableCell >Recursos disponibles</asp:TableCell>
                                                             </asp:TableRow>
                                                         </asp:Table>
                                                         <asp:Panel runat="server" ID="panelRecursosNoAsignados" ScrollBars="Auto" Height="250">

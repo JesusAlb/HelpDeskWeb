@@ -55,7 +55,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                                }).ToList();
+                            }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                     else
                     {
@@ -79,7 +79,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                 }
                 else
@@ -105,7 +105,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderBy(a => a.fecha_solicitud).ToList();
                     }
                     else
                     {
@@ -128,7 +128,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderBy(a => a.fecha_solicitud).ToList();
                     }
                 }
                 
@@ -176,7 +176,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                     else
                     {
@@ -200,7 +200,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                 }
                 else
@@ -226,7 +226,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderBy(a => a.fecha_solicitud).ToList();
                     }
                     else
                     {
@@ -249,7 +249,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                                 hora_final = x.hora_final,
                                 acciones = x.acciones,
                                 solucion = x.solucion
-                            }).ToList();
+                            }).OrderBy(a => a.fecha_solicitud).ToList();
                     }
                 }
             }

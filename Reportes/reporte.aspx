@@ -164,20 +164,28 @@
                                                         <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <asp:Panel runat="server" ID="panelGrid" ScrollBars="auto" Height="150" Visible="false">
-                                                                    <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                        ShowHeaderWhenEmpty="true"  DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
-                                                                        <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
-                                                                        <Columns>
-                                                                            <asp:BoundField HeaderText="Id" DataField="id" />
-                                                                            <asp:BoundField HeaderText="Evento" DataField="nombre" />
-                                                                            <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
-                                                                        </Columns>
-                                                                    </asp:GridView>
+                                                                    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                                        <ContentTemplate>
+                                                                            <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                                                ShowHeaderWhenEmpty="true" DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                                                <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
+                                                                                <Columns>
+                                                                                    <asp:BoundField HeaderText="Id" DataField="id" />
+                                                                                    <asp:BoundField HeaderText="Evento" DataField="nombre" />
+                                                                                    <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
+                                                                                </Columns>
+                                                                            </asp:GridView>
+                                                                        </ContentTemplate>
+                                                                        <Triggers>
+                                                                            <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
+                                                                        </Triggers>
+                                                                    </asp:UpdatePanel>
+
                                                                 </asp:Panel>
                                                             </ContentTemplate>
                                                             <Triggers>
+
                                                                 <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
-                                                                <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
                                                             </Triggers>
                                                         </asp:UpdatePanel>
                                                     </div>

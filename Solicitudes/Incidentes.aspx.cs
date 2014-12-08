@@ -200,7 +200,7 @@ namespace HelpDeskWeb.Solicitudes
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "mensajeNoEncuesta", "alertify.alert('Para dar de alta un incidente, debes contestar la encuesta')", true);
+                    ScriptManager.RegisterStartupScript(this.updateAcciones, GetType(), "mensajeNoEncuesta", "alertify.alert('Para dar de alta un incidente, debes contestar las evaluaciones')", true);
                 }
 
             }

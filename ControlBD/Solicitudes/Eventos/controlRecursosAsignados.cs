@@ -16,9 +16,9 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
            {
                try
                {
-                   return dbhelp.modelo.vt_recursos_asignados.Where(a => a.idevento == idEvento).Select(x => new {
-                       idRequerimiento = x.idrecurso,
-                       nomRequerimiento = x.nom_recurso,
+                   return dbhelp.modelo.tblrecursoasignado.Where(a => a.fk_idevento == idEvento).Select(x => new {
+                       idRequerimiento = x.fk_idrequerimiento,
+                       nomRequerimiento = x.tblrecurso.nombre,
                        cantidad = x.cantidad
                    }).ToList();
                }

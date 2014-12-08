@@ -63,15 +63,26 @@ namespace HelpDeskWeb.ControlBD.Catalogo
             try{
                 if (tipo == 0)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.fk_idtipo == 0).OrderBy(a=>a.nom_completo).ToList();
+                    return dbhelp.modelo.tblusuario.Where(a => a.fk_idtipo == 0).OrderBy(a=>a.nombre).Select( x => new {
+                        id = x.id,
+                        nom_completo = x.nombre + " " + x.apellidos                    
+                    }).ToList();
                 }
                 else if (tipo == 1)
                 {
-                    return dbhelp.modelo.vt_usuarios.Where(a => a.fk_idtipo == 1 && !a.nombre_usuario.Equals("S/A")).OrderBy(a=>a.nom_completo).ToList();
+                    return dbhelp.modelo.tblusuario.Where(a => a.fk_idtipo == 1 && !a.nombre_usuario.Equals("S/A")).OrderBy(a => a.nombre).Select(x => new
+                    {
+                        id = x.id,
+                        nom_completo = x.nombre + " " + x.apellidos    
+                    }).ToList();
                 }
                 else 
                 {
-                    return obtenerDataSource("");
+                    return dbhelp.modelo.tblusuario.Where(a => !a.nombre_usuario.Equals("S/A")).OrderBy(a => a.nombre).Select(x => new
+                    {
+                        id = x.id,
+                        nom_completo = x.nombre + " " + x.apellidos    
+                    }).ToList();
                 }
 
             }

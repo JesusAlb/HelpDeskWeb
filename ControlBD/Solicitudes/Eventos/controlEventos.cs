@@ -53,7 +53,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                     else
                     {
@@ -77,7 +77,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                hora_final = x.hora_final,
                                                acomodo = x.acomodo,
                                                asistencia = x.asistencia
-                                           }).ToList();
+                                           }).OrderByDescending(a => a.fecha_cierre).ToList();
 
                     }
                 }
@@ -105,7 +105,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderBy(a => a.fecha_realizacion).ToList();
                     }
                     else
                     {
@@ -128,7 +128,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                hora_final = x.hora_final,
                                                acomodo = x.acomodo,
                                                asistencia = x.asistencia
-                                           }).ToList();
+                                           }).OrderBy(a => a.fecha_realizacion).ToList();
 
                     }
                 }
@@ -151,7 +151,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             }
         }
 
-        public static vt_eventos_cerrados obtenerventoCerrado(int evento)
+        public static vt_eventos_cerrados obtenerEventoCerrado(int evento)
         {
             try
             {
@@ -206,7 +206,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderByDescending(a => a.fecha_cierre).ToList();
                     }
                     else
                     {
@@ -235,7 +235,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderByDescending(a => a.fecha_cierre).ToList();
 
                     }
                 }
@@ -267,7 +267,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderBy(a => a.fecha_realizacion).ToList();
                     }
                     else
                     {
@@ -295,7 +295,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
                                                              hora_final = x.hora_final,
                                                              acomodo = x.acomodo,
                                                              asistencia = x.asistencia
-                                                         }).ToList();
+                                                         }).OrderBy(a => a.fecha_realizacion).ToList();
 
                     }
                 }
@@ -534,6 +534,18 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
             {
                 dbhelp.UndoAll(dbhelp.modelo);
                 return false;
+            }
+        }
+
+        public static IList<tbltipoevento> obtenerDataSourceTipoEventos()
+        {
+            try
+            {
+                return dbhelp.modelo.tbltipoevento.ToList();
+            }
+            catch
+            {
+                return null;
             }
         }
 

@@ -117,6 +117,8 @@ namespace HelpDeskWeb.Solicitudes
             cbLugares.DataBind();
             cbAcomodo.DataSource = controlAcomodo.obtenerDataSource("");
             cbAcomodo.DataBind();
+            cbTipo.DataSource = controlEventos.obtenerDataSourceTipoEventos();
+            cbTipo.DataBind();
         }
 
         protected void gvEventos_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,13 +172,22 @@ namespace HelpDeskWeb.Solicitudes
                 {
                     this.configurarModal("Alta de eventos", true, false);
                 }
+                ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
             }
             else
             {
-                this.configurarModal("Alta de eventos", false, false);
+                if (controlEncuestas.obtenerNumeroDeEncuestasSinResponderEnEventos(controlUsuario.obtenerUsuarioDeSession(this).id) == 0)
+                {
+                    this.configurarModal("Alta de eventos", false, false);
+                    ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "mensajeNoEncuesta", "alertify.alert('Para dar de alta un evento, debes contestar la encuesta')", true);
+                }
             }
 
-            ScriptManager.RegisterStartupScript(this.UpdateBtns, GetType(), "btnNuevoActivado", "$('#ModalNuevo').modal('show');", true);
+
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -188,6 +199,7 @@ namespace HelpDeskWeb.Solicitudes
                     registroEvento = controlEventos.obtenerEvento(Convert.ToInt32(idEventoSeleccionado.Value));
                     txtTituloNuevo.Text = registroEvento.nombre;
                     cbAcomodo.SelectedValue = registroEvento.fk_idacomodo.ToString();
+                    cbTipo.SelectedValue = registroEvento.fk_idtipo.ToString();
                     txtAsistencia.Text = registroEvento.asistencia.ToString();
                     txtDescripcion.Text = registroEvento.tblservicio.descripcion;
                     cbLugares.SelectedValue = registroEvento.fk_idlugar.ToString();
