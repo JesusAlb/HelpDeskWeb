@@ -13,15 +13,6 @@
     <link href="../css/helpdesk-template.css" rel="stylesheet" />
     <script src="../js/jquery-2.1.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-
-        $(function () {
-            $("#<%=txtFiltroAbierto.ClientID%>").keyup(function () {
-                __doPostBack("txtFiltroAbierto", $("#<%=txtFiltroAbierto.ClientID%>").val());
-            })
-         });
-
-    </script>
 </head>
 <body>
         <asp:Panel ID="Menu" runat="server" CssClass="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -90,24 +81,24 @@
                                 <asp:LinkButton CssClass="btn btn-primary btn-lg btn-block" runat="server" data-toggle="collapse" href="#datosBusqueda" Text="Datos del reporte" />
                                 <asp:Panel runat="server" ID="datosBusqueda" class="panel-collapse collapse in active">
                                     <div class="panel-body">
-                                        <div class="row">
+                                        <asp:Panel runat="server"  CssClass="row" DefaultButton="btnGenerar">
                                             <div class="col-lg-2"></div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <h3 class="text-center">Busqueda avanzada</h3>
                                                 </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">
-                                                            Información a mostrar
-                                                        </div>
-                                                        <div class="col-lg-5">
-                                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">
+                                                        Información a mostrar
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
                                                             <asp:DropDownList runat="server" ID="cbObjeto" CssClass="form-control" OnSelectedIndexChanged="cbObjeto_SelectedIndexChanged" AutoPostBack="true">
                                                             </asp:DropDownList>
-                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
                                                                     <asp:DropDownList runat="server" ToolTip="status" ID="cbEstatus" CssClass="form-control">
@@ -122,16 +113,19 @@
                                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
                                                                 </Triggers>
                                                             </asp:UpdatePanel>
-                                                                </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-4" style="font-weight: bold; font-size: 16px; margin-top: 5px">Filtro</div>
                                                         <div class="col-lg-8">
                                                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                                 <ContentTemplate>
-                                                                    <asp:TextBox runat="server" ID="txtFiltroAbierto" onpaste="return false;" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                    <asp:Panel runat="server" ID="panelFiltro" CssClass="input-group" DefaultButton="btnFiltrar" >
+                                                                        <asp:TextBox runat="server" ID="txtFiltroAbierto" onpaste="return false;" MaxLength="30" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
+                                                                         <span class="input-group-btn"><asp:LinkButton runat="server" CssClass="btn btn-default" Text="Filtrar" ID="btnFiltrar" OnClick="btnFiltrar_Click"></asp:LinkButton></span>
+                                                                    </asp:Panel>
                                                                 </ContentTemplate>
                                                                 <Triggers>
                                                                     <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
@@ -160,34 +154,34 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-lg-12">
-                                                        <asp:UpdatePanel runat="server" ID="updateGrid" UpdateMode="Conditional">
-                                                            <ContentTemplate>
-                                                                <asp:Panel runat="server" ID="panelGrid" ScrollBars="auto" Height="150" Visible="false">
-                                                                    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                                                        <ContentTemplate>
-                                                                            <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
-                                                                                ShowHeaderWhenEmpty="true" DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
-                                                                                <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
-                                                                                <Columns>
-                                                                                    <asp:BoundField HeaderText="Id" DataField="id" />
-                                                                                    <asp:BoundField HeaderText="Evento" DataField="nombre" />
-                                                                                    <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
-                                                                                </Columns>
-                                                                            </asp:GridView>
-                                                                        </ContentTemplate>
-                                                                        <Triggers>
-                                                                            <asp:AsyncPostBackTrigger ControlID="txtFiltroAbierto" EventName="TextChanged" />
-                                                                        </Triggers>
-                                                                    </asp:UpdatePanel>
-
-                                                                </asp:Panel>
-                                                            </ContentTemplate>
-                                                            <Triggers>
-
-                                                                <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
-                                                            </Triggers>
-                                                        </asp:UpdatePanel>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <asp:UpdatePanel runat="server" ID="updateContentGrid" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:Panel runat="server" ID="panelGrid" ScrollBars="auto" Height="150" Visible="false">
+                                                                        <asp:UpdatePanel runat="server" ID="updateGrid"   UpdateMode="Conditional">
+                                                                            <ContentTemplate>
+                                                                                <asp:GridView ToolTip="Tabla de eventos con recursos asignados" runat="server" OnRowCreated="gvEventos_RowCreated" ID="gvEventos" AutoGenerateColumns="False" CssClass="table table-condensed" SelectedRowStyle-ForeColor="black" SelectedRowStyle-BackColor="#B0C4DE"
+                                                                                    ShowHeaderWhenEmpty="true" DataKeyNames="id" AlternatingRowStyle-BackColor="#F2F2F2" CellPadding="4" GridLines="none">
+                                                                                    <HeaderStyle Font-Bold="True" ForeColor="White" BackColor="#006699" Font-Size="12" />
+                                                                                    <Columns>
+                                                                                        <asp:BoundField HeaderText="Id" DataField="id" />
+                                                                                        <asp:BoundField HeaderText="Evento" DataField="nombre" />
+                                                                                        <asp:BoundField HeaderText="Fecha" DataField="fecha_realizacion" DataFormatString="{0:D}" />
+                                                                                    </Columns>
+                                                                                </asp:GridView>
+                                                                            </ContentTemplate>
+                                                                            <Triggers>
+                                                                                <asp:AsyncPostBackTrigger ControlID="btnFiltrar" EventName="Click" />
+                                                                            </Triggers>
+                                                                        </asp:UpdatePanel>
+                                                                    </asp:Panel>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="cbObjeto" EventName="SelectedIndexChanged" />
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -202,10 +196,10 @@
                                                 </div>
 
                                             </div>
-                                        <div class="col-lg-2"></div>
+                                            <div class="col-lg-2"></div>
+                                        </asp:Panel>
                                     </div>
-                            </div>
-                        </asp:Panel>
+                                </asp:Panel>
                     </div>
                     <asp:Panel runat="server" ID="panelReporte" CssClass="panel panel-default contenedorTablaControl" Visible="false">
                                 <div class="panel-heading text-center">

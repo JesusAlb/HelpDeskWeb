@@ -252,15 +252,22 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void BtnGrabarAsignacion_Click(object sender, EventArgs e)
         {
-            if (controlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), Convert.ToInt16(cbPrioridad.SelectedItem.Value), Convert.ToInt32(cbTipoIncidente.SelectedValue)))
+            if (Utilerias.verificarCombosUsuarios(new string[] { cbSoporte.SelectedItem.Text, cbSeguimiento.SelectedItem.Text }))
             {
-                this.cargarTablasIncidentes();
-                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "SalirVentanaAsign", "$('#ModalAsignar').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
+                if (controlIncidentes.asignarSoporte(Convert.ToInt32(idIncidenteSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue), Convert.ToInt16(cbPrioridad.SelectedItem.Value), Convert.ToInt32(cbTipoIncidente.SelectedValue)))
+                {
+                    this.cargarTablasIncidentes();
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "SalirVentanaAsign", "$('#ModalAsignar').modal('hide');", true);
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.error('Error al asignar el soporte');", true);
+                }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "AsignacionCorrecta", "alertify.error('Error al asignar el soporte');", true);
+                ScriptManager.RegisterStartupScript(this.UpdateGrabarAsignacion, this.GetType(), "ErrorSoporte", "alertify.error('Existen usuarios sin asignar');", true);
             }
         }
 
@@ -475,7 +482,7 @@ namespace HelpDeskWeb.Solicitudes
             if(Utilerias.verificarCamposVacios(new string[]{
                 txtAcciones2.Text, txtDescripcion2.Text, txtAcciones2.Text, txtSolucion2.Text, cbPrioridad2.Text, cbTipoIncidente2.Text
             }) && Utilerias.verificarCombosUsuarios(new string[]{
-                cbSeguimiento2.Text, cbSoporte2.Text
+                cbSeguimiento2.SelectedItem.Text, cbSoporte2.SelectedItem.Text
             }))
             {
                 if (Utilerias.validarFechas(new TextBox[] { txtFechaInicio, txtFechaFinal, txtHoraInicio, txtHoraFinal }) && Utilerias.fechaReal(txtFechaFinal.Text, true))

@@ -190,9 +190,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>4.92277cm</Top>
-        <Left>9.73551cm</Left>
+        <Left>9.10051cm</Left>
         <Height>0.9175cm</Height>
-        <Width>2.44368cm</Width>
+        <Width>2.40841cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -359,7 +359,7 @@
         <Top>4.92277cm</Top>
         <Left>3.89294cm</Left>
         <Height>0.9175cm</Height>
-        <Width>5.43688cm</Width>
+        <Width>4.69605cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -410,9 +410,9 @@
         </Paragraphs>
         <rd:DefaultName>acomodo</rd:DefaultName>
         <Top>4.92277cm</Top>
-        <Left>12.24975cm</Left>
+        <Left>11.61475cm</Left>
         <Height>0.9175cm</Height>
-        <Width>3.85935cm</Width>
+        <Width>4.49435cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -584,7 +584,7 @@
                 <Value>=Fields!hora_inicial.Value</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
-                  <Format>h:mm tt</Format>
+                  <Format>hh:mm tt</Format>
                 </Style>
               </TextRun>
               <TextRun>
@@ -597,7 +597,7 @@
                 <Value>=Fields!hora_final.Value</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
-                  <Format>h:mm tt</Format>
+                  <Format>hh:mm tt</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1007,7 +1007,7 @@
     <Height>7.02285in</Height>
     <Style />
   </Body>
-  <Width>7.88731in</Width>
+  <Width>7.40814in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

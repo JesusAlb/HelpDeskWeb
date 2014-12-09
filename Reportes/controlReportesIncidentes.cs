@@ -24,54 +24,108 @@ namespace HelpDeskWeb.Reportes
 
                 if (idSolicitante != null)
                 {
-
-                    return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) ||
-                                a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbltipoincidencia.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
-                                a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                                a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
-                                        x => new vt_incidentes
-                                        {
-                                            id = x.id,
-                                            descripcion = x.tblservicio.descripcion,
-                                            tipo = x.tbltipoincidencia.nombre,
-                                            solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
-                                            estatus = x.tblservicio.tblestatus.nombre,                                           
-                                            prioridad = x.tblprioridad.nombre,
-                                            soporte = x.tblservicio.tblusuario2.nombre_usuario,
-                                            apoyo = x.tblservicio.tblusuario.nombre_usuario,
-                                            fecha_solicitud = x.tblservicio.fecha_solicitud,
-                                            fecha_cierre = x.tblservicio.fecha_cierre,
-                                            hora_inicial = x.tblservicio.hora_inicial.Value,
-                                            hora_final = x.tblservicio.hora_final,
-                                            acciones = x.acciones,
-                                            solucion = x.solucion
-                                        }).ToList();
+                    if (limiteIn == null || limiteSp == null)
+                    {
+                        return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) ||
+                                    a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbltipoincidencia.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                    a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                    a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
+                                            x => new vt_incidentes
+                                            {
+                                                id = x.id,
+                                                descripcion = x.tblservicio.descripcion,
+                                                tipo = x.tbltipoincidencia.nombre,
+                                                solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                estatus = x.tblservicio.tblestatus.nombre,
+                                                prioridad = x.tblprioridad.nombre,
+                                                soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                fecha_cierre = x.tblservicio.fecha_cierre,
+                                                hora_inicial = x.tblservicio.hora_inicial.Value,
+                                                hora_final = x.tblservicio.hora_final,
+                                                acciones = x.acciones,
+                                                solucion = x.solucion
+                                            }).ToList();
+                    }
+                    else
+                    {
+                        return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) ||
+                                    a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbltipoincidencia.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                    a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                    a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante) && (a.tblservicio.fecha_solicitud >= limiteIn && a.tblservicio.fecha_solicitud <= limiteSp)).Select(
+                                            x => new vt_incidentes
+                                            {
+                                                id = x.id,
+                                                descripcion = x.tblservicio.descripcion,
+                                                tipo = x.tbltipoincidencia.nombre,
+                                                solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                estatus = x.tblservicio.tblestatus.nombre,
+                                                prioridad = x.tblprioridad.nombre,
+                                                soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                fecha_cierre = x.tblservicio.fecha_cierre,
+                                                hora_inicial = x.tblservicio.hora_inicial.Value,
+                                                hora_final = x.tblservicio.hora_final,
+                                                acciones = x.acciones,
+                                                solucion = x.solucion
+                                            }).ToList();
+                    }
                 }
                 else
                 {
-                    return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
-                            a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) ||
-                            a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                            a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status))).Select(
-                                        x => new vt_incidentes
-                                        {
-                                            id = x.id,
-                                            descripcion = x.tblservicio.descripcion,
-                                            tipo = x.tbltipoincidencia.nombre,
-                                            solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
-                                            estatus = x.tblservicio.tblestatus.nombre,
-                                            prioridad = x.tblprioridad.nombre,
-                                            soporte = x.tblservicio.tblusuario2.nombre_usuario,
-                                            apoyo = x.tblservicio.tblusuario.nombre_usuario,
-                                            fecha_solicitud = x.tblservicio.fecha_solicitud,
-                                            fecha_cierre = x.tblservicio.fecha_cierre,
-                                            hora_inicial = x.tblservicio.hora_inicial.Value,
-                                            hora_final = x.tblservicio.hora_final,
-                                            acciones = x.acciones,
-                                            solucion = x.solucion
-                                        }).ToList();
+
+                    if (limiteSp == null || limiteIn == null)
+                    {
+                        return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) ||
+                                a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status))).Select(
+                                            x => new vt_incidentes
+                                            {
+                                                id = x.id,
+                                                descripcion = x.tblservicio.descripcion,
+                                                tipo = x.tbltipoincidencia.nombre,
+                                                solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                estatus = x.tblservicio.tblestatus.nombre,
+                                                prioridad = x.tblprioridad.nombre,
+                                                soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                fecha_cierre = x.tblservicio.fecha_cierre,
+                                                hora_inicial = x.tblservicio.hora_inicial.Value,
+                                                hora_final = x.tblservicio.hora_final,
+                                                acciones = x.acciones,
+                                                solucion = x.solucion
+                                            }).ToList();
+                    }
+                    else
+                    {
+                        return dbhelp.modelo.tblincidente.Where(a => (a.acciones.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                    a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) ||
+                                    a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                    a.solucion.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status)) && (a.tblservicio.fecha_solicitud >= limiteIn && a.tblservicio.fecha_solicitud <= limiteSp)).Select(
+                                                x => new vt_incidentes
+                                                {
+                                                    id = x.id,
+                                                    descripcion = x.tblservicio.descripcion,
+                                                    tipo = x.tbltipoincidencia.nombre,
+                                                    solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                    estatus = x.tblservicio.tblestatus.nombre,
+                                                    prioridad = x.tblprioridad.nombre,
+                                                    soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                    apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                    fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                    fecha_cierre = x.tblservicio.fecha_cierre,
+                                                    hora_inicial = x.tblservicio.hora_inicial.Value,
+                                                    hora_final = x.tblservicio.hora_final,
+                                                    acciones = x.acciones,
+                                                    solucion = x.solucion
+                                                }).ToList();
+                    }
                 }
-                
+ 
             }
             catch
             {

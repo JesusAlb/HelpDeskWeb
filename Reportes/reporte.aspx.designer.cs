@@ -112,6 +112,15 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.WebControls.DropDownList cbEstatus;
         
         /// <summary>
+        /// Control panelFiltro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFiltro;
+        
+        /// <summary>
         /// Control txtFiltroAbierto.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace HelpDeskWeb.Reportes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFiltroAbierto;
+        
+        /// <summary>
+        /// Control btnFiltrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFiltrar;
         
         /// <summary>
         /// Control panelRangoFechas.
@@ -148,13 +166,13 @@ namespace HelpDeskWeb.Reportes {
         protected global::System.Web.UI.WebControls.TextBox txtFechaFinal;
         
         /// <summary>
-        /// Control updateGrid.
+        /// Control updateContentGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateGrid;
+        protected global::System.Web.UI.UpdatePanel updateContentGrid;
         
         /// <summary>
         /// Control panelGrid.
@@ -164,6 +182,15 @@ namespace HelpDeskWeb.Reportes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelGrid;
+        
+        /// <summary>
+        /// Control updateGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateGrid;
         
         /// <summary>
         /// Control gvEventos.

@@ -24,48 +24,98 @@ namespace HelpDeskWeb.Reportes
 
                  if (idSolicitante != null)
                  {
-
-                     return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
-                                 a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbllugar.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
-                                 a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                                 a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
-                                         x => new vt_eventos
-                                         {
-                                             id = x.id,
-                                             nombre = x.nombre,
-                                             descripcion = x.tblservicio.descripcion,
-                                             solicitante = x.tblservicio.tblusuario1.nombre + " "+ x.tblservicio.tblusuario1.apellidos,
-                                             soporte = x.tblservicio.tblusuario2.nombre_usuario,
-                                             apoyo = x.tblservicio.tblusuario.nombre_usuario,
-                                             fecha_realizacion = x.fecha_realizacion,
-                                             fecha_solicitud = x.tblservicio.fecha_solicitud,
-                                             hora_inicial = x.tblservicio.hora_inicial,
-                                             hora_final = x.tblservicio.hora_final,
-                                             fecha_cierre = x.tblservicio.fecha_cierre,
-                                             estatus = x.tblservicio.tblestatus.nombre
-                                         }).ToList();
+                     if (limiteIn == null || limiteSp == null)
+                     {
+                         return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
+                                     a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbllugar.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                     a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                     a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante)).Select(
+                                             x => new vt_eventos
+                                             {
+                                                 id = x.id,
+                                                 nombre = x.nombre,
+                                                 descripcion = x.tblservicio.descripcion,
+                                                 solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                 soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                 apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                 fecha_realizacion = x.fecha_realizacion,
+                                                 fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                 hora_inicial = x.tblservicio.hora_inicial,
+                                                 hora_final = x.tblservicio.hora_final,
+                                                 fecha_cierre = x.tblservicio.fecha_cierre,
+                                                 estatus = x.tblservicio.tblestatus.nombre
+                                             }).ToList();
+                     }
+                     else
+                     {
+                         return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
+                                    a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tbllugar.nombre.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                    a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                    a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status) && a.tblservicio.fk_idusuario_solicitante == idSolicitante) && (a.fecha_realizacion >= limiteIn && a.fecha_realizacion <= limiteSp)).Select(
+                                            x => new vt_eventos
+                                            {
+                                                id = x.id,
+                                                nombre = x.nombre,
+                                                descripcion = x.tblservicio.descripcion,
+                                                solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                fecha_realizacion = x.fecha_realizacion,
+                                                fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                hora_inicial = x.tblservicio.hora_inicial,
+                                                hora_final = x.tblservicio.hora_final,
+                                                fecha_cierre = x.tblservicio.fecha_cierre,
+                                                estatus = x.tblservicio.tblestatus.nombre
+                                            }).ToList();
+                     }
                  }
                  else
                  {
-                     return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
-                             a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
-                             a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
-                             a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status))).Select(
-                                         x => new vt_eventos
-                                         {
-                                             id = x.id,
-                                             nombre = x.nombre,
-                                             descripcion = x.tblservicio.descripcion,
-                                             solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
-                                             soporte = x.tblservicio.tblusuario2.nombre_usuario,
-                                             apoyo = x.tblservicio.tblusuario.nombre_usuario,
-                                             fecha_realizacion = x.fecha_realizacion,
-                                             fecha_solicitud = x.tblservicio.fecha_solicitud,
-                                             hora_inicial = x.tblservicio.hora_inicial,
-                                             hora_final = x.tblservicio.hora_final,
-                                             fecha_cierre = x.tblservicio.fecha_cierre,
-                                             estatus = x.tblservicio.tblestatus.nombre
-                                         }).ToList();
+
+                     if (limiteIn == null || limiteSp == null)
+                     {
+                         return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                 a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
+                                 a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                 a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status))).Select(
+                                             x => new vt_eventos
+                                             {
+                                                 id = x.id,
+                                                 nombre = x.nombre,
+                                                 descripcion = x.tblservicio.descripcion,
+                                                 solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                 soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                 apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                 fecha_realizacion = x.fecha_realizacion,
+                                                 fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                 hora_inicial = x.tblservicio.hora_inicial,
+                                                 hora_final = x.tblservicio.hora_final,
+                                                 fecha_cierre = x.tblservicio.fecha_cierre,
+                                                 estatus = x.tblservicio.tblestatus.nombre
+                                             }).ToList();
+                     }
+                     else
+                     {
+                         return dbhelp.modelo.tblevento.Where(a => (a.tblacomodo.nombre.Contains(filtro) || a.tblservicio.descripcion.Contains(filtro) || a.tblservicio.tblusuario1.nombre.Contains(filtro) || a.tblservicio.tblusuario1.apellidos.Contains(filtro) ||
+                                    a.tblservicio.tblusuario.nombre_usuario.Contains(filtro) || a.tblservicio.tblusuario1.nombre_usuario.Contains(filtro) || a.tbltipoevento.nombre.Contains(filtro) ||
+                                    a.tblservicio.tblusuario2.nombre_usuario.Contains(filtro) || a.tblservicio.fecha_cierre.Value.Equals(busquedaFecha) || a.tblservicio.fecha_solicitud.Equals(busquedaFecha) ||
+                                    a.nombre.Contains(filtro)) && (a.tblservicio.tblestatus.nombre.Contains(status)) && (a.fecha_realizacion >= limiteIn && a.fecha_realizacion <= limiteSp)).Select(
+                                                x => new vt_eventos
+                                                {
+                                                    id = x.id,
+                                                    nombre = x.nombre,
+                                                    descripcion = x.tblservicio.descripcion,
+                                                    solicitante = x.tblservicio.tblusuario1.nombre + " " + x.tblservicio.tblusuario1.apellidos,
+                                                    soporte = x.tblservicio.tblusuario2.nombre_usuario,
+                                                    apoyo = x.tblservicio.tblusuario.nombre_usuario,
+                                                    fecha_realizacion = x.fecha_realizacion,
+                                                    fecha_solicitud = x.tblservicio.fecha_solicitud,
+                                                    hora_inicial = x.tblservicio.hora_inicial,
+                                                    hora_final = x.tblservicio.hora_final,
+                                                    fecha_cierre = x.tblservicio.fecha_cierre,
+                                                    estatus = x.tblservicio.tblestatus.nombre
+                                                }).ToList();
+                     }
                  }
             }
             catch

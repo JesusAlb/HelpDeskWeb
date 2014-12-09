@@ -22,14 +22,6 @@ namespace HelpDeskWeb.Reportes
             this.generarPrivilegios();
             lbelUsuario.Text = controlUsuario.obtenerUsuarioDeSession(this).nombre_usuario;
             this.cargarEventos();    
-
-            if (Page.IsPostBack)
-            {
-                if (Request["__EVENTTARGET"] == "txtFiltroAbierto")
-                {
-                    this.cargarEventos();
-                }
-            }
         }
 
         protected void cargarEventos()
@@ -203,11 +195,12 @@ namespace HelpDeskWeb.Reportes
             {
                 this.inhabilitarControles(false, true, true);
                 panelGrid.Visible = true;
+                panelFiltro.DefaultButton = "btnFiltrar";
             }
             else
             {
                 panelGrid.Visible = false;
-
+                panelFiltro.DefaultButton = "btnGenerar";
                 if (index <= 1)
                 {
                     this.inhabilitarControles(true, true, true);
@@ -235,6 +228,11 @@ namespace HelpDeskWeb.Reportes
                 txtFechaInicial.Text = new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");
                 txtFechaFinal.Text = new DateTime(DateTime.Today.Year + 1, DateTime.Today.Month, DateTime.Today.Day).ToString("yyyy-MM-dd");      
             }
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            this.cargarEventos();
         }
         
     }

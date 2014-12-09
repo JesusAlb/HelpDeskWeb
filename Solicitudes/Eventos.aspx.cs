@@ -235,7 +235,7 @@ namespace HelpDeskWeb.Solicitudes
 
             if (panelFechas.Visible)
             {
-                 usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.Text, cbSoporte2.Text, cbSeguimiento2.Text });
+                usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.SelectedItem.Text, cbSoporte2.SelectedItem.Text, cbSeguimiento2.SelectedItem.Text });
                  FechasValidas = Utilerias.validarFechas(new TextBox[] { txtFecha, txtFechaCierre, txtFechaSolicitud, txtHoraFinal, txtHoraInicial });
                  if (FechasValidas)
                  {
@@ -246,7 +246,7 @@ namespace HelpDeskWeb.Solicitudes
             }
             else if (panelSolicitante.Visible && !panelFechas.Visible)
             {
-                usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.Text});
+                usuariosValidos = Utilerias.verificarCombosUsuarios(new string[] { cbSolicitante.SelectedItem.Text });
                 FechasValidas = Utilerias.validarFechas(new TextBox[] { txtFecha, txtHoraFinal, txtHoraInicial });
                 if (FechasValidas)
                 {
@@ -367,21 +367,22 @@ namespace HelpDeskWeb.Solicitudes
 
         protected void btnGrabarAsignacion_Click(object sender, EventArgs e)
         {
-            if (!cbSoporte.SelectedItem.Text.Equals("S/A"))
-            {
-                if (controlEventos.asignarSoporte(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+            if (Utilerias.verificarCombosUsuarios(new string[] { cbSoporte.SelectedItem.Text, cbSeguimiento.SelectedItem.Text }))
                 {
-                    gvEventos_EnProceso.DataSource = null;
-                    gvEventos_EnProceso.DataBind();
-                    this.cargarTablasEventos();
-                    ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "$('#ModalAsignar').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
+                    if (controlEventos.asignarSoporte(Convert.ToInt32(idEventoSeleccionado.Value), Convert.ToInt32(cbSoporte.SelectedValue), Convert.ToInt32(cbSeguimiento.SelectedValue)))
+                    {
+                        gvEventos_EnProceso.DataSource = null;
+                        gvEventos_EnProceso.DataBind();
+                        this.cargarTablasEventos();
+                        ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "SalirVentanaSoporte", "$('#ModalAsignar').modal('hide');", true);
+                        ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "AsignacionCorrecta", "alertify.success('Soporte asignado correctamente');", true);
+                    }
                 }
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "ErrorSoporte", "alertify.error('Seleccione un usuario de soporte');", true);
-            }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this.UpdateSoporte, this.GetType(), "ErrorSoporte", "alertify.error('Existen usuarios sin asignar');", true);
+                }
+   
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -677,35 +678,43 @@ namespace HelpDeskWeb.Solicitudes
             }
             else
             {
-                bool correcto = true;
-                foreach (GridViewRow row in gvEncuestas.Rows)
+                if (!String.IsNullOrWhiteSpace(txtObEncuestas.Text))
                 {
-                    if (row.RowType == DataControlRowType.DataRow)
+                    bool correcto = true;
+                    foreach (GridViewRow row in gvEncuestas.Rows)
                     {
-                        DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
-                        if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                        if (row.RowType == DataControlRowType.DataRow)
                         {
-                            correcto = true;
+                            DropDownList cbRespuesta = row.FindControl("cbRespuesta") as DropDownList;
+                            if (controlEncuestas.insertarRespuesta(Convert.ToInt32(idCalidad.Value), Convert.ToInt32(gvEncuestas.DataKeys[row.DataItemIndex].Value), Convert.ToInt32(cbRespuesta.SelectedValue)))
+                            {
+                                correcto = true;
+                            }
+                            else
+                            {
+                                correcto = false;
+                            }
+                        }
+                    }
+                    if (correcto)
+                    {
+                        if (controlEncuestas.SaveChangesEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
+                        {
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
+                            this.cargarTablasEventos();
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registró la encuesta');", true);
                         }
                         else
                         {
-                            correcto = false;
+                            ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('No se pudo registrar la encuesta');", true);
                         }
                     }
                 }
-                if (correcto)
+                else
                 {
-                    if (controlEncuestas.SaveChangesEncuesta(Convert.ToInt32(idCalidad.Value), txtObEncuestas.Text, float.Parse(txtPromedio.Text, System.Globalization.CultureInfo.InvariantCulture)))
-                    {
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "btnEncuestas", "$('#ModalEncuesta').modal('hide');", true);
-                        this.cargarTablasEventos();
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestaGuarda", "alertify.success('Se registró la encuesta');", true);  
-                    }else{
-                        ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('No se pudo registrar la encuesta');", true);
-                    }
+                    ScriptManager.RegisterStartupScript(this.upGrabarEncuesta, GetType(), "EncuestNoGuardada", "alertify.error('Agregue la observación del servicio');", true);
                 }
-            }
-
+            }                
         }
 
         protected void cbCuantificable_SelectedIndexChanged(object sender, EventArgs e)
