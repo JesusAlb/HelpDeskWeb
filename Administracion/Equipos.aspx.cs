@@ -81,7 +81,7 @@ namespace HelpDeskWeb.Administracion
                         lbelTituloModal.Text = "Modificar equipo asignado";
                         tblequipoasignado equipos = controlEquipos.obtenerEquipo(Convert.ToInt32(gvEquipo.SelectedDataKey.Value.ToString()));
                         cbResponsable.SelectedValue = equipos.fk_idusuario_responsable.ToString();
-                        cbTipoEquipo.SelectedValue = equipos.fk_tipoequipo.ToString();
+                        cbTipoEquipo.SelectedValue = equipos.fk_idtipoequipo.ToString();
                         this.cargarControles();
                         string[] division = equipos.disco_duro.Split(' ');
                         txtDD.Text = division[0];

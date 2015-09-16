@@ -77,7 +77,7 @@
                                 <asp:HyperLink runat="server" NavigateUrl="~/perfil.aspx">Perfil</asp:HyperLink></li><li class="divider"></li>
                             <li>
                                 <asp:HyperLink runat="server" NavigateUrl="~/logout.aspx">Cerrar sesión</asp:HyperLink></li></ul></li><li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li></ul></div></div></asp:Panel><asp:Panel runat="server" CssClass="container">
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li></ul></div></div></asp:Panel><asp:Panel runat="server" CssClass="container">
         <asp:Panel runat="server" CssClass="box">
             <form runat="server" role="form">
                 <asp:ScriptManager runat="server" ID="script" EnablePartialRendering="true"></asp:ScriptManager>

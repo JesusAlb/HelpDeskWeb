@@ -50,7 +50,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     serie_monitor = serieMonitor, 
                     serie_mouse = serieMouse,  
                     serie_teclado =serieTeclado, 
-                    fk_tipoequipo = idTipoEquipo };
+                    fk_idtipoequipo = idTipoEquipo };
                 if (equipo != null)
                 {
                     dbhelp.modelo.tblequipoasignado.Attach(equipo);
@@ -87,7 +87,7 @@ namespace HelpDeskWeb.ControlBD.Catalogo
                     ItemAmodificar.serie_monitor = serieMonitor;
                     ItemAmodificar.serie_mouse = serieMouse;
                     ItemAmodificar.serie_teclado = serieTeclado;
-                    ItemAmodificar.fk_tipoequipo = idTipoEquipo;
+                    ItemAmodificar.fk_idtipoequipo = idTipoEquipo;
                     dbhelp.modelo.SaveChanges();
                 }
                 return true;

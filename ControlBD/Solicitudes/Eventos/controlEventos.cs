@@ -311,10 +311,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes
         {       
             try
             {
-                int idservicio = controlServicios.obtenerUltimoServicio()+1;
-                int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-                int idevento = obtenerUltimoEvento()+1;
-                var evento = dbhelp.modelo.sp_insertar_evento(idevento, titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fecha, idusuario, idservicio);
+                var evento = dbhelp.modelo.sp_insertar_evento(titulo, lugar, acomodo, asistencia, horaInicial, horafinal, descripcion, tipo, idSolicitante, fecha);
                    if (evento != 0)
                    {
                        dbhelp.modelo.SaveChanges();

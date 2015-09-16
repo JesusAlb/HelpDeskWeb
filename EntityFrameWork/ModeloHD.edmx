@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbhelpdeskV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbhelpdeskV3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblacomodo">
           <Key>
             <PropertyRef Name="id" />
@@ -17,7 +17,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="tblcalidadservicio">
           <Key>
@@ -34,14 +34,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="tbldepartamento">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="fk_idcoordinacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblequipoasignado">
@@ -50,7 +50,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fk_idusuario_responsable" Type="int" Nullable="false" />
-          <Property Name="fk_tipoequipo" Type="int" Nullable="false" />
+          <Property Name="fk_idtipoequipo" Type="int" Nullable="false" />
           <Property Name="fk_idmarca_equipo" Type="int" Nullable="false" />
           <Property Name="serie_equipo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="ram" Type="varchar" MaxLength="8" />
@@ -81,7 +81,7 @@
           <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="fk_idlugar" Type="int" Nullable="false" />
           <Property Name="asistencia" Type="int" Nullable="false" />
-          <Property Name="fk_idacomodo" Type="int" />
+          <Property Name="fk_idacomodo" Type="int" Nullable="false" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="600" />
           <Property Name="fk_idservicio" Type="int" Nullable="false" />
@@ -102,8 +102,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
-          <Property Name="correo" Type="varchar" MaxLength="20" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="estatus" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbllugar">
@@ -111,14 +111,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="tblmarca">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="40" />
+          <Property Name="nombre" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="tblpregunta">
           <Key>
@@ -140,14 +140,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="tblrecurso">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="cuantificable" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblrecursoasignado">
@@ -172,8 +172,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="400" />
           <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
           <Property Name="fk_idusuario_soporte" Type="int" Nullable="false" />
           <Property Name="fk_idusuario_apoyo" Type="int" Nullable="false" />
@@ -188,7 +188,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="40" />
+          <Property Name="nombre" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="monitor" Type="bit" Nullable="false" />
           <Property Name="equipo" Type="bit" Nullable="false" />
           <Property Name="disco_duro" Type="bit" Nullable="false" />
@@ -210,7 +210,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="40" />
+          <Property Name="nombre" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="tbltipousuario">
           <Key>
@@ -225,7 +225,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nombre_usuario" Type="varchar" MaxLength="40" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="fk_iddepto" Type="int" Nullable="false" />
@@ -236,18 +236,20 @@
           <Property Name="fk_idinstitucion" Type="int" Nullable="false" />
           <Property Name="apellidos" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_departamentos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_departamentos">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="nom_coordinacion" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="60" />
-          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
+          <Property Name="nombre" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_encuestas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_encuestas">
           <Key>
             <PropertyRef Name="id" />
@@ -255,7 +257,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene defi
             <PropertyRef Name="estatus_pregunta" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="idcalidad" />
-            <PropertyRef Name="estatus_calidad" />
             <PropertyRef Name="idservicio" />
           </Key>
           <Property Name="numero" Type="bigint" />
@@ -265,42 +266,46 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_encuestas' no tiene defi
           <Property Name="valor" Type="int" Nullable="false" />
           <Property Name="idcalidad" Type="int" Nullable="false" />
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
-          <Property Name="estatus_calidad" Type="bit" Nullable="false" />
           <Property Name="idservicio" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_equipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_equipos">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="nombre_completo" />
+            <PropertyRef Name="nomTipoEquipo" />
+            <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serie_equipo" />
+            <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serie_monitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nomMarcaMouse" />
             <PropertyRef Name="serie_mouse" />
+            <PropertyRef Name="nomMarcaTeclado" />
             <PropertyRef Name="serie_teclado" />
             <PropertyRef Name="procesador" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="nombre_completo" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" />
-          <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" />
+          <Property Name="nomTipoEquipo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="nomMarcaEquipo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_equipo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="memoriaRam" Type="varchar" MaxLength="8" />
           <Property Name="disco_duro" Type="varchar" MaxLength="8" />
-          <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" />
+          <Property Name="nomMarcaMonitor" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_monitor" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" />
+          <Property Name="nomMarcaMouse" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_mouse" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" />
+          <Property Name="nomMarcaTeclado" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_teclado" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_eventos_cerrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_eventos_cerrados">
           <Key>
             <PropertyRef Name="id" />
@@ -310,7 +315,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tie
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="tipo" />
+            <PropertyRef Name="lugar" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
@@ -328,10 +336,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tie
           <Property Name="estatus_evento" Type="int" Nullable="false" />
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="idsolicitante" Type="int" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="lugar" Type="varchar" MaxLength="60" />
+          <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="asistencia" Type="int" Nullable="false" />
           <Property Name="acomodo" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
@@ -340,8 +348,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_cerrados' no tie
           <Property Name="promedio" Type="float" Nullable="false" />
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_eventos_sin_cerrar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_eventos_sin_cerrar">
           <Key>
             <PropertyRef Name="id" />
@@ -351,7 +359,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_sin_cerrar' no t
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="tipo" />
+            <PropertyRef Name="lugar" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
@@ -366,32 +377,35 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_eventos_sin_cerrar' no t
           <Property Name="estatus_evento" Type="int" Nullable="false" />
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="idsolicitante" Type="int" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="lugar" Type="varchar" MaxLength="60" />
+          <Property Name="lugar" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="asistencia" Type="int" Nullable="false" />
           <Property Name="acomodo" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_cerrados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_incidentes_cerrados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_incidentes_cerrados">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="descripcion" />
+            <PropertyRef Name="tipo" />
             <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_incidente" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="fk_idusuario_solicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="idcalidad" />
             <PropertyRef Name="estatus_calidad" />
             <PropertyRef Name="promedio" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="tipo" Type="varchar" MaxLength="40" />
+          <Property Name="tipo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="prioridad" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="acciones" Type="varchar" MaxLength="250" />
           <Property Name="solucion" Type="varchar" MaxLength="250" />
@@ -402,19 +416,22 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_cerrados' no 
           <Property Name="estatus_incidente" Type="int" Nullable="false" />
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="idcalidad" Type="int" Nullable="false" />
           <Property Name="estatus_calidad" Type="bit" Nullable="false" />
           <Property Name="promedio" Type="float" Nullable="false" />
           <Property Name="observaciones" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_sin_cerrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_incidentes_sin_cerrar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_incidentes_sin_cerrar">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="descripcion" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
+            <PropertyRef Name="tipo" />
             <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_incidente" />
@@ -423,9 +440,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_sin_cerrar' n
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
-          <Property Name="tipo" Type="varchar" MaxLength="40" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="prioridad" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="acciones" Type="varchar" MaxLength="250" />
           <Property Name="solucion" Type="varchar" MaxLength="250" />
@@ -437,8 +454,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_incidentes_sin_cerrar' n
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="fk_idusuario_solicitante" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_preguntas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_preguntas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_preguntas">
           <Key>
             <PropertyRef Name="id" />
@@ -450,8 +467,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_preguntas' no tiene defi
           <Property Name="pregunta" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="estatus" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_eventos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_promedio_eventos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_promedio_eventos">
           <Key>
             <PropertyRef Name="soporte" />
@@ -459,8 +476,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_eventos' no tie
           <Property Name="soporte" Type="int" Nullable="false" />
           <Property Name="promedio_evento" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_general' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_promedio_general' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_promedio_general">
           <Key>
             <PropertyRef Name="id" />
@@ -471,8 +488,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_general' no tie
           <Property Name="promedio_incidente" Type="float" />
           <Property Name="promedioTotal" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_incidentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_promedio_incidentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_promedio_incidentes">
           <Key>
             <PropertyRef Name="soporte" />
@@ -480,8 +497,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_promedio_incidentes' no 
           <Property Name="soporte" Type="int" Nullable="false" />
           <Property Name="promedio_incidente" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_recursos_asignados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_recursos_asignados">
           <Key>
             <PropertyRef Name="idevento" />
@@ -491,6 +508,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no t
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
             <PropertyRef Name="nom_evento" />
+            <PropertyRef Name="nom_lugar" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_recurso" />
             <PropertyRef Name="idrecurso" />
           </Key>
           <Property Name="idevento" Type="int" Nullable="false" />
@@ -498,54 +518,63 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_recursos_asignados' no t
           <Property Name="cantidad" Type="int" />
           <Property Name="asistencia" Type="int" Nullable="false" />
           <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="acomodo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="acomodo" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="hora_inicial" Type="datetime" />
           <Property Name="hora_final" Type="datetime" />
           <Property Name="fecha_realizacion" Type="datetime" Nullable="false" />
-          <Property Name="observacion" Type="varchar" MaxLength="250" />
+          <Property Name="observacion" Type="varchar" MaxLength="600" />
           <Property Name="nom_evento" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="nom_lugar" Type="varchar" MaxLength="60" />
-          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nom_recurso" Type="varchar" MaxLength="60" />
+          <Property Name="nom_lugar" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_recurso" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="idrecurso" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_reporte_equipos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_reporte_equipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_reporte_equipos">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nom_tipo_equipo" />
+            <PropertyRef Name="nom_marca_equipo" />
             <PropertyRef Name="serie_equipo" />
+            <PropertyRef Name="nom_marca_monitor" />
             <PropertyRef Name="serie_monitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nom_marca_mouse" />
             <PropertyRef Name="serie_mouse" />
+            <PropertyRef Name="nom_marca_teclado" />
             <PropertyRef Name="serie_teclado" />
             <PropertyRef Name="procesador" />
             <PropertyRef Name="nom_completo" />
+            <PropertyRef Name="nom_area" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_depto" />
+            <PropertyRef Name="nom_puesto" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nom_tipo_equipo" Type="varchar" MaxLength="40" />
-          <Property Name="nom_marca_equipo" Type="varchar" MaxLength="40" />
+          <Property Name="nom_tipo_equipo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="nom_marca_equipo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_equipo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="memoria_ram" Type="varchar" MaxLength="8" />
           <Property Name="disco_duro" Type="varchar" MaxLength="8" />
-          <Property Name="nom_marca_monitor" Type="varchar" MaxLength="40" />
+          <Property Name="nom_marca_monitor" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_monitor" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="ip" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="mac" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="nom_marca_mouse" Type="varchar" MaxLength="40" />
+          <Property Name="nom_marca_mouse" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_mouse" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="nom_marca_teclado" Type="varchar" MaxLength="40" />
+          <Property Name="nom_marca_teclado" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="serie_teclado" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="procesador" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="nom_completo" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="nom_area" Type="varchar" MaxLength="60" />
-          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nom_depto" Type="varchar" MaxLength="60" />
-          <Property Name="nom_puesto" Type="varchar" MaxLength="60" />
+          <Property Name="nom_area" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_depto" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_puesto" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_servicios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_servicios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_servicios">
           <Key>
             <PropertyRef Name="idsolicitante" />
@@ -554,6 +583,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_servicios' no tiene defi
             <PropertyRef Name="fk_idestatus" />
             <PropertyRef Name="id" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
           </Key>
           <Property Name="idsolicitante" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="250" Nullable="false" />
@@ -564,36 +595,42 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_servicios' no tiene defi
           <Property Name="fk_idestatus" Type="int" Nullable="false" />
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="solicitante" Type="varchar" MaxLength="121" Nullable="false" />
-          <Property Name="soporte" Type="varchar" MaxLength="40" />
-          <Property Name="apoyo" Type="varchar" MaxLength="40" />
+          <Property Name="soporte" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="apoyo" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbhelpdeskV3.dbo.vt_usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vt_usuarios">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre_usuario" />
             <PropertyRef Name="nom_completo" />
             <PropertyRef Name="password" />
             <PropertyRef Name="nom_tipo" />
+            <PropertyRef Name="nom_depto" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_area" />
+            <PropertyRef Name="nom_puesto" />
             <PropertyRef Name="fk_idtipo" />
             <PropertyRef Name="correo" />
+            <PropertyRef Name="nom_institucion" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nombre_usuario" Type="varchar" MaxLength="40" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="nom_completo" Type="varchar" MaxLength="121" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="nom_tipo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="extension_telefonica" Type="varchar" MaxLength="5" />
-          <Property Name="nom_depto" Type="varchar" MaxLength="60" />
-          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" />
-          <Property Name="nom_area" Type="varchar" MaxLength="60" />
-          <Property Name="nom_puesto" Type="varchar" MaxLength="60" />
+          <Property Name="nom_depto" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_area" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="nom_puesto" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="fk_idtipo" Type="int" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nom_institucion" Type="varchar" MaxLength="60" />
+          <Property Name="nom_institucion" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <Association Name="fk_acomodo">
-          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="0..1" />
+          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="1" />
           <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblacomodo">
@@ -601,6 +638,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Principal>
             <Dependent Role="tblevento">
               <PropertyRef Name="fk_idacomodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_apoyo">
+          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblservicio">
+              <PropertyRef Name="fk_idusuario_apoyo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -656,33 +705,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_evento_en_uso">
-          <End Role="tblevento" Type="Self.tblevento" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tblrecursoasignado" Type="Self.tblrecursoasignado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblevento">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblrecursoasignado">
-              <PropertyRef Name="fk_idevento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_idapoyo">
-          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblusuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblservicio">
-              <PropertyRef Name="fk_idusuario_apoyo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_idestatus">
+        <Association Name="fk_estatus">
           <End Role="tblestatus" Type="Self.tblestatus" Multiplicity="1" />
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -694,15 +717,17 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idprioridad">
-          <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+        <Association Name="fk_evento">
+          <End Role="tblevento" Type="Self.tblevento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecursoasignado" Type="Self.tblrecursoasignado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblprioridad">
+            <Principal Role="tblevento">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="tblincidente">
-              <PropertyRef Name="fk_idprioridad" />
+            <Dependent Role="tblrecursoasignado">
+              <PropertyRef Name="fk_idevento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -717,44 +742,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Principal>
             <Dependent Role="tblevento">
               <PropertyRef Name="fk_idservicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_idservicio_incidente">
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblservicio">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblincidente">
-              <PropertyRef Name="fk_idservicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_idsolicitante">
-          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblusuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblservicio">
-              <PropertyRef Name="fk_idusuario_solicitante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_idsoporte">
-          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
-          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblusuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblservicio">
-              <PropertyRef Name="fk_idusuario_soporte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -842,6 +829,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_prioridad">
+          <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
+          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblprioridad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblincidente">
+              <PropertyRef Name="fk_idprioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_puesto">
           <End Role="tblpuesto" Type="Self.tblpuesto" Multiplicity="1" />
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="*" />
@@ -854,7 +853,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_recurso_asignado">
+        <Association Name="fk_recurso">
           <End Role="tblrecurso" Type="Self.tblrecurso" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -882,6 +881,44 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_servicio_incidente">
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblservicio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblincidente">
+              <PropertyRef Name="fk_idservicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_solicitante">
+          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblservicio">
+              <PropertyRef Name="fk_idusuario_solicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_soporte">
+          <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
+          <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblservicio">
+              <PropertyRef Name="fk_idusuario_soporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_tipo">
           <End Role="tbltipoincidencia" Type="Self.tbltipoincidencia" Multiplicity="1" />
           <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
@@ -902,7 +939,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tblequipoasignado">
-              <PropertyRef Name="fk_tipoequipo" />
+              <PropertyRef Name="fk_idtipoequipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -949,10 +986,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Parameter Name="idIncidente" Type="int" Mode="In" />
           <Parameter Name="Acciones" Type="varchar" Mode="In" />
           <Parameter Name="Solucion" Type="varchar" Mode="In" />
-          <Parameter Name="idservicio" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_insertar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idevento" Type="int" Mode="In" />
           <Parameter Name="titulo" Type="varchar" Mode="In" />
           <Parameter Name="lugar" Type="int" Mode="In" />
           <Parameter Name="acomodo" Type="int" Mode="In" />
@@ -963,21 +998,15 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Parameter Name="tipoEvento" Type="int" Mode="In" />
           <Parameter Name="solicitante" Type="int" Mode="In" />
           <Parameter Name="FechaEvento" Type="datetime" Mode="In" />
-          <Parameter Name="idUserNA" Type="int" Mode="In" />
-          <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_insertar_incidente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idincidente" Type="int" Mode="In" />
           <Parameter Name="solicitante" Type="int" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="idUserNA" Type="int" Mode="In" />
-          <Parameter Name="idultimo_servicio" Type="int" Mode="In" />
-          <Parameter Name="id_tipoIncidencia_general" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_requerimientos_sin_asignar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEvento" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="dbhelpdeskV2ModelStoreContainer">
+        <EntityContainer Name="dbhelpdeskV3ModelStoreContainer">
           <EntitySet Name="tblacomodo" EntityType="Self.tblacomodo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblarea" EntityType="Self.tblarea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblcalidadservicio" EntityType="Self.tblcalidadservicio" Schema="dbo" store:Type="Tables" />
@@ -1018,7 +1047,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     [vt_encuestas].[valor] AS [valor], 
     [vt_encuestas].[idcalidad] AS [idcalidad], 
     [vt_encuestas].[observaciones] AS [observaciones], 
-    [vt_encuestas].[estatus_calidad] AS [estatus_calidad], 
     [vt_encuestas].[idservicio] AS [idservicio]
     FROM [dbo].[vt_encuestas] AS [vt_encuestas]</DefiningQuery>
           </EntitySet>
@@ -1238,6 +1266,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblacomodo" EntitySet="tblacomodo" />
             <End Role="tblevento" EntitySet="tblevento" />
           </AssociationSet>
+          <AssociationSet Name="fk_apoyo" Association="Self.fk_apoyo">
+            <End Role="tblusuario" EntitySet="tblusuario" />
+            <End Role="tblservicio" EntitySet="tblservicio" />
+          </AssociationSet>
           <AssociationSet Name="fk_area" Association="Self.fk_area">
             <End Role="tblarea" EntitySet="tblarea" />
             <End Role="tblusuario" EntitySet="tblusuario" />
@@ -1254,37 +1286,17 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tbldepartamento" EntitySet="tbldepartamento" />
             <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
-          <AssociationSet Name="fk_evento_en_uso" Association="Self.fk_evento_en_uso">
-            <End Role="tblevento" EntitySet="tblevento" />
-            <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idapoyo" Association="Self.fk_idapoyo">
-            <End Role="tblusuario" EntitySet="tblusuario" />
-            <End Role="tblservicio" EntitySet="tblservicio" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idestatus" Association="Self.fk_idestatus">
+          <AssociationSet Name="fk_estatus" Association="Self.fk_estatus">
             <End Role="tblestatus" EntitySet="tblestatus" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
-          <AssociationSet Name="fk_idprioridad" Association="Self.fk_idprioridad">
-            <End Role="tblprioridad" EntitySet="tblprioridad" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
+          <AssociationSet Name="fk_evento" Association="Self.fk_evento">
+            <End Role="tblevento" EntitySet="tblevento" />
+            <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
           </AssociationSet>
           <AssociationSet Name="fk_idservicio" Association="Self.fk_idservicio">
             <End Role="tblservicio" EntitySet="tblservicio" />
             <End Role="tblevento" EntitySet="tblevento" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idservicio_incidente" Association="Self.fk_idservicio_incidente">
-            <End Role="tblservicio" EntitySet="tblservicio" />
-            <End Role="tblincidente" EntitySet="tblincidente" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idsolicitante" Association="Self.fk_idsolicitante">
-            <End Role="tblusuario" EntitySet="tblusuario" />
-            <End Role="tblservicio" EntitySet="tblservicio" />
-          </AssociationSet>
-          <AssociationSet Name="fk_idsoporte" Association="Self.fk_idsoporte">
-            <End Role="tblusuario" EntitySet="tblusuario" />
-            <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
           <AssociationSet Name="fk_institucion" Association="Self.fk_institucion">
             <End Role="tblinstitucion" EntitySet="tblinstitucion" />
@@ -1314,17 +1326,33 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblpregunta" EntitySet="tblpregunta" />
             <End Role="tblrespuesta" EntitySet="tblrespuesta" />
           </AssociationSet>
+          <AssociationSet Name="fk_prioridad" Association="Self.fk_prioridad">
+            <End Role="tblprioridad" EntitySet="tblprioridad" />
+            <End Role="tblincidente" EntitySet="tblincidente" />
+          </AssociationSet>
           <AssociationSet Name="fk_puesto" Association="Self.fk_puesto">
             <End Role="tblpuesto" EntitySet="tblpuesto" />
             <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
-          <AssociationSet Name="fk_recurso_asignado" Association="Self.fk_recurso_asignado">
+          <AssociationSet Name="fk_recurso" Association="Self.fk_recurso">
             <End Role="tblrecurso" EntitySet="tblrecurso" />
             <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
           </AssociationSet>
           <AssociationSet Name="fk_servicio" Association="Self.fk_servicio">
             <End Role="tblservicio" EntitySet="tblservicio" />
             <End Role="tblcalidadservicio" EntitySet="tblcalidadservicio" />
+          </AssociationSet>
+          <AssociationSet Name="fk_servicio_incidente" Association="Self.fk_servicio_incidente">
+            <End Role="tblservicio" EntitySet="tblservicio" />
+            <End Role="tblincidente" EntitySet="tblincidente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_solicitante" Association="Self.fk_solicitante">
+            <End Role="tblusuario" EntitySet="tblusuario" />
+            <End Role="tblservicio" EntitySet="tblservicio" />
+          </AssociationSet>
+          <AssociationSet Name="fk_soporte" Association="Self.fk_soporte">
+            <End Role="tblusuario" EntitySet="tblusuario" />
+            <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
           <AssociationSet Name="fk_tipo" Association="Self.fk_tipo">
             <End Role="tbltipoincidencia" EntitySet="tbltipoincidencia" />
@@ -1347,10 +1375,11 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbhelpdeskV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbhelpdeskV3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tblacomodo">
           <Key>
             <PropertyRef Name="id" />
@@ -1364,7 +1393,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblusuario" Relationship="Self.fk_area" FromRole="tblarea" ToRole="tblusuario" />
         </EntityType>
         <EntityType Name="tblcalidadservicio">
@@ -1384,7 +1413,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tbldepartamento" Relationship="Self.fk_coordinacion" FromRole="tblcoordinacion" ToRole="tbldepartamento" />
         </EntityType>
         <EntityType Name="tbldepartamento">
@@ -1392,7 +1421,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_idcoordinacion" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblcoordinacion" Relationship="Self.fk_coordinacion" FromRole="tbldepartamento" ToRole="tblcoordinacion" />
           <NavigationProperty Name="tblusuario" Relationship="Self.fk_depto" FromRole="tbldepartamento" ToRole="tblusuario" />
@@ -1403,7 +1432,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fk_idusuario_responsable" Type="Int32" Nullable="false" />
-          <Property Name="fk_tipoequipo" Type="Int32" Nullable="false" />
+          <Property Name="fk_idtipoequipo" Type="Int32" Nullable="false" />
           <Property Name="fk_idmarca_equipo" Type="Int32" Nullable="false" />
           <Property Name="serie_equipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ram" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
@@ -1430,7 +1459,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblservicio" Relationship="Self.fk_idestatus" FromRole="tblestatus" ToRole="tblservicio" />
+          <NavigationProperty Name="tblservicio" Relationship="Self.fk_estatus" FromRole="tblestatus" ToRole="tblservicio" />
         </EntityType>
         <EntityType Name="tblevento">
           <Key>
@@ -1441,12 +1470,12 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="fk_idlugar" Type="Int32" Nullable="false" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
-          <Property Name="fk_idacomodo" Type="Int32" />
+          <Property Name="fk_idacomodo" Type="Int32" Nullable="false" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="observacion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
           <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblacomodo" Relationship="Self.fk_acomodo" FromRole="tblevento" ToRole="tblacomodo" />
-          <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_evento_en_uso" FromRole="tblevento" ToRole="tblrecursoasignado" />
+          <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_evento" FromRole="tblevento" ToRole="tblrecursoasignado" />
           <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio" FromRole="tblevento" ToRole="tblservicio" />
           <NavigationProperty Name="tbllugar" Relationship="Self.fk_lugar" FromRole="tblevento" ToRole="tbllugar" />
           <NavigationProperty Name="tbltipoevento" Relationship="Self.fk_tipoevento" FromRole="tblevento" ToRole="tbltipoevento" />
@@ -1461,8 +1490,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="fk_idservicio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblprioridad" Relationship="Self.fk_idprioridad" FromRole="tblincidente" ToRole="tblprioridad" />
-          <NavigationProperty Name="tblservicio" Relationship="Self.fk_idservicio_incidente" FromRole="tblincidente" ToRole="tblservicio" />
+          <NavigationProperty Name="tblprioridad" Relationship="Self.fk_prioridad" FromRole="tblincidente" ToRole="tblprioridad" />
+          <NavigationProperty Name="tblservicio" Relationship="Self.fk_servicio_incidente" FromRole="tblincidente" ToRole="tblservicio" />
           <NavigationProperty Name="tbltipoincidencia" Relationship="Self.fk_tipo" FromRole="tblincidente" ToRole="tbltipoincidencia" />
         </EntityType>
         <EntityType Name="tblinstitucion">
@@ -1470,8 +1499,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="correo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblusuario" Relationship="Self.fk_institucion" FromRole="tblinstitucion" ToRole="tblusuario" />
         </EntityType>
@@ -1480,7 +1509,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblevento" Relationship="Self.fk_lugar" FromRole="tbllugar" ToRole="tblevento" />
         </EntityType>
         <EntityType Name="tblmarca">
@@ -1488,7 +1517,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblequipoasignado" Relationship="Self.fk_marca_equipo" FromRole="tblmarca" ToRole="tblequipoasignado" />
           <NavigationProperty Name="tblequipoasignado1" Relationship="Self.fk_marca_monitor" FromRole="tblmarca" ToRole="tblequipoasignado" />
           <NavigationProperty Name="tblequipoasignado2" Relationship="Self.fk_marca_mouse" FromRole="tblmarca" ToRole="tblequipoasignado" />
@@ -1509,14 +1538,14 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblincidente" Relationship="Self.fk_idprioridad" FromRole="tblprioridad" ToRole="tblincidente" />
+          <NavigationProperty Name="tblincidente" Relationship="Self.fk_prioridad" FromRole="tblprioridad" ToRole="tblincidente" />
         </EntityType>
         <EntityType Name="tblpuesto">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblusuario" Relationship="Self.fk_puesto" FromRole="tblpuesto" ToRole="tblusuario" />
         </EntityType>
         <EntityType Name="tblrecurso">
@@ -1524,9 +1553,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cuantificable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_recurso_asignado" FromRole="tblrecurso" ToRole="tblrecursoasignado" />
+          <NavigationProperty Name="tblrecursoasignado" Relationship="Self.fk_recurso" FromRole="tblrecurso" ToRole="tblrecursoasignado" />
         </EntityType>
         <EntityType Name="tblrecursoasignado">
           <Key>
@@ -1536,8 +1565,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="fk_idevento" Type="Int32" Nullable="false" />
           <Property Name="fk_idrequerimiento" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" />
-          <NavigationProperty Name="tblevento" Relationship="Self.fk_evento_en_uso" FromRole="tblrecursoasignado" ToRole="tblevento" />
-          <NavigationProperty Name="tblrecurso" Relationship="Self.fk_recurso_asignado" FromRole="tblrecursoasignado" ToRole="tblrecurso" />
+          <NavigationProperty Name="tblevento" Relationship="Self.fk_evento" FromRole="tblrecursoasignado" ToRole="tblevento" />
+          <NavigationProperty Name="tblrecurso" Relationship="Self.fk_recurso" FromRole="tblrecursoasignado" ToRole="tblrecurso" />
         </EntityType>
         <EntityType Name="tblrespuesta">
           <Key>
@@ -1554,8 +1583,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
           <Property Name="fk_idusuario_soporte" Type="Int32" Nullable="false" />
           <Property Name="fk_idusuario_apoyo" Type="Int32" Nullable="false" />
@@ -1565,19 +1594,19 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="hora_final" Type="DateTime" Precision="3" />
           <Property Name="fk_idestatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblcalidadservicio" Relationship="Self.fk_servicio" FromRole="tblservicio" ToRole="tblcalidadservicio" />
-          <NavigationProperty Name="tblestatus" Relationship="Self.fk_idestatus" FromRole="tblservicio" ToRole="tblestatus" />
+          <NavigationProperty Name="tblestatus" Relationship="Self.fk_estatus" FromRole="tblservicio" ToRole="tblestatus" />
           <NavigationProperty Name="tblevento" Relationship="Self.fk_idservicio" FromRole="tblservicio" ToRole="tblevento" />
-          <NavigationProperty Name="tblincidente" Relationship="Self.fk_idservicio_incidente" FromRole="tblservicio" ToRole="tblincidente" />
-          <NavigationProperty Name="tblusuario" Relationship="Self.fk_idapoyo" FromRole="tblservicio" ToRole="tblusuario" />
-          <NavigationProperty Name="tblusuario1" Relationship="Self.fk_idsolicitante" FromRole="tblservicio" ToRole="tblusuario" />
-          <NavigationProperty Name="tblusuario2" Relationship="Self.fk_idsoporte" FromRole="tblservicio" ToRole="tblusuario" />
+          <NavigationProperty Name="tblincidente" Relationship="Self.fk_servicio_incidente" FromRole="tblservicio" ToRole="tblincidente" />
+          <NavigationProperty Name="tblusuario" Relationship="Self.fk_apoyo" FromRole="tblservicio" ToRole="tblusuario" />
+          <NavigationProperty Name="tblusuario1" Relationship="Self.fk_solicitante" FromRole="tblservicio" ToRole="tblusuario" />
+          <NavigationProperty Name="tblusuario2" Relationship="Self.fk_soporte" FromRole="tblservicio" ToRole="tblusuario" />
         </EntityType>
         <EntityType Name="tbltipoequipo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="monitor" Type="Boolean" Nullable="false" />
           <Property Name="equipo" Type="Boolean" Nullable="false" />
           <Property Name="disco_duro" Type="Boolean" Nullable="false" />
@@ -1601,7 +1630,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblincidente" Relationship="Self.fk_tipo" FromRole="tbltipoincidencia" ToRole="tblincidente" />
         </EntityType>
         <EntityType Name="tbltipousuario">
@@ -1618,7 +1647,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="fk_iddepto" Type="Int32" Nullable="false" />
@@ -1633,18 +1662,20 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <NavigationProperty Name="tblequipoasignado" Relationship="Self.fk_usuario_responsable" FromRole="tblusuario" ToRole="tblequipoasignado" />
           <NavigationProperty Name="tblinstitucion" Relationship="Self.fk_institucion" FromRole="tblusuario" ToRole="tblinstitucion" />
           <NavigationProperty Name="tblpuesto" Relationship="Self.fk_puesto" FromRole="tblusuario" ToRole="tblpuesto" />
-          <NavigationProperty Name="tblservicio" Relationship="Self.fk_idapoyo" FromRole="tblusuario" ToRole="tblservicio" />
-          <NavigationProperty Name="tblservicio1" Relationship="Self.fk_idsolicitante" FromRole="tblusuario" ToRole="tblservicio" />
-          <NavigationProperty Name="tblservicio2" Relationship="Self.fk_idsoporte" FromRole="tblusuario" ToRole="tblservicio" />
+          <NavigationProperty Name="tblservicio" Relationship="Self.fk_apoyo" FromRole="tblusuario" ToRole="tblservicio" />
+          <NavigationProperty Name="tblservicio1" Relationship="Self.fk_solicitante" FromRole="tblusuario" ToRole="tblservicio" />
+          <NavigationProperty Name="tblservicio2" Relationship="Self.fk_soporte" FromRole="tblusuario" ToRole="tblservicio" />
           <NavigationProperty Name="tbltipousuario" Relationship="Self.fk_tipousuario" FromRole="tblusuario" ToRole="tbltipousuario" />
         </EntityType>
         <EntityType Name="vt_departamentos">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="nom_coordinacion" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_encuestas">
           <Key>
@@ -1653,7 +1684,6 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="estatus_pregunta" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="idcalidad" />
-            <PropertyRef Name="estatus_calidad" />
             <PropertyRef Name="idservicio" />
           </Key>
           <Property Name="numero" Type="Int64" />
@@ -1663,35 +1693,39 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="valor" Type="Int32" Nullable="false" />
           <Property Name="idcalidad" Type="Int32" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="estatus_calidad" Type="Boolean" Nullable="false" />
           <Property Name="idservicio" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_equipos">
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="nombre_completo" />
+            <PropertyRef Name="nomTipoEquipo" />
+            <PropertyRef Name="nomMarcaEquipo" />
             <PropertyRef Name="serie_equipo" />
+            <PropertyRef Name="nomMarcaMonitor" />
             <PropertyRef Name="serie_monitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nomMarcaMouse" />
             <PropertyRef Name="serie_mouse" />
+            <PropertyRef Name="nomMarcaTeclado" />
             <PropertyRef Name="serie_teclado" />
             <PropertyRef Name="procesador" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre_completo" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nomTipoEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nomMarcaEquipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_equipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="memoriaRam" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="disco_duro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nomMarcaMonitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_monitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nomMarcaMouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_mouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nomMarcaTeclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_teclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
@@ -1704,7 +1738,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="tipo" />
+            <PropertyRef Name="lugar" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
@@ -1722,10 +1759,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="estatus_evento" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idsolicitante" Type="Int32" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
           <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
@@ -1743,7 +1780,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="estatus_evento" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="idsolicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="tipo" />
+            <PropertyRef Name="lugar" />
             <PropertyRef Name="asistencia" />
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
@@ -1758,10 +1798,10 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="estatus_evento" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idsolicitante" Type="Int32" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
           <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
@@ -1770,18 +1810,21 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="descripcion" />
+            <PropertyRef Name="tipo" />
             <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_incidente" />
             <PropertyRef Name="solicitante" />
             <PropertyRef Name="fk_idusuario_solicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
             <PropertyRef Name="idcalidad" />
             <PropertyRef Name="estatus_calidad" />
             <PropertyRef Name="promedio" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -1792,8 +1835,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="estatus_incidente" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_idusuario_solicitante" Type="Int32" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idcalidad" Type="Int32" Nullable="false" />
           <Property Name="estatus_calidad" Type="Boolean" Nullable="false" />
           <Property Name="promedio" Type="Double" Nullable="false" />
@@ -1803,6 +1846,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Key>
             <PropertyRef Name="id" />
             <PropertyRef Name="descripcion" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
+            <PropertyRef Name="tipo" />
             <PropertyRef Name="prioridad" />
             <PropertyRef Name="fecha_solicitud" />
             <PropertyRef Name="estatus_incidente" />
@@ -1811,9 +1857,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="acciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="solucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -1869,6 +1915,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="acomodo" />
             <PropertyRef Name="fecha_realizacion" />
             <PropertyRef Name="nom_evento" />
+            <PropertyRef Name="nom_lugar" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_recurso" />
             <PropertyRef Name="idrecurso" />
           </Key>
           <Property Name="idevento" Type="Int32" Nullable="false" />
@@ -1876,49 +1925,58 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="cantidad" Type="Int32" />
           <Property Name="asistencia" Type="Int32" Nullable="false" />
           <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="acomodo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="acomodo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="hora_inicial" Type="DateTime" Precision="3" />
           <Property Name="hora_final" Type="DateTime" Precision="3" />
           <Property Name="fecha_realizacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
           <Property Name="nom_evento" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nom_lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_lugar" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_recurso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idrecurso" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_reporte_equipos">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nom_tipo_equipo" />
+            <PropertyRef Name="nom_marca_equipo" />
             <PropertyRef Name="serie_equipo" />
+            <PropertyRef Name="nom_marca_monitor" />
             <PropertyRef Name="serie_monitor" />
             <PropertyRef Name="ip" />
             <PropertyRef Name="mac" />
+            <PropertyRef Name="nom_marca_mouse" />
             <PropertyRef Name="serie_mouse" />
+            <PropertyRef Name="nom_marca_teclado" />
             <PropertyRef Name="serie_teclado" />
             <PropertyRef Name="procesador" />
             <PropertyRef Name="nom_completo" />
+            <PropertyRef Name="nom_area" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_depto" />
+            <PropertyRef Name="nom_puesto" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nom_tipo_equipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="nom_marca_equipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nom_tipo_equipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_marca_equipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_equipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="memoria_ram" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="disco_duro" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="nom_marca_monitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nom_marca_monitor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_monitor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mac" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nom_marca_mouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nom_marca_mouse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_mouse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nom_marca_teclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nom_marca_teclado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="serie_teclado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="procesador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_completo" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_servicios">
           <Key>
@@ -1928,6 +1986,8 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <PropertyRef Name="fk_idestatus" />
             <PropertyRef Name="id" />
             <PropertyRef Name="solicitante" />
+            <PropertyRef Name="soporte" />
+            <PropertyRef Name="apoyo" />
           </Key>
           <Property Name="idsolicitante" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1938,34 +1998,40 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
           <Property Name="fk_idestatus" Type="Int32" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="solicitante" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="soporte" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apoyo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="vt_usuarios">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="nombre_usuario" />
             <PropertyRef Name="nom_completo" />
             <PropertyRef Name="password" />
             <PropertyRef Name="nom_tipo" />
+            <PropertyRef Name="nom_depto" />
+            <PropertyRef Name="nom_coordinacion" />
+            <PropertyRef Name="nom_area" />
+            <PropertyRef Name="nom_puesto" />
             <PropertyRef Name="fk_idtipo" />
             <PropertyRef Name="correo" />
+            <PropertyRef Name="nom_institucion" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_completo" Type="String" MaxLength="121" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="extension_telefonica" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_depto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_coordinacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_area" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_puesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_idtipo" Type="Int32" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="nom_institucion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="fk_acomodo">
-          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="0..1" />
+          <End Role="tblacomodo" Type="Self.tblacomodo" Multiplicity="1" />
           <End Role="tblevento" Type="Self.tblevento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblacomodo">
@@ -2098,7 +2164,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tblequipoasignado">
-              <PropertyRef Name="fk_tipoequipo" />
+              <PropertyRef Name="fk_idtipoequipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2114,7 +2180,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idestatus">
+        <Association Name="fk_estatus">
           <End Role="tblestatus" Type="Self.tblestatus" Multiplicity="1" />
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2126,7 +2192,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_evento_en_uso">
+        <Association Name="fk_evento">
           <End Role="tblevento" Type="Self.tblevento" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2178,7 +2244,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idprioridad">
+        <Association Name="fk_prioridad">
           <End Role="tblprioridad" Type="Self.tblprioridad" Multiplicity="1" />
           <End Role="tblincidente" Type="Self.tblincidente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2190,7 +2256,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idservicio_incidente">
+        <Association Name="fk_servicio_incidente">
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2252,7 +2318,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_recurso_asignado">
+        <Association Name="fk_recurso">
           <End Role="tblrecurso" Type="Self.tblrecurso" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2266,7 +2332,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idapoyo">
+        <Association Name="fk_apoyo">
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2278,7 +2344,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idsolicitante">
+        <Association Name="fk_solicitante">
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2290,7 +2356,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_idsoporte">
+        <Association Name="fk_soporte">
           <End Role="tblusuario" Type="Self.tblusuario" Multiplicity="1" />
           <End Role="tblservicio" Type="Self.tblservicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2402,11 +2468,11 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblequipoasignado" EntitySet="tblequipoasignado" />
           </AssociationSet>
-          <AssociationSet Name="fk_idestatus" Association="Self.fk_idestatus">
+          <AssociationSet Name="fk_estatus" Association="Self.fk_estatus">
             <End Role="tblestatus" EntitySet="tblestatus" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
-          <AssociationSet Name="fk_evento_en_uso" Association="Self.fk_evento_en_uso">
+          <AssociationSet Name="fk_evento" Association="Self.fk_evento">
             <End Role="tblevento" EntitySet="tblevento" />
             <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
           </AssociationSet>
@@ -2422,11 +2488,11 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tbltipoevento" EntitySet="tbltipoevento" />
             <End Role="tblevento" EntitySet="tblevento" />
           </AssociationSet>
-          <AssociationSet Name="fk_idprioridad" Association="Self.fk_idprioridad">
+          <AssociationSet Name="fk_prioridad" Association="Self.fk_prioridad">
             <End Role="tblprioridad" EntitySet="tblprioridad" />
             <End Role="tblincidente" EntitySet="tblincidente" />
           </AssociationSet>
-          <AssociationSet Name="fk_idservicio_incidente" Association="Self.fk_idservicio_incidente">
+          <AssociationSet Name="fk_servicio_incidente" Association="Self.fk_servicio_incidente">
             <End Role="tblservicio" EntitySet="tblservicio" />
             <End Role="tblincidente" EntitySet="tblincidente" />
           </AssociationSet>
@@ -2446,19 +2512,19 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblpuesto" EntitySet="tblpuesto" />
             <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
-          <AssociationSet Name="fk_recurso_asignado" Association="Self.fk_recurso_asignado">
+          <AssociationSet Name="fk_recurso" Association="Self.fk_recurso">
             <End Role="tblrecurso" EntitySet="tblrecurso" />
             <End Role="tblrecursoasignado" EntitySet="tblrecursoasignado" />
           </AssociationSet>
-          <AssociationSet Name="fk_idapoyo" Association="Self.fk_idapoyo">
+          <AssociationSet Name="fk_apoyo" Association="Self.fk_apoyo">
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
-          <AssociationSet Name="fk_idsolicitante" Association="Self.fk_idsolicitante">
+          <AssociationSet Name="fk_solicitante" Association="Self.fk_solicitante">
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
-          <AssociationSet Name="fk_idsoporte" Association="Self.fk_idsoporte">
+          <AssociationSet Name="fk_soporte" Association="Self.fk_soporte">
             <End Role="tblusuario" EntitySet="tblusuario" />
             <End Role="tblservicio" EntitySet="tblservicio" />
           </AssociationSet>
@@ -2467,16 +2533,14 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <End Role="tblusuario" EntitySet="tblusuario" />
           </AssociationSet>
           <FunctionImport Name="sp_cerrar_evento">
-          <Parameter Name="idservicio" Mode="In" Type="Int32" />
+            <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_cerrar_incidente">
             <Parameter Name="idIncidente" Mode="In" Type="Int32" />
             <Parameter Name="Acciones" Mode="In" Type="String" />
             <Parameter Name="Solucion" Mode="In" Type="String" />
-            <Parameter Name="idservicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insertar_evento">
-            <Parameter Name="idevento" Mode="In" Type="Int32" />
             <Parameter Name="titulo" Mode="In" Type="String" />
             <Parameter Name="lugar" Mode="In" Type="Int32" />
             <Parameter Name="acomodo" Mode="In" Type="Int32" />
@@ -2487,24 +2551,18 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             <Parameter Name="tipoEvento" Mode="In" Type="Int32" />
             <Parameter Name="solicitante" Mode="In" Type="Int32" />
             <Parameter Name="FechaEvento" Mode="In" Type="DateTime" />
-            <Parameter Name="idUserNA" Mode="In" Type="Int32" />
-            <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insertar_incidente">
-            <Parameter Name="idincidente" Mode="In" Type="Int32" />
             <Parameter Name="solicitante" Mode="In" Type="Int32" />
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="idUserNA" Mode="In" Type="Int32" />
-            <Parameter Name="idultimo_servicio" Mode="In" Type="Int32" />
-            <Parameter Name="id_tipoIncidencia_general" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result)">
-          <Parameter Name="idEvento" Mode="In" Type="Int32" />
+          <FunctionImport Name="sp_requerimientos_sin_asignar" ReturnType="Collection(dbhelpdeskV3Model.sp_requerimientos_sin_asignar_Result)">
+            <Parameter Name="idEvento" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_requerimientos_sin_asignar_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="60" />
           <Property Type="Boolean" Name="cuantificable" Nullable="false" />
           <Property Type="String" Name="tipo" Nullable="true" MaxLength="16" />
         </ComplexType>
@@ -2513,9 +2571,9 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbhelpdeskV2ModelStoreContainer" CdmEntityContainer="dbhelpdeskV2Entities">
+        <EntityContainerMapping StorageEntityContainer="dbhelpdeskV3ModelStoreContainer" CdmEntityContainer="dbhelpdeskV2Entities">
           <EntitySetMapping Name="tblacomodo">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblacomodo">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblacomodo">
               <MappingFragment StoreEntitySet="tblacomodo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2523,7 +2581,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblarea">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblarea">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblarea">
               <MappingFragment StoreEntitySet="tblarea">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2531,7 +2589,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblcalidadservicio">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblcalidadservicio">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblcalidadservicio">
               <MappingFragment StoreEntitySet="tblcalidadservicio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
@@ -2542,7 +2600,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblcoordinacion">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblcoordinacion">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblcoordinacion">
               <MappingFragment StoreEntitySet="tblcoordinacion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2550,7 +2608,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbldepartamento">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbldepartamento">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbldepartamento">
               <MappingFragment StoreEntitySet="tbldepartamento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2559,11 +2617,11 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblequipoasignado">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblequipoasignado">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblequipoasignado">
               <MappingFragment StoreEntitySet="tblequipoasignado">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fk_idusuario_responsable" ColumnName="fk_idusuario_responsable" />
-                <ScalarProperty Name="fk_tipoequipo" ColumnName="fk_tipoequipo" />
+                <ScalarProperty Name="fk_idtipoequipo" ColumnName="fk_idtipoequipo" />
                 <ScalarProperty Name="fk_idmarca_equipo" ColumnName="fk_idmarca_equipo" />
                 <ScalarProperty Name="serie_equipo" ColumnName="serie_equipo" />
                 <ScalarProperty Name="ram" ColumnName="ram" />
@@ -2581,7 +2639,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblestatus">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblestatus">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblestatus">
               <MappingFragment StoreEntitySet="tblestatus">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2589,7 +2647,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblevento">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblevento">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblevento">
               <MappingFragment StoreEntitySet="tblevento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2604,7 +2662,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblincidente">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblincidente">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblincidente">
               <MappingFragment StoreEntitySet="tblincidente">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fk_idtipo" ColumnName="fk_idtipo" />
@@ -2616,7 +2674,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblinstitucion">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblinstitucion">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblinstitucion">
               <MappingFragment StoreEntitySet="tblinstitucion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2626,7 +2684,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbllugar">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbllugar">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbllugar">
               <MappingFragment StoreEntitySet="tbllugar">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2634,7 +2692,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblmarca">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblmarca">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblmarca">
               <MappingFragment StoreEntitySet="tblmarca">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2642,7 +2700,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblpregunta">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblpregunta">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblpregunta">
               <MappingFragment StoreEntitySet="tblpregunta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="pregunta" ColumnName="pregunta" />
@@ -2651,7 +2709,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblprioridad">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblprioridad">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblprioridad">
               <MappingFragment StoreEntitySet="tblprioridad">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2659,7 +2717,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblpuesto">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblpuesto">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblpuesto">
               <MappingFragment StoreEntitySet="tblpuesto">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2667,7 +2725,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblrecurso">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrecurso">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblrecurso">
               <MappingFragment StoreEntitySet="tblrecurso">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2676,7 +2734,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblrecursoasignado">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrecursoasignado">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblrecursoasignado">
               <MappingFragment StoreEntitySet="tblrecursoasignado">
                 <ScalarProperty Name="fk_idevento" ColumnName="fk_idevento" />
                 <ScalarProperty Name="fk_idrequerimiento" ColumnName="fk_idrequerimiento" />
@@ -2685,7 +2743,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblrespuesta">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblrespuesta">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblrespuesta">
               <MappingFragment StoreEntitySet="tblrespuesta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
@@ -2695,7 +2753,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblservicio">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblservicio">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblservicio">
               <MappingFragment StoreEntitySet="tblservicio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -2711,7 +2769,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbltipoequipo">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoequipo">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbltipoequipo">
               <MappingFragment StoreEntitySet="tbltipoequipo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2727,7 +2785,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbltipoevento">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoevento">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbltipoevento">
               <MappingFragment StoreEntitySet="tbltipoevento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2735,7 +2793,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbltipoincidencia">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipoincidencia">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbltipoincidencia">
               <MappingFragment StoreEntitySet="tbltipoincidencia">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2743,7 +2801,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbltipousuario">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tbltipousuario">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tbltipousuario">
               <MappingFragment StoreEntitySet="tbltipousuario">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2751,7 +2809,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblusuario">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.tblusuario">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.tblusuario">
               <MappingFragment StoreEntitySet="tblusuario">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2769,7 +2827,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_departamentos">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_departamentos">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_departamentos">
               <MappingFragment StoreEntitySet="vt_departamentos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2778,7 +2836,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_encuestas">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_encuestas">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_encuestas">
               <MappingFragment StoreEntitySet="vt_encuestas">
                 <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -2787,13 +2845,12 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="idcalidad" ColumnName="idcalidad" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="estatus_calidad" ColumnName="estatus_calidad" />
                 <ScalarProperty Name="idservicio" ColumnName="idservicio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_equipos">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_equipos">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_equipos">
               <MappingFragment StoreEntitySet="vt_equipos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
@@ -2815,7 +2872,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_eventos_cerrados">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_cerrados">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_eventos_cerrados">
               <MappingFragment StoreEntitySet="vt_eventos_cerrados">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2842,7 +2899,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_eventos_sin_cerrar">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_eventos_sin_cerrar">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_eventos_sin_cerrar">
               <MappingFragment StoreEntitySet="vt_eventos_sin_cerrar">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2865,7 +2922,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_incidentes_cerrados">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidentes_cerrados">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_incidentes_cerrados">
               <MappingFragment StoreEntitySet="vt_incidentes_cerrados">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -2890,7 +2947,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_incidentes_sin_cerrar">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_incidentes_sin_cerrar">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_incidentes_sin_cerrar">
               <MappingFragment StoreEntitySet="vt_incidentes_sin_cerrar">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -2911,7 +2968,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_preguntas">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_preguntas">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_preguntas">
               <MappingFragment StoreEntitySet="vt_preguntas">
                 <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -2921,7 +2978,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_promedio_eventos">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_eventos">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_promedio_eventos">
               <MappingFragment StoreEntitySet="vt_promedio_eventos">
                 <ScalarProperty Name="soporte" ColumnName="soporte" />
                 <ScalarProperty Name="promedio_evento" ColumnName="promedio_evento" />
@@ -2929,7 +2986,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_promedio_general">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_general">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_promedio_general">
               <MappingFragment StoreEntitySet="vt_promedio_general">
                 <ScalarProperty Name="posicion" ColumnName="posicion" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -2940,7 +2997,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_promedio_incidentes">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_promedio_incidentes">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_promedio_incidentes">
               <MappingFragment StoreEntitySet="vt_promedio_incidentes">
                 <ScalarProperty Name="soporte" ColumnName="soporte" />
                 <ScalarProperty Name="promedio_incidente" ColumnName="promedio_incidente" />
@@ -2948,7 +3005,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_recursos_asignados">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_recursos_asignados">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_recursos_asignados">
               <MappingFragment StoreEntitySet="vt_recursos_asignados">
                 <ScalarProperty Name="idevento" ColumnName="idevento" />
                 <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
@@ -2969,7 +3026,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_reporte_equipos">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_reporte_equipos">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_reporte_equipos">
               <MappingFragment StoreEntitySet="vt_reporte_equipos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom_tipo_equipo" ColumnName="nom_tipo_equipo" />
@@ -2995,7 +3052,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_servicios">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_servicios">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_servicios">
               <MappingFragment StoreEntitySet="vt_servicios">
                 <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -3012,7 +3069,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vt_usuarios">
-            <EntityTypeMapping TypeName="dbhelpdeskV2Model.vt_usuarios">
+            <EntityTypeMapping TypeName="dbhelpdeskV3Model.vt_usuarios">
               <MappingFragment StoreEntitySet="vt_usuarios">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
@@ -3030,13 +3087,13 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_cerrar_evento" FunctionName="dbhelpdeskV2Model.Store.sp_cerrar_evento" />
-          <FunctionImportMapping FunctionImportName="sp_cerrar_incidente" FunctionName="dbhelpdeskV2Model.Store.sp_cerrar_incidente" />
-          <FunctionImportMapping FunctionImportName="sp_insertar_evento" FunctionName="dbhelpdeskV2Model.Store.sp_insertar_evento" />
-          <FunctionImportMapping FunctionImportName="sp_insertar_incidente" FunctionName="dbhelpdeskV2Model.Store.sp_insertar_incidente" />
-          <FunctionImportMapping FunctionImportName="sp_requerimientos_sin_asignar" FunctionName="dbhelpdeskV2Model.Store.sp_requerimientos_sin_asignar">
+          <FunctionImportMapping FunctionImportName="sp_cerrar_evento" FunctionName="dbhelpdeskV3Model.Store.sp_cerrar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_cerrar_incidente" FunctionName="dbhelpdeskV3Model.Store.sp_cerrar_incidente" />
+          <FunctionImportMapping FunctionImportName="sp_insertar_evento" FunctionName="dbhelpdeskV3Model.Store.sp_insertar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_insertar_incidente" FunctionName="dbhelpdeskV3Model.Store.sp_insertar_incidente" />
+          <FunctionImportMapping FunctionImportName="sp_requerimientos_sin_asignar" FunctionName="dbhelpdeskV3Model.Store.sp_requerimientos_sin_asignar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbhelpdeskV2Model.sp_requerimientos_sin_asignar_Result">
+              <ComplexTypeMapping TypeName="dbhelpdeskV3Model.sp_requerimientos_sin_asignar_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="cuantificable" ColumnName="cuantificable" />
@@ -3061,7 +3118,7 @@ advertencia 6002: La tabla o vista 'dbhelpdeskV2.dbo.vt_usuarios' no tiene defin
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

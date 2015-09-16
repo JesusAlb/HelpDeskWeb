@@ -327,7 +327,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
                 int idservicio = controlServicios.obtenerUltimoServicio() + 1;
                 int idtipo = controlTipoIncidencia.obtenerTipoIncidenciaGeneral();
                 int idusuario = controlUsuario.obtener_idUsuario_sinAsignar();
-               var resultado = dbhelp.modelo.sp_insertar_incidente(obtenerUltimoIncidente()+1,idSolicitante, descripcion, idusuario, idservicio, idtipo );
+               var resultado = dbhelp.modelo.sp_insertar_incidente(idSolicitante, descripcion);
                if (resultado != 0)
                {
                    dbhelp.modelo.SaveChanges();
@@ -349,7 +349,7 @@ namespace HelpDeskWeb.ControlBD.Solicitudes.Incidentes
         {
             try
             {
-                var ItemAmodificar = dbhelp.modelo.sp_cerrar_incidente(id, acciones, solucion, idservicio);
+                var ItemAmodificar = dbhelp.modelo.sp_cerrar_incidente(id, acciones, solucion);
                 if (ItemAmodificar != 0)
                 {
                     dbhelp.modelo.SaveChanges();

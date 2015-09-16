@@ -87,7 +87,7 @@
                         </ul>
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" NavigateUrl="~/principal.aspx">Inicio</asp:HyperLink></li>
+                        <asp:HyperLink runat="server" NavigateUrl="~/soporte.aspx">Inicio</asp:HyperLink></li>
                 </ul>
             </div>
         </div>
